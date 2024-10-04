@@ -1,0 +1,29 @@
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.mbc.team.product.ProductService">
+
+<insert id="inserta">
+	insert into product values(product_seq.nextval, #{param1}, #{param2}, #{param3}, #{param4}, 
+	#{param5}, #{param6})
+</insert>
+
+<select id="outa" resultType="com.mbc.team.product.ProductDTO">
+  select * from product
+</select>
+
+<select id="detail" resultType="com.mbc.team.product.ProductDTO">
+  select itemnum , image1 , product , price , dimage from product where itemnum=#{param1}
+</select>
+
+<select id="outmainbest" resultType="com.mbc.team.product.ProductDTO">
+  select * from product order by itemnum desc
+</select>
+
+<select id="outmainnew" resultType="com.mbc.team.product.ProductDTO">
+  select * from product order by itemnum asc
+</select>
+
+</mapper>
+

@@ -1,0 +1,97 @@
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mbc.team.FAQ.FAQService">
+	<!-- 1:1 저장(문의글 작성) -->
+	<insert id="faqinsert">
+		insert into
+		faq(cnum,tab,title,fcontents,nickname,fimage1,fimage2,fimage3,groups)
+		values(faq_seq.nextval,#{param1},#{param2},#{param3},#{param4},#{param5},#{param6},#{param7},faq_seq.currval)
+	</insert>
+	<!-- 1:1 출력(문의글 목록) -->
+	<select id="faqboard" resultType="com.mbc.team.FAQ.FAQDTO">
+		select
+		cnum,tab,title,nickname,to_char(fdate,'yyyy-MM-dd')fdate
+		from faq
+	</select>
+
+	<!-- 1:1 페이지 -->
+	<select id="total" resultType="int">
+		select count(*)from faq
+	</select>
+
+	<select id="page" resultType="com.mbc.team.FAQ.FAQDTO">
+		select * from (
+		select rownum rn,A.*
+		from(
+		select
+		cnum,tab,title,nickname,to_char(fdate,'yyyy-MM-dd')fdate,fcontents,groups,step,indent,fimage1,fimage2,fimage3
+		from faq where step=0 and indent=0 order by cnum desc)A)
+		where rn
+		between #{start} AND #{end}
+	</select>
+
+
+
+	<!-- 1:1 출력(문의글 상세페이지) -->
+	<select id="faqdetail" resultType="com.mbc.team.FAQ.FAQDTO">
+		select
+		cnum,tab,title,to_char(fdate,'yyyy-MM-dd')fdate,fcontents,groups,step,indent,nickname,fimage1,fimage2,fimage3
+		from faq where cnum=#{param1}
+	</select>
+
+	<!-- 1:1 문의 답변 남기기 -->
+	<select id="faqreply" resultType="com.mbc.team.FAQ.FAQDTO">
+		select
+		cnum,tab,title,to_char(fdate,'yyyy-MM-dd')fdate,fcontents,groups,step,indent,nickname,fimage1,fimage2,fimage3
+		from faq where cnum=#{param1}
+	</select>
+	<!-- 1:1 스탭업 -->
+	<update id="faqstepup">
+		update faq set step=step+1
+		where groups=#{param1} and
+		step>#{param2}
+	</update>
+	<!-- 1:1 문의 답변 내용 저장 -->
+	<insert id="faqreplysave">
+		insert into
+		faq(cnum,tab,title,fcontents,nickname,groups,step,indent)
+		values(faq_seq.nextval,#{param2},#{param3},#{param4},#{param5},#{param6},#{param7},#{param8})
+	</insert>
+	<!-- 출력(문의글 답변) -->
+	<select id="faqreplydetail" resultType="com.mbc.team.FAQ.FAQDTO">
+		select
+		cnum,tab,title,nickname,to_char(fdate,'yyyy-MM-dd')fdate,fcontents
+		from faq where groups=#{param1} and step>0 and indent>0
+	</select>
+
+
+
+	<!-- 1:1 수정(문의글 상세페이지) -->
+	<select id="faqupdate" resultType="com.mbc.team.FAQ.FAQDTO">
+		select
+		cnum,tab,title,to_char(fdate,'yyyy-MM-dd')fdate,fcontents,groups,step,indent,nickname,fimage1,fimage2,fimage3
+		from faq where cnum=#{param1}
+	</select>
+	<!-- 1:1 수정(완료) -->
+	<update id="faqupdate2">
+		update faq set
+		tab=#{param2},title=#{param3},fcontents=#{param4},nickname=#{param5},fimage1=#{param6},fimage2=#{param7},fimage3=#{param8}
+		where cnum=#{param1}
+	</update>
+	<!-- 1:1 삭제 -->
+	<delete id="faqdelete" parameterType="int">
+		delete from faq where
+		cnum=#{cnum}
+	</delete>
+
+	<!-- 1:1 문의내역 검색 -->
+	<select id="faqtitlesearch" resultType="com.mbc.team.FAQ.FAQDTO">
+		select * from faq where
+		title like '%'||#{param1}||'%'
+	</select>
+	<select id="faqnicknamesearch"
+		resultType="com.mbc.team.FAQ.FAQDTO">
+		select * from faq where nickname like '%'||#{param1}||'%'
+	</select>
+</mapper>

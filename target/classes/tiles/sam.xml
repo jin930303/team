@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE tiles-definitions PUBLIC
+"-//Apache Software Foundation//DTD Tiles Configuration 2.0//EN"
+"http://tiles.apache.org/dtds/tiles-config_2_0.dtd">
+<tiles-definitions>
+   <definition name="baseLayout" template="/WEB-INF/views/layout.jsp">
+      <put-attribute name="title" value=""/>
+      <put-attribute name="top" value="/WEB-INF/views/top.jsp"/>
+      <put-attribute name="body" value=""/>
+      <put-attribute name="footer" value="/WEB-INF/views/footer.jsp"/>
+   </definition>
+   
+   <definition name="main" extends="baseLayout">
+      <put-attribute name="title" value="메인화면"/>
+      <put-attribute name="body" value="/WEB-INF/views/main.jsp"/>
+   </definition> 
+   
+    <definition name="memberinput" extends="baseLayout">
+      <put-attribute name="title" value="메인화면"/>
+      <put-attribute name="body" value="/WEB-INF/views/member/memberinput.jsp"/>
+   </definition> 
+   
+   <definition name="membercongratulations" extends="baseLayout">
+      <put-attribute name="title" value="메인화면"/>
+      <put-attribute name="body" value="/WEB-INF/views/member/membercongratulations.jsp"/>
+   </definition> 
+   
+   <definition name="login" extends="baseLayout">
+      <put-attribute name="title" value="메인화면"/>
+      <put-attribute name="body" value="/WEB-INF/views/login/login.jsp"/>
+   </definition> 
+   
+    <definition name="myinfo" extends="baseLayout">
+      <put-attribute name="title" value="메인화면"/>
+      <put-attribute name="body" value="/WEB-INF/views/login/myinfo.jsp"/>
+   </definition> 
+   
+    <definition name="updateview" extends="baseLayout">
+      <put-attribute name="title" value="메인화면"/>
+      <put-attribute name="body" value="/WEB-INF/views/login/updateview.jsp"/>
+   </definition> 
+   
+    <definition name="deleteview" extends="baseLayout">
+      <put-attribute name="title" value="메인화면"/>
+      <put-attribute name="body" value="/WEB-INF/views/login/deleteview.jsp"/>
+   </definition> 
+   
+   <definition name="thanksforusing" extends="baseLayout">
+      <put-attribute name="title" value="메인화면"/>
+      <put-attribute name="body" value="/WEB-INF/views/login/thanksforusing.jsp"/>
+   </definition> 
+   
+    <definition name="findmyid" extends="baseLayout">
+      <put-attribute name="title" value="메인화면"/>
+      <put-attribute name="body" value="/WEB-INF/views/login/findmyid.jsp"/>
+   </definition> 
+   
+   <definition name="confirmid" extends="baseLayout">
+      <put-attribute name="title" value="메인화면"/>
+      <put-attribute name="body" value="/WEB-INF/views/login/confirmid.jsp"/>
+   </definition> 
+   
+   <definition name="findmypw" extends="baseLayout">
+      <put-attribute name="title" value="메인화면"/>
+      <put-attribute name="body" value="/WEB-INF/views/login/findmypw.jsp"/>
+   </definition> 
+   
+   <definition name="confirmpw" extends="baseLayout">
+      <put-attribute name="title" value="메인화면"/>
+      <put-attribute name="body" value="/WEB-INF/views/login/confirmpw.jsp"/>
+   </definition> 
+   
+</tiles-definitions>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

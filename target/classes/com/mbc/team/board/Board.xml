@@ -1,0 +1,251 @@
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.mbc.team.board.BoardService">
+
+<!-- 공지사항 -->
+	<insert id="insertgongji">
+		insert into gongji values(#{param1}, #{param2}, gnum_seq.nextval, #{param3}, #{param4}, sysdate, 0, #{param5})
+	</insert>
+	
+	<select id="gongjiout" resultType="com.mbc.team.board.GongjiDTO">
+		select id, nickname, gnum, gtitle, gcontents, gdate, gcnt, gimage from gongji
+	</select>
+	
+	<select id="total" resultType="int">
+   		select count(*) from gongji
+	</select>
+	
+	<select id="page" resultType="com.mbc.team.board.GongjiDTO">
+	   select * from (
+	   select rownum rn,A.* from(  
+	   select id, nickname, gnum, gtitle, gcontents, to_char(gdate, 'yyyy-MM-dd') as gdate, gcnt, gimage from gongji order by gnum desc)A)
+	   where rn between #{start} AND #{end}
+	</select>
+	
+	<select id="gongjidetail" resultType="com.mbc.team.board.GongjiDTO">
+		select id, nickname, gnum, gtitle, gcontents, to_char(gdate, 'yyyy-MM-dd') as gdate, gcnt, gimage from gongji where gnum=#{param1}
+	</select>
+	
+	<update id="gongjicount">
+		update gongji set gcnt=gcnt+1 where gnum=#{param1}
+	</update>
+	
+	<delete id="gongjidelete">
+		delete from gongji where gnum=#{param1}
+	</delete>
+	
+	<select id="gongjiupdateview" resultType="com.mbc.team.board.GongjiDTO">
+		select id, nickname, gnum, gtitle, gcontents, to_char(gdate, 'yyyy-MM-dd') as gdate, gcnt, gimage from gongji where gnum=#{param1}
+	</select>
+	
+	<update id="gongjiupdate">
+		update gongji set gtitle=#{param4}, gcontents=#{param5}, gimage=#{param6} where gnum=#{param1}
+	</update>
+
+	<select id="paget" resultType="com.mbc.team.board.GongjiDTO">
+	   select * from (
+	   select rownum rn,A.* from(  
+	   select id, nickname, gnum, gtitle, gcontents, to_char(gdate, 'yyyy-MM-dd') as gdate, gcnt, gimage from gongji where gtitle like #{param2} order by gnum desc)A)
+	   where rn between #{param1.start} AND #{param1.end}
+	</select>
+
+	<select id="pagec" resultType="com.mbc.team.board.GongjiDTO">
+	   select * from (
+	   select rownum rn,A.* from(  
+	   select id, nickname, gnum, gtitle, gcontents, to_char(gdate, 'yyyy-MM-dd') as gdate, gcnt, gimage from gongji where gcontents like #{param2} order by gnum desc)A)
+	   where rn between #{param1.start} AND #{param1.end}
+	</select>
+	
+	<select id="pagen" resultType="com.mbc.team.board.GongjiDTO">
+	   select * from (
+	   select rownum rn,A.* from(  
+	   select id, nickname, gnum, gtitle, gcontents, to_char(gdate, 'yyyy-MM-dd') as gdate, gcnt, gimage from gongji where nickname like #{param2} order by gnum desc)A)
+	   where rn between #{param1.start} AND #{param1.end}
+	</select>
+	
+	<select id="totalt" resultType="int">
+   		select count(*) from gongji where gtitle like #{svalue}
+	</select>
+	
+	<select id="totalc" resultType="int">
+   		select count(*) from gongji where gcontents like #{svalue}
+	</select>
+	
+	<select id="totaln" resultType="int">
+   		select count(*) from gongji where nickname like #{svalue}
+	</select>
+	
+
+<!-- 자유게시판 -->	
+	<insert id="insertboard">
+		insert into community(cnum, tab, title, ccontents, cgroup, nickname, cimage) values(cnum_seq.nextval, #{param2}, #{param3}, #{param4}, cnum_seq.nextval, #{param1}, #{param5})
+	</insert>
+	
+	<select id="boardtotal" resultType="int">
+   		select count(*) from community where step=0 and indent=0
+	</select>
+	
+	<select id="boardpage" resultType="com.mbc.team.board.BoardDTO">
+	   select * from (
+	   select rownum rn,A.* from(  
+	   select cnum, tab, title, to_char(cdate, 'yyyy-MM-dd') as cdate, ccontents, cgroup, step, indent, clike, chate, ccnt, nickname, cimage from community where step=0 and indent=0 order by cnum desc)A)
+	   where rn between #{start} AND #{end}
+	</select>
+	
+	<select id="boarddetail" resultType="com.mbc.team.board.BoardDTO">
+		select cnum, tab, title, to_char(cdate, 'yyyy-MM-dd') as cdate, ccontents, cgroup, step, indent, clike, chate, ccnt, nickname, cimage from community where cnum=#{param1}
+	</select>
+	
+	<update id="boardcount">
+		update community set ccnt=ccnt+1 where cnum=#{param1}
+	</update>
+	
+	<update id="boardlike">
+		update community set clike=clike+1 where cnum=#{param1}
+	</update>
+	
+	<update id="boardhate">
+		update community set chate=chate+1 where cnum=#{param1}
+	</update>
+	
+	<select id="pagect" resultType="com.mbc.team.board.BoardDTO">
+	   select * from (
+	   select rownum rn,A.* from(  
+	   select cnum, tab, title, to_char(cdate, 'yyyy-MM-dd') as cdate, ccontents, cgroup, step, indent, clike, chate, ccnt, nickname, cimage from community where title like #{param2} order by cnum desc)A)
+	   where rn between #{param1.start} AND #{param1.end}
+	</select>
+
+	<select id="pagecc" resultType="com.mbc.team.board.BoardDTO">
+	   select * from (
+	   select rownum rn,A.* from(  
+	   select cnum, tab, title, to_char(cdate, 'yyyy-MM-dd') as cdate, ccontents, cgroup, step, indent, clike, chate, ccnt, nickname, cimage from community where ccontents like #{param2} order by cnum desc)A)
+	   where rn between #{param1.start} AND #{param1.end}
+	</select>
+	
+	<select id="pagecn" resultType="com.mbc.team.board.BoardDTO">
+	   select * from (
+	   select rownum rn,A.* from(  
+	   select cnum, tab, title, to_char(cdate, 'yyyy-MM-dd') as cdate, ccontents, cgroup, step, indent, clike, chate, ccnt, nickname, cimage from community where nickname like #{param2} order by cnum desc)A)
+	   where rn between #{param1.start} AND #{param1.end}
+	</select>
+	
+	<select id="totalct" resultType="int">
+   		select count(*) from community where title like #{svalue} and step=0 and indent=0
+	</select>
+	
+	<select id="totalcc" resultType="int">
+   		select count(*) from community where ccontents like #{svalue} and step=0 and indent=0
+	</select>
+	
+	<select id="totalcn" resultType="int">
+   		select count(*) from community where nickname like #{svalue} and step=0 and indent=0
+	</select>
+	
+	<update id="stepup">
+		update community set step=step+1 where cgroup = #{param1} and step > #{param2} 
+	</update>
+
+	<insert id="replyinsertb">
+		insert into community(cnum, cgroup, step, indent, ccontents) 
+		values(cnum_seq.nextval, #{param2}, #{param3}, #{param4}, #{param5})
+	</insert>
+	
+	<select id="replyout" resultType="com.mbc.team.board.BoardDTO">
+		select cnum, tab, title, to_char(cdate, 'yyyy-MM-dd') as cdate, ccontents, cgroup, step, indent, clike, chate, ccnt, nickname, cimage from community where cgroup=#{param1} and step>0 and indent>0 order by step desc
+	</select>
+	
+	<delete id="boarddelete">
+		delete from community where cgroup=#{param1}
+	</delete>
+	
+	<select id="boardupdateview" resultType="com.mbc.team.board.BoardDTO">
+		select cnum, tab, title, to_char(cdate, 'yyyy-MM-dd') as cdate, ccontents, cgroup, step, indent, clike, chate, ccnt, nickname, cimage from community where cnum=#{param1}
+	</select>
+	
+	<update id="boardupdate">
+		update community set tab=#{param3}, title=#{param4}, ccontents=#{param5}, cimage=#{param6} where cnum=#{param1} and nickname=#{param2} 
+	</update>
+	
+
+<!-- 경기일정 -->
+	<insert id="iljunginput">
+		insert into iljung values(#{param1}, #{param2})
+	</insert>
+	
+	<select id="iljungout" resultType="com.mbc.team.board.IljungDTO">
+		select to_char(gamedate, 'yyyy-MM-dd') as gamedate, gameresult from iljung
+	</select>
+	
+
+<!-- 야구소식 -->
+	<insert id="insertsosick">
+		insert into sosick values(#{param1}, #{param2}, snum_seq.nextval, #{param3}, #{param4}, sysdate, 0, #{param5}, #{param6})
+	</insert>
+	
+	<select id="totals" resultType="int">
+   		select count(*) from sosick
+	</select>
+	
+	<select id="pages" resultType="com.mbc.team.board.SosickDTO">
+	   select * from (
+	   select rownum rn,A.* from(  
+	   select id, nickname, snum, stitle, scontents, to_char(sdate, 'yyyy-MM-dd') as sdate, scnt, simage, stag from sosick order by snum desc)A)
+	   where rn between #{start} AND #{end}
+	</select>
+	
+	<select id="sosickdetail" resultType="com.mbc.team.board.SosickDTO">
+		select id, nickname, snum, stitle, scontents, to_char(sdate, 'yyyy-MM-dd') as sdate, scnt, simage, stag from sosick where snum=#{param1}
+	</select>
+	
+	<update id="sosickcount">
+		update sosick set scnt=scnt+1 where snum=#{param1}
+	</update>
+	
+	<delete id="sosickdelete">
+		delete from sosick where snum=#{param1}
+	</delete>
+	
+	<select id="sosickupdateview" resultType="com.mbc.team.board.SosickDTO">
+		select id, nickname, snum, stitle, scontents, to_char(sdate, 'yyyy-MM-dd') as sdate, scnt, simage, stag from sosick where snum=#{param1}
+	</select>
+	
+	<update id="sosickupdate">
+		update sosick set stitle=#{param4}, scontents=#{param5}, simage=#{param6}, stag=#{param7} where snum=#{param1}
+	</update>
+
+	<select id="pagest" resultType="com.mbc.team.board.SosickDTO">
+	   select * from (
+	   select rownum rn,A.* from(  
+	   select id, nickname, snum, stitle, scontents, to_char(sdate, 'yyyy-MM-dd') as sdate, scnt, simage, stag from sosick where stitle like #{param2} order by snum desc)A)
+	   where rn between #{param1.start} AND #{param1.end}
+	</select>
+
+	<select id="pagesc" resultType="com.mbc.team.board.SosickDTO">
+	   select * from (
+	   select rownum rn,A.* from(  
+	   select id, nickname, snum, stitle, scontents, to_char(sdate, 'yyyy-MM-dd') as sdate, scnt, simage, stag from sosick where scontents like #{param2} order by snum desc)A)
+	   where rn between #{param1.start} AND #{param1.end}
+	</select>
+	
+	<select id="pagesn" resultType="com.mbc.team.board.SosickDTO">
+	   select * from (
+	   select rownum rn,A.* from(  
+	   select id, nickname, snum, stitle, scontents, to_char(sdate, 'yyyy-MM-dd') as sdate, scnt, simage, stag from sosick where nickname like #{param2} order by snum desc)A)
+	   where rn between #{param1.start} AND #{param1.end}
+	</select>
+	
+	<select id="totalst" resultType="int">
+   		select count(*) from sosick where stitle like #{svalue}
+	</select>
+	
+	<select id="totalsc" resultType="int">
+   		select count(*) from sosick where scontents like #{svalue}
+	</select>
+	
+	<select id="totalsn" resultType="int">
+   		select count(*) from sosick where nickname like #{svalue}
+	</select>
+	
+</mapper>

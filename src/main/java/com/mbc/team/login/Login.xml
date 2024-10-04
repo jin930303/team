@@ -1,0 +1,45 @@
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.mbc.team.login.LoginService">
+	
+	<select id="logincheck" resultType="com.mbc.team.login.LoginDTO">
+	select * from member where id=#{param1}
+	</select>
+	
+	<select id="myinfo" resultType="com.mbc.team.login.LoginDTO">
+	select * from member where id=#{param1}
+	</select>
+	
+	<select id="updateview" resultType="com.mbc.team.login.LoginDTO">
+	select * from member where id=#{param1}
+	</select>
+	
+	<update id="memberupdate2">
+	update member set nickname=#{param1},pw=#{param2},name=#{param3},gender=#{param4},birth=#{param5},phone=#{param6},address=#{param7}
+	,email=#{param8} where id=#{param9}
+	</update>
+	
+	<select id="deleteview" resultType="com.mbc.team.login.LoginDTO">
+	select * from member where id=#{param1}
+	</select>
+	
+	<delete id="delete2">
+	delete from member where id=#{param1}
+	</delete>
+	
+	<select id="findid" resultType="com.mbc.team.login.LoginDTO">
+	select id from member where name=#{param1} and email=#{param2} 
+	</select>
+	
+	<select id="findpw" resultType="com.mbc.team.login.LoginDTO">
+	select pw from member where id=#{param1} and name=#{param2} and email=#{param3} 
+	</select>
+	
+	<update id="updatepw">
+	update member set pw=#{param2} where id=#{param1}
+	</update>
+	
+	
+</mapper>
