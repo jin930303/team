@@ -4,7 +4,6 @@ package com.mbc.team.login;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.ArrayList;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -224,7 +223,7 @@ public class LoginController {
 		return "confirmid";
 		
 	}
-	
+	///////  login-비밀번호 찾기
 	@RequestMapping(value = "/findmypw")
 	public String login12()
 	{
@@ -241,19 +240,18 @@ public class LoginController {
 		LoginService ls=sqlSession.getMapper(LoginService.class);
 		LoginDTO findpw=ls.findpw(id,name,email);
 		mo.addAttribute("findpw",findpw);
-		
 		return "confirmpw";
 	}
 	
-	@RequestMapping(value = "/confirmpw",method = RequestMethod.POST)
+	@RequestMapping(value = "/updatepw",method = RequestMethod.POST)
 	public String login14(HttpServletRequest request,Model mo)
 	{	
 		String id=request.getParameter("id");
-		String pw=request.getParameter("pw");
+		String pw1=request.getParameter("pw");
+		PasswordEncoder passwordEncoder=new BCryptPasswordEncoder();
+		String pw=passwordEncoder.encode(pw1);
 		LoginService ls=sqlSession.getMapper(LoginService.class);
 		ls.updatepw(id,pw);
-		
-		
 		return "redirect:/login";
 	}
 	

@@ -183,6 +183,19 @@
                 </td>
             </tr>
             <tr>
+            <th>이메일</th>
+            	<td>
+            	<input type="email" name="fdomain" id="fdomain">@
+            	<select name="bdomain" id="bdomain">
+            	<option value="naver.com" >naver.com</option>
+            	<option value="daum.net" >daum.net</option>
+            	<option value="gmail.com" >gmail.com</option>
+            	<option value="kakao.com" >kakao.com</option>
+            	<option value="nate.com" >nate.com</option>
+            	</select>
+            	</td>
+            </tr>
+            <tr>
             <th>주소</th>
                 <td>
                     <input type="text" id="postcode" placeholder="우편번호">

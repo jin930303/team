@@ -34,7 +34,7 @@
 	</select>
 	
 	<select id="findpw" resultType="com.mbc.team.login.LoginDTO">
-	select pw from member where id=#{param1} and name=#{param2} and email=#{param3} 
+	select id,pw from member where id=#{param1} and name=#{param2} and email=#{param3} 
 	</select>
 	
 	<update id="updatepw">

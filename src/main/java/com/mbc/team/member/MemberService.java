@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 public interface MemberService {
 
 	void memberinput(String id, String nickname, String pw, String name, String gender, String birth, String phone,
-			String address, String email);
+			String address);
 
 	int idcheck(String id);
 

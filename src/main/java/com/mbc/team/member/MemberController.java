@@ -38,7 +38,6 @@ public class MemberController {
 		String pw=passwordEncoder.encode(pw1);
 		String nickname=request.getParameter("nickname");
 		String name=request.getParameter("name");
-		String gender=request.getParameter("gender");
 		String birth=request.getParameter("birth");
 		String phone1=request.getParameter("phone1");
 		String phone2=request.getParameter("phone2");
@@ -51,7 +50,7 @@ public class MemberController {
 		String extraaddress=request.getParameter("extraaddress");
 		String address=mainaddress+detailaddress+extraaddress;
 		MemberService ms=sqlSession.getMapper(MemberService.class);
-		ms.memberinput(id,nickname,pw,name,gender,birth,phone,address,email);
+		ms.memberinput(id,nickname,pw,name,birth,phone,address,email);
 		
 		
 		return "membercongratulations";
