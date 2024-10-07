@@ -25,5 +25,10 @@
   select * from product order by itemnum asc
 </select>
 
+<select id="arbat" resultType="com.mbc.team.product.ProductDTO">
+  select * from product where cat2=#{param1}
+</select>
+
+
 </mapper>
 
