@@ -148,8 +148,7 @@
 	</update>
 
 	<insert id="replyinsertb">
-		insert into community(cnum, cgroup, step, indent, ccontents) 
-		values(cnum_seq.nextval, #{param2}, #{param3}, #{param4}, #{param5})
+		insert into community(cnum, cgroup, step, indent, ccontents, nickname) values(cnum_seq.nextval, #{param2}, #{param3}, #{param4}, #{param5}, #{param6})
 	</insert>
 	
 	<select id="replyout" resultType="com.mbc.team.board.BoardDTO">

@@ -26,14 +26,25 @@ text-align: center;
 	<tr>	
 		<td colspan="4" style="text-align: left;"><img src="./image/${list.simage}"><br><pre>${list.scontents}</pre></td>
 	</tr>
+
+<c:choose>
+<c:when test="${adminloginstate==true}">
 	<tr>	
 		<td colspan="4">
 			<input type="button" onclick="location.href='sosickboard'" value="목록">
 			<input type="button" onclick="location.href='sosickdelete?snum=${list.snum}'" value="삭제">
 			<input type="button" onclick="location.href='sosickupdateview?snum=${list.snum}'" value="수정">
 		</td>
-		
 	</tr>
+</c:when>
+<c:otherwise>
+	<tr>	
+		<td colspan="4">
+			<input type="button" onclick="location.href='sosickboard'" value="목록">
+		</td>
+	</tr>
+</c:otherwise>
+</c:choose>
 </table>
 </body>
 </html>

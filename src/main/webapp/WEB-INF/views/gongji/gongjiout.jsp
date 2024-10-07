@@ -36,14 +36,24 @@ text-align: center;
 			</c:otherwise>
 		</c:choose>
 	</tr>
+<c:choose>
+<c:when test="${adminloginstate==true}">
 	<tr>	
 		<td colspan="4">
 			<input type="button" onclick="location.href='gongjiboard'" value="목록">
 			<input type="button" onclick="location.href='gongjidelete?gnum=${list.gnum}'" value="삭제">
 			<input type="button" onclick="location.href='gongjiupdateview?gnum=${list.gnum}'" value="수정">
 		</td>
-		
 	</tr>
+</c:when>
+<c:otherwise>
+	<tr>	
+		<td colspan="4">
+			<input type="button" onclick="location.href='gongjiboard'" value="목록">
+		</td>
+	</tr>
+</c:otherwise>
+</c:choose>
 </table>
 </body>
 </html>

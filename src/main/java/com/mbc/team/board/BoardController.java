@@ -299,11 +299,12 @@ public class BoardController {
 		int rpstep=Integer.parseInt(request.getParameter("step"));
 		int rpindent=Integer.parseInt(request.getParameter("indent"));
 		String ccontents=request.getParameter("ccontents");
+		String nickname=request.getParameter("nickname");
 		BoardService bs=sqlsession.getMapper(BoardService.class);
 		bs.stepup(rpcgroup, rpstep);
 		rpstep++;
 		rpindent++;
-		bs.replyinsertb(rpcnum, rpcgroup, rpstep, rpindent, ccontents);
+		bs.replyinsertb(rpcnum, rpcgroup, rpstep, rpindent, ccontents, nickname);
 	    return "redirect:/boarddetail?cnum=" + rpcnum;
 	}//
 	
