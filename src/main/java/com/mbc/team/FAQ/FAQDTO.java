@@ -3,9 +3,21 @@ package com.mbc.team.FAQ;
 public class FAQDTO {
 
 	int cnum;
-	String tab,title,fdate,fcontents,nickname,fimage1,fimage2,fimage3;
-	int groups,step,indent;
+	String tab, title, fdate, fcontents, nickname, fimage1, fimage2, fimage3;
+	int groups, step, indent, faqcnt, rank;
 	public FAQDTO() {}
+	public int getRank() {
+		return rank;
+	}
+	public void setRank(int rank) {
+		this.rank = rank;
+	}
+	public int getFaqcnt() {
+		return faqcnt;
+	}
+	public void setFaqcnt(int faqcnt) {
+		this.faqcnt = faqcnt;
+	}
 	public int getCnum() {
 		return cnum;
 	}
@@ -78,5 +90,4 @@ public class FAQDTO {
 	public void setNickname(String nickname) {
 		this.nickname = nickname;
 	}
-	
 }

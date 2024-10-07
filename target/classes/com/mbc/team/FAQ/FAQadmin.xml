@@ -12,9 +12,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<!-- FAQ 출력(관리자) -->
 	<select id="faqboard" resultType="com.mbc.team.FAQ.FAQadminDTO">
 		select
-		cnum,tab,title,nickname,to_char(fdate,'yyyy-MM-dd')fdate
+		cnum,tab,title,nickname,to_char(fdate,'yyyy-MM-dd')fdate,faqcnt 
 		from faq where
-		tab='FAQ'
+		tab='FAQ' and indent=0 and step=0
 	</select>
 
 	<!-- FAQ 페이지 -->
@@ -27,8 +27,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		select rownum rn,A.*
 		from(
 		select
-		cnum,tab,title,nickname,to_char(fdate,'yyyy-MM-dd')fdate,fcontents,groups,step,indent,fimage1,fimage2,fimage3
-		from faq where step=0 and indent=0 order by cnum desc)A)
+		cnum,tab,title,nickname,to_char(fdate,'yyyy-MM-dd')fdate,fcontents,groups,step,indent,fimage1,fimage2,fimage3,faqcnt 
+		from faq where tab ='FAQ' and indent=0 and step=0 order by cnum
+		desc)A)
 		where rn
 		between #{start} AND #{end}
 	</select>
@@ -37,7 +38,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="faq_quetions_detail"
 		resultType="com.mbc.team.FAQ.FAQadminDTO">
 		select
-		cnum,tab,title,to_char(fdate,'yyyy-MM-dd')fdate,fcontents,groups,step,indent,nickname,fimage1,fimage2,fimage3
+		cnum,tab,title,to_char(fdate,'yyyy-MM-dd')fdate,fcontents,groups,step,indent,nickname,fimage1,fimage2,fimage3,faqcnt
 		from faq where cnum=#{param1}
 	</select>
 
@@ -82,5 +83,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		cnum,tab,title,nickname,to_char(fdate,'yyyy-MM-dd')fdate,fcontents
 		from faq where groups=#{param1} and step>0 and indent>0
 	</select>
-
+	
+	<!-- 조회수 -->
+	<update id="faqcount2">
+		update faq set faqcnt=faqcnt+1 where cnum=#{param1}
+	</update>
 </mapper>

@@ -35,6 +35,7 @@ public interface FAQadminService {
 
 	ArrayList<FAQadminDTO> faq_questions_reply(int cnum);
 
+//8. FAQ-자주묻는질문 조회수
+	void faqcount2(int cnum);
 
-	
 }

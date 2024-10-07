@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html lang="ko">
 <!-- 고객센터 홈 생성 및 좌측 사이드바, 우측 사이드바(반응형,이동형) -->
@@ -22,7 +23,7 @@ body {
 
 .container {
 	display: flex;
-	width: 75%;
+	width: 80%;
 }
 
 .sidebar {
@@ -270,21 +271,19 @@ body {
 						<th>번호</th>
 						<th>분류</th>
 						<th>내용</th>
+						<th>조회수</th>
 					</tr>
 				</thead>
-				<tbody>
-					<tr>
-						<td>12</td>
-						<td>마일리지 적립</td>
-						<td>후기 작성 포인트 지급 관련</td>
-					</tr>
-					<tr>
-						<td>11</td>
-						<td>결제/배송</td>
-						<td>배송중이라고 표시되었는데 배송 추적이 안돼요.</td>
-					</tr>
-					<!-- 추가 FAQ 항목들 -->
-				</tbody>
+				<c:forEach items="${bestfaq}" var="bestfaq">
+					<tbody>
+						<tr>
+							<td>${bestfaq.cnum}</td>
+							<td>${bestfaq.tab}</td>
+							<td>${bestfaq.fcontents}</td>
+							<td>${bestfaq.faqcnt}</td>
+						</tr>
+					</tbody>
+				</c:forEach>
 			</table>
 		</main>
 	</div>

@@ -20,7 +20,7 @@ body {
 
 .container {
 	display: flex;
-	width: 75%;
+	width: 80%;
 }
 
 .sidebar {
@@ -280,7 +280,8 @@ body {
 						<th width="120px">TAB</th>
 						<th width="350px">제목</th>
 						<th width="120px">작성자</th>
-						<th>시간</th>
+						<th width="150px">작성일자</th>
+						<th width="90px">조회수</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -293,6 +294,7 @@ body {
 							<td style="text-align: left;">${faq_admin.title}</td>
 							<td>${faq_admin.nickname}</td>
 							<td>${faq_admin.fdate}</td>
+							<td>${faq_admin.faqcnt}</td>
 						</tr>
 					</c:forEach>
 				</tbody>

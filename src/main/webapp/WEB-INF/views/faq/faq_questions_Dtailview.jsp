@@ -263,7 +263,7 @@ body {
 				</caption>
 				<input type="hidden" value="${faq.cnum}" name="cnum">
 				<tr>
-					<th colspan="6" style="text-align: left;">[${faq.tab}] ${faq.title}</th>
+					<th colspan="6" style="text-align: left;">[${faq.tab}] ${faq.title} 조회수: ${faq.faqcnt}</th>
 				</tr>
 				<tr>
 					<td>글번호</td><td>${faq.cnum}</td><td>작성일</td><td>${faq.fdate}</td>

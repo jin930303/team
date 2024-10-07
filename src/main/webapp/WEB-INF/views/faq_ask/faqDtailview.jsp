@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<!-- 상세페이지 하단 문의 답변내용 기재 -->
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html>
@@ -17,13 +18,16 @@
 				</caption>
 				<input type="hidden" value="${faq.cnum}" name="cnum">
 				<tr>
-					<th colspan="4" id="cnum">${faq.cnum}${faq.tab} ${faq.fdate}</th>
+					<th colspan="4" id="cnum">${faq.cnum} / ${faq.tab} / ${faq.fdate} / ${faq.faqcnt}</th>
 				</tr>
 				<tr>
 					<th>제 목</th>
 					<td>${faq.title}</td>
 					<th>작성자</th>
 					<td>${faq.nickname}</td>
+					<th>조회수</th>
+					<td>${faq.faqcnt}</td>
+					
 				<tr>
 					<td colspan="4">${faq.fcontents}</td>
 				</tr>
