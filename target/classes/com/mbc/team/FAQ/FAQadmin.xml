@@ -1,0 +1,86 @@
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mbc.team.FAQ.FAQadminService">
+	<!-- FAQ 저장(관리자) -->
+	<insert id="faqinsert">
+		insert into
+		faq(cnum,tab,title,fcontents,nickname,fimage1,fimage2,fimage3,groups)
+		values(faq_seq.nextval,#{param1},#{param2},#{param3},#{param4},#{param5},#{param6},#{param7},faq_seq.currval)
+	</insert>
+
+	<!-- FAQ 출력(관리자) -->
+	<select id="faqboard" resultType="com.mbc.team.FAQ.FAQadminDTO">
+		select
+		cnum,tab,title,nickname,to_char(fdate,'yyyy-MM-dd')fdate
+		from faq where
+		tab='FAQ'
+	</select>
+
+	<!-- FAQ 페이지 -->
+	<select id="total" resultType="int">
+		select count(*)from faq
+	</select>
+
+	<select id="page" resultType="com.mbc.team.FAQ.FAQadminDTO">
+		select * from (
+		select rownum rn,A.*
+		from(
+		select
+		cnum,tab,title,nickname,to_char(fdate,'yyyy-MM-dd')fdate,fcontents,groups,step,indent,fimage1,fimage2,fimage3
+		from faq where step=0 and indent=0 order by cnum desc)A)
+		where rn
+		between #{start} AND #{end}
+	</select>
+
+	<!-- FAQ 출력(상세페이지) -->
+	<select id="faq_quetions_detail"
+		resultType="com.mbc.team.FAQ.FAQadminDTO">
+		select
+		cnum,tab,title,to_char(fdate,'yyyy-MM-dd')fdate,fcontents,groups,step,indent,nickname,fimage1,fimage2,fimage3
+		from faq where cnum=#{param1}
+	</select>
+
+	<!-- FAQ 수정(FAQ 상세페이지) -->
+	<select id="faq_admin_update"
+		resultType="com.mbc.team.FAQ.FAQadminDTO">
+		select
+		cnum,tab,title,to_char(fdate,'yyyy-MM-dd')fdate,fcontents,groups,step,indent,nickname,fimage1,fimage2,fimage3
+		from faq where cnum=#{param1}
+	</select>
+
+	<!-- FAQ 수정(완료) -->
+	<update id="faq_admin_update2">
+		update faq set
+		tab=#{param2},title=#{param3},fcontents=#{param4},nickname=#{param5},fimage1=#{param6},fimage2=#{param7},fimage3=#{param8}
+		where cnum=#{param1}
+	</update>
+
+	<!-- FAQ 삭제(완료) -->
+	<delete id="faq_admin_delete">
+		delete from faq where cnum=#{param1}
+	</delete>
+
+	<!-- FAQ 댓글 스탭업 -->
+	<update id="faq_questions_stepup">
+		update faq set step=step+1
+		where groups=#{param1} and
+		step>#{param2}
+	</update>
+
+	<!-- FAQ 댓글 저장 -->
+	<insert id="faq_questions_faqreplysave">
+		insert into
+		faq(cnum,groups,step,indent,fcontents,tab)
+		values(faq_seq.nextval,#{param2},#{param3},#{param4},#{param5},#{param6})
+	</insert>
+
+	<!-- FAQ 댓글 출력(상세페이지) -->
+	<select id="faq_questions_reply"
+		resultType="com.mbc.team.FAQ.FAQadminDTO">
+		select
+		cnum,tab,title,nickname,to_char(fdate,'yyyy-MM-dd')fdate,fcontents
+		from faq where groups=#{param1} and step>0 and indent>0
+	</select>
+
+</mapper>
