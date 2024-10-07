@@ -46,6 +46,8 @@
 			<td colspan="2">
 			<input type="button" value="정보수정" onclick="location.href='update?id=${dto1.id}'"> 
 			<input type="button" value="메인으로" onclick="location.href='main'"> 
+			<input type="button" value="장바구니" onclick="location.href='cart'"> 
+			
 			</td>
 			
 		</tr>

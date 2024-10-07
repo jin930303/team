@@ -26,14 +26,32 @@
 			document.getElementById("email").focus();
 			return false; // 유효성 검사 실패 시 폼 제출 중지
 		}
-
-		return true; 
+	
+	$.ajax({
+		type:"post",
+		url:"findidcheck",
+		async:true,
+		data:{name:name,email:email},
+		success:function(response){
+			if(response.id){
+				alert("당신의 아이디는 : "+response.id+"입니다");
+				window.location.href="login";
+			}
+			else{
+				alert(response.message);
+			}
+		},
+		error: function(){
+			  alert("아이디 찾기에 실패하였습니다.");
+		}
+	});
+	return false;
 	}
 </script>
 </head>
 <body>
 	  <h2>아이디 찾기</h2>
-    <form onsubmit="return check();" action="findidcheck" method="post">
+    <form onsubmit="return check();"  method="post">
         <div class="form-group">
             <input type="text" name="name" id="name" placeholder="이름">
         </div>

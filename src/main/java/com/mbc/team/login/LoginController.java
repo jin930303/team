@@ -4,6 +4,8 @@ package com.mbc.team.login;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -203,7 +205,7 @@ public class LoginController {
 		}
 		
 	}
-	
+	//아이디 찾기
 	@RequestMapping(value = "/findmyid")
 	public String login10()
 	{
@@ -211,18 +213,34 @@ public class LoginController {
 		return "findmyid";
 	}
 	
+	@ResponseBody
 	@RequestMapping(value = "/findidcheck",method = RequestMethod.POST)
-	public String login11(HttpServletRequest request,Model mo)
+	public Map<String, Object> login11(HttpServletRequest request)
 	{
 		String name=request.getParameter("name");
 		String email=request.getParameter("email");
 		
 		LoginService ls=sqlSession.getMapper(LoginService.class);
 		LoginDTO findid=ls.findid(name,email);
-		mo.addAttribute("findid",findid);
-		return "confirmid";
+		
+		Map<String, Object> response= new HashMap<>();
+		if(findid!=null)
+		{
+			response.put("id", findid.getId());
+			response.put("message", "아이디를 찾았습니다.");
+		}
+		else
+		{
+			response.put("id", null);
+			response.put("message","아이디를 찾을 수 없습니다." );
+		}
+		
+		return response;
 		
 	}
+	
+	
+	
 	///////  login-비밀번호 찾기
 	@RequestMapping(value = "/findmypw")
 	public String login12()
@@ -254,5 +272,8 @@ public class LoginController {
 		ls.updatepw(id,pw);
 		return "redirect:/login";
 	}
+	
+	
+	
 	
 }
