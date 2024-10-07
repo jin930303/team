@@ -60,6 +60,7 @@ text-align: center
 			<select name="gamestate" required>
 				<option value="진행">진행
 				<option value="취소">취소
+				<option value="예정">예정
 			</select>
 		</td>
 	</tr>

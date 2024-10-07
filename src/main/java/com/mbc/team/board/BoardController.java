@@ -372,6 +372,9 @@ public class BoardController {
 		if(gamestate.equals("진행")) {
 			gameresult=home+" "+homescore+" : "+awayscore+" "+away;
 		}
+		else if(gamestate.equals("예정")) {
+			gameresult=home+" 예정 "+away;
+		}
 		else {
 			gameresult=home+" 취소 "+away;
 		}
@@ -385,14 +388,6 @@ public class BoardController {
 	public List<Map<String, Object>> events() {
 	    BoardService bs = sqlsession.getMapper(BoardService.class);
 	    ArrayList<IljungDTO> list = bs.iljungout();
-
-	    if (list == null || list.isEmpty()) {
-	        System.out.println("데이터가 없습니다.");
-	    } 
-	    else {
-	        System.out.println("데이터 있음: " + list.size() + "개의 일정");
-	    }
-
 	    List<Map<String, Object>> jsonList = new ArrayList<>();
 	    for (IljungDTO dto : list) {
 	        Map<String, Object> event = new HashMap<>();
@@ -400,11 +395,8 @@ public class BoardController {
 	        event.put("start", dto.getGamedate().toString()); // 기본적으로 시간을 붙임
 	        jsonList.add(event);
 	    }
-	    System.out.println("JSON 데이터: " + jsonList);
 	    return jsonList; // JSON 형식으로 반환
 	}
-	
-	
 	
 	@RequestMapping(value = "/sosickinput", method = RequestMethod.GET)
 	public String sosickinput() {
