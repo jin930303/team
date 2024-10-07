@@ -51,7 +51,7 @@ public interface BoardService {
 	public int totalcn(String svalue);
 
 	void stepup(int rpcgroup, int rpstep);
-	void replyinsertb(int rpcnum, int rpcgroup, int rpstep, int rpindent, String ccontents);
+	void replyinsertb(int rpcnum, int rpcgroup, int rpstep, int rpindent, String ccontents, String nickname);
 	ArrayList<BoardDTO> replyout(int cnum);
 
 	void boarddelete(int cnum);

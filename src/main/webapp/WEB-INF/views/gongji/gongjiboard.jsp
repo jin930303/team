@@ -49,6 +49,8 @@ text-align: center
    </td>
 </tr>
 <!-- 페이징처리 4444444444-->
+<c:choose>
+<c:when test="${adminloginstate==true}">
 	<tr>
 		<td colspan="7" align="left">
 			<form action="gongjisearchsave" method="post">
@@ -64,6 +66,24 @@ text-align: center
 			</form>
 		</td>
 	</tr>
+</c:when>
+<c:otherwise>
+	<tr>
+		<td colspan="7" align="left">
+			<form action="gongjisearchsave" method="post">
+				<select name="gongjikey" >
+					<option value="gtitle">제목
+					<option value="gcontents">내용
+					<option value="nickname">글쓴이
+				</select>
+				<input type="text" name="svalue" style="width: 250px" placeholder="검색어를 입력해주세요.">
+				<input type="submit" value="찾기">
+				<input type="button" onclick="location.href='gongjiboard'" value="목록">
+			</form>
+		</td>
+	</tr>
+</c:otherwise>
+</c:choose>
 </table>
 </body>
 </html>
