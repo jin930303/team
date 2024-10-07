@@ -4,7 +4,6 @@ package com.mbc.team.login;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.ArrayList;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -251,7 +250,6 @@ public class LoginController {
 		String pw1=request.getParameter("pw");
 		PasswordEncoder passwordEncoder=new BCryptPasswordEncoder();
 		String pw=passwordEncoder.encode(pw1);
-		System.out.println("id : "+id+"pw"+pw);
 		LoginService ls=sqlSession.getMapper(LoginService.class);
 		ls.updatepw(id,pw);
 		return "redirect:/login";
