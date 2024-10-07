@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE tiles-definitions PUBLIC
+"-//Apache Software Foundation//DTD Tiles Configuration 2.0//EN"
+"http://tiles.apache.org/dtds/tiles-config_2_0.dtd">
+<tiles-definitions>
+	<definition name="baseLayout"
+		template="/WEB-INF/views/layout.jsp">
+		<put-attribute name="title" value="" />
+		<put-attribute name="top" value="/WEB-INF/views/top.jsp" />
+		<put-attribute name="body" value="" />
+		<put-attribute name="footer"
+			value="/WEB-INF/views/footer.jsp" />
+	</definition>
+
+
+	<!-- 1:1 문의 -->
+	<!-- 문의글 작성 -->
+	<definition name="faqinput" extends="baseLayout">
+		<put-attribute name="title" value="메인화면" />
+		<put-attribute name="body"
+			value="/WEB-INF/views/faq_ask/faqinput.jsp" />
+	</definition>
+	<!-- 문의글 목록 -->
+	<definition name="faqoutput" extends="baseLayout">
+		<put-attribute name="title" value="메인화면" />
+		<put-attribute name="body"
+			value="/WEB-INF/views/faq_ask/faqoutput.jsp" />
+	</definition>
+	<!-- 문의글 상세페이지 -->
+	<definition name="faqDtailview" extends="baseLayout">
+		<put-attribute name="title" value="메인화면" />
+		<put-attribute name="body"
+			value="/WEB-INF/views/faq_ask/faqDtailview.jsp" />
+	</definition>
+	<!-- 문의글 상세페이지 수정 -->
+	<definition name="faqUpdateview" extends="baseLayout">
+		<put-attribute name="title" value="메인화면" />
+		<put-attribute name="body"
+			value="/WEB-INF/views/faq_ask/faqUpdateview.jsp" />
+	</definition>
+	<!-- 문의글 답변 -->
+	<definition name="faqreplyview" extends="baseLayout">
+		<put-attribute name="title" value="메인화면" />
+		<put-attribute name="body"
+			value="/WEB-INF/views/faq_ask/faqreplyview.jsp" />
+	</definition>
+	<!-- 고객센터 메인 -->
+	<definition name="faq_main" extends="baseLayout">
+		<put-attribute name="title" value="메인화면" />
+		<put-attribute name="body"
+			value="/WEB-INF/views/faq_ask/faq_main.jsp" />
+	</definition>
+
+
+
+	<!-- FAQ -->
+	<!-- FAQ 작성(관리자) -->
+	<definition name="faq_admin_input" extends="baseLayout">
+		<put-attribute name="title" value="메인화면" />
+		<put-attribute name="body"
+			value="/WEB-INF/views/faq/faq_admin_input.jsp" />
+	</definition>
+	<!-- FAQ(자주 묻는 질문)-게시판 -->
+	<definition name="faq_questions" extends="baseLayout">
+		<put-attribute name="title" value="메인화면" />
+		<put-attribute name="body"
+			value="/WEB-INF/views/faq/faq_questions.jsp" />
+	</definition>
+	<!-- FAQ(자주 묻는 질문)-상세페이지 -->
+	<definition name="faq_questions_Dtailview"
+		extends="baseLayout">
+		<put-attribute name="title" value="메인화면" />
+		<put-attribute name="body"
+			value="/WEB-INF/views/faq/faq_questions_Dtailview.jsp" />
+	</definition>
+	<!-- FAQ(자주 묻는 질문)-수정페이지 -->
+	<definition name="faq_questions_Updateview"
+		extends="baseLayout">
+		<put-attribute name="title" value="메인화면" />
+		<put-attribute name="body"
+			value="/WEB-INF/views/faq/faq_questions_Updateview.jsp" />
+	</definition>
+
+</tiles-definitions>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
