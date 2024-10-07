@@ -372,6 +372,9 @@ public class BoardController {
 		if(gamestate.equals("진행")) {
 			gameresult=home+" "+homescore+" : "+awayscore+" "+away;
 		}
+		else if(gamestate.equals("예정")) {
+			gameresult=home+" 예정 "+away;
+		}
 		else {
 			gameresult=home+" 취소 "+away;
 		}

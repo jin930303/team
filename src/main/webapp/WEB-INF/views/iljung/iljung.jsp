@@ -31,6 +31,11 @@
           info.el.style.backgroundColor = 'orange';
           info.el.style.borderColor = 'orange';
         }
+        else if (info.event.title.includes("예정")) {
+            // '취소'가 포함된 일정의 색상을 주황색으로 변경
+            info.el.style.backgroundColor = 'green';
+            info.el.style.borderColor = 'green';
+          }
       }
     });
 
