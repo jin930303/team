@@ -14,6 +14,8 @@ public interface ProductService  {
 	ArrayList<ProductDTO> outmainbest();
 	ArrayList<ProductDTO> outmainnew();
 
+	ArrayList<ProductDTO> arbat(String cat2);
+
 	
 
 }
