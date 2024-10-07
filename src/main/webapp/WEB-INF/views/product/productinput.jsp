@@ -23,12 +23,11 @@ function updateCat2() {
         "야구공": ["경식구", "연식구",  "스냅볼", "야구공 보관함"],
         "글러브": ["투수/올라운드", "내야수", "외야수", "1루/포수미트", "어린이/유소년용", "글러브 관리용품"],
         "보호장비": ["타자헬멧", "암가드", "풋가드", "핸드가드", "안면마스크", "기타 보호장비"],
-        "유니폼": ["국가대표 어센틱 유니폼", "KBO 어센틱 유니폼", "MLB 어센틱 유니폼", "NPB 어센틱 유니폼", "기타 유니폼", "키즈 유니폼"],
-        "굿즈": ["인형", "쿠션", "키링", "머리띠/팔찌", "기타"],
-        "야구화": ["징 일체형", "징 교체형", "인조잔디화", "유소년용 야구화", "런닝/트레이닝화", "야구화부속품"],
+        "굿즈": ["키링", "타올", "인형", "슬리퍼"],
+        "야구화": ["징 일체형", "인조잔디화", "유소년용 야구화", "런닝/트레이닝화", "야구화부속품"],
         "장갑": ["배팅장갑", "수비장갑", "주루장갑", "방한장갑", "유소년용 장갑", "기타 장갑"],
-        "가방": ["백팩", "크로스백", "팀장비 가방", "휠가방", "배트가방", "볼가방", "유소년용 가방", "주머니", "기타 가방"],
-        "의류": ["티셔츠", "언더셔츠", "슬라이딩팬츠", "롱/숏스판팬츠", "아이싱웨어", "바람막이", "점퍼", "트레이닝복", "맨투맨/후디", "모자/벨트/양말", "기타"],
+        "가방": ["백팩", "크로스백", "휠가방", "배트가방", "볼가방", "기타 가방"],
+        "의류": ["국가대표 어센틱 유니폼","티셔츠", "언더셔츠", "슬라이딩팬츠", "롱/숏스판팬츠", "아이싱웨어", "바람막이", "점퍼", "트레이닝복", "맨투맨/후디", "모자/벨트/양말", "기타"],
         "기타용품": ["선글라스", "악세사리", "손목밴드", "로진백", "아이패치", "피규어", "베이스", "기타용품"]
     };
 
@@ -90,7 +89,6 @@ function updateCat2() {
             <option value="야구공">야구공</option>
             <option value="글러브">글러브</option>
             <option value="보호장비">보호장비</option>
-            <option value="유니폼">유니폼</option>
             <option value="굿즈">굿즈</option>
             <option value="야구화">야구화</option>
             <option value="장갑">장갑</option>
@@ -135,25 +133,15 @@ function updateCat2() {
             <option value="핸드가드">핸드가드</option>
             <option value="안면마스크">안면마스크</option>
             <option value="기타 보호장비">기타 보호장비</option>
-            
-            <!-- 유니폼 옵션 -->
-            <option value="국가대표 어센틱 유니폼">국가대표 어센틱 유니폼</option>
-            <option value="KBO 어센틱 유니폼">KBO 어센틱 유니폼</option>
-            <option value="MLB 어센틱 유니폼">MLB 어센틱 유니폼</option>
-            <option value="NPB 어센틱 유니폼">NPB 어센틱 유니폼</option>
-            <option value="기타 유니폼">기타 유니폼</option>
-            <option value="키즈 유니폼">키즈 유니폼</option>
-            
+        
             <!-- 굿즈 옵션 -->
-            <option value="인형">인형</option>
-            <option value="쿠션">쿠션</option>
             <option value="키링">키링</option>
-            <option value="머리띠/팔찌">머리띠/팔찌</option>
-            <option value="기타">기타</option>
-            
+            <option value="타올">타올</option>
+            <option value="인형">인형</option>
+            <option value="슬리퍼">슬리퍼</option>
+                
             <!-- 야구화 옵션 -->
             <option value="징 일체형">징 일체형</option>
-            <option value="징 교체형">징 교체형</option>
             <option value="인조잔디화">인조잔디화</option>
             <option value="유소년용 야구화">유소년용 야구화</option>
             <option value="런닝/트레이닝화">런닝/트레이닝화</option>
@@ -170,15 +158,13 @@ function updateCat2() {
             <!-- 가방 옵션 -->
             <option value="백팩">백팩</option>
             <option value="크로스백">크로스백</option>
-            <option value="팀장비 가방">팀장비 가방</option>
             <option value="휠가방">휠가방</option>
             <option value="배트가방">배트가방</option>
             <option value="볼가방">볼가방</option>
-            <option value="유소년용 가방">유소년용 가방</option>
-            <option value="주머니">주머니</option>
             <option value="기타 가방">기타 가방</option>
             
             <!-- 의류 옵션 -->
+            <option value="국가대표 어센틱 유니폼">국가대표 어센틱 유니폼</option>
             <option value="티셔츠">티셔츠</option>
             <option value="언더셔츠">언더셔츠</option>
             <option value="슬라이딩팬츠">슬라이딩팬츠</option>

@@ -5,12 +5,6 @@
 <html>
 <head>
 <style type="text/css">
-pre{
-	white-space: pre-wrap; 
-	word-wrap: break-word; 
-	background-color: transparent !important;
-	border: none;
-}
 body {
 	font-family: Arial, sans-serif;
 	background-color: #f0f0f0;
@@ -125,7 +119,7 @@ p {
 						<li><a href="myinfo"> 회원정보</a></li>
 						<li><a href="#"> 장바구니</a></li>
 						<li><a href="#"> 주문/배송조회</a></li>
-						<li><a href="faq_community"> 고객센터</a></li>
+						<li><a href="faq_comunity"> 고객센터</a></li>
 					</c:when>
 
 					<c:when test="${adminloginstate==true}">
@@ -147,7 +141,7 @@ p {
 						<li><a href="login"> 로그인</a></li>
 						<li><a href="#"> 장바구니</a></li>
 						<li><a href="#"> 주문/배송조회</a></li>
-						<li><a href="faq_community"> 고객센터</a></li>
+						<li><a href="faq_comunity"> 고객센터</a></li>
 					</c:otherwise>
 				</c:choose>
 			</ul>
@@ -176,141 +170,127 @@ p {
 				<li class="dropdown"><a class="dropdown-toggle"
 					data-toggle="dropdown" href="#">Sale<span class="caret"></span></a></li>
 
-				<li class="dropdown"><a class="dropdown-toggle"
+				
+				
+				
+			   <li class="dropdown"><a class="dropdown-toggle"
 					data-toggle="dropdown" href="#">글러브<span class="caret"></span></a>
 					<ul class="dropdown-menu">
-						<li><a href="#">투수/올라운드</a></li>
-						<li><a href="#">내야수</a></li>
-						<li><a href="#">외야수</a></li>
-						<li><a href="#">1루/포수미트</a></li>
-						<li><a href="#">어린이/유소년용</a></li>
-						<li><a href="#">글러브 관리용품</a></li>
+						<li><a href="pitcherallround">투수/올라운드</a></li>
+						<li><a href="infielder">내야수</a></li>
+						<li><a href="outfielder">외야수</a></li>
+						<li><a href="catchersmitt">포수미트</a></li>
+						<li><a href="youth">어린이/유소년용</a></li>
+						<li><a href="glovecare">글러브 관리용품</a></li>
+					</ul></li>
+
+				<li class="dropdown"><a class="dropdown-toggle" 
+				 data-toggle="dropdown" href="">배트<span class="caret"></span></a>
+				    <ul class="dropdown-menu">
+				        <li><a href="arbat">알루미늄 배트</a></li>
+				        <li><a href="carbonbat">카본/컴포짓</a></li>
+				        <li><a href="woodbat">나무배트</a></li>
+				        <li><a href="pungbat">펑고배트</a></li>
+				        <li><a href="youngbat">유소년용 배트</a></li>
+				        <li><a href="trainingbat">트레이닝 배트</a></li>						
+				        <li><a href="batgrip">배트그립</a></li>
+				        <li><a href="bataccessories">배트용품</a></li>
+				    </ul>
+				</li>
+
+				<li class="dropdown"><a class="dropdown-toggle"
+					data-toggle="dropdown" href="">장갑<span class="caret"></span></a>
+					<ul class="dropdown-menu">
+						<li><a href="batting-gloves">배팅장갑</a></li>
+						<li><a href="fielding-gloves">수비장갑</a></li>
+						<li><a href="base-running-gloves">주루장갑</a></li>
+						<li><a href="thermal-gloves">방한장갑</a></li>
+						<li><a href="youth-gloves">유소년용 장갑</a></li>
+						<li><a href="other-gloves">기타 장갑</a></li>
 					</ul></li>
 
 				<li class="dropdown"><a class="dropdown-toggle"
-					data-toggle="dropdown" href="#">배트<span class="caret"></span></a>
+					data-toggle="dropdown" href="">야구화<span class="caret"></span></a>
 					<ul class="dropdown-menu">
-						<li><a href="#">알루미늄 배트</a></li>
-						<li><a href="#">카본/컴포짓</a></li>
-						<li><a href="#">나무배트</a></li>
-						<li><a href="#">펑고배트</a></li>
-						<li><a href="#">유소년용 배트</a></li>
-						<li><a href="#">트레이닝 배트</a></li>
-						<li><a href="#">소프트볼 배트</a></li>
-						<li><a href="#">배트그립</a></li>
-						<li><a href="#">배트용품</a></li>
+						<li><a href="integrated-spikes">징 일체형</a></li>
+						<li><a href="turf-shoes">인조잔디화</a></li>
+						<li><a href="youth-shoes">유소년용 야구화</a></li>
+						<li><a href="running-training-shoes">런닝/트레이닝화</a></li>
+						<li><a href="shoe-accessories">야구화부속품</a></li>
 					</ul></li>
 
 				<li class="dropdown"><a class="dropdown-toggle"
-					data-toggle="dropdown" href="#">장갑<span class="caret"></span></a>
+					data-toggle="dropdown" href="">가방<span class="caret"></span></a>
 					<ul class="dropdown-menu">
-						<li><a href="#">배팅장갑</a></li>
-						<li><a href="#">수비장갑</a></li>
-						<li><a href="#">주루장갑</a></li>
-						<li><a href="#">방한장갑</a></li>
-						<li><a href="#">유소년용 장갑</a></li>
-						<li><a href="#">기타 장갑</a></li>
+						<li><a href="backpacks">백팩</a></li>
+						<li><a href="crossbody-bags">크로스백</a></li>						
+						<li><a href="wheeled-bags">휠가방</a></li>
+						<li><a href="bat-bags">배트가방</a></li>
+						<li><a href="ball-bags">볼가방</a></li>
+						<li><a href="other-bags">기타 가방</a></li>
 					</ul></li>
 
 				<li class="dropdown"><a class="dropdown-toggle"
-					data-toggle="dropdown" href="#">야구화<span class="caret"></span></a>
+					data-toggle="dropdown" href="">의류<span class="caret"></span></a>
 					<ul class="dropdown-menu">
-						<li><a href="#">징 일체형</a></li>
-						<li><a href="#">징 교체형</a></li>
-						<li><a href="#">인조잔디화</a></li>
-						<li><a href="#">유소년용 야구화</a></li>
-						<li><a href="#">런닝/트레이닝화</a></li>
-						<li><a href="#">야구화부속품</a></li>
+					    <li><a href="national-team-authentic">국가대표 어센틱 유니폼</a></li>
+						<li><a href="t-shirts">티셔츠</a></li>
+						<li><a href="undershirts">언더셔츠</a></li>
+						<li><a href="sliding-pants">슬라이딩팬츠</a></li>
+						<li><a href="long-short-pants">롱/숏스판팬츠</a></li>
+						<li><a href="icing-wear">아이싱웨어</a></li>
+						<li><a href="windbreakers">바람막이</a></li>
+						<li><a href="jackets">점퍼</a></li>
+						<li><a href="training-wear">트레이닝복</a></li>
+						<li><a href="hoodies">맨투맨/후디</a></li>
+						<li><a href="hats-belts-socks">모자/벨트/양말</a></li>
+						<li><a href="other-clothing">기타</a></li>
 					</ul></li>
 
 				<li class="dropdown"><a class="dropdown-toggle"
-					data-toggle="dropdown" href="#">가방<span class="caret"></span></a>
+					data-toggle="dropdown" href="">보호장비<span class="caret"></span></a>
 					<ul class="dropdown-menu">
-						<li><a href="#">백팩</a></li>
-						<li><a href="#">크로스백</a></li>
-						<li><a href="#">팀장비 가방</a></li>
-						<li><a href="#">휠가방</a></li>
-						<li><a href="#">배트가방</a></li>
-						<li><a href="#">볼가방</a></li>
-						<li><a href="#">유소년용 가방</a></li>
-						<li><a href="#">주머니</a></li>
-						<li><a href="#">기타 가방</a></li>
+						<li><a href="batter-helmets">타자헬멧</a></li>
+						<li><a href="arm-guards">암가드</a></li>
+						<li><a href="foot-guards">풋가드</a></li>
+						<li><a href="hand-guards">핸드가드</a></li>
+						<li><a href="face-masks">안면마스크</a></li>
+						<li><a href="other-protective-gear">기타 보호장비</a></li>
 					</ul></li>
 
 				<li class="dropdown"><a class="dropdown-toggle"
-					data-toggle="dropdown" href="#">의류<span class="caret"></span></a>
+					data-toggle="dropdown" href="">야구공<span class="caret"></span></a>
 					<ul class="dropdown-menu">
-						<li><a href="#">티셔츠</a></li>
-						<li><a href="#">언더셔츠</a></li>
-						<li><a href="#">슬라이딩팬츠</a></li>
-						<li><a href="#">롱/숏스판팬츠</a></li>
-						<li><a href="#">아이싱웨어</a></li>
-						<li><a href="#">바람막이</a></li>
-						<li><a href="#">점퍼</a></li>
-						<li><a href="#">트레이닝복</a></li>
-						<li><a href="#">맨투맨/후디</a></li>
-						<li><a href="#">모자/벨트/양말</a></li>
-						<li><a href="#">기타</a></li>
+						<li><a href="hard-balls">경식구</a></li>
+						<li><a href="soft-balls">연식구</a></li>
+						<li><a href="snap-balls">스냅볼</a></li>
+						<li><a href="ball-storage">야구공 보관함</a></li>
+					</ul></li>
+	
+				<li class="dropdown"><a class="dropdown-toggle"
+					data-toggle="dropdown" href="">굿즈<span class="caret"></span></a>
+					<ul class="dropdown-menu">
+						<li><a href="keyring">키링</a></li>
+						<li><a href="towel">타올</a></li>
+						<li><a href="doll">인형</a></li>
+						<li><a href="headbands-bracelets">슬리퍼</a></li>
 					</ul></li>
 
 				<li class="dropdown"><a class="dropdown-toggle"
-					data-toggle="dropdown" href="#">보호장비<span class="caret"></span></a>
+					data-toggle="dropdown" href="">기타용품<span class="caret"></span></a>
 					<ul class="dropdown-menu">
-						<li><a href="#">타자헬멧</a></li>
-						<li><a href="#">암가드</a></li>
-						<li><a href="#">풋가드</a></li>
-						<li><a href="#">핸드가드</a></li>
-						<li><a href="#">안면마스크</a></li>
-						<li><a href="#">기타 보호장비</a></li>
+						<li><a href="sunglasses">선글라스</a></li>
+						<li><a href="accessories">악세사리</a></li>
+						<li><a href="wristbands">손목밴드</a></li>
+						<li><a href="rosin-bags">로진백</a></li>
+						<li><a href="eye-patches">아이패치</a></li>
+						<li><a href="figures">피규어</a></li>
+						<li><a href="bases">베이스</a></li>
+						<li><a href="other-products">기타용품</a></li>
 					</ul></li>
 
-				<li class="dropdown"><a class="dropdown-toggle"
-					data-toggle="dropdown" href="#">야구공<span class="caret"></span></a>
-					<ul class="dropdown-menu">
-						<li><a href="#">경식구</a></li>
-						<li><a href="#">연식구</a></li>
-						<li><a href="#">캐치볼용</a></li>
-						<li><a href="#">스냅볼</a></li>
-						<li><a href="#">소프트볼</a></li>
-						<li><a href="#">피칭머신볼</a></li>
-						<li><a href="#">기념구</a></li>
-						<li><a href="#">야구공 보관함</a></li>
-						<li><a href="#">배팅장갑</a></li>
-					</ul></li>
 
-				<li class="dropdown"><a class="dropdown-toggle"
-					data-toggle="dropdown" href="#">유니폼<span class="caret"></span></a>
-					<ul class="dropdown-menu">
-						<li><a href="#">국가대표 어센틱 유니폼</a></li>
-						<li><a href="#">KBO 어센틱 유니폼</a></li>
-						<li><a href="#">MLB 어센틱 유니폼</a></li>
-						<li><a href="#">NPB 어센틱 유니폼</a></li>
-						<li><a href="#">기타 유니폼</a></li>
-						<li><a href="#">키즈 유니폼</a></li>
-					</ul></li>
 
-				<li class="dropdown"><a class="dropdown-toggle"
-					data-toggle="dropdown" href="#">굿즈<span class="caret"></span></a>
-					<ul class="dropdown-menu">
-						<li><a href="#">인형</a></li>
-						<li><a href="#">쿠션</a></li>
-						<li><a href="#">키링</a></li>
-						<li><a href="#">머리띠/팔찌</a></li>
-						<li><a href="#">기타</a></li>
-					</ul></li>
-
-				<li class="dropdown"><a class="dropdown-toggle"
-					data-toggle="dropdown" href="#">기타용품<span class="caret"></span></a>
-					<ul class="dropdown-menu">
-						<li><a href="#">선글라스</a></li>
-						<li><a href="#">악세사리</a></li>
-						<li><a href="#">손목밴드</a></li>
-						<li><a href="#">로진백</a></li>
-						<li><a href="#">아이패치</a></li>
-						<li><a href="#">피규어</a></li>
-						<li><a href="#">베이스</a></li>
-						<li><a href="#">기타용품</a></li>
-					</ul></li>
 
 				<li class="dropdown"><a class="dropdown-toggle"
 					data-toggle="dropdown" href="#">커뮤니티<span class="caret"></span></a>
