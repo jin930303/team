@@ -38,16 +38,20 @@ function check(){
          confirmMsg.style.color = correctColor;
          confirmMsg.innerHTML = "비밀번호 일치";
      }
-	 document.forms[0].submit();
+	 if (!document.forms[0].submitted) {
+	        document.forms[0].submitted = true;
+	        document.forms[0].submit();
+	    }
 }
 </script>
 <meta charset="UTF-8">
 <title>Insert title here</title>
 </head>
 <body>
-<input type="hidden" name="id" value="${findpw.id}">
+
 <form action="updatepw" method="post">
 <table border="6" align="center">
+
 <tr>
 <th>새 비밀번호</th>
 	<td><input type="password" name="pw" id="pw" placeholder="비밀번호 입력" maxlength="16"></td>
@@ -65,6 +69,7 @@ function check(){
                     <input type="reset" value="취소">
                 </td>
             </tr>
+
 </table>
 </form>
 </body>

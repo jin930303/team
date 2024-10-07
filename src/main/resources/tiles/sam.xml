@@ -71,6 +71,11 @@
       <put-attribute name="body" value="/WEB-INF/views/login/confirmpw.jsp"/>
    </definition> 
    
+    <definition name="updatepw" extends="baseLayout">
+      <put-attribute name="title" value="메인화면"/>
+      <put-attribute name="body" value="/WEB-INF/views/login/updatepw.jsp"/>
+   </definition> 
+   
 </tiles-definitions>
 
 

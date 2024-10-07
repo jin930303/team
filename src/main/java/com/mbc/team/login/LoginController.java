@@ -224,7 +224,7 @@ public class LoginController {
 		return "confirmid";
 		
 	}
-	
+	///////  login-비밀번호 찾기
 	@RequestMapping(value = "/findmypw")
 	public String login12()
 	{
@@ -241,15 +241,16 @@ public class LoginController {
 		LoginService ls=sqlSession.getMapper(LoginService.class);
 		LoginDTO findpw=ls.findpw(id,name,email);
 		mo.addAttribute("findpw",findpw);
-		
+		System.out.println("findpw : "+findpw);
 		return "confirmpw";
 	}
 	
-	@RequestMapping(value = "/confirmpw",method = RequestMethod.POST)
+	@RequestMapping(value = "/updatepw",method = RequestMethod.POST)
 	public String login14(HttpServletRequest request,Model mo)
 	{	
 		String id=request.getParameter("id");
 		String pw=request.getParameter("pw");
+		System.out.println("id"+id+"pw"+pw);
 		LoginService ls=sqlSession.getMapper(LoginService.class);
 		ls.updatepw(id,pw);
 		
