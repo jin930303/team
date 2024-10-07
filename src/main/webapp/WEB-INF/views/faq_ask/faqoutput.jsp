@@ -23,7 +23,7 @@ body {
 
 .container {
 	display: flex;
-	width: 75%;
+	width: 80%;
 }
 
 .sidebar {
@@ -268,23 +268,45 @@ body {
 				<select name="faqkey">
 					<option value="title">제목</option>
 					<option value="nickname">작성자</option>
-				</select> <input type="text" name="faqvalue" placeholder="검색어를 입력하세요">
+				</select> 
+				<input type="text" name="faqvalue" placeholder="검색어를 입력하세요">
 				<button type="submit">검색</button>
 			</form>
 
+			<!-- 정렬기준 -->
+			<form action="category" method="post">
+				<button type="submit" name="faq_category" value="faqcnt">조회수많은순</button>
+				<button type="submit" name="faq_category" value="fdate">최신순</button>
+			</form>
+			
 			<!-- 문의 리스트 테이블 -->
 			<table class="faq-table">
 				<caption>문의 내역</caption>
+				<!-- 
+					<td>
+						<select name="tab" onclick="location.href='category'">
+							<option value="회원관련 문의">회원관련 문의</option>
+							<option value="이벤트/혜택">이벤트/혜택</option>
+							<option value="상품옵션 문의">상품옵션</option>
+							<option value="교환/환불 문의">교환/환불</option>
+							<option value="배송 문의">배송 문의</option>
+							<option value="기타 문의">기타 문의</option>
+						</select>
+					</td>
+				</tr>
+				 -->
 				<thead>
 					<tr class="faq-small-title">
 						<th width="60px">문의번호</th>
 						<th width="120px">TAB</th>
 						<th width="350px">제목</th>
 						<th width="120px">작성자</th>
-						<th>시간</th>
+						<th width="150px">작성일자</th>
+						<th width="90px">조회수</th>
 					</tr>
 				</thead>
 				<tbody>
+				
 					<c:forEach items="${list}" var="faq">
 						<tr onclick="location.href='faqdetail?cnum=${faq.cnum}'"
 							class="trlink">
@@ -293,6 +315,7 @@ body {
 							<td style="text-align: left;">${faq.title}</td>
 							<td>${faq.nickname}</td>
 							<td>${faq.fdate}</td>
+							<td>${faq.faqcnt}</td>
 						</tr>
 					</c:forEach>
 				</tbody>

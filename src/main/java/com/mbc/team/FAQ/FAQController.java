@@ -22,7 +22,7 @@ public class FAQController {
 	@Autowired
 	SqlSession sqlSession;
 	// 경로 수정해야합니다.
-	String path = "C:\\mbc\\Somall\\Somall\\teamproject\\src\\main\\webapp\\image";
+	String path = "C:\\Users\\3-16\\git\\team\\src\\main\\webapp\\image";
 
 	// faqinput으로 이동
 	@RequestMapping(value = "/faqin")
@@ -68,16 +68,52 @@ public class FAQController {
 		int total = fs.total();
 		if (nowPage == null && cntPerPage == null) {
 			nowPage = "1";
-			cntPerPage = "15";
+			cntPerPage = "10";
 		} else if (nowPage == null) {
 			nowPage = "1";
 		} else if (cntPerPage == null) {
-			cntPerPage = "15";
+			cntPerPage = "10";
 		}
 		dto = new PageDTO(total, Integer.parseInt(nowPage), Integer.parseInt(cntPerPage));
 		mo.addAttribute("paging", dto);
 		mo.addAttribute("list", fs.page(dto));
 
+		return "faqoutput";
+	}
+
+	// 게시판 정렬기준
+	@RequestMapping(value = "/category")
+	public String faq19(HttpServletRequest request, PageDTO dto, Model mo) {
+		String faq_category = request.getParameter("faq_category");
+		
+		FAQService fs = sqlSession.getMapper(FAQService.class);
+		ArrayList<FAQDTO> list = null;
+		if(faq_category.equals("faqcnt"))
+		{
+			list = fs.category1();
+		}
+		else
+		{
+			list = fs.category2();
+		}
+		mo.addAttribute("list", list);
+/*
+		String nowPage = request.getParameter("nowPage");
+		String cntPerPage = request.getParameter("cntPerPage");
+
+		int total = fs.total();
+		if (nowPage == null && cntPerPage == null) {
+			nowPage = "1";
+			cntPerPage = "10";
+		} else if (nowPage == null) {
+			nowPage = "1";
+		} else if (cntPerPage == null) {
+			cntPerPage = "10";
+		}
+		dto = new PageDTO(total, Integer.parseInt(nowPage), Integer.parseInt(cntPerPage));
+		mo.addAttribute("paging", dto);
+		mo.addAttribute("list", fs.page(dto));
+*/		
 		return "faqoutput";
 	}
 
@@ -114,14 +150,16 @@ public class FAQController {
 		return "redirect:/faqdetail?cnum=" + cnum;
 	}
 
-	// 저장내용 목록 상세페이지(+하단에 문의 답변내용 미완)
+	// 저장내용 목록 상세페이지
 	@RequestMapping(value = "/faqdetail")
 	public String faq5(Model mo, HttpServletRequest request) {
 		int cnum = Integer.parseInt(request.getParameter("cnum"));
 
 		FAQService fs = sqlSession.getMapper(FAQService.class);
+		
 		ArrayList<FAQDTO> list = fs.faqdetail(cnum);
 		mo.addAttribute("list", list);
+		fs.faqcount(cnum);
 
 		ArrayList<FAQDTO> replylist = fs.faqreplydetail(cnum);
 		mo.addAttribute("replylist", replylist);
@@ -199,8 +237,12 @@ public class FAQController {
 
 	// 고객센터 홈
 	@RequestMapping(value = "/faq_community")
-	public String faq10() {
-
+	public String faq10(Model mo) {
+		
+		FAQService fs = sqlSession.getMapper(FAQService.class);
+		ArrayList<FAQDTO> bestfaq = fs.best_faq10();
+		mo.addAttribute("bestfaq", bestfaq);
+		
 		return "faq_main";
 	}
 
@@ -268,8 +310,10 @@ public class FAQController {
 		int cnum = Integer.parseInt(request.getParameter("cnum"));
 
 		FAQadminService fs2 = sqlSession.getMapper(FAQadminService.class);
+		
 		FAQadminDTO faq = fs2.faq_quetions_detail(cnum);
 		mo.addAttribute("faq", faq);
+		fs2.faqcount2(cnum);
 
 		ArrayList<FAQadminDTO> faqreply = fs2.faq_questions_reply(cnum);
 		mo.addAttribute("faqreply", faqreply);
