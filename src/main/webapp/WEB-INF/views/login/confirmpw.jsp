@@ -51,7 +51,7 @@ function check(){
 
 <form action="updatepw" method="post">
 <table border="6" align="center">
-
+<input type="hidden" name="id" value="${findpw.id}">
 <tr>
 <th>새 비밀번호</th>
 	<td><input type="password" name="pw" id="pw" placeholder="비밀번호 입력" maxlength="16"></td>
@@ -69,6 +69,7 @@ function check(){
                     <input type="reset" value="취소">
                 </td>
             </tr>
+
 
 </table>
 </form>

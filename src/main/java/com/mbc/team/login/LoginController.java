@@ -241,7 +241,6 @@ public class LoginController {
 		LoginService ls=sqlSession.getMapper(LoginService.class);
 		LoginDTO findpw=ls.findpw(id,name,email);
 		mo.addAttribute("findpw",findpw);
-		System.out.println("findpw : "+findpw);
 		return "confirmpw";
 	}
 	
@@ -249,12 +248,12 @@ public class LoginController {
 	public String login14(HttpServletRequest request,Model mo)
 	{	
 		String id=request.getParameter("id");
-		String pw=request.getParameter("pw");
-		System.out.println("id"+id+"pw"+pw);
+		String pw1=request.getParameter("pw");
+		PasswordEncoder passwordEncoder=new BCryptPasswordEncoder();
+		String pw=passwordEncoder.encode(pw1);
+		System.out.println("id : "+id+"pw"+pw);
 		LoginService ls=sqlSession.getMapper(LoginService.class);
 		ls.updatepw(id,pw);
-		
-		
 		return "redirect:/login";
 	}
 	
