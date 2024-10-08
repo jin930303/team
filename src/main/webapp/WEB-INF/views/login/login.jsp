@@ -3,26 +3,13 @@
 <!DOCTYPE html>
 <html>
 <head>
+<meta charset="UTF-8">
+    <title>Insert title here</title>
+    
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <meta charset="UTF-8">
-    <title>Insert title here</title>
-    <script type="text/javascript">
-        $(document).ready(function(){
-            $('#togglePassword').click(function(){
-                const passwordInput = $('#pw');
-                const type = passwordInput.attr('type') === 'password' ? 'text' : 'password'; // 'password'와 'text' 사이에서 토글
-                passwordInput.attr('type', type);
-                
-                // 아이콘 전환 로직
-                if (type === 'text') {
-                    $(this).html('<i class="fas fa-eye-slash"></i>'); // 비밀번호 보이기 상태
-                } else {
-                    $(this).html('<i class="fas fa-eye"></i>'); // 비밀번호 숨기기 상태
-                }
-            });
-        });
-    </script>
+    
+    
     <style>
         /* 스타일 추가 */
         .input-container {
