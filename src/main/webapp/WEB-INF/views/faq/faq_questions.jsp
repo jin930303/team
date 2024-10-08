@@ -227,7 +227,7 @@ body {
 			<h2>고객센터</h2>
 			<ul>
 				<li><a href="faq_community">고객센터</a></li>
-				<li><a href="#">공지사항</a></li>
+				<li><a href="gongjiboard">공지사항</a></li>
 				<li><a href="faqin">1:1 문의하기</a></li>
 				<li><a href="faqout">문의 내역</a></li>
 				<li><a href="faq">FAQ</a></li>
@@ -287,7 +287,7 @@ body {
 				<tbody>
 					<c:forEach items="${faq_admin_board}" var="faq_admin">
 						<tr
-							onclick="location.href='faq_quetions_detail?cnum=${faq_admin.cnum}'"
+							onclick="location.href='faq_questions_detail?cnum=${faq_admin.cnum}'"
 							class="trlink">
 							<td>${faq_admin.cnum}</td>
 							<td>${faq_admin.tab}</td>

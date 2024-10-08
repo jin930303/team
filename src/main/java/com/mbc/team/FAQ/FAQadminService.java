@@ -16,7 +16,7 @@ public interface FAQadminService {
 	public ArrayList<FAQadminDTO> page(PageDTO dto);
 
 //4. FAQ-자주묻는질문 상세페이지
-	FAQadminDTO faq_quetions_detail(int cnum);
+	FAQadminDTO faq_questions_detail(int cnum);
 
 //5. FAQ-자주묻는질문 상세페이지 수정(관리자)
 	FAQadminDTO faq_admin_update(int cnum);
@@ -31,7 +31,7 @@ public interface FAQadminService {
 //7. FAQ-자주묻는질문 댓글 달기
 	void faq_questions_stepup(int groups, int step);
 
-	void faq_questions_faqreplysave(int cnum, int groups, int step, int indent, String fcontents, String tab);
+	void faq_questions_faqreplysave(int cnum, int groups, int step, int indent, String fcontents, String tab, String nickname);
 
 	ArrayList<FAQadminDTO> faq_questions_reply(int cnum);
 
