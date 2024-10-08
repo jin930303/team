@@ -20,7 +20,7 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 @Controller
 public class ProductController {
 	
-	String path = "C:\\Users\\3-14\\git\\team\\src\\main\\webapp\\image";
+	String path = "C://team//team//src//main//webapp//image";
 
 	@Autowired
 	SqlSession sqlSession;
