@@ -3,7 +3,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.mbc.team.FAQ.FAQadminService">
 	<!-- FAQ 저장(관리자) -->
-	<insert id="faqinsert">
+	<insert id="faqinsert" parameterType="map">
 		insert into
 		faq(cnum,tab,title,fcontents,nickname,fimage1,fimage2,fimage3,groups)
 		values(faq_seq.nextval,#{param1},#{param2},#{param3},#{param4},#{param5},#{param6},#{param7},faq_seq.currval)
@@ -35,16 +35,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 
 	<!-- FAQ 출력(상세페이지) -->
-	<select id="faq_quetions_detail"
-		resultType="com.mbc.team.FAQ.FAQadminDTO">
+	<select id="faq_questions_detail" resultType="com.mbc.team.FAQ.FAQadminDTO">
 		select
 		cnum,tab,title,to_char(fdate,'yyyy-MM-dd')fdate,fcontents,groups,step,indent,nickname,fimage1,fimage2,fimage3,faqcnt
 		from faq where cnum=#{param1}
 	</select>
 
 	<!-- FAQ 수정(FAQ 상세페이지) -->
-	<select id="faq_admin_update"
-		resultType="com.mbc.team.FAQ.FAQadminDTO">
+	<select id="faq_admin_update" resultType="com.mbc.team.FAQ.FAQadminDTO">
 		select
 		cnum,tab,title,to_char(fdate,'yyyy-MM-dd')fdate,fcontents,groups,step,indent,nickname,fimage1,fimage2,fimage3
 		from faq where cnum=#{param1}
@@ -72,13 +70,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<!-- FAQ 댓글 저장 -->
 	<insert id="faq_questions_faqreplysave">
 		insert into
-		faq(cnum,groups,step,indent,fcontents,tab)
-		values(faq_seq.nextval,#{param2},#{param3},#{param4},#{param5},#{param6})
+		faq(cnum,groups,step,indent,fcontents,tab,nickname)
+		values(faq_seq.nextval,#{param2},#{param3},#{param4},#{param5},#{param6},#{param7})
 	</insert>
 
 	<!-- FAQ 댓글 출력(상세페이지) -->
-	<select id="faq_questions_reply"
-		resultType="com.mbc.team.FAQ.FAQadminDTO">
+	<select id="faq_questions_reply" resultType="com.mbc.team.FAQ.FAQadminDTO">
 		select
 		cnum,tab,title,nickname,to_char(fdate,'yyyy-MM-dd')fdate,fcontents
 		from faq where groups=#{param1} and step>0 and indent>0

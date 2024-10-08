@@ -1,7 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<!-- 상세페이지 답변 달면 게시판으로 출력되던 오류 수정. 상세페이지 하단 생성 -->
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -228,7 +227,7 @@ body {
 			<h2>고객센터</h2>
 			<ul>
 				<li><a href="faq_community">고객센터</a></li>
-				<li><a href="#">공지사항</a></li>
+				<li><a href="gongjiboard">공지사항</a></li>
 				<li><a href="faqin">1:1 문의하기</a></li>
 				<li><a href="faqout">문의 내역</a></li>
 				<li><a href="faq">FAQ</a></li>
