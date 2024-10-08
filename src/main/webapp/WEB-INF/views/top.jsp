@@ -5,6 +5,12 @@
 <html>
 <head>
 <style type="text/css">
+    pre {
+        word-wrap: break-word;
+        white-space: pre-wrap;
+        background-color: transparent;
+    }
+
 body {
 	font-family: Arial, sans-serif;
 	background-color: #f0f0f0;
@@ -119,7 +125,7 @@ p {
 						<li><a href="myinfo"> 회원정보</a></li>
 						<li><a href="#"> 장바구니</a></li>
 						<li><a href="#"> 주문/배송조회</a></li>
-						<li><a href="faq_comunity"> 고객센터</a></li>
+						<li><a href="faq_community"> 고객센터</a></li>
 					</c:when>
 
 					<c:when test="${adminloginstate==true}">
@@ -141,7 +147,7 @@ p {
 						<li><a href="login"> 로그인</a></li>
 						<li><a href="#"> 장바구니</a></li>
 						<li><a href="#"> 주문/배송조회</a></li>
-						<li><a href="faq_comunity"> 고객센터</a></li>
+						<li><a href="faq_community"> 고객센터</a></li>
 					</c:otherwise>
 				</c:choose>
 			</ul>
