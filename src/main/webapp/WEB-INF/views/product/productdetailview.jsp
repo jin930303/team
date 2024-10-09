@@ -56,28 +56,13 @@
             const total = price * count;
             document.getElementById("tot").innerText = "합계: " + total + "원";
         }
-
-        function toggleOptions() {
-            const productType = document.getElementById("productType").value;
-            const batOptions = document.getElementById("batOptions");
-            const gloveOptions = document.getElementById("gloveOptions");
-            
-            if (productType === "bat") {
-                batOptions.style.display = "block";
-                gloveOptions.style.display = "none";
-            } else if (productType === "glove") {
-                batOptions.style.display = "none";
-                gloveOptions.style.display = "block";
-            } else {
-                batOptions.style.display = "none";
-                gloveOptions.style.display = "none";
-            }
-        }
     </script>  
     
 </head>
 <body>
     <form action="" method="post" enctype="multipart/form-data">
+    <input type="hidden" name="itemnum" id="itemnum" value="${dto.itemnum}">
+    <input type="hidden" name="price" id="price" value="${dto.price}">
         <table>
             <tr>
                 <td rowspan="6">
@@ -89,42 +74,38 @@
                 <td colspan="6" class="price">판매가 ${dto.price}원</td>
             </tr>
             
-            <!-- 제품 유형 선택 -->
-            <tr>
-                <td colspan="6">
-                    <div class="option-title">제품 유형 선택</div>
-                    <select id="productType" onchange="toggleOptions()">
-                        <option value="">[필수] 제품 유형을 선택해 주세요</option>
-                        <option value="bat">배트</option>
-                        <option value="glove">글러브</option>
-                    </select>
-                </td>
-            </tr>
-            
-            <!-- 배트 옵션 선택 영역 -->
-            <tr id="batOptions" style="display:none;">
-                <td colspan="6">
-                    <div class="option-title">배트 사이즈</div>
-                    <select name="op1" id="op1">
-                        <option value="">[필수] 옵션을 선택해 주세요</option>
-                        <option value="33인치/28온스">33인치/28온스</option>
-                        <option value="32인치/27온스">32인치/27온스</option>
-                    </select>
-                </td>
-            </tr>
-            
-            <!-- 글러브 옵션 선택 영역 -->
-            <tr id="gloveOptions" style="display:none;">
-                <td colspan="6">
-                    <div class="option-title">글러브 선택</div>
-                    <select name="op2" id="op2">
-                        <option value="">[필수] 옵션을 선택해 주세요</option>
-                        <option value="우투(왼손착용)">우투(왼손착용)</option>
-                        <option value="좌투(오른손착용)">좌투(오른손착용)</option>
-                    </select>
-                </td>
-            </tr>
-            
+           <!-- cat1에 따라 배트 또는 글러브 옵션 선택 영역 표시 -->
+            <c:choose>
+                <c:when test="${dto.cat1 == '배트'}">
+                    <tr id="batOptions" style="display:block;">
+                        <td colspan="6">
+                            <div class="option-title">배트 사이즈</div>
+                            <select name="op1" id="op1">
+                                <option value="">[필수] 옵션을 선택해 주세요</option>
+                                <option value="33인치/28온스">33인치/28온스</option>
+                                <option value="32인치/27온스">32인치/27온스</option>
+                            </select>
+                        </td>
+                    </tr>
+                </c:when>
+                <c:when test="${dto.cat1 == '글러브'}">
+                    <tr id="gloveOptions" style="display:block;">
+                        <td colspan="6">
+                            <div class="option-title">글러브 선택</div>
+                            <select name="op2" id="op2">
+                                <option value="">[필수] 옵션을 선택해 주세요</option>
+                                <option value="우투(왼손착용)">우투(왼손착용)</option>
+                                <option value="좌투(오른손착용)">좌투(오른손착용)</option>
+                            </select>
+                        </td>
+                    </tr>
+                </c:when>
+                <c:otherwise>
+                    <tr>
+                        <td colspan="6">선택할 수 있는 옵션이 없습니다.</td>
+                    </tr>
+                </c:otherwise>
+            </c:choose>
             <!-- 수량 선택 영역 -->
             <tr>
                 <td colspan="6">  
@@ -139,9 +120,10 @@
             </tr>
             
             <!-- 구매 선택 영역 -->
-            <tr>
+              <tr>
                 <td colspan="6">
-                    <a href="" onclick="alert('구매 페이지로 이동합니다.'); return true;">바로구매</a>
+                    <a href="">장바구니</a>
+                    <a href="">바로구매</a>
                 </td>
             </tr>
            
