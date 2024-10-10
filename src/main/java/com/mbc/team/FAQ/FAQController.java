@@ -31,37 +31,51 @@ public class FAQController {
 	// 1:1 문의글 작성
 	@RequestMapping(value = "/faqin")
 	public String faq0member(HttpServletRequest request, Model mo) {
+		
 		HttpSession session = request.getSession();
 		Boolean FAQinput = (Boolean) session.getAttribute("loginstate");
 
 		if (FAQinput == null || !FAQinput) {
 			return "redirect:/faq_community";
 		}
-		return "faqinput";
+		
+			return "faqinput";
+		
 	}
-
-	// 1:1 문의글 저장
+	
+	//	1:1 문의글 저장(이미지 갯수별 저장 가능)
 	@RequestMapping(value = "/faqsave", method = RequestMethod.POST)
 	public String faq1member(MultipartHttpServletRequest mul) throws IllegalStateException, IOException {
-		String tab = mul.getParameter("tab");
-		String title = mul.getParameter("title");
-		String nickname = mul.getParameter("nickname");
-		String fcontents = mul.getParameter("fcontents");
-		MultipartFile fimg1 = mul.getFile("fimage1");
-		MultipartFile fimg2 = mul.getFile("fimage2");
-		MultipartFile fimg3 = mul.getFile("fimage3");
+	    String tab = mul.getParameter("tab");
+	    String title = mul.getParameter("title");
+	    String nickname = mul.getParameter("nickname");
+	    String fcontents = mul.getParameter("fcontents");
 
-		String fname1 = fimg1.getOriginalFilename();
-		String fname2 = fimg2.getOriginalFilename();
-		String fname3 = fimg3.getOriginalFilename();
-		FAQService fs = sqlSession.getMapper(FAQService.class);
-		fimg1.transferTo(new File(path + "\\" + fname1));
-		fimg2.transferTo(new File(path + "\\" + fname2));
-		fimg3.transferTo(new File(path + "\\" + fname3));
+	    // 파일 처리 (파일이 없을 경우 빈 문자열로 처리)
+	    MultipartFile fimg1 = mul.getFile("fimage1");
+	    MultipartFile fimg2 = mul.getFile("fimage2");
+	    MultipartFile fimg3 = mul.getFile("fimage3");
 
-		fs.faqinsert(tab, title, fcontents, nickname, fname1, fname2, fname3);
+	    String fname1 = (fimg1 != null && !fimg1.isEmpty()) ? fimg1.getOriginalFilename() : "";
+	    String fname2 = (fimg2 != null && !fimg2.isEmpty()) ? fimg2.getOriginalFilename() : "";
+	    String fname3 = (fimg3 != null && !fimg3.isEmpty()) ? fimg3.getOriginalFilename() : "";
 
-		return "redirect:/";
+	    // 파일 저장 (파일이 있을 경우에만 저장)
+	    if (!fname1.isEmpty()) {
+	        fimg1.transferTo(new File(path + "\\" + fname1));
+	    }
+	    if (!fname2.isEmpty()) {
+	        fimg2.transferTo(new File(path + "\\" + fname2));
+	    }
+	    if (!fname3.isEmpty()) {
+	        fimg3.transferTo(new File(path + "\\" + fname3));
+	    }
+
+	    // FAQ 데이터 저장
+	    FAQService fs = sqlSession.getMapper(FAQService.class);
+	    fs.faqinsert(tab, title, fcontents, nickname, fname1, fname2, fname3);
+
+	    return "redirect:/";
 	}
 
 	// 1:1 문의글 게시판
@@ -90,7 +104,7 @@ public class FAQController {
 		return "faqoutput";
 	}
 
-	// 1:1 문의글 정렬기준
+	// 1:1 문의글 정렬기준(페이징 필요)
 	@RequestMapping(value = "/category")
 	public String faq3(HttpServletRequest request, PageDTO dto, Model mo) {
 		String faq_category = request.getParameter("faq_category");
@@ -184,27 +198,38 @@ public class FAQController {
 	public String faq8admin(HttpServletResponse response, MultipartHttpServletRequest mul) throws IllegalStateException, IOException {
 		int cnum = Integer.parseInt(mul.getParameter("cnum"));
 		String tab = mul.getParameter("tab");
-		String title = mul.getParameter("title");
-		String nickname = mul.getParameter("nickname");
-		String fcontents = mul.getParameter("fcontents");
-		MultipartFile fimg1 = mul.getFile("fimage1");
-		MultipartFile fimg2 = mul.getFile("fimage2");
-		MultipartFile fimg3 = mul.getFile("fimage3");
+	    String title = mul.getParameter("title");
+	    String nickname = mul.getParameter("nickname");
+	    String fcontents = mul.getParameter("fcontents");
 
-		String fname1 = fimg1.getOriginalFilename();
-		String fname2 = fimg2.getOriginalFilename();
-		String fname3 = fimg3.getOriginalFilename();
-		FAQService fs = sqlSession.getMapper(FAQService.class);
-		fimg1.transferTo(new File(path + "\\" + fname1));
-		fimg2.transferTo(new File(path + "\\" + fname2));
-		fimg3.transferTo(new File(path + "\\" + fname3));
-		
+	    // 파일 처리 (파일이 없을 경우 빈 문자열로 처리)
+	    MultipartFile fimg1 = mul.getFile("fimage1");
+	    MultipartFile fimg2 = mul.getFile("fimage2");
+	    MultipartFile fimg3 = mul.getFile("fimage3");
+
+	    String fname1 = (fimg1 != null && !fimg1.isEmpty()) ? fimg1.getOriginalFilename() : "";
+	    String fname2 = (fimg2 != null && !fimg2.isEmpty()) ? fimg2.getOriginalFilename() : "";
+	    String fname3 = (fimg3 != null && !fimg3.isEmpty()) ? fimg3.getOriginalFilename() : "";
+
+	    // 파일 저장 (파일이 있을 경우에만 저장)
+	    if (!fname1.isEmpty()) {
+	        fimg1.transferTo(new File(path + "\\" + fname1));
+	    }
+	    if (!fname2.isEmpty()) {
+	        fimg2.transferTo(new File(path + "\\" + fname2));
+	    }
+	    if (!fname3.isEmpty()) {
+	        fimg3.transferTo(new File(path + "\\" + fname3));
+	    }
+	    
+	    // 수정 완료 알림
 		response.setContentType("text/html;charset=utf-8");
 		PrintWriter prw=response.getWriter();
 		prw.print("<script> alert('수정이 완료되었습니다.');</script>");
 		prw.print("<script> location.href='faqout';</script>");
 		prw.close();
 		
+		FAQService fs = sqlSession.getMapper(FAQService.class);
 		fs.faq_reply_update2(cnum, tab, title, fcontents, nickname, fname1, fname2, fname3);
 
 		return "redirect:/faqout";
@@ -235,24 +260,41 @@ public class FAQController {
 
 	// 1:1 문의글 Update clear
 	@RequestMapping(value = "/faqupdate2", method = RequestMethod.POST)
-	public String faq11member(MultipartHttpServletRequest mul) throws IllegalStateException, IOException {
+	public String faq11member(HttpServletResponse response, MultipartHttpServletRequest mul) throws IllegalStateException, IOException {
 		int cnum = Integer.parseInt(mul.getParameter("cnum"));
 		String tab = mul.getParameter("tab");
-		String title = mul.getParameter("title");
-		String nickname = mul.getParameter("nickname");
-		String fcontents = mul.getParameter("fcontents");
-		MultipartFile fimg1 = mul.getFile("fimage1");
-		MultipartFile fimg2 = mul.getFile("fimage2");
-		MultipartFile fimg3 = mul.getFile("fimage3");
+	    String title = mul.getParameter("title");
+	    String nickname = mul.getParameter("nickname");
+	    String fcontents = mul.getParameter("fcontents");
 
-		String fname1 = fimg1.getOriginalFilename();
-		String fname2 = fimg2.getOriginalFilename();
-		String fname3 = fimg3.getOriginalFilename();
+	    // 파일 처리 (파일이 없을 경우 빈 문자열로 처리)
+	    MultipartFile fimg1 = mul.getFile("fimage1");
+	    MultipartFile fimg2 = mul.getFile("fimage2");
+	    MultipartFile fimg3 = mul.getFile("fimage3");
+
+	    String fname1 = (fimg1 != null && !fimg1.isEmpty()) ? fimg1.getOriginalFilename() : "";
+	    String fname2 = (fimg2 != null && !fimg2.isEmpty()) ? fimg2.getOriginalFilename() : "";
+	    String fname3 = (fimg3 != null && !fimg3.isEmpty()) ? fimg3.getOriginalFilename() : "";
+
+	    // 파일 저장 (파일이 있을 경우에만 저장)
+	    if (!fname1.isEmpty()) {
+	        fimg1.transferTo(new File(path + "\\" + fname1));
+	    }
+	    if (!fname2.isEmpty()) {
+	        fimg2.transferTo(new File(path + "\\" + fname2));
+	    }
+	    if (!fname3.isEmpty()) {
+	        fimg3.transferTo(new File(path + "\\" + fname3));
+	    }
+	    
+	    // 수정 완료 알림
+		response.setContentType("text/html;charset=utf-8");
+		PrintWriter prw=response.getWriter();
+		prw.print("<script> alert('수정이 완료되었습니다.');</script>");
+		prw.print("<script> location.href='faqout';</script>");
+		prw.close();
+
 		FAQService fs = sqlSession.getMapper(FAQService.class);
-		fimg1.transferTo(new File(path + "\\" + fname1));
-		fimg2.transferTo(new File(path + "\\" + fname2));
-		fimg3.transferTo(new File(path + "\\" + fname3));
-
 		fs.faqupdate2(cnum, tab, title, fcontents, nickname, fname1, fname2, fname3);
 
 		return "redirect:/faqout";
@@ -337,24 +379,35 @@ public class FAQController {
 	public String faq17admin(MultipartHttpServletRequest mul) throws IllegalStateException, IOException {
 
 		String tab = mul.getParameter("tab");
-		String title = mul.getParameter("title");
-		String nickname = mul.getParameter("nickname");
-		String fcontents = mul.getParameter("fcontents");
-		MultipartFile fimg1 = mul.getFile("fimage1");
-		MultipartFile fimg2 = mul.getFile("fimage2");
-		MultipartFile fimg3 = mul.getFile("fimage3");
+	    String title = mul.getParameter("title");
+	    String nickname = mul.getParameter("nickname");
+	    String fcontents = mul.getParameter("fcontents");
 
-		String fname1 = fimg1.getOriginalFilename();
-		String fname2 = fimg2.getOriginalFilename();
-		String fname3 = fimg3.getOriginalFilename();
-		FAQadminService fs2 = sqlSession.getMapper(FAQadminService.class);
-		fimg1.transferTo(new File(path + "\\" + fname1));
-		fimg2.transferTo(new File(path + "\\" + fname2));
-		fimg3.transferTo(new File(path + "\\" + fname3));
+	    // 파일 처리 (파일이 없을 경우 ""를 통해서 빈 문자열로 처리)
+	    MultipartFile fimg1 = mul.getFile("fimage1");
+	    MultipartFile fimg2 = mul.getFile("fimage2");
+	    MultipartFile fimg3 = mul.getFile("fimage3");
 
-		fs2.faqinsert(tab, title, fcontents, nickname, fname1, fname2, fname3);
+	    String fname1 = (fimg1 != null && !fimg1.isEmpty()) ? fimg1.getOriginalFilename() : "";
+	    String fname2 = (fimg2 != null && !fimg2.isEmpty()) ? fimg2.getOriginalFilename() : "";
+	    String fname3 = (fimg3 != null && !fimg3.isEmpty()) ? fimg3.getOriginalFilename() : "";
 
-		return "redirect:/faq_community";
+	    // 파일 저장 (파일이 있을 경우에만 저장)
+	    if (!fname1.isEmpty()) {
+	        fimg1.transferTo(new File(path + "\\" + fname1));
+	    }
+	    if (!fname2.isEmpty()) {
+	        fimg2.transferTo(new File(path + "\\" + fname2));
+	    }
+	    if (!fname3.isEmpty()) {
+	        fimg3.transferTo(new File(path + "\\" + fname3));
+	    }
+
+	    // FAQ 데이터 저장
+	    FAQService fs = sqlSession.getMapper(FAQService.class);
+	    fs.faqinsert(tab, title, fcontents, nickname, fname1, fname2, fname3);
+
+	    return "redirect:/faq_community";
 	}
 
 	// FAQ-자주 묻는 질문 게시판
@@ -415,24 +468,41 @@ public class FAQController {
 
 	// FAQ-자주 묻는 질문 Update clear
 	@RequestMapping(value = "/faq_admin_update2", method = RequestMethod.POST)
-	public String faq21admin(MultipartHttpServletRequest mul) throws IllegalStateException, IOException {
+	public String faq21admin(HttpServletResponse response, MultipartHttpServletRequest mul) throws IllegalStateException, IOException {
 		int cnum = Integer.parseInt(mul.getParameter("cnum"));
 		String tab = mul.getParameter("tab");
-		String title = mul.getParameter("title");
-		String nickname = mul.getParameter("nickname");
-		String fcontents = mul.getParameter("fcontents");
-		MultipartFile fimg1 = mul.getFile("fimage1");
-		MultipartFile fimg2 = mul.getFile("fimage2");
-		MultipartFile fimg3 = mul.getFile("fimage3");
+	    String title = mul.getParameter("title");
+	    String nickname = mul.getParameter("nickname");
+	    String fcontents = mul.getParameter("fcontents");
 
-		String fname1 = fimg1.getOriginalFilename();
-		String fname2 = fimg2.getOriginalFilename();
-		String fname3 = fimg3.getOriginalFilename();
+	    // 파일 처리 (파일이 없을 경우 빈 문자열로 처리)
+	    MultipartFile fimg1 = mul.getFile("fimage1");
+	    MultipartFile fimg2 = mul.getFile("fimage2");
+	    MultipartFile fimg3 = mul.getFile("fimage3");
+
+	    String fname1 = (fimg1 != null && !fimg1.isEmpty()) ? fimg1.getOriginalFilename() : "";
+	    String fname2 = (fimg2 != null && !fimg2.isEmpty()) ? fimg2.getOriginalFilename() : "";
+	    String fname3 = (fimg3 != null && !fimg3.isEmpty()) ? fimg3.getOriginalFilename() : "";
+
+	    // 파일 저장 (파일이 있을 경우에만 저장)
+	    if (!fname1.isEmpty()) {
+	        fimg1.transferTo(new File(path + "\\" + fname1));
+	    }
+	    if (!fname2.isEmpty()) {
+	        fimg2.transferTo(new File(path + "\\" + fname2));
+	    }
+	    if (!fname3.isEmpty()) {
+	        fimg3.transferTo(new File(path + "\\" + fname3));
+	    }
+	    
+	    // 수정 완료 알림
+		response.setContentType("text/html;charset=utf-8");
+		PrintWriter prw=response.getWriter();
+		prw.print("<script> alert('수정이 완료되었습니다.');</script>");
+		prw.print("<script> location.href='faqout';</script>");
+		prw.close();
+		
 		FAQadminService fs2 = sqlSession.getMapper(FAQadminService.class);
-		fimg1.transferTo(new File(path + "\\" + fname1));
-		fimg2.transferTo(new File(path + "\\" + fname2));
-		fimg3.transferTo(new File(path + "\\" + fname3));
-
 		fs2.faq_admin_update2(cnum, tab, title, fcontents, nickname, fname1, fname2, fname3);
 
 		return "redirect:/faq";

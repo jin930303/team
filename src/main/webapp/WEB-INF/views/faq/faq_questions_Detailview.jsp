@@ -217,6 +217,13 @@ body {
 }
 </style>
 <script src="https://code.jquery.com/jquery-latest.min.js"></script>
+<script>
+    function deleteFaq(cnum) {
+        if (confirm('삭제하시면 복구할 수 없습니다.\n정말로 삭제하시겠습니까?')) {
+            location.href = 'faqdelete?cnum=' + cnum;
+        }
+    }
+</script>
 <meta charset="UTF-8">
 <title>FAQ-자주묻는질문 상세페이지</title>
 </head>
@@ -273,9 +280,16 @@ body {
 				</tr>
 				<tr>
 					<td colspan="6">
-						<img src="./image/${faq.fimage1}" width="80px" height="70px"> 
-						<img src="./image/${faq.fimage2}" width="80px" height="70px"> 
-						<img src="./image/${faq.fimage3}" width="80px" height="70px"></td>
+						<c:if test="${faq.fimage1 != null}">
+			                <img src="./image/${faq.fimage1}" width="80px" height="70px">
+			            </c:if>
+			            <c:if test="${faq.fimage2 != null}">
+							<img src="./image/${faq.fimage2}" width="80px" height="70px"> 
+						</c:if>
+						<c:if test="${faq.fimage3 != null}">
+							<img src="./image/${faq.fimage3}" width="80px" height="70px">
+						</c:if>	
+					</td>
 				</tr>
 				<tr>
 					<td colspan="7">
@@ -285,7 +299,7 @@ body {
 						if (FAQadmin != null && FAQadmin) {
 					%>
 					<input type="button" value="FAQ 수정(관리자)" onclick="location.href='faq_admin_update?cnum=${faq.cnum}'">
-					<input id="deletecheck" type="button" value="FAQ 삭제(관리자)" onclick="location.href='faq_admin_delete?cnum=${faq.cnum}'">
+					<input type="button" value="FAQ 삭제(관리자)" onclick="deleteFaq(${faq.cnum})">
 					<% 
 						}
 					%>

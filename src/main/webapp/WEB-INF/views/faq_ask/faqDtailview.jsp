@@ -218,6 +218,13 @@ body {
 }
 </style>
 <script src="https://code.jquery.com/jquery-latest.min.js"></script>
+<script>
+    function deleteFaq(cnum) {
+        if (confirm('삭제하시면 복구할 수 없습니다.\n정말로 삭제하시겠습니까?')) {
+            location.href = 'faqdelete?cnum=' + cnum;
+        }
+    }
+</script>
 <meta charset="UTF-8">
 <title>1:1 문의 목록 상세페이지</title>
 </head>
@@ -281,9 +288,15 @@ body {
 				</tr>
 				<tr>
 					<td colspan="4">
-						<img src="./image/${faq.fimage1}" width="80px" height="70px"> 
-						<img src="./image/${faq.fimage2}" width="80px" height="70px"> 
-						<img src="./image/${faq.fimage3}" width="80px" height="70px">
+						<c:if test="${faq.fimage1 != null}">
+			                <img src="./image/${faq.fimage1}" width="80px" height="70px">
+			            </c:if>
+			            <c:if test="${faq.fimage2 != null}">
+							<img src="./image/${faq.fimage2}" width="80px" height="70px"> 
+						</c:if>
+						<c:if test="${faq.fimage3 != null}">
+							<img src="./image/${faq.fimage3}" width="80px" height="70px">
+						</c:if>	
 					</td>
 				</tr>
 				<tr>
@@ -304,7 +317,7 @@ body {
 						if (FAQmember != null && FAQmember) {
 					%>
 						<input type="button" value="문의글 수정" onclick="location.href='faqupdate?cnum=${faq.cnum}'">
-						<input id="deletecheck" type="button" value="문의글 삭제" onclick="location.href='faqdelete?cnum=${faq.cnum}'"> 
+						<input type="button" value="문의글 삭제" onclick="deleteFaq(${faq.cnum})">
 					<% 
 						}
 					%>

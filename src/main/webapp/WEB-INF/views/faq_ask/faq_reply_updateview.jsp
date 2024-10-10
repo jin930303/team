@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -301,9 +302,15 @@ body {
 					<input type="file" name="fimage3">
 				</td>
 				<td>
-					<img src="./image/${dto.fimage1}" width="80px" height="70px"> 
-					<img src="./image/${dto.fimage2}" width="80px" height="70px"> 
-					<img src="./image/${dto.fimage3}" width="80px" height="70px">
+					<c:if test="${dto.fimage1 != null}">
+			            <img src="./image/${faq.fimage1}" width="80px" height="70px">
+			        </c:if>
+			        <c:if test="${dto.fimage2 != null}">
+						<img src="./image/${faq.fimage2}" width="80px" height="70px"> 
+			 		</c:if>
+					<c:if test="${dto.fimage3 != null}">
+						<img src="./image/${faq.fimage3}" width="80px" height="70px">
+					</c:if>	
 				</td>
 			</tr>
 			<tr>

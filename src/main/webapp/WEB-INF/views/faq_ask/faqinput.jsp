@@ -1,8 +1,27 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
-<html lang="ko">
+<html>
 <head>
+<script>
+	let fileCount = 1;
+	const maxFiles = 3;
+		
+	function addFileInput() {
+    if (fileCount >= maxFiles) {
+	    alert("최대 3장까지 첨부 가능합니다.");
+	return;
+	}
+					
+    fileCount++;
+    const newInput = document.createElement('input');
+    newInput.type = 'file';
+    newInput.name = `fimage${fileCount}`;
+					
+    document.getElementById('fileInputs').appendChild(newInput);
+}
+</script>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>문의글 작성</title>
@@ -286,14 +305,17 @@ body {
 							<textarea rows="10" cols="25" name="fcontents"></textarea>
 						</td>
 					</tr>
+
 					<tr>
-						<th>첨부 이미지</th>
-						<td>
-							<input type="file" name="fimage1"> 
-							<input type="file" name="fimage2"> 
-							<input type="file" name="fimage3">
-						</td>
+					    <th>첨부 이미지</th>
+					    <td>
+					        <div id="fileInputs">
+					            <input type="file" name="fimage1" onclick="addFileInput()">
+					        </div>
+					    </td>
 					</tr>
+					
+					
 					<tr>
 						<td colspan="2" style="text-align: center;"><input
 							type="submit" value="작성 완료"></td>

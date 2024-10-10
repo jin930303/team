@@ -231,6 +231,7 @@ body {
 				<li><a href="faqin">1:1 문의하기</a></li>
 				<li><a href="faqout">문의 내역</a></li>
 				<li><a href="faq">FAQ</a></li>
+				<li><a href="upload">업로드 연습</a></li>
 				<!-- 관리자만 확인하기 버튼임 -->
 				<% 
 					Boolean FAQinput = (Boolean) session.getAttribute("adminloginstate");

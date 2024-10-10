@@ -3,6 +3,24 @@
 <!DOCTYPE html>
 <html>
 <head>
+<script>
+	let fileCount = 1;
+	const maxFiles = 3;
+		
+	function addFileInput() {
+    if (fileCount >= maxFiles) {
+	    alert("최대 3장까지 첨부 가능합니다.");
+	return;
+	}
+					
+    fileCount++;
+    const newInput = document.createElement('input');
+    newInput.type = 'file';
+    newInput.name = `fimage${fileCount}`;
+					
+    document.getElementById('fileInputs').appendChild(newInput);
+}
+</script>
 <style type="text/css">
 * {
 	margin: 0;
@@ -279,9 +297,9 @@ body {
 					<tr>
 						<th>첨부 이미지</th>
 						<td>
-							<input type="file" name="fimage1"> 
-							<input type="file" name="fimage2"> 
-							<input type="file" name="fimage3">
+							<div id="fileInputs">
+					            <input type="file" name="fimage1" onclick="addFileInput()">
+					        </div>
 						</td>
 					</tr>
 					<tr>
