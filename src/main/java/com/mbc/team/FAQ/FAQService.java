@@ -59,5 +59,22 @@ public interface FAQService {
 
 //14. 고객센터 메인 홈
 	ArrayList<FAQDTO> best_faq10();
+	
+//15. 상세페이지 문의 답변 수정창
+	FAQDTO faq_reply_update1(int cnum);
+
+//16. 상세페이지 문의 답변 수정완료
+	void faq_reply_update2(int cnum, String tab, String title, String fcontents, String nickname, String fname1,
+			String fname2, String fname3);
+
+//17. 상세페이지 문의 답변 삭제
+	void faq_reply_delete(int cnum);
+
+//18. 고객센터 홈 검색	
+	ArrayList<FAQDTO> faq_main_titlesearch(String faq_search_value);
+
+	ArrayList<FAQDTO> faq_main_nicknamesearch(String faq_search_value);
+
+
 
 }

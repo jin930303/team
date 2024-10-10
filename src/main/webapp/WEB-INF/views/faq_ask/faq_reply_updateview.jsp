@@ -1,8 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
 <head>
+<title>고객센터 문의 게시판</title>
 <style type="text/css">
 * {
 	margin: 0;
@@ -225,7 +227,7 @@ body {
 			<h2>고객센터</h2>
 			<ul>
 				<li><a href="faq_community">고객센터</a></li>
-				<li><a href="gongjiboard">공지사항</a></li>
+				<li><a href="#">공지사항</a></li>
 				<li><a href="faqin">1:1 문의하기</a></li>
 				<li><a href="faqout">문의 내역</a></li>
 				<li><a href="faq">FAQ</a></li>
@@ -255,25 +257,28 @@ body {
             <div class="scroll-button" onclick="window.scrollTo({top: document.body.scrollHeight, behavior: 'smooth'});">▽</div>
      -->
 		</div>
-	<form action="faqupdate2" method="post" enctype="multipart/form-data">
+	<form action="faq_reply_update2" method="post" enctype="multipart/form-data">
 		<table>
 			<caption>
 				<span>문의글 수정</span>
 			</caption>
 			<tr>
-				<td><input type="number" name="cnum" value="${dto.cnum}"
-					readonly></td>
+				<td>
+					<input type="number" name="cnum" value="${dto.cnum}" readonly>
+				</td>
 			</tr>
 			<tr>
 				<th>문의 종류</th>
-				<td><select name="tab">
+				<td>
+					<select name="tab">
 						<option value="회원관련 문의">회원관련 문의</option>
 						<option value="이벤트/혜택">이벤트/혜택</option>
 						<option value="상품옵션 문의">상품옵션</option>
 						<option value="교환/환불 문의">교환/환불</option>
 						<option value="배송 문의">배송 문의</option>
 						<option value="기타 문의">기타 문의</option>
-				</select></td>
+					</select>
+				</td>
 			</tr>
 			<tr>
 				<th>제목</th>
@@ -285,25 +290,37 @@ body {
 			</tr>
 			<tr>
 				<th>문의 내용</th>
-				<td><textarea rows="10" cols="25" name="fcontents">${dto.fcontents}</textarea>
+				<td>
+					<textarea rows="10" cols="25" name="fcontents">${dto.fcontents}</textarea>
 				</td>
 			</tr>
 			<tr>
 				<th>첨부이미지</th>
-
-				<td><input type="file" name="fimage1"> <input
-					type="file" name="fimage2"> <input type="file"
-					name="fimage3"></td>
-				<td><img src="./image/${dto.fimage1}" width="80px"
-					height="70px"> <img src="./image/${dto.fimage2}" width="80px"
-					height="70px"> <img src="./image/${dto.fimage3}" width="80px"
-					height="70px"></td>
+				<td>
+					<input type="file" name="fimage1"> 
+					<input type="file" name="fimage2"> 
+					<input type="file" name="fimage3">
+				</td>
+				<td>
+					<c:if test="${dto.fimage1 != null}">
+			            <img src="./image/${faq.fimage1}" width="80px" height="70px">
+			        </c:if>
+			        <c:if test="${dto.fimage2 != null}">
+						<img src="./image/${faq.fimage2}" width="80px" height="70px"> 
+			 		</c:if>
+					<c:if test="${dto.fimage3 != null}">
+						<img src="./image/${faq.fimage3}" width="80px" height="70px">
+					</c:if>	
+				</td>
 			</tr>
 			<tr>
-				<td><input type="submit" value="수정 완료"></td>
+				<td>
+					<input type="submit" value="수정 완료">
+					<input type="button" value="수정 취소" onclick="location.href='faqout'">
+				</td>
 			</tr>
 		</table>
 	</form>
-</div>	
+</div>
 </body>
 </html>

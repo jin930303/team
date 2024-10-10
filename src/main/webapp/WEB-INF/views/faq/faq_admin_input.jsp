@@ -3,6 +3,24 @@
 <!DOCTYPE html>
 <html>
 <head>
+<script>
+	let fileCount = 1;
+	const maxFiles = 3;
+		
+	function addFileInput() {
+    if (fileCount >= maxFiles) {
+	    alert("최대 3장까지 첨부 가능합니다.");
+	return;
+	}
+					
+    fileCount++;
+    const newInput = document.createElement('input');
+    newInput.type = 'file';
+    newInput.name = `fimage${fileCount}`;
+					
+    document.getElementById('fileInputs').appendChild(newInput);
+}
+</script>
 <style type="text/css">
 * {
 	margin: 0;
@@ -18,7 +36,7 @@ body {
 
 .container {
 	display: flex;
-	width: 75%;
+	width: 80%;
 }
 
 .sidebar {
@@ -225,7 +243,7 @@ body {
 			<h2>고객센터</h2>
 			<ul>
 				<li><a href="faq_community">고객센터</a></li>
-				<li><a href="#">공지사항</a></li>
+				<li><a href="gongjiboard">공지사항</a></li>
 				<li><a href="faqin">1:1 문의하기</a></li>
 				<li><a href="faqout">문의 내역</a></li>
 				<li><a href="faq">FAQ</a></li>
@@ -257,14 +275,12 @@ body {
 		</div>
 
 		<div class="container">
-			<form action="faq_admin_save" method="post"
-				enctype="multipart/form-data">
+			<form action="faq_admin_save" method="post" enctype="multipart/form-data">
 				<table>
 					<caption>FAQ : 글 작성</caption>
 					<tr>
 						<th>문의 종류</th>
-						<td><input type="text" name="tab" value="FAQ" readonly>
-						</td>
+						<td><input type="text" name="tab" value="FAQ" readonly></td>
 					</tr>
 					<tr>
 						<th>제목</th>
@@ -276,21 +292,25 @@ body {
 					</tr>
 					<tr>
 						<th>내용</th>
-						<td><textarea rows="10" cols="25" name="fcontents"></textarea>
-						</td>
+						<td><textarea rows="10" cols="25" name="fcontents"></textarea></td>
 					</tr>
 					<tr>
 						<th>첨부 이미지</th>
-						<td><input type="file" name="fimage1"> <input
-							type="file" name="fimage2"> <input type="file"
-							name="fimage3"></td>
+						<td>
+							<div id="fileInputs">
+					            <input type="file" name="fimage1" onclick="addFileInput()">
+					        </div>
+						</td>
 					</tr>
 					<tr>
-						<td colspan="2" style="text-align: center;"><input
-							type="submit" value="작성 완료"></td>
+						<td colspan="2" style="text-align: center;">
+							<input type="submit" value="작성 완료">
+						</td>
 					</tr>
 				</table>
 			</form>
+
 		</div>
+	</div>
 </body>
 </html>

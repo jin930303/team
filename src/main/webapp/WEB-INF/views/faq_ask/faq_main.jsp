@@ -3,7 +3,6 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html lang="ko">
-<!-- 고객센터 홈 생성 및 좌측 사이드바, 우측 사이드바(반응형,이동형) -->
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -227,12 +226,21 @@ body {
 		<aside class="sidebar">
 			<h2>고객센터</h2>
 			<ul>
-				<li><a href="faq_comunity">고객센터</a></li>
-				<li><a href="#">공지사항</a></li>
+				<li><a href="faq_community">고객센터</a></li>
+				<li><a href="gongjiboard">공지사항</a></li>
 				<li><a href="faqin">1:1 문의하기</a></li>
 				<li><a href="faqout">문의 내역</a></li>
 				<li><a href="faq">FAQ</a></li>
-				<li><a href="FAQ_in">FAQ 글 쓰기</a></li>
+				<li><a href="upload">업로드 연습</a></li>
+				<!-- 관리자만 확인하기 버튼임 -->
+				<% 
+					Boolean FAQinput = (Boolean) session.getAttribute("adminloginstate");
+					if (FAQinput != null && FAQinput) {
+				%>
+					<li><a href="FAQ_in">FAQ 글 쓰기</a></li>
+				<% 
+					}
+				%>
 			</ul>
 			<div class="contact-info">
 				<h3>고객상담센터</h3>
@@ -260,26 +268,34 @@ body {
 		<!-- 메인 콘텐츠 -->
 		<main class="main-content">
 			<h1>자주 묻는 질문</h1>
-			<div class="search-bar">
-				<input type="text" placeholder="검색어를 입력하세요">
-				<button>검색</button>
-			</div>
+		
+		<!-- 검색 바 -->
+			<form action="faq_main_serch" method="post" class="search-bar">
+				<select name="faq_search_key">
+					<option value="title">제목</option>
+					<option value="nickname">작성자</option>
+				</select>
+				<input type="text" name="faq_search_value" placeholder="검색어를 입력하세요">
+				<button type="submit">검색</button>
+			</form>
+			
+		<!-- 메인 게시판 -->
 			<table class="faq-table">
 				<caption>BEST FAQ</caption>
 				<thead>
 					<tr>
 						<th>번호</th>
 						<th>분류</th>
-						<th>내용</th>
+						<th>제목</th>
 						<th>조회수</th>
 					</tr>
 				</thead>
 				<c:forEach items="${bestfaq}" var="bestfaq">
 					<tbody>
-						<tr>
+						<tr onclick="location.href='faqdetail?cnum=${bestfaq.cnum}'" class="trlink">
 							<td>${bestfaq.cnum}</td>
 							<td>${bestfaq.tab}</td>
-							<td>${bestfaq.fcontents}</td>
+							<td>${bestfaq.title}</td>
 							<td>${bestfaq.faqcnt}</td>
 						</tr>
 					</tbody>

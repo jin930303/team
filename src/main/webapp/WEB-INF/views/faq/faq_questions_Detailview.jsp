@@ -217,8 +217,15 @@ body {
 }
 </style>
 <script src="https://code.jquery.com/jquery-latest.min.js"></script>
+<script>
+    function deleteFaq(cnum) {
+        if (confirm('삭제하시면 복구할 수 없습니다.\n정말로 삭제하시겠습니까?')) {
+            location.href = 'faqdelete?cnum=' + cnum;
+        }
+    }
+</script>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>FAQ-자주묻는질문 상세페이지</title>
 </head>
 <body>
 	<div class="container">
@@ -227,7 +234,7 @@ body {
 			<h2>고객센터</h2>
 			<ul>
 				<li><a href="faq_community">고객센터</a></li>
-				<li><a href="#">공지사항</a></li>
+				<li><a href="gongjiboard">공지사항</a></li>
 				<li><a href="faqin">1:1 문의하기</a></li>
 				<li><a href="faqout">문의 내역</a></li>
 				<li><a href="faq">FAQ</a></li>
@@ -273,21 +280,36 @@ body {
 				</tr>
 				<tr>
 					<td colspan="6">
-						<img src="./image/${faq.fimage1}" width="80px" height="70px"> 
-						<img src="./image/${faq.fimage2}" width="80px" height="70px"> 
-						<img src="./image/${faq.fimage3}" width="80px" height="70px"></td>
+						<c:if test="${faq.fimage1 != null}">
+			                <img src="./image/${faq.fimage1}" width="80px" height="70px">
+			            </c:if>
+			            <c:if test="${faq.fimage2 != null}">
+							<img src="./image/${faq.fimage2}" width="80px" height="70px"> 
+						</c:if>
+						<c:if test="${faq.fimage3 != null}">
+							<img src="./image/${faq.fimage3}" width="80px" height="70px">
+						</c:if>	
+					</td>
 				</tr>
 				<tr>
 					<td colspan="7">
+					<!-- 관리자 문의 답변달기 버튼 -->
+					<% 
+						Boolean FAQadmin = (Boolean) session.getAttribute("adminloginstate");
+						if (FAQadmin != null && FAQadmin) {
+					%>
 					<input type="button" value="FAQ 수정(관리자)" onclick="location.href='faq_admin_update?cnum=${faq.cnum}'">
-					<input id="deletecheck" type="button" value="FAQ 삭제(관리자)" onclick="location.href='faq_admin_delete?cnum=${faq.cnum}'">
+					<input type="button" value="FAQ 삭제(관리자)" onclick="deleteFaq(${faq.cnum})">
+					<% 
+						}
+					%>
 					<input type="button" value="돌아가기" onclick="location.href='./faq'"></td>
 				</tr>
 				<tr>
-					<th colspan="8" style="text-align:left;">댓글</th>
+					<th colspan="6"><h2 style="text-align: left;">댓글</h2></th>
 				</tr>
 			<c:forEach items="${faqreply}" var="reply">
-				<tr>
+				<tr>	
 					<td>${reply.nickname}</td>
 					<td>${reply.fcontents}</td>
 				</tr>
@@ -295,13 +317,22 @@ body {
 		</table>
 		<br>
 		</div>
+		<br>
+		<!-- 회원만 댓글달기 -->
+		
 			<form action="faq_questions_reply_save" method="post">
-				<table align="center" width="900px" border="1">
+		<% 
+			Boolean FAQmember = (Boolean) session.getAttribute("loginstate");
+			if (FAQmember != null && FAQmember) {
+		%>
+				<table style="text-align: center;" width="900px" border="1">
 					<input type="hidden" value="${faq.cnum}" name="cnum"> 
 					<input type="hidden" value="${faq.groups}" name="groups"> 
 					<input type="hidden" value="${faq.step}" name="step"> 
 					<input type="hidden" value="${faq.indent}" name="indent">
 					<input type="hidden" value="${faq.tab}" name="tab">
+					<!-- +@ 닉네임이 운영자로 나옴 멤버에서 가져와야됨 -->
+					<input type="hidden" value="${faq.nickname}" name="nickname">
 					<tr>	
 						<td><textarea rows="5" cols="10" name="fcontents"></textarea></td>
 						<td><input type="submit" value="댓글 달기">
@@ -309,5 +340,8 @@ body {
 					</tr>
 				</table>
 			</form>
+		<%
+			}
+		%>
 </body>
 </html>
