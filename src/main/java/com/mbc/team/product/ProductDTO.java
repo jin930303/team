@@ -1,16 +1,17 @@
 package com.mbc.team.product;
 
 public class ProductDTO {
-	String image1, cat1, cat2, product, dimage;
+	String image1, cg_code, scg_code, product, dimage;
     int itemnum, price;
     
 	public ProductDTO() {}
 
-	public ProductDTO(String image1, String cat1, String cat2, String product, String dimage, int itemnum, int price) {
+	public ProductDTO(String image1, String cg_code, String scg_code, String product, String dimage, int itemnum,
+			int price) {
 		super();
 		this.image1 = image1;
-		this.cat1 = cat1;
-		this.cat2 = cat2;
+		this.cg_code = cg_code;
+		this.scg_code = scg_code;
 		this.product = product;
 		this.dimage = dimage;
 		this.itemnum = itemnum;
@@ -25,20 +26,20 @@ public class ProductDTO {
 		this.image1 = image1;
 	}
 
-	public String getCat1() {
-		return cat1;
+	public String getCg_code() {
+		return cg_code;
 	}
 
-	public void setCat1(String cat1) {
-		this.cat1 = cat1;
+	public void setCg_code(String cg_code) {
+		this.cg_code = cg_code;
 	}
 
-	public String getCat2() {
-		return cat2;
+	public String getScg_code() {
+		return scg_code;
 	}
 
-	public void setCat2(String cat2) {
-		this.cat2 = cat2;
+	public void setScg_code(String scg_code) {
+		this.scg_code = scg_code;
 	}
 
 	public String getProduct() {
@@ -72,6 +73,4 @@ public class ProductDTO {
 	public void setPrice(int price) {
 		this.price = price;
 	}
-
-
 }
