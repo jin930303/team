@@ -26,8 +26,8 @@
         <img src="./image/${aa.image1}" width="50" height="50" alt="Product Image">
     </a>
 </td>
-  <td>${aa.cat1}</td>
-  <td>${aa.cat2}</td>
+  <td>${aa.cg_code}</td>
+  <td>${aa.scg_code}</td>
   <td>${aa.product}</td>
   <td>${aa.price}</td>
   <td><img src="./image/${aa.dimage}" width="50px" height="50px"></td>

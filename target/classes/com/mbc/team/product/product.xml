@@ -26,7 +26,7 @@
 </select>
 
 <select id="arbat" resultType="com.mbc.team.product.ProductDTO">
-  select * from product where cat2=#{param1}
+  select * from product where scg_code=#{param1}
 </select>
 
 

@@ -7,69 +7,47 @@
 <meta charset="UTF-8">
 <title>상품정보등록</title>
 <script>
-function updateCat2() {
-    const cat1 = document.getElementById("cat1").value;
-    const cat2 = document.getElementById("cat2");
-    const op1 = document.getElementsByName("op1")[0];
-
-    // 모든 cat2 옵션 숨기기
-    for (let i = 0; i < cat2.options.length; i++) {
-        cat2.options[i].style.display = "none";
+function updateScgCode() {
+    const cg_code = document.getElementById("cg_code").value;
+    const scg_code = document.getElementById("scg_code");
+   
+    // 모든 scg_code 옵션 숨기기
+    for (let i = 0; i < scg_code.options.length; i++) {
+        scg_code.options[i].style.display = "none";
     }
 
     // 카테고리별 옵션 매핑
     const optionsMapping = {
-        "배트": ["알루미늄 배트", "카본/컴포짓", "나무배트", "펑고배트", "유소년용 배트", "트레이닝 배트", "배트그립", "배트용품"],
-        "야구공": ["경식구", "연식구",  "스냅볼", "야구공 보관함"],
-        "글러브": ["투수/올라운드", "내야수", "외야수", "1루/포수미트", "어린이/유소년용", "글러브 관리용품"],
-        "보호장비": ["타자헬멧", "암가드", "풋가드", "핸드가드", "안면마스크", "기타 보호장비"],
-        "굿즈": ["키링", "타올", "인형", "슬리퍼"],
-        "야구화": ["징 일체형", "인조잔디화", "유소년용 야구화", "런닝/트레이닝화", "야구화부속품"],
-        "장갑": ["배팅장갑", "수비장갑", "주루장갑", "방한장갑", "유소년용 장갑", "기타 장갑"],
-        "가방": ["백팩", "크로스백", "휠가방", "배트가방", "볼가방", "기타 가방"],
-        "의류": ["국가대표 어센틱 유니폼","티셔츠", "언더셔츠", "슬라이딩팬츠", "롱/숏스판팬츠", "아이싱웨어", "바람막이", "점퍼", "트레이닝복", "맨투맨/후디", "모자/벨트/양말", "기타"],
-        "기타용품": ["선글라스", "악세사리", "손목밴드", "로진백", "아이패치", "피규어", "베이스", "기타용품"]
+        "fcg002": ["bat001", "bat002", "bat003", "bat004", "bat005", "bat006", "bat008", "bat009"],
+        "fcg008": ["baseball001", "baseball002", "baseball004", "baseball007"],
+        "fcg001": ["mitt001", "mitt002", "mitt003", "mitt004", "mitt005", "mitt006"],
+        "fcg007": ["protect001", "protect002", "protect003", "protect004", "protect005", "protect006"],
+        "fcg010": ["goods001", "goods002", "goods003", "goods004"],
+        "fcg004": ["shoes001", "shoes003", "shoes004", "shoes005", "shoes006"],
+        "fcg003": ["glove001", "glove002", "glove003", "glove004", "glove005", "glove006"],
+        "fcg005": ["bag001", "bag002", "bag004", "bag005", "bag006", "bag009"],
+        "fcg006": ["clothes001", "clothes002", "clothes003", "clothes004", "clothes005", "clothes006", "clothes007", "clothes008", "clothes009", "clothes010", "clothes011"],
+        "fcg011": ["etc001", "etc002", "etc003", "etc004", "etc005", "etc006", "etc007", "etc008"]
     };
 
-    // 선택된 cat1에 해당하는 cat2 옵션 표시
-    if (optionsMapping[cat1]) {
-        optionsMapping[cat1].forEach(value => {
-            const option = Array.from(cat2.options).find(opt => opt.value === value);
+    // 선택된 cg_code에 해당하는 scg_code 옵션 표시
+    if (optionsMapping[cg_code]) {
+        optionsMapping[cg_code].forEach(value => {
+            const option = Array.from(scg_code.options).find(opt => opt.value === value);
             if (option) {
                 option.style.display = "";
             }
         });
     }
-
-    // op1 옵션 초기화
-    op1.innerHTML = "";
-
+   
     // 기본 옵션 추가
     const defaultOption = document.createElement("option");
     defaultOption.value = "";
     defaultOption.textContent = "선택안함";
-    op1.appendChild(defaultOption);
+ 
 
-    // op1 옵션 추가
-    let options = [];
-    if (cat1 === "배트") {
-        options = ["32-27", "32.5-27.5", "33-28", "33.5-28.5"];
-    } else if (cat1 === "글러브") {
-        options = ["우투(왼손착용)", "좌투(오른손착용)"];
-    } else if (cat1 === "야구화") {
-        options = ["250", "255", "260", "265", "270", "275", "280", "285", "290", "295", "300"];
-    }
-
-    // op1에 옵션 추가
-    options.forEach(option => {
-        const newOption = document.createElement("option");
-        newOption.value = option;
-        newOption.textContent = option;
-        op1.appendChild(newOption);
-    });
-
-    // 첫 번째 cat2 옵션으로 기본 선택
-    cat2.selectedIndex = 0;
+    // 첫 번째 scg_code 옵션으로 기본 선택
+    scg_code.selectedIndex = 0;
 }
 </script>
 </head>
@@ -84,108 +62,109 @@ function updateCat2() {
 <tr>
     <th>야구용품/구단별용품</th>
     <td>
-        <select name="cat1" id="cat1" onchange="updateCat2()">
-            <option value="배트">배트</option>
-            <option value="야구공">야구공</option>
-            <option value="글러브">글러브</option>
-            <option value="보호장비">보호장비</option>
-            <option value="굿즈">굿즈</option>
-            <option value="야구화">야구화</option>
-            <option value="장갑">장갑</option>
-            <option value="가방">가방</option>
-            <option value="의류">의류</option>       
-            <option value="기타용품">기타용품</option>
+        <select name="cg_code" id="cg_code" onchange="updateScgCode()">
+            <option value="fcg002">배트</option>
+            <option value="fcg008">야구공</option>
+            <option value="fcg001">글러브</option>
+            <option value="fcg007">보호장비</option>
+            <option value="fcg010">굿즈</option>
+            <option value="fcg004">야구화</option>
+            <option value="fcg003">장갑</option>
+            <option value="fcg005">가방</option>
+            <option value="fcg006">의류</option>       
+            <option value="fcg011">기타용품</option>
         </select>
     </td>
 </tr>
+
 <tr>
-    <th></th>
+    <th>옵션선택</th>
     <td>
-        <select name="cat2" id="cat2">
+        <select name="scg_code" id="scg_code">
             <!-- 배트 옵션 -->
-            <option value="알루미늄 배트">알루미늄 배트</option>
-            <option value="카본/컴포짓">카본/컴포짓</option>
-            <option value="나무배트">나무배트</option>
-            <option value="펑고배트">펑고배트</option>
-            <option value="유소년용 배트">유소년용 배트</option>
-            <option value="트레이닝 배트">트레이닝 배트</option>
-            <option value="배트그립">배트그립</option>
-            <option value="배트용품">배트용품</option>
+            <option value="bat001">알루미늄 배트</option>
+            <option value="bat002">카본/컴포짓</option>
+            <option value="bat003">나무배트</option>
+            <option value="bat004">펑고배트</option>
+            <option value="bat005">유소년용 배트</option>
+            <option value="bat006">트레이닝 배트</option>
+            <option value="bat008">배트그립</option>
+            <option value="bat009">배트용품</option>
             
             <!-- 야구공 옵션 -->
-            <option value="경식구">경식구</option>
-            <option value="연식구">연식구</option>
-            <option value="스냅볼">스냅볼</option>
-            <option value="야구공 보관함">야구공 보관함</option>
+            <option value="baseball001">경식구</option>
+            <option value="baseball002">연식구</option>
+            <option value="baseball004">스냅볼</option>
+            <option value="baseball007">야구공 보관함</option>
             
             <!-- 글러브 옵션 -->
-            <option value="투수/올라운드">투수/올라운드</option>
-            <option value="내야수">내야수</option>
-            <option value="외야수">외야수</option>
-            <option value="1루/포수미트">1루/포수미트</option>
-            <option value="어린이/유소년용">어린이/유소년용</option>
-            <option value="글러브 관리용품">글러브 관리용품</option>
+            <option value="mitt001">투수/올라운드</option>
+            <option value="mitt002">내야수</option>
+            <option value="mitt003">외야수</option>
+            <option value="mitt004">포수미트</option>
+            <option value="mitt005">어린이/유소년용</option>
+            <option value="mitt006">글러브 관리용품</option>
             
             <!-- 보호장비 옵션 -->
-            <option value="타자헬멧">타자헬멧</option>
-            <option value="암가드">암가드</option>
-            <option value="풋가드">풋가드</option>
-            <option value="핸드가드">핸드가드</option>
-            <option value="안면마스크">안면마스크</option>
-            <option value="기타 보호장비">기타 보호장비</option>
+            <option value="protect001">타자헬멧</option>
+            <option value="protect002">암가드</option>
+            <option value="protect003">풋가드</option>
+            <option value="protect004">핸드가드</option>
+            <option value="protect005">안면마스크</option>
+            <option value="protect006">기타 보호장비</option>
         
             <!-- 굿즈 옵션 -->
-            <option value="키링">키링</option>
-            <option value="타올">타올</option>
-            <option value="인형">인형</option>
-            <option value="슬리퍼">슬리퍼</option>
+            <option value="goods001">키링</option>
+            <option value="goods002">타올</option>
+            <option value="goods003">인형</option>
+            <option value="goods004">슬리퍼</option>
                 
             <!-- 야구화 옵션 -->
-            <option value="징 일체형">징 일체형</option>
-            <option value="인조잔디화">인조잔디화</option>
-            <option value="유소년용 야구화">유소년용 야구화</option>
-            <option value="런닝/트레이닝화">런닝/트레이닝화</option>
-            <option value="야구화부속품">야구화부속품</option>
+            <option value="shoes001">징 일체형</option>
+            <option value="shoes003">인조잔디화</option>
+            <option value="shoes004">유소년용 야구화</option>
+            <option value="shoes005">런닝/트레이닝화</option>
+            <option value="shoes006">야구화부속품</option>
             
             <!-- 장갑 옵션 -->
-            <option value="배팅장갑">배팅장갑</option>
-            <option value="수비장갑">수비장갑</option>
-            <option value="주루장갑">주루장갑</option>
-            <option value="방한장갑">방한장갑</option>
-            <option value="유소년용 장갑">유소년용 장갑</option>
-            <option value="기타 장갑">기타 장갑</option>
+            <option value="glove001">배팅장갑</option>
+            <option value="glove002">수비장갑</option>
+            <option value="glove003">주루장갑</option>
+            <option value="glove004">방한장갑</option>
+            <option value="glove005">유소년용 장갑</option>
+            <option value="glove006">기타 장갑</option>
             
             <!-- 가방 옵션 -->
-            <option value="백팩">백팩</option>
-            <option value="크로스백">크로스백</option>
-            <option value="휠가방">휠가방</option>
-            <option value="배트가방">배트가방</option>
-            <option value="볼가방">볼가방</option>
-            <option value="기타 가방">기타 가방</option>
+            <option value="bag001">백팩</option>
+            <option value="bag002">크로스백</option>
+            <option value="bag004">휠가방</option>
+            <option value="bag005">배트가방</option>
+            <option value="bag006">볼가방</option>
+            <option value="bag009">기타 가방</option>
             
             <!-- 의류 옵션 -->
-            <option value="국가대표 어센틱 유니폼">국가대표 어센틱 유니폼</option>
-            <option value="티셔츠">티셔츠</option>
-            <option value="언더셔츠">언더셔츠</option>
-            <option value="슬라이딩팬츠">슬라이딩팬츠</option>
-            <option value="롱/숏스판팬츠">롱/숏스판팬츠</option>
-            <option value="아이싱웨어">아이싱웨어</option>
-            <option value="바람막이">바람막이</option>
-            <option value="점퍼">점퍼</option>
-            <option value="트레이닝복">트레이닝복</option>
-            <option value="맨투맨/후디">맨투맨/후디</option>
-            <option value="모자/벨트/양말">모자/벨트/양말</option>
-            <option value="기타">기타</option>
+            <option value="clothes001">국가대표 어센틱 유니폼</option>
+            <option value="clothes002">티셔츠</option>
+            <option value="clothes003">언더셔츠</option>
+            <option value="clothes004">슬라이딩팬츠</option>
+            <option value="clothes005">롱/숏스판팬츠</option>
+            <option value="clothes006">아이싱웨어</option>
+            <option value="clothes007">바람막이</option>
+            <option value="clothes008">점퍼</option>
+            <option value="clothes009">트레이닝복</option>
+            <option value="clothes010">맨투맨/후디</option>
+            <option value="clothes011">모자/벨트/양말</option>
+            <option value="clothes012">기타</option>
             
             <!-- 기타 옵션 -->
-            <option value="선글라스">선글라스</option>
-            <option value="악세사리">악세사리</option>
-            <option value="손목밴드">손목밴드</option>
-            <option value="로진백">로진백</option>
-            <option value="아이패치">아이패치</option>
-            <option value="피규어">피규어</option>
-            <option value="베이스">베이스</option>
-            <option value="기타용품">기타용품</option>
+            <option value="etc001">선글라스</option>
+            <option value="etc002">악세사리</option>
+            <option value="etc003">손목밴드</option>
+            <option value="etc004">로진백</option>
+            <option value="etc005">아이패치</option>
+            <option value="etc006">피규어</option>
+            <option value="etc007">베이스</option>
+            <option value="etc008">기타용품</option>
 
         </select>
     </td>

@@ -76,7 +76,7 @@
             
            <!-- cat1에 따라 배트 또는 글러브 옵션 선택 영역 표시 -->
             <c:choose>
-                <c:when test="${dto.cat1 == '배트'}">
+                <c:when test="${dto.cg_code == '배트'}">
                     <tr id="batOptions" style="display:block;">
                         <td colspan="6">
                             <div class="option-title">배트 사이즈</div>
@@ -88,7 +88,7 @@
                         </td>
                     </tr>
                 </c:when>
-                <c:when test="${dto.cat1 == '글러브'}">
+                <c:when test="${dto.cg_code == '글러브'}">
                     <tr id="gloveOptions" style="display:block;">
                         <td colspan="6">
                             <div class="option-title">글러브 선택</div>
