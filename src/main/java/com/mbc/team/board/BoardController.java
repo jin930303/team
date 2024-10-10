@@ -57,13 +57,13 @@ public class BoardController {
 		int total=bs.total();
 		if(nowPage==null && cntPerPage == null) {
 			nowPage="1";
-			cntPerPage="5";
+			cntPerPage="10";
 		}
 		else if(nowPage==null) {
 			nowPage="1";
 		}
 		else if(cntPerPage==null) {
-			cntPerPage="5";
+			cntPerPage="10";
 		} 
 		dto=new PageDTO(total,Integer.parseInt(nowPage),Integer.parseInt(cntPerPage));
 		mo.addAttribute("paging",dto);
@@ -131,13 +131,13 @@ public class BoardController {
 		
 		if(nowPage==null && cntPerPage == null) {
 			nowPage="1";
-			cntPerPage="5";
+			cntPerPage="10";
 		}
 		else if(nowPage==null) {
 			nowPage="1";
 		}
 		else if(cntPerPage==null) {
-			cntPerPage="5";
+			cntPerPage="10";
 		} 
 	    if (svalue == null || svalue.trim().equals("")) {
 	        response.setContentType("text/html;charset=utf-8");
@@ -185,13 +185,13 @@ public class BoardController {
 		int btotal=bs.boardtotal();
 		if(nowPage==null && cntPerPage == null) {
 			nowPage="1";
-			cntPerPage="5";
+			cntPerPage="10";
 		}
 		else if(nowPage==null) {
 			nowPage="1";
 		}
 		else if(cntPerPage==null) {
-			cntPerPage="5";
+			cntPerPage="10";
 		} 
 		dto=new PageDTO(btotal,Integer.parseInt(nowPage),Integer.parseInt(cntPerPage));
 		mo.addAttribute("paging",dto);
@@ -251,13 +251,13 @@ public class BoardController {
 		
 		if(nowPage==null && cntPerPage == null) {
 			nowPage="1";
-			cntPerPage="5";
+			cntPerPage="10";
 		}
 		else if(nowPage==null) {
 			nowPage="1";
 		}
 		else if(cntPerPage==null) {
-			cntPerPage="5";
+			cntPerPage="10";
 		} 
 	    if (svalue == null || svalue.trim().equals("")) {
 	        response.setContentType("text/html;charset=utf-8");
@@ -362,6 +362,8 @@ public class BoardController {
 	
 	@RequestMapping(value = "/iljungsave", method = RequestMethod.POST)
 	public String iljungsave(HttpServletRequest request) {
+		String leaguestate=request.getParameter("leaguestate");
+		int state=Integer.parseInt(request.getParameter("state"));
 		String gamedate=request.getParameter("gamedate");
 		String home=request.getParameter("home");
 		String away=request.getParameter("away");
@@ -369,13 +371,59 @@ public class BoardController {
 		int awayscore=Integer.parseInt(request.getParameter("awayscore"));
 		String gamestate=request.getParameter("gamestate");
 		String gameresult="";
-		if(gamestate.equals("진행")) {
+		
+		if(gamestate.equals("진행")&&leaguestate.equals("TB")) {
+			gameresult=leaguestate+" "+home+" "+homescore+" : "+awayscore+" "+away;
+		}
+		else if(gamestate.equals("진행")&&leaguestate.equals("WC")) {
+			gameresult=leaguestate+state+" "+home+" "+homescore+" : "+awayscore+" "+away;
+		}
+		else if(gamestate.equals("진행")&&leaguestate.equals("준PO")) {
+			gameresult=leaguestate+state+" "+home+" "+homescore+" : "+awayscore+" "+away;
+		}
+		else if(gamestate.equals("진행")&&leaguestate.equals("PO")) {
+			gameresult=leaguestate+state+" "+home+" "+homescore+" : "+awayscore+" "+away;
+		}
+		else if(gamestate.equals("진행")&&leaguestate.equals("KS")) {
+			gameresult=leaguestate+state+" "+home+" "+homescore+" : "+awayscore+" "+away;
+		}
+		else if(gamestate.equals("진행")&&leaguestate.equals("정규시즌")) {
 			gameresult=home+" "+homescore+" : "+awayscore+" "+away;
 		}
-		else if(gamestate.equals("예정")) {
+		else if(gamestate.equals("예정")&&leaguestate.equals("TB")) {
+			gameresult=leaguestate+" "+home+" 예정 "+away;
+		}
+		else if(gamestate.equals("예정")&&leaguestate.equals("WC")) {
+			gameresult=leaguestate+state+" "+home+" 예정 "+away;
+		}
+		else if(gamestate.equals("예정")&&leaguestate.equals("준PO")) {
+			gameresult=leaguestate+state+" "+home+" 예정 "+away;
+		}
+		else if(gamestate.equals("예정")&&leaguestate.equals("PO")) {
+			gameresult=leaguestate+state+" "+home+" 예정 "+away;
+		}
+		else if(gamestate.equals("예정")&&leaguestate.equals("KS")) {
+			gameresult=leaguestate+state+" "+home+" 예정 "+away;
+		}
+		else if(gamestate.equals("예정")&&leaguestate.equals("정규시즌")) {
 			gameresult=home+" 예정 "+away;
 		}
-		else {
+		else if(gamestate.equals("취소")&&leaguestate.equals("TB")) {
+			gameresult=leaguestate+" "+home+" 취소 "+away;
+		}
+		else if(gamestate.equals("취소")&&leaguestate.equals("WC")) {
+			gameresult=leaguestate+state+" "+home+" 취소 "+away;
+		}
+		else if(gamestate.equals("취소")&&leaguestate.equals("준PO")) {
+			gameresult=leaguestate+state+" "+home+" 취소 "+away;
+		}
+		else if(gamestate.equals("취소")&&leaguestate.equals("PO")) {
+			gameresult=leaguestate+state+" "+home+" 취소 "+away;
+		}
+		else if(gamestate.equals("취소")&&leaguestate.equals("KS")) {
+			gameresult=leaguestate+state+" "+home+" 취소 "+away;
+		}
+		else if(gamestate.equals("취소")&&leaguestate.equals("정규시즌")) {
 			gameresult=home+" 취소 "+away;
 		}
 		BoardService bs=sqlsession.getMapper(BoardService.class);
@@ -426,13 +474,13 @@ public class BoardController {
 		int totals=bs.totals();
 		if(nowPage==null && cntPerPage == null) {
 			nowPage="1";
-			cntPerPage="5";
+			cntPerPage="10";
 		}
 		else if(nowPage==null) {
 			nowPage="1";
 		}
 		else if(cntPerPage==null) {
-			cntPerPage="5";
+			cntPerPage="10";
 		} 
 		dto=new PageDTO(totals,Integer.parseInt(nowPage),Integer.parseInt(cntPerPage));
 		mo.addAttribute("paging",dto);
@@ -457,7 +505,7 @@ public class BoardController {
 		response.setContentType("text/html;charset=utf-8");
 		PrintWriter prw=response.getWriter();
 		prw.print("<script> alert('해당 글을 삭제하였습니다.');</script>");
-		prw.print("<script> location.href='gongjiboard';</script>");
+		prw.print("<script> location.href='sosickboard';</script>");
 		prw.close();
 		bs.sosickdelete(snum);
 		return "redirect:/sosickboard";
@@ -501,13 +549,13 @@ public class BoardController {
 		
 		if(nowPage==null && cntPerPage == null) {
 			nowPage="1";
-			cntPerPage="5";
+			cntPerPage="10";
 		}
 		else if(nowPage==null) {
 			nowPage="1";
 		}
 		else if(cntPerPage==null) {
-			cntPerPage="5";
+			cntPerPage="10";
 		} 
 	    if (svalue == null || svalue.trim().equals("")) {
 	        response.setContentType("text/html;charset=utf-8");

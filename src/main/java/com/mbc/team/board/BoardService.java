@@ -87,5 +87,6 @@ public interface BoardService {
 	public ArrayList<SosickDTO> pagesn(PageDTO dto, String svalue);
 
 	void sosickcount(int snum);
+
 	
 }
