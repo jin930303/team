@@ -32,13 +32,19 @@
         eventDidMount: function(info) {
           // 이벤트 제목에 '취소'가 포함되어 있는지 확인
         	if (info.event.title.includes("취소")) {
-				info.el.style.backgroundColor = 'orange';
-				info.el.style.borderColor = 'orange';
+				info.el.style.backgroundColor = 'red';
+				info.el.style.borderColor = 'red';
           	} 
         	else if (info.event.title.includes("예정")) {
+            	info.el.style.backgroundColor = 'orange';
+            	info.el.style.borderColor = 'orange';
+          	}
+
+        	else if (info.event.title.includes("TB")||info.event.title.includes("WC")||info.event.title.includes("PO")||info.event.title.includes("KS")) {
             	info.el.style.backgroundColor = 'green';
             	info.el.style.borderColor = 'green';
           	}
+
         }
       });
 

@@ -45,7 +45,7 @@ text-align: center
 		<tr>
 		<th>파일첨부</th>
 		<td>
-			<input type="file" name="cimage" required="required">
+			<input type="file" name="cimage">
 		</td>
 	</tr>
 	<tr>

@@ -22,7 +22,7 @@ text-align: center
 <c:forEach items="${list}" var="board">
 	<tr>
 		<td>${board.cnum}</td>
-		<td>${board.tab}</td><td style="text-align: left;"><a href="boarddetail?cnum=${board.cnum}">${board.title}</a></td>
+		<td style="text-align: left;"><a href="boarddetail?cnum=${board.cnum}">[${board.tab}] ${board.title}</a></td>
 		<td>${board.nickname}</td><td>${board.cdate}</td><td>${board.ccnt}</td>
 	</tr>
 </c:forEach>
