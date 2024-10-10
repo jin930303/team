@@ -27,10 +27,11 @@ text-align: center;
 	</tr>
 	<tr>	
 		<td colspan="8">
-			<input type="button" onclick="location.href='boardlike?cnum=${list.cnum}'" value="좋아요">
-			<input type="button" onclick="location.href='boardhate?cnum=${list.cnum}'" value="싫어요">
+			${list.clike}<a href="boardlike?cnum=${list.cnum}"><img src="./image/좋아요.png" style="width:50px; height:50px;"></a>
+			<a href="boardhate?cnum=${list.cnum}"><img src="./image/싫어요.png" style="width:50px; height:50px;"></a>${list.chate}
 		</td>
 	</tr>
+	
 <c:choose>
 <c:when test="${adminloginstate==true}">
 	<tr>	

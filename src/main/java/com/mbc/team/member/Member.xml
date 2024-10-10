@@ -4,7 +4,7 @@
 
 <mapper namespace="com.mbc.team.member.MemberService">
 	<insert id="memberinput">
-		insert into member values(#{param1},#{param2},#{param3},#{param4},#{param5},#{param6},#{param7},#{param8},1,0)
+		insert into member (id,nickname,pw,name,birth,phone,address,email,grade,total,auth) values(#{param1},#{param2},#{param3},#{param4},#{param5},#{param6},#{param7},#{param8},1,0,'002')
 	</insert>
 	
 	<select id="idcheck" resultType="int">
