@@ -137,6 +137,11 @@ p {
 								<li><a href="productin">상품자료입력</a></li>
 								<li><a href="productout">상품자료출력</a></li>
 							</ul></li>
+						<li class="dropdown"><a class="dropdown-toggle"
+							data-toggle="dropdown" href="#">고객센터<span class="caret"></span></a>
+							<ul class="dropdown-menu">
+								<li><a href="faq_community"> 고객센터</a></li>
+							</ul></li>
 
 						<li><a href="logout"><span class="glyphicon glyphicon-log-out"></span>
 								로그아웃</a></li>
