@@ -23,6 +23,7 @@
             });
         });
     </script>
+  
     <style>
         /* 스타일 추가 */
         .input-container {
@@ -53,7 +54,9 @@
             </td>
         </tr>
         <tr>
-            <td><input type="submit" value="로그인"></td>
+            <td>
+            	<input type="submit" value="로그인">
+            </td>
         </tr>
     </table>
     <table align="center">

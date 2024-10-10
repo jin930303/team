@@ -5,6 +5,12 @@
 <html>
 <head>
 <style type="text/css">
+    pre {
+        word-wrap: break-word;
+        white-space: pre-wrap;
+        background-color: transparent;
+    }
+
 body {
 	font-family: Arial, sans-serif;
 	background-color: #f0f0f0;

@@ -26,7 +26,7 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 @Controller
 public class BoardController {
 
-	String savepath="C://project//teamproject//src//main//webapp//image";
+	String savepath="C://team//team//src//main//webapp//image";
 	@Autowired
 	SqlSession sqlsession;
 	
@@ -383,7 +383,7 @@ public class BoardController {
 		return "iljung";
 	}
 	
-	@RequestMapping(value = "gameiljung", method = RequestMethod.GET)
+	@RequestMapping(value = "gameiljung", method = RequestMethod.POST)
 	@ResponseBody
 	public List<Map<String, Object>> events() {
 	    BoardService bs = sqlsession.getMapper(BoardService.class);

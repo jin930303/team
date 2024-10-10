@@ -9,7 +9,6 @@
 	document.addEventListener('DOMContentLoaded', function () {
     	var calendarEl = document.getElementById('calendar');
 		var calendar = new FullCalendar.Calendar(calendarEl, {
-			themeSystem : 'bootstrap5',
 			headerToolbar:{
 				left : 'prev',
 				center : 'title',
@@ -19,7 +18,7 @@
 			initialView: 'dayGridMonth',
 			events: {
 				url: 'gameiljung',  // 서버에서 일정 데이터를 불러옴
-				method: 'GET',
+				method: 'POST',
 				dataType: 'json',
 			},
 		dayCellContent: function (info) {

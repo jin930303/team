@@ -22,33 +22,23 @@
     <ol class="carousel-indicators">
       <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
       <li data-target="#myCarousel" data-slide-to="1"></li>
-      <li data-target="#myCarousel" data-slide-to="2"></li>
-      <li data-target="#myCarousel" data-slide-to="3"></li>
     </ol>
 
     <!-- Wrapper for slides -->
     <div class="carousel-inner" role="listbox">
 
       <div class="item active">
-        <img src="./image/박병호.jpg" alt="박병호" style="height:500px; width:400px;">
+      <a href="outfielder">
+        <img src="./image/글러브-야수.jpg" alt="글러브야수" style="height:500px; width:850px;">
+		</a>
         <div class="carousel-caption">
         </div>
       </div>
-
+      
       <div class="item">
-        <img src="./image/테임즈.jpg" alt="테임즈" style="height:500px; width:400px;">
-        <div class="carousel-caption">
-        </div>
-      </div>
-    
-      <div class="item">
-        <img src="./image/김도영.jpg" alt="김도영" style="height:500px; width:400px;">
-        <div class="carousel-caption">
-        </div>
-      </div>
-
-      <div class="item">
-        <img src="./image/김하성.jpg" alt="김하성" style="height:500px; width:400px;">
+      <a href="pitcherallround">
+        <img src="./image/글러브-투수.jpg" alt="글러브투수" style="height:500px; width:850px;">
+        </a>
         <div class="carousel-caption">
         </div>
       </div>
@@ -109,7 +99,5 @@
         </td>
     </tr>
 </table>
-111
-
 </body>
 </html>
