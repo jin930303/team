@@ -24,7 +24,7 @@ text-align: center;
 		<th>작성일시</th><td>${list.sdate}</td><th>조회수</th><td>${list.scnt}</td>
 	</tr>	
 	<tr>	
-		<td colspan="4" style="text-align: left;"><img src="./image/${list.simage}"><br><pre>${list.scontents}</pre></td>
+		<td colspan="4" style="text-align: left;"><img src="./image/${list.simage}" style="text-align: center;"><br><pre>${list.scontents}</pre></td>
 	</tr>
 
 <c:choose>
