@@ -590,5 +590,200 @@ public class BoardController {
 		}
 	}
 
+	@RequestMapping(value = "/eventinput", method = RequestMethod.GET)
+	public String eventinput() {
+		return "eventinput";
+	}
+	
+	@RequestMapping(value = "/eventsave", method = RequestMethod.POST)
+	public String eventsave(MultipartHttpServletRequest mul) throws IllegalStateException, IOException {
+		String id=mul.getParameter("id");
+		String nickname=mul.getParameter("nickname");
+		String etitle=mul.getParameter("etitle");
+		String econtents=mul.getParameter("econtents");
+		String estate=mul.getParameter("estate");
+		
+		MultipartFile mf1=mul.getFile("eimagem");
+		String eimagemfn=mf1.getOriginalFilename();
+		mf1.transferTo(new File(savepath+"//"+eimagemfn));
+		
+		MultipartFile mf2=mul.getFile("eimaged");
+		String eimagedfn=mf2.getOriginalFilename();
+		mf2.transferTo(new File(savepath+"//"+eimagedfn));
+		
+		BoardService bs=sqlsession.getMapper(BoardService.class);
+		bs.insertevent(id, nickname, etitle, econtents, eimagemfn, eimagedfn, estate);
+		return "redirect:/eventboard";
+	}
+	
+	@RequestMapping(value = "/eventboard", method = RequestMethod.GET)
+	public String eventboard(Model mo, PageDTO dto, HttpServletRequest request) {
+		String nowPage=request.getParameter("nowPage");
+		String cntPerPage=request.getParameter("cntPerPage");
+		BoardService bs=sqlsession.getMapper(BoardService.class);
+		int totalev=bs.totalev();
+		if(nowPage==null && cntPerPage == null) {
+			nowPage="1";
+			cntPerPage="6";
+		}
+		else if(nowPage==null) {
+			nowPage="1";
+		}
+		else if(cntPerPage==null) {
+			cntPerPage="6";
+		} 
+		dto=new PageDTO(totalev,Integer.parseInt(nowPage),Integer.parseInt(cntPerPage));
+		mo.addAttribute("paging",dto);
+		mo.addAttribute("list", bs.pageev(dto));
+		return "eventboard";
+	}
+	
+	@RequestMapping(value = "/eventdetail", method = RequestMethod.GET)
+	public String eventdetail(Model mo, HttpServletRequest request) {
+		int evnum=Integer.parseInt(request.getParameter("evnum"));
+		BoardService bs=sqlsession.getMapper(BoardService.class);
+		bs.eventcount(evnum);
+		EventDTO list=bs.eventdetail(evnum);
+		mo.addAttribute("list",list);
+		return "eventout";
+	}
+	
+	@RequestMapping(value = "/eventdelete", method = RequestMethod.GET)
+	public String eventdelete(HttpServletRequest request, HttpServletResponse response) throws IOException {
+		int evnum=Integer.parseInt(request.getParameter("evnum"));
+		BoardService bs=sqlsession.getMapper(BoardService.class);
+		response.setContentType("text/html;charset=utf-8");
+		PrintWriter prw=response.getWriter();
+		prw.print("<script> alert('해당 글을 삭제하였습니다.');</script>");
+		prw.print("<script> location.href='eventboard';</script>");
+		prw.close();
+		bs.eventdelete(evnum);
+		return "redirect:/eventboard";
+	}
+	
+	@RequestMapping(value = "/eventupdateview", method = RequestMethod.GET)
+	public String eventupdateview(HttpServletRequest request, Model mo) {
+		int evnum=Integer.parseInt(request.getParameter("evnum"));
+		BoardService bs=sqlsession.getMapper(BoardService.class);
+		EventDTO list=bs.eventupdateview(evnum);
+		mo.addAttribute("list", list);
+		return "eventupdateview";
+	}
+	
+	@RequestMapping(value = "/eventupdate", method = RequestMethod.POST)
+	public String eventupdate(HttpServletResponse response, MultipartHttpServletRequest mul) throws IOException {
+		int evnum=Integer.parseInt(mul.getParameter("evnum"));
+		String id=mul.getParameter("id");
+		String nickname=mul.getParameter("nickname");
+		String etitle=mul.getParameter("etitle");
+		String econtents=mul.getParameter("econtents");
+		String estate=mul.getParameter("estate");
+		
+		MultipartFile mf1=mul.getFile("eimagem");
+		String eimagemfn=mf1.getOriginalFilename();
+		mf1.transferTo(new File(savepath+"//"+eimagemfn));
+		
+		MultipartFile mf2=mul.getFile("eimaged");
+		String eimagedfn=mf2.getOriginalFilename();
+		mf2.transferTo(new File(savepath+"//"+eimagedfn));
+		
+		BoardService bs=sqlsession.getMapper(BoardService.class);
+		response.setContentType("text/html;charset=utf-8");
+		PrintWriter prw=response.getWriter();
+		prw.print("<script> alert('수정이 완료되었습니다.');</script>");
+		prw.print("<script> location.href='eventboard';</script>");
+		prw.close();
+		bs.updateevent(id, nickname, etitle, econtents, eimagemfn, eimagedfn, estate, evnum);
+		return "redirect:/eventdetail?evnum=" + evnum;
+	}
+	
+	@RequestMapping(value = "/eventsearchsave", method = RequestMethod.POST)
+	public String eventsearchsave(HttpServletRequest request, Model mo, PageDTO dto, @RequestParam("svalue") String svalue, @RequestParam("eventkey") String eventkey, HttpServletResponse response) throws IOException {
+		String nowPage=request.getParameter("nowPage");
+		String cntPerPage=request.getParameter("cntPerPage");
+		BoardService bs=sqlsession.getMapper(BoardService.class);
+		
+		if(nowPage==null && cntPerPage == null) {
+			nowPage="1";
+			cntPerPage="6";
+		}
+		else if(nowPage==null) {
+			nowPage="1";
+		}
+		else if(cntPerPage==null) {
+			cntPerPage="6";
+		} 
+	    if (svalue == null || svalue.trim().equals("")) {
+	        response.setContentType("text/html;charset=utf-8");
+	        PrintWriter prw = response.getWriter();
+			prw.print("<script> alert('검색어를 입력해주세요.');</script>");
+			prw.print("<script> location.href='eventboard';</script>");
+	        prw.flush();
+	        prw.close();
+	        return null;
+		}
+		else {
+			svalue="%"+svalue+"%";
+			if(eventkey.equals("etitle")) {
+				int totalet=bs.totalet(svalue);
+				dto=new PageDTO(totalet,Integer.parseInt(nowPage),Integer.parseInt(cntPerPage));
+				mo.addAttribute("paging",dto);
+				mo.addAttribute("list", bs.pageet(dto, svalue));
+			}
+			else {
+				int totalec=bs.totalec(svalue);
+				dto=new PageDTO(totalec,Integer.parseInt(nowPage),Integer.parseInt(cntPerPage));
+				mo.addAttribute("paging",dto);
+				mo.addAttribute("list", bs.pageec(dto, svalue));
+			}
+			return "eventsearchview";
+		}
+	}	
+	
+	@RequestMapping(value = "/eventing", method = RequestMethod.GET)
+	public String eventing(HttpServletRequest request, Model mo, PageDTO dto, HttpServletResponse response) throws IOException {
+		String nowPage=request.getParameter("nowPage");
+		String cntPerPage=request.getParameter("cntPerPage");
+		BoardService bs=sqlsession.getMapper(BoardService.class);
+		if(nowPage==null && cntPerPage == null) {
+			nowPage="1";
+			cntPerPage="6";
+		}
+		else if(nowPage==null) {
+			nowPage="1";
+		}
+		else if(cntPerPage==null) {
+			cntPerPage="6";
+		} 
+		String estate="진행중";
+		int totalevsi=bs.totalevsi(estate);
+		dto=new PageDTO(totalevsi,Integer.parseInt(nowPage),Integer.parseInt(cntPerPage));
+		mo.addAttribute("paging",dto);
+		mo.addAttribute("list", bs.pageevsi(dto, estate));
+		return "eventsearchview";
+	}
+	
+	@RequestMapping(value = "/eventend", method = RequestMethod.GET)
+	public String eventend(HttpServletRequest request, Model mo, PageDTO dto, HttpServletResponse response) throws IOException {
+		String nowPage=request.getParameter("nowPage");
+		String cntPerPage=request.getParameter("cntPerPage");
+		BoardService bs=sqlsession.getMapper(BoardService.class);
+		if(nowPage==null && cntPerPage == null) {
+			nowPage="1";
+			cntPerPage="6";
+		}
+		else if(nowPage==null) {
+			nowPage="1";
+		}
+		else if(cntPerPage==null) {
+			cntPerPage="6";
+		} 
+		String estate="종료";
+		int totalevse=bs.totalevse(estate);
+		dto=new PageDTO(totalevse,Integer.parseInt(nowPage),Integer.parseInt(cntPerPage));
+		mo.addAttribute("paging",dto);
+		mo.addAttribute("list", bs.pageevse(dto, estate));
+		return "eventsearchview";
+	}
 
 }
