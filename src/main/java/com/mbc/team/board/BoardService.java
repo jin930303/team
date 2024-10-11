@@ -88,5 +88,31 @@ public interface BoardService {
 
 	void sosickcount(int snum);
 
+	//¿Ã∫•∆Æ
+	public int totalev();
+	public ArrayList<EventDTO> pageev(PageDTO dto);
+
+	void insertevent(String id, String nickname, String etitle, String econtents, String eimagemfn, String eimagedfn, String estate);
+
+	void eventcount(int evnum);
+	EventDTO eventdetail(int evnum);
+
+	void eventdelete(int evnum);
+
+	EventDTO eventupdateview(int evnum);
+	void updateevent(String id, String nickname, String etitle, String econtents, String eimagemfn, String eimagedfn, String estate, int evnum);
+
+	public int totalet(String svalue);
+	public ArrayList<EventDTO> pageet(PageDTO dto, String svalue);
+
+	public int totalec(String svalue);
+	public ArrayList<EventDTO> pageec(PageDTO dto, String svalue);
+
+	public int totalevsi(String estate);
+	public ArrayList<EventDTO> pageevsi(PageDTO dto, String estate);
+
+	public int totalevse(String estate);
+	public ArrayList<EventDTO> pageevse(PageDTO dto, String estate);
+
 	
 }

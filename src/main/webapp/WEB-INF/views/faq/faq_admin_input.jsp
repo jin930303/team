@@ -9,7 +9,7 @@
 		
 	function addFileInput() {
     if (fileCount >= maxFiles) {
-	    alert("최대 3장까지 첨부 가능합니다.");
+	    alert("최대 3장까지 첨부 가능합니다");
 	return;
 	}
 					

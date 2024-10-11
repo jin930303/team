@@ -64,7 +64,7 @@
             <td>
                 <a href="productdetail?itemnum=${pro.itemnum}">
                 <img src="./image/${pro.image1}" style="width: 300px; height: 300px;"></a>
-                <div>${pro.product}</div>
+                <div><a href="productdetail?itemnum=${pro.itemnum}">${pro.product}</div>
                 <div>${pro.price}원</div>
             </td>
             <c:if test="${status.index % 4 == 3}"> <!-- 4개마다 새로운 행을 추가 -->
@@ -86,7 +86,7 @@
             <td>
                 <a href="productdetail?itemnum=${pro1.itemnum}">
                 <img src="./image/${pro1.image1}" style="width: 300px; height: 300px;"></a>
-                <div>${pro1.product}</div>
+                <div><a href="productdetail?itemnum=${pro1.itemnum}">${pro1.product}</div>
                 <div>${pro1.price}원</div>
             </td>
             <c:if test="${status.index % 4 == 3}"> <!-- 4개마다 새로운 행을 추가 -->

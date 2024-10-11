@@ -4,7 +4,6 @@ import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
-import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -16,13 +15,16 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 @Controller
 public class FAQController {
 
+	/*
+	 * 검색 키워드 [작성, 저장, 게시판, 정렬, 상세페이지, Update, Delete, 검색, 댓글]
+	 */
+	
 	@Autowired
 	SqlSession sqlSession;
 	// 경로 수정해야합니다.
@@ -30,17 +32,24 @@ public class FAQController {
 
 	// 1:1 문의글 작성
 	@RequestMapping(value = "/faqin")
-	public String faq0member(HttpServletRequest request, Model mo) {
+	public String faq0member(HttpServletResponse response, HttpServletRequest request, Model mo) throws IOException {
 		
 		HttpSession session = request.getSession();
 		Boolean FAQinput = (Boolean) session.getAttribute("loginstate");
-
+		
 		if (FAQinput == null || !FAQinput) {
-			return "redirect:/faq_community";
+			
+			response.setContentType("text/html;charset=utf-8");
+			PrintWriter pww=response.getWriter();
+			pww.print("<script> alert('로그인 후 이용해주새요')</script>");
+			pww.print("<script> location.href='login'</script>");
+			pww.close();
+			return "redirect:/login";
 		}
-		
+		else 
+		{
 			return "faqinput";
-		
+		}
 	}
 	
 	//	1:1 문의글 저장(이미지 갯수별 저장 가능)
@@ -81,6 +90,7 @@ public class FAQController {
 	// 1:1 문의글 게시판
 	@RequestMapping(value = "/faqout")
 	public String faq2(HttpServletRequest request, PageDTO dto, Model mo) {
+		String tab = request.getParameter("tab");
 		String nowPage = request.getParameter("nowPage");
 		String cntPerPage = request.getParameter("cntPerPage");
 
@@ -88,7 +98,7 @@ public class FAQController {
 		ArrayList<FAQDTO> list = fs.faqboard();
 		mo.addAttribute("list", list);
 
-		int total = fs.total();
+		int total = fs.total(tab);
 		if (nowPage == null && cntPerPage == null) {
 			nowPage = "1";
 			cntPerPage = "10";
@@ -132,13 +142,22 @@ public class FAQController {
 
 	// 1:1 문의글 답변 작성
 	@RequestMapping(value = "/faqreply", method = RequestMethod.POST)
-	public String faq4admin(HttpServletRequest request, Model mo) {
-		int cnum = Integer.parseInt(request.getParameter("cnum"));
-		FAQService fs = sqlSession.getMapper(FAQService.class);
-		ArrayList<FAQDTO> list = fs.faqreply(cnum);
-		mo.addAttribute("faqlist", list);
-
-		return "faqreplyview";
+	public String faq4admin(HttpServletResponse response, HttpServletRequest request, Model mo) throws IOException {
+		
+		HttpSession hs = request.getSession();
+		boolean login = (Boolean)hs.getAttribute("adminloginstate");
+		
+		if(login)
+		{
+			int cnum = Integer.parseInt(request.getParameter("cnum"));
+			FAQService fs = sqlSession.getMapper(FAQService.class);
+			ArrayList<FAQDTO> list = fs.faqreply(cnum);
+			mo.addAttribute("faqlist", list);
+	
+			return "faqreplyview";
+		}
+			return "redirect:/main";
+		
 	}
 
 	// 1:1 문의글 답변 저장
@@ -314,22 +333,45 @@ public class FAQController {
 	@RequestMapping(value = "/faqsearch", method = RequestMethod.POST)
 	public String faq13(HttpServletRequest request, Model mo) throws IllegalStateException, IOException {
 
-		String faqkey = request.getParameter("faqkey");
-		String faqvalue = request.getParameter("faqvalue");
+		String faqkey1 = request.getParameter("faqkey1"); // 기간 (1일, 1주일 등)
+		String faqkey2 = request.getParameter("faqkey2"); // 검색 조건 (제목, 내용, 작성자)
+		String faqvalue = request.getParameter("faqvalue"); // 검색어
 
 		FAQService fs = sqlSession.getMapper(FAQService.class);
+		ArrayList<FAQDTO> list = new ArrayList<>();
 
-		ArrayList<FAQDTO> list;
-		if (faqkey.equals("title")) {
-			list = fs.faqtitlesearch(faqvalue);
-		} else {
-			list = fs.faqnicknamesearch(faqvalue);
+		// 둘 다 입력된 경우
+		if (faqkey1 != null && !faqkey1.isEmpty() && faqkey2 != null && !faqkey2.isEmpty()) {
+		    int days = Integer.parseInt(faqkey1); // faqkey1의 값은 1, 7, 30, 90
+		    if (faqkey2.equals("title")) {
+		        list = fs.faqTitleSearchWithDate(faqvalue, days);
+		    } else if (faqkey2.equals("fcontents")) {
+		        list = fs.faqContentsSearchWithDate(faqvalue, days);
+		    } else {
+		        list = fs.faqNicknameSearchWithDate(faqvalue, days);
+		    }
 		}
+		// faqkey1만 입력된 경우 (기간 필터만)
+		else if (faqkey1 != null && !faqkey1.isEmpty()) {
+		    int days = Integer.parseInt(faqkey1);
+		    list = fs.faqSearchByDateOnly(days);
+		}
+		// faqkey2만 입력된 경우 (검색 조건만)
+		else if (faqkey2 != null && !faqkey2.isEmpty()) {
+		    if (faqkey2.equals("title")) {
+		        list = fs.faqTitleSearch(faqvalue);
+		    } else if (faqkey2.equals("fcontents")) {
+		        list = fs.faqContentsSearch(faqvalue);
+		    } else {
+		        list = fs.faqNicknameSearch(faqvalue);
+		    }
+		}
+	    
 		mo.addAttribute("list", list);
 
 		return "faqoutput";
 	}
-
+	
 	// 고객센터 홈
 	@RequestMapping(value = "/faq_community")
 	public String faq14(Model mo) {
@@ -345,30 +387,53 @@ public class FAQController {
 	@RequestMapping(value = "/faq_main_serch", method = RequestMethod.POST)
 	public String faq15(HttpServletRequest request, Model mo) throws IllegalStateException, IOException {
 
-		String faq_search_key = request.getParameter("faq_search_key");
-		String faq_search_value = request.getParameter("faq_search_value");
+		String faqkey1 = request.getParameter("faqkey1"); // 기간 (1일, 1주일 등)
+		String faqkey2 = request.getParameter("faqkey2"); // 검색 조건 (제목, 내용, 작성자)
+		String faqvalue = request.getParameter("faqvalue"); // 검색어
 
-		FAQService fs = sqlSession.getMapper(FAQService.class);
+		FAQadminService fs2 = sqlSession.getMapper(FAQadminService.class);
+		ArrayList<FAQadminDTO> list = new ArrayList<>();
 
-		ArrayList<FAQDTO> bestfaq;
-		if (faq_search_key.equals("title")) {
-			bestfaq = fs.faq_main_titlesearch(faq_search_value);
-		} else {
-			bestfaq = fs.faq_main_nicknamesearch(faq_search_value);
+		// 둘 다 입력된 경우
+		if (faqkey1 != null && !faqkey1.isEmpty() && faqkey2 != null && !faqkey2.isEmpty()) {
+		    int days = Integer.parseInt(faqkey1); // faqkey1의 값은 1, 7, 30, 90
+		    if (faqkey2.equals("title")) {
+		        list = fs2.faqTitleSearchWithDate(faqvalue, days);
+		    } else if (faqkey2.equals("fcontents")) {
+		        list = fs2.faqContentsSearchWithDate(faqvalue, days);
+		    } else {
+		        list = fs2.faqNicknameSearchWithDate(faqvalue, days);
+		    }
 		}
-		mo.addAttribute("bestfaq", bestfaq);
+		// faqkey1만 입력된 경우 (기간 필터만)
+		else if (faqkey1 != null && !faqkey1.isEmpty()) {
+		    int days = Integer.parseInt(faqkey1);
+		    list = fs2.faqSearchByDateOnly(days);
+		}
+		// faqkey2만 입력된 경우 (검색 조건만)
+		else if (faqkey2 != null && !faqkey2.isEmpty()) {
+		    if (faqkey2.equals("title")) {
+		        list = fs2.faqTitleSearch(faqvalue);
+		    } else if (faqkey2.equals("fcontents")) {
+		        list = fs2.faqContentsSearch(faqvalue);
+		    } else {
+		        list = fs2.faqNicknameSearch(faqvalue);
+		    }
+		}
+		mo.addAttribute("bestfaq", list);
 
 		return "faq_main";
 	}
 
 	// FAQ-자주 묻는 질문 작성
 	@RequestMapping(value = "/FAQ_in")
-	public String faq16admin(HttpServletRequest request, Model mo) {
+	public String faq16admin(HttpServletResponse response, HttpServletRequest request, Model mo) throws IOException {
 		HttpSession session = request.getSession();
 		Boolean FAQinput = (Boolean) session.getAttribute("adminloginstate");
 
 		// 관리자 로그인이 되어 있지 않으면 메인 페이지로 리다이렉트
 		if (FAQinput == null || !FAQinput) {
+			
 			return "redirect:/faq_community";
 		}
 		return "faq_admin_input";
@@ -421,22 +486,65 @@ public class FAQController {
 		ArrayList<FAQadminDTO> list = fs2.faqboard(tab);
 		mo.addAttribute("faq_admin_board", list);
 
-		int total = fs2.total();
+		int total = fs2.total(tab);
 		if (nowPage == null && cntPerPage == null) {
 			nowPage = "1";
-			cntPerPage = "15";
+			cntPerPage = "10";
 		} else if (nowPage == null) {
 			nowPage = "1";
 		} else if (cntPerPage == null) {
-			cntPerPage = "15";
+			cntPerPage = "10";
 		}
 		dto = new PageDTO(total, Integer.parseInt(nowPage), Integer.parseInt(cntPerPage));
 		mo.addAttribute("paging", dto);
-		mo.addAttribute("list", fs2.page(dto));
+		mo.addAttribute("faq_admin_board", fs2.page(dto));
 
 		return "faq_questions";
 	}
 
+	// FAQ-자주 묻는 질문 검색
+	@RequestMapping(value = "/faq_questions_search", method = RequestMethod.POST)
+	public String faq18_1(HttpServletRequest request, Model mo) throws IllegalStateException, IOException {
+
+		String faqkey1 = request.getParameter("faqkey1"); // 기간 (1일, 1주일 등)
+		String faqkey2 = request.getParameter("faqkey2"); // 검색 조건 (제목, 내용, 작성자)
+		String faqvalue = request.getParameter("faqvalue"); // 검색어
+
+		FAQadminService fs2 = sqlSession.getMapper(FAQadminService.class);
+		ArrayList<FAQadminDTO> list = new ArrayList<>();
+
+		// 둘 다 입력된 경우
+		if (faqkey1 != null && !faqkey1.isEmpty() && faqkey2 != null && !faqkey2.isEmpty()) {
+		    int days = Integer.parseInt(faqkey1); // faqkey1의 값은 1, 7, 30, 90
+		    if (faqkey2.equals("title")) {
+		        list = fs2.faqTitleSearchWithDate(faqvalue, days);
+		    } else if (faqkey2.equals("fcontents")) {
+		        list = fs2.faqContentsSearchWithDate(faqvalue, days);
+		    } else {
+		        list = fs2.faqNicknameSearchWithDate(faqvalue, days);
+		    }
+		}
+		// faqkey1만 입력된 경우 (기간 필터만)
+		else if (faqkey1 != null && !faqkey1.isEmpty()) {
+		    int days = Integer.parseInt(faqkey1);
+		    list = fs2.faqSearchByDateOnly(days);
+		}
+		// faqkey2만 입력된 경우 (검색 조건만)
+		else if (faqkey2 != null && !faqkey2.isEmpty()) {
+		    if (faqkey2.equals("title")) {
+		        list = fs2.faqTitleSearch(faqvalue);
+		    } else if (faqkey2.equals("fcontents")) {
+		        list = fs2.faqContentsSearch(faqvalue);
+		    } else {
+		        list = fs2.faqNicknameSearch(faqvalue);
+		    }
+		}
+		    
+		mo.addAttribute("faq_admin_board", list);
+
+		return "faq_questions";
+		}
+		
 	// FAQ-자주 묻는 질문 상세페이지
 	@RequestMapping(value = "/faq_questions_detail")
 	public String faq19(Model mo, HttpServletRequest request) {
@@ -521,23 +629,40 @@ public class FAQController {
 
 	// FAQ-자주 묻는 질문 댓글
 	@RequestMapping(value = "/faq_questions_reply_save", method = RequestMethod.POST)
-	public String faq23member(HttpServletRequest request, Model mo) {
+	public String faq23member(HttpServletResponse response, HttpServletRequest request, Model mo) throws IOException {
 		
-		int cnum = Integer.parseInt(request.getParameter("cnum"));
-		int groups = Integer.parseInt(request.getParameter("groups"));
-		int step = Integer.parseInt(request.getParameter("step"));
-		int indent = Integer.parseInt(request.getParameter("indent"));
-		String fcontents = request.getParameter("fcontents");
-		String nickname = request.getParameter("nickname");
-		String tab = request.getParameter("tab");
-		FAQadminService fs2 = sqlSession.getMapper(FAQadminService.class);
-		fs2.faq_questions_stepup(groups, step);
-		step++;
-		indent++;
+		HttpSession session = request.getSession();
+		Boolean FAQinput = (Boolean) session.getAttribute("loginstate");
+		
+		if (FAQinput == null || !FAQinput) {
+		
+			response.setContentType("text/html;charset=utf-8");
+			PrintWriter pww=response.getWriter();
+			pww.print("<script> alert('로그인 후 이용해주새요')</script>");
+			pww.print("<script> location.href='login'</script>");
+			pww.close();
+			return "";			
+			
+		}
+		else
+		{
+			int cnum = Integer.parseInt(request.getParameter("cnum"));
+			int groups = Integer.parseInt(request.getParameter("groups"));
+			int step = Integer.parseInt(request.getParameter("step"));
+			int indent = Integer.parseInt(request.getParameter("indent"));
+			String fcontents = request.getParameter("fcontents");
+			String nickname = request.getParameter("nickname");
+			String tab = request.getParameter("tab");
+			FAQadminService fs2 = sqlSession.getMapper(FAQadminService.class);
+			fs2.faq_questions_stepup(groups, step);
+			step++;
+			indent++;
+	
+			fs2.faq_questions_faqreplysave(cnum, groups, step, indent, fcontents, tab, nickname);
+	
+			return "redirect:/faq_questions_detail?cnum=" + cnum;
 
-		fs2.faq_questions_faqreplysave(cnum, groups, step, indent, fcontents, tab, nickname);
-
-		return "redirect:/faq_questions_detail?cnum=" + cnum;
+		}
 	}
 
 }

@@ -11,7 +11,7 @@ public interface FAQadminService {
 	ArrayList<FAQadminDTO> faqboard(String tab);
 
 //3. FAQ-자주묻는질문 페이지	
-	public int total();
+	public int total(String tab);
 
 	public ArrayList<FAQadminDTO> page(PageDTO dto);
 
@@ -37,5 +37,22 @@ public interface FAQadminService {
 
 //8. FAQ-자주묻는질문 조회수
 	void faqcount2(int cnum);
+
+//9. FAQ-자주묻는질문 검색
+	
+	ArrayList<FAQadminDTO> faqTitleSearchWithDate(String faqvalue, int days);
+
+	ArrayList<FAQadminDTO> faqContentsSearchWithDate(String faqvalue, int days);
+
+	ArrayList<FAQadminDTO> faqNicknameSearchWithDate(String faqvalue, int days);
+
+	ArrayList<FAQadminDTO> faqSearchByDateOnly(int days);
+
+	ArrayList<FAQadminDTO> faqTitleSearch(String faqvalue);
+
+	ArrayList<FAQadminDTO> faqContentsSearch(String faqvalue);
+
+	ArrayList<FAQadminDTO> faqNicknameSearch(String faqvalue);
+	
 
 }
