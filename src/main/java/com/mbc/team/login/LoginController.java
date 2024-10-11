@@ -19,6 +19,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.mbc.team.member.MemberService;
@@ -273,7 +274,28 @@ public class LoginController {
 		return "redirect:/login";
 	}
 	
-	
-	
+	// 카카오 로그인 처리
+    @RequestMapping(value = "/kakaoLoginCheck", method = RequestMethod.POST)
+    @ResponseBody
+    public Map<String, Object> kakaoLoginCheck(HttpServletRequest request,
+            @RequestParam String kakaoname) {
+        Map<String, Object> responseMap = new HashMap<>();
+        try {
+            HttpSession session = request.getSession();
+            session.setAttribute("loginstate", true);
+            session.setAttribute("kakaoname", kakaoname); // 카카오 닉네임 세션에 저장
+            responseMap.put("redirect", "main"); // 성공 후 리다이렉트할 페이지 URL 반환
+        } catch (Exception e) {
+            e.printStackTrace();
+            responseMap.put("error", "카카오 로그인 처리 중 오류가 발생했습니다: " + e.getMessage());
+        }
+        return responseMap;
+    }
+
+    //네이버 로그인 매핑
+    @RequestMapping("/login/navercallback")
+    public String naverCallback() {
+        return "navercallback"; // Tiles definition 이름 반환
+    }
 	
 }
