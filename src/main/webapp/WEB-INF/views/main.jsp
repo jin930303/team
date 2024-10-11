@@ -4,7 +4,10 @@
 <!DOCTYPE html>
 <html>
 <head>
-
+<% 
+    Boolean loginState = (Boolean) session.getAttribute("loginstate");
+    System.out.println("Login state in main.jsp: " + loginState);
+%>
   <style>
   .carousel-inner > .item > img,
   .carousel-inner > .item > a > img {
