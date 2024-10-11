@@ -21,7 +21,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 	<!-- 1:1 페이지 -->
 	<select id="total" resultType="int">
-		select count(*)from faq
+		select count(*)from faq where tab != 'FAQ'
 	</select>
 
 	<select id="page" resultType="com.mbc.team.FAQ.FAQDTO">
@@ -113,15 +113,49 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</delete>
 
 	<!-- 1:1 문의내역 검색 -->
-	<select id="faqtitlesearch" resultType="com.mbc.team.FAQ.FAQDTO">
-		select * from faq where
-		title like '%'||#{param1}||'%' and tab != 'FAQ'
+	<select id="faqTitleSearchWithDate" resultType="com.mbc.team.FAQ.FAQDTO">
+	    select * from faq
+	    where title like '%'||#{param1}||'%'
+	    and fdate >= SYSDATE - #{param2}
+	    and tab != 'FAQ'
 	</select>
-
-	<select id="faqnicknamesearch"
-		resultType="com.mbc.team.FAQ.FAQDTO">
-		select * from faq where nickname like '%'||#{param1}||'%'
+	
+	<!-- 내용 검색 -->
+	<select id="faqContentsSearchWithDate" resultType="com.mbc.team.FAQ.FAQDTO">
+	    select * from faq
+	    where fcontents like '%'||#{param1}||'%'
+	    and fdate >= SYSDATE - #{param2}
+	    and tab != 'FAQ'
 	</select>
+	
+	<!-- 기간 검색 -->
+	<select id="faqSearchByDateOnly" resultType="com.mbc.team.FAQ.FAQDTO">
+	    select * from faq
+	    where fdate >= SYSDATE - #{param1}
+	    and tab != 'FAQ'
+	</select>
+	
+	<!-- 검색 조건만 있을 때 쿼리들 -->
+	<select id="faqTitleSearch" resultType="com.mbc.team.FAQ.FAQDTO">
+	    select * from faq where title like '%'||#{param1}||'%' and tab != 'FAQ'
+	</select>
+	
+	<select id="faqContentsSearch" resultType="com.mbc.team.FAQ.FAQDTO">
+	    select * from faq where fcontents like '%'||#{param1}||'%' and tab != 'FAQ'
+	</select>
+	
+	<select id="faqNicknameSearch" resultType="com.mbc.team.FAQ.FAQDTO">
+	    select * from faq where nickname like '%'||#{param1}||'%' and tab != 'FAQ'
+	</select>
+	
+	<!-- 작성자 검색 -->
+	<select id="faqNicknameSearchWithDate" resultType="com.mbc.team.FAQ.FAQDTO">
+	    select * from faq
+	    where nickname like '%'||#{param1}||'%'
+	    and fdate >= SYSDATE - #{param2}
+	    and tab != 'FAQ'
+	</select>
+	
 
 	<!-- 1:1 문의내역 조회수 -->
 	<update id="faqcount">

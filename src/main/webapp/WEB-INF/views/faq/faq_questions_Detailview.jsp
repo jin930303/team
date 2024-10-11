@@ -321,10 +321,6 @@ body {
 		<!-- 회원만 댓글달기 -->
 		
 			<form action="faq_questions_reply_save" method="post">
-		<% 
-			Boolean FAQmember = (Boolean) session.getAttribute("loginstate");
-			if (FAQmember != null && FAQmember) {
-		%>
 				<table style="text-align: center;" width="900px" border="1">
 					<input type="hidden" value="${faq.cnum}" name="cnum"> 
 					<input type="hidden" value="${faq.groups}" name="groups"> 
@@ -340,8 +336,6 @@ body {
 					</tr>
 				</table>
 			</form>
-		<%
-			}
-		%>
+		
 </body>
 </html>
