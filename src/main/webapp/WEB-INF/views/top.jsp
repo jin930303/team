@@ -217,7 +217,6 @@ p {
 						<li><a href="base-running-gloves">주루장갑</a></li>
 						<li><a href="thermal-gloves">방한장갑</a></li>
 						<li><a href="youth-gloves">유소년용 장갑</a></li>
-						<li><a href="other-gloves">기타 장갑</a></li>
 					</ul></li>
 
 				<li class="dropdown"><a class="dropdown-toggle"
@@ -225,8 +224,7 @@ p {
 					<ul class="dropdown-menu">
 						<li><a href="integrated-spikes">징 일체형</a></li>
 						<li><a href="turf-shoes">인조잔디화</a></li>
-						<li><a href="youth-shoes">유소년용 야구화</a></li>
-						<li><a href="running-training-shoes">런닝/트레이닝화</a></li>
+						<li><a href="youth-shoes">포인트화</a></li>
 						<li><a href="shoe-accessories">야구화부속품</a></li>
 					</ul></li>
 
@@ -237,14 +235,12 @@ p {
 						<li><a href="crossbody-bags">크로스백</a></li>						
 						<li><a href="wheeled-bags">휠가방</a></li>
 						<li><a href="bat-bags">배트가방</a></li>
-						<li><a href="ball-bags">볼가방</a></li>
-						<li><a href="other-bags">기타 가방</a></li>
+						<li><a href="ball-bags">볼가방</a></li>	
 					</ul></li>
 
 				<li class="dropdown"><a class="dropdown-toggle"
 					data-toggle="dropdown" href="">의류<span class="caret"></span></a>
 					<ul class="dropdown-menu">
-					    <li><a href="national-team-authentic">국가대표 어센틱 유니폼</a></li>
 						<li><a href="t-shirts">티셔츠</a></li>
 						<li><a href="undershirts">언더셔츠</a></li>
 						<li><a href="sliding-pants">슬라이딩팬츠</a></li>
@@ -255,7 +251,6 @@ p {
 						<li><a href="training-wear">트레이닝복</a></li>
 						<li><a href="hoodies">맨투맨/후디</a></li>
 						<li><a href="hats-belts-socks">모자/벨트/양말</a></li>
-						<li><a href="other-clothing">기타</a></li>
 					</ul></li>
 
 				<li class="dropdown"><a class="dropdown-toggle"
@@ -294,10 +289,7 @@ p {
 						<li><a href="accessories">악세사리</a></li>
 						<li><a href="wristbands">손목밴드</a></li>
 						<li><a href="rosin-bags">로진백</a></li>
-						<li><a href="eye-patches">아이패치</a></li>
-						<li><a href="figures">피규어</a></li>
 						<li><a href="bases">베이스</a></li>
-						<li><a href="other-products">기타용품</a></li>
 					</ul></li>
 
 
