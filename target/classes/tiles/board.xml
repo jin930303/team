@@ -109,7 +109,30 @@
       <put-attribute name="body" value="/WEB-INF/views/sosick/sosicksearchview.jsp"/>
 	</definition>
 	
-	
+    <definition name="eventboard" extends="baseLayout">
+      <put-attribute name="title" value="메인화면"/>
+      <put-attribute name="body" value="/WEB-INF/views/event/eventboard.jsp"/>
+   </definition> 
+   
+   <definition name="eventinput" extends="baseLayout">
+      <put-attribute name="title" value="메인화면"/>
+      <put-attribute name="body" value="/WEB-INF/views/event/eventinput.jsp"/>
+   </definition>
+
+    <definition name="eventout" extends="baseLayout">
+      <put-attribute name="title" value="메인화면"/>
+      <put-attribute name="body" value="/WEB-INF/views/event/eventout.jsp"/>
+   </definition> 
+   
+    <definition name="eventupdateview" extends="baseLayout">
+      <put-attribute name="title" value="메인화면"/>
+      <put-attribute name="body" value="/WEB-INF/views/event/eventupdateview.jsp"/>
+   </definition>
+
+    <definition name="eventsearchview" extends="baseLayout">
+      <put-attribute name="title" value="메인화면"/>
+      <put-attribute name="body" value="/WEB-INF/views/event/eventsearchview.jsp"/>
+   </definition>
 	
 </tiles-definitions>
 

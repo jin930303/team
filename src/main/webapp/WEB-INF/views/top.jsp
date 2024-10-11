@@ -16,7 +16,7 @@ body {
 	background-color: #f0f0f0;
 	margin: 0;
 	padding: 20px;
-	background-image: url('./resources/image/블루패브릭.jpg');
+/* 	background-image: url('./image/블루패브릭.jpg');   */ 
 	background-size: cover; /* 이미지가 화면 전체를 덮도록 설정 */
 	background-position: center; /* 이미지를 가운데에 배치 */
 	background-repeat: no-repeat; /* 이미지를 반복하지 않음 */
@@ -299,6 +299,7 @@ p {
 					data-toggle="dropdown" href="#">커뮤니티<span class="caret"></span></a>
 					<ul class="dropdown-menu">
 						<li><a href="gongjiboard">공지사항</a></li>
+						<li><a href="eventboard">이벤트</a></li>
 						<li><a href="board">자유게시판</a></li>
 						<li><a href="sosickboard">야구소식</a></li>
 						<li><a href="iljung">경기일정</a></li>

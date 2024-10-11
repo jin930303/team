@@ -26,7 +26,7 @@ body {
 }
 
 .sidebar {
-	width: 350px;
+	width: 250px;
 	background-color: #fff;
 	border-right: 1px solid #ddd;
 	padding: 20px;
@@ -252,30 +252,37 @@ body {
 				<li><a href="#">CREDIT CARD</a></li>
 				<li><a href="#">EMS</a></li>
 			</ul>
-			<!-- 
             <div class="scroll-button" onclick="window.scrollTo({top: 0, behavior: 'smooth'});">△</div>
             <div class="scroll-button" onclick="window.scrollTo({top: document.body.scrollHeight, behavior: 'smooth'});">▽</div>
-     -->
 		</div>
 
 		<!-- 메인 콘텐츠 -->
 		<main class="main-content">
 			<h1>문의 게시판</h1>
 
-			<!-- 검색 바 -->
 			<form action="faqsearch" method="post" class="search-bar">
-				<select name="faqkey">
-					<option value="title">제목</option>
-					<option value="nickname">작성자</option>
-				</select> 
-				<input type="text" name="faqvalue" placeholder="검색어를 입력하세요">
-				<button type="submit">검색</button>
-			</form>
-
-			<!-- 정렬기준 -->
-			<form action="category" method="post">
-				<button type="submit" name="faq_category" value="faqcnt">조회수많은순</button>
-				<button type="submit" name="faq_category" value="fdate">최신순</button>
+			    <!-- 기간 선택 -->
+			    <select name="faqkey1" id="faqkey1">
+			        <option value="">기간 선택</option>
+			        <option value="1">1일</option>
+			        <option value="7">1주일</option>
+			        <option value="30">1개월</option>
+			        <option value="90">3개월</option>
+			    </select>
+			
+			    <!-- 검색 조건 선택 -->
+			    <select name="faqkey2" id="faqkey2">
+			        <option value="">검색 조건 선택</option>
+			        <option value="title">제목</option>
+			        <option value="fcontents">내용</option>
+			        <option value="nickname">글쓴이</option>
+			    </select>
+			
+			    <!-- 검색어 입력 -->
+			    <input type="text" name="faqvalue" id="faqvalue" placeholder="검색어를 입력하세요" required>
+			
+			    <!-- 검색 버튼 -->
+			    <button type="submit">검색</button>
 			</form>
 			
 			<!-- 문의 리스트 테이블 -->
@@ -299,6 +306,7 @@ body {
 						<th width="60px">문의번호</th>
 						<th width="120px">TAB</th>
 						<th width="350px">제목</th>
+						<th width="350px">내용</th>
 						<th width="120px">작성자</th>
 						<th width="150px">작성일자</th>
 						<th width="90px">조회수</th>
@@ -312,6 +320,7 @@ body {
 							<td>${faq.cnum}</td>
 							<td>${faq.tab}</td>
 							<td style="text-align: left;">${faq.title}</td>
+							<td style="text-align: left;">${faq.fcontents}</td>
 							<td>${faq.nickname}</td>
 							<td>${faq.fdate}</td>
 							<td>${faq.faqcnt}</td>

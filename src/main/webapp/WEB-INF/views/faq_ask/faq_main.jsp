@@ -231,7 +231,6 @@ body {
 				<li><a href="faqin">1:1 문의하기</a></li>
 				<li><a href="faqout">문의 내역</a></li>
 				<li><a href="faq">FAQ</a></li>
-				<li><a href="upload">업로드 연습</a></li>
 				<!-- 관리자만 확인하기 버튼임 -->
 				<% 
 					Boolean FAQinput = (Boolean) session.getAttribute("adminloginstate");
@@ -271,12 +270,28 @@ body {
 		
 		<!-- 검색 바 -->
 			<form action="faq_main_serch" method="post" class="search-bar">
-				<select name="faq_search_key">
-					<option value="title">제목</option>
-					<option value="nickname">작성자</option>
-				</select>
-				<input type="text" name="faq_search_value" placeholder="검색어를 입력하세요">
-				<button type="submit">검색</button>
+				<!-- 기간 선택 -->
+			    <select name="faqkey1" id="faqkey1">
+			        <option value="">기간 선택</option>
+			        <option value="1">1일</option>
+			        <option value="7">1주일</option>
+			        <option value="30">1개월</option>
+			        <option value="90">3개월</option>
+			    </select>
+			
+			    <!-- 검색 조건 선택 -->
+			    <select name="faqkey2" id="faqkey2">
+			        <option value="">검색 조건 선택</option>
+			        <option value="title">제목</option>
+			        <option value="fcontents">내용</option>
+			        <option value="nickname">글쓴이</option>
+			    </select>
+			
+			    <!-- 검색어 입력 -->
+			    <input type="text" name="faqvalue" id="faqvalue" placeholder="검색어를 입력하세요" required>
+			
+			    <!-- 검색 버튼 -->
+			    <button type="submit">검색</button>
 			</form>
 			
 		<!-- 메인 게시판 -->

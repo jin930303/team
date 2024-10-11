@@ -24,7 +24,7 @@ public interface FAQService {
 	void faqdelete(int cnum);
 
 //7. 페이지	
-	public int total();
+	public int total(String tab);
 
 	public ArrayList<FAQDTO> page(PageDTO dto);
 
@@ -43,10 +43,23 @@ public interface FAQService {
 
 //10. 키값 검색
 	// title(제목)
-	ArrayList<FAQDTO> faqtitlesearch(String faqvalue);
+	ArrayList<FAQDTO> faqTitleSearch(String faqvalue);
 
+	// fcontents(내용)
+	ArrayList<FAQDTO> faqContentsSearch(String faqvalue);
+	
 	// nickname(작성자)
-	ArrayList<FAQDTO> faqnicknamesearch(String faqvalue);
+	ArrayList<FAQDTO> faqNicknameSearch(String faqvalue);
+	
+	// fdate(기간)
+	ArrayList<FAQDTO> faqSearchByDateOnly(int days);
+	
+	// 기간+벨류
+	ArrayList<FAQDTO> faqTitleSearchWithDate(String faqvalue, int days);
+	
+	ArrayList<FAQDTO> faqContentsSearchWithDate(String faqvalue, int days);
+	
+	ArrayList<FAQDTO> faqNicknameSearchWithDate(String faqvalue, int days);
 
 //11. 조회수
 	void faqcount(int cnum);
@@ -74,6 +87,14 @@ public interface FAQService {
 	ArrayList<FAQDTO> faq_main_titlesearch(String faq_search_value);
 
 	ArrayList<FAQDTO> faq_main_nicknamesearch(String faq_search_value);
+//
+
+
+
+
+
+
+	
 
 
 
