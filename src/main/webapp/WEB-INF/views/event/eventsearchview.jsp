@@ -28,7 +28,7 @@ text-align: center
 				<input type="text" name="svalue" style="width: 250px" placeholder="검색어를 입력해주세요.">
 				<input type="submit" value="찾기">
 				<input type="button" onclick="location.href='eventinput'" value="추가">
-				<input type="button" onclick="location.href='eventboard'" value="목록">
+				<input type="button" onclick="location.href='eventboard'" value="전체보기">
 				<input type="button" onclick="location.href='eventing'" value="진행중">
 				<input type="button" onclick="location.href='eventend'" value="종료">
 			</form>
@@ -45,7 +45,7 @@ text-align: center
 				</select>
 				<input type="text" name="svalue" style="width: 250px" placeholder="검색어를 입력해주세요.">
 				<input type="submit" value="찾기">
-				<input type="button" onclick="location.href='eventboard'" value="목록">
+				<input type="button" onclick="location.href='eventboard'" value="전체보기">
 				<input type="button" onclick="location.href='eventing'" value="진행중">
 				<input type="button" onclick="location.href='eventend'" value="종료">
 			</form>
