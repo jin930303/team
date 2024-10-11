@@ -4,6 +4,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+
   <style>
   .carousel-inner > .item > img,
   .carousel-inner > .item > a > img {

@@ -26,8 +26,13 @@
       <put-attribute name="body" value="/WEB-INF/views/product/productdetailview.jsp"/>
    </definition> 
    
+   <definition name="cart" extends="baseLayout">
+      <put-attribute name="title" value="메인화면"/>
+      <put-attribute name="body" value="/WEB-INF/views/product/cart.jsp"/>
+   </definition> 
    
 </tiles-definitions>
+
 
 
 

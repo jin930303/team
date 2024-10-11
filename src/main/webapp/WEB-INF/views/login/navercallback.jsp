@@ -10,7 +10,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>Naver Callback</title>
 </head>
 <body>
     <%
@@ -18,7 +18,7 @@
         String clientSecret = "v1p2zPAItY"; // 애플리케이션 클라이언트 시크릿값
         String code = request.getParameter("code");
         String state = request.getParameter("state");
-        String redirectURI = URLEncoder.encode("http://localhost:8091/team/login/navercallback", "UTF-8");
+        String redirectURI = URLEncoder.encode("http://localhost:8091/team", "UTF-8");
         
         // Access Token 요청
         String apiURL = "https://nid.naver.com/oauth2.0/token?grant_type=authorization_code"
@@ -86,12 +86,24 @@
             session.setAttribute("nickname", nickname);
             session.setAttribute("email", email);
             session.setAttribute("userId", userId);
+            session.setAttribute("loginstate", true);
+            System.out.println("세션 loginstate: " + session.getAttribute("loginstate"));
+            System.out.println("세션 nickname: " + session.getAttribute("nickname"));
+            System.out.println("세션 email: " + session.getAttribute("email"));
             
+            System.out.println("Login state set to true: " + session.getAttribute("loginstate"));
+
             // 리디렉션
-            response.sendRedirect("/team/home"); // 로그인 후 리디렉션할 페이지
+            System.out.println("Redirecting to /main");
+            RequestDispatcher dispatcher = request.getRequestDispatcher("/main");
+            dispatcher.forward(request, response);
+            System.out.println("Login state before redirect: " + session.getAttribute("loginstate"));
+            return;// 로그인 후 리디렉션할 페이지
             
         } catch (Exception e) {
             e.printStackTrace(); // 에러 로그 출력
+            out.println("<script>alert('로그인 처리 중 오류가 발생했습니다. 다시 시도해주세요.');</script>");
+            response.sendRedirect("/login"); // 에러 시 로그인 페이지로 리디렉트
         }
     %>
 </body>
