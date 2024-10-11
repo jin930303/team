@@ -246,5 +246,85 @@
 	<select id="totalsn" resultType="int">
    		select count(*) from sosick where nickname like #{svalue}
 	</select>
+
+<!-- 이벤트 -->
+	<insert id="insertevent">
+		insert into event values(evnum_seq.nextval, #{param1}, #{param2}, #{param3}, #{param4}, sysdate, #{param5}, #{param6}, #{param7}, 0)
+	</insert>
+
+	<select id="totalev" resultType="int">
+   		select count(*) from event
+	</select>
 	
+	<select id="pageev" resultType="com.mbc.team.board.EventDTO">
+	   select * from (
+	   select rownum rn,A.* from(  
+	   select evnum, id, nickname, etitle, econtents, to_char(edate, 'yyyy-MM-dd') as edate, eimagem, eimaged, estate, ecnt from event order by evnum desc)A)
+	   where rn between #{start} AND #{end}
+	</select>
+	
+	<select id="eventdetail" resultType="com.mbc.team.board.EventDTO">
+		select evnum, id, nickname, etitle, econtents, to_char(edate, 'yyyy-MM-dd') as edate, eimagem, eimaged, estate, ecnt from event where evnum=#{param1}
+	</select>
+	
+	<update id="eventcount">
+		update event set ecnt=ecnt+1 where evnum=#{param1}
+	</update>
+	
+	<delete id="eventdelete">
+		delete from event where evnum=#{param1}
+	</delete>
+	
+	<select id="eventupdateview" resultType="com.mbc.team.board.EventDTO">
+		select evnum, id, nickname, etitle, econtents, to_char(edate, 'yyyy-MM-dd') as edate, eimagem, eimaged, estate, ecnt from event where evnum=#{param1}
+	</select>
+
+	<update id="eventupdate">
+		update event set etitle=#{param3}, econtents=#{param4}, eimagem=#{param5}, eimaged=#{param6}, estate=#{param7} where evnum=#{param8}
+	</update>
+	
+	<select id="pageet" resultType="com.mbc.team.board.EventDTO">
+	   select * from (
+	   select rownum rn,A.* from(  
+	   select evnum, id, nickname, etitle, econtents, to_char(edate, 'yyyy-MM-dd') as edate, eimagem, eimaged, estate, ecnt from event where etitle like #{param2} order by evnum desc)A)
+	   where rn between #{param1.start} AND #{param1.end}
+	</select>
+
+	<select id="pageec" resultType="com.mbc.team.board.EventDTO">
+	   select * from (
+	   select rownum rn,A.* from(  
+	   select evnum, id, nickname, etitle, econtents, to_char(edate, 'yyyy-MM-dd') as edate, eimagem, eimaged, estate, ecnt from event where econtents like #{param2} order by evnum desc)A)
+	   where rn between #{param1.start} AND #{param1.end}
+	</select>
+	
+	<select id="totalet" resultType="int">
+   		select count(*) from event where etitle like #{svalue}
+	</select>
+	
+	<select id="totalec" resultType="int">
+   		select count(*) from event where econtents like #{svalue}
+	</select>
+
+	<select id="pageevsi" resultType="com.mbc.team.board.EventDTO">
+	   select * from (
+	   select rownum rn,A.* from(  
+	   select evnum, id, nickname, etitle, econtents, to_char(edate, 'yyyy-MM-dd') as edate, eimagem, eimaged, estate, ecnt from event where estate=#{param2} order by evnum desc)A)
+	   where rn between #{param1.start} AND #{param1.end}
+	</select>
+	
+	<select id="totalevsi" resultType="int">
+   		select count(*) from event where estate=#{param1}
+	</select>
+	
+	<select id="pageevse" resultType="com.mbc.team.board.EventDTO">
+	   select * from (
+	   select rownum rn,A.* from(  
+	   select evnum, id, nickname, etitle, econtents, to_char(edate, 'yyyy-MM-dd') as edate, eimagem, eimaged, estate, ecnt from event where estate=#{param2} order by evnum desc)A)
+	   where rn between #{param1.start} AND #{param1.end}
+	</select>
+	
+	<select id="totalevse" resultType="int">
+   		select count(*) from event where estate=#{param1}
+	</select>
+
 </mapper>
