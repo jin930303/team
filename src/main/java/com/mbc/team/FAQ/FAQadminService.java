@@ -6,6 +6,8 @@ public interface FAQadminService {
 //1. FAQ-자주묻는질문 저장(문의글 작성)
 	void faqinsert(String tab, String title, String fcontents, String nickname, String fname1, String fname2,
 			String fname3);
+	
+	int save_detail();
 
 //2. FAQ-자주묻는질문 게시판
 	ArrayList<FAQadminDTO> faqboard(String tab);
@@ -20,6 +22,8 @@ public interface FAQadminService {
 
 //5. FAQ-자주묻는질문 상세페이지 수정(관리자)
 	FAQadminDTO faq_admin_update(int cnum);
+	
+	int update_detail();
 
 //5-1. 수정 완료(관리자)
 	void faq_admin_update2(int cnum, String tab, String title, String fcontents, String nickname, String fname1,
@@ -53,6 +57,10 @@ public interface FAQadminService {
 	ArrayList<FAQadminDTO> faqContentsSearch(String faqvalue);
 
 	ArrayList<FAQadminDTO> faqNicknameSearch(String faqvalue);
+
+
+
+	
 	
 
 }

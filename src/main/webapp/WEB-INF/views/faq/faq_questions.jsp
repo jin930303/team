@@ -228,7 +228,14 @@ body {
 			<ul>
 				<li><a href="faq_community">고객센터</a></li>
 				<li><a href="gongjiboard">공지사항</a></li>
+			<% 
+				Boolean FAQmember = (Boolean) session.getAttribute("loginstate");
+				if (FAQmember != null && FAQmember) {
+			%>
 				<li><a href="faqin">1:1 문의하기</a></li>
+			<%
+				}
+			%>
 				<li><a href="faqout">문의 내역</a></li>
 				<li><a href="faq">FAQ</a></li>
 			</ul>
@@ -247,20 +254,20 @@ body {
 		<!-- 오른쪽 플로팅 메뉴 -->
 		<div id="floating-menu">
 			<ul>
-				<li><a href="#">CART</a></li>
-				<li><a href="#">KAKAO</a></li>
-				<li><a href="#">CREDIT CARD</a></li>
-				<li><a href="#">EMS</a></li>
+				<li><a href="cart">장바구니</a></li>
+				<li><a href="https://open.kakao.com/o/suixDsUg">KAKAO문의</a></li>
+				<li><a href="#">배송조회</a></li>
+				<li><a href="#">최근 본 상품</a></li>
+				<li><a href="#">관심상품</a></li>
+				<li><a href="myinfo">마이페이지</a></li>
 			</ul>
-			<!-- 
             <div class="scroll-button" onclick="window.scrollTo({top: 0, behavior: 'smooth'});">△</div>
             <div class="scroll-button" onclick="window.scrollTo({top: document.body.scrollHeight, behavior: 'smooth'});">▽</div>
-     -->
 		</div>
 
 		<!-- 메인 콘텐츠 -->
 		<main class="main-content">
-			<h1>문의 게시판</h1>
+			<h1>FAQ - 자주 묻는 질문</h1>
 
 			<form action="faq_questions_search" method="post" class="search-bar">
 			    <!-- 기간 선택 -->
@@ -292,13 +299,11 @@ body {
 				<caption>문의 내역</caption>
 				<thead>
 					<tr class="faq-small-title">
-						<th width="60px">문의번호</th>
-						<th width="120px">TAB</th>
+						<th width="60px">TAB</th>
 						<th width="350px">제목</th>
-						<th width="350px">내용</th>
-						<th width="120px">작성자</th>
-						<th width="150px">작성일자</th>
-						<th width="90px">조회수</th>
+						<th width="100px">작성자</th>
+						<th width="100px">작성일자</th>
+						<th width="50px">조회수</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -306,10 +311,8 @@ body {
 						<tr
 							onclick="location.href='faq_questions_detail?cnum=${faq_admin.cnum}'"
 							class="trlink">
-							<td>${faq_admin.cnum}</td>
 							<td>${faq_admin.tab}</td>
 							<td style="text-align: left;">${faq_admin.title}</td>
-							<td style="text-align: left;">${faq_admin.fcontents}</td>
 							<td>${faq_admin.nickname}</td>
 							<td>${faq_admin.fdate}</td>
 							<td>${faq_admin.faqcnt}</td>

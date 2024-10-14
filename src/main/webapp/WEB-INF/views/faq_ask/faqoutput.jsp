@@ -228,7 +228,14 @@ body {
 			<ul>
 				<li><a href="faq_community">고객센터</a></li>
 				<li><a href="gongjiboard">공지사항</a></li>
-				<li><a href="faqin">1:1 문의하기</a></li>
+				<% 
+					Boolean FAQmember = (Boolean) session.getAttribute("loginstate");
+					if (FAQmember != null && FAQmember) {
+				%>
+					<li><a href="faqin">1:1 문의하기</a></li>
+				<%
+					}
+				%>
 				<li><a href="faqout">문의 내역</a></li>
 				<li><a href="faq">FAQ</a></li>
 			</ul>
@@ -247,10 +254,12 @@ body {
 		<!-- 오른쪽 플로팅 메뉴 -->
 		<div id="floating-menu">
 			<ul>
-				<li><a href="#">CART</a></li>
-				<li><a href="#">KAKAO</a></li>
-				<li><a href="#">CREDIT CARD</a></li>
-				<li><a href="#">EMS</a></li>
+				<li><a href="cart">장바구니</a></li>
+				<li><a href="https://open.kakao.com/o/suixDsUg">KAKAO문의</a></li>
+				<li><a href="#">배송조회</a></li>
+				<li><a href="#">최근 본 상품</a></li>
+				<li><a href="#">관심상품</a></li>
+				<li><a href="myinfo">마이페이지</a></li>
 			</ul>
             <div class="scroll-button" onclick="window.scrollTo({top: 0, behavior: 'smooth'});">△</div>
             <div class="scroll-button" onclick="window.scrollTo({top: document.body.scrollHeight, behavior: 'smooth'});">▽</div>
@@ -259,6 +268,11 @@ body {
 		<!-- 메인 콘텐츠 -->
 		<main class="main-content">
 			<h1>문의 게시판</h1>
+
+			<form action="category" method="post">
+			    <button type="submit" name="faq_category" value="faqcnt">조회수 많은 순</button>
+			    <button type="submit" name="faq_category" value="fdate">최신순</button>
+			</form>
 
 			<form action="faqsearch" method="post" class="search-bar">
 			    <!-- 기간 선택 -->
@@ -288,39 +302,22 @@ body {
 			<!-- 문의 리스트 테이블 -->
 			<table class="faq-table">
 				<caption>문의 내역</caption>
-				<!-- 
-					<td>
-						<select name="tab" onclick="location.href='category'">
-							<option value="회원관련 문의">회원관련 문의</option>
-							<option value="이벤트/혜택">이벤트/혜택</option>
-							<option value="상품옵션 문의">상품옵션</option>
-							<option value="교환/환불 문의">교환/환불</option>
-							<option value="배송 문의">배송 문의</option>
-							<option value="기타 문의">기타 문의</option>
-						</select>
-					</td>
-				</tr>
-				 -->
+				
 				<thead>
 					<tr class="faq-small-title">
-						<th width="60px">문의번호</th>
-						<th width="120px">TAB</th>
+						<th width="60px">TAB</th>
 						<th width="350px">제목</th>
-						<th width="350px">내용</th>
-						<th width="120px">작성자</th>
-						<th width="150px">작성일자</th>
-						<th width="90px">조회수</th>
+						<th width="100px">작성자</th>
+						<th width="100px">작성일자</th>
+						<th width="50px">조회수</th>
 					</tr>
 				</thead>
 				<tbody>
 				
 					<c:forEach items="${list}" var="faq">
-						<tr onclick="location.href='faqdetail?cnum=${faq.cnum}'"
-							class="trlink">
-							<td>${faq.cnum}</td>
+						<tr onclick="location.href='faqdetail?cnum=${faq.cnum}'" class="trlink">
 							<td>${faq.tab}</td>
 							<td style="text-align: left;">${faq.title}</td>
-							<td style="text-align: left;">${faq.fcontents}</td>
 							<td>${faq.nickname}</td>
 							<td>${faq.fdate}</td>
 							<td>${faq.faqcnt}</td>

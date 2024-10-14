@@ -228,7 +228,14 @@ body {
 			<ul>
 				<li><a href="faq_community">고객센터</a></li>
 				<li><a href="gongjiboard">공지사항</a></li>
-				<li><a href="faqin">1:1 문의하기</a></li>
+				<% 
+					Boolean FAQmember = (Boolean) session.getAttribute("loginstate");
+					if (FAQmember != null && FAQmember) {
+				%>
+					<li><a href="faqin">1:1 문의하기</a></li>
+				<%
+					}
+				%>
 				<li><a href="faqout">문의 내역</a></li>
 				<li><a href="faq">FAQ</a></li>
 				<!-- 관리자만 확인하기 버튼임 -->
@@ -257,16 +264,18 @@ body {
 		<!-- 오른쪽 플로팅 메뉴 -->
 		<div id="floating-menu">
 			<ul>
-				<li><a href="#">CART</a></li>
-				<li><a href="#">KAKAO</a></li>
-				<li><a href="#">CREDIT CARD</a></li>
-				<li><a href="#">EMS</a></li>
+				<li><a href="cart">장바구니</a></li>
+				<li><a href="https://open.kakao.com/o/suixDsUg">KAKAO문의</a></li>
+				<li><a href="#">배송조회</a></li>
+				<li><a href="#">최근 본 상품</a></li>
+				<li><a href="#">관심상품</a></li>
+				<li><a href="myinfo">마이페이지</a></li>
 			</ul>
 		</div>
 
 		<!-- 메인 콘텐츠 -->
 		<main class="main-content">
-			<h1>자주 묻는 질문</h1>
+			<h1>FAQ - 자주 묻는 질문 BEST 10</h1>
 		
 		<!-- 검색 바 -->
 			<form action="faq_main_serch" method="post" class="search-bar">
@@ -299,7 +308,6 @@ body {
 				<caption>BEST FAQ</caption>
 				<thead>
 					<tr>
-						<th>번호</th>
 						<th>분류</th>
 						<th>제목</th>
 						<th>조회수</th>
@@ -308,7 +316,6 @@ body {
 				<c:forEach items="${bestfaq}" var="bestfaq">
 					<tbody>
 						<tr onclick="location.href='faqdetail?cnum=${bestfaq.cnum}'" class="trlink">
-							<td>${bestfaq.cnum}</td>
 							<td>${bestfaq.tab}</td>
 							<td>${bestfaq.title}</td>
 							<td>${bestfaq.faqcnt}</td>

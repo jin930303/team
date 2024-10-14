@@ -6,6 +6,7 @@ public interface FAQService {
 //1. 저장(문의글 작성)
 	void faqinsert(String tab, String title, String fcontents, String nickname, String fname1, String fname2,
 			String fname3);
+	int save_detail();
 
 //2. 게시판
 	ArrayList<FAQDTO> faqboard();
@@ -64,10 +65,11 @@ public interface FAQService {
 //11. 조회수
 	void faqcount(int cnum);
 
-//12. 조회수많은순 정렬
+//12. 정렬
+	//조회수 많은 순
 	ArrayList<FAQDTO> category1();
 
-//13. 최신순 정렬
+	//최신순 정렬
 	ArrayList<FAQDTO> category2();
 
 //14. 고객센터 메인 홈
@@ -88,6 +90,8 @@ public interface FAQService {
 
 	ArrayList<FAQDTO> faq_main_nicknamesearch(String faq_search_value);
 //
+
+
 
 
 
