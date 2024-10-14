@@ -11,6 +11,52 @@
         background-color: transparent;
     }
 
+.container {
+    display: flex !important;
+    width: 80% !important;
+    margin: 0 auto !important;
+}
+.maindata {
+    display: flex !important;
+    flex-direction: column !important;
+    width: 100% !important;
+}
+.sidebar {
+	width: 350px;
+	background-color: #fff;
+	border-right: 1px solid #ddd;
+	padding: 20px;
+}
+
+.sidebar h2 {
+	font-size: 18px;
+	margin-bottom: 20px;
+}
+
+.sidebar ul {
+	list-style: none;
+	padding: 0;
+	margin-bottom: 30px;
+}
+
+.sidebar ul li {
+	margin-bottom: 10px;
+}
+
+.sidebar ul li a {
+	text-decoration: none;
+	color: #333;
+	display: block;
+	padding: 10px;
+	background-color: #f1f1f1;
+	border-radius: 4px;
+	transition: background-color 0.3s;
+}
+
+.sidebar ul li a:hover {
+	background-color: #ddd;
+}
+
 body {
 	font-family: Arial, sans-serif;
 	background-color: #f0f0f0;
