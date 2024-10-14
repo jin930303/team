@@ -30,7 +30,7 @@ public class FAQController {
 	// 경로 수정해야합니다.
 	String path = "C:\\Users\\3-16\\git\\team\\src\\main\\webapp\\image";
 
-	// 1:1 문의글 작성
+	// 1:1 문의글 작성 (회원만 글 작성 가능)
 	@RequestMapping(value = "/faqin")
 	public String faq0member(HttpServletResponse response, HttpServletRequest request, Model mo) throws IOException {
 		
@@ -52,7 +52,7 @@ public class FAQController {
 		}
 	}
 	
-	//	1:1 문의글 저장(이미지 갯수별 저장 가능)
+	//	1:1 문의글 저장(이미지 max 3장까지 저장) +@ 저장 후 바로 상세페이지 이동 O
 	@RequestMapping(value = "/faqsave", method = RequestMethod.POST)
 	public String faq1member(MultipartHttpServletRequest mul) throws IllegalStateException, IOException {
 	    String tab = mul.getParameter("tab");
@@ -83,11 +83,13 @@ public class FAQController {
 	    // FAQ 데이터 저장
 	    FAQService fs = sqlSession.getMapper(FAQService.class);
 	    fs.faqinsert(tab, title, fcontents, nickname, fname1, fname2, fname3);
+	    
+	    int cnum = fs.save_detail();
 
-	    return "redirect:/";
+	    return "redirect:/faqdetail?cnum="+cnum;
 	}
 
-	// 1:1 문의글 게시판
+	// 1:1 문의글 게시판(페이징)
 	@RequestMapping(value = "/faqout")
 	public String faq2(HttpServletRequest request, PageDTO dto, Model mo) {
 		String tab = request.getParameter("tab");
@@ -114,10 +116,14 @@ public class FAQController {
 		return "faqoutput";
 	}
 
-	// 1:1 문의글 정렬기준(페이징 필요)
+	// 1:1 문의글 정렬기준(조회수많은순, 최신순) +@ 페이징 필요
 	@RequestMapping(value = "/category")
 	public String faq3(HttpServletRequest request, PageDTO dto, Model mo) {
+		
 		String faq_category = request.getParameter("faq_category");
+		String tab = request.getParameter("tab");
+		String nowPage = request.getParameter("nowPage");
+		String cntPerPage = request.getParameter("cntPerPage");
 
 		FAQService fs = sqlSession.getMapper(FAQService.class);
 		ArrayList<FAQDTO> list = null;
@@ -127,20 +133,24 @@ public class FAQController {
 			list = fs.category2();
 		}
 		mo.addAttribute("list", list);
-		/*
-		 * String nowPage = request.getParameter("nowPage"); String cntPerPage =
-		 * request.getParameter("cntPerPage");
-		 * 
-		 * int total = fs.total(); if (nowPage == null && cntPerPage == null) { nowPage
-		 * = "1"; cntPerPage = "10"; } else if (nowPage == null) { nowPage = "1"; } else
-		 * if (cntPerPage == null) { cntPerPage = "10"; } dto = new PageDTO(total,
-		 * Integer.parseInt(nowPage), Integer.parseInt(cntPerPage));
-		 * mo.addAttribute("paging", dto); mo.addAttribute("list", fs.page(dto));
-		 */
+		
+		int total = fs.total(tab);
+		if (nowPage == null && cntPerPage == null) {
+			nowPage = "1";
+			cntPerPage = "10";
+		} else if (nowPage == null) {
+			nowPage = "1";
+		} else if (cntPerPage == null) {
+			cntPerPage = "10";
+		}
+		dto = new PageDTO(total, Integer.parseInt(nowPage), Integer.parseInt(cntPerPage));
+		mo.addAttribute("paging", dto);
+		mo.addAttribute("list", fs.page(dto));
+		
 		return "faqoutput";
 	}
 
-	// 1:1 문의글 답변 작성
+	// 1:1 문의글 답변 작성(관리자만 답변 작성) +@ 공개, 비공개 여부
 	@RequestMapping(value = "/faqreply", method = RequestMethod.POST)
 	public String faq4admin(HttpServletResponse response, HttpServletRequest request, Model mo) throws IOException {
 		
@@ -160,7 +170,7 @@ public class FAQController {
 		
 	}
 
-	// 1:1 문의글 답변 저장
+	// 1:1 문의글 답변 저장(관리자 답변은 1개만 가능) +@ 상세페이지로 바로 이동 기능
 	@RequestMapping(value = "/faqreplysave", method = RequestMethod.POST)
 	public String faq5admin(HttpServletRequest request) throws IllegalStateException, IOException {
 		int cnum = Integer.parseInt(request.getParameter("cnum"));
@@ -182,7 +192,7 @@ public class FAQController {
 		return "redirect:/faqdetail?cnum=" + cnum;
 	}
 
-	// 1:1 문의글 상세페이지
+	// 1:1 문의글 상세페이지(상세페이지 출력 + 관리자 답변 동시 출력)
 	@RequestMapping(value = "/faqdetail")
 	public String faq6(Model mo, HttpServletRequest request) {
 		int cnum = Integer.parseInt(request.getParameter("cnum"));
@@ -199,7 +209,7 @@ public class FAQController {
 		return "faqDtailview";
 	}
 
-	// 1:1 문의글 답변 Updateview
+	// 1:1 문의글 답변 Updateview(관리자만 답변 수정 가능)
 	@RequestMapping(value = "/faq_reply_update1")
 	public String faq7admin(HttpServletRequest request, Model mo) throws IllegalStateException, IOException {
 		int cnum = Integer.parseInt(request.getParameter("cnum"));
@@ -212,7 +222,7 @@ public class FAQController {
 		return "faq_reply_updateview";
 	}
 
-	// 1:1 문의글 답변 Update clear
+	// 1:1 문의글 답변 Update clear(이미지 max 3장까지 저장) +@ 되돌아가는 기능 필요
 	@RequestMapping(value = "/faq_reply_update2", method = RequestMethod.POST)
 	public String faq8admin(HttpServletResponse response, MultipartHttpServletRequest mul) throws IllegalStateException, IOException {
 		int cnum = Integer.parseInt(mul.getParameter("cnum"));
@@ -254,7 +264,7 @@ public class FAQController {
 		return "redirect:/faqout";
 	}
 
-	// 1:1 문의글 답변 Delete clear
+	// 1:1 문의글 답변 Delete clear +@ 되돌아가는 기능 필요
 	@RequestMapping(value = "/faq_reply_delete")
 	public String faq9admin(HttpServletRequest request) {
 		int cnum = Integer.parseInt(request.getParameter("cnum"));
@@ -264,7 +274,7 @@ public class FAQController {
 		return "redirect:/faqout";
 	}
 
-	// 1:1 문의글 Updateview
+	// 1:1 문의글 Updateview(회원만 수정가능) +@ 모든 회원이 수정가능한 오류 수정 요구
 	@RequestMapping(value = "/faqupdate")
 	public String faq10member(HttpServletRequest request, Model mo) throws IllegalStateException, IOException {
 		int cnum = Integer.parseInt(request.getParameter("cnum"));
@@ -277,7 +287,7 @@ public class FAQController {
 		return "faqUpdateview";
 	}
 
-	// 1:1 문의글 Update clear
+	// 1:1 문의글 Update clear(이미지 max 3장까지 저장) +@ 되돌아가는 기능 필요
 	@RequestMapping(value = "/faqupdate2", method = RequestMethod.POST)
 	public String faq11member(HttpServletResponse response, MultipartHttpServletRequest mul) throws IllegalStateException, IOException {
 		int cnum = Integer.parseInt(mul.getParameter("cnum"));
@@ -329,7 +339,7 @@ public class FAQController {
 		return "redirect:/faqout";
 	}
 
-	// 1:1 문의글 게시판 검색
+	// 1:1 문의글 게시판 검색(검색 시 기간,제목,내용,작성자)
 	@RequestMapping(value = "/faqsearch", method = RequestMethod.POST)
 	public String faq13(HttpServletRequest request, Model mo) throws IllegalStateException, IOException {
 
@@ -383,7 +393,7 @@ public class FAQController {
 		return "faq_main";
 	}
 
-	// 고객센터 홈 검색
+	// 고객센터 홈 검색(검색 시 기간,제목,내용,작성자)
 	@RequestMapping(value = "/faq_main_serch", method = RequestMethod.POST)
 	public String faq15(HttpServletRequest request, Model mo) throws IllegalStateException, IOException {
 
@@ -425,7 +435,7 @@ public class FAQController {
 		return "faq_main";
 	}
 
-	// FAQ-자주 묻는 질문 작성
+	// FAQ-자주 묻는 질문 작성(관리자만 작성 가능)
 	@RequestMapping(value = "/FAQ_in")
 	public String faq16admin(HttpServletResponse response, HttpServletRequest request, Model mo) throws IOException {
 		HttpSession session = request.getSession();
@@ -439,7 +449,7 @@ public class FAQController {
 		return "faq_admin_input";
 	}
 
-	// FAQ-자주 묻는 질문 저장
+	// FAQ-자주 묻는 질문 저장(이미지 max 3장까지 저장) +@ 상세페이지로 바로 이동 기능 요구 O
 	@RequestMapping(value = "/faq_admin_save", method = RequestMethod.POST)
 	public String faq17admin(MultipartHttpServletRequest mul) throws IllegalStateException, IOException {
 
@@ -469,13 +479,17 @@ public class FAQController {
 	    }
 
 	    // FAQ 데이터 저장
-	    FAQService fs = sqlSession.getMapper(FAQService.class);
+	    FAQadminService fs = sqlSession.getMapper(FAQadminService.class);
 	    fs.faqinsert(tab, title, fcontents, nickname, fname1, fname2, fname3);
 
-	    return "redirect:/faq_community";
+	    // 작성 후 곧바로 상세페이지로 이동함
+	    int cnum = fs.save_detail();
+	    		
+	    //return "redirect:/faq_community";
+	    return "redirect:/faq_questions_detail?cnum=" + cnum;
 	}
 
-	// FAQ-자주 묻는 질문 게시판
+	// FAQ-자주 묻는 질문 게시판(페이징)
 	@RequestMapping(value = "/faq")
 	public String faq18(HttpServletRequest request, PageDTO dto, Model mo) {
 		String tab = request.getParameter("tab");
@@ -502,7 +516,7 @@ public class FAQController {
 		return "faq_questions";
 	}
 
-	// FAQ-자주 묻는 질문 검색
+	// FAQ-자주 묻는 질문 검색(검색 시 기간,제목,내용,작성자)
 	@RequestMapping(value = "/faq_questions_search", method = RequestMethod.POST)
 	public String faq18_1(HttpServletRequest request, Model mo) throws IllegalStateException, IOException {
 
@@ -545,7 +559,7 @@ public class FAQController {
 		return "faq_questions";
 		}
 		
-	// FAQ-자주 묻는 질문 상세페이지
+	// FAQ-자주 묻는 질문 상세페이지(상세페이지 출력 + 회원 댓글 동시 출력)
 	@RequestMapping(value = "/faq_questions_detail")
 	public String faq19(Model mo, HttpServletRequest request) {
 		int cnum = Integer.parseInt(request.getParameter("cnum"));
@@ -562,7 +576,7 @@ public class FAQController {
 		return "faq_questions_Detailview";
 	}
 
-	// FAQ-자주 묻는 질문 Updateview
+	// FAQ-자주 묻는 질문 Updateview(관리자만 수정가능) +@ 모든 회원이 수정가능한 오류 수정 요구
 	@RequestMapping(value = "/faq_admin_update")
 	public String faq20admin(Model mo, HttpServletRequest request) {
 		int cnum = Integer.parseInt(request.getParameter("cnum"));
@@ -574,7 +588,7 @@ public class FAQController {
 		return "faq_questions_Updateview";
 	}
 
-	// FAQ-자주 묻는 질문 Update clear
+	// FAQ-자주 묻는 질문 Update clear(이미지 max 3장까지 저장) +@ 되돌아가는 기능 필요...ㅜㅜ
 	@RequestMapping(value = "/faq_admin_update2", method = RequestMethod.POST)
 	public String faq21admin(HttpServletResponse response, MultipartHttpServletRequest mul) throws IllegalStateException, IOException {
 		int cnum = Integer.parseInt(mul.getParameter("cnum"));
@@ -612,8 +626,9 @@ public class FAQController {
 		
 		FAQadminService fs2 = sqlSession.getMapper(FAQadminService.class);
 		fs2.faq_admin_update2(cnum, tab, title, fcontents, nickname, fname1, fname2, fname3);
-
-		return "redirect:/faq";
+		int cnum1 = fs2.update_detail();
+		
+		return "redirect:/faq_questions_detail?cnum=" + cnum1;
 	}
 
 	// FAQ-자주 묻는 질문 Delete clear
@@ -627,7 +642,7 @@ public class FAQController {
 		return "redirect:/faq";
 	}
 
-	// FAQ-자주 묻는 질문 댓글
+	// FAQ-자주 묻는 질문 댓글(회원만 댓글 가능)
 	@RequestMapping(value = "/faq_questions_reply_save", method = RequestMethod.POST)
 	public String faq23member(HttpServletResponse response, HttpServletRequest request, Model mo) throws IOException {
 		
