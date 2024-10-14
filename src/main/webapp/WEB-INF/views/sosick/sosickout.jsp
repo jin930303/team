@@ -65,7 +65,7 @@ text-align: center;
 </aside>
 <div class="maindata">
 <table border="1" width="800px" align="center">
-<caption><h3>야구소식</h3></caption>
+<caption><h2>야구소식</h2></caption>
 	<tr>
 		<th>제목</th><td style="text-align: left;">[${list.stag}] ${list.stitle}</td>
 		<th>작성자</th><td>${list.nickname}</td>
@@ -73,10 +73,21 @@ text-align: center;
 	<tr>	
 		<th>작성일시</th><td>${list.sdate}</td><th>조회수</th><td>${list.scnt}</td>
 	</tr>	
-	<tr>	
-		<td colspan="4" style="text-align: left;"><img src="./image/${list.simage}" style="text-align: center;"><br><pre>${list.scontents}</pre></td>
+		<tr>
+		<c:choose>
+			<c:when test="${list.simage==null}">
+			<td colspan="4">
+				<pre style="text-align: left;">${list.scontents}</pre>
+			</td>
+			</c:when>
+			<c:otherwise>
+				<td colspan="4" style="text-align: center;">
+		    		<img src="./image/${list.simage}" style="width:700px; display: block; margin: 0 auto;"><br>
+		    		<pre style="text-align: left;">${list.scontents}</pre>
+				</td>
+			</c:otherwise>
+		</c:choose>
 	</tr>
-
 <c:choose>
 <c:when test="${adminloginstate==true}">
 	<tr>	

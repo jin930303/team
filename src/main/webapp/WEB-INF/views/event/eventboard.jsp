@@ -107,7 +107,7 @@ text-align: center
         <c:forEach items="${list}" var="event" varStatus="status" end="6">
             <td>
                 <a href="eventdetail?evnum=${event.evnum}">
-                <img src="./image/${event.eimagem}" style="width: 300px; height: 300px;"></a>
+                <img src="./image/${event.eimagem}" style="width: 250px; height: 250px;"></a>
                 <div><a href="eventdetail?evnum=${event.evnum}">[${event.estate}] ${event.etitle}</div>
             </td>
             <c:if test="${status.index % 3 == 2}"> <!-- 3개마다 새로운 행을 추가 -->

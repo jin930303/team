@@ -8,11 +8,32 @@ th, td{
 text-align: center
 }
 </style>
+<script type="text/javascript">
+function toggleStateOptions() {
+    var fileonoff = document.querySelector('select[name="fileonoff"]').value;  // 선택된 select 값
+    var imagestateon = document.getElementById("imagestateon");
+    var imagestateoff = document.getElementById("imagestateoff");
+
+    if (fileonoff === 'fileo') {
+        imagestateon.style.display = '';  // 파일첨부 시 보이기
+        imagestateoff.style.display = 'none';  
+    } else {
+        imagestateon.style.display = 'none';  // 파일없음 선택 시 숨기기
+        imagestateoff.style.display = '';  
+        document.querySelector('input[name="cimage"]').value = "fileno";
+    }
+}
+
+window.onload = function() {
+    toggleStateOptions();  // 페이지 로드 시 초기 상태 설정
+};
+</script>
+
 <meta charset="UTF-8">
 <title>
 </title>
 </head>
-<body>
+<body onload="toggleStateOptions();">  <!-- 페이지 로드 시 상태 체크 -->
 <div class="container">
 <aside class="sidebar">
 	<h2>커뮤니티</h2>
@@ -65,7 +86,7 @@ text-align: center
 <div class="maindata">
 <form action="boardsave" method="post" enctype="multipart/form-data">
 <table border="1" align="center" width="800px">
-<caption><h3>글쓰기</h3></caption>
+<caption><h2>글쓰기</h2></caption>
 	<tr>
 		<th>태그</th>
 		<td style="text-align: left;">
@@ -93,10 +114,21 @@ text-align: center
 			<textarea rows="20" cols="100px" name="ccontents" required="required"></textarea>
 		</td>
 	</tr>
-		<tr>
-		<th>파일첨부</th>
+	<tr>
+		<th rowspan="2">파일첨부</th>
 		<td>
+			<select name="fileonoff" onchange="toggleStateOptions()">
+				<option value="fileo">파일첨부
+				<option value="filex">파일없음
+			</select>
+		</td>
+	</tr>
+	<tr>
+		<td id="imagestateon">
 			<input type="file" name="cimage">
+		</td>
+		<td id="imagestateoff" style="display: none;">
+			첨부된 파일없음
 		</td>
 	</tr>
 	<tr>

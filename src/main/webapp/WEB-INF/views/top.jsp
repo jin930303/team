@@ -5,12 +5,11 @@
 <html>
 <head>
 <style type="text/css">
-    pre {
-        word-wrap: break-word;
-        white-space: pre-wrap;
-        background-color: transparent;
-    }
-
+pre {
+	word-wrap: break-word;
+    white-space: pre-wrap;
+    background-color: transparent !important;
+}
 .container {
     display: flex !important;
     width: 80% !important;

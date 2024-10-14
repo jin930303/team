@@ -10,6 +10,7 @@ public interface BoardService {
 
 	//공지사항
 	void insertgongji(String id, String nickname, String gtitle, String gcontents, String gimagefn);
+	void insertgongjix(String id, String nickname, String gtitle, String gcontents);
 
 	public int total();
 	public ArrayList<GongjiDTO> page(PageDTO dto);
@@ -21,6 +22,7 @@ public interface BoardService {
 
 	GongjiDTO gongjiupdateview(int gnum);
 	void gongjiupdate(int gnum, String id, String nickname, String gtitle, String gcontents, String gimagefn);
+	void gongjiupdatex(int gnum, String id, String nickname, String gtitle, String gcontents);
 
 	public ArrayList<GongjiDTO> paget(PageDTO dto, String svalue);
 	public ArrayList<GongjiDTO> pagec(PageDTO dto, String svalue);
@@ -31,6 +33,7 @@ public interface BoardService {
 	public int totaln(String svalue);
 	
 	//자유게시판
+	void insertboardx(String nickname, String tag, String title, String ccontents);
 	void insertboard(String nickname, String tag, String title, String ccontents, String cimagefn);
 	
 	public int boardtotal();
@@ -58,6 +61,7 @@ public interface BoardService {
 
 	BoardDTO boardupdateview(int cnum);
 	void boardupdate(int cnum, String nickname, String tag, String title, String ccontents, String cimagefn);
+	void boardupdatex(int cnum, String nickname, String tag, String title, String ccontents);
 
 	//경기일정
 	void iljunginput(String gamedate, String gameresult);
@@ -65,6 +69,7 @@ public interface BoardService {
 
 	//야구소식	
 	void insertsosick(String id, String nickname, String stitle, String scontents, String simagefn, String stag);
+	void insertsosickx(String id, String nickname, String stitle, String scontents, String stag);
 
 	public int totals();
 	public ArrayList<SosickDTO> pages(PageDTO dto);
@@ -76,6 +81,7 @@ public interface BoardService {
 	SosickDTO sosickupdateview(int snum);
 
 	void sosickupdate(int snum, String id, String nickname, String stitle, String scontents, String simagefn, String stag);
+	void sosickupdatex(int snum, String id, String nickname, String stitle, String scontents, String stag);
 
 	public int totalst(String svalue);
 	public ArrayList<SosickDTO> pagest(PageDTO dto, String svalue);
@@ -113,6 +119,5 @@ public interface BoardService {
 
 	public int totalevse(String estate);
 	public ArrayList<EventDTO> pageevse(PageDTO dto, String estate);
-
 	
 }

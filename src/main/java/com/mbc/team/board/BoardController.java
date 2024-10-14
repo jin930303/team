@@ -37,15 +37,20 @@ public class BoardController {
 	
 	@RequestMapping(value = "/gongjisave", method = RequestMethod.POST)
 	public String gongjisave(MultipartHttpServletRequest mul) throws IllegalStateException, IOException {
+		BoardService bs=sqlsession.getMapper(BoardService.class);
 		String id=mul.getParameter("id");
 		String nickname=mul.getParameter("nickname");
 		String gtitle=mul.getParameter("gtitle");
 		String gcontents=mul.getParameter("gcontents");
 		MultipartFile mf=mul.getFile("gimage");
-		String gimagefn=mf.getOriginalFilename();
-		mf.transferTo(new File(savepath+"//"+gimagefn));
-		BoardService bs=sqlsession.getMapper(BoardService.class);
-		bs.insertgongji(id, nickname, gtitle, gcontents, gimagefn);
+	    if (mf == null || mf.isEmpty()) {
+			bs.insertgongjix(id, nickname, gtitle, gcontents);
+		}
+		else {
+			String gimagefn=mf.getOriginalFilename();
+			mf.transferTo(new File(savepath+"//"+gimagefn));
+			bs.insertgongji(id, nickname, gtitle, gcontents, gimagefn);
+		}
 		return "redirect:/gongjiboard";
 	}
 	
@@ -105,21 +110,26 @@ public class BoardController {
 	
 	@RequestMapping(value = "/gongjiupdate", method = RequestMethod.POST)
 	public String gongjiupdate(HttpServletResponse response, MultipartHttpServletRequest mul) throws IOException {
+		BoardService bs=sqlsession.getMapper(BoardService.class);
 		int gnum=Integer.parseInt(mul.getParameter("gnum"));
 		String id=mul.getParameter("id");
 		String nickname=mul.getParameter("nickname");
 		String gtitle=mul.getParameter("gtitle");
 		String gcontents=mul.getParameter("gcontents");
 		MultipartFile mf=mul.getFile("gimage");
-		String gimagefn=mf.getOriginalFilename();
-		mf.transferTo(new File(savepath+"//"+gimagefn));
-		BoardService bs=sqlsession.getMapper(BoardService.class);
+	    if (mf == null || mf.isEmpty()) {
+	    	bs.gongjiupdatex(gnum, id, nickname, gtitle, gcontents);
+		}
+		else {
+			String gimagefn=mf.getOriginalFilename();
+			mf.transferTo(new File(savepath+"//"+gimagefn));
+			bs.gongjiupdate(gnum, id, nickname, gtitle, gcontents, gimagefn);
+		}
 		response.setContentType("text/html;charset=utf-8");
 		PrintWriter prw=response.getWriter();
 		prw.print("<script> alert('수정이 완료되었습니다.');</script>");
 		prw.print("<script> location.href='gongjiboard';</script>");
 		prw.close();
-		bs.gongjiupdate(gnum, id, nickname, gtitle, gcontents, gimagefn);
 		return "redirect:/gongjidetail?gnum=" + gnum;
 	}
 	
@@ -201,15 +211,20 @@ public class BoardController {
 	
 	@RequestMapping(value = "/boardsave", method = RequestMethod.POST)
 	public String boardsave(MultipartHttpServletRequest mul) throws IllegalStateException, IOException {
+		BoardService bs=sqlsession.getMapper(BoardService.class);
 		String tag=mul.getParameter("tag");
 		String nickname=mul.getParameter("nickname");
 		String title=mul.getParameter("title");
 		String ccontents=mul.getParameter("ccontents");
 		MultipartFile mf=mul.getFile("cimage");
-		String cimagefn=mf.getOriginalFilename();
-		mf.transferTo(new File(savepath+"//"+cimagefn));
-		BoardService bs=sqlsession.getMapper(BoardService.class);
-		bs.insertboard(nickname, tag, title, ccontents, cimagefn);
+	    if (mf == null || mf.isEmpty()) {
+			bs.insertboardx(nickname, tag, title, ccontents);
+		}
+		else {
+			String cimagefn=mf.getOriginalFilename();
+			mf.transferTo(new File(savepath+"//"+cimagefn));
+			bs.insertboard(nickname, tag, title, ccontents, cimagefn);
+		}
 		return "redirect:/board";
 	}
 	
@@ -332,16 +347,21 @@ public class BoardController {
 	
 	@RequestMapping(value = "/boardupdate", method = RequestMethod.POST)
 	public String boardupdate(HttpServletResponse response, MultipartHttpServletRequest mul) throws IOException {
+		BoardService bs=sqlsession.getMapper(BoardService.class);
 		int cnum=Integer.parseInt(mul.getParameter("cnum"));
 		String tag=mul.getParameter("tag");
 		String nickname=mul.getParameter("nickname");
 		String title=mul.getParameter("title");
 		String ccontents=mul.getParameter("ccontents");
 		MultipartFile mf=mul.getFile("cimage");
-		String cimagefn=mf.getOriginalFilename();
-		mf.transferTo(new File(savepath+"//"+cimagefn));
-		BoardService bs=sqlsession.getMapper(BoardService.class);
-		bs.boardupdate(cnum, nickname, tag, title, ccontents, cimagefn);
+	    if (mf == null || mf.isEmpty()) {
+			bs.boardupdatex(cnum, nickname, tag, title, ccontents);
+		}
+		else {
+			String cimagefn=mf.getOriginalFilename();
+			mf.transferTo(new File(savepath+"//"+cimagefn));
+			bs.boardupdate(cnum, nickname, tag, title, ccontents, cimagefn);
+		}
 		response.setContentType("text/html;charset=utf-8");
 		PrintWriter prw=response.getWriter();
 		prw.print("<script> alert('수정이 완료되었습니다.');</script>");
@@ -453,16 +473,21 @@ public class BoardController {
 	
 	@RequestMapping(value = "/sosicksave", method = RequestMethod.POST)
 	public String sosicksave(MultipartHttpServletRequest mul) throws IllegalStateException, IOException {
+		BoardService bs=sqlsession.getMapper(BoardService.class);
 		String id=mul.getParameter("id");
 		String nickname=mul.getParameter("nickname");
 		String stag=mul.getParameter("stag");
 		String stitle=mul.getParameter("stitle");
 		String scontents=mul.getParameter("scontents");
 		MultipartFile mf=mul.getFile("simage");
-		String simagefn=mf.getOriginalFilename();
-		mf.transferTo(new File(savepath+"//"+simagefn));
-		BoardService bs=sqlsession.getMapper(BoardService.class);
-		bs.insertsosick(id, nickname, stitle, scontents, simagefn, stag);
+	    if (mf == null || mf.isEmpty()) {
+			bs.insertsosickx(id, nickname, stitle, scontents, stag);
+		}
+		else {
+			String simagefn=mf.getOriginalFilename();
+			mf.transferTo(new File(savepath+"//"+simagefn));
+			bs.insertsosick(id, nickname, stitle, scontents, simagefn, stag);
+		}
 		return "redirect:/sosickboard";
 	}
 	
@@ -523,21 +548,27 @@ public class BoardController {
 	@RequestMapping(value = "/sosickupdate", method = RequestMethod.POST)
 	public String sosickupdate(HttpServletResponse response, MultipartHttpServletRequest mul) throws IOException {
 		int snum=Integer.parseInt(mul.getParameter("snum"));
+		BoardService bs=sqlsession.getMapper(BoardService.class);
 		String id=mul.getParameter("id");
 		String nickname=mul.getParameter("nickname");
+		String stag=mul.getParameter("stag");
 		String stitle=mul.getParameter("stitle");
 		String scontents=mul.getParameter("scontents");
-		String stag=mul.getParameter("stag");
-		MultipartFile mf=mul.getFile("simage");
-		String simagefn=mf.getOriginalFilename();
-		mf.transferTo(new File(savepath+"//"+simagefn));
-		BoardService bs=sqlsession.getMapper(BoardService.class);
+		MultipartFile mf=mul.getFile("gimage");
+	    if (mf == null || mf.isEmpty()) {
+			bs.sosickupdatex(snum, id, nickname, stitle, scontents, stag);
+		}
+		else {
+			String simagefn=mf.getOriginalFilename();
+			mf.transferTo(new File(savepath+"//"+simagefn));
+			bs.sosickupdate(snum, id, nickname, stitle, scontents, simagefn, stag);
+		}
+
 		response.setContentType("text/html;charset=utf-8");
 		PrintWriter prw=response.getWriter();
 		prw.print("<script> alert('수정이 완료되었습니다.');</script>");
 		prw.print("<script> location.href='sosickboard';</script>");
 		prw.close();
-		bs.sosickupdate(snum, id, nickname, stitle, scontents, simagefn, stag);
 		return "redirect:/sosickdetail?snum=" + snum;
 	}
 	

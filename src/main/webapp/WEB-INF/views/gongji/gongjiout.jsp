@@ -65,7 +65,7 @@ text-align: center;
 </aside>
 <div class="maindata">
 <table border="1" width="800px" align="center">
-<caption><h3>공지사항</h3></caption>
+<caption><h2>공지사항</h2></caption>
 	<tr>
 		<th>제목</th><td colspan="3">${list.gtitle}</td>
 	</tr>	
@@ -77,12 +77,13 @@ text-align: center;
 	</tr>	
 	<tr>	
 		<c:choose>
-			<c:when test="${list.gimage ne null}">
-				<td colspan="4" style="text-align: left;"><pre>${list.gcontents}</pre><br>
-				<img src="./image/${list.gimage}"></td>
+			<c:when test="${list.gimage==null}">
+				<td colspan="4" style="text-align: left;"><pre>${list.gcontents}</pre></td>
 			</c:when>
 			<c:otherwise>
-				<td colspan="4" style="text-align: left;"><pre>${list.gcontents}</pre></td>
+				<td colspan="4" style="text-align: center;">
+				<pre style="text-align: left;">${list.gcontents}</pre><br>
+				<img src="./image/${list.gimage}" style="width:700px; display: block; margin: 0 auto;"></td>
 			</c:otherwise>
 		</c:choose>
 	</tr>

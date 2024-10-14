@@ -9,6 +9,10 @@
 		insert into gongji values(#{param1}, #{param2}, gnum_seq.nextval, #{param3}, #{param4}, sysdate, 0, #{param5})
 	</insert>
 	
+	<insert id="insertgongjix">
+		insert into gongji values(#{param1}, #{param2}, gnum_seq.nextval, #{param3}, #{param4}, sysdate, 0, (null))
+	</insert>
+	
 	<select id="gongjiout" resultType="com.mbc.team.board.GongjiDTO">
 		select id, nickname, gnum, gtitle, gcontents, gdate, gcnt, gimage from gongji
 	</select>
@@ -43,6 +47,10 @@
 	<update id="gongjiupdate">
 		update gongji set gtitle=#{param4}, gcontents=#{param5}, gimage=#{param6} where gnum=#{param1}
 	</update>
+	
+	<update id="gongjiupdatex">
+		update gongji set gtitle=#{param4}, gcontents=#{param5}, gimage=(null) where gnum=#{param1}
+	</update>	
 
 	<select id="paget" resultType="com.mbc.team.board.GongjiDTO">
 	   select * from (
@@ -81,6 +89,10 @@
 <!-- 자유게시판 -->	
 	<insert id="insertboard">
 		insert into community(cnum, tab, title, ccontents, cgroup, nickname, cimage) values(cnum_seq.nextval, #{param2}, #{param3}, #{param4}, cnum_seq.nextval, #{param1}, #{param5})
+	</insert>
+	
+	<insert id="insertboardx">
+		insert into community(cnum, tab, title, ccontents, cgroup, nickname) values(cnum_seq.nextval, #{param2}, #{param3}, #{param4}, cnum_seq.nextval, #{param1})
 	</insert>
 	
 	<select id="boardtotal" resultType="int">
@@ -167,6 +179,9 @@
 		update community set tab=#{param3}, title=#{param4}, ccontents=#{param5}, cimage=#{param6} where cnum=#{param1} and nickname=#{param2} 
 	</update>
 	
+	<update id="boardupdatex">
+		update community set tab=#{param3}, title=#{param4}, ccontents=#{param5}, cimage=(null) where cnum=#{param1} and nickname=#{param2} 
+	</update>
 
 <!-- 경기일정 -->
 	<insert id="iljunginput">
@@ -181,6 +196,10 @@
 <!-- 야구소식 -->
 	<insert id="insertsosick">
 		insert into sosick values(#{param1}, #{param2}, snum_seq.nextval, #{param3}, #{param4}, sysdate, 0, #{param5}, #{param6})
+	</insert>
+	
+	<insert id="insertsosickx">
+		insert into sosick values(#{param1}, #{param2}, snum_seq.nextval, #{param3}, #{param4}, sysdate, 0, (null), #{param5})
 	</insert>
 	
 	<select id="totals" resultType="int">
@@ -212,6 +231,10 @@
 	
 	<update id="sosickupdate">
 		update sosick set stitle=#{param4}, scontents=#{param5}, simage=#{param6}, stag=#{param7} where snum=#{param1}
+	</update>
+	
+	<update id="sosickupdatex">
+		update sosick set stitle=#{param4}, scontents=#{param5}, simage=(null), stag=#{param6} where snum=#{param1}
 	</update>
 
 	<select id="pagest" resultType="com.mbc.team.board.SosickDTO">

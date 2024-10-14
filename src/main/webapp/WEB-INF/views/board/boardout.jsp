@@ -64,16 +64,28 @@ text-align: center;
 	</div>
 </aside>
 <div class="maindata">
-<table border="1" width="650px" align="center">
+<table border="1" width="800px" align="center">
+<caption><h2>자유게시판</h2></caption>
 	<tr>
 		<th colspan="5" style="text-align: left;">[${list.tab}] ${list.title}</th><th colspan="3">${list.nickname}</th>
 	</tr>	
 	<tr>	
 		<td>글번호</td><td>${list.cnum}</td><td>작성일</td><td>${list.cdate}</td><td>추천</td><th>${list.clike}</th><td>조회</td><td>${list.ccnt}</td>
 	</tr>
-	<tr>	
-		<td colspan="8" style="text-align: left;"><img src="./image/${list.cimage}" width="50%" height="50%"><br><pre>${list.ccontents}</pre>
-		</td>
+	<tr>
+		<c:choose>
+			<c:when test="${list.cimage==null}">
+				<td colspan="8">
+					<pre style="text-align: left;">${list.ccontents}</pre>
+				</td>
+			</c:when>
+			<c:otherwise>
+				<td colspan="8" style="text-align: center;">
+					<img src="./image/${list.cimage}" style="width:700px; display: block; margin: 0 auto;">
+					<pre style="text-align: left;">${list.ccontents}</pre>
+				</td>
+			</c:otherwise>
+		</c:choose>
 	</tr>
 	<tr>	
 		<td colspan="8">

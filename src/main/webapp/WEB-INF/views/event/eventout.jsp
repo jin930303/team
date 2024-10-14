@@ -64,8 +64,8 @@ text-align: center;
 	</div>
 </aside>
 <div class="maindata">
-<table border="1" width="1000px" align="center">
-<caption><h3>이벤트</h3></caption>
+<table border="1" width="800px" align="center">
+<caption><h2>Event</h2></caption>
 	<tr>
 		<th>제목</th><td colspan="3">[${list.estate}] ${list.etitle}</td>
 	</tr>	
@@ -76,12 +76,12 @@ text-align: center;
 	    <c:choose>
 	        <c:when test="${list.econtents=='default'}">
 	            <td colspan="4" style="text-align: center;">
-	                <img src="./image/${list.eimaged}" style="display: block; margin: auto;">
+	                <img src="./image/${list.eimaged}" style="width:750px;">
 	            </td>
 	        </c:when>
 	        <c:otherwise>
 	            <td colspan="4" style="text-align: center;">
-	                <img src="./image/${list.eimaged}" style="display: block; margin: auto;">
+	                <img src="./image/${list.eimaged}" style="width:750px;">
 	                <br>
 	                <pre>${list.econtents}</pre>
 	            </td>

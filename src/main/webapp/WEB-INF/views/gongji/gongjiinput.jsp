@@ -8,6 +8,25 @@ th, td{
 text-align: center
 }
 </style>
+<script type="text/javascript">
+function toggleStateOptions() {
+    var fileonoff = document.querySelector('select[name="fileonoff"]').value;  // 선택된 select 값
+    var imagestateon = document.getElementById("imagestateon");
+    var imagestateoff = document.getElementById("imagestateoff");
+
+    if (fileonoff === 'fileo') {
+        imagestateon.style.display = '';  // 파일첨부 시 보이기
+        imagestateoff.style.display = 'none';  
+    } else if (fileonoff === 'filex') {
+        imagestateon.style.display = 'none';  // 파일없음 선택 시 숨기기
+        imagestateoff.style.display = '';  
+    }
+}
+
+window.onload = function() {
+    toggleStateOptions();  // 페이지 로드 시 초기 상태 설정
+};
+</script>
 <meta charset="UTF-8">
 <title>
 </title>
@@ -81,9 +100,20 @@ text-align: center
 		</td>
 	</tr>
 	<tr>
-		<th>파일첨부</th>
+		<th rowspan="2">파일첨부</th>
 		<td>
-			<input type="file" name="gimage" required="required">
+			<select name="fileonoff" onchange="toggleStateOptions()">
+				<option value="fileo">파일첨부
+				<option value="filex">파일없음
+			</select>
+		</td>
+	</tr>
+	<tr>
+		<td id="imagestateon">
+			<input type="file" name="gimage">
+		</td>
+		<td id="imagestateoff">
+			첨부된 파일없음
 		</td>
 	</tr>
 	<tr>

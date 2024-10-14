@@ -67,7 +67,7 @@ text-align: center
 <table border="1" width="800px" align="center">
 <caption><h2>야구소식</h2></caption>
 	<tr>
-		<th>번호</th><th style="border: 800px;">제목</th><th>작성자</th><th>작성일</th><th>조회</th>
+		<th>번호</th><th style="border: 500px;">제목</th><th>작성자</th><th>작성일</th><th>조회</th>
 	</tr>
 <c:forEach items="${list}" var="sosick">
 	<tr>

@@ -14,6 +14,15 @@
     width: 100%;
     margin: auto;
   }
+  .main-container{
+    display: flex !important;
+    justify-content: center; /* 가로 중앙 정렬 */
+    align-items: center;     /* 세로 중앙 정렬 (필요할 경우) */
+    width: 100%;
+    height: 100%;            /* 부모 요소에 맞추기 위해 높이 설정 */
+    margin: 0 auto !important; /* 상하 여백을 없애고 가로 중앙에 배치 */
+
+  }
   </style>
 <meta charset="UTF-8">
 <title>Insert title here</title>
@@ -67,7 +76,7 @@
             <td>
                 <a href="productdetail?itemnum=${pro.itemnum}">
                 <img src="./image/${pro.image1}" style="width: 300px; height: 300px;"></a>
-                <div><a href="productdetail?itemnum=${pro.itemnum}">${pro.product}</div>
+                <div><a href="productdetail?itemnum=${pro.itemnum}">${pro.product}</a></div>
                 <div>${pro.price}원</div>
             </td>
             <c:if test="${status.index % 4 == 3}"> <!-- 4개마다 새로운 행을 추가 -->
@@ -89,7 +98,7 @@
             <td>
                 <a href="productdetail?itemnum=${pro1.itemnum}">
                 <img src="./image/${pro1.image1}" style="width: 300px; height: 300px;"></a>
-                <div><a href="productdetail?itemnum=${pro1.itemnum}">${pro1.product}</div>
+                <div><a href="productdetail?itemnum=${pro1.itemnum}">${pro1.product}</a></div>
                 <div>${pro1.price}원</div>
             </td>
             <c:if test="${status.index % 4 == 3}"> <!-- 4개마다 새로운 행을 추가 -->
