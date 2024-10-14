@@ -8,6 +8,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		faq(cnum,tab,title,fcontents,nickname,fimage1,fimage2,fimage3,groups)
 		values(faq_seq.nextval,#{param1},#{param2},#{param3},#{param4},#{param5},#{param6},#{param7},faq_seq.currval)
 	</insert>
+	<select id="save_detail" resultType="int">
+	    select max(cnum) from faq
+	</select>
 
 	<!-- FAQ 출력(관리자) -->
 	<select id="faqboard" resultType="com.mbc.team.FAQ.FAQadminDTO">
@@ -29,7 +32,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		        select cnum, tab, title, nickname, to_char(fdate,'yyyy-MM-dd') fdate, faqcnt
 		        from faq
 		        where tab = 'FAQ' and indent = 0 and step = 0
-		        order by cnum desc
+		        order by cnum asc
 		    ) A
 		)
 		where rn between #{start} and #{end}
@@ -56,6 +59,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		where cnum=#{param1}
 	</update>
 
+	<select id="update_detail" resultType="int">
+	    select cnum from faq
+	</select>
+	
 	<!-- FAQ 삭제(완료) -->
 	<delete id="faq_admin_delete">
 		delete from faq where cnum=#{param1}
