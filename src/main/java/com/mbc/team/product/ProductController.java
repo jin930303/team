@@ -373,4 +373,226 @@ public class ProductController {
 		mo.addAttribute("list", list);
 		return "productout";
 	}
+	
+	// 카테고리 별로 출력 장갑
+	@RequestMapping(value = "batting-gloves", method = RequestMethod.GET)
+	public String lte39(HttpServletRequest request, Model mo) {
+		String scg_code = "glove001";
+		ProductService ps = sqlSession.getMapper(ProductService.class);
+		ArrayList<ProductDTO> list = ps.arbat(scg_code);
+		mo.addAttribute("list", list);
+		return "productout";
+	}
+	
+	@RequestMapping(value = "fielding-gloves", method = RequestMethod.GET)
+	public String lte40(HttpServletRequest request, Model mo) {
+		String scg_code = "glove002";
+		ProductService ps = sqlSession.getMapper(ProductService.class);
+		ArrayList<ProductDTO> list = ps.arbat(scg_code);
+		mo.addAttribute("list", list);
+		return "productout";
+	}
+	@RequestMapping(value = "base-running-gloves", method = RequestMethod.GET)
+	public String lte41(HttpServletRequest request, Model mo) {
+		String scg_code = "glove003";
+		ProductService ps = sqlSession.getMapper(ProductService.class);
+		ArrayList<ProductDTO> list = ps.arbat(scg_code);
+		mo.addAttribute("list", list);
+		return "productout";
+	}
+	
+	@RequestMapping(value = "thermal-gloves", method = RequestMethod.GET)
+	public String lte42(HttpServletRequest request, Model mo) {
+		String scg_code = "glove004";
+		ProductService ps = sqlSession.getMapper(ProductService.class);
+		ArrayList<ProductDTO> list = ps.arbat(scg_code);
+		mo.addAttribute("list", list);
+		return "productout";
+	}
+	
+	@RequestMapping(value = "youth-gloves", method = RequestMethod.GET)
+	public String lte43(HttpServletRequest request, Model mo) {
+		String scg_code = "glove005";
+		ProductService ps = sqlSession.getMapper(ProductService.class);
+		ArrayList<ProductDTO> list = ps.arbat(scg_code);
+		mo.addAttribute("list", list);
+		return "productout";
+	}
+	
+	// 카테고리 별로 출력 야구화
+		@RequestMapping(value = "integrated-spikes", method = RequestMethod.GET)
+		public String lte44(HttpServletRequest request, Model mo) {
+			String scg_code = "shoes001";
+			ProductService ps = sqlSession.getMapper(ProductService.class);
+			ArrayList<ProductDTO> list = ps.arbat(scg_code);
+			mo.addAttribute("list", list);
+			return "productout";
+		}
+		
+		@RequestMapping(value = "turf-shoes", method = RequestMethod.GET)
+		public String lte45(HttpServletRequest request, Model mo) {
+			String scg_code = "shoes003";
+			ProductService ps = sqlSession.getMapper(ProductService.class);
+			ArrayList<ProductDTO> list = ps.arbat(scg_code);
+			mo.addAttribute("list", list);
+			return "productout";
+		}
+		
+		@RequestMapping(value = "point-shoes", method = RequestMethod.GET)
+		public String lte46(HttpServletRequest request, Model mo) {
+			String scg_code = "shoes004";
+			ProductService ps = sqlSession.getMapper(ProductService.class);
+			ArrayList<ProductDTO> list = ps.arbat(scg_code);
+			mo.addAttribute("list", list);
+			return "productout";
+		}
+		
+		@RequestMapping(value = "shoe-accessories", method = RequestMethod.GET)
+		public String lte47(HttpServletRequest request, Model mo) {
+			String scg_code = "shoes006";
+			ProductService ps = sqlSession.getMapper(ProductService.class);
+			ArrayList<ProductDTO> list = ps.arbat(scg_code);
+			mo.addAttribute("list", list);
+			return "productout";
+		}
+		
+		
+		// 카테고리 별로 출력 의류
+		@RequestMapping(value = "t-shirts", method = RequestMethod.GET)
+		public String lte48(HttpServletRequest request, Model mo) {
+			String scg_code = "clothes001";
+			ProductService ps = sqlSession.getMapper(ProductService.class);
+			ArrayList<ProductDTO> list = ps.arbat(scg_code);
+			mo.addAttribute("list", list);
+			return "productout";
+		}
+		
+		@RequestMapping(value = "undershirts", method = RequestMethod.GET)
+		public String lte49(HttpServletRequest request, Model mo) {
+			String scg_code = "clothes002";
+			ProductService ps = sqlSession.getMapper(ProductService.class);
+			ArrayList<ProductDTO> list = ps.arbat(scg_code);
+			mo.addAttribute("list", list);
+			return "productout";
+		}
+		
+		@RequestMapping(value = "sliding-pants", method = RequestMethod.GET)
+		public String lte50(HttpServletRequest request, Model mo) {
+			String scg_code = "clothes003";
+			ProductService ps = sqlSession.getMapper(ProductService.class);
+			ArrayList<ProductDTO> list = ps.arbat(scg_code);
+			mo.addAttribute("list", list);
+			return "productout";
+		}
+		
+		@RequestMapping(value = "long-short-pants", method = RequestMethod.GET)
+		public String lte51(HttpServletRequest request, Model mo) {
+			String scg_code = "clothes004";
+			ProductService ps = sqlSession.getMapper(ProductService.class);
+			ArrayList<ProductDTO> list = ps.arbat(scg_code);
+			mo.addAttribute("list", list);
+			return "productout";
+		}
+		
+		@RequestMapping(value = "icing-wear", method = RequestMethod.GET)
+		public String lte52(HttpServletRequest request, Model mo) {
+			String scg_code = "clothes005";
+			ProductService ps = sqlSession.getMapper(ProductService.class);
+			ArrayList<ProductDTO> list = ps.arbat(scg_code);
+			mo.addAttribute("list", list);
+			return "productout";
+		}
+		
+		@RequestMapping(value = "windbreakers", method = RequestMethod.GET)
+		public String lte53(HttpServletRequest request, Model mo) {
+			String scg_code = "clothes006";
+			ProductService ps = sqlSession.getMapper(ProductService.class);
+			ArrayList<ProductDTO> list = ps.arbat(scg_code);
+			mo.addAttribute("list", list);
+			return "productout";
+		}
+		
+		@RequestMapping(value = "jackets", method = RequestMethod.GET)
+		public String lte54(HttpServletRequest request, Model mo) {
+			String scg_code = "clothes007";
+			ProductService ps = sqlSession.getMapper(ProductService.class);
+			ArrayList<ProductDTO> list = ps.arbat(scg_code);
+			mo.addAttribute("list", list);
+			return "productout";
+		}
+		
+		@RequestMapping(value = "training-wear", method = RequestMethod.GET)
+		public String lte55(HttpServletRequest request, Model mo) {
+			String scg_code = "clothes008";
+			ProductService ps = sqlSession.getMapper(ProductService.class);
+			ArrayList<ProductDTO> list = ps.arbat(scg_code);
+			mo.addAttribute("list", list);
+			return "productout";
+		}
+		
+		@RequestMapping(value = "hoodies", method = RequestMethod.GET)
+		public String lte56(HttpServletRequest request, Model mo) {
+			String scg_code = "clothes009";
+			ProductService ps = sqlSession.getMapper(ProductService.class);
+			ArrayList<ProductDTO> list = ps.arbat(scg_code);
+			mo.addAttribute("list", list);
+			return "productout";
+		}
+		
+		@RequestMapping(value = "hats-belts-socks", method = RequestMethod.GET)
+		public String lte57(HttpServletRequest request, Model mo) {
+			String scg_code = "clothes010";
+			ProductService ps = sqlSession.getMapper(ProductService.class);
+			ArrayList<ProductDTO> list = ps.arbat(scg_code);
+			mo.addAttribute("list", list);
+			return "productout";
+		}
+		
+		
+		// 카테고리 별로 출력 기타용품
+		@RequestMapping(value = "sunglasses", method = RequestMethod.GET)
+		public String lte58(HttpServletRequest request, Model mo) {
+			String scg_code = "etc001";
+			ProductService ps = sqlSession.getMapper(ProductService.class);
+			ArrayList<ProductDTO> list = ps.arbat(scg_code);
+			mo.addAttribute("list", list);
+			return "productout";
+		}
+		
+		@RequestMapping(value = "accessories", method = RequestMethod.GET)
+		public String lte59(HttpServletRequest request, Model mo) {
+			String scg_code = "etc002";
+			ProductService ps = sqlSession.getMapper(ProductService.class);
+			ArrayList<ProductDTO> list = ps.arbat(scg_code);
+			mo.addAttribute("list", list);
+			return "productout";
+		}
+		
+		@RequestMapping(value = "wristbands", method = RequestMethod.GET)
+		public String lte60(HttpServletRequest request, Model mo) {
+			String scg_code = "etc003";
+			ProductService ps = sqlSession.getMapper(ProductService.class);
+			ArrayList<ProductDTO> list = ps.arbat(scg_code);
+			mo.addAttribute("list", list);
+			return "productout";
+		}
+		
+		@RequestMapping(value = "rosin-bags", method = RequestMethod.GET)
+		public String lte61(HttpServletRequest request, Model mo) {
+			String scg_code = "etc004";
+			ProductService ps = sqlSession.getMapper(ProductService.class);
+			ArrayList<ProductDTO> list = ps.arbat(scg_code);
+			mo.addAttribute("list", list);
+			return "productout";
+		}
+		
+		@RequestMapping(value = "bases", method = RequestMethod.GET)
+		public String lte62(HttpServletRequest request, Model mo) {
+			String scg_code = "etc007";
+			ProductService ps = sqlSession.getMapper(ProductService.class);
+			ArrayList<ProductDTO> list = ps.arbat(scg_code);
+			mo.addAttribute("list", list);
+			return "productout";
+		}		
+
 }

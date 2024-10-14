@@ -1,38 +1,76 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %> 
 
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>Product Grid</title>
+<style>
+    /* General styling for grid layout */
+    .product-container {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); /* 상품 카드 크기 증가 */
+        gap: 30px; /* 상품 간격 더 넓힘 */
+        max-width: 1200px; /* 그리드 전체 폭 더 넓힘 */
+        margin: 0 auto;
+    }
+
+    .product {
+        border: 1px solid #ddd;
+        padding: 30px; /* 상품 카드 패딩 증가 */
+        text-align: center;
+    }
+
+    /* Increased image size */
+    .product img {
+        width: 200px; /* 이미지 크기 더 크게 설정 */
+        height: 200px;
+        object-fit: cover;
+    }
+
+    .product a {
+        text-decoration: none;
+        color: inherit;
+    }
+
+    /* Increased font size for the product title */
+    .product-title {
+        font-weight: bold;
+        font-size: 24px; /* 상품명 폰트 크기 증가 */
+        margin: 15px 0;
+    }
+
+    /* Increased font size for the product price */
+    .product-price {
+        color: #d32f2f;
+        font-size: 20px; /* 가격 폰트 크기 증가 */
+        margin: 10px 0;
+    }
+</style>
 </head>
 
 <body>
-<table border="1" width="900px" height="200px" align="center">
-<caption>상품정보출력</caption>
 
-<tr>
-<th>상품번호</th><th>메인이미지</th><th>카테고리1</th><th>카테고리2</th>
-<th>상품명</th><th>가격</th><th>상세이미지</th>
+<div style="margin: 20px;"> 
+    <select id="sortSelect" onchange="sortProducts()">
+        <option value="default">-정렬방식-</option>
+        <option value="priceAsc">가격 낮은 순</option>
+        <option value="priceDesc">가격 높은 순</option>
+    </select>
+</div>
 
-</tr>
-<c:forEach items="${list}" var="aa">
-<tr>
-  <td>${aa.itemnum}</td>
-  <td>
-    <a href="productdetail?itemnum=${aa.itemnum}">
-        <img src="./image/${aa.image1}" width="50" height="50" alt="Product Image">
-    </a>
-</td>
-  <td>${aa.cg_code}</td>
-  <td>${aa.scg_code}</td>
-  <td>${aa.product}</td>
-  <td>${aa.price}</td>
-  <td><img src="./image/${aa.dimage}" width="50px" height="50px"></td>
-</tr>
-</c:forEach>
-</table >
+<div class="product-container">
+    <c:forEach items="${list}" var="aa">
+        <div class="product">
+            <a href="productdetail?itemnum=${aa.itemnum}">
+                <img src="./image/${aa.image1}" alt="Product Image">
+            </a>
+            <div class="product-title">${aa.product}</div>
+            <div class="product-price">${aa.price}원</div>
+        </div>
+    </c:forEach>
+</div>
+
 </body>
 </html>
