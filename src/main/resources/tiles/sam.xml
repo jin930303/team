@@ -76,10 +76,6 @@
       <put-attribute name="body" value="/WEB-INF/views/login/updatepw.jsp"/>
    </definition> 
    
-    <definition name="cart" extends="baseLayout">
-      <put-attribute name="title" value="메인화면"/>
-      <put-attribute name="body" value="/WEB-INF/views/login/cart.jsp"/>
-   </definition> 
    
     <definition name="navercallback" extends="baseLayout">
       <put-attribute name="title" value="메인화면"/>

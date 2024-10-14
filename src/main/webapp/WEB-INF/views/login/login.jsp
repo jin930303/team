@@ -13,63 +13,66 @@
     <meta charset="UTF-8">
     <title>Insert title here</title>
     <script type="text/javascript">
-        $(document).ready(function() {
-            $('#togglePassword').click(function() {
-                const passwordInput = $('#pw');
-                const type = passwordInput.attr('type') === 'password' ? 'text' : 'password'; // 'password'와 'text' 사이에서 토글
-                passwordInput.attr('type', type);
-                
-                // 아이콘 전환 로직
-                if (type === 'text') {
-                    $(this).html('<i class="fas fa-eye-slash"></i>'); // 비밀번호 보이기 상태
-                } else {
-                    $(this).html('<i class="fas fa-eye"></i>'); // 비밀번호 숨기기 상태
-                }
-            });
+    $(document).ready(function() {
+        $('#togglePassword').click(function() {
+            const passwordInput = $('#pw');
+            const type = passwordInput.attr('type') === 'password' ? 'text' : 'password'; // 'password'와 'text' 사이에서 토글
+            passwordInput.attr('type', type);
+            
+            // 아이콘 전환 로직
+            if (type === 'text') {
+                $(this).html('<i class="fas fa-eye-slash"></i>'); // 비밀번호 보이기 상태
+            } else {
+                $(this).html('<i class="fas fa-eye"></i>'); // 비밀번호 숨기기 상태
+            }
+        });
 
-            // SDK를 초기화합니다.
-            window.Kakao.init('969b228828d14995f1545967c5c77212');
-            console.log(Kakao.isInitialized());
+        // SDK를 초기화합니다.
+        window.Kakao.init('969b228828d14995f1545967c5c77212');
+        console.log(Kakao.isInitialized());
 
-            $('#kakao-login-btn').click(function() {
-                KakaoLogin();
-            });
+        $('#kakao-login-btn').click(function() {
+            console.log('카카오 로그인 버튼 클릭');
+            KakaoLogin();
+        });
+    });
 
-		
-        // 카카오 로그인
-        function KakaoLogin() {
-            window.Kakao.Auth.login({
-                scope: 'profile_nickname',
-                success: function(authObj) {
-                    console.log(authObj);
-                    window.Kakao.API.request({
-                        url: '/v2/user/me',
-                        success: res => {
-                            const name = res.properties.nickname; 
-                            console.log(name);
-                            $('#kakaoname').val(name); 
+    // 카카오 로그인 함수
+    function KakaoLogin() {
+        window.Kakao.Auth.login({
+            scope: 'profile_nickname',
+            success: function(authObj) {
+                console.log(authObj);
+                window.Kakao.API.request({
+                    url: '/v2/user/me',
+                    success: function(res) {
+                        const name = res.properties.nickname; 
+                        console.log(name);
+                        $('#kakaoname').val(name);
 
-                            $.ajax({
-                                type: "POST",
-                                url: "kakaoLoginCheck", 
-                                data: { kakaoname: name }, 
-                                success: function(response) {
-                                    if (response.redirect) {
-                                        window.location.href = response.redirect; 
-                                    } else if (response.error) {
-                                        alert(response.error); 
-                                    }
-                                },
-                                error: function(jqXHR, textStatus, errorThrown) {
-                                    console.error("Error during AJAX request:", textStatus, errorThrown);
+                        $.ajax({
+                            type: "POST",
+                            url: "kakaoLoginCheck",
+                            data: { kakaoname: name },
+                            success: function(response) {
+                                if (response.redirect) {
+                                    window.location.href = response.redirect;
+                                } else if (response.error) {
+                                    alert(response.error);
                                 }
-                            });
-                            document.login.frm.submit();
-                        }
-                    });
-                }
-            });
-        }
+                            },
+                            error: function(jqXHR, textStatus, errorThrown) {
+                                console.error("Error during AJAX request:", textStatus, errorThrown);
+                            }
+                        });
+                    }
+                });
+            },
+            fail: function(err) {
+                console.error(err);
+            }
+        });
+    }
     </script>
     <style>
         /* 스타일 추가 */
@@ -120,7 +123,7 @@
         </a>
          <%
     String clientId = "PtxqAuJgt0ECukbGfDgR";//애플리케이션 클라이언트 아이디값";
-    String redirectURI = URLEncoder.encode("http://localhost:8091/team/login/navercallback", "UTF-8");
+    String redirectURI = URLEncoder.encode("http://localhost:8091/team", "UTF-8");
     SecureRandom random = new SecureRandom();
     String state = new BigInteger(130, random).toString();
     String apiURL = "https://nid.naver.com/oauth2.0/authorize?response_type=code"

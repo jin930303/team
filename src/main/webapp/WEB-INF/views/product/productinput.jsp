@@ -122,17 +122,15 @@ function updateScgCode() {
             <!-- 야구화 옵션 -->
             <option value="shoes001">징 일체형</option>
             <option value="shoes003">인조잔디화</option>
-            <option value="shoes004">유소년용 야구화</option>
-            <option value="shoes005">런닝/트레이닝화</option>
+            <option value="shoes004">포인트화</option>
             <option value="shoes006">야구화부속품</option>
             
-            <!-- 장갑 옵션 -->
+            <!-- 장갑 옵션 -->	
             <option value="glove001">배팅장갑</option>
             <option value="glove002">수비장갑</option>
             <option value="glove003">주루장갑</option>
             <option value="glove004">방한장갑</option>
             <option value="glove005">유소년용 장갑</option>
-            <option value="glove006">기타 장갑</option>
             
             <!-- 가방 옵션 -->
             <option value="bag001">백팩</option>
@@ -140,31 +138,25 @@ function updateScgCode() {
             <option value="bag004">휠가방</option>
             <option value="bag005">배트가방</option>
             <option value="bag006">볼가방</option>
-            <option value="bag009">기타 가방</option>
             
             <!-- 의류 옵션 -->
-            <option value="clothes001">국가대표 어센틱 유니폼</option>
-            <option value="clothes002">티셔츠</option>
-            <option value="clothes003">언더셔츠</option>
-            <option value="clothes004">슬라이딩팬츠</option>
-            <option value="clothes005">롱/숏스판팬츠</option>
-            <option value="clothes006">아이싱웨어</option>
-            <option value="clothes007">바람막이</option>
-            <option value="clothes008">점퍼</option>
-            <option value="clothes009">트레이닝복</option>
-            <option value="clothes010">맨투맨/후디</option>
-            <option value="clothes011">모자/벨트/양말</option>
-            <option value="clothes012">기타</option>
+            <option value="clothes001">티셔츠</option>
+            <option value="clothes002">언더셔츠</option>
+            <option value="clothes003">슬라이딩팬츠</option>
+            <option value="clothes004">롱/숏스판팬츠</option>
+            <option value="clothes005">아이싱웨어</option>
+            <option value="clothes006">바람막이</option>
+            <option value="clothes007">점퍼</option>
+            <option value="clothes008">트레이닝복</option>
+            <option value="clothes009">맨투맨/후디</option>
+            <option value="clothes010">모자/벨트/양말</option>
             
             <!-- 기타 옵션 -->
             <option value="etc001">선글라스</option>
             <option value="etc002">악세사리</option>
             <option value="etc003">손목밴드</option>
             <option value="etc004">로진백</option>
-            <option value="etc005">아이패치</option>
-            <option value="etc006">피규어</option>
             <option value="etc007">베이스</option>
-            <option value="etc008">기타용품</option>
 
         </select>
     </td>
