@@ -79,36 +79,157 @@
             </tr>
             
             
-            <c:choose>
-                <c:when test="${dto.cg_code == 'fcg002'}">
-                    <tr id="batOptions" style="display:block;">
-                        <td colspan="6">
-                            <div class="option-title">배트 사이즈</div>
-                            <select name="op1" id="op1" onchange="this.options[this.selectedIndex].value = this.value;">
-                                <option value="">[필수] 옵션을 선택해 주세요</option>
-                                <option value="33인치/28온스">33인치/28온스</option>
-                                <option value="32인치/27온스">32인치/27온스</option>
-                            </select>
-                        </td>
-                    </tr>
-                </c:when>
-                <c:when test="${dto.cg_code == 'fcg001'}">
+            <c:choose>                           
+               <c:when test="${dto.cg_code == 'fcg001'}">
+			    	<tr id="mittOptions" style="display:block;">
+			        	<td colspan="6">
+			            	<div class="option-title">글러브 옵션</div>
+			            	<c:if test="${dto.scg_code == 'mitt006'}">
+			                <p>선택할 수 있는 옵션이 없습니다.</p>
+			            </c:if>
+				            <c:if test="${dto.scg_code != 'mitt006'}">
+				                <select name="op1" id="op1_select" onchange="this.options[this.selectedIndex].value = this.value;">
+				                    <option value="">[필수] 옵션을 선택해 주세요</option>
+				                    <option value="우투(왼손착용)">우투(왼손착용)</option>
+				                    <option value="좌투(오른손착용)">좌투(오른손착용)</option>
+				                </select>
+				            </c:if>
+				        </td>
+				    </tr>
+				</c:when>
+         
+               <c:when test="${dto.cg_code == 'fcg002'}">
+				    <tr id="batOptions" style="display:block;">
+				        <td colspan="6">
+				            <div class="option-title">배트 사이즈</div>
+				            <c:if test="${dto.scg_code == 'bat008' || dto.scg_code == 'bat009'}">
+				                <p>선택할 수 있는 옵션이 없습니다.</p>
+				            </c:if>
+				            <c:if test="${dto.scg_code != 'bat008' && dto.scg_code != 'bat009'}">
+				                <select name="op1" id="op1" onchange="this.options[this.selectedIndex].value = this.value;">
+				                    <option value="">[필수] 옵션을 선택해 주세요</option>
+				                    <option value="33인치/28온스">33인치/28온스</option>
+				                    <option value="32인치/27온스">32인치/27온스</option>
+				                </select>
+				            </c:if>
+				        </td>
+				    </tr>
+				</c:when>
+                
+                <c:when test="${dto.cg_code == 'fcg003'}">
                     <tr id="gloveOptions" style="display:block;">
                         <td colspan="6">
-                            <div class="option-title">글러브 선택</div>
+                            <div class="option-title">장갑 사이즈</div>
                             <select name="op1" id="op1" onchange="this.options[this.selectedIndex].value = this.value;">
                                 <option value="">[필수] 옵션을 선택해 주세요</option>
-                                <option value="우투(왼손착용)">우투(왼손착용)</option>
-                                <option value="좌투(오른손착용)">좌투(오른손착용)</option>
+                                <option value="S">S</option>
+                                <option value="M">M</option>
+                                <option value="L">L</option>
                             </select>
                         </td>
                     </tr>
                 </c:when>
+                
+                <c:when test="${dto.cg_code == 'fcg004'}">
+				    <tr id="shoesOptions" style="display:block;">
+				        <td colspan="6">
+				            <div class="option-title">신발 사이즈</div>
+				            <c:if test="${dto.scg_code == 'shoes006'}">
+				                <p>선택할 수 있는 옵션이 없습니다.</p>
+				            </c:if>
+				            <c:if test="${dto.scg_code != 'shoes006'}">
+				                <select name="op1" id="op1" onchange="this.options[this.selectedIndex].value = this.value;">
+				                    <option value="">[필수] 옵션을 선택해 주세요</option>
+				                    <option value="250">250</option>
+				                    <option value="255">255</option>
+				                    <option value="260">260</option>
+				                    <option value="265">265</option>
+				                    <option value="270">270</option>
+				                    <option value="275">275</option>
+				                    <option value="280">280</option>
+				                    <option value="285">285</option>
+				                    <option value="290">290</option>
+				                    <option value="295">295</option>
+				                    <option value="300">300</option>                           
+				                </select>
+				            </c:if>
+				        </td>
+				    </tr>
+				</c:when>
+
+                
+                <c:when test="${dto.cg_code == 'fcg006'}">
+				    <tr id="clothesOptions" style="display:block;">
+				        <td colspan="6">
+				            <div class="option-title">사이즈</div>
+				            <c:if test="${dto.scg_code == 'clothes010'}">
+				                <p>선택할 수 있는 옵션이 없습니다.</p>
+				            </c:if>
+				            <c:if test="${dto.scg_code != 'clothes010'}">
+				                <select name="op1" id="op1" onchange="this.options[this.selectedIndex].value = this.value;">
+				                    <option value="">[필수] 옵션을 선택해 주세요</option>
+				                    <option value="S">S</option>
+				                    <option value="M">M</option>
+				                    <option value="L">L</option>
+				                    <option value="XL">XL</option>
+				                    <option value="2XL">2XL</option>
+				                </select>
+				            </c:if>
+				        </td>
+				    </tr>
+				</c:when>
+				
+				<c:when test="${dto.cg_code == 'fcg007'}">
+				    <tr id="gloveOptions" style="display:block;">
+				        <td colspan="6">
+				            <div class="option-title">사이즈</div>
+				            <c:if test="${dto.scg_code == 'protect001' || dto.scg_code == 'protect005'}">
+				                <p>선택할 수 있는 옵션이 없습니다.</p>
+				            </c:if>
+				            <c:if test="${dto.scg_code != 'protect001' && dto.scg_code != 'protect005'}">
+				                <select name="op1" id="op1" onchange="this.options[this.selectedIndex].value = this.value;">
+				                    <option value="">[필수] 옵션을 선택해 주세요</option>
+				                    <option value="S">S</option>
+				                    <option value="M">M</option>
+				                    <option value="L">L</option>
+				                </select>
+				            </c:if>
+				        </td>
+				    </tr>
+				</c:when>
+                                      
+                <c:when test="${dto.cg_code == 'fcg010'}">
+				    <tr id="gloveOptions" style="display:block;">
+				        <td colspan="6">
+				            <div class="option-title">사이즈</div>
+				            <c:if test="${dto.scg_code == 'goods004'}">
+				                <select name="op1" id="op1" onchange="this.options[this.selectedIndex].value = this.value;">
+				                    <option value="">[필수] 옵션을 선택해 주세요</option>
+				                    <option value="250">250</option>
+				                    <option value="255">255</option>
+				                    <option value="260">260</option>
+				                    <option value="265">265</option>
+				                    <option value="270">270</option>
+				                    <option value="275">275</option>
+				                    <option value="280">280</option>
+				                    <option value="285">285</option>
+				                    <option value="290">290</option>
+				                    <option value="295">295</option>
+				                    <option value="300">300</option>  
+				                </select>
+				            </c:if>
+				            <c:if test="${dto.scg_code != 'goods004'}">
+				                <p>선택할 수 있는 옵션이 없습니다.</p>
+				            </c:if>
+				        </td>
+				    </tr>
+				</c:when>
+				                               
                 <c:otherwise>
                     <tr>
                         <td colspan="6">선택할 수 있는 옵션이 없습니다.</td>
                     </tr>
-                </c:otherwise>
+                </c:otherwise>                
             </c:choose>
            
             <tr>

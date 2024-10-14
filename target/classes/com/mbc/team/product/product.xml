@@ -14,7 +14,7 @@
 </select>
 
 <select id="detail" resultType="com.mbc.team.product.ProductDTO">
-  select itemnum , image1 ,cg_code, product , price , dimage from product where itemnum=#{param1}
+  select itemnum , image1 ,cg_code, scg_code , product , price , dimage from product where itemnum=#{param1}
 </select>
 
 <select id="outmainbest" resultType="com.mbc.team.product.ProductDTO">
@@ -28,7 +28,6 @@
 <select id="arbat" resultType="com.mbc.team.product.ProductDTO">
   select * from product where scg_code=#{param1}
 </select>
-
 
 </mapper>
 

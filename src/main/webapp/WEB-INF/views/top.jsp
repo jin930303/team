@@ -269,7 +269,7 @@ p {
 					<ul class="dropdown-menu">
 						<li><a href="integrated-spikes">징 일체형</a></li>
 						<li><a href="turf-shoes">인조잔디화</a></li>
-						<li><a href="youth-shoes">포인트화</a></li>
+						<li><a href="point-shoes">포인트화</a></li>
 						<li><a href="shoe-accessories">야구화부속품</a></li>
 					</ul></li>
 
