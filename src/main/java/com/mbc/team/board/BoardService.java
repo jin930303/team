@@ -66,6 +66,14 @@ public interface BoardService {
 	//版扁老沥
 	void iljunginput(String gamedate, String gameresult);
 	ArrayList<IljungDTO> iljungout();
+	
+	public int totalis();
+	public ArrayList<IljungDTO> pageis(PageDTO dto);
+	
+	void iljungdelete(String gamedate, String gameresult);
+
+	IljungDTO iljungupdateview(String gamedate, String gameresult);
+	void iljungupdate(String gamedate, String gameresult, String fgamedate, String fgameresult);
 
 	//具备家侥	
 	void insertsosick(String id, String nickname, String stitle, String scontents, String simagefn, String stag);
@@ -119,5 +127,6 @@ public interface BoardService {
 
 	public int totalevse(String estate);
 	public ArrayList<EventDTO> pageevse(PageDTO dto, String estate);
+
 	
 }
