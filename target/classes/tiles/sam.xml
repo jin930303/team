@@ -76,11 +76,11 @@
       <put-attribute name="body" value="/WEB-INF/views/login/updatepw.jsp"/>
    </definition> 
    
-   
-    <definition name="navercallback" extends="baseLayout">
+   <definition name="buyproduct" extends="baseLayout">
       <put-attribute name="title" value="메인화면"/>
-      <put-attribute name="body" value="/WEB-INF/views/login/navercallback.jsp"/>
+      <put-attribute name="body" value="/WEB-INF/views/product/buyproduct.jsp"/>
    </definition> 
+    
    
 </tiles-definitions>
 

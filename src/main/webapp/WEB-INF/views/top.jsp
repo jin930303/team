@@ -168,7 +168,7 @@ p {
 						<li><a href="#"> 님 반갑습니다.</a></li>
 						<li><a href="logout"> 로그아웃</a></li>
 						<li><a href="myinfo"> 회원정보</a></li>
-						<li><a href="#"> 장바구니</a></li>
+						<li><a href="cart"> 장바구니</a></li>
 						<li><a href="#"> 주문/배송조회</a></li>
 						<li><a href="faq_community"> 고객센터</a></li>
 					</c:when>
@@ -195,7 +195,7 @@ p {
 					<c:otherwise>
 						<li><a href="memberinput"> 회원가입</a></li>
 						<li><a href="login"> 로그인</a></li>
-						<li><a href="#"> 장바구니</a></li>
+						<li><a href="cart"> 장바구니</a></li>
 						<li><a href="#"> 주문/배송조회</a></li>
 						<li><a href="faq_community"> 고객센터</a></li>
 					</c:otherwise>
