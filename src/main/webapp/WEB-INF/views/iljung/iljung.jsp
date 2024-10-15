@@ -67,9 +67,15 @@
         text-align: center;
     }
 
+    .button-container {
+        display: flex;
+        justify-content: center;  /* 버튼을 중앙 정렬 */
+        margin-top: 20px;
+    }
+
     .add-event-button {
-        display: block;
-        margin: 20px auto; 
+        display: inline-block; 
+        margin: 0 10px;  /* 좌우에 10px 간격 */
         padding: 10px 20px;
         background-color: #007BFF;
         color: white;
@@ -141,11 +147,16 @@
 <h2>KBO 일정</h2>
     <div class="calendar-container">
         <div id="calendar"></div>
-    </div>
+</div>
 <c:choose>
 <c:when test="${adminloginstate==true}">
-    <input type="button" class="add-event-button" onclick="location.href='iljunginput'" value="일정추가">
+<div class="button-container">
+   	<input type="button" class="add-event-button" onclick="location.href='iljungsetting'" value="일정변경">
+	<input type="button" class="add-event-button" onclick="location.href='iljunginput'" value="일정추가">
+</div>
 </c:when>
-</c:choose></div></div>
+</c:choose>
+</div>
+</div>
 </body>
 </html>

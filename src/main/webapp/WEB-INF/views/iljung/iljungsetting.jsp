@@ -1,25 +1,25 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html>
 <head>
 <style type="text/css">
-th,td{
-text-align: center;
+th, td{
+    text-align: center;
 }
+
 </style>
 <script src="https://code.jquery.com/jquery-latest.min.js"></script>
 <script>
-    function delsosick(snum) {
+    function deliljung(gamedate, gameresult) {
         if (confirm('삭제하시면 복구할 수 없습니다.\n정말로 삭제하시겠습니까?')) {
-            location.href = 'sosickdelete?snum=' + snum;
+            location.href = 'iljungdelete?gamedate=' + gamedate + '&gameresult=' + gameresult;
         }
     }
 </script>
 <meta charset="UTF-8">
-<title>
-</title>
+<title>일정 수정/삭제</title>
 </head>
 <body>
 <div class="container">
@@ -72,48 +72,54 @@ text-align: center;
 	</div>
 </aside>
 <div class="maindata">
-<table border="1" width="800px" align="center">
-<caption><h2>야구소식</h2></caption>
+<table border="1" align="center" width="800px">
+<caption><h3>일정변경</h3></caption>
 	<tr>
-		<th>제목</th><td style="text-align: left;">[${list.stag}] ${list.stitle}</td>
-		<th>작성자</th><td>${list.nickname}</td>
-	</tr>	
-	<tr>	
-		<th>작성일시</th><td>${list.sdate}</td><th>조회수</th><td>${list.scnt}</td>
-	</tr>	
-		<tr>
-		<c:choose>
-			<c:when test="${list.simage==null}">
-			<td colspan="4">
-				<pre style="text-align: left;">${list.scontents}</pre>
-			</td>
-			</c:when>
-			<c:otherwise>
-				<td colspan="4" style="text-align: center;">
-		    		<img src="./image/${list.simage}" style="width:700px; display: block; margin: 0 auto;"><br>
-		    		<pre style="text-align: left;">${list.scontents}</pre>
-				</td>
-			</c:otherwise>
-		</c:choose>
+		<th>경기날짜</th><th>경기내용</th><th>비고</th>
 	</tr>
-<c:choose>
-<c:when test="${adminloginstate==true}">
-	<tr>	
-		<td colspan="4">
-			<input type="button" onclick="location.href='sosickboard'" value="목록">
-			<input type="button" onclick="delsosick(${list.snum})" value="삭제">
-			<input type="button" onclick="location.href='sosickupdateview?snum=${list.snum}'" value="수정">
+<c:forEach items="${list}" var="iljung">
+	<tr>
+		<td>${iljung.gamedate}</td>
+		<td>${iljung.gameresult}</td>
+		<td>
+		<a href="iljungupdateview?gamedate=${iljung.gamedate}&&gameresult=${iljung.gameresult}">수정</a> / 
+		<a href="javascript:deliljung('${iljung.gamedate}','${iljung.gameresult}')">삭제</a>
 		</td>
-	</tr>
-</c:when>
-<c:otherwise>
-	<tr>	
-		<td colspan="4">
-			<input type="button" onclick="location.href='sosickboard'" value="목록">
-		</td>
-	</tr>
-</c:otherwise>
-</c:choose>
-</table></div></div>
+    </tr>
+</c:forEach>
+
+<!-- 페이징처리 4444444444-->
+<tr style="border-left: none;border-right: none;border-bottom: none">
+   <td colspan="8" style="text-align: center;">
+   
+   <c:if test="${paging.startPage!=1 }">
+      <a href="iljungsetting?nowPage=${paging.startPage-1 }&cntPerPage=${paging.cntPerPage}"></a>
+   </c:if>   
+      <c:forEach begin="${paging.startPage }" end="${paging.endPage}" var="p"> 
+         <c:choose>
+            <c:when test="${p == paging.nowPage }">
+               <b><span style="color: red;">${p}</span></b>
+            </c:when>   
+            <c:when test="${p != paging.nowPage }">
+               <a href="iljungsetting?nowPage=${p}&cntPerPage=${paging.cntPerPage}">${p}</a>
+            </c:when>   
+         </c:choose>
+      </c:forEach>
+      
+      <c:if test="${paging.endPage != paging.lastPage}">
+      <a href="iljungsetting?nowPage=${paging.endPage+1}&cntPerPage=${paging.cntPerPage }">  </a>
+   </c:if>
+   
+   </td>
+</tr>
+<!-- 페이징처리 4444444444-->
+    <tr>
+        <th colspan="3">
+            <input type="button" onclick="location.href='iljung'" value="캘린더">
+        </th>
+    </tr>
+</table>
+</div>
+</div>
 </body>
 </html>

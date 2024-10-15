@@ -466,6 +466,125 @@ public class BoardController {
 	    return jsonList; // JSON 형식으로 반환
 	}
 	
+	@RequestMapping(value = "/iljungsetting", method = RequestMethod.GET)
+	public String iljungsetting(HttpServletRequest request, Model mo, PageDTO dto, HttpServletResponse response) throws IOException {
+		String nowPage=request.getParameter("nowPage");
+		String cntPerPage=request.getParameter("cntPerPage");
+		BoardService bs=sqlsession.getMapper(BoardService.class);
+		int totalis=bs.totalis();
+		if(nowPage==null && cntPerPage == null) {
+			nowPage="1";
+			cntPerPage="15";
+		}
+		else if(nowPage==null) {
+			nowPage="1";
+		}
+		else if(cntPerPage==null) {
+			cntPerPage="15";
+		} 
+		dto=new PageDTO(totalis,Integer.parseInt(nowPage),Integer.parseInt(cntPerPage));
+		mo.addAttribute("paging",dto);
+		mo.addAttribute("list", bs.pageis(dto));
+		return "iljungsetting";
+	}
+	
+	@RequestMapping(value = "/iljungdelete", method = RequestMethod.GET)
+	public String iljungdelete(HttpServletRequest request, HttpServletResponse response) throws IOException {
+		String gamedate=request.getParameter("gamedate");
+		String gameresult=request.getParameter("gameresult");
+		BoardService bs=sqlsession.getMapper(BoardService.class);
+		bs.iljungdelete(gamedate, gameresult);
+		response.setContentType("text/html;charset=utf-8");
+		PrintWriter prw=response.getWriter();
+		prw.print("<script> alert('해당 글을 삭제하였습니다.');</script>");
+		prw.print("<script> location.href='iljungsetting';</script>");
+		prw.close();
+		return "redirect:/iljungsetting";
+	}
+	
+	@RequestMapping(value = "/iljungupdateview", method = RequestMethod.GET)
+	public String iljungupdateview(HttpServletRequest request, Model mo) {
+		String gamedate=request.getParameter("gamedate");
+		String gameresult=request.getParameter("gameresult");
+		BoardService bs=sqlsession.getMapper(BoardService.class);
+		IljungDTO list=bs.iljungupdateview(gamedate, gameresult);
+		mo.addAttribute("list", list);
+		return "iljungupdateview";
+	}
+	
+	@RequestMapping(value = "/iljungupdate", method = RequestMethod.POST)
+	public String iljungupdate(HttpServletRequest request) {
+		String fgamedate=request.getParameter("fgamedate");
+		String fgameresult=request.getParameter("fgameresult");
+		String leaguestate=request.getParameter("leaguestate");
+		int state=Integer.parseInt(request.getParameter("state"));
+		String gamedate=request.getParameter("gamedate");
+		String home=request.getParameter("home");
+		String away=request.getParameter("away");
+		int homescore=Integer.parseInt(request.getParameter("homescore"));
+		int awayscore=Integer.parseInt(request.getParameter("awayscore"));
+		String gamestate=request.getParameter("gamestate");
+		String gameresult="";
+		
+		if(gamestate.equals("진행")&&leaguestate.equals("TB")) {
+			gameresult=leaguestate+" "+home+" "+homescore+" : "+awayscore+" "+away;
+		}
+		else if(gamestate.equals("진행")&&leaguestate.equals("WC")) {
+			gameresult=leaguestate+state+" "+home+" "+homescore+" : "+awayscore+" "+away;
+		}
+		else if(gamestate.equals("진행")&&leaguestate.equals("준PO")) {
+			gameresult=leaguestate+state+" "+home+" "+homescore+" : "+awayscore+" "+away;
+		}
+		else if(gamestate.equals("진행")&&leaguestate.equals("PO")) {
+			gameresult=leaguestate+state+" "+home+" "+homescore+" : "+awayscore+" "+away;
+		}
+		else if(gamestate.equals("진행")&&leaguestate.equals("KS")) {
+			gameresult=leaguestate+state+" "+home+" "+homescore+" : "+awayscore+" "+away;
+		}
+		else if(gamestate.equals("진행")&&leaguestate.equals("정규시즌")) {
+			gameresult=home+" "+homescore+" : "+awayscore+" "+away;
+		}
+		else if(gamestate.equals("예정")&&leaguestate.equals("TB")) {
+			gameresult=leaguestate+" "+home+" 예정 "+away;
+		}
+		else if(gamestate.equals("예정")&&leaguestate.equals("WC")) {
+			gameresult=leaguestate+state+" "+home+" 예정 "+away;
+		}
+		else if(gamestate.equals("예정")&&leaguestate.equals("준PO")) {
+			gameresult=leaguestate+state+" "+home+" 예정 "+away;
+		}
+		else if(gamestate.equals("예정")&&leaguestate.equals("PO")) {
+			gameresult=leaguestate+state+" "+home+" 예정 "+away;
+		}
+		else if(gamestate.equals("예정")&&leaguestate.equals("KS")) {
+			gameresult=leaguestate+state+" "+home+" 예정 "+away;
+		}
+		else if(gamestate.equals("예정")&&leaguestate.equals("정규시즌")) {
+			gameresult=home+" 예정 "+away;
+		}
+		else if(gamestate.equals("취소")&&leaguestate.equals("TB")) {
+			gameresult=leaguestate+" "+home+" 취소 "+away;
+		}
+		else if(gamestate.equals("취소")&&leaguestate.equals("WC")) {
+			gameresult=leaguestate+state+" "+home+" 취소 "+away;
+		}
+		else if(gamestate.equals("취소")&&leaguestate.equals("준PO")) {
+			gameresult=leaguestate+state+" "+home+" 취소 "+away;
+		}
+		else if(gamestate.equals("취소")&&leaguestate.equals("PO")) {
+			gameresult=leaguestate+state+" "+home+" 취소 "+away;
+		}
+		else if(gamestate.equals("취소")&&leaguestate.equals("KS")) {
+			gameresult=leaguestate+state+" "+home+" 취소 "+away;
+		}
+		else if(gamestate.equals("취소")&&leaguestate.equals("정규시즌")) {
+			gameresult=home+" 취소 "+away;
+		}
+		BoardService bs=sqlsession.getMapper(BoardService.class);
+		bs.iljungupdate(gamedate, gameresult, fgamedate, fgameresult);
+		return "iljung";
+	}
+	
 	@RequestMapping(value = "/sosickinput", method = RequestMethod.GET)
 	public String sosickinput() {
 		return "sosickinput";
@@ -527,12 +646,12 @@ public class BoardController {
 	public String sosickdelete(HttpServletRequest request, HttpServletResponse response) throws IOException {
 		int snum=Integer.parseInt(request.getParameter("snum"));
 		BoardService bs=sqlsession.getMapper(BoardService.class);
+		bs.sosickdelete(snum);
 		response.setContentType("text/html;charset=utf-8");
 		PrintWriter prw=response.getWriter();
 		prw.print("<script> alert('해당 글을 삭제하였습니다.');</script>");
 		prw.print("<script> location.href='sosickboard';</script>");
 		prw.close();
-		bs.sosickdelete(snum);
 		return "redirect:/sosickboard";
 	}
 	
@@ -817,4 +936,6 @@ public class BoardController {
 		return "eventsearchview";
 	}
 
+
+	
 }
