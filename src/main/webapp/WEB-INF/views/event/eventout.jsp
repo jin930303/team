@@ -9,6 +9,14 @@ th,td{
 text-align: center;
 }
 </style>
+<script src="https://code.jquery.com/jquery-latest.min.js"></script>
+<script>
+    function delevent(evnum) {
+        if (confirm('삭제하시면 복구할 수 없습니다.\n정말로 삭제하시겠습니까?')) {
+            location.href = 'eventdelete?evnum=' + evnum;
+        }
+    }
+</script>
 <meta charset="UTF-8">
 <title>
 </title>
@@ -93,7 +101,7 @@ text-align: center;
 	<tr>	
 		<td colspan="4">
 			<input type="button" onclick="location.href='eventboard'" value="목록">
-			<input type="button" onclick="location.href='eventdelete?evnum=${list.evnum}'" value="삭제">
+			<input type="button" onclick="delevent(${list.evnum})" value="삭제">
 			<input type="button" onclick="location.href='eventupdateview?evnum=${list.evnum}'" value="수정">
 		</td>
 	</tr>

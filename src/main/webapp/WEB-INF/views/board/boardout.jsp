@@ -9,6 +9,14 @@ th,td{
 text-align: center;
 }
 </style>
+<script src="https://code.jquery.com/jquery-latest.min.js"></script>
+<script>
+    function delboard(cnum) {
+        if (confirm('삭제하시면 복구할 수 없습니다.\n정말로 삭제하시겠습니까?')) {
+            location.href = 'boarddelete?cnum=' + cnum;
+        }
+    }
+</script>
 <meta charset="UTF-8">
 <title>
 </title>
@@ -99,8 +107,8 @@ text-align: center;
 	<tr>	
 		<td colspan="8">
 			<input type="button" onclick="location.href='board'" value="목록">
-			<input type="button" onclick="location.href='boardupdateview?cnum=${list.cnum}'" value="수정하기">
-			<input type="button" onclick="location.href='boarddelete?cnum=${list.cnum}'" value="삭제하기">
+			<input type="button" onclick="delboard(${list.cnum})" value="삭제">
+			<input type="button" onclick="location.href='boardupdateview?cnum=${list.cnum}'" value="수정">
 		</td>
 	</tr>
 	<tr>
@@ -131,8 +139,8 @@ text-align: center;
 	<tr>
 		<td colspan="8">
 			<input type="button" onclick="location.href='board'" value="목록">
-			<input type="button" onclick="location.href='boardupdateview?cnum=${list.cnum}'" value="수정하기">
-			<input type="button" onclick="location.href='boarddelete?cnum=${list.cnum}'" value="삭제하기">
+			<input type="button" onclick="delboard(${list.cnum})" value="삭제">
+			<input type="button" onclick="location.href='boardupdateview?cnum=${list.cnum}'" value="수정">
 		</td>
 	</tr>
 	<tr>

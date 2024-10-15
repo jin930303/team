@@ -192,6 +192,28 @@
 		select to_char(gamedate, 'yyyy-MM-dd') as gamedate, gameresult from iljung
 	</select>
 	
+	<select id="totalis" resultType="int">
+   		select count(*) from iljung
+	</select>
+	
+	<select id="pageis" resultType="com.mbc.team.board.IljungDTO">
+	   select * from (
+	   select rownum rn,A.* from(  
+	   select to_char(gamedate, 'yyyy-MM-dd') as gamedate, gameresult from iljung order by gamedate desc)A)
+	   where rn between #{start} AND #{end}
+	</select>
+	
+	<delete id="iljungdelete">
+		delete from iljung where gamedate=#{param1} and gameresult=#{param2}
+	</delete>
+	
+	<select id="iljungupdateview" resultType="com.mbc.team.board.IljungDTO">
+		select to_char(gamedate, 'yyyy-MM-dd') as gamedate, gameresult from iljung where gamedate=#{param1} and gameresult=#{param2}
+	</select>
+	
+	<update id="iljungupdate">
+		update iljung set gamedate=#{param1}, gameresult=#{param2} where gamedate=#{param3} and gameresult=#{param4} 
+	</update>
 
 <!-- 야구소식 -->
 	<insert id="insertsosick">

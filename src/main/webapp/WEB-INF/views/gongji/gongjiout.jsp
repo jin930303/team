@@ -9,6 +9,14 @@ th,td{
 text-align: center;
 }
 </style>
+<script src="https://code.jquery.com/jquery-latest.min.js"></script>
+<script>
+    function delgongji(gnum) {
+        if (confirm('삭제하시면 복구할 수 없습니다.\n정말로 삭제하시겠습니까?')) {
+            location.href = 'gongjidelete?gnum=' + gnum;
+        }
+    }
+</script>
 <meta charset="UTF-8">
 <title>
 </title>
@@ -92,7 +100,7 @@ text-align: center;
 	<tr>	
 		<td colspan="4">
 			<input type="button" onclick="location.href='gongjiboard'" value="목록">
-			<input type="button" onclick="location.href='gongjidelete?gnum=${list.gnum}'" value="삭제">
+			<input type="button" onclick="delgongji(${list.gnum})" value="삭제">
 			<input type="button" onclick="location.href='gongjiupdateview?gnum=${list.gnum}'" value="수정">
 		</td>
 	</tr>

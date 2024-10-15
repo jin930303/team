@@ -84,6 +84,16 @@
       <put-attribute name="body" value="/WEB-INF/views/iljung/iljung.jsp"/>
    </definition>
    
+    <definition name="iljungsetting" extends="baseLayout">
+      <put-attribute name="title" value="메인화면"/>
+      <put-attribute name="body" value="/WEB-INF/views/iljung/iljungsetting.jsp"/>
+   </definition>
+   
+    <definition name="iljungupdateview" extends="baseLayout">
+      <put-attribute name="title" value="메인화면"/>
+      <put-attribute name="body" value="/WEB-INF/views/iljung/iljungupdateview.jsp"/>
+   </definition>
+   
     <definition name="sosickboard" extends="baseLayout">
       <put-attribute name="title" value="메인화면"/>
       <put-attribute name="body" value="/WEB-INF/views/sosick/sosickboard.jsp"/>
