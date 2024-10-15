@@ -70,6 +70,20 @@
         margin-left: 10px; /* input과 label 사이 공간 추가 */
         padding: 4px;
     }
+
+    /* Delete button styling */
+    .delete-button {
+        background-color: #d32f2f; /* 빨간색 배경 */
+        color: white; /* 글자색 흰색 */
+        border: none; /* 테두리 없애기 */
+        padding: 8px 12px; /* 패딩 */
+        cursor: pointer; /* 커서 모양 변경 */
+        margin-top: 10px; /* 버튼 위쪽 여백 */
+    }
+
+    .delete-button:hover {
+        background-color: #c62828; /* 호버 시 색상 변경 */
+    }
 </style>
 </head>
 
@@ -95,6 +109,7 @@
             </a>
             <div class="product-title">${aa.product}</div>
             <div class="product-price">${aa.price}원</div>
+            <button class="delete-button" onclick="confirmDelete('${aa.itemnum}')">삭제</button>
         </div>
     </c:forEach>
 </div>
@@ -122,7 +137,7 @@
         // 정렬된 상품을 다시 추가
         products.forEach(product => productContainer.appendChild(product));
     }
-    //검색옵션
+
     function filterProducts() { 
         const input = document.getElementById("searchInput").value.toLowerCase();
         const productContainer = document.querySelector(".product-container");
@@ -136,6 +151,12 @@
                 product.style.display = "none"; // 숨기기
             }
         });
+    }
+
+    function confirmDelete(itemnum) {
+        if (confirm("정말로 이 상품을 삭제하시겠습니까?")) {
+            window.location.href = "productdelete?itemnum=" + itemnum;
+        }
     }
 </script>
 
