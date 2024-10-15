@@ -29,5 +29,14 @@
   select * from product where scg_code=#{param1}
 </select>
 
+<select id="outd" resultType="com.mbc.team.product.ProductDTO">
+  select * from product
+</select>
+
+<delete id="deleteProduct" parameterType="int">
+   delete from product where itemnum = #{itemnum}
+</delete>
+
+	
 </mapper>
 
