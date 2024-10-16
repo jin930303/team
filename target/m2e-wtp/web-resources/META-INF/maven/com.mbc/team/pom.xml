@@ -137,7 +137,7 @@
 			<artifactId>httpclient</artifactId>
 			<version>4.5.13</version> <!-- 버전은 최신으로 변경 가능 -->
 		</dependency>
-		<!-- 필요한 라이브러리 종료 -->
+		<!-- 필요한 라이브러리 종료! -->
 
 
 		<!-- AspectJ -->

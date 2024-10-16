@@ -163,7 +163,7 @@ public class CartController {
             return "purchaseComplete";  // 구매 완료 페이지로 이동
         } else {
             // 상품이 없으면 장바구니로 돌아가기
-            return "redirect:/cart";  // 장바구니로 리디렉션
+            return "redirect:/cart";  // 장바구니로 리디렉션 수정
         }
     }
 }
