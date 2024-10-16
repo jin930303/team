@@ -36,7 +36,7 @@ public class CartController {
 	        int count = Integer.parseInt(countStr);
 
 	        // CartItem 객체 생성 (구조에 맞게 변경 필요)
-	        CartItem item = new CartItem(itemnum, product, price, count);
+	        CartItem item = new CartItem(itemnum, product, price, op1, count, op1);
 
 	        // 세션에서 카트 가져오기
 	        List<CartItem> cart = (List<CartItem>) hs.getAttribute("cart");
