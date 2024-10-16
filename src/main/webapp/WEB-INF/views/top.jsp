@@ -168,7 +168,7 @@ p {
 						<li><a href="#">${sessionScope.dto3.nickname}님 반갑습니다.</a></li>
 						<li><a href="logout"> 로그아웃</a></li>
 						<li><a href="myinfo"> 회원정보</a></li>
-						<li><a href="#"> 장바구니</a></li>
+						<li><a href="cart"> 장바구니</a></li>
 						<li><a href="#"> 주문/배송조회</a></li>
 						<li><a href="faq_community"> 고객센터</a></li>
 					</c:when>
@@ -181,6 +181,7 @@ p {
 							<ul class="dropdown-menu">
 								<li><a href="productin">상품자료입력</a></li>
 								<li><a href="productout">상품자료출력</a></li>
+								<li><a href="productdelete">상품자료삭제</a></li>
 							</ul></li>
 						<li class="dropdown"><a class="dropdown-toggle"
 							data-toggle="dropdown" href="#">고객센터<span class="caret"></span></a>
@@ -195,7 +196,7 @@ p {
 					<c:otherwise>
 						<li><a href="memberinput"> 회원가입</a></li>
 						<li><a href="login"> 로그인</a></li>
-						<li><a href="#"> 장바구니</a></li>
+						<li><a href="cart"> 장바구니</a></li>
 						<li><a href="#"> 주문/배송조회</a></li>
 						<li><a href="faq_community"> 고객센터</a></li>
 					</c:otherwise>

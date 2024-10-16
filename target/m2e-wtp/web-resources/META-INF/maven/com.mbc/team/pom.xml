@@ -131,6 +131,12 @@
 			<version>1.0.0.RELEASE</version>
 		</dependency>
 		<!-- 구글 소셜 로그인 구현 -->
+		<!-- Apache HttpClient 의존성 추가 -->
+		<dependency>
+			<groupId>org.apache.httpcomponents</groupId>
+			<artifactId>httpclient</artifactId>
+			<version>4.5.13</version> <!-- 버전은 최신으로 변경 가능 -->
+		</dependency>
 		<!-- 필요한 라이브러리 종료 -->
 
 

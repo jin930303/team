@@ -17,5 +17,9 @@ public interface ProductService  {
 	
 	void inserta(String fname1, String cg_code, String scg_code, String product, int price, String fname2);
 
+	void deleteProduct(Integer itemnum);
+
+	ArrayList<ProductDTO> outd();
+
 }
  

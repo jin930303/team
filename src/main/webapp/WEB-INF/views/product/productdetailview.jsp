@@ -55,17 +55,33 @@
         }
         
         function addToCart() {
-            // 여기서는 실제로 폼을 제출하는 방식으로 수정합니다.
-            document.getElementById("productForm").submit(); 
+        	// 옵션 선택 확인
+            const op1Select = document.getElementById("op1_select");
+            if (op1Select && op1Select.value === "") {
+                alert("옵션을 선택해주세요.");
+                return;
+            }
+         // 옵션이 없는 경우에도 폼을 제출할 수 있게 처리
+            // op1 값을 설정 (옵션이 선택되지 않은 경우 빈 문자열로 설정)
+            document.getElementById("op1").value = op1Select ? op1Select.value : "";
+
+            console.log("옵션 값: ", document.getElementById("op1").value); // 디버깅: 콘솔에서 값을 확인
+            document.getElementById("productForm").submit();  // 폼 제출
         }
+        
+        
     </script>  
 </head>
 <body>
-    <form id="productForm" action="/team/cart" method="get" enctype="multipart/form-data">
+    <form id="productForm" action="/team/cart" method="post" enctype="multipart/form-data">
         <input type="hidden" name="itemnum" id="itemnum" value="${dto.itemnum}">
         <input type="hidden" name="price" id="price" value="${dto.price}">
         <input type="hidden" name="product" id="product" value="${dto.product}">
-        <input type="hidden" name="op1" id="op1">
+        <input type="hidden" name="op1" id="op1" value="${param.op1}">
+        <input type="hidden" name="image1" id="image1" value="${dto.image1}">
+        
+        
+        
        
         <table>
             <tr>
@@ -106,8 +122,8 @@
 				                <p>선택할 수 있는 옵션이 없습니다.</p>
 				            </c:if>
 				            <c:if test="${dto.scg_code != 'bat008' && dto.scg_code != 'bat009'}">
-				                <select name="op1" id="op1" onchange="this.options[this.selectedIndex].value = this.value;">
-				                    <option value="">[필수] 옵션을 선택해 주세요</option>
+				                <select name="op1" id="op1_select"  onchange="this.options[this.selectedIndex].value = this.value;">
+				                   <option value="">[필수] 옵션을 선택해 주세요</option>
 				                    <option value="33인치/28온스">33인치/28온스</option>
 				                    <option value="32인치/27온스">32인치/27온스</option>
 				                </select>
@@ -120,7 +136,7 @@
                     <tr id="gloveOptions" style="display:block;">
                         <td colspan="6">
                             <div class="option-title">장갑 사이즈</div>
-                            <select name="op1" id="op1" onchange="this.options[this.selectedIndex].value = this.value;">
+                            <select name="op1" id="op1_select"  onchange="this.options[this.selectedIndex].value = this.value;">
                                 <option value="">[필수] 옵션을 선택해 주세요</option>
                                 <option value="S">S</option>
                                 <option value="M">M</option>
@@ -138,8 +154,8 @@
 				                <p>선택할 수 있는 옵션이 없습니다.</p>
 				            </c:if>
 				            <c:if test="${dto.scg_code != 'shoes006'}">
-				                <select name="op1" id="op1" onchange="this.options[this.selectedIndex].value = this.value;">
-				                    <option value="">[필수] 옵션을 선택해 주세요</option>
+				                <select name="op1" id="op1_select"  onchange="this.options[this.selectedIndex].value = this.value;">
+				                 <option value="">[필수] 옵션을 선택해 주세요</option>
 				                    <option value="250">250</option>
 				                    <option value="255">255</option>
 				                    <option value="260">260</option>
@@ -150,7 +166,7 @@
 				                    <option value="285">285</option>
 				                    <option value="290">290</option>
 				                    <option value="295">295</option>
-				                    <option value="300">300</option>                           
+				                    <option value="300">300</option>         
 				                </select>
 				            </c:if>
 				        </td>
@@ -166,7 +182,7 @@
 				                <p>선택할 수 있는 옵션이 없습니다.</p>
 				            </c:if>
 				            <c:if test="${dto.scg_code != 'clothes010'}">
-				                <select name="op1" id="op1" onchange="this.options[this.selectedIndex].value = this.value;">
+				                <select name="op1" id="op1_select"  onchange="this.options[this.selectedIndex].value = this.value;">
 				                    <option value="">[필수] 옵션을 선택해 주세요</option>
 				                    <option value="S">S</option>
 				                    <option value="M">M</option>
@@ -187,7 +203,7 @@
 				                <p>선택할 수 있는 옵션이 없습니다.</p>
 				            </c:if>
 				            <c:if test="${dto.scg_code != 'protect001' && dto.scg_code != 'protect005'}">
-				                <select name="op1" id="op1" onchange="this.options[this.selectedIndex].value = this.value;">
+				                <select name="op1" id="op1_select"  onchange="this.options[this.selectedIndex].value = this.value;">
 				                    <option value="">[필수] 옵션을 선택해 주세요</option>
 				                    <option value="S">S</option>
 				                    <option value="M">M</option>
@@ -203,7 +219,7 @@
 				        <td colspan="6">
 				            <div class="option-title">사이즈</div>
 				            <c:if test="${dto.scg_code == 'goods004'}">
-				                <select name="op1" id="op1" onchange="this.options[this.selectedIndex].value = this.value;">
+				                <select name="op1" id="op1_select"  onchange="this.options[this.selectedIndex].value = this.value;">
 				                    <option value="">[필수] 옵션을 선택해 주세요</option>
 				                    <option value="250">250</option>
 				                    <option value="255">255</option>
@@ -215,7 +231,7 @@
 				                    <option value="285">285</option>
 				                    <option value="290">290</option>
 				                    <option value="295">295</option>
-				                    <option value="300">300</option>  
+				                    <option value="300">300</option> 
 				                </select>
 				            </c:if>
 				            <c:if test="${dto.scg_code != 'goods004'}">
