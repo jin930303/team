@@ -18,6 +18,8 @@ public interface MemberService {
 	void memberupdate( String nickname, String pw1, String name, String gender, String birth, String phone,
 			String address, String email,String id);
 
+	int emailcheck(String email);
+
 	
 
 	

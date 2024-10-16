@@ -19,4 +19,8 @@
 	select count(*) from member where nickname=#{param1}	
 	</select>
 	
+	<select id="emailcheck1" resultType="int">
+	select count(*) from member where email=#{param1}	
+	</select>
+	
 </mapper>

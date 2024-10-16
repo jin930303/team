@@ -1,9 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+
 <!DOCTYPE html>
 <html>
 <head>
+
 <style type="text/css">
 pre {
 	word-wrap: break-word;
@@ -163,13 +165,22 @@ p {
 
 		<div class="container-log" style="text-align: left;">
 			<ul class="nav navbar-nav navbar-left">
+			
 				<c:choose>
 					<c:when test="${loginstate==true}">
-						<li><a href="#"> 님 반갑습니다.</a></li>
-						<li><a href="logout"> 로그아웃</a></li>
-						<li><a href="myinfo"> 회원정보</a></li>
-						<li><a href="cart"> 장바구니</a></li>
-						<li><a href="#"> 주문/배송조회</a></li>
+						  <li><a href="#">${dto3.nickname} 님 반갑습니다.</a></li>
+                        <li><a href="logout">로그아웃</a></li>
+                        <li><a href="myinfo">회원정보</a></li>
+                        
+                        <!-- 로그인 상태에서만 접근 가능하도록 카트 링크 처리 -->
+                        <c:choose>
+                            <c:when test="${loginstate == true}">
+                                <li><a href="cart">장바구니</a></li>
+                            </c:when>
+                            <c:otherwise>
+                            <li><a href="login?redirect=cart">장바구니 (로그인 필요)</a></li>
+                            </c:otherwise>
+                        </c:choose>
 						<li><a href="faq_community"> 고객센터</a></li>
 					</c:when>
 
@@ -197,7 +208,6 @@ p {
 						<li><a href="memberinput"> 회원가입</a></li>
 						<li><a href="login"> 로그인</a></li>
 						<li><a href="cart"> 장바구니</a></li>
-						<li><a href="#"> 주문/배송조회</a></li>
 						<li><a href="faq_community"> 고객센터</a></li>
 					</c:otherwise>
 				</c:choose>

@@ -55,31 +55,64 @@
         }
         
         function addToCart() {
+        	const loginState = document.getElementById("loginState").value;
+
+        	 if (loginState === null || loginState === "false") {  // 로그인 상태가 false인 경우
+        	        alert("로그인 후 이용해주세요.");
+        	        window.location.href = "login"; // 로그인 페이지로 리다이렉트
+        	        return;
+        	    }
+        	
         	// 옵션 선택 확인
             const op1Select = document.getElementById("op1_select");
             if (op1Select && op1Select.value === "") {
                 alert("옵션을 선택해주세요.");
                 return;
             }
-         // 옵션이 없는 경우에도 폼을 제출할 수 있게 처리
-            // op1 값을 설정 (옵션이 선택되지 않은 경우 빈 문자열로 설정)
+         // 선택한 옵션 값을 히든 필드에 설정
             document.getElementById("op1").value = op1Select ? op1Select.value : "";
-
-            console.log("옵션 값: ", document.getElementById("op1").value); // 디버깅: 콘솔에서 값을 확인
             document.getElementById("productForm").submit();  // 폼 제출
         }
         
+        function buyNow() {
+            const loginState = document.getElementById("loginState").value;
+
+            if (loginState === null || loginState === "false") {  // 로그인 상태가 false인 경우
+                alert("로그인 후 이용해주세요.");
+                window.location.href = "login"; // 로그인 페이지로 리다이렉트
+                return;
+            }
+
+         // 옵션 선택 확인 (옵션 선택이 없는 경우)
+            const op1Select = document.getElementById("op1_select");
+            if (op1Select && op1Select.value === "") {
+                alert("옵션을 선택해주세요.");
+                return;
+            }
+
+            // 폼의 히든 필드에 선택된 옵션 값을 넣습니다.
+            document.getElementById("op1").value = op1Select ? op1Select.value : "";
+            
+            // 상품 폼의 액션을 "buySelectedItems"로 설정하여 바로 구매를 처리하도록 합니다.
+            document.getElementById("productForm").action = "/team/buydirectitem";
+            document.getElementById("productForm").submit();  // 폼 제출
+        }
         
     </script>  
 </head>
 <body>
+ <% 
+    Boolean loginState = (Boolean) session.getAttribute("loginstate");
+    System.out.println("Login state in productdetailview.jsp: " + loginState);  // 로그로 상태 확인
+  %>
     <form id="productForm" action="/team/cart" method="post" enctype="multipart/form-data">
         <input type="hidden" name="itemnum" id="itemnum" value="${dto.itemnum}">
         <input type="hidden" name="price" id="price" value="${dto.price}">
         <input type="hidden" name="product" id="product" value="${dto.product}">
         <input type="hidden" name="op1" id="op1" value="${param.op1}">
         <input type="hidden" name="image1" id="image1" value="${dto.image1}">
-        
+         <!-- 로그인 상태 히든 필드 -->
+       <input type="hidden" id="loginState" value="${sessionScope.loginstate}">
         
         
        
@@ -264,7 +297,7 @@
             <tr>
                 <td colspan="6">
                     <button type="button" onclick="addToCart()">장바구니</button>
-                    <a href="">바로구매</a>
+                    <a href="javascript:void(0);" onclick="buyNow()">바로구매</a>
                 </td>
             </tr>
            

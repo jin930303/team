@@ -54,15 +54,13 @@
                   </tbody>
               </table>
 
-              <!-- 결제 또는 구매 버튼 -->
+              
               <button type="submit">구매 완료</button>
           </form>
       </c:if>
   </c:if>
 
-  <!-- 장바구니로 돌아가기 버튼 -->
-  <form action="cart" method="post">
-      <button type="submit">장바구니로 돌아가기</button>
-  </form>
+  
+  
 </body>
 </html>

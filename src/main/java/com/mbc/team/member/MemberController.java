@@ -90,4 +90,20 @@ public class MemberController {
 		}
 	}
 	
+	@ResponseBody
+	@RequestMapping(value = "/emailcheck1")
+	public String member4(HttpServletRequest request)
+	{
+		String email=request.getParameter("email");
+		MemberService ms=sqlSession.getMapper(MemberService.class);
+		int count=ms.emailcheck(email);
+		if(count==0)
+		{
+			return "ok";
+		}
+		else
+		{
+			return "no";
+		}
+	}
 }

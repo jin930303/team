@@ -92,11 +92,21 @@ public class CartController {
         }
         return "redirect:/cart"; // 장바구니 페이지로 리다이렉트
     }
+    
+    @RequestMapping(value = "/processSelectedItems", method = RequestMethod.POST)
+    public String processSelectedItems(@RequestParam List<String> selectedItems, @RequestParam String action, HttpSession session, HttpServletRequest request) {
+        List<CartItem> cart = (List<CartItem>) session.getAttribute("cart");
 
-    @RequestMapping("/clearCart")
-    public String clearCart(HttpSession session) {
-        session.removeAttribute("cart"); // 세션에서 장바구니 비우기
-        return "redirect:/cart"; // 장바구니 페이지로 리다이렉트
+        if ("delete".equals(action)) {
+            // 선택된 항목 삭제
+            cart.removeIf(item -> selectedItems.contains(String.valueOf(item.getItemnum())));
+            session.setAttribute("cart", cart);
+        } else if ("buy".equals(action)) {
+            // 선택된 항목 구매 처리
+            return buySelectedItems(selectedItems, session, request); // 구매 처리 메서드 호출
+        }
+
+        return "redirect:/cart";  // 장바구니 페이지로 리다이렉션
     }
 
  // 로그인 상태 체크 및 구매 처리
@@ -122,15 +132,17 @@ public class CartController {
                 }
                 // 아이템을 구매 처리하는 로직을 추가 (예: DB에 저장, 결제 등)
                 session.setAttribute("itemsToBuy", itemsToBuy);  // 세션에 선택된 아이템 저장
+                return "buyproduct";  // 구매 페이지로 이동
+            } else {
+                request.setAttribute("errorMessage", "장바구니가 비어 있습니다.");
+                return "cart";  // 장바구니가 비어있으면 다시 장바구니 페이지로
             }
         } else {
             // 선택된 상품이 없으면 장바구니 페이지로 리다이렉트
             request.setAttribute("errorMessage", "상품을 선택하세요.");
             return "cart";  // 장바구니 페이지로 리다이렉트
         }
-        return "buyproduct";  // 구매 페이지로 이동
     }
-
     // 구매 처리 로직 (로그인 상태 확인 후 진행)
     @RequestMapping(value = "/confirmPurchase", method = RequestMethod.POST)
     public String confirmPurchase(HttpSession session) {
@@ -165,5 +177,42 @@ public class CartController {
             // 상품이 없으면 장바구니로 돌아가기
             return "redirect:/cart";  // 장바구니로 리디렉션 수정
         }
+    }
+    
+    @RequestMapping(value = "/buydirectitem", method = RequestMethod.POST)
+    public String buyDirectItem(@RequestParam("itemnum") int itemnum,
+                                @RequestParam("count") int count,
+                                @RequestParam("op1") String option1,
+                                HttpSession session, HttpServletRequest request) {
+
+        // 로그인 상태 확인
+        Boolean loginState = (Boolean) session.getAttribute("loginstate");
+        if (loginState == null || !loginState) {
+            return "redirect:/login"; // 로그인되지 않았으면 로그인 페이지로 리디렉션
+        }
+
+        // 상품 정보 가져오기
+        String product = request.getParameter("product");
+        int price = Integer.parseInt(request.getParameter("price"));
+        String image1 = request.getParameter("image1");
+
+        // CartItem 객체 생성
+        CartItem directItem = new CartItem(itemnum, product, price, option1, count, image1);
+
+        // 세션에서 카트 가져오기
+        List<CartItem> cart = (List<CartItem>) session.getAttribute("cart");
+        if (cart == null) {
+            cart = new ArrayList<>();
+        }
+
+        // 카트에 추가
+        cart.add(directItem);
+        session.setAttribute("cart", cart);
+
+        // 바로 구매 처리 메서드 호출
+        List<String> selectedItems = new ArrayList<>();
+        selectedItems.add(String.valueOf(itemnum));
+
+        return buySelectedItems(selectedItems, session, request); // 구매 처리 메서드 호출
     }
 }

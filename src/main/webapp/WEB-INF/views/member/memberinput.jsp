@@ -8,7 +8,8 @@
     <script type="text/javascript">
     var isNicknameAvailable = false;
     var isIdAvailable = false;
-
+	var isemailAvailable = false;
+	
     $(document).ready(function() {
         $("#idcheck").click(function() {
             var id = $("#id").val();
@@ -51,6 +52,26 @@
                         alert("이미 사용중인 닉네임입니다.");
                         isNicknameAvailable = false;
                         $("#nickname").focus();
+                    }
+                }
+            });
+        });
+        
+        $("#emailcheck").click(function() {
+            var email = $("#fdomain").val()+"@"+$("#bdomain").val();
+            $.ajax({
+                type: "post",
+                url: "emailcheck1",
+                data: { "email": email },
+                async: true,
+                success: function(data) {
+                    if (data == "ok") {
+                        alert("사용 가능한 이메일입니다.");
+                        isemailAvailable = true;
+                    } else {
+                        alert("이미 사용중인 이메일입니다.");
+                        isemailAvailable = false;
+                        $("#fdomain").focus();
                     }
                 }
             });
@@ -133,6 +154,16 @@
             $('#phone2').focus();
             return false;
         }
+        if (fdomain.trim() == "") {
+            alert('이메일을 입력해 주세요');
+            $('#fdomain').focus();
+            return false;
+        }
+        if (!isemailAvailable) {
+            alert('이메일 중복 확인해주세요');
+            $('#fdomain').focus();
+            return false;
+        }
         document.forms[0].submit();
     }
     </script>
@@ -205,6 +236,7 @@
                         <option value="kakao.com">kakao.com</option>
                         <option value="nate.com">nate.com</option>
                     </select>
+                    <input type="button" name="emailcheck" id="emailcheck" value="중복확인">
                 </td>
             </tr>
             <tr>
