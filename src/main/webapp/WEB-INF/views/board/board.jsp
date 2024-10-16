@@ -111,8 +111,19 @@ text-align: center
 				</select>
 				<input type="text" name="svalue" style="width: 250px" placeholder="검색어를 입력해주세요.">
 				<input type="submit" value="찾기">
+<c:choose>
+	<c:when test="${adminloginstate==true}">
 				<input type="button" onclick="location.href='board'" value="목록">
 				<input type="button" onclick="location.href='boardinput'" value="글쓰기">
+	</c:when>
+	<c:when test="${loginstate==true}">
+				<input type="button" onclick="location.href='board'" value="목록">
+				<input type="button" onclick="location.href='boardinput'" value="글쓰기">
+	</c:when>
+	<c:otherwise>
+				<input type="button" onclick="location.href='board'" value="목록">
+	</c:otherwise>
+</c:choose>
 			</form>
 		</td>
 	</tr>

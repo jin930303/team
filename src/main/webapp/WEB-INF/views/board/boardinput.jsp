@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -101,12 +102,23 @@ window.onload = function() {
 			</select>
 		</td>
 	</tr>
+
 	<tr>
 		<th>제목</th>
+<c:choose>
+<c:when test="${loginstate==true}">
 		<td style="text-align: left;">
 			<input type="text" name="title" style="width:725px" required="required">
-			<input type="hidden" name="nickname" value="${list.nickname}" readonly>
+			<input type="hidden" name="nickname" value="${sessionScope.dto3.nickname}" readonly>
 		</td>
+</c:when>
+<c:when test="${adminloginstate==true}">
+		<td style="text-align: left;">
+			<input type="text" name="title" style="width:725px" required="required">
+			<input type="hidden" name="nickname" value="관리자" readonly>
+		</td>
+</c:when>
+</c:choose>
 	</tr>
 	<tr>
 		<th>내용</th>
