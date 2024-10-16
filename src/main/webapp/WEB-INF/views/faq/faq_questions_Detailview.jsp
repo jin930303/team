@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html>
@@ -223,6 +222,14 @@ body {
             location.href = 'faq_admin_delete?cnum=' + cnum;
         }
     }
+    function reply_delete(cnum) {
+        if (confirm('삭제하시면 복구할 수 없습니다.\n정말로 삭제하시겠습니까?')) {
+            location.href = 'reply_delete?cnum=' + cnum;
+        }
+    }
+    $(document).click(function(#"reply_update") {
+		
+	});
 </script>
 <meta charset="UTF-8">
 <title>FAQ-자주묻는질문 상세페이지</title>
@@ -235,14 +242,11 @@ body {
 			<ul>
 				<li><a href="faq_community">고객센터</a></li>
 				<li><a href="gongjiboard">공지사항</a></li>
-				<% 
-					Boolean FAQmember = (Boolean) session.getAttribute("loginstate");
-					if (FAQmember != null && FAQmember) {
-				%>
-					<li><a href="faqin">1:1 문의하기</a></li>
-				<%
-					}
-				%>
+				<c:choose>
+					<c:when test="${loginstate eq true}">
+						<li><a href="faqin">1:1 문의하기</a></li>
+					</c:when>
+				</c:choose>
 				<li><a href="faqout">문의 내역</a></li>
 				<li><a href="faq">FAQ</a></li>
 			</ul>
@@ -303,24 +307,24 @@ body {
 				<tr>
 					<td colspan="7">
 					<!-- 관리자 문의 답변달기 버튼 -->
-					<% 
-						Boolean FAQadmin = (Boolean) session.getAttribute("adminloginstate");
-						if (FAQadmin != null && FAQadmin) {
-					%>
-					<input type="button" value="FAQ 수정(관리자)" onclick="location.href='faq_admin_update?cnum=${faq.cnum}'">
-					<input type="button" value="FAQ 삭제(관리자)" onclick="deleteFaq(${faq.cnum})">
-					<% 
-						}
-					%>
+				<c:choose>
+					<c:when test="${adminloginstate eq true}">
+						<input type="button" value="FAQ 수정(관리자)" onclick="location.href='faq_admin_update?cnum=${faq.cnum}'">
+						<input type="button" value="FAQ 삭제(관리자)" onclick="deleteFaq(${faq.cnum})">
+					</c:when>
+				</c:choose>	
 					<input type="button" value="돌아가기" onclick="location.href='./faq'"></td>
 				</tr>
 				<tr>
 					<th colspan="6"><h2 style="text-align: left;">댓글</h2></th>
 				</tr>
+			
 			<c:forEach items="${faqreply}" var="reply">
 				<tr>	
 					<td>${reply.nickname}</td>
-					<td>${reply.fcontents}</td>
+					<td>
+						${reply.fcontents}
+					</td>
 				</tr>
 			</c:forEach>
 		</table>
@@ -331,18 +335,21 @@ body {
 		
 			<form action="faq_questions_reply_save" method="post">
 				<table style="text-align: center;" width="900px" border="1">
+				<c:choose>
+					<c:when test="${loginstate eq true}">
 					<input type="hidden" value="${faq.cnum}" name="cnum"> 
 					<input type="hidden" value="${faq.groups}" name="groups"> 
 					<input type="hidden" value="${faq.step}" name="step"> 
 					<input type="hidden" value="${faq.indent}" name="indent">
 					<input type="hidden" value="${faq.tab}" name="tab">
-					<!-- +@ 닉네임이 운영자로 나옴 멤버에서 가져와야됨 -->
-					<input type="hidden" value="${faq.nickname}" name="nickname">
+					<input type="hidden" value="${sessionScope.dto3.nickname}" name="nickname">
 					<tr>	
 						<td><textarea rows="5" cols="10" name="fcontents"></textarea></td>
 						<td><input type="submit" value="댓글 달기">
 							<input type="reset" value="초기화"></td>
 					</tr>
+					</c:when>
+				</c:choose>
 				</table>
 			</form>
 		

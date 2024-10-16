@@ -37,6 +37,17 @@
    delete from product where itemnum = #{itemnum}
 </delete>
 
-	
+<select id="update" resultType="com.mbc.team.product.ProductDTO">
+ select * from product where itemnum = #{param1} 
+ </select>
+
+<update id="productupdatesave"> 
+  update product set image1 = #{param1, jdbcType=VARCHAR}, cg_code = #{param2, jdbcType=VARCHAR}, scg_code = #{param3, jdbcType=VARCHAR}, 
+                     product = #{param4, jdbcType=VARCHAR}, price = #{param5, jdbcType=INTEGER}, dimage = #{param6, jdbcType=VARCHAR} 
+                     where itemnum = #{param7, jdbcType=INTEGER}
+</update>
+
+
+
 </mapper>
 

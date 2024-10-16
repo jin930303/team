@@ -18,6 +18,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
+import com.mbc.team.member.MemberDTO;
+
 @Controller
 public class FAQController {
 
@@ -34,8 +36,8 @@ public class FAQController {
 	@RequestMapping(value = "/faqin")
 	public String faq0member(HttpServletResponse response, HttpServletRequest request, Model mo) throws IOException {
 		
-		HttpSession session = request.getSession();
-		Boolean FAQinput = (Boolean) session.getAttribute("loginstate");
+		HttpSession hs = request.getSession();
+		Boolean FAQinput = (Boolean) hs.getAttribute("loginstate");
 		
 		if (FAQinput == null || !FAQinput) {
 			
@@ -52,13 +54,15 @@ public class FAQController {
 		}
 	}
 	
-	//	1:1 문의글 저장(이미지 max 3장까지 저장) +@ 저장 후 바로 상세페이지 이동 O
+	// 1:1 문의글 저장(이미지 max 3장까지 저장) +@ 저장 후 바로 상세페이지 이동 O
 	@RequestMapping(value = "/faqsave", method = RequestMethod.POST)
-	public String faq1member(MultipartHttpServletRequest mul) throws IllegalStateException, IOException {
-	    String tab = mul.getParameter("tab");
+	public String faq1member(MultipartHttpServletRequest mul, HttpSession hs) throws IllegalStateException, IOException {
+	    
+		String nickname = mul.getParameter("nickname");
+		String tab = mul.getParameter("tab");
 	    String title = mul.getParameter("title");
-	    String nickname = mul.getParameter("nickname");
 	    String fcontents = mul.getParameter("fcontents");
+	    String openclose = mul.getParameter("openclose");
 
 	    // 파일 처리 (파일이 없을 경우 빈 문자열로 처리)
 	    MultipartFile fimg1 = mul.getFile("fimage1");
@@ -82,14 +86,13 @@ public class FAQController {
 
 	    // FAQ 데이터 저장
 	    FAQService fs = sqlSession.getMapper(FAQService.class);
-	    fs.faqinsert(tab, title, fcontents, nickname, fname1, fname2, fname3);
-	    
+	    fs.faqinsert(tab, title, fcontents, nickname, fname1, fname2, fname3, openclose);
 	    int cnum = fs.save_detail();
 
 	    return "redirect:/faqdetail?cnum="+cnum;
 	}
 
-	// 1:1 문의글 게시판(페이징)
+	// 1:1 문의글 게시판(페이징) +@ 공개, 비공개 여부 O
 	@RequestMapping(value = "/faqout")
 	public String faq2(HttpServletRequest request, PageDTO dto, Model mo) {
 		String tab = request.getParameter("tab");
@@ -98,6 +101,7 @@ public class FAQController {
 
 		FAQService fs = sqlSession.getMapper(FAQService.class);
 		ArrayList<FAQDTO> list = fs.faqboard();
+		
 		mo.addAttribute("list", list);
 
 		int total = fs.total(tab);
@@ -150,7 +154,7 @@ public class FAQController {
 		return "faqoutput";
 	}
 
-	// 1:1 문의글 답변 작성(관리자만 답변 작성) +@ 공개, 비공개 여부
+	// 1:1 문의글 답변 작성(관리자만 답변 작성)
 	@RequestMapping(value = "/faqreply", method = RequestMethod.POST)
 	public String faq4admin(HttpServletResponse response, HttpServletRequest request, Model mo) throws IOException {
 		
@@ -170,7 +174,7 @@ public class FAQController {
 		
 	}
 
-	// 1:1 문의글 답변 저장(관리자 답변은 1개만 가능) +@ 상세페이지로 바로 이동 기능
+	// 1:1 문의글 답변 저장(관리자 답변은 1개만 가능) +@ 상세페이지로 바로 이동 기능 O
 	@RequestMapping(value = "/faqreplysave", method = RequestMethod.POST)
 	public String faq5admin(HttpServletRequest request) throws IllegalStateException, IOException {
 		int cnum = Integer.parseInt(request.getParameter("cnum"));
@@ -192,21 +196,34 @@ public class FAQController {
 		return "redirect:/faqdetail?cnum=" + cnum;
 	}
 
-	// 1:1 문의글 상세페이지(상세페이지 출력 + 관리자 답변 동시 출력)
+	// 1:1 문의글 상세페이지(상세페이지 출력 + 관리자 답변 동시 출력 +관리자 및 회원만 확인 가능) +@ 회원만x 비회원도 공개는 같이 볼 수 있어야됨 O
 	@RequestMapping(value = "/faqdetail")
-	public String faq6(Model mo, HttpServletRequest request) {
+	public String faq6(Model mo, HttpServletRequest request, FAQDTO dto) {
+		HttpSession hs = request.getSession();
+		Boolean FAQadmin = (Boolean) hs.getAttribute("adminloginstate");
+		Boolean FAQmember = (Boolean) hs.getAttribute("loginstate");
 		int cnum = Integer.parseInt(request.getParameter("cnum"));
-
-		FAQService fs = sqlSession.getMapper(FAQService.class);
-
-		ArrayList<FAQDTO> list = fs.faqdetail(cnum);
-		mo.addAttribute("list", list);
-		fs.faqcount(cnum);
-
-		ArrayList<FAQDTO> replylist = fs.faqreplydetail(cnum);
-		mo.addAttribute("replylist", replylist);
-
-		return "faqDtailview";
+		String openclose = request.getParameter("openclose");
+		
+		// 1.관리자가 아니면 2.비회원면 + 비공개면
+		if (!FAQadmin && 
+				!FAQmember 
+				&& openclose.equals("비공개")) {
+			
+			return "redirect:/faqout";
+		}
+		else { 
+			FAQService fs = sqlSession.getMapper(FAQService.class);
+	
+			ArrayList<FAQDTO> list = fs.faqdetail(cnum);
+			mo.addAttribute("list", list);
+			fs.faqcount(cnum);
+	
+			ArrayList<FAQDTO> replylist = fs.faqreplydetail(cnum);
+			mo.addAttribute("replylist", replylist);
+	
+			return "faqDtailview";
+		}
 	}
 
 	// 1:1 문의글 답변 Updateview(관리자만 답변 수정 가능)
@@ -264,7 +281,7 @@ public class FAQController {
 		return "redirect:/faqout";
 	}
 
-	// 1:1 문의글 답변 Delete clear +@ 되돌아가는 기능 필요
+	// 1:1 문의글 답변 Delete clear
 	@RequestMapping(value = "/faq_reply_delete")
 	public String faq9admin(HttpServletRequest request) {
 		int cnum = Integer.parseInt(request.getParameter("cnum"));
@@ -274,7 +291,7 @@ public class FAQController {
 		return "redirect:/faqout";
 	}
 
-	// 1:1 문의글 Updateview(회원만 수정가능) +@ 모든 회원이 수정가능한 오류 수정 요구
+	// 1:1 문의글 Updateview(회원만 수정가능) +@ 모든 회원이 수정가능한 오류 수정 요구 O
 	@RequestMapping(value = "/faqupdate")
 	public String faq10member(HttpServletRequest request, Model mo) throws IllegalStateException, IOException {
 		int cnum = Integer.parseInt(request.getParameter("cnum"));
@@ -295,6 +312,7 @@ public class FAQController {
 	    String title = mul.getParameter("title");
 	    String nickname = mul.getParameter("nickname");
 	    String fcontents = mul.getParameter("fcontents");
+	    String openclose = mul.getParameter("openclose");
 
 	    // 파일 처리 (파일이 없을 경우 빈 문자열로 처리)
 	    MultipartFile fimg1 = mul.getFile("fimage1");
@@ -324,7 +342,7 @@ public class FAQController {
 		prw.close();
 
 		FAQService fs = sqlSession.getMapper(FAQService.class);
-		fs.faqupdate2(cnum, tab, title, fcontents, nickname, fname1, fname2, fname3);
+		fs.faqupdate2(cnum, tab, title, fcontents, nickname, fname1, fname2, fname3, openclose);
 
 		return "redirect:/faqout";
 	}
@@ -576,7 +594,7 @@ public class FAQController {
 		return "faq_questions_Detailview";
 	}
 
-	// FAQ-자주 묻는 질문 Updateview(관리자만 수정가능) +@ 모든 회원이 수정가능한 오류 수정 요구
+	// FAQ-자주 묻는 질문 Updateview(관리자만 수정가능)
 	@RequestMapping(value = "/faq_admin_update")
 	public String faq20admin(Model mo, HttpServletRequest request) {
 		int cnum = Integer.parseInt(request.getParameter("cnum"));
@@ -680,4 +698,5 @@ public class FAQController {
 		}
 	}
 
+	
 }

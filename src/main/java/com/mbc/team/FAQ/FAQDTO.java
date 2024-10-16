@@ -3,9 +3,18 @@ package com.mbc.team.FAQ;
 public class FAQDTO {
 
 	int cnum;
-	String tab, title, fdate, fcontents, nickname, fimage1, fimage2, fimage3;
+	String tab, title, fdate, fcontents, nickname, fimage1, fimage2, fimage3,openclose;
 	int groups, step, indent, faqcnt, rank;
 	public FAQDTO() {}
+	
+	public String getOpenclose() {
+		return openclose;
+	}
+
+	public void setOpenclose(String openclose) {
+		this.openclose = openclose;
+	}
+
 	public int getRank() {
 		return rank;
 	}

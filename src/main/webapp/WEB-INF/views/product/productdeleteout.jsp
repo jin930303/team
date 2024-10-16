@@ -10,21 +10,20 @@
     /* General styling for grid layout */
     .product-container {
         display: grid;
-        grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); /* 상품 카드 크기 증가 */
-        gap: 30px; /* 상품 간격 더 넓힘 */
-        max-width: 1200px; /* 그리드 전체 폭 더 넓힘 */
+        grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+        gap: 30px;
+        max-width: 1200px;
         margin: 0 auto;
     }
 
     .product {
         border: 1px solid #ddd;
-        padding: 30px; /* 상품 카드 패딩 증가 */
+        padding: 30px;
         text-align: center;
     }
 
-    /* Increased image size */
     .product img {
-        width: 200px; /* 이미지 크기 더 크게 설정 */
+        width: 200px;
         height: 200px;
         object-fit: cover;
     }
@@ -34,60 +33,82 @@
         color: inherit;
     }
 
-    /* Increased font size for the product title */
     .product-title {
         font-weight: bold;
-        font-size: 24px; /* 상품명 폰트 크기 증가 */
+        font-size: 24px;
         margin: 15px 0;
     }
 
-    /* Increased font size for the product price */
     .product-price {
         color: #d32f2f;
-        font-size: 20px; /* 가격 폰트 크기 증가 */
+        font-size: 20px;
         margin: 10px 0;
     }
 
-    /* Right-align the sort select dropdown */
     .sort-container {
         display: flex;
-        justify-content: flex-end; /* 오른쪽 정렬 */
+        justify-content: flex-end;
         margin: 20px;
     }
 
-    .sort-container select {
-        margin-left: 10px; /* select와 다른 요소 사이에 공간 추가 */
-    }
-
-    /* Search container styling */
     .search-container {
         margin: 20px;
         display: flex;
-        justify-content: flex-end; /* 오른쪽 정렬 */
+        justify-content: flex-end;
     }
 
-    .search-container input {
-        margin-left: 10px; /* input과 label 사이 공간 추가 */
-        padding: 4px;
-    }
-
-    /* Delete button styling */
     .delete-button {
-        background-color: #d32f2f; /* 빨간색 배경 */
-        color: white; /* 글자색 흰색 */
-        border: none; /* 테두리 없애기 */
-        padding: 8px 12px; /* 패딩 */
-        cursor: pointer; /* 커서 모양 변경 */
-        margin-top: 10px; /* 버튼 위쪽 여백 */
+        background-color: #d32f2f;
+        color: white;
+        border: none;
+        padding: 8px 12px;
+        cursor: pointer;
+        margin-top: 10px;
     }
 
     .delete-button:hover {
-        background-color: #c62828; /* 호버 시 색상 변경 */
+        background-color: #c62828;
+    }
+
+    .category-container {
+        display: flex;
+        justify-content: center; /* 중앙 정렬 */
+        margin: 20px;
+        flex-wrap: wrap; /* 여러 줄로 감싸기 */
+    }
+
+    .category-button {
+        margin: 10px; /* 버튼 간격 조정 */
+        padding: 10px 15px;
+        border: none;
+        background-color: #ccc; /* 회색 배경 */
+        color: black; /* 글자색 검정 */
+        cursor: pointer;
+        border-radius: 5px; /* 모서리 둥글게 */
+    }
+
+    .category-button:hover {
+        background-color: #bbb; /* 호버 시 색상 변경 */
     }
 </style>
 </head>
 
 <body>
+
+<!-- 카테고리 버튼 추가 -->
+<div class="category-container">
+    <button class="category-button" onclick="filterByCategory('')">모두 보기</button> <!-- 모든 상품 보기 버튼 -->
+    <button class="category-button" onclick="filterByCategory('fcg001')">글러브</button>
+    <button class="category-button" onclick="filterByCategory('fcg002')">배트</button>
+    <button class="category-button" onclick="filterByCategory('fcg003')">장갑</button>
+    <button class="category-button" onclick="filterByCategory('fcg004')">야구화</button>
+    <button class="category-button" onclick="filterByCategory('fcg005')">가방</button>
+    <button class="category-button" onclick="filterByCategory('fcg006')">의류</button>
+    <button class="category-button" onclick="filterByCategory('fcg007')">보호장비</button>
+    <button class="category-button" onclick="filterByCategory('fcg008')">야구공</button>
+    <button class="category-button" onclick="filterByCategory('fcg010')">굿즈</button>
+    <button class="category-button" onclick="filterByCategory('fcg011')">기타용품</button>
+</div>
 
 <div class="sort-container"> 
     <select id="sortSelect" onchange="sortProducts()">
@@ -103,12 +124,13 @@
 
 <div class="product-container">
     <c:forEach items="${list}" var="aa">
-        <div class="product">
+        <div class="product" data-cg_code="${aa.cg_code}"> <!-- 각 상품에 cg_code 추가 -->
             <a href="productdetail?itemnum=${aa.itemnum}">
                 <img src="./image/${aa.image1}" alt="Product Image">
             </a>
             <div class="product-title">${aa.product}</div>
             <div class="product-price">${aa.price}원</div>
+            <button class="edit-button" onclick="window.location.href='producteupdate?itemnum=${aa.itemnum}'">수정</button>
             <button class="delete-button" onclick="confirmDelete('${aa.itemnum}')">삭제</button>
         </div>
     </c:forEach>
@@ -121,7 +143,6 @@
         const productContainer = document.querySelector(".product-container");
         const products = Array.from(productContainer.children);
 
-        // 가격에 따라 정렬 옵션
         products.sort((a, b) => {
             const priceA = parseInt(a.querySelector(".product-price").textContent.replace("원", "").trim());
             const priceB = parseInt(b.querySelector(".product-price").textContent.replace("원", "").trim());
@@ -131,10 +152,9 @@
             } else if (sortBy === "priceDesc") {
                 return priceB - priceA;
             }
-            return 0; // 기본값: 변경 없음
+            return 0;
         });
 
-        // 정렬된 상품을 다시 추가
         products.forEach(product => productContainer.appendChild(product));
     }
 
@@ -146,6 +166,20 @@
         products.forEach(product => {
             const title = product.querySelector(".product-title").textContent.toLowerCase();
             if (title.includes(input)) {
+                product.style.display = ""; 
+            } else {
+                product.style.display = "none"; 
+            }
+        });
+    }
+
+    function filterByCategory(cg_code) {
+        const productContainer = document.querySelector(".product-container");
+        const products = Array.from(productContainer.children);
+
+        products.forEach(product => {
+            const productCode = product.dataset.cg_code;
+            if (cg_code === "" || productCode === cg_code) {
                 product.style.display = ""; // 보여주기
             } else {
                 product.style.display = "none"; // 숨기기

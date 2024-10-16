@@ -279,10 +279,8 @@ body {
 				<li><a href="#">관심상품</a></li>
 				<li><a href="myinfo">마이페이지</a></li>
 			</ul>
-			<!-- 
             <div class="scroll-button" onclick="window.scrollTo({top: 0, behavior: 'smooth'});">△</div>
             <div class="scroll-button" onclick="window.scrollTo({top: document.body.scrollHeight, behavior: 'smooth'});">▽</div>
-     -->
 		</div>
 
 		<div class="container">
@@ -301,12 +299,17 @@ body {
 						</select></td>
 					</tr>
 					<tr>
+					<c:choose>
+						<c:when test="${loginstate==true}">
+							<th>닉네임</th>
+							<td><input type="text" name="nickname" value="${sessionScope.dto3.nickname}" readonly></td>
+						</c:when>
+					</c:choose>
+					</tr>					
+					
+					<tr>
 						<th>제목</th>
 						<td><input type="text" name="title"></td>
-					</tr>
-					<tr>
-						<th>작성자</th>
-						<td><input type="text" name="nickname"></td>
 					</tr>
 					<tr>
 						<th>문의 내용</th>
@@ -323,8 +326,14 @@ body {
 					        </div>
 					    </td>
 					</tr>
-					
-					
+					<tr>
+						<!-- 공개/비공개 체크박스 추가 -->
+					    <td>
+						    <label for="openclose">공개 여부:</label>
+						    <input type="checkbox" name="openclose" value="공개"> 공개
+						    <input type="checkbox" name="openclose" value="비공개"> 비공개
+						</td>
+					</tr>
 					<tr>
 						<td colspan="2" style="text-align: center;"><input
 							type="submit" value="작성 완료"></td>
