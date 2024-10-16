@@ -310,26 +310,20 @@ body {
 				</tr>
 				<tr>
 					<td colspan="4">
-					<!-- 관리자 문의 답변달기 버튼 -->
-					<% 
-						Boolean FAQadmin = (Boolean) session.getAttribute("adminloginstate");
-						if (FAQadmin != null && FAQadmin) {
-					%>
+				<!-- 관리자 문의 답변달기 버튼 -->
+				<c:choose>
+					<c:when test="${adminloginstate==true}">
 						<button type="submit">문의 답변 달기</button>
-					<% 
-						}
-					%>
+					</c:when>
+				</c:choose>
 					
-					<!-- 회원 문의 수정,삭제 버튼(작성한 회원만 사용하게끔 보완해야됨) -->
-					<% 
-						Boolean FAQmember1 = (Boolean) session.getAttribute("loginstate");
-						if (FAQmember1 != null && FAQmember1) {
-					%>
+				<!-- 회원 문의 수정, 삭제 버튼 (로그인한 사람이며 작성자와 nickname이 같을 때만 가능) -->
+				<c:choose>
+					<c:when test="${loginstate eq true && sessionScope.dto3.nickname eq faq.nickname}">
 						<input type="button" value="문의글 수정" onclick="location.href='faqupdate?cnum=${faq.cnum}'">
 						<input type="button" value="문의글 삭제" onclick="deleteFaq(${faq.cnum})">
-					<% 
-						}
-					%>
+					</c:when>
+				</c:choose>
 						<input type="button" value="돌아가기" onclick="location.href='./faqout'">
 					</td>
 				</tr>

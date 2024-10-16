@@ -307,6 +307,14 @@ body {
 					height="70px"></td>
 			</tr>
 			<tr>
+				<!-- 공개/비공개 체크박스 -->
+			    <td>
+				    <label for="openclose">공개 여부:</label>
+				    <input type="checkbox" name="openclose" value="공개"> 공개
+				    <input type="checkbox" name="openclose" value="비공개"> 비공개
+				</td>
+			</tr>
+			<tr>
 				<td><input type="submit" value="수정 완료"></td>
 			</tr>
 		</table>

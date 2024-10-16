@@ -7,6 +7,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>고객센터 문의 게시판</title>
+
 <style type="text/css">
 * {
 	margin: 0;
@@ -309,20 +310,34 @@ body {
 						<th width="350px">제목</th>
 						<th width="100px">작성자</th>
 						<th width="100px">작성일자</th>
+						<th width="80px">공개여부</th>
 						<th width="50px">조회수</th>
 					</tr>
 				</thead>
 				<tbody>
-				
 					<c:forEach items="${list}" var="faq">
-						<tr onclick="location.href='faqdetail?cnum=${faq.cnum}'" class="trlink">
-							<td>${faq.tab}</td>
-							<td style="text-align: left;">${faq.title}</td>
-							<td>${faq.nickname}</td>
-							<td>${faq.fdate}</td>
-							<td>${faq.faqcnt}</td>
+						<tr onclick="location.href='faqdetail?cnum=${faq.cnum}&openclose=${faq.openclose}'" class="trlink" id="admincheck">
+							<c:choose>
+		                        <c:when test="${faq.openclose == '공개'}">
+		                            <td>${faq.tab}</td>
+		                            <td style="text-align: left;">${faq.title}</td>
+		                            <td>${faq.nickname}</td>
+									<td>${faq.fdate}</td>
+									<td>${faq.openclose}</td>
+									<td>${faq.faqcnt}</td>
+		                        </c:when>
+		                        <c:otherwise>
+		                            <td>${faq.tab}</td>
+		                            <td style="text-align: left;">비공개</td>
+		                            <td>비공개</td>
+		                            <td>${faq.fdate}</td>
+		                            <td>${faq.openclose}</td>
+		                            <td>${faq.faqcnt}</td>
+		                        </c:otherwise>
+		                    </c:choose>
 						</tr>
 					</c:forEach>
+					
 				</tbody>
 			</table>
 
