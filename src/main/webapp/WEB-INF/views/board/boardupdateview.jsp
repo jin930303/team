@@ -86,7 +86,14 @@ window.onload = function() {
 <form action="boardupdate" method="post" enctype="multipart/form-data">
 <table border="1" align="center" width="800px">
 <caption><h3>자유게시판</h3></caption>
-<input type="hidden" name="nickname" value="${list.nickname}" readonly>
+<c:choose>
+<c:when test="${loginstate==true}">
+	<input type="hidden" name="nickname" value="${sessionScope.dto3.nickname}" readonly>
+</c:when>
+<c:when test="${adminloginstate==true}">
+	<input type="hidden" name="nickname" value="관리자" readonly>
+</c:when>
+</c:choose>
 <input type="hidden" name="cnum" value="${list.cnum}" readonly>
 	<tr>
 		<th>태그</th>

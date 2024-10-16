@@ -165,7 +165,7 @@ p {
 			<ul class="nav navbar-nav navbar-left">
 				<c:choose>
 					<c:when test="${loginstate==true}">
-						<li><a href="#"> 님 반갑습니다.</a></li>
+						<li><a href="#">${sessionScope.dto3.nickname}님 반갑습니다.</a></li>
 						<li><a href="logout"> 로그아웃</a></li>
 						<li><a href="myinfo"> 회원정보</a></li>
 						<li><a href="#"> 장바구니</a></li>

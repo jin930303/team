@@ -89,8 +89,8 @@ window.onload = function() {
 		<th>제목</th>
 		<td style="text-align: left;">
 			<input type="text" name="gtitle" style="width:725px" required="required">
-			<input type="hidden" name="id" value="${list.id}" readonly>
-			<input type="hidden" name="nickname" value="${list.nickname}" readonly>
+			<input type="hidden" name="id" value="admin" readonly>
+			<input type="hidden" name="nickname" value="관리자" readonly>
 		</td>
 	</tr>
 	<tr>
