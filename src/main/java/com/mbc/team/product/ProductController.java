@@ -597,7 +597,7 @@ public class ProductController {
 		}		
 		
 		@RequestMapping(value = "productdelete", method = RequestMethod.GET)
-		public String deleteProduct(@RequestParam(value = "itemnum", required = false) Integer itemnum, Model mo) {
+		public String lte63(@RequestParam(value = "itemnum", required = false) Integer itemnum, Model mo) {
 		    ProductService ps = sqlSession.getMapper(ProductService.class);		    
 		    // itemnum이 null이 아닐 경우에만 삭제
 		    if (itemnum != null) {
@@ -607,6 +607,54 @@ public class ProductController {
 		    ArrayList<ProductDTO> list = ps.outd();
 		    mo.addAttribute("list", list);
 		    return "productdeleteout"; // 삭제 후 보여줄 페이지
+		}
+		
+		@RequestMapping(value = "/producteupdate")
+		public String lte64(HttpServletRequest request,Model mo) {	
+			int itemnum = Integer.parseInt(request.getParameter("itemnum"));
+			ProductService ps = sqlSession.getMapper(ProductService.class);
+			ProductDTO dto = ps.update(itemnum);
+			mo.addAttribute("dto", dto);
+			return "productupdate";			
+		}
+		
+		@RequestMapping(value = "productupdatesave", method = RequestMethod.POST)
+		public String lte65(MultipartHttpServletRequest mul , Model mo) throws IllegalStateException, IOException {
+		    String path = "C:\\Users\\3-14\\git\\team\\src\\main\\webapp\\image"; 
+
+		    String cg_code = mul.getParameter("cg_code");
+		    String scg_code = mul.getParameter("scg_code");
+		    String product = mul.getParameter("product");
+		    int price = Integer.parseInt(mul.getParameter("price"));
+		    
+		    // itemnum 파라미터 가져오기
+		    String itemnumStr = mul.getParameter("itemnum");
+		    if (itemnumStr == null) {
+		        throw new IllegalArgumentException("itemnum is required");
+		    }
+		    int itemnum = Integer.parseInt(itemnumStr); // null 체크 후 변환
+
+		    // 이미지 파일 처리
+		    MultipartFile mf1 = mul.getFile("image1");
+		    String fname1 = null;
+		    if (mf1 != null && !mf1.isEmpty()) {
+		        fname1 = mf1.getOriginalFilename();
+		        mf1.transferTo(new File(path + "//" + fname1));
+		    }
+
+		    MultipartFile mf2 = mul.getFile("dimage");
+		    String fname2 = null;
+		    if (mf2 != null && !mf2.isEmpty()) {
+		        fname2 = mf2.getOriginalFilename();
+		        mf2.transferTo(new File(path + "//" + fname2));
+		    }
+
+		    // 파일 이름이 null인 경우 기존 값을 유지하도록 처리
+		    ProductService ps = sqlSession.getMapper(ProductService.class);
+		    ps.productupdatesave(fname1, cg_code, scg_code, product, price, fname2, itemnum);
+		    ArrayList<ProductDTO> list = ps.outd();
+		    mo.addAttribute("list", list);
+		    return "productdeleteout";
 		}
 
 }

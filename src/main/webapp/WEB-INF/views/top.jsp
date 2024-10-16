@@ -191,8 +191,8 @@ p {
 							data-toggle="dropdown" href="#">상품등록<span class="caret"></span></a>
 							<ul class="dropdown-menu">
 								<li><a href="productin">상품자료입력</a></li>
-								<li><a href="productout">상품자료출력</a></li>
-								<li><a href="productdelete">상품자료삭제</a></li>
+	 <!--<li><a href="productout">상품자료출력</a></li> //(상품자료 출력 페이지 따로 ////// 수정+삭제 페이지 따로)출력 화면은 top에서 불필요-->
+								<li><a href="productdelete">상품자료출력</a></li>
 							</ul></li>
 						<li class="dropdown"><a class="dropdown-toggle"
 							data-toggle="dropdown" href="#">고객센터<span class="caret"></span></a>
