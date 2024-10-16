@@ -5,7 +5,7 @@ import java.util.ArrayList;
 public interface FAQService {
 //1. 저장(문의글 작성)
 	void faqinsert(String tab, String title, String fcontents, String nickname, String fname1, String fname2,
-			String fname3);
+			String fname3, String openclose);
 	int save_detail();
 
 //2. 게시판
@@ -19,7 +19,7 @@ public interface FAQService {
 
 //5. 문의글 수정완료
 	void faqupdate2(int cnum, String tab, String title, String fcontents, String nickname, String fname1, String fname2,
-			String fname3);
+			String fname3, String openclose);
 
 //6. 문의글 삭제
 	void faqdelete(int cnum);
