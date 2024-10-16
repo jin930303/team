@@ -49,7 +49,7 @@
 	</update>
 	
 	<update id="gongjiupdatex">
-		update gongji set gtitle=#{param4}, gcontents=#{param5}, gimage=(null) where gnum=#{param1}
+		update gongji set gtitle=#{param4}, gcontents=#{param5} where gnum=#{param1}
 	</update>	
 
 	<select id="paget" resultType="com.mbc.team.board.GongjiDTO">
@@ -180,7 +180,7 @@
 	</update>
 	
 	<update id="boardupdatex">
-		update community set tab=#{param3}, title=#{param4}, ccontents=#{param5}, cimage=(null) where cnum=#{param1} and nickname=#{param2} 
+		update community set tab=#{param3}, title=#{param4}, ccontents=#{param5} where cnum=#{param1} and nickname=#{param2} 
 	</update>
 
 <!-- 경기일정 -->
@@ -256,7 +256,7 @@
 	</update>
 	
 	<update id="sosickupdatex">
-		update sosick set stitle=#{param4}, scontents=#{param5}, simage=(null), stag=#{param6} where snum=#{param1}
+		update sosick set stitle=#{param4}, scontents=#{param5}, stag=#{param6} where snum=#{param1}
 	</update>
 
 	<select id="pagest" resultType="com.mbc.team.board.SosickDTO">
@@ -324,10 +324,22 @@
 		select evnum, id, nickname, etitle, econtents, to_char(edate, 'yyyy-MM-dd') as edate, eimagem, eimaged, estate, ecnt from event where evnum=#{param1}
 	</select>
 
-	<update id="eventupdate">
+	<update id="updateevent">
 		update event set etitle=#{param3}, econtents=#{param4}, eimagem=#{param5}, eimaged=#{param6}, estate=#{param7} where evnum=#{param8}
 	</update>
-	
+
+	<update id="updateevent1">
+		update event set etitle=#{param3}, econtents=#{param4}, estate=#{param5} where evnum=#{param6}
+	</update>
+
+	<update id="updateevent2">
+		update event set etitle=#{param3}, econtents=#{param4}, eimaged=#{param5}, estate=#{param6} where evnum=#{param7}
+	</update>
+
+	<update id="updateevent3">
+		update event set etitle=#{param3}, econtents=#{param4}, eimagem=#{param5}, estate=#{param6} where evnum=#{param7}
+	</update>
+
 	<select id="pageet" resultType="com.mbc.team.board.EventDTO">
 	   select * from (
 	   select rownum rn,A.* from(  

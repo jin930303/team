@@ -828,22 +828,36 @@ public class BoardController {
 		String etitle=mul.getParameter("etitle");
 		String econtents=mul.getParameter("econtents");
 		String estate=mul.getParameter("estate");
-		
-		MultipartFile mf1=mul.getFile("eimagem");
-		String eimagemfn=mf1.getOriginalFilename();
-		mf1.transferTo(new File(savepath+"//"+eimagemfn));
-		
-		MultipartFile mf2=mul.getFile("eimaged");
-		String eimagedfn=mf2.getOriginalFilename();
-		mf2.transferTo(new File(savepath+"//"+eimagedfn));
-		
+		MultipartFile mf1=mul.getFile("eimagemu");
+		MultipartFile mf2=mul.getFile("eimagedu");
 		BoardService bs=sqlsession.getMapper(BoardService.class);
+
+		if ((mf1 == null || mf1.isEmpty()) && (mf2 == null || mf2.isEmpty())) {
+			bs.updateevent1(id, nickname, etitle, econtents, estate, evnum);
+		}
+		else if ((mf1 == null || mf1.isEmpty()) && (mf2 != null && !mf2.isEmpty())) {
+			String eimagedufn=mf2.getOriginalFilename();
+			mf2.transferTo(new File(savepath+"//"+eimagedufn));
+			bs.updateevent2(id, nickname, etitle, econtents, eimagedufn, estate, evnum);
+		}
+		else if ((mf1 != null && !mf1.isEmpty()) && (mf2 == null || mf2.isEmpty())) {
+			String eimagemufn=mf1.getOriginalFilename();
+			mf1.transferTo(new File(savepath+"//"+eimagemufn));
+			bs.updateevent3(id, nickname, etitle, econtents, eimagemufn, estate, evnum);
+		}
+		else {
+			String eimagemufn=mf1.getOriginalFilename();
+			mf1.transferTo(new File(savepath+"//"+eimagemufn));
+			String eimagedufn=mf2.getOriginalFilename();
+			mf2.transferTo(new File(savepath+"//"+eimagedufn));
+			bs.updateevent(id, nickname, etitle, econtents, eimagemufn, eimagedufn, estate, evnum);
+		}
+		
 		response.setContentType("text/html;charset=utf-8");
 		PrintWriter prw=response.getWriter();
 		prw.print("<script> alert('수정이 완료되었습니다.');</script>");
 		prw.print("<script> location.href='eventboard';</script>");
 		prw.close();
-		bs.updateevent(id, nickname, etitle, econtents, eimagemfn, eimagedfn, estate, evnum);
 		return "redirect:/eventdetail?evnum=" + evnum;
 	}
 	

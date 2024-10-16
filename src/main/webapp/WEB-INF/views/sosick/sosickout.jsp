@@ -74,22 +74,26 @@ text-align: center;
 <div class="maindata">
 <table border="1" width="800px" align="center">
 <caption><h2>야구소식</h2></caption>
+	<tr height="35px">
+		<th width="140px">제목</th><td colspan="5" style="text-align: left; padding-left: 10px;">[${list.stag}] ${list.stitle}</th>
+	</tr>
+	
+	<tr height="35px">
+		<th width="140px">작성자</th><td width="160px">${list.nickname}</td>
+		<th width="140px">작성일시</th><td width="160px">${list.sdate}</td>
+		<th width="100px">조회수</th><td width="100px">${list.scnt}회</td>
+	</tr>	
+	
 	<tr>
-		<th>제목</th><td style="text-align: left;">[${list.stag}] ${list.stitle}</td>
-		<th>작성자</th><td>${list.nickname}</td>
-	</tr>	
-	<tr>	
-		<th>작성일시</th><td>${list.sdate}</td><th>조회수</th><td>${list.scnt}</td>
-	</tr>	
-		<tr>
 		<c:choose>
 			<c:when test="${list.simage==null}">
-			<td colspan="4">
-				<pre style="text-align: left;">${list.scontents}</pre>
-			</td>
+				<td colspan="6">
+					<pre style="text-align: left; padding-bottom: 20px; padding-top: 20px;">${list.scontents}</pre>
+				</td>
 			</c:when>
+			
 			<c:otherwise>
-				<td colspan="4" style="text-align: center;">
+				<td colspan="6" style="text-align: center; padding-bottom: 20px; padding-top: 20px;">
 		    		<img src="./image/${list.simage}" style="width:700px; display: block; margin: 0 auto;"><br>
 		    		<pre style="text-align: left;">${list.scontents}</pre>
 				</td>
@@ -98,8 +102,8 @@ text-align: center;
 	</tr>
 <c:choose>
 <c:when test="${adminloginstate==true}">
-	<tr>	
-		<td colspan="4">
+	<tr height="50px">	
+		<td colspan="6">
 			<input type="button" onclick="location.href='sosickboard'" value="목록">
 			<input type="button" onclick="delsosick(${list.snum})" value="삭제">
 			<input type="button" onclick="location.href='sosickupdateview?snum=${list.snum}'" value="수정">
@@ -107,8 +111,8 @@ text-align: center;
 	</tr>
 </c:when>
 <c:otherwise>
-	<tr>	
-		<td colspan="4">
+	<tr height="50px">	
+		<td colspan="6">
 			<input type="button" onclick="location.href='sosickboard'" value="목록">
 		</td>
 	</tr>

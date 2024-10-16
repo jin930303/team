@@ -74,28 +74,36 @@ text-align: center;
 <div class="maindata">
 <table border="1" width="800px" align="center">
 <caption><h2>자유게시판</h2></caption>
-	<tr>
-		<th colspan="5" style="text-align: left;">[${list.tab}] ${list.title}</th><th colspan="3">${list.nickname}</th>
-	</tr>	
-	<tr>	
-		<td>글번호</td><td>${list.cnum}</td><td>작성일</td><td>${list.cdate}</td><td>추천</td><th>${list.clike}</th><td>조회</td><td>${list.ccnt}</td>
+	<tr height="35px">
+		<th colspan="6" style="text-align: left; padding-left:10px">[${list.tab}] ${list.title}</th>
+		<th colspan="2">${list.nickname}</th>
 	</tr>
-	<tr>
-		<c:choose>
-			<c:when test="${list.cimage==null}">
-				<td colspan="8">
-					<pre style="text-align: left;">${list.ccontents}</pre>
-				</td>
-			</c:when>
-			<c:otherwise>
-				<td colspan="8" style="text-align: center;">
-					<img src="./image/${list.cimage}" style="width:700px; display: block; margin: 0 auto;">
-					<pre style="text-align: left;">${list.ccontents}</pre>
-				</td>
-			</c:otherwise>
-		</c:choose>
+		
+	<tr height="35px">	
+		<td width="100px">글번호</td><td width="50px">${list.cnum}</td>
+		<td width="120px">작성일</td><td width="180px">${list.cdate}</td>
+		<td width="80px">추천</td><th width="70px">${list.clike}</th>
+		<td width="100px">조회수</td><td width="50px">${list.ccnt}</td>
 	</tr>
-	<tr>	
+	
+	<tr>
+	<c:choose>
+		<c:when test="${list.cimage==null}">
+			<td colspan="8" style="padding-bottom: 20px; padding-top: 20px;">
+				<pre style="text-align: left;">${list.ccontents}</pre>
+			</td>
+		</c:when>
+		
+		<c:otherwise>
+			<td colspan="8" style="text-align: center;">
+				<img src="./image/${list.cimage}" style="width:700px; display: block; margin: 0 auto; padding-bottom: 20px; padding-top: 20px;"><br>
+				<pre style="text-align: left;">${list.ccontents}</pre>
+			</td>
+		</c:otherwise>
+	</c:choose>
+	</tr>
+
+	<tr height="50px">	
 		<td colspan="8">
 			${list.clike}<a href="boardlike?cnum=${list.cnum}"><img src="./image/좋아요.png" style="width:50px; height:50px;"></a>
 			<a href="boardhate?cnum=${list.cnum}"><img src="./image/싫어요.png" style="width:50px; height:50px;"></a>${list.chate}
@@ -104,118 +112,187 @@ text-align: center;
 	
 <c:choose>
 <c:when test="${adminloginstate==true}">
-	<tr>	
+	<tr height="50px">	
 		<td colspan="8">
 			<input type="button" onclick="location.href='board'" value="목록">
 			<input type="button" onclick="delboard(${list.cnum})" value="삭제">
-			<input type="button" onclick="location.href='boardupdateview?cnum=${list.cnum}'" value="수정">
 		</td>
 	</tr>
-	<tr>
-	<th colspan="8" style="text-align:left;">댓글</th>
-</tr>
-<c:forEach var="reply" items="${reply}">
-    <tr>
-		<td colspan="2">${reply.nickname}</td>
-		<td colspan="6" style="text-align: left;">☞ ${reply.ccontents}</td>
+	
+	<tr height="35px">
+		<th colspan="8" style="text-align:left; padding-left:10px">댓글</th>
 	</tr>
-</c:forEach>
+	
+	<c:forEach var="reply" items="${reply}">
+		<tr height="50px">
+			<td>${reply.nickname}</td>
+			<td colspan="7" style="text-align: left; padding-left:10px">☞ ${reply.ccontents}</td>
+		</tr>
+	</c:forEach>
+
+	
 <form action="boardreplysave" method="post">
 <input type="hidden" value="${list.cnum}" name="cnum" readonly>
 <input type="hidden" value="관리자" name="nickname" readonly>
 <input type="hidden" value="${list.cgroup}" name="cgroup" readonly>
 <input type="hidden" value="${list.step}" name="step" readonly>
 <input type="hidden" value="${list.indent}" name="indent" readonly>
-<tr>
-	<td colspan="8" align="center">
+
+<tr height="50px">
+	<td>관리자</td>
+	<td colspan="7" align="left">
 		<textarea rows="1" cols="60" name="ccontents"></textarea>
 		<input type="submit" value="댓글등록">
 		<input type="reset" value="작성취소">
 	</td>
 </tr>
+
 </form>
 </c:when>
 
-<c:when test="${list.nickname!=sessionScope.dto3.nickname}">
-	<tr>	
+<c:when test="${loginstate==true && list.nickname!=sessionScope.dto3.nickname}">
+	<tr height="50px">	
 		<td colspan="8">
 			<input type="button" onclick="location.href='board'" value="목록">
 		</td>
 	</tr>
-	<tr>
-	<th colspan="8" style="text-align:left;">댓글</th>
-</tr>
-<c:forEach var="reply" items="${reply}">
-    <tr>
-		<td colspan="2">${reply.nickname}</td>
-		<td colspan="6" style="text-align: left;">☞ ${reply.ccontents}</td>
+	
+	<tr height="35px">
+		<th colspan="8" style="text-align:left; padding-left:10px">댓글</th>
 	</tr>
-</c:forEach>
+	
+	<c:forEach var="reply" items="${reply}">
+		<tr height="50px">
+			<td>${reply.nickname}</td>
+			<td colspan="7" style="text-align: left; padding-left:10px">☞ ${reply.ccontents}</td>
+		</tr>
+	</c:forEach>
+	
 <form action="boardreplysave" method="post">
 <input type="hidden" value="${list.cnum}" name="cnum" readonly>
 <input type="hidden" value="${sessionScope.dto3.nickname}" name="nickname" readonly>
 <input type="hidden" value="${list.cgroup}" name="cgroup" readonly>
 <input type="hidden" value="${list.step}" name="step" readonly>
 <input type="hidden" value="${list.indent}" name="indent" readonly>
-<tr>
-	<td colspan="8" align="center">
+
+<tr height="50px">
+	<td>${sessionScope.dto3.nickname}</td>
+	<td colspan="7" align="left">
 		<textarea rows="1" cols="60" name="ccontents"></textarea>
 		<input type="submit" value="댓글등록">
 		<input type="reset" value="작성취소">
 	</td>
 </tr>
+
 </form>
 </c:when>
 
-<c:when test="${list.nickname==sessionScope.dto3.nickname}">
-	<tr>
+<c:when test="${list.nickname == '관리자' && adminloginstate == true}">
+	<tr height="50px">
 		<td colspan="8">
 			<input type="button" onclick="location.href='board'" value="목록">
 			<input type="button" onclick="delboard(${list.cnum})" value="삭제">
 			<input type="button" onclick="location.href='boardupdateview?cnum=${list.cnum}'" value="수정">
 		</td>
 	</tr>
-	<tr>
-	<th colspan="8" style="text-align:left;">댓글</th>
-</tr>
-<c:forEach var="reply" items="${reply}">
-    <tr>
-		<td colspan="2">${reply.nickname}</td>
-		<td colspan="6" style="text-align: left;">☞ ${reply.ccontents}</td>
+	
+	<tr height="35px">
+		<th colspan="8" style="text-align:left; padding-left:10px">댓글</th>
 	</tr>
-</c:forEach>
+	
+	<c:forEach var="reply" items="${reply}">
+		<tr height="50px">
+			<td>${reply.nickname}</td>
+			<td colspan="7" style="text-align: left; padding-left:10px">☞ ${reply.ccontents}</td>
+		</tr>
+	</c:forEach>
+
+<form action="boardreplysave" method="post">
+<input type="hidden" value="${list.cnum}" name="cnum" readonly>
+<input type="hidden" value="관리자" name="nickname" readonly>
+<input type="hidden" value="${list.cgroup}" name="cgroup" readonly>
+<input type="hidden" value="${list.step}" name="step" readonly>
+<input type="hidden" value="${list.indent}" name="indent" readonly>
+
+<tr height="50px">
+	<td>관리자</td>
+	<td colspan="7" align="left">
+		<textarea rows="1" cols="60" name="ccontents"></textarea>
+		<input type="submit" value="댓글등록">
+		<input type="reset" value="작성취소">
+	</td>
+</tr>
+
+</form>
+</c:when>
+
+<c:when test="${loginstate==true && list.nickname==sessionScope.dto3.nickname}">
+	<tr height="50px">
+		<td colspan="8">
+			<input type="button" onclick="location.href='board'" value="목록">
+			<input type="button" onclick="delboard(${list.cnum})" value="삭제">
+			<input type="button" onclick="location.href='boardupdateview?cnum=${list.cnum}'" value="수정">
+		</td>
+	</tr>
+	
+	<tr height="35px">
+		<th colspan="8" style="text-align:left; padding-left:10px">댓글</th>
+	</tr>
+	
+	<c:forEach var="reply" items="${reply}">
+		<tr height="50px">
+			<td>${reply.nickname}</td>
+			<td colspan="7" style="text-align: left; padding-left:10px">☞ ${reply.ccontents}</td>
+		</tr>
+	</c:forEach>
+
 <form action="boardreplysave" method="post">
 <input type="hidden" value="${list.cnum}" name="cnum" readonly>
 <input type="hidden" value="${sessionScope.dto3.nickname}" name="nickname" readonly>
 <input type="hidden" value="${list.cgroup}" name="cgroup" readonly>
 <input type="hidden" value="${list.step}" name="step" readonly>
 <input type="hidden" value="${list.indent}" name="indent" readonly>
-<tr>
-	<td colspan="8" align="center">
+
+<tr height="50px">
+	<td>${sessionScope.dto3.nickname}</td>
+	<td colspan="7" align="left">
 		<textarea rows="1" cols="60" name="ccontents"></textarea>
 		<input type="submit" value="댓글등록">
 		<input type="reset" value="작성취소">
 	</td>
 </tr>
+
 </form>
 </c:when>
+
 <c:otherwise>
-	<tr>	
+	<tr height="50px">	
 		<td colspan="8">
 			<input type="button" onclick="location.href='board'" value="목록">
 		</td>
 	</tr>
-	<tr>
-	<th colspan="8" style="text-align:left;">댓글</th>
-</tr>
-<c:forEach var="reply" items="${reply}">
-    <tr>
-		<td colspan="2">${reply.nickname}</td>
-		<td colspan="6" style="text-align: left;">☞ ${reply.ccontents}</td>
+	
+	<tr height="35px">
+		<th colspan="8" style="text-align:left; padding-left:10px">댓글</th>
 	</tr>
-</c:forEach>
+	
+	<c:forEach var="reply" items="${reply}">
+		<tr height="50px">
+			<td>${reply.nickname}</td>
+			<td colspan="7" style="text-align: left; padding-left:10px">☞ ${reply.ccontents}</td>
+		</tr>
+	</c:forEach>
+	
+	<tr height="50px">
+		<td colspan="8" align="center">
+			<textarea rows="1" cols="60" readonly>댓글은 로그인 후 작성할 수 있습니다...</textarea>
+		</td>
+	</tr>
 </c:otherwise>
 </c:choose>
-</table></div></div>
+
+</table>
+</div>
+</div>
 </body>
 </html>

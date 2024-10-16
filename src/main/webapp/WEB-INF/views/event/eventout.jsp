@@ -74,21 +74,22 @@ text-align: center;
 <div class="maindata">
 <table border="1" width="800px" align="center">
 <caption><h2>Event</h2></caption>
-	<tr>
-		<th>제목</th><td colspan="3">[${list.estate}] ${list.etitle}</td>
+	<tr height="30px">
+		<th width="200px">제목</th><th colspan="3" width="700px" style="text-align: left; padding-left: 10px;">[${list.estate}] ${list.etitle}</th>
 	</tr>	
-	<tr>	
-		<th>작성일시</th><td>${list.edate}</td><th>조회수</th><td>${list.ecnt}회</td>
+	<tr height="30px">	
+		<th width="200px">작성일시</th><td width="300px">${list.edate}</td>
+		<th width="150px">조회수</th><td width="150px">${list.ecnt}회</td>
 	</tr>	
 	<tr>    
 	    <c:choose>
 	        <c:when test="${list.econtents=='default'}">
-	            <td colspan="4" style="text-align: center;">
+	            <td colspan="4" style="text-align: center; padding-bottom: 20px; padding-top: 20px;">
 	                <img src="./image/${list.eimaged}" style="width:750px;">
 	            </td>
 	        </c:when>
 	        <c:otherwise>
-	            <td colspan="4" style="text-align: center;">
+	            <td colspan="4" style="text-align: center; padding-bottom: 20px; padding-top: 20px;">
 	                <img src="./image/${list.eimaged}" style="width:750px;">
 	                <br>
 	                <pre>${list.econtents}</pre>
@@ -98,7 +99,7 @@ text-align: center;
 	</tr>
 <c:choose>
 <c:when test="${adminloginstate==true}">
-	<tr>	
+	<tr height="50px">	
 		<td colspan="4">
 			<input type="button" onclick="location.href='eventboard'" value="목록">
 			<input type="button" onclick="delevent(${list.evnum})" value="삭제">
@@ -107,13 +108,15 @@ text-align: center;
 	</tr>
 </c:when>
 <c:otherwise>
-	<tr>	
+	<tr height="50px">	
 		<td colspan="4">
 			<input type="button" onclick="location.href='eventboard'" value="목록">
 		</td>
 	</tr>
 </c:otherwise>
 </c:choose>
-</table></div></div>
+</table>
+</div>
+</div>
 </body>
 </html>

@@ -85,7 +85,7 @@ window.onload = function() {
 <form action="gongjisave" method="post" enctype="multipart/form-data">
 <table border="1" align="center" width="800px">
 <caption><h3>공지사항 입력</h3></caption>
-	<tr>
+	<tr height="35px">
 		<th>제목</th>
 		<td style="text-align: left;">
 			<input type="text" name="gtitle" style="width:725px" required="required">
@@ -93,13 +93,15 @@ window.onload = function() {
 			<input type="hidden" name="nickname" value="관리자" readonly>
 		</td>
 	</tr>
+	
 	<tr>
 		<th>내용</th>
 		<td style="text-align: left;">
 			<textarea rows="20" cols="100px" name="gcontents" required="required"></textarea>
 		</td>
 	</tr>
-	<tr>
+	
+	<tr height="35px">
 		<th rowspan="2">파일첨부</th>
 		<td>
 			<select name="fileonoff" onchange="toggleStateOptions()">
@@ -108,7 +110,8 @@ window.onload = function() {
 			</select>
 		</td>
 	</tr>
-	<tr>
+	
+	<tr height="35px">
 		<td id="imagestateon">
 			<input type="file" name="gimage">
 		</td>
@@ -116,14 +119,17 @@ window.onload = function() {
 			첨부된 파일없음
 		</td>
 	</tr>
-	<tr>
-	<td colspan="2">
-	<input type="submit" value="작성완료">
-	<input type="reset" value="작성취소">
-	<input type="button" onclick="location.href='gongjiboard'" value="목록">
-	</td>
+	
+	<tr height="35px">
+		<td colspan="2">
+			<input type="submit" value="작성완료">
+			<input type="reset" value="작성취소">
+			<input type="button" onclick="location.href='gongjiboard'" value="목록">
+		</td>
 	</tr>
 </table>
-</form></div></div>
+</form>
+</div>
+</div>
 </body>
 </html>

@@ -8,6 +8,42 @@ th, td{
 text-align: center
 }
 </style>
+<script type="text/javascript">
+function toggleStateOptions1() {
+    var mainimageonoff = document.querySelector('select[name="mainimageonoff"]').value;  // 선택된 select 값
+    var mainimagestateon = document.getElementById("mainimagestateon");
+    var mainimagestateoff = document.getElementById("mainimagestateoff");
+
+    if (mainimageonoff === 'fileo') {
+    	mainimagestateon.style.display = '';  // 파일첨부 시 보이기
+    	mainimagestateoff.style.display = 'none';
+    } 
+    else {
+    	mainimagestateon.style.display = 'none';  // 파일없음 선택 시 숨기기
+    	mainimagestateoff.style.display = '';  
+    }
+}
+
+function toggleStateOptions2() {
+    var detailimageonoff = document.querySelector('select[name="detailimageonoff"]').value;  // 선택된 select 값
+    var detailimagestateon = document.getElementById("detailimagestateon");
+    var detailimagestateoff = document.getElementById("detailimagestateoff");
+
+    if (detailimageonoff === 'fileo') {
+    	detailimagestateon.style.display = '';  // 파일첨부 시 보이기
+    	detailimagestateoff.style.display = 'none';
+    } 
+    else {
+    	detailimagestateon.style.display = 'none';  // 파일없음 선택 시 숨기기
+    	detailimagestateoff.style.display = '';  
+    }
+}
+
+window.onload = function() {
+    toggleStateOptions1();  // 페이지 로드 시 초기 상태 설정
+    toggleStateOptions2();
+};
+</script>
 <meta charset="UTF-8">
 <title>
 </title>
@@ -64,34 +100,59 @@ text-align: center
 </aside>
 <div class="maindata">
 <form action="eventupdate" method="post" enctype="multipart/form-data">
-<table border="1" align="center" width="1500px">
+<table border="1" align="center" width="800px">
 <caption><h3>공지사항</h3></caption>
 	<tr>
 		<th>제목</th>
 		<td style="text-align: left;">
-			<input type="text" name="etitle" style="width:1250px" value="${list.etitle}" required="required">
+			<input type="text" name="etitle" style="width:725px" value="${list.etitle}" required="required">
 			<input type="hidden" name="id" value="admin" readonly>
 			<input type="hidden" name="nickname" value="관리자" readonly>
+			<input type="hidden" name="evnum" value="${list.evnum}" readonly>
 		</td>
 	</tr>
 	<tr>
 		<th>내용</th>
 		<td style="text-align: left;">
-			<textarea rows="20" cols="175px" name="econtents" required="required">${list.econtents}</textarea>
+			<textarea rows="20" cols="100px" name="econtents" required="required">${list.econtents}</textarea>
 		</td>
 	</tr>
 	<tr>
 		<th>메인이미지</th>
 		<td>
-			<input type="file" name="eimagem" value="${list.eimagem}" required="required">
+			<select name="mainimageonoff" onchange="toggleStateOptions1()">
+				<option value="fileo">이미지 변경 필요
+				<option value="filex">이미지 변경 불필요
+			</select>
 		</td>
 	</tr>
+	
+	<tr>
+		<td id="mainimagestateon" colspan="2">
+			<input type="file" name="eimagemu">
+		</td>
+		<td id="mainimagestateoff" style="display: none;" colspan="2">
+		</td>
+	</tr>
+	
 	<tr>
 		<th>상세이미지</th>
 		<td>
-			<input type="file" name="eimaged" value="${list.eimaged}" required="required">
+			<select name="detailimageonoff" onchange="toggleStateOptions2()">
+				<option value="fileo">이미지 변경 필요
+				<option value="filex">이미지 변경 불필요
+			</select>
 		</td>
 	</tr>
+	
+	<tr>
+		<td id="detailimagestateon" colspan="2">
+			<input type="file" name="eimagedu">
+		</td>
+		<td id="detailmagestateoff" style="display: none;" colspan="2">
+		</td>
+	</tr>
+	
 	<tr>
 		<th>진행상태</th>
 		<td>

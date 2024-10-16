@@ -74,22 +74,21 @@ text-align: center;
 <div class="maindata">
 <table border="1" width="800px" align="center">
 <caption><h2>공지사항</h2></caption>
-	<tr>
-		<th>제목</th><td colspan="3">${list.gtitle}</td>
+	<tr height="35px">
+		<th width="140px">제목</th><td colspan="5" style="text-align: left; padding-left: 10px;">${list.gtitle}</td>
 	</tr>	
-	<tr>	
-		<th>작성자</th><td colspan="3">${list.nickname}</td>
-	</tr>
-	<tr>	
-		<th>작성일시</th><td>${list.gdate}</td><th>조회수</th><td>${list.gcnt}</td>
+	<tr height="35px">	
+		<th width="140px">작성자</th><td width="160px">${list.nickname}</td>
+		<th width="140px">작성일시</th><td width="160px">${list.gdate}</td>
+		<th width="100px">조회수</th><td width="100px">${list.gcnt}회</td>
 	</tr>	
 	<tr>	
 		<c:choose>
 			<c:when test="${list.gimage==null}">
-				<td colspan="4" style="text-align: left;"><pre>${list.gcontents}</pre></td>
+				<td colspan="6" style="text-align: left; padding-bottom: 20px; padding-top: 20px;"><pre>${list.gcontents}</pre></td>
 			</c:when>
 			<c:otherwise>
-				<td colspan="4" style="text-align: center;">
+				<td colspan="6" style="text-align: center; padding-bottom: 20px; padding-top: 20px;">
 				<pre style="text-align: left;">${list.gcontents}</pre><br>
 				<img src="./image/${list.gimage}" style="width:700px; display: block; margin: 0 auto;"></td>
 			</c:otherwise>
@@ -97,8 +96,8 @@ text-align: center;
 	</tr>
 <c:choose>
 <c:when test="${adminloginstate==true}">
-	<tr>	
-		<td colspan="4">
+	<tr height="50px">	
+		<td colspan="6">
 			<input type="button" onclick="location.href='gongjiboard'" value="목록">
 			<input type="button" onclick="delgongji(${list.gnum})" value="삭제">
 			<input type="button" onclick="location.href='gongjiupdateview?gnum=${list.gnum}'" value="수정">
@@ -106,13 +105,15 @@ text-align: center;
 	</tr>
 </c:when>
 <c:otherwise>
-	<tr>	
-		<td colspan="4">
+	<tr height="50px">	
+		<td colspan="6">
 			<input type="button" onclick="location.href='gongjiboard'" value="목록">
 		</td>
 	</tr>
 </c:otherwise>
 </c:choose>
-</table></div></div>
+</table>
+</div>
+</div>
 </body>
 </html>

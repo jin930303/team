@@ -66,16 +66,16 @@ text-align: center
 <div class="maindata">
 <table border="1" width="800px" align="center">
 <caption><h2>공지사항</h2></caption>
-	<tr>
-		<th>번호</th><th style="border: 800px;">제목</th><th>작성자</th><th>작성일</th><th>조회</th>
+	<tr height="35px">
+		<th width="50px">번호</th><th width="500px">제목</th><th width="100px">작성자</th><th width="100px">작성일</th><th width="50px">조회수</th>
 	</tr>
 <c:forEach items="${list}" var="gongji">
-	<tr>
-		<td>${gongji.gnum}</td><td style="text-align: left; border: 600px;"><a href="gongjidetail?gnum=${gongji.gnum}">${gongji.gtitle}</a></td><td>${gongji.nickname}</td><td>${gongji.gdate}</td><td>${gongji.gcnt}</td>
+	<tr height="35px">
+		<td>${gongji.gnum}</td><td style="text-align: left; padding-left: 5px;"><a href="gongjidetail?gnum=${gongji.gnum}">${gongji.gtitle}</a></td><td>${gongji.nickname}</td><td>${gongji.gdate}</td><td>${gongji.gcnt}</td>
 	</tr>
 </c:forEach>
 <!-- 페이징처리 4444444444-->
-<tr style="border-left: none;border-right: none;border-bottom: none">
+<tr style="border-left: none;border-right: none;border-bottom: none" height="35px">
    <td colspan="8" style="text-align: center;">
    
    <c:if test="${paging.startPage!=1 }">
@@ -99,9 +99,7 @@ text-align: center
    </td>
 </tr>
 <!-- 페이징처리 4444444444-->
-<c:choose>
-<c:when test="${adminloginstate==true}">
-	<tr>
+	<tr height="35px">
 		<td colspan="7" align="left">
 			<form action="gongjisearchsave" method="post">
 				<select name="gongjikey" >
@@ -110,30 +108,19 @@ text-align: center
 					<option value="nickname">글쓴이
 				</select>
 				<input type="text" name="svalue" style="width: 250px" placeholder="검색어를 입력해주세요.">
+		<c:choose>
+			<c:when test="${adminloginstate==true}">
 				<input type="submit" value="찾기">
 				<input type="button" onclick="location.href='gongjiinput'" value="글쓰기">
 				<input type="button" onclick="location.href='gongjiboard'" value="목록">
-			</form>
-		</td>
-	</tr>
-</c:when>
-<c:otherwise>
-	<tr>
-		<td colspan="7" align="left">
-			<form action="gongjisearchsave" method="post">
-				<select name="gongjikey" >
-					<option value="gtitle">제목
-					<option value="gcontents">내용
-					<option value="nickname">글쓴이
-				</select>
-				<input type="text" name="svalue" style="width: 250px" placeholder="검색어를 입력해주세요.">
-				<input type="submit" value="찾기">
+			</c:when>
+			<c:otherwise>
 				<input type="button" onclick="location.href='gongjiboard'" value="목록">
+			</c:otherwise>
+		</c:choose>
 			</form>
 		</td>
 	</tr>
-</c:otherwise>
-</c:choose>
 </table>
 </div>
 </div>

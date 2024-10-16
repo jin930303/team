@@ -64,12 +64,12 @@ text-align: center
 	</div>
 </aside>
 <div class="maindata">
-<table border="1" width="1000px" align="center">
+<table border="1" width="800px" align="center">
 <caption><h2>Event</h2></caption>
 <c:choose>
 <c:when test="${adminloginstate==true}">
 	<tr>
-		<td align="left" colspan="3">
+		<td align="left" colspan="3" height="35px">
 			<form action="eventsearchsave" method="post">
 				<select name="eventkey" >
 					<option value="etitle">제목
@@ -87,7 +87,7 @@ text-align: center
 </c:when>
 <c:otherwise>
 	<tr>
-		<td align="left" colspan="3">
+		<td align="left" colspan="3" height="35px">
 			<form action="eventsearchsave" method="post">
 				<select name="eventkey" >
 					<option value="etitle">제목
@@ -103,18 +103,27 @@ text-align: center
 	</tr>
 </c:otherwise>
 </c:choose>
-    <tr>
-        <c:forEach items="${list}" var="event" varStatus="status" end="6">
-            <td>
-                <a href="eventdetail?evnum=${event.evnum}">
-                <img src="./image/${event.eimagem}" style="width: 300px; height: 300px;"></a>
-                <div><a href="eventdetail?evnum=${event.evnum}">[${event.estate}] ${event.etitle}</div>
-            </td>
-            <c:if test="${status.index % 3 == 2}"> <!-- 4개마다 새로운 행을 추가 -->
-                </tr><tr>
-            </c:if>
-        </c:forEach>
-            </tr>
+
+<tr>
+<c:forEach items="${list}" var="event" varStatus="status" end="9">
+<td style="width: 250px; height: 200px; text-align: center; vertical-align: top; justify-content:left;">
+    <div class="eventbox" style="display: flex; flex-direction: column; justify-content: left; align-items: center; height: 100%;">
+        <div class="eventimage" style="width: 250px; height: 175px; display: flex; justify-content: center; align-items: center;">
+            <a href="eventdetail?evnum=${event.evnum}">
+                <img src="./image/${event.eimagem}" style="max-width: 100%; max-height: 100%; object-fit: cover;">
+            </a>
+        </div>
+        <div class="eventtitle" style="margin-top: 25px; text-align: center;">
+            <a href="eventdetail?evnum=${event.evnum}">[${event.estate}] ${event.etitle}</a>
+        </div>
+    </div>
+</td>
+<c:if test="${status.index % 3 == 2}">
+    </tr><tr>
+</c:if>
+</c:forEach>
+</tr>
+
 <!-- 페이징처리 4444444444-->
 <tr style="border-left: none;border-right: none;border-bottom: none">
    <td colspan="8" style="text-align: center;">
