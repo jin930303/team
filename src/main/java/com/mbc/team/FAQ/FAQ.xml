@@ -5,9 +5,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 	<!-- 1:1 저장(문의글 작성) -->
 	<insert id="faqinsert">
-		insert into
-		faq(cnum,tab,title,fcontents,nickname,fimage1,fimage2,fimage3,groups)
-		values(faq_seq.nextval,#{param1},#{param2},#{param3},#{param4},#{param5},#{param6},#{param7},faq_seq.currval)
+	    insert into faq(cnum, tab, title, fcontents, nickname, fimage1, fimage2, fimage3, groups, openclose)
+	    values(faq_seq.nextval, #{param1}, #{param2}, #{param3}, #{param4}, #{param5}, #{param6}, #{param7}, faq_seq.currval, #{param8})
 	</insert>
 	<select id="save_detail" resultType="int">
 	    select max(cnum) from faq
@@ -15,13 +14,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 	<!-- 1:1 출력(문의글 목록) -->
 	<select id="faqboard" resultType="com.mbc.team.FAQ.FAQDTO">
-		select
-		cnum, tab, title,
-		nickname, to_char(fdate, 'yyyy-MM-dd') fdate,faqcnt
-		from faq
-		where tab
-		!= 'FAQ'
+	    select
+	    cnum, tab, title, nickname, to_char(fdate, 'yyyy-MM-dd') fdate, faqcnt, openclose
+	    from faq
+	    where tab != 'FAQ'
 	</select>
+
 
 	<!-- 1:1 페이지 -->
 	<select id="total" resultType="int">
@@ -33,7 +31,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		select rownum rn,A.*
 		from(
 		select
-		cnum,tab,title,nickname,to_char(fdate,'yyyy-MM-dd')fdate,fcontents,groups,step,indent,fimage1,fimage2,fimage3,faqcnt
+		cnum,tab,title,nickname,to_char(fdate,'yyyy-MM-dd')fdate,fcontents,groups,step,indent,fimage1,fimage2,fimage3,faqcnt, openclose
 		from faq where tab != 'FAQ' and step=0 and indent=0 order by cnum
 		desc)A)
 		where rn
@@ -43,7 +41,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<!-- 1:1 출력(문의글 상세페이지) -->
 	<select id="faqdetail" resultType="com.mbc.team.FAQ.FAQDTO">
 		select
-		cnum,tab,title,to_char(fdate,'yyyy-MM-dd')fdate,fcontents,groups,step,indent,nickname,fimage1,fimage2,fimage3,faqcnt
+		cnum,tab,title,to_char(fdate,'yyyy-MM-dd')fdate,fcontents,groups,step,indent,nickname,fimage1,fimage2,fimage3,faqcnt, openclose
 		from faq where cnum=#{param1}
 	</select>
 
@@ -51,7 +49,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="faqreply" resultType="com.mbc.team.FAQ.FAQDTO">
 		select
 		cnum,tab,title,to_char(fdate,'yyyy-MM-dd')fdate,fcontents,groups,step,indent,nickname,fimage1,fimage2,fimage3,
-		faqcnt
+		faqcnt, openclose
 		from faq where cnum=#{param1}
 	</select>
 
@@ -79,7 +77,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<!-- 1:1 문의 답변 수정(문의글 상세페이지) -->
 	<select id="faq_reply_update1" resultType="com.mbc.team.FAQ.FAQDTO">
 		select
-		cnum,tab,title,to_char(fdate,'yyyy-MM-dd')fdate,fcontents,groups,step,indent,nickname,fimage1,fimage2,fimage3,faqcnt
+		cnum,tab,title,to_char(fdate,'yyyy-MM-dd')fdate,fcontents,groups,step,indent,nickname,fimage1,fimage2,fimage3,faqcnt, openclose
 		from faq where cnum=#{param1}
 	</select>
 
@@ -99,14 +97,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<!-- 1:1 수정(문의글 상세페이지) -->
 	<select id="faqupdate" resultType="com.mbc.team.FAQ.FAQDTO">
 		select
-		cnum,tab,title,to_char(fdate,'yyyy-MM-dd')fdate,fcontents,groups,step,indent,nickname,fimage1,fimage2,fimage3,faqcnt
+		cnum,tab,title,to_char(fdate,'yyyy-MM-dd')fdate,fcontents,groups,step,indent,nickname,fimage1,fimage2,fimage3,faqcnt, openclose
 		from faq where cnum=#{param1}
 	</select>
 
 	<!-- 1:1 수정(완료) -->
 	<update id="faqupdate2">
 		update faq set
-		tab=#{param2},title=#{param3},fcontents=#{param4},nickname=#{param5},fimage1=#{param6},fimage2=#{param7},fimage3=#{param8}
+		tab=#{param2},title=#{param3},fcontents=#{param4},nickname=#{param5},fimage1=#{param6},fimage2=#{param7},fimage3=#{param8},openclose=#{param9}
 		where cnum=#{param1}
 	</update>
 
@@ -181,8 +179,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		fimage1,
 		fimage2,
 		fimage3,
-		faqcnt  <!-- 조회수를 기준으로 
-			랭크 -->
+		faqcnt  
 		from faq where tab != 'FAQ'
 		order by faqcnt desc
 	</select>

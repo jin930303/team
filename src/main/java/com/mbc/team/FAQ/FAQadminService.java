@@ -22,7 +22,7 @@ public interface FAQadminService {
 
 //5. FAQ-자주묻는질문 상세페이지 수정(관리자)
 	FAQadminDTO faq_admin_update(int cnum);
-	
+	// 디테일뷰로 넘길 데이터
 	int update_detail();
 
 //5-1. 수정 완료(관리자)
@@ -57,10 +57,5 @@ public interface FAQadminService {
 	ArrayList<FAQadminDTO> faqContentsSearch(String faqvalue);
 
 	ArrayList<FAQadminDTO> faqNicknameSearch(String faqvalue);
-
-
-
-	
-	
 
 }
