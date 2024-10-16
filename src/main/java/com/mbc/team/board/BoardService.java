@@ -115,7 +115,10 @@ public interface BoardService {
 
 	EventDTO eventupdateview(int evnum);
 	void updateevent(String id, String nickname, String etitle, String econtents, String eimagemfn, String eimagedfn, String estate, int evnum);
-
+	void updateevent1(String id, String nickname, String etitle, String econtents, String estate, int evnum);
+	void updateevent2(String id, String nickname, String etitle, String econtents, String eimagedufn, String estate, int evnum);
+	void updateevent3(String id, String nickname, String etitle, String econtents, String eimagemufn, String estate, int evnum);
+	
 	public int totalet(String svalue);
 	public ArrayList<EventDTO> pageet(PageDTO dto, String svalue);
 
@@ -127,6 +130,8 @@ public interface BoardService {
 
 	public int totalevse(String estate);
 	public ArrayList<EventDTO> pageevse(PageDTO dto, String estate);
+
+
 
 	
 }

@@ -137,4 +137,5 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	    and fdate >= SYSDATE - #{param2}
 	    and tab = 'FAQ'
 	</select>
+
 </mapper>

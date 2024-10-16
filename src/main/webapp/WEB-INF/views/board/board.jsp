@@ -66,18 +66,18 @@ text-align: center
 <div class="maindata">
 <table border="1" width="800px" align="center">
 <caption><h2>자유게시판</h2></caption>
-	<tr>
-		<th>번호</th><th colspan="2">제목</th><th>작성자</th><th>작성일</th><th>조회</th>
+	<tr height="35px">
+		<th width="50px">번호</th><th width="500px">제목</th><th width="100px">작성자</th><th width="100px">작성일</th><th width="50px">조회수</th>
 	</tr>
 <c:forEach items="${list}" var="board">
-	<tr>
+	<tr height="35px">
 		<td>${board.cnum}</td>
-		<td>${board.tab}</td><td style="text-align: left;"><a href="boarddetail?cnum=${board.cnum}">${board.title}</a></td>
+		<td style="text-align: left; padding-left: 5px;"><a href="boarddetail?cnum=${board.cnum}">[${board.tab}] ${board.title}</a></td>
 		<td>${board.nickname}</td><td>${board.cdate}</td><td>${board.ccnt}</td>
 	</tr>
 </c:forEach>
 <!-- 페이징처리 4444444444-->
-<tr style="border-left: none;border-right: none;border-bottom: none">
+<tr style="border-left: none;border-right: none;border-bottom: none" height="35px">
    <td colspan="8" style="text-align: center;">
    
    <c:if test="${paging.startPage!=1 }">
@@ -101,7 +101,7 @@ text-align: center
    </td>
 </tr>
 <!-- 페이징처리 4444444444-->
-	<tr>
+	<tr height="35px">
 		<td colspan="7" align="left">
 			<form action="boardsearchsave" method="post">
 				<select name="boardkey" >
@@ -111,8 +111,19 @@ text-align: center
 				</select>
 				<input type="text" name="svalue" style="width: 250px" placeholder="검색어를 입력해주세요.">
 				<input type="submit" value="찾기">
+<c:choose>
+	<c:when test="${adminloginstate==true}">
 				<input type="button" onclick="location.href='board'" value="목록">
 				<input type="button" onclick="location.href='boardinput'" value="글쓰기">
+	</c:when>
+	<c:when test="${loginstate==true}">
+				<input type="button" onclick="location.href='board'" value="목록">
+				<input type="button" onclick="location.href='boardinput'" value="글쓰기">
+	</c:when>
+	<c:otherwise>
+				<input type="button" onclick="location.href='board'" value="목록">
+	</c:otherwise>
+</c:choose>
 			</form>
 		</td>
 	</tr>

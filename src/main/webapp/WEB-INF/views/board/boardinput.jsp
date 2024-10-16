@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -87,7 +88,7 @@ window.onload = function() {
 <form action="boardsave" method="post" enctype="multipart/form-data">
 <table border="1" align="center" width="800px">
 <caption><h2>글쓰기</h2></caption>
-	<tr>
+	<tr height="35px">
 		<th>태그</th>
 		<td style="text-align: left;">
 			<select name="tag">
@@ -101,20 +102,30 @@ window.onload = function() {
 			</select>
 		</td>
 	</tr>
-	<tr>
+
+	<tr height="35px">
 		<th>제목</th>
 		<td style="text-align: left;">
 			<input type="text" name="title" style="width:725px" required="required">
-			<input type="hidden" name="nickname" value="${list.nickname}" readonly>
+	<c:choose>
+		<c:when test="${adminloginstate==true}">
+			<input type="hidden" name="nickname" value="관리자" readonly>
+		</c:when>
+		<c:when test="${loginstate==true}">
+			<input type="hidden" name="nickname" value="${sessionScope.dto3.nickname}" readonly>
+		</c:when>
+	</c:choose>
 		</td>
 	</tr>
+	
 	<tr>
 		<th>내용</th>
 		<td style="text-align: left;">
 			<textarea rows="20" cols="100px" name="ccontents" required="required"></textarea>
 		</td>
 	</tr>
-	<tr>
+	
+	<tr height="35px">
 		<th rowspan="2">파일첨부</th>
 		<td>
 			<select name="fileonoff" onchange="toggleStateOptions()">
@@ -122,8 +133,8 @@ window.onload = function() {
 				<option value="filex">파일없음
 			</select>
 		</td>
-	</tr>
-	<tr>
+	
+	<tr height="35px">
 		<td id="imagestateon">
 			<input type="file" name="cimage">
 		</td>
@@ -131,12 +142,13 @@ window.onload = function() {
 			첨부된 파일없음
 		</td>
 	</tr>
-	<tr>
-	<td colspan="2">
-	<input type="submit" value="작성완료">
-	<input type="reset" value="작성취소">
-	<input type="button" onclick="location.href='board'" value="목록">
-	</td>
+	
+	<tr height="35px">
+		<td colspan="2">
+			<input type="submit" value="작성완료">
+			<input type="reset" value="작성취소">
+			<input type="button" onclick="location.href='board'" value="목록">
+		</td>
 	</tr>
 </table>
 </form>
