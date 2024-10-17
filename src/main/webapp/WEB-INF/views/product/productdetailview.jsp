@@ -69,9 +69,14 @@
                 alert("옵션을 선택해주세요.");
                 return;
             }
+            
+            console.log("Selected option: " + op1Select.value);  // 로그 추가
          // 선택한 옵션 값을 히든 필드에 설정
             document.getElementById("op1").value = op1Select ? op1Select.value : "";
+         
             document.getElementById("productForm").submit();  // 폼 제출
+            alert("장바구니에 상품이 추가되었습니다.");
+            window.location.reload();
         }
         
         function buyNow() {
@@ -105,7 +110,7 @@
     Boolean loginState = (Boolean) session.getAttribute("loginstate");
     System.out.println("Login state in productdetailview.jsp: " + loginState);  // 로그로 상태 확인
   %>
-    <form id="productForm" action="/team/cart" method="post" enctype="multipart/form-data">
+    <form id="productForm" action="/team/insertcart" method="post" enctype="multipart/form-data">
         <input type="hidden" name="itemnum" id="itemnum" value="${dto.itemnum}">
         <input type="hidden" name="price" id="price" value="${dto.price}">
         <input type="hidden" name="product" id="product" value="${dto.product}">
@@ -113,6 +118,8 @@
         <input type="hidden" name="image1" id="image1" value="${dto.image1}">
          <!-- 로그인 상태 히든 필드 -->
        <input type="hidden" id="loginState" value="${sessionScope.loginstate}">
+       <input type="hidden" name="id"id="id" value="${sessionScope.dto3.id}">
+       
         
         
        
