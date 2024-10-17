@@ -1,0 +1,24 @@
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.mbc.team.cart.CartService">
+	
+	<insert id="insert" parameterType="com.mbc.team.cart.CartItem">
+    insert into cart(itemnum, id, product, price, count, image1, op1)
+    values(#{itemnum}, #{id}, #{product}, #{price}, #{count}, #{image1}, #{op1})
+</insert>
+	<select id="selectitem" resultType="com.mbc.team.cart.CartItem">
+		select *from cart where id=#{id}
+	</select>
+	
+	<delete id="deleteSelectItems">
+    delete from cart 
+    where itemnum in 
+    <foreach item="item" collection="items" open="(" separator="," close=")">
+        #{item}
+    </foreach>
+    AND id = #{id}
+</delete>
+	
+</mapper>
