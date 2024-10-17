@@ -1,6 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %> 
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -95,6 +94,11 @@
             </a>
             <div class="product-title">${aa.product}</div>
             <div class="product-price">${aa.price}원</div>
+            <c:choose>
+            	<c:when test="${loginstate==true}">
+		            <div><input type="button" name="likenum" value="찜하기" onclick="location.href='like_save?itemnum=${aa.itemnum}'"></div>
+            	</c:when>
+            </c:choose>
         </div>
     </c:forEach>
 </div>

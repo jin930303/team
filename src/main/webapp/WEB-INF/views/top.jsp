@@ -168,7 +168,7 @@ p {
 			
 				<c:choose>
 					<c:when test="${loginstate==true}">
-						  <li><a href="#">${dto3.nickname} 님 반갑습니다.</a></li>
+						  <li><a href="#">${sessionScope.dto3.nickname} 님 반갑습니다.</a></li>
                         <li><a href="logout">로그아웃</a></li>
                         <li><a href="myinfo">회원정보</a></li>
                         
@@ -182,6 +182,7 @@ p {
                             </c:otherwise>
                         </c:choose>
 						<li><a href="faq_community"> 고객센터</a></li>
+						<li><a href="like_product"> 관심상품</a></li>
 					</c:when>
 
 					<c:when test="${adminloginstate==true}">

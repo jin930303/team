@@ -1,0 +1,26 @@
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mbc.team.Like.LikeService">
+<!-- 찜 하기 -->
+	<insert id="like_insert">
+		INSERT INTO Plike (likenum, itemnum, id)
+		SELECT like_seq.nextval, #{param1}, #{param2}
+		FROM dual
+		WHERE NOT EXISTS (
+		    SELECT 1 FROM plike
+		    WHERE itemnum = #{param1}
+		    AND id = #{param2}
+		)
+	</insert>
+<!-- 찜 목록 -->	
+	<select id="like_product" resultType="com.mbc.team.Like.LikeDTO">
+		select p.itemnum, p.image1, p.product, p.price, l.likenum
+		from plike l, product p, member m
+		where l.itemnum = p.itemnum and l.id = m.id and l.id = #{param1}
+	</select>
+<!-- 찜 상품 삭제 -->	
+	<delete id="like_items_delete">
+		delete from plike where likenum=#{param1}
+	</delete>
+</mapper>
