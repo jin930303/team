@@ -228,14 +228,11 @@ p {
 
 			<ul class="nav navbar-nav" style="text-align: center;">
 
-				<li class="dropdown"><a class="dropdown-toggle"
-					data-toggle="dropdown" href="#">Best<span class="caret"></span></a></li>
+				<li><a href="bestitem">Best</a></li>
 
-				<li class="dropdown"><a class="dropdown-toggle"
-					data-toggle="dropdown" href="#">New<span class="caret"></span></a></li>
+				<li><a href="newitem">New</a></li>
 
-				<li class="dropdown"><a class="dropdown-toggle"
-					data-toggle="dropdown" href="#">Sale<span class="caret"></span></a></li>
+				<li><a href="">Sale</a></li>
 
 				
 				
@@ -347,10 +344,7 @@ p {
 						<li><a href="rosin-bags">로진백</a></li>
 						<li><a href="bases">베이스</a></li>
 					</ul></li>
-
-
-
-
+	
 				<li class="dropdown"><a class="dropdown-toggle"
 					data-toggle="dropdown" href="#">커뮤니티<span class="caret"></span></a>
 					<ul class="dropdown-menu">

@@ -29,7 +29,7 @@ public class ProductController {
 		return "productinput";
 	}
 
-		@RequestMapping(value = "productsave", method = RequestMethod.POST)
+		@RequestMapping(value = "productsave", method = RequestMethod.POST)  //상품 정보 저장
 		public String lte2(MultipartHttpServletRequest mul) throws IllegalStateException, IOException {
 			MultipartFile mf1 = mul.getFile("image1");
 			String fname1 = mf1.getOriginalFilename();
@@ -46,7 +46,7 @@ public class ProductController {
 			return "main";
 		}
 	
-		@RequestMapping(value = "productout")
+		@RequestMapping(value = "productout")  //상품 정보 출력
 		public String lte3(Model mo) {
 			ProductService ps = sqlSession.getMapper(ProductService.class);
 			ArrayList<ProductDTO> list = ps.outa();
@@ -54,15 +54,17 @@ public class ProductController {
 			return "productout";
 		}
 	
-		@RequestMapping(value = "productdetail", method = RequestMethod.GET)
+		@RequestMapping(value = "productdetail", method = RequestMethod.GET)  //상품정보 상세 정보
 		public String lte4(HttpServletRequest request, Model mo) {
 			int itemnum = Integer.parseInt(request.getParameter("itemnum"));
 			ProductService ps = sqlSession.getMapper(ProductService.class);
+			ps.pview(itemnum);
 			ProductDTO dto = ps.detail(itemnum);
 			mo.addAttribute("dto", dto);
 			return "productdetailview";
 		}
 	
+		
 		// 카테고리2 출력 배트
 		@RequestMapping(value = "arbat", method = RequestMethod.GET)
 		public String lte5(HttpServletRequest request, Model mo) {
@@ -136,6 +138,7 @@ public class ProductController {
 			return "productout";
 		}
 	
+		
 		// 카테고리 별로 출력 글러브
 		@RequestMapping(value = "pitcherallround", method = RequestMethod.GET)
 		public String lte13(HttpServletRequest request, Model mo) {
@@ -191,6 +194,7 @@ public class ProductController {
 			return "productout";
 		}
 	
+		
 		// 카테고리 별로 출력 야구공
 		@RequestMapping(value = "hard-balls", method = RequestMethod.GET)
 		public String lte19(HttpServletRequest request, Model mo) {
@@ -228,6 +232,7 @@ public class ProductController {
 			return "productout";
 		}
 	
+		
 		// 카테고리 별로 출력 보호장비
 		@RequestMapping(value = "batter-helmets", method = RequestMethod.GET)
 		public String lte23(HttpServletRequest request, Model mo) {
@@ -283,6 +288,7 @@ public class ProductController {
 			return "productout";
 		}
 	
+		
 		// 카테고리 별로 출력 굿즈
 		@RequestMapping(value = "keyring", method = RequestMethod.GET)
 		public String lte29(HttpServletRequest request, Model mo) {
@@ -320,6 +326,7 @@ public class ProductController {
 			return "productout";
 		}
 	
+		
 		// 카테고리 별로 출력 가방
 		@RequestMapping(value = "backpacks", method = RequestMethod.GET)
 		public String lte33(HttpServletRequest request, Model mo) {
@@ -375,6 +382,7 @@ public class ProductController {
 			return "productout";
 		}
 		
+		
 		// 카테고리 별로 출력 장갑
 		@RequestMapping(value = "batting-gloves", method = RequestMethod.GET)
 		public String lte39(HttpServletRequest request, Model mo) {
@@ -420,7 +428,8 @@ public class ProductController {
 			return "productout";
 		}
 	
-	// 카테고리 별로 출력 야구화
+		
+	    // 카테고리 별로 출력 야구화
 		@RequestMapping(value = "integrated-spikes", method = RequestMethod.GET)
 		public String lte44(HttpServletRequest request, Model mo) {
 			String scg_code = "shoes001";
@@ -596,7 +605,7 @@ public class ProductController {
 			return "productout";
 		}		
 		
-		@RequestMapping(value = "productdelete", method = RequestMethod.GET)
+		@RequestMapping(value = "productdelete", method = RequestMethod.GET)  //상품 정보 삭제
 		public String lte63(@RequestParam(value = "itemnum", required = false) Integer itemnum, Model mo) {
 		    ProductService ps = sqlSession.getMapper(ProductService.class);		    
 		    // itemnum이 null이 아닐 경우에만 삭제
@@ -609,7 +618,7 @@ public class ProductController {
 		    return "productdeleteout"; // 삭제 후 보여줄 페이지
 		}
 		
-		@RequestMapping(value = "/producteupdate")
+		@RequestMapping(value = "/producteupdate")  //상품 정보 수정
 		public String lte64(HttpServletRequest request,Model mo) {	
 			int itemnum = Integer.parseInt(request.getParameter("itemnum"));
 			ProductService ps = sqlSession.getMapper(ProductService.class);
@@ -618,7 +627,7 @@ public class ProductController {
 			return "productupdate";			
 		}
 		
-		@RequestMapping(value = "productupdatesave", method = RequestMethod.POST)
+		@RequestMapping(value = "productupdatesave", method = RequestMethod.POST) //상품 정보 수정목록
 		public String lte65(MultipartHttpServletRequest mul , Model mo) throws IllegalStateException, IOException {
 		    String path = "C:\\Users\\3-14\\git\\team\\src\\main\\webapp\\image"; 
 
@@ -655,6 +664,22 @@ public class ProductController {
 		    ArrayList<ProductDTO> list = ps.outd();
 		    mo.addAttribute("list", list);
 		    return "productdeleteout";
+		   }
+		
+		@RequestMapping(value = "bestitem" , method = RequestMethod.GET)  //조회수 높은 상품
+		public String lte66(Model mo) {
+			ProductService ps = sqlSession.getMapper(ProductService.class);
+			ArrayList<ProductDTO> list = ps.besta();
+			mo.addAttribute("list", list);
+			return "productout";
 		}
-
+		
+		@RequestMapping(value = "newitem" , method = RequestMethod.GET)  //db에 최근등록순 상품
+		public String lte67(Model mo) {
+			ProductService ps = sqlSession.getMapper(ProductService.class);
+			ArrayList<ProductDTO> list = ps.newa();
+			mo.addAttribute("list", list);
+			return "productout";
+		}
+     
 }
