@@ -96,7 +96,7 @@ function toggleScoreFields() {
 <div class="maindata">
 <form action="iljungsave" method="post">
 <table border="1" align="center" width="800px">
-<caption><h3>일정 입력</h3></caption>
+<caption><h3>KBO 일정</h3></caption>
 	<tr>
 		<th>경기구분</th>
 		<td>

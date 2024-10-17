@@ -66,19 +66,56 @@ text-align: center
 <div class="maindata">
 <table border="1" width="800px" align="center">
 <caption><h2>자유게시판</h2></caption>
-	<tr height="35px">
-		<th width="50px">번호</th><th width="500px">제목</th><th width="100px">작성자</th><th width="100px">작성일</th><th width="50px">조회</th>
+	<tr style="border-bottom: none;" height="35px">
+<c:choose>
+	<c:when test="${empty list}">
+		<th colspan="5" style="text-align: right;">
+			최신 <a href="boarddayup" style="margin-right: 3px;">↑ </a><a href="boarddaydown" style="margin-right: 5px;">↓ </a> 
+			조회수 <a href="boardviewup" style="margin-right: 3px;">↑ </a><a href="boardviewdown" style="margin-right: 5px;">↓ </a>
+			추천수 <a href="boardlikeup" style="margin-right: 3px;">↑ </a><a href="boardlikedown" style="margin-right: 5px;">↓ </a>
+		</th>
+	</c:when>
+	<c:otherwise>
+		<td colspan="2" style="text-align: left; padding-left: 10px;">"${svalue}"로 검색한 결과</td>
+		<th colspan="3" style="text-align: right;">
+			최신 <a href="boarddayup" style="margin-right: 3px;">↑ </a><a href="boarddaydown" style="margin-right: 5px;">↓ </a> 
+			조회수 <a href="boardviewup" style="margin-right: 3px;">↑ </a><a href="boardviewdown" style="margin-right: 5px;">↓ </a>
+			추천수 <a href="boardlikeup" style="margin-right: 3px;">↑ </a><a href="boardlikedown" style="margin-right: 5px;">↓ </a>
+		</th>
+	</c:otherwise>
+</c:choose>
 	</tr>
-<c:forEach items="${list}" var="board">
+	
 	<tr height="35px">
-		<td>${board.cnum}</td>
-		<td style="text-align: left;"><a href="boarddetail?cnum=${board.cnum}">[${board.tab}] ${board.title}</a></td>
-		<td>${board.nickname}</td><td>${board.cdate}</td><td>${board.ccnt}</td>
+		<th style="border-right:none;" width="50px">번호</th>
+		<th style="border-right:none; border-left:none;" width="500px">제목</th>
+		<th style="border-right:none; border-left:none;" width="100px">작성자</th>
+		<th style="border-right:none; border-left:none;" width="100px">작성일</th>
+		<th style="border-left:none;" width="50px">조회수</th>
 	</tr>
-</c:forEach>
+
+<c:choose>
+    <c:when test="${empty list}">
+		<tr height="35px">
+			<td colspan="6">"${svalue}"로 검색한 결과가 없습니다.</td>
+		</tr>
+	</c:when>
+	<c:otherwise>
+		<c:forEach items="${list}" var="board">
+		<tr height="35px">
+			<td style="border-right:none;">${board.cnum}</td>
+			<td style="border-right:none; border-left:none; text-align: left; padding-left: 5px;"><a href="boarddetail?cnum=${board.cnum}">[${board.tab}] ${board.title}</a></td>
+			<td style="border-right:none; border-left:none;">${board.nickname}</td>
+			<td style="border-right:none; border-left:none;">${board.cdate}</td>
+			<td style="border-left:none;">${board.ccnt}</td>
+		</tr>
+		</c:forEach>
+	</c:otherwise>
+</c:choose>
+
 <!-- 페이징처리 4444444444-->
-<tr style="border-left: none;border-right: none;border-bottom: none" height="35px">
-   <td colspan="6" style="text-align: center;">
+<tr style="border-bottom:none;" height="25px">
+   <td colspan="8" style="text-align: center; border-bottom:none;">
    
    <c:if test="${paging.startPage!=1 }">
       <a href="board?nowPage=${paging.startPage-1 }&cntPerPage=${paging.cntPerPage}"></a>
@@ -101,7 +138,7 @@ text-align: center
    </td>
 </tr>
 <!-- 페이징처리 4444444444-->
-	<tr height="35px">
+	<tr style="border-top:none;" height="35px">
 		<td colspan="7" align="left">
 			<form action="boardsearchsave" method="post">
 				<select name="boardkey" >

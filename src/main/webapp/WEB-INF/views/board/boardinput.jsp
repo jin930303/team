@@ -87,7 +87,7 @@ window.onload = function() {
 <div class="maindata">
 <form action="boardsave" method="post" enctype="multipart/form-data">
 <table border="1" align="center" width="800px">
-<caption><h2>글쓰기</h2></caption>
+<caption><h2>자유게시판</h2></caption>
 	<tr height="35px">
 		<th>태그</th>
 		<td style="text-align: left;">

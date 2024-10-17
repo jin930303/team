@@ -19,7 +19,7 @@ th, td{
     }
 </script>
 <meta charset="UTF-8">
-<title>일정 수정/삭제</title>
+<title>KBO 일정</title>
 </head>
 <body>
 <div class="container">
@@ -73,7 +73,7 @@ th, td{
 </aside>
 <div class="maindata">
 <table border="1" align="center" width="800px">
-<caption><h3>일정변경</h3></caption>
+<caption><h3>KBO 일정</h3></caption>
 	<tr>
 		<th>경기날짜</th><th>경기내용</th><th>비고</th>
 	</tr>

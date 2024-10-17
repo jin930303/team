@@ -101,7 +101,11 @@ window.onload = function() {
 <div class="maindata">
 <form action="eventupdate" method="post" enctype="multipart/form-data">
 <table border="1" align="center" width="800px">
-<caption><h3>공지사항</h3></caption>
+<caption><h3>Event</h3></caption>
+	<tr height="35px">
+		<td colspan="10" style="text-align: left; padding-left: 10px;">"${svalue}"로 검색한 결과</td>
+	</tr>
+	
 	<tr>
 		<th>제목</th>
 		<td style="text-align: left;">

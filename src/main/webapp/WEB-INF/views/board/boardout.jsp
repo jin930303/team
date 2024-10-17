@@ -111,7 +111,7 @@ text-align: center;
 	</tr>
 	
 <c:choose>
-<c:when test="${adminloginstate==true}">
+<c:when test="${adminloginstate==true&&list.nickname!='관리자'}">
 	<tr height="50px">	
 		<td colspan="8">
 			<input type="button" onclick="location.href='board'" value="목록">
@@ -187,7 +187,7 @@ text-align: center;
 </form>
 </c:when>
 
-<c:when test="${list.nickname == '관리자' && adminloginstate == true}">
+<c:when test="${adminloginstate==true&&list.nickname=='관리자'}">
 	<tr height="50px">
 		<td colspan="8">
 			<input type="button" onclick="location.href='board'" value="목록">
