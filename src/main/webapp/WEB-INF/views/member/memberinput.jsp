@@ -94,6 +94,7 @@
         var name = $("#name").val();
         var phone1 = $("#phone1").val();
         var phone2 = $("#phone2").val();
+        var fdomain = $("#fdomain").val();
         var idRegex = /^[a-zA-Z0-9]{4,12}$/;
         var pwRegex = /^(?=.*[a-zA-Z])(?=.*[0-9])(?=.*[!@#$%^&*])[A-Za-z\d!@#$%^&*]{4,16}$/; // 영문자, 숫자, 특수문자 포함
         var correctColor = "#00ff00";
@@ -186,7 +187,7 @@
                 <td>
                     <div class="input-container">
                         <input type="password" name="pw" id="pw" placeholder="비밀번호를 입력해주세요" maxlength="16">
-                        <a class="togglePassword" style="cursor: pointer;"><i class="fas fa-eye"></i></a>
+                        <a class="togglePassword" style="cursor: pointer;"><i class="fas fa-eye-slash"></i></a>
                     </div>
                 </td>
             </tr>
@@ -195,7 +196,7 @@
                 <td colspan="2">
                     <div class="input-container">
                         <input type="password" name="pwconfirm" id="pwconfirm" placeholder="비밀번호 확인" maxlength="16">
-                        <a class="togglePassword" style="cursor: pointer;"><i class="fas fa-eye"></i></a>
+                        <a class="togglePassword" style="cursor: pointer;"><i class="fas fa-eye-slash"></i></a>
                     </div>
                     <span id="confirmMsg"></span>
                 </td>
