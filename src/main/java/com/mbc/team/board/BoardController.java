@@ -27,9 +27,12 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 public class BoardController {
 
 	String savepath="C://team//team//src//main//webapp//image";
+	
 	@Autowired
 	SqlSession sqlsession;
 	
+	
+	//공지사항
 	@RequestMapping(value = "/gongjiinput", method = RequestMethod.GET)
 	public String gongjiinput() {
 		return "gongjiinput";
@@ -73,6 +76,94 @@ public class BoardController {
 		dto=new PageDTO(total,Integer.parseInt(nowPage),Integer.parseInt(cntPerPage));
 		mo.addAttribute("paging",dto);
 		mo.addAttribute("list", bs.page(dto));
+		return "gongjiboard";
+	}
+	
+	@RequestMapping(value = "/gongjidayup", method = RequestMethod.GET)
+	public String gongjidayup(Model mo, PageDTO dto, HttpServletRequest request) {
+		String nowPage=request.getParameter("nowPage");
+		String cntPerPage=request.getParameter("cntPerPage");
+		BoardService bs=sqlsession.getMapper(BoardService.class);
+		int total=bs.total();
+		if(nowPage==null && cntPerPage == null) {
+			nowPage="1";
+			cntPerPage="10";
+		}
+		else if(nowPage==null) {
+			nowPage="1";
+		}
+		else if(cntPerPage==null) {
+			cntPerPage="10";
+		} 
+		dto=new PageDTO(total,Integer.parseInt(nowPage),Integer.parseInt(cntPerPage));
+		mo.addAttribute("paging",dto);
+		mo.addAttribute("list", bs.gongjidayup(dto));
+		return "gongjiboard";
+	}
+	
+	@RequestMapping(value = "/gongjidaydown", method = RequestMethod.GET)
+	public String gongjidaydown(Model mo, PageDTO dto, HttpServletRequest request) {
+		String nowPage=request.getParameter("nowPage");
+		String cntPerPage=request.getParameter("cntPerPage");
+		BoardService bs=sqlsession.getMapper(BoardService.class);
+		int total=bs.total();
+		if(nowPage==null && cntPerPage == null) {
+			nowPage="1";
+			cntPerPage="10";
+		}
+		else if(nowPage==null) {
+			nowPage="1";
+		}
+		else if(cntPerPage==null) {
+			cntPerPage="10";
+		} 
+		dto=new PageDTO(total,Integer.parseInt(nowPage),Integer.parseInt(cntPerPage));
+		mo.addAttribute("paging",dto);
+		mo.addAttribute("list", bs.gongjidaydown(dto));
+		return "gongjiboard";
+	}
+	
+	@RequestMapping(value = "/gongjiviewdown", method = RequestMethod.GET)
+	public String gongjiviewdown(Model mo, PageDTO dto, HttpServletRequest request) {
+		String nowPage=request.getParameter("nowPage");
+		String cntPerPage=request.getParameter("cntPerPage");
+		BoardService bs=sqlsession.getMapper(BoardService.class);
+		int total=bs.total();
+		if(nowPage==null && cntPerPage == null) {
+			nowPage="1";
+			cntPerPage="10";
+		}
+		else if(nowPage==null) {
+			nowPage="1";
+		}
+		else if(cntPerPage==null) {
+			cntPerPage="10";
+		} 
+		dto=new PageDTO(total,Integer.parseInt(nowPage),Integer.parseInt(cntPerPage));
+		mo.addAttribute("paging",dto);
+		mo.addAttribute("list", bs.gongjiviewdown(dto));
+		return "gongjiboard";
+	}
+	
+	@RequestMapping(value = "/gongjiviewup", method = RequestMethod.GET)
+	public String gongjiviewup(Model mo, PageDTO dto, HttpServletRequest request) {
+		String nowPage=request.getParameter("nowPage");
+		String cntPerPage=request.getParameter("cntPerPage");
+		BoardService bs=sqlsession.getMapper(BoardService.class);
+		int total=bs.total();
+		if(nowPage==null && cntPerPage == null) {
+			nowPage="1";
+			cntPerPage="10";
+		}
+		else if(nowPage==null) {
+			nowPage="1";
+		}
+		else if(cntPerPage==null) {
+			cntPerPage="10";
+		} 
+		dto=new PageDTO(total,Integer.parseInt(nowPage),Integer.parseInt(cntPerPage));
+		mo.addAttribute("paging",dto);
+		mo.addAttribute("list", bs.gongjiviewup(dto));
 		return "gongjiboard";
 	}
 	
@@ -159,6 +250,7 @@ public class BoardController {
 	        return null;
 		}
 		else {
+			mo.addAttribute("svalue",svalue);
 			svalue="%"+svalue+"%";
 			if(gongjikey.equals("gtitle")) {
 				int totalt=bs.totalt(svalue);
@@ -182,6 +274,139 @@ public class BoardController {
 		}
 	}
 	
+	@RequestMapping(value = "/boarddayup", method = RequestMethod.GET)
+	public String boarddayup(Model mo, PageDTO dto, HttpServletRequest request) {
+		String nowPage=request.getParameter("nowPage");
+		String cntPerPage=request.getParameter("cntPerPage");
+		BoardService bs=sqlsession.getMapper(BoardService.class);
+		int btotal=bs.boardtotal();
+		if(nowPage==null && cntPerPage == null) {
+			nowPage="1";
+			cntPerPage="10";
+		}
+		else if(nowPage==null) {
+			nowPage="1";
+		}
+		else if(cntPerPage==null) {
+			cntPerPage="10";
+		} 
+		dto=new PageDTO(btotal,Integer.parseInt(nowPage),Integer.parseInt(cntPerPage));
+		mo.addAttribute("paging",dto);
+		mo.addAttribute("list", bs.boarddayup(dto));
+		return "board";
+	}
+	
+	@RequestMapping(value = "/boarddaydown", method = RequestMethod.GET)
+	public String boarddaydown(Model mo, PageDTO dto, HttpServletRequest request) {
+		String nowPage=request.getParameter("nowPage");
+		String cntPerPage=request.getParameter("cntPerPage");
+		BoardService bs=sqlsession.getMapper(BoardService.class);
+		int btotal=bs.boardtotal();
+		if(nowPage==null && cntPerPage == null) {
+			nowPage="1";
+			cntPerPage="10";
+		}
+		else if(nowPage==null) {
+			nowPage="1";
+		}
+		else if(cntPerPage==null) {
+			cntPerPage="10";
+		} 
+		dto=new PageDTO(btotal,Integer.parseInt(nowPage),Integer.parseInt(cntPerPage));
+		mo.addAttribute("paging",dto);
+		mo.addAttribute("list", bs.boarddaydown(dto));
+		return "board";
+	}
+	
+	@RequestMapping(value = "/boardviewup", method = RequestMethod.GET)
+	public String boardviewup(Model mo, PageDTO dto, HttpServletRequest request) {
+		String nowPage=request.getParameter("nowPage");
+		String cntPerPage=request.getParameter("cntPerPage");
+		BoardService bs=sqlsession.getMapper(BoardService.class);
+		int btotal=bs.boardtotal();
+		if(nowPage==null && cntPerPage == null) {
+			nowPage="1";
+			cntPerPage="10";
+		}
+		else if(nowPage==null) {
+			nowPage="1";
+		}
+		else if(cntPerPage==null) {
+			cntPerPage="10";
+		} 
+		dto=new PageDTO(btotal,Integer.parseInt(nowPage),Integer.parseInt(cntPerPage));
+		mo.addAttribute("paging",dto);
+		mo.addAttribute("list", bs.boardviewup(dto));
+		return "board";
+	}
+	
+	@RequestMapping(value = "/boardviewdown", method = RequestMethod.GET)
+	public String boardviewdown(Model mo, PageDTO dto, HttpServletRequest request) {
+		String nowPage=request.getParameter("nowPage");
+		String cntPerPage=request.getParameter("cntPerPage");
+		BoardService bs=sqlsession.getMapper(BoardService.class);
+		int btotal=bs.boardtotal();
+		if(nowPage==null && cntPerPage == null) {
+			nowPage="1";
+			cntPerPage="10";
+		}
+		else if(nowPage==null) {
+			nowPage="1";
+		}
+		else if(cntPerPage==null) {
+			cntPerPage="10";
+		} 
+		dto=new PageDTO(btotal,Integer.parseInt(nowPage),Integer.parseInt(cntPerPage));
+		mo.addAttribute("paging",dto);
+		mo.addAttribute("list", bs.boardviewdown(dto));
+		return "board";
+	}
+	
+	@RequestMapping(value = "/boardlikeup", method = RequestMethod.GET)
+	public String boardlikeup(Model mo, PageDTO dto, HttpServletRequest request) {
+		String nowPage=request.getParameter("nowPage");
+		String cntPerPage=request.getParameter("cntPerPage");
+		BoardService bs=sqlsession.getMapper(BoardService.class);
+		int btotal=bs.boardtotal();
+		if(nowPage==null && cntPerPage == null) {
+			nowPage="1";
+			cntPerPage="10";
+		}
+		else if(nowPage==null) {
+			nowPage="1";
+		}
+		else if(cntPerPage==null) {
+			cntPerPage="10";
+		} 
+		dto=new PageDTO(btotal,Integer.parseInt(nowPage),Integer.parseInt(cntPerPage));
+		mo.addAttribute("paging",dto);
+		mo.addAttribute("list", bs.boardlikeup(dto));
+		return "board";
+	}
+	
+	@RequestMapping(value = "/boardlikedown", method = RequestMethod.GET)
+	public String boardlikedown(Model mo, PageDTO dto, HttpServletRequest request) {
+		String nowPage=request.getParameter("nowPage");
+		String cntPerPage=request.getParameter("cntPerPage");
+		BoardService bs=sqlsession.getMapper(BoardService.class);
+		int btotal=bs.boardtotal();
+		if(nowPage==null && cntPerPage == null) {
+			nowPage="1";
+			cntPerPage="10";
+		}
+		else if(nowPage==null) {
+			nowPage="1";
+		}
+		else if(cntPerPage==null) {
+			cntPerPage="10";
+		} 
+		dto=new PageDTO(btotal,Integer.parseInt(nowPage),Integer.parseInt(cntPerPage));
+		mo.addAttribute("paging",dto);
+		mo.addAttribute("list", bs.boardlikedown(dto));
+		return "board";
+	}
+	
+	//자유게시판
 	@RequestMapping(value = "/boardinput", method = RequestMethod.GET)
 	public String boardinput() {
 		return "boardinput";
@@ -284,6 +509,7 @@ public class BoardController {
 	        return null;
 		}
 		else {
+			mo.addAttribute("svalue",svalue);
 			svalue="%"+svalue+"%";
 			if(boardkey.equals("ctitle")) {
 				int totalct=bs.totalct(svalue);
@@ -369,7 +595,8 @@ public class BoardController {
 		prw.close();
 		return "redirect:/boarddetail?cnum=" + cnum;
 	}
-
+	
+	//경기일정
 	@RequestMapping(value = "/iljung", method = RequestMethod.GET)
 	public String iljung() {
 		return "iljung";
@@ -585,6 +812,7 @@ public class BoardController {
 		return "iljung";
 	}
 	
+	//경기소식
 	@RequestMapping(value = "/sosickinput", method = RequestMethod.GET)
 	public String sosickinput() {
 		return "sosickinput";
@@ -629,6 +857,94 @@ public class BoardController {
 		dto=new PageDTO(totals,Integer.parseInt(nowPage),Integer.parseInt(cntPerPage));
 		mo.addAttribute("paging",dto);
 		mo.addAttribute("list", bs.pages(dto));
+		return "sosickboard";
+	}
+	
+	@RequestMapping(value = "/sosickdayup", method = RequestMethod.GET)
+	public String sosickdayup(Model mo, PageDTO dto, HttpServletRequest request) {
+		String nowPage=request.getParameter("nowPage");
+		String cntPerPage=request.getParameter("cntPerPage");
+		BoardService bs=sqlsession.getMapper(BoardService.class);
+		int totals=bs.totals();
+		if(nowPage==null && cntPerPage == null) {
+			nowPage="1";
+			cntPerPage="10";
+		}
+		else if(nowPage==null) {
+			nowPage="1";
+		}
+		else if(cntPerPage==null) {
+			cntPerPage="10";
+		} 
+		dto=new PageDTO(totals,Integer.parseInt(nowPage),Integer.parseInt(cntPerPage));
+		mo.addAttribute("paging",dto);
+		mo.addAttribute("list", bs.sosickdayup(dto));
+		return "sosickboard";
+	}
+	
+	@RequestMapping(value = "/sosickdaydown", method = RequestMethod.GET)
+	public String sosickdaydown(Model mo, PageDTO dto, HttpServletRequest request) {
+		String nowPage=request.getParameter("nowPage");
+		String cntPerPage=request.getParameter("cntPerPage");
+		BoardService bs=sqlsession.getMapper(BoardService.class);
+		int totals=bs.totals();
+		if(nowPage==null && cntPerPage == null) {
+			nowPage="1";
+			cntPerPage="10";
+		}
+		else if(nowPage==null) {
+			nowPage="1";
+		}
+		else if(cntPerPage==null) {
+			cntPerPage="10";
+		} 
+		dto=new PageDTO(totals,Integer.parseInt(nowPage),Integer.parseInt(cntPerPage));
+		mo.addAttribute("paging",dto);
+		mo.addAttribute("list", bs.sosickdaydown(dto));
+		return "sosickboard";
+	}
+	
+	@RequestMapping(value = "/sosickviewup", method = RequestMethod.GET)
+	public String sosickviewup(Model mo, PageDTO dto, HttpServletRequest request) {
+		String nowPage=request.getParameter("nowPage");
+		String cntPerPage=request.getParameter("cntPerPage");
+		BoardService bs=sqlsession.getMapper(BoardService.class);
+		int totals=bs.totals();
+		if(nowPage==null && cntPerPage == null) {
+			nowPage="1";
+			cntPerPage="10";
+		}
+		else if(nowPage==null) {
+			nowPage="1";
+		}
+		else if(cntPerPage==null) {
+			cntPerPage="10";
+		} 
+		dto=new PageDTO(totals,Integer.parseInt(nowPage),Integer.parseInt(cntPerPage));
+		mo.addAttribute("paging",dto);
+		mo.addAttribute("list", bs.sosickviewup(dto));
+		return "sosickboard";
+	}
+	
+	@RequestMapping(value = "/sosickviewdown", method = RequestMethod.GET)
+	public String sosickviewdown(Model mo, PageDTO dto, HttpServletRequest request) {
+		String nowPage=request.getParameter("nowPage");
+		String cntPerPage=request.getParameter("cntPerPage");
+		BoardService bs=sqlsession.getMapper(BoardService.class);
+		int totals=bs.totals();
+		if(nowPage==null && cntPerPage == null) {
+			nowPage="1";
+			cntPerPage="10";
+		}
+		else if(nowPage==null) {
+			nowPage="1";
+		}
+		else if(cntPerPage==null) {
+			cntPerPage="10";
+		} 
+		dto=new PageDTO(totals,Integer.parseInt(nowPage),Integer.parseInt(cntPerPage));
+		mo.addAttribute("paging",dto);
+		mo.addAttribute("list", bs.sosickviewdown(dto));
 		return "sosickboard";
 	}
 	
@@ -717,6 +1033,7 @@ public class BoardController {
 	        return null;
 		}
 		else {
+			mo.addAttribute("svalue",svalue);
 			svalue="%"+svalue+"%";
 			if(sosickkey.equals("stitle")) {
 				int totalst=bs.totalst(svalue);
@@ -739,7 +1056,8 @@ public class BoardController {
 			return "sosicksearchview";
 		}
 	}
-
+	
+	//이벤트
 	@RequestMapping(value = "/eventinput", method = RequestMethod.GET)
 	public String eventinput() {
 		return "eventinput";
@@ -785,6 +1103,94 @@ public class BoardController {
 		dto=new PageDTO(totalev,Integer.parseInt(nowPage),Integer.parseInt(cntPerPage));
 		mo.addAttribute("paging",dto);
 		mo.addAttribute("list", bs.pageev(dto));
+		return "eventboard";
+	}
+	
+	@RequestMapping(value = "/eventdaydown", method = RequestMethod.GET)
+	public String eventdaydown(Model mo, PageDTO dto, HttpServletRequest request) {
+		String nowPage=request.getParameter("nowPage");
+		String cntPerPage=request.getParameter("cntPerPage");
+		BoardService bs=sqlsession.getMapper(BoardService.class);
+		int totalev=bs.totalev();
+		if(nowPage==null && cntPerPage == null) {
+			nowPage="1";
+			cntPerPage="6";
+		}
+		else if(nowPage==null) {
+			nowPage="1";
+		}
+		else if(cntPerPage==null) {
+			cntPerPage="6";
+		} 
+		dto=new PageDTO(totalev,Integer.parseInt(nowPage),Integer.parseInt(cntPerPage));
+		mo.addAttribute("paging",dto);
+		mo.addAttribute("list", bs.eventdaydown(dto));
+		return "eventboard";
+	}
+	
+	@RequestMapping(value = "/eventdayup", method = RequestMethod.GET)
+	public String eventdayup(Model mo, PageDTO dto, HttpServletRequest request) {
+		String nowPage=request.getParameter("nowPage");
+		String cntPerPage=request.getParameter("cntPerPage");
+		BoardService bs=sqlsession.getMapper(BoardService.class);
+		int totalev=bs.totalev();
+		if(nowPage==null && cntPerPage == null) {
+			nowPage="1";
+			cntPerPage="6";
+		}
+		else if(nowPage==null) {
+			nowPage="1";
+		}
+		else if(cntPerPage==null) {
+			cntPerPage="6";
+		} 
+		dto=new PageDTO(totalev,Integer.parseInt(nowPage),Integer.parseInt(cntPerPage));
+		mo.addAttribute("paging",dto);
+		mo.addAttribute("list", bs.eventdayup(dto));
+		return "eventboard";
+	}
+	
+	@RequestMapping(value = "/eventviewdown", method = RequestMethod.GET)
+	public String eventviewdown(Model mo, PageDTO dto, HttpServletRequest request) {
+		String nowPage=request.getParameter("nowPage");
+		String cntPerPage=request.getParameter("cntPerPage");
+		BoardService bs=sqlsession.getMapper(BoardService.class);
+		int totalev=bs.totalev();
+		if(nowPage==null && cntPerPage == null) {
+			nowPage="1";
+			cntPerPage="6";
+		}
+		else if(nowPage==null) {
+			nowPage="1";
+		}
+		else if(cntPerPage==null) {
+			cntPerPage="6";
+		} 
+		dto=new PageDTO(totalev,Integer.parseInt(nowPage),Integer.parseInt(cntPerPage));
+		mo.addAttribute("paging",dto);
+		mo.addAttribute("list", bs.eventviewdown(dto));
+		return "eventboard";
+	}
+	
+	@RequestMapping(value = "/eventviewup", method = RequestMethod.GET)
+	public String eventviewup(Model mo, PageDTO dto, HttpServletRequest request) {
+		String nowPage=request.getParameter("nowPage");
+		String cntPerPage=request.getParameter("cntPerPage");
+		BoardService bs=sqlsession.getMapper(BoardService.class);
+		int totalev=bs.totalev();
+		if(nowPage==null && cntPerPage == null) {
+			nowPage="1";
+			cntPerPage="6";
+		}
+		else if(nowPage==null) {
+			nowPage="1";
+		}
+		else if(cntPerPage==null) {
+			cntPerPage="6";
+		} 
+		dto=new PageDTO(totalev,Integer.parseInt(nowPage),Integer.parseInt(cntPerPage));
+		mo.addAttribute("paging",dto);
+		mo.addAttribute("list", bs.eventviewup(dto));
 		return "eventboard";
 	}
 	
@@ -887,6 +1293,7 @@ public class BoardController {
 	        return null;
 		}
 		else {
+			mo.addAttribute("svalue",svalue);
 			svalue="%"+svalue+"%";
 			if(eventkey.equals("etitle")) {
 				int totalet=bs.totalet(svalue);
@@ -924,7 +1331,7 @@ public class BoardController {
 		dto=new PageDTO(totalevsi,Integer.parseInt(nowPage),Integer.parseInt(cntPerPage));
 		mo.addAttribute("paging",dto);
 		mo.addAttribute("list", bs.pageevsi(dto, estate));
-		return "eventsearchview";
+		return "eventboard";
 	}
 	
 	@RequestMapping(value = "/eventend", method = RequestMethod.GET)
@@ -947,7 +1354,7 @@ public class BoardController {
 		dto=new PageDTO(totalevse,Integer.parseInt(nowPage),Integer.parseInt(cntPerPage));
 		mo.addAttribute("paging",dto);
 		mo.addAttribute("list", bs.pageevse(dto, estate));
-		return "eventsearchview";
+		return "eventboard";
 	}
 
 

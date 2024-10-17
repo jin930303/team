@@ -66,17 +66,34 @@ text-align: center
 <div class="maindata">
 <table border="1" width="800px" align="center">
 <caption><h2>공지사항</h2></caption>
-	<tr height="35px">
-		<th width="50px">번호</th><th width="500px">제목</th><th width="100px">작성자</th><th width="100px">작성일</th><th width="50px">조회수</th>
+	<tr style="border-bottom: none;" height="35px">
+		<th colspan="5" style="text-align: right;">
+			최신 <a href="gongjidayup" style="margin-right: 3px;">↑ </a><a href="gongjidaydown" style="margin-right: 5px;">↓ </a> 
+			조회수 <a href="gongjiviewup" style="margin-right: 3px;">↑ </a><a href="gongjiviewdown" style="margin-right: 5px;">↓ </a>
+		</th>
 	</tr>
+	
+	<tr height="35px">
+		<th style="border-right:none;" width="50px">번호</th>
+		<th style="border-right:none; border-left:none;" width="500px">제목</th>
+		<th style="border-right:none; border-left:none;" width="100px">작성자</th>
+		<th style="border-right:none; border-left:none;" width="100px">작성일</th>
+		<th style="border-left:none;" width="50px">조회수</th>
+	</tr>
+
 <c:forEach items="${list}" var="gongji">
 	<tr height="35px">
-		<td>${gongji.gnum}</td><td style="text-align: left; padding-left: 5px;"><a href="gongjidetail?gnum=${gongji.gnum}">${gongji.gtitle}</a></td><td>${gongji.nickname}</td><td>${gongji.gdate}</td><td>${gongji.gcnt}</td>
+		<td style="border-right:none;">${gongji.gnum}</td>
+		<td style="border-right:none; border-left:none; text-align: left; padding-left: 5px;"><a href="gongjidetail?gnum=${gongji.gnum}">${gongji.gtitle}</a></td>
+		<td style="border-right:none; border-left:none;">${gongji.nickname}</td>
+		<td style="border-right:none; border-left:none;">${gongji.gdate}</td>
+		<td style="border-left:none;">${gongji.gcnt}</td>
 	</tr>
 </c:forEach>
+
 <!-- 페이징처리 4444444444-->
-<tr style="border-left: none;border-right: none;border-bottom: none" height="35px">
-   <td colspan="8" style="text-align: center;">
+<tr style="border-bottom:none;" height="25px">
+   <td colspan="8" style="text-align: center; border-bottom:none;">
    
    <c:if test="${paging.startPage!=1 }">
       <a href="gongjiboard?nowPage=${paging.startPage-1 }&cntPerPage=${paging.cntPerPage}"></a>
@@ -99,7 +116,7 @@ text-align: center
    </td>
 </tr>
 <!-- 페이징처리 4444444444-->
-	<tr height="35px">
+	<tr style="border-top:none;" height="35px">
 		<td colspan="7" align="left">
 			<form action="gongjisearchsave" method="post">
 				<select name="gongjikey" >
@@ -108,9 +125,9 @@ text-align: center
 					<option value="nickname">글쓴이
 				</select>
 				<input type="text" name="svalue" style="width: 250px" placeholder="검색어를 입력해주세요.">
+				<input type="submit" value="찾기">
 		<c:choose>
 			<c:when test="${adminloginstate==true}">
-				<input type="submit" value="찾기">
 				<input type="button" onclick="location.href='gongjiinput'" value="글쓰기">
 				<input type="button" onclick="location.href='gongjiboard'" value="목록">
 			</c:when>

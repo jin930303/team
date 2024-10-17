@@ -28,6 +28,34 @@
 	   where rn between #{start} AND #{end}
 	</select>
 	
+	<select id="gongjidayup" resultType="com.mbc.team.board.GongjiDTO">
+	   select * from (
+	   select rownum rn,A.* from(  
+	   select id, nickname, gnum, gtitle, gcontents, to_char(gdate, 'yyyy-MM-dd') as gdate, gcnt, gimage from gongji order by gnum desc)A)
+	   where rn between #{start} AND #{end}
+	</select>
+	
+	<select id="gongjidaydown" resultType="com.mbc.team.board.GongjiDTO">
+	   select * from (
+	   select rownum rn,A.* from(  
+	   select id, nickname, gnum, gtitle, gcontents, to_char(gdate, 'yyyy-MM-dd') as gdate, gcnt, gimage from gongji order by gnum asc)A)
+	   where rn between #{start} AND #{end}
+	</select>
+	
+	<select id="gongjiviewup" resultType="com.mbc.team.board.GongjiDTO">
+	   select * from (
+	   select rownum rn,A.* from(  
+	   select id, nickname, gnum, gtitle, gcontents, to_char(gdate, 'yyyy-MM-dd') as gdate, gcnt, gimage from gongji order by gcnt desc)A)
+	   where rn between #{start} AND #{end}
+	</select>
+	
+	<select id="gongjiviewdown" resultType="com.mbc.team.board.GongjiDTO">
+	   select * from (
+	   select rownum rn,A.* from(  
+	   select id, nickname, gnum, gtitle, gcontents, to_char(gdate, 'yyyy-MM-dd') as gdate, gcnt, gimage from gongji order by gcnt asc)A)
+	   where rn between #{start} AND #{end}
+	</select>
+	
 	<select id="gongjidetail" resultType="com.mbc.team.board.GongjiDTO">
 		select id, nickname, gnum, gtitle, gcontents, to_char(gdate, 'yyyy-MM-dd') as gdate, gcnt, gimage from gongji where gnum=#{param1}
 	</select>
@@ -106,6 +134,48 @@
 	   where rn between #{start} AND #{end}
 	</select>
 	
+	<select id="boarddayup" resultType="com.mbc.team.board.BoardDTO">
+	   select * from (
+	   select rownum rn,A.* from(  
+	   select cnum, tab, title, to_char(cdate, 'yyyy-MM-dd') as cdate, ccontents, cgroup, step, indent, clike, chate, ccnt, nickname, cimage from community where step=0 and indent=0 order by cnum desc)A)
+	   where rn between #{start} AND #{end}
+	</select>
+	
+	<select id="boarddaydown" resultType="com.mbc.team.board.BoardDTO">
+	   select * from (
+	   select rownum rn,A.* from(  
+	   select cnum, tab, title, to_char(cdate, 'yyyy-MM-dd') as cdate, ccontents, cgroup, step, indent, clike, chate, ccnt, nickname, cimage from community where step=0 and indent=0 order by cnum asc)A)
+	   where rn between #{start} AND #{end}
+	</select>
+	
+	<select id="boardviewup" resultType="com.mbc.team.board.BoardDTO">
+	   select * from (
+	   select rownum rn,A.* from(  
+	   select cnum, tab, title, to_char(cdate, 'yyyy-MM-dd') as cdate, ccontents, cgroup, step, indent, clike, chate, ccnt, nickname, cimage from community where step=0 and indent=0 order by ccnt desc)A)
+	   where rn between #{start} AND #{end}
+	</select>
+	
+	<select id="boardviewdown" resultType="com.mbc.team.board.BoardDTO">
+	   select * from (
+	   select rownum rn,A.* from(  
+	   select cnum, tab, title, to_char(cdate, 'yyyy-MM-dd') as cdate, ccontents, cgroup, step, indent, clike, chate, ccnt, nickname, cimage from community where step=0 and indent=0 order by ccnt asc)A)
+	   where rn between #{start} AND #{end}
+	</select>
+	
+	<select id="boardlikeup" resultType="com.mbc.team.board.BoardDTO">
+	   select * from (
+	   select rownum rn,A.* from(  
+	   select cnum, tab, title, to_char(cdate, 'yyyy-MM-dd') as cdate, ccontents, cgroup, step, indent, clike, chate, ccnt, nickname, cimage from community where step=0 and indent=0 order by clike desc)A)
+	   where rn between #{start} AND #{end}
+	</select>
+	
+	<select id="boardlikedown" resultType="com.mbc.team.board.BoardDTO">
+	   select * from (
+	   select rownum rn,A.* from(  
+	   select cnum, tab, title, to_char(cdate, 'yyyy-MM-dd') as cdate, ccontents, cgroup, step, indent, clike, chate, ccnt, nickname, cimage from community where step=0 and indent=0 order by clike asc)A)
+	   where rn between #{start} AND #{end}
+	</select>
+	
 	<select id="boarddetail" resultType="com.mbc.team.board.BoardDTO">
 		select cnum, tab, title, to_char(cdate, 'yyyy-MM-dd') as cdate, ccontents, cgroup, step, indent, clike, chate, ccnt, nickname, cimage from community where cnum=#{param1}
 	</select>
@@ -176,11 +246,11 @@
 	</select>
 	
 	<update id="boardupdate">
-		update community set tab=#{param3}, title=#{param4}, ccontents=#{param5}, cimage=#{param6} where cnum=#{param1} and nickname=#{param2} 
+		update community set tab=#{param3}, title=#{param4}, ccontents=#{param5}, cimage=#{param6} where cnum=#{param1}
 	</update>
 	
 	<update id="boardupdatex">
-		update community set tab=#{param3}, title=#{param4}, ccontents=#{param5} where cnum=#{param1} and nickname=#{param2} 
+		update community set tab=#{param3}, title=#{param4}, ccontents=#{param5} where cnum=#{param1}
 	</update>
 
 <!-- 경기일정 -->
@@ -232,6 +302,34 @@
 	   select * from (
 	   select rownum rn,A.* from(  
 	   select id, nickname, snum, stitle, scontents, to_char(sdate, 'yyyy-MM-dd') as sdate, scnt, simage, stag from sosick order by snum desc)A)
+	   where rn between #{start} AND #{end}
+	</select>
+	
+	<select id="sosickdayup" resultType="com.mbc.team.board.SosickDTO">
+	   select * from (
+	   select rownum rn,A.* from(  
+	   select id, nickname, snum, stitle, scontents, to_char(sdate, 'yyyy-MM-dd') as sdate, scnt, simage, stag from sosick order by snum desc)A)
+	   where rn between #{start} AND #{end}
+	</select>
+	
+	<select id="sosickdaydown" resultType="com.mbc.team.board.SosickDTO">
+	   select * from (
+	   select rownum rn,A.* from(  
+	   select id, nickname, snum, stitle, scontents, to_char(sdate, 'yyyy-MM-dd') as sdate, scnt, simage, stag from sosick order by snum asc)A)
+	   where rn between #{start} AND #{end}
+	</select>
+	
+	<select id="sosickviewup" resultType="com.mbc.team.board.SosickDTO">
+	   select * from (
+	   select rownum rn,A.* from(  
+	   select id, nickname, snum, stitle, scontents, to_char(sdate, 'yyyy-MM-dd') as sdate, scnt, simage, stag from sosick order by scnt desc)A)
+	   where rn between #{start} AND #{end}
+	</select>
+	
+	<select id="sosickviewdown" resultType="com.mbc.team.board.SosickDTO">
+	   select * from (
+	   select rownum rn,A.* from(  
+	   select id, nickname, snum, stitle, scontents, to_char(sdate, 'yyyy-MM-dd') as sdate, scnt, simage, stag from sosick order by scnt asc)A)
 	   where rn between #{start} AND #{end}
 	</select>
 	
@@ -305,6 +403,34 @@
 	   select * from (
 	   select rownum rn,A.* from(  
 	   select evnum, id, nickname, etitle, econtents, to_char(edate, 'yyyy-MM-dd') as edate, eimagem, eimaged, estate, ecnt from event order by evnum desc)A)
+	   where rn between #{start} AND #{end}
+	</select>
+	
+	<select id="eventdayup" resultType="com.mbc.team.board.EventDTO">
+	   select * from (
+	   select rownum rn,A.* from(  
+	   select evnum, id, nickname, etitle, econtents, to_char(edate, 'yyyy-MM-dd') as edate, eimagem, eimaged, estate, ecnt from event order by evnum desc)A)
+	   where rn between #{start} AND #{end}
+	</select>
+	
+	<select id="eventdaydown" resultType="com.mbc.team.board.EventDTO">
+	   select * from (
+	   select rownum rn,A.* from(  
+	   select evnum, id, nickname, etitle, econtents, to_char(edate, 'yyyy-MM-dd') as edate, eimagem, eimaged, estate, ecnt from event order by evnum asc)A)
+	   where rn between #{start} AND #{end}
+	</select>
+	
+	<select id="eventviewup" resultType="com.mbc.team.board.EventDTO">
+	   select * from (
+	   select rownum rn,A.* from(  
+	   select evnum, id, nickname, etitle, econtents, to_char(edate, 'yyyy-MM-dd') as edate, eimagem, eimaged, estate, ecnt from event order by ecnt desc)A)
+	   where rn between #{start} AND #{end}
+	</select>
+	
+	<select id="eventviewdown" resultType="com.mbc.team.board.EventDTO">
+	   select * from (
+	   select rownum rn,A.* from(  
+	   select evnum, id, nickname, etitle, econtents, to_char(edate, 'yyyy-MM-dd') as edate, eimagem, eimaged, estate, ecnt from event order by ecnt asc)A)
 	   where rn between #{start} AND #{end}
 	</select>
 	

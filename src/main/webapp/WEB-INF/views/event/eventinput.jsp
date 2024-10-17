@@ -65,7 +65,7 @@ text-align: center
 <div class="maindata">
 <form action="eventsave" method="post" enctype="multipart/form-data">
 <table border="1" align="center" width="800px">
-<caption><h3>이벤트 입력</h3></caption>
+<caption><h3>Event</h3></caption>
 	<tr>
 		<th>제목</th>
 		<td style="text-align: left;">

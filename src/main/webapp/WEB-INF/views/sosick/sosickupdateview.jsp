@@ -85,7 +85,7 @@ window.onload = function() {
 <div class="maindata">
 <form action="sosickupdate" method="post" enctype="multipart/form-data">
 <table border="1" align="center" width="800px">
-<caption><h3>야구소식 수정</h3></caption>
+<caption><h3>야구소식</h3></caption>
 	<tr height="35px">
 		<th>태그</th>
 		<td style="text-align: left;">

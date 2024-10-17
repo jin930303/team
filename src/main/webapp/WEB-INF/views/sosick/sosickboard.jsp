@@ -66,18 +66,34 @@ text-align: center
 <div class="maindata">
 <table border="1" width="800px" align="center">
 <caption><h2>야구소식</h2></caption>
-	<tr height="35px">
-		<th width="50px">번호</th><th width="500px">제목</th><th width="100px">작성자</th><th width="100px">작성일</th><th width="50px">조회수</th>
+	<tr style="border-bottom: none;" height="35px">
+		<th colspan="5" style="text-align: right;">
+			최신 <a href="sosickdayup" style="margin-right: 3px;">↑ </a><a href="sosickdaydown" style="margin-right: 5px;">↓ </a> 
+			조회수 <a href="sosickviewup" style="margin-right: 3px;">↑ </a><a href="sosickviewdown" style="margin-right: 5px;">↓ </a>
+		</th>
 	</tr>
+	
+	<tr height="35px">
+		<th style="border-right:none;" width="50px">번호</th>
+		<th style="border-right:none; border-left:none;" width="500px">제목</th>
+		<th style="border-right:none; border-left:none;" width="100px">작성자</th>
+		<th style="border-right:none; border-left:none;" width="100px">작성일</th>
+		<th style="border-left:none;" width="50px">조회수</th>
+	</tr>
+	
 <c:forEach items="${list}" var="sosick">
 	<tr height="35px">
-		<td>${sosick.snum}</td><td style="text-align: left; padding-left: 5px;"><a href="sosickdetail?snum=${sosick.snum}">[${sosick.stag}] ${sosick.stitle}</a></td>
-		<td>${sosick.nickname}</td><td>${sosick.sdate}</td><td>${sosick.scnt}</td>
+		<td style="border-right:none;">${sosick.snum}</td>
+		<td style="border-right:none; border-left:none; text-align: left; padding-left: 5px;"><a href="sosickdetail?snum=${sosick.snum}">[${sosick.stag}] ${sosick.stitle}</a></td>
+		<td style="border-right:none; border-left:none;">${sosick.nickname}</td>
+		<td style="border-right:none; border-left:none;">${sosick.sdate}</td>
+		<td style="border-left:none;">${sosick.scnt}</td>
 	</tr>
 </c:forEach>
+
 <!-- 페이징처리 4444444444-->
-<tr style="border-left: none;border-right: none;border-bottom: none" height="35px">
-   <td colspan="8" style="text-align: center;">
+<tr style="border-bottom:none;" height="25px">
+   <td colspan="8" style="text-align: center; border-bottom:none;">
    
    <c:if test="${paging.startPage!=1 }">
       <a href="sosickboard?nowPage=${paging.startPage-1 }&cntPerPage=${paging.cntPerPage}"></a>
@@ -100,7 +116,7 @@ text-align: center
    </td>
 </tr>
 <!-- 페이징처리 4444444444-->
-	<tr height="35px">
+	<tr style="border-top:none;" height="35px">
 		<td colspan="7" align="left">
 			<form action="sosicksearchsave" method="post">
 				<select name="sosickkey" >
