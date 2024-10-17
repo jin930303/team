@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -85,14 +86,14 @@ window.onload = function() {
 <div class="maindata">
 <form action="gongjiupdate" method="post" enctype="multipart/form-data">
 <table border="1" align="center" width="800px">
-<caption><h3>공지사항 수정</h3></caption>
+<caption><h3>공지사항</h3></caption>
 	<tr height="35px">
 		<th>제목</th>
 		<td style="text-align: left;">
 			<input type="text" name="gtitle" style="width:725px" value="${list.gtitle}" required="required">
 			<input type="hidden" name="gnum" value="${list.gnum}" readonly>
-			<input type="hidden" name="id" value="${list.id}" readonly>
-			<input type="hidden" name="nickname" value="${list.nickname}" readonly>
+			<input type="hidden" name="id" value="admin" readonly>
+			<input type="hidden" name="nickname" value="관리자" readonly>
 		</td>
 	</tr>
 	

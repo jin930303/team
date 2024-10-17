@@ -2,12 +2,12 @@ package com.mbc.team.product;
 
 public class ProductDTO {
 	String image1, cg_code, scg_code, product, dimage;
-    int itemnum, price;
-    
+    int itemnum, price , pcnt;
+   
 	public ProductDTO() {}
 
 	public ProductDTO(String image1, String cg_code, String scg_code, String product, String dimage, int itemnum,
-			int price) {
+			int price, int pcnt) {
 		super();
 		this.image1 = image1;
 		this.cg_code = cg_code;
@@ -16,8 +16,9 @@ public class ProductDTO {
 		this.dimage = dimage;
 		this.itemnum = itemnum;
 		this.price = price;
+		this.pcnt = pcnt;
 	}
-
+	
 	public String getImage1() {
 		return image1;
 	}
@@ -72,5 +73,13 @@ public class ProductDTO {
 
 	public void setPrice(int price) {
 		this.price = price;
+	}
+
+	public int getPcnt() {
+		return pcnt;
+	}
+
+	public void setPcnt(int pcnt) {
+		this.pcnt = pcnt;
 	}
 }

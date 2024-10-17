@@ -66,66 +66,66 @@ text-align: center
 <div class="maindata">
 <table border="1" width="800px" align="center">
 <caption><h2>Event</h2></caption>
+<tr style="border-bottom: none;" height="35px">
 <c:choose>
-<c:when test="${adminloginstate==true}">
-	<tr>
-		<td align="left" colspan="3" height="35px">
-			<form action="eventsearchsave" method="post">
-				<select name="eventkey" >
-					<option value="etitle">제목
-					<option value="econtents">내용
-				</select>
-				<input type="text" name="svalue" style="width: 250px" placeholder="검색어를 입력해주세요.">
-				<input type="submit" value="찾기">
-				<input type="button" onclick="location.href='eventinput'" value="추가">
-				<input type="button" onclick="location.href='eventboard'" value="전체보기">
-				<input type="button" onclick="location.href='eventing'" value="진행중">
-				<input type="button" onclick="location.href='eventend'" value="종료">
-			</form>
+	<c:when test="${empty list}">
+		<th colspan="3" style="text-align: right;">
+			<a href="eventing" style="margin-right: 5px;">[진행중] </a>
+			<a href="eventend" style="margin-right: 5px;">[종료] </a>
+			최신 
+			<a href="eventdayup" style="margin-right: 3px;">↑ </a>
+			<a href="eventdaydown" style="margin-right: 5px;">↓ </a>
+			조회수 
+			<a href="eventviewup" style="margin-right: 3px;">↑ </a>
+			<a href="eventviewdown" style="margin-right: 5px;">↓ </a>
+		</th>
+	</c:when>
+	<c:otherwise>
+		<td style="text-align: left; padding-left: 10px;">"${svalue}"로 검색한 결과</td>
+		<th colspan="2" style="text-align: right;">
+			<a href="eventing" style="margin-right: 5px;">[진행중] </a>
+			<a href="eventend" style="margin-right: 5px;">[종료] </a>
+			최신 
+			<a href="eventdayup" style="margin-right: 3px;">↑ </a>
+			<a href="eventdaydown" style="margin-right: 5px;">↓ </a>
+			조회수 
+			<a href="eventviewup" style="margin-right: 3px;">↑ </a>
+			<a href="eventviewdown" style="margin-right: 5px;">↓ </a>
+		</th>
+	</c:otherwise>
+</c:choose>
+</tr>
+<c:choose>
+    <c:when test="${empty list}">
+		<tr height="250px">
+			<td colspan="6">"${svalue}"로 검색한 결과가 없습니다.</td>
+		</tr>
+	</c:when>
+	<c:otherwise>
+		<tr>
+		<c:forEach items="${list}" var="event" varStatus="status" end="9">
+		<td style="width: 250px; height: 200px; text-align: center; vertical-align: top; justify-content:left; height: 100%; border-right:none; border-left: none;">
+		    <div class="eventbox" style="display: flex; flex-direction: column; justify-content: left; align-items: center; height: 100%;">
+		        <div class="eventimage" style="width: 250px; height: 175px; display: flex; justify-content: center; align-items: center;">
+		            <a href="eventdetail?evnum=${event.evnum}">
+		                <img src="./image/${event.eimagem}" style="max-width: 100%; max-height: 100%; object-fit: cover;">
+		            </a>
+		        </div>
+		        <div class="eventtitle" style="margin-top: 25px; text-align: center;">
+		            <a href="eventdetail?evnum=${event.evnum}">[${event.estate}] ${event.etitle}</a>
+		        </div>
+		    </div>
 		</td>
-	</tr>
-</c:when>
-<c:otherwise>
-	<tr>
-		<td align="left" colspan="3" height="35px">
-			<form action="eventsearchsave" method="post">
-				<select name="eventkey" >
-					<option value="etitle">제목
-					<option value="econtents">내용
-				</select>
-				<input type="text" name="svalue" style="width: 250px" placeholder="검색어를 입력해주세요.">
-				<input type="submit" value="찾기">
-				<input type="button" onclick="location.href='eventboard'" value="전체보기">
-				<input type="button" onclick="location.href='eventing'" value="진행중">
-				<input type="button" onclick="location.href='eventend'" value="종료">
-			</form>
-		</td>
-	</tr>
-</c:otherwise>
+		<c:if test="${status.index % 3 == 2}">
+		    </tr><tr>
+		</c:if>
+		</c:forEach>
+		</tr>
+	</c:otherwise>
 </c:choose>
 
-<tr>
-<c:forEach items="${list}" var="event" varStatus="status" end="9">
-<td style="width: 250px; height: 200px; text-align: center; vertical-align: top; justify-content:left;">
-    <div class="eventbox" style="display: flex; flex-direction: column; justify-content: left; align-items: center; height: 100%;">
-        <div class="eventimage" style="width: 250px; height: 175px; display: flex; justify-content: center; align-items: center;">
-            <a href="eventdetail?evnum=${event.evnum}">
-                <img src="./image/${event.eimagem}" style="max-width: 100%; max-height: 100%; object-fit: cover;">
-            </a>
-        </div>
-        <div class="eventtitle" style="margin-top: 25px; text-align: center;">
-            <a href="eventdetail?evnum=${event.evnum}">[${event.estate}] ${event.etitle}</a>
-        </div>
-    </div>
-</td>
-<c:if test="${status.index % 3 == 2}">
-    </tr><tr>
-</c:if>
-</c:forEach>
-</tr>
-
 <!-- 페이징처리 4444444444-->
-<tr style="border-left: none;border-right: none;border-bottom: none">
+<tr style="border-bottom:none;" height="25px">
    <td colspan="8" style="text-align: center;">
    
    <c:if test="${paging.startPage!=1 }">
@@ -149,6 +149,29 @@ text-align: center
    </td>
 </tr>
 <!-- 페이징처리 4444444444-->
-</table></div></div>
+<tr style="border-top:none;" height="35px">
+	<td align="left" colspan="6">
+	<form action="eventsearchsave" method="post">
+		<select name="eventkey" >
+			<option value="etitle">제목
+			<option value="econtents">내용
+		</select>
+		<input type="text" name="svalue" style="width: 250px" placeholder="검색어를 입력해주세요.">
+		<input type="submit" value="찾기">
+<c:choose>
+	<c:when test="${adminloginstate==true}">
+		<input type="button" onclick="location.href='eventinput'" value="글쓰기">
+		<input type="button" onclick="location.href='eventboard'" value="목록">
+	</c:when>
+	<c:otherwise>
+		<input type="button" onclick="location.href='eventboard'" value="목록">
+	</c:otherwise>
+</c:choose>
+	</form>
+	</td>
+</tr>
+</table>
+</div>
+</div>
 </body>
 </html>

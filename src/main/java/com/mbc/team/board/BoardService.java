@@ -14,6 +14,10 @@ public interface BoardService {
 
 	public int total();
 	public ArrayList<GongjiDTO> page(PageDTO dto);
+	public ArrayList<GongjiDTO> gongjidayup(PageDTO dto);
+	public ArrayList<GongjiDTO> gongjidaydown(PageDTO dto);
+	public ArrayList<GongjiDTO> gongjiviewup(PageDTO dto);
+	public ArrayList<GongjiDTO> gongjiviewdown(PageDTO dto);
 
 	GongjiDTO gongjidetail(int gnum);
 	void gongjicount(int gnum);
@@ -38,6 +42,13 @@ public interface BoardService {
 	
 	public int boardtotal();
 	public ArrayList<BoardDTO> boardpage(PageDTO dto);
+	public ArrayList<BoardDTO> boarddayup(PageDTO dto);
+	public ArrayList<BoardDTO> boarddaydown(PageDTO dto);
+	public ArrayList<BoardDTO> boardviewup(PageDTO dto);
+	public ArrayList<BoardDTO> boardviewdown(PageDTO dto);
+	public ArrayList<BoardDTO> boardlikeup(PageDTO dto);
+	public ArrayList<BoardDTO> boardlikedown(PageDTO dto);
+
 
 	void boardcount(int cnum);
 	BoardDTO boarddetail(int cnum);
@@ -81,6 +92,10 @@ public interface BoardService {
 
 	public int totals();
 	public ArrayList<SosickDTO> pages(PageDTO dto);
+	public ArrayList<SosickDTO> sosickdayup(PageDTO dto);
+	public ArrayList<SosickDTO> sosickdaydown(PageDTO dto);
+	public ArrayList<SosickDTO> sosickviewup(PageDTO dto);
+	public ArrayList<SosickDTO> sosickviewdown(PageDTO dto);
 
 	SosickDTO sosickdetail(int snum);
 
@@ -105,6 +120,10 @@ public interface BoardService {
 	//¿Ã∫•∆Æ
 	public int totalev();
 	public ArrayList<EventDTO> pageev(PageDTO dto);
+	public ArrayList<EventDTO> eventdayup(PageDTO dto);
+	public ArrayList<EventDTO> eventdaydown(PageDTO dto);
+	public ArrayList<EventDTO> eventviewup(PageDTO dto);
+	public ArrayList<EventDTO> eventviewdown(PageDTO dto);
 
 	void insertevent(String id, String nickname, String etitle, String econtents, String eimagemfn, String eimagedfn, String estate);
 

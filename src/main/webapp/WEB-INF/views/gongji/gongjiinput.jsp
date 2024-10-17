@@ -84,7 +84,7 @@ window.onload = function() {
 <div class="maindata">
 <form action="gongjisave" method="post" enctype="multipart/form-data">
 <table border="1" align="center" width="800px">
-<caption><h3>공지사항 입력</h3></caption>
+<caption><h3>공지사항</h3></caption>
 	<tr height="35px">
 		<th>제목</th>
 		<td style="text-align: left;">
