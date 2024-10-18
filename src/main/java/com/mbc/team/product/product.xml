@@ -9,8 +9,17 @@
 	#{param5}, #{param6})
 </insert>
 
-<select id="outa" resultType="com.mbc.team.product.ProductDTO">  <!-- 상품 출력 페이지 / 상품 수정,삭제 페이지랑 다름 -->
-  select * from product
+<!-- 상품 목록을 가져오는 쿼리 -->
+<select id="outa" resultType="com.mbc.team.product.ProductDTO">
+    select * from product
+</select>
+
+<!-- 찜 목록을 가져오는 쿼리 -->
+<select id="outb" resultType="com.mbc.team.Like.LikeDTO">
+    select l.itemnum, l.id, p.itemnum
+    from plike l
+    join product p
+    on l.itemnum = p.itemnum
 </select>
 
 <select id="detail" resultType="com.mbc.team.product.ProductDTO">  <!-- 상품을 선택하면 그 상품의 정보 출력 -->
