@@ -87,22 +87,50 @@
 </div>
 
 <div class="product-container">
-    <c:forEach items="${list}" var="aa">
-        <div class="product">
-            <a href="productdetail?itemnum=${aa.itemnum}">
-                <img src="./image/${aa.image1}" alt="Product Image">
-            </a>
-            <div class="product-title">${aa.product}</div>
-            <div class="product-price">${aa.price}원</div>
-            <c:choose>
-            	<c:when test="${loginstate==true}">
-		            <div><input type="button" name="likenum" value="찜하기" onclick="location.href='like_save?itemnum=${aa.itemnum}'"></div>
-            	</c:when>
-            </c:choose>
-        </div>
-    </c:forEach>
-</div>
+<c:forEach items="${list}" var="aa">
+    <div class="product">
+        <a href="productdetail?itemnum=${aa.itemnum}">
+            <img src="./image/${aa.image1}" alt="Product Image">
+        </a>
+        <div class="product-title">${aa.product}</div>
+        <div class="product-price">${aa.price}원</div>
 
+        <c:choose>
+            <c:when test="${loginstate eq true}">
+                <c:set var="isLiked" value="false" />
+                <c:forEach items="${like}" var="like">
+                    <c:if test="${sessionScope.dto3.id eq like.id && aa.itemnum eq like.itemnum}">
+                        <c:set var="isLiked" value="true" />
+                    </c:if>
+                </c:forEach>
+
+                <c:choose>
+                    <c:when test="${isLiked eq true}">
+                        <div>
+                            <a href="like_save?itemnum=${aa.itemnum}">
+                                <img src="./image/꽉하트.png">
+                            </a>
+                        </div>
+                    </c:when>
+                    <c:otherwise>
+                        <div>
+                            <a href="like_save?itemnum=${aa.itemnum}">
+                                <img src="./image/빈하트.png">
+                            </a>
+                        </div>
+                    </c:otherwise>
+                </c:choose>
+            </c:when>
+
+            <c:otherwise>
+                <div>
+                    <img src="./image/빈하트.png">
+                </div>
+            </c:otherwise>
+        </c:choose>
+    </div>
+</c:forEach>
+</div>
 <script>
     function sortProducts() {
         const select = document.getElementById("sortSelect");

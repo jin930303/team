@@ -16,19 +16,12 @@
 
   <!-- 로그인한 경우 -->
   <c:if test="${not empty sessionScope.loginstate and sessionScope.loginstate == true}">
-      <h1>구매하기</h1>
 
-      <!-- 선택된 상품이 없을 경우 처리 -->
-      <c:if test="${empty sessionScope.itemsToBuy}">
-          <p>선택한 상품이 없습니다.</p>
-          <form action="cart" method="post">
-              <button type="submit">장바구니로 돌아가기</button>
-          </form>
-      </c:if>
+      <!-- 상품이 선택된 경우 -->
+      <c:if test="${not empty sessionScope.itemToBuy}">
+          <h1>구매하기</h1>
 
-      <!-- 선택된 상품이 있을 경우 처리 -->
-      <c:if test="${not empty sessionScope.itemsToBuy}">
-          <form action="confirmPurchase" method="post">
+          <form action="buydirectitem" method="post">
               <table>
                   <thead>
                       <tr>
@@ -41,26 +34,38 @@
                       </tr>
                   </thead>
                   <tbody>
-                      <c:forEach var="item" items="${sessionScope.itemsToBuy}">
-                          <tr>
-                              <td>${item.product}</td>
-                              <td><img src="./image/${item.image1}" alt="${item.product}" width="100"></td>
-                              <td>${item.op1}</td>
-                              <td>${item.count}</td>
-                              <td>${item.price}원</td>
-                              <td>${item.price * item.count}원</td>
-                          </tr>
-                      </c:forEach>
+                      <tr>
+                          <td>${itemToBuy.product}</td>
+                          <td><img src="./image/${itemToBuy.image1}" alt="${itemToBuy.product}" width="100"></td>
+                          <td>${itemToBuy.op1}</td>
+                          <td>
+                              <!-- 수량을 변경할 수 있는 입력창 -->
+                              <input type="number" name="count" value="${itemToBuy.count}" min="1" />
+                          </td>
+                          <td>${itemToBuy.price}원</td>
+                          <td>${itemToBuy.price * itemToBuy.count}원</td>
+                      </tr>
                   </tbody>
               </table>
 
-              
+              <!-- 장바구니에서 바로 구매 -->
+              <input type="hidden" name="itemnum" value="${itemToBuy.itemnum}" />
+              <input type="hidden" name="op1" value="${itemToBuy.op1}" />
+
               <button type="submit">구매 완료</button>
           </form>
+
       </c:if>
+
+      <!-- 상품이 선택되지 않은 경우 -->
+      <c:if test="${empty sessionScope.itemToBuy}">
+          <p>선택한 상품이 없습니다.</p>
+          <form action="cart" method="post">
+              <button type="submit">장바구니로 돌아가기</button>
+          </form>
+      </c:if>
+
   </c:if>
 
-  
-  
 </body>
 </html>

@@ -18,7 +18,16 @@
     <foreach item="item" collection="items" open="(" separator="," close=")">
         #{item}
     </foreach>
-    AND id = #{id}
+    and id = #{id}
 </delete>
 	
+	 <select id="isItemInCart" resultType="int">
+        select count(*) from cart where id =#{id} and itemnum = #{itemnum}
+    </select>
+	
+	<insert id="buyDirectItem">
+        insert into  cart (itemnum, id, product, price, count, image1, op1)
+        values (#{itemnum}, #{id}, #{product}, #{price}, #{count}, #{image1}, #{op1})
+    </insert>
+    
 </mapper>
