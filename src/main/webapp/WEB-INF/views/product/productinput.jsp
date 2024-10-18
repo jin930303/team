@@ -164,6 +164,20 @@ function updateScgCode() {
 
 <tr><th>상품이름</th><td><input type="text" name="product"></td></tr>
 <tr><th>상품가격</th><td><input type="number" name="price"></td></tr>
+<tr>
+	<th>할인율</th>
+	<td>
+		<select name="sale">
+			<option value="0">없음</option>
+			<option value="5">5%</option>
+			<option value="10">10%</option>
+			<option value="15">15%</option>
+			<option value="20">20%</option>
+			<option value="25">25%</option>
+			<option value="30">30%</option>
+		</select>
+	</td>
+</tr>
 <tr><th>상세내용이미지</th><td><input type="file" name="dimage"></td></tr>
 
 <tr><td><input type="submit" value="전송"></td></tr>
