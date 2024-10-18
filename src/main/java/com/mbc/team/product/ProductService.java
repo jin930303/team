@@ -15,7 +15,7 @@ public interface ProductService  {
 
 	ArrayList<ProductDTO> arbat(String scg_code);
 	
-	void inserta(String fname1, String cg_code, String scg_code, String product, int price, String fname2);
+	void inserta(String fname1, String cg_code, String scg_code, String product, int price, String fname2, int sale);
 
 	void deleteProduct(Integer itemnum);
 

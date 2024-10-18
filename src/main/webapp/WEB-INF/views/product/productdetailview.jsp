@@ -130,11 +130,20 @@
                 </td>
                 <td colspan="6" class="product-title">${dto.product}</td>
             </tr>
+            
+<c:choose>
+	<c:when test="${dto.sale == 0}">
             <tr>
                 <td colspan="6" class="price">판매가 ${dto.price}원</td>
+            </tr>	
+	</c:when>
+	<c:otherwise>
+            <tr>
+                <td colspan="6" class="price">판매가 [세일중] ${dto.saleprice}원</td>
             </tr>
-            
-            
+	</c:otherwise>
+</c:choose>    
+
             <c:choose>                           
                <c:when test="${dto.cg_code == 'fcg001'}">
 			    	<tr id="mittOptions" style="display:block;">
@@ -295,10 +304,19 @@
                 </td>
             </tr>
             
-            
+<c:choose>
+	<c:when test="${dto.sale == 0}">
             <tr>
                 <td colspan="6" id="tot">합계: ${dto.price}원</td>
+            </tr>	
+	</c:when>
+	<c:otherwise>
+            <tr>
+                <td colspan="6" id="tot">합계: ${dto.saleprice}원</td>
             </tr>
+	</c:otherwise>
+</c:choose>            
+
             
             
             <tr>

@@ -38,15 +38,16 @@ public class ProductController {
 			String scg_code = mul.getParameter("scg_code");
 			String product = mul.getParameter("product");
 			int price = Integer.parseInt(mul.getParameter("price"));
+			int sale = Integer.parseInt(mul.getParameter("sale"));
 			MultipartFile mf2 = mul.getFile("dimage");
 			String fname2 = mf2.getOriginalFilename();
 			mf2.transferTo(new File(path + "//" + fname2));
 			ProductService ps = sqlSession.getMapper(ProductService.class);
-			ps.inserta(fname1, cg_code, scg_code, product, price, fname2);
+			ps.inserta(fname1, cg_code, scg_code, product, price, fname2, sale);
 			return "main";
 		}
 	
-		@RequestMapping(value = "productout")  //상품 정보 출력
+		@RequestMapping(value = "productout", method = RequestMethod.GET)  //상품 정보 출력
 		public String lte3(Model mo) {
 			ProductService ps = sqlSession.getMapper(ProductService.class);
 			ArrayList<ProductDTO> list = ps.outa();
@@ -681,5 +682,6 @@ public class ProductController {
 			mo.addAttribute("list", list);
 			return "productout";
 		}
+		
      
 }

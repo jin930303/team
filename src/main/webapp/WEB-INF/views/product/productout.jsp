@@ -1,3 +1,5 @@
+<%@page import="java.util.List"%>
+<%@page import="com.mbc.team.product.ProductDTO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %> 
 <!DOCTYPE html>
@@ -93,7 +95,15 @@
                 <img src="./image/${aa.image1}" alt="Product Image">
             </a>
             <div class="product-title">${aa.product}</div>
-            <div class="product-price">${aa.price}원</div>
+            
+<c:choose>
+    <c:when test="${aa.sale > 0}"> <!-- sale이 0보다 큰 경우 -->
+        <div class="product-price">[세일중] ${aa.saleprice}원</div>
+    </c:when>
+    <c:otherwise>
+        <div class="product-price">${aa.price}원</div> <!-- 기본 가격 -->
+    </c:otherwise>
+</c:choose>
             <c:choose>
             	<c:when test="${loginstate==true}">
 		            <div><input type="button" name="likenum" value="찜하기" onclick="location.href='like_save?itemnum=${aa.itemnum}'"></div>
