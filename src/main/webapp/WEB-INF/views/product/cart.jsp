@@ -37,8 +37,8 @@
           type: 'post',
           url: 'deleteitems',
           contentType: 'application/json',
-          data: JSON.stringify({ items: selectedItems }),  // 수정된 부분: selectedItems -> items로
-          async: true,  // 수정된 부분: async true
+          data: JSON.stringify({ items: selectedItems }),  
+          async: true,  
           success: function(response) {
             alert("선택한 상품이 삭제되었습니다.");
             location.reload();  // 삭제 후 페이지 새로고침

@@ -62,21 +62,19 @@
         	        window.location.href = "login"; // 로그인 페이지로 리다이렉트
         	        return;
         	    }
-        	
         	// 옵션 선택 확인
             const op1Select = document.getElementById("op1_select");
             if (op1Select && op1Select.value === "") {
                 alert("옵션을 선택해주세요.");
                 return;
             }
-            
-            console.log("Selected option: " + op1Select.value);  // 로그 추가
-         // 선택한 옵션 값을 히든 필드에 설정
-            document.getElementById("op1").value = op1Select ? op1Select.value : "";
-         
+            if (!op1Select) {
+                document.getElementById("op1").value = "옵션없음";
+            } else {
+                document.getElementById("op1").value = op1Select.value;
+            }
             document.getElementById("productForm").submit();  // 폼 제출
             alert("장바구니에 상품이 추가되었습니다.");
-            window.location.reload();
         }
         
         function buyNow() {
@@ -142,6 +140,7 @@
 			            	<div class="option-title">글러브 옵션</div>
 			            	<c:if test="${dto.scg_code == 'mitt006'}">
 			                <p>선택할 수 있는 옵션이 없습니다.</p>
+			                <input type="hidden" name="op1" id="op1" value="옵션없음">
 			            </c:if>
 				            <c:if test="${dto.scg_code != 'mitt006'}">
 				                <select name="op1" id="op1_select" onchange="this.options[this.selectedIndex].value = this.value;">
@@ -160,6 +159,7 @@
 				            <div class="option-title">배트 사이즈</div>
 				            <c:if test="${dto.scg_code == 'bat008' || dto.scg_code == 'bat009'}">
 				                <p>선택할 수 있는 옵션이 없습니다.</p>
+				                <input type="hidden" name="op1" id="op1" value="옵션없음">
 				            </c:if>
 				            <c:if test="${dto.scg_code != 'bat008' && dto.scg_code != 'bat009'}">
 				                <select name="op1" id="op1_select"  onchange="this.options[this.selectedIndex].value = this.value;">
@@ -192,6 +192,7 @@
 				            <div class="option-title">신발 사이즈</div>
 				            <c:if test="${dto.scg_code == 'shoes006'}">
 				                <p>선택할 수 있는 옵션이 없습니다.</p>
+				                <input type="hidden" name="op1" id="op1" value="옵션없음">
 				            </c:if>
 				            <c:if test="${dto.scg_code != 'shoes006'}">
 				                <select name="op1" id="op1_select"  onchange="this.options[this.selectedIndex].value = this.value;">
@@ -220,6 +221,7 @@
 				            <div class="option-title">사이즈</div>
 				            <c:if test="${dto.scg_code == 'clothes010'}">
 				                <p>선택할 수 있는 옵션이 없습니다.</p>
+				                <input type="hidden" name="op1" id="op1" value="옵션없음">
 				            </c:if>
 				            <c:if test="${dto.scg_code != 'clothes010'}">
 				                <select name="op1" id="op1_select"  onchange="this.options[this.selectedIndex].value = this.value;">
@@ -241,6 +243,7 @@
 				            <div class="option-title">사이즈</div>
 				            <c:if test="${dto.scg_code == 'protect001' || dto.scg_code == 'protect005'}">
 				                <p>선택할 수 있는 옵션이 없습니다.</p>
+				                <input type="hidden" name="op1" id="op1" value="옵션없음">
 				            </c:if>
 				            <c:if test="${dto.scg_code != 'protect001' && dto.scg_code != 'protect005'}">
 				                <select name="op1" id="op1_select"  onchange="this.options[this.selectedIndex].value = this.value;">
@@ -276,6 +279,7 @@
 				            </c:if>
 				            <c:if test="${dto.scg_code != 'goods004'}">
 				                <p>선택할 수 있는 옵션이 없습니다.</p>
+				                <input type="hidden" name="op1" id="op1" value="옵션없음">
 				            </c:if>
 				        </td>
 				    </tr>
@@ -284,6 +288,7 @@
                 <c:otherwise>
                     <tr>
                         <td colspan="6">선택할 수 있는 옵션이 없습니다.</td>
+                        <input type="hidden" name="op1" id="op1" value="옵션없음">
                     </tr>
                 </c:otherwise>                
             </c:choose>
