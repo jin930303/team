@@ -1,6 +1,8 @@
 package com.mbc.team.Like;
 
 import java.util.ArrayList;
+import java.util.List;
+
 
 public interface LikeService {
 //1. ÂòÇÏ±â
@@ -10,6 +12,6 @@ public interface LikeService {
 	ArrayList<LikeDTO> like_product(String id);
 
 //3. Âò »óÇ° »èÁ¦
-	void like_items_delete(int likenum);
+	void like_items_delete(List<String> item);
 
 }
