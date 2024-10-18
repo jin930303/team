@@ -2,10 +2,14 @@ package com.mbc.team.product;
 
 import java.util.ArrayList;
 
+import com.mbc.team.Like.LikeDTO;
+
 public interface ProductService  {
 
 
 	ArrayList<ProductDTO> outa();
+	
+	ArrayList<LikeDTO> outb();
 
 	ProductDTO detail(int itemnum);
 
@@ -31,6 +35,8 @@ public interface ProductService  {
 	ArrayList<ProductDTO> besta();
 
 	ArrayList<ProductDTO> newa();
+
+
 
 	
 

@@ -16,6 +16,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
+import com.mbc.team.Like.LikeDTO;
+
 @Controller
 public class ProductController {
 	
@@ -50,7 +52,9 @@ public class ProductController {
 		public String lte3(Model mo) {
 			ProductService ps = sqlSession.getMapper(ProductService.class);
 			ArrayList<ProductDTO> list = ps.outa();
+			ArrayList<LikeDTO> like = ps.outb();
 			mo.addAttribute("list", list);
+			mo.addAttribute("like", like);
 			return "productout";
 		}
 	

@@ -3,6 +3,7 @@ package com.mbc.team.Like;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -13,9 +14,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.mbc.team.login.LoginDTO;
-import com.mbc.team.login.LoginService;
 
 @Controller
 public class LikeController {
@@ -64,15 +65,23 @@ public class LikeController {
 	}
 
 	// 찜 상품 삭제
-	@RequestMapping(value = "/like_items_delete")
+	@RequestMapping(value = "/like_items_delete", method = RequestMethod.POST)
 	public String like3(HttpServletRequest request, Model mo) {
-		int likenum = Integer.parseInt(request.getParameter("likenum"));
-		
-		LikeService ls = sqlSession.getMapper(LikeService.class);
-		
-		ls.like_items_delete(likenum);
-		
-		return "like_product_out";
+	    // 체크박스로 선택한 항목들 가져오기
+	    String[] selectedItems = request.getParameterValues("selectedItems");
+
+	    LikeService ls = sqlSession.getMapper(LikeService.class);
+
+	    if (selectedItems != null) {
+	        // Arrays.asList(selectedItems)는 고정된 크기의 리스트를 반환하므로 ArrayList로 변환
+	        ArrayList<String> itemList = new ArrayList<>(Arrays.asList(selectedItems));
+
+	        // LikeService 매퍼로 삭제 요청
+	        ls.like_items_delete(itemList);
+	    }
+
+	    // 삭제 후, 찜 상품 목록 페이지로 리다이렉트
+	    return "redirect:/like_product";
 	}
 
 }
