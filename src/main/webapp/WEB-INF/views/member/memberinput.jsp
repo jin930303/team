@@ -9,6 +9,7 @@
     var isNicknameAvailable = false;
     var isIdAvailable = false;
 	var isemailAvailable = false;
+	var isPhoneAvailable = false;
 	
     $(document).ready(function() {
         $("#idcheck").click(function() {
@@ -141,7 +142,7 @@
         var correctColor = "#00ff00";
         var wrongColor = "#ff0000";
         var confirmMsg = document.getElementById('confirmMsg');
-        var isPhoneAvailable = false;
+        
         
         if (id.length == 0) {
             alert('아이디를 입력해주세요');
@@ -197,11 +198,6 @@
             $('#phone2').focus();
             return false;
         }
-        if (!isPhoneAvailable) {
-            alert('전화번호 중복 확인해주세요');
-            $('#phonecheck').focus();
-            return false;
-        }
         if (fdomain.trim() == "") {
             alert('이메일을 입력해 주세요');
             $('#fdomain').focus();
@@ -210,6 +206,11 @@
         if (!isemailAvailable) {
             alert('이메일 중복 확인해주세요');
             $('#fdomain').focus();
+            return false;
+        }
+        if (!isPhoneAvailable) {
+            alert('전화번호 중복 확인해주세요');
+            $('#phonecheck').focus();
             return false;
         }
         document.forms[0].submit();
