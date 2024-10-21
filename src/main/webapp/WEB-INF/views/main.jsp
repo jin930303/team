@@ -77,7 +77,14 @@
                 <a href="productdetail?itemnum=${pro.itemnum}">
                 <img src="./image/${pro.image1}" style="width: 300px; height: 300px;"></a>
                 <div><a href="productdetail?itemnum=${pro.itemnum}">${pro.product}</a></div>
-                <div>${pro.price}원</div>
+		<c:choose>
+			<c:when test="${pro.sale>0}">
+				<div>[${pro.sale}% 세일중] ${pro.price}원 → ${pro.saleprice}원</div>
+			</c:when>
+			<c:otherwise>
+				<div>${pro.price}원</div>
+			</c:otherwise>
+		</c:choose>
             </td>
             <c:if test="${status.index % 4 == 3}"> <!-- 4개마다 새로운 행을 추가 -->
                 </tr><tr>
@@ -99,7 +106,14 @@
                 <a href="productdetail?itemnum=${pro1.itemnum}">
                 <img src="./image/${pro1.image1}" style="width: 300px; height: 300px;"></a>
                 <div><a href="productdetail?itemnum=${pro1.itemnum}">${pro1.product}</a></div>
-                <div>${pro1.price}원</div>
+		<c:choose>
+			<c:when test="${pro1.sale>0}">
+				<div>[${pro1.sale}% 세일중] ${pro1.price}원 → ${pro1.saleprice}원</div>
+			</c:when>
+			<c:otherwise>
+				<div>${pro1.price}원</div>
+			</c:otherwise>
+		</c:choose>
             </td>
             <c:if test="${status.index % 4 == 3}"> <!-- 4개마다 새로운 행을 추가 -->
                 </tr><tr>
