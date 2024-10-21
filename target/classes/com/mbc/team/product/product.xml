@@ -4,43 +4,34 @@
 
 <mapper namespace="com.mbc.team.product.ProductService">
 
-<insert id="inserta"> <!-- 상품 입력 정보 -->
+<insert id="inserta"> 
 	insert into product values(product_seq.nextval, #{param1}, #{param2}, #{param3}, #{param4}, 
-	#{param5}, #{param6})
+	#{param5}, #{param6} ,0 , #{param7})
 </insert>
 
-<!-- 상품 목록을 가져오는 쿼리 -->
-<select id="outa" resultType="com.mbc.team.product.ProductDTO">
-    select * from product
-</select>
-
-<!-- 찜 목록을 가져오는 쿼리 -->
-<select id="outb" resultType="com.mbc.team.Like.LikeDTO">
-    select l.itemnum, l.id, p.itemnum
-    from plike l
-    join product p
-    on l.itemnum = p.itemnum
+<select id="outa" resultType="com.mbc.team.product.ProductDTO">  <!-- 상품 출력 페이지 / 상품 수정,삭제 페이지랑 다름 -->
+  select itemnum , image1 ,cg_code, scg_code , product , price , dimage, sale, (price*((100-sale)/100)) as saleprice from product
 </select>
 
 <select id="detail" resultType="com.mbc.team.product.ProductDTO">  <!-- 상품을 선택하면 그 상품의 정보 출력 -->
-  select itemnum , image1 ,cg_code, scg_code , product , price , dimage from product where itemnum=#{param1}
+  select itemnum , image1 ,cg_code, scg_code , product , price , dimage, sale, (price*((100-sale)/100)) as saleprice from product where itemnum=#{param1}
 </select>
 
 <select id="outmainbest" resultType="com.mbc.team.product.ProductDTO">  <!-- main 화면에서 조회수 높은순서대로 출력 -->
-  select * from product order by pcnt desc
+  select itemnum , image1 ,cg_code, scg_code , product , price , dimage, sale, (price*((100-sale)/100)) as saleprice from product order by pcnt desc
 </select>
 
 
 <select id="outmainnew" resultType="com.mbc.team.product.ProductDTO"> <!-- main 화면에서 최근 db에 입력된 순서대로 출력 -->
-  select * from product order by itemnum desc
+  select itemnum , image1 ,cg_code, scg_code , product , price , dimage, sale, (price*((100-sale)/100)) as saleprice from product order by itemnum desc
 </select>
 
 <select id="arbat" resultType="com.mbc.team.product.ProductDTO"> <!-- 카테코리2선택하면 코드마다 분류 -->
-  select * from product where scg_code=#{param1}
+  select itemnum , image1 ,cg_code, scg_code , product , price , dimage, sale, (price*((100-sale)/100)) as saleprice from product where scg_code=#{param1}
 </select>
 
 <select id="outd" resultType="com.mbc.team.product.ProductDTO"> <!-- 상품 수정,삭제 페이지 출력 -->
-  select * from product
+  select itemnum , image1 ,cg_code, scg_code , product , price , dimage, sale, (price*((100-sale)/100)) as saleprice from product
 </select>
 
 <delete id="deleteProduct" parameterType="int">  <!-- 상품 삭제  -->
@@ -48,7 +39,7 @@
 </delete>
 
 <select id="update" resultType="com.mbc.team.product.ProductDTO">  <!-- 상품선택하면 그 상품정보 기재 되어있음 -->
- select * from product where itemnum = #{param1} 
+ select itemnum , image1 ,cg_code, scg_code , product , price , dimage, sale, (price*((100-sale)/100)) as saleprice from product where itemnum = #{param1} 
 </select>
 
 <update id="productupdatesave">    <!-- 상품정보 수정 저장 -->
