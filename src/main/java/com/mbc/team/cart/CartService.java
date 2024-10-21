@@ -14,8 +14,18 @@ public interface CartService {
 
 	void deleteSelectItems(@Param("id") String id, @Param("items") List<String> items);
 
-	public boolean isItemInCart(String id, Long itemnum);
+	public void buydirectitem(Long itemnum, String id, String product, int price, int count, String op1, String image1);
 
-	void buydirectitem(String id, Long itemnum, int count, String op1);
+	public List<CartItem> getCartItemsByUserId(String id);
+
+	public void deleteCartItemByUserIdAndItemNum(String id, int itemnum);
+
+
+
+	public void removeItemFromCart(Long itemnum, String id);
+
+	
+	
+	
 
 }

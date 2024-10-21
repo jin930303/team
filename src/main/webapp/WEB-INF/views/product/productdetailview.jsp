@@ -85,14 +85,14 @@
                 window.location.href = "login"; // 로그인 페이지로 리다이렉트
                 return;
             }
-
+            
          // 옵션 선택 확인 (옵션 선택이 없는 경우)
             const op1Select = document.getElementById("op1_select");
             if (op1Select && op1Select.value === "") {
                 alert("옵션을 선택해주세요.");
                 return;
             }
-
+			
             // 폼의 히든 필드에 선택된 옵션 값을 넣습니다.
             document.getElementById("op1").value = op1Select ? op1Select.value : "";
             

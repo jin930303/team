@@ -2,6 +2,8 @@ package com.mbc.team.cart;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -54,7 +56,6 @@ public class CartController {
 
 		// CartService 호출하여 CartItem 객체 전달
 		CartService cs = sqlSession.getMapper(CartService.class);
-		System.out.println("Inserting Cart Item: " + cartItem);
 		cs.insert(cartItem); // CartItem 객체 전달
 
 		return "redirect:/productdetail?itemnum=" + itemnum; // 장바구니 페이지로 이동
@@ -94,7 +95,7 @@ public class CartController {
 	@RequestMapping(value = "/deleteitems", method = RequestMethod.POST)
 	public String deleteSelectedItems(@RequestBody Map<String, List<String>> param, HttpSession hs) {
 		List<String> items = param.get("items"); // JSON에서 "items"를 추출
-
+		
 		LoginDTO dto3 = (LoginDTO) hs.getAttribute("dto3");
 
 		if (dto3 == null) {
@@ -107,26 +108,82 @@ public class CartController {
 
 		return "success";
 	}
-
+	
 	@RequestMapping(value = "/buydirectitem", method = RequestMethod.POST)
-	public String buydirectitem(@RequestParam("itemnum") Long itemnum, @RequestParam("count") int count,
-			@RequestParam("op1") String op1, HttpSession hs) {
+	public String buydirectitem(@RequestParam("itemnum") Long itemnum, 
+	                            @RequestParam("count") int count,
+	                            @RequestParam("op1") String op1,
+	                            @RequestParam("product") String product,
+	                            @RequestParam("image1") String image1, 
+	                            @RequestParam("price") int price, 
+	                            HttpSession hs, Model model) {
+		 
+		System.out.println("ItemNum: " + itemnum);
+		    System.out.println("Price: " + price);
+		    System.out.println("Product: " + product);
+		    System.out.println("Option: " + op1);
+		    System.out.println("Count: " + count);
 
-		LoginDTO member = (LoginDTO) hs.getAttribute("dto3");
+	    LoginDTO dto3 = (LoginDTO) hs.getAttribute("dto3");
 
-        // 로그인 상태 확인
-        if (member == null) {
-            return "redirect:/login";
-        }
-        CartService cs=sqlSession.getMapper(CartService.class);
-        
-        boolean isItemInCart = cs.isItemInCart(member.getId(), itemnum);
-        
-       
-        cs.buydirectitem(member.getId(),itemnum,count,op1);
-        
-        
-		return "redirect:/cart";
+
+	    String id = dto3.getId();  // 사용자 ID 가져오기
+	    System.out.println("사용자 ID: " + id);
+
+	   
+//	    CartService cs = sqlSession.getMapper(CartService.class);
+//	    
+//	   
+//	    cs.buydirectitem(itemnum, id, product, price, count, op1, image1);
+	    
+
+	    // 구매 정보 모델에 추가
+	    model.addAttribute("itemnum", itemnum);
+	    model.addAttribute("product", product);
+	    model.addAttribute("count", count);
+	    model.addAttribute("op1", op1);
+	    model.addAttribute("price", price);
+	    
+	    // 구매 확인 페이지로 이동
+	    return "buyproduct";
 	}
 
+
+	@RequestMapping("/buy")
+	
+    public String buySelectedItems(@RequestParam("selectedItems") List<String> selectedItems, HttpSession hs,Model mo) {
+		
+		LoginDTO dto3 = (LoginDTO) hs.getAttribute("dto3");
+		String id= dto3.getId();
+	    System.out.println("아이디 : " +id);
+		CartService cs = sqlSession.getMapper(CartService.class);
+	    List<CartItem> cart = cs.getCartItemsByUserId(id);
+
+	    // 장바구니 또는 선택된 아이템이 없을 경우 처리
+	    if (cart == null || selectedItems == null || selectedItems.isEmpty()) {
+	        mo.addAttribute("errorMessage", "선택한 상품이 없습니다.");
+	        return "errorPage";
+	    }
+	    
+	    
+	    List<CartItem> purchasedItems = new ArrayList<>();
+	    int totalPrice = 0;
+
+	    // 선택된 상품만 구매 처리
+	    for (CartItem item : cart) {
+	        if (selectedItems.contains(String.valueOf(item.getItemnum()))) {
+	            purchasedItems.add(item);
+	            totalPrice += item.getPrice() * item.getCount();
+	            System.out.println("ID: " + id + ", ItemNum: " + item.getItemnum());
+	            cs.deleteCartItemByUserIdAndItemNum(id, item.getItemnum());
+	        }
+	    }
+	    
+	    // 구매된 상품과 총 금액을 모델에 담아 뷰로 전달
+	    mo.addAttribute("purchasedItems", purchasedItems);
+	    mo.addAttribute("totalPrice", totalPrice);
+
+	    return "purchaseConfirmation";  // Tiles에 설정된 뷰 이름
+	}
+	
 }
