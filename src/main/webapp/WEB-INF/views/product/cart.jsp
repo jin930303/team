@@ -92,6 +92,7 @@
                             <td>${item.count}</td>
                             <td>${item.price}원</td>
                             <td>${item.price * item.count}원</td>
+
                             <td><input type="checkbox" name="selectedItems" value="${item.itemnum}"></td> 
                         </tr>
                     </c:forEach>

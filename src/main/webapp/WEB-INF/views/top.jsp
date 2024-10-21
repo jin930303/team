@@ -233,7 +233,7 @@ p {
 
 				<li><a href="newitem">New</a></li>
 
-				<li><a href="">Sale</a></li>
+				<li><a href="saleitem">Sale</a></li>
 
 				
 				

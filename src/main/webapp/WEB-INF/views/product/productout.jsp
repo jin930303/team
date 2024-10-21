@@ -96,7 +96,7 @@
  
  <c:choose>
     <c:when test="${aa.sale > 0}"> <!-- sale이 0보다 큰 경우 -->
-        <div class="product-price">[세일중] ${aa.saleprice}원</div>
+        <div class="product-price">[${aa.sale}% 세일중] ${aa.price}원 → ${aa.saleprice}원</div>
     </c:when>
     <c:otherwise>
         <div class="product-price">${aa.price}원</div> <!-- 기본 가격 -->

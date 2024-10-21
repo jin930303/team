@@ -5,6 +5,8 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,11 +19,12 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.mbc.team.Like.LikeDTO;
+import com.mbc.team.login.LoginDTO;
 
 @Controller
 public class ProductController {
 	
-	String path = "C://Users//3-14//git//team//src//main//webapp//image";
+	String path = "C://team//team//src//main//webapp//image";
 
 	@Autowired
 	SqlSession sqlSession;
@@ -50,12 +53,16 @@ public class ProductController {
 		}
 	
 		@RequestMapping(value = "productout", method = RequestMethod.GET)  //상품 정보 출력
-		public String lte3(Model mo) {
+		public String lte3(Model mo, HttpServletRequest request) {
+			HttpSession hs = request.getSession();
+			LoginDTO dto3 = (LoginDTO) hs.getAttribute("dto3");
+			String loginid=dto3.getId();
 			ProductService ps = sqlSession.getMapper(ProductService.class);
 			ArrayList<ProductDTO> list = ps.outa();
-			ArrayList<LikeDTO> like = ps.outb();
+			ArrayList<LikeDTO> like = ps.outb(loginid);
 			mo.addAttribute("list", list);
 			mo.addAttribute("like", like);
+			System.out.println(like);
 			return "productout";
 		}
 	
@@ -686,6 +693,13 @@ public class ProductController {
 			mo.addAttribute("list", list);
 			return "productout";
 		}
-		
+
+		@RequestMapping(value = "saleitem" , method = RequestMethod.GET)  //db에 최근등록순 상품
+		public String lte68(Model mo) {
+			ProductService ps = sqlSession.getMapper(ProductService.class);
+			ArrayList<ProductDTO> list = ps.salea();
+			mo.addAttribute("list", list);
+			return "productout";
+		}
      
 }

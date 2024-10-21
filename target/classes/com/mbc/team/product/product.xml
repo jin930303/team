@@ -39,7 +39,7 @@
 </delete>
 
 <select id="update" resultType="com.mbc.team.product.ProductDTO">  <!-- 상품선택하면 그 상품정보 기재 되어있음 -->
- select itemnum , image1 ,cg_code, scg_code , product , price , dimage, sale, (price*((100-sale)/100)) as saleprice from product where itemnum = #{param1} 
+ select itemnum , image1 ,cg_code, scg_code , product , price , dimage, sale from product where itemnum = #{param1} 
 </select>
 
 <update id="productupdatesave">    <!-- 상품정보 수정 저장 -->
@@ -53,14 +53,20 @@
 </update>
 
 <select id="besta" resultType="com.mbc.team.product.ProductDTO"> <!-- pnct(조회수 높은 순서대로 출력) -->
-  select * from (
-    select * from product order by pcnt desc
+  select itemnum , image1 ,cg_code, scg_code , product , price , dimage, sale, (price*((100-sale)/100)) as saleprice from (
+    select itemnum , image1 ,cg_code, scg_code , product , price , dimage, sale, (price*((100-sale)/100)) as saleprice from product order by pcnt desc
   ) where ROWNUM &lt;= 12
 </select>
 
 <select id="newa" resultType="com.mbc.team.product.ProductDTO"> <!-- itemnum 가 높은순서대로 출력되게 함(조회수 높은 순서대로 출력) -->
-  select * from (
-    select * from product order by itemnum desc
+  select itemnum , image1 ,cg_code, scg_code , product , price , dimage, sale, (price*((100-sale)/100)) as saleprice from (
+    select itemnum , image1 ,cg_code, scg_code , product , price , dimage, sale, (price*((100-sale)/100)) as saleprice from product order by itemnum desc
+  ) where ROWNUM &lt;= 12
+</select>
+
+<select id="salea" resultType="com.mbc.team.product.ProductDTO"> <!-- itemnum 가 높은순서대로 출력되게 함(조회수 높은 순서대로 출력) -->
+  select itemnum , image1 ,cg_code, scg_code , product , price , dimage, sale, (price*((100-sale)/100)) as saleprice from (
+    select itemnum , image1 ,cg_code, scg_code , product , price , dimage, sale, (price*((100-sale)/100)) as saleprice from product where sale>0 order by sale desc
   ) where ROWNUM &lt;= 12
 </select>
 

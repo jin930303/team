@@ -9,7 +9,7 @@ public interface ProductService  {
 
 	ArrayList<ProductDTO> outa();
 	
-	ArrayList<LikeDTO> outb();
+	ArrayList<LikeDTO> outb(String loginid);
 
 	ProductDTO detail(int itemnum);
 
@@ -35,6 +35,8 @@ public interface ProductService  {
 	ArrayList<ProductDTO> besta();
 
 	ArrayList<ProductDTO> newa();
+
+	ArrayList<ProductDTO> salea();
 
 
 

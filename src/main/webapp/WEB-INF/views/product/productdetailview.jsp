@@ -49,9 +49,17 @@
     <script>
         function updateTotal() {
             const price = parseFloat("${dto.price}");
+            const saleprice = parseFloat("${dto.saleprice}");
             const count = document.getElementById("count").value;
-            const total = price * count;
-            document.getElementById("tot").innerText = "합계: " + total + "원";
+			if(sale=0){
+	            const total = (price * count);
+	            document.getElementById("tot").innerText = "합계: " + total + "원";
+			}
+			else {
+	            const total = (saleprice * count);
+	            document.getElementById("tot").innerText = "합계: " + total + "원";
+			}
+
         }
         
         function addToCart() {
@@ -110,7 +118,14 @@
   %>
     <form id="productForm" action="/team/insertcart" method="post" enctype="multipart/form-data">
         <input type="hidden" name="itemnum" id="itemnum" value="${dto.itemnum}">
-        <input type="hidden" name="price" id="price" value="${dto.price}">
+<c:choose>
+	<c:when test="${dto.sale>0}">
+		<input type="hidden" name="price" id="price" value="${dto.saleprice}">
+	</c:when>
+	<c:otherwise>
+		<input type="hidden" name="price" id="price" value="${dto.price}">
+	</c:otherwise>
+</c:choose>
         <input type="hidden" name="product" id="product" value="${dto.product}">
         <input type="hidden" name="op1" id="op1" value="${param.op1}">
         <input type="hidden" name="image1" id="image1" value="${dto.image1}">
@@ -137,7 +152,7 @@
 	</c:when>
 	<c:otherwise>
             <tr>
-                <td colspan="6" class="price">판매가 [세일중] ${dto.saleprice}원</td>
+                <td colspan="6" class="price">판매가 [${dto.sale}% 세일중] ${dto.price}원 → ${dto.saleprice}원</td>
             </tr>
 	</c:otherwise>
 </c:choose>    
