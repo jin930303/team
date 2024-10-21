@@ -80,6 +80,13 @@
       <put-attribute name="title" value="메인화면"/>
       <put-attribute name="body" value="/WEB-INF/views/product/buyproduct.jsp"/>
    </definition> 
+   
+   
+   <definition name="purchaseConfirmation" extends="baseLayout">
+      <put-attribute name="title" value="메인화면"/>
+      <put-attribute name="body" value="/WEB-INF/views/product/purchaseConfirmation.jsp"/>
+   </definition> 
+    
     
    
 </tiles-definitions>

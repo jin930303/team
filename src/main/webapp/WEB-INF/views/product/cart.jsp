@@ -24,6 +24,8 @@
       return false;  // 폼 전송을 막음
     }
     
+    
+    
     if(action === 'delete'){
       var selectedItems = [];
       for (var i = 0; i < checkboxes.length; i++) {
@@ -53,8 +55,8 @@
     
     // action에 따른 폼 전송
     var form = document.getElementById("cartForm");
-    form.action = action;  // 버튼 클릭에 따라 다른 액션을 지정
-    return true;  // 폼 전송 허용
+    form.action = action === 'buy' ? 'buy' : 'delete';
+    return true;
   }
 </script>
 </head>
@@ -78,7 +80,7 @@
                         <th>수량</th>
                         <th>가격</th>
                         <th>총 가격</th>
-                        <th>선택</th> <!-- 추가된 선택 칼럼 -->
+                        <th>선택</th> 
                     </tr>
                 </thead>
                 <tbody>
@@ -90,7 +92,7 @@
                             <td>${item.count}</td>
                             <td>${item.price}원</td>
                             <td>${item.price * item.count}원</td>
-                            <td><input type="checkbox" name="selectedItems" value="${item.itemnum}"></td> <!-- 체크박스 추가 -->
+                            <td><input type="checkbox" name="selectedItems" value="${item.itemnum}"></td> 
                         </tr>
                     </c:forEach>
                 </tbody>
