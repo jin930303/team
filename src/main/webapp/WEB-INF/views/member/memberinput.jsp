@@ -76,7 +76,6 @@
                 }
             });
         });
-
         // 비밀번호 보이기/숨기기 기능
         $('.togglePassword').click(function() {
             const passwordInput = $(this).siblings('input');
@@ -84,6 +83,38 @@
             passwordInput.attr('type', type);
             $(this).find('i').toggleClass('fa-eye fa-eye-slash');
         });
+        
+        $("#phonecheck").click(function() {
+            var phone1 = $("#phone1").val();
+            var phone2 = $("#phone2").val();
+            var phoneRegex = /^[0-9]{4}$/; // 전화번호 형식 체크 (4자리 숫자)
+
+            if (!phoneRegex.test(phone1) || !phoneRegex.test(phone2)) {
+                alert('전화번호는 4자리 숫자만 가능합니다.');
+                $("#phone1").focus();
+                return;
+            }
+
+            var fullPhone = "010-" + phone1 + "-" + phone2; // 전체 전화번호 조합
+
+            $.ajax({
+                type: "post",
+                url: "phonecheck1", // 서버에서 처리할 URL
+                data: { "phone": fullPhone },
+                async: true,
+                success: function(data) {
+                    if (data == "ok") {
+                        alert("사용 가능한 전화번호입니다.");
+                        isPhoneAvailable = true; // 전화번호 사용 가능 플래그
+                    } else {
+                        alert("이미 사용중인 전화번호입니다.");
+                        isPhoneAvailable = false; // 전화번호 사용 불가 플래그
+                        $("#phone1").focus();
+                    }
+                }
+            });
+        });
+        
     });
 
     function check() {
@@ -100,7 +131,8 @@
         var correctColor = "#00ff00";
         var wrongColor = "#ff0000";
         var confirmMsg = document.getElementById('confirmMsg');
-
+        var isPhoneAvailable = false;
+        
         if (id.length == 0) {
             alert('아이디를 입력해주세요');
             $('#id').focus();
@@ -153,6 +185,11 @@
         if (phone2.trim() == "") {
             alert('전화번호 뒷자리를 입력해주세요');
             $('#phone2').focus();
+            return false;
+        }
+        if (!isPhoneAvailable) {
+            alert('전화번호 중복 확인해주세요');
+            $('#phonecheck').focus();
             return false;
         }
         if (fdomain.trim() == "") {
@@ -224,6 +261,7 @@
                 <th>전화번호</th>
                 <td>
                     010-<input type="text" name="phone1" id="phone1" maxlength="4">-<input type="text" name="phone2" id="phone2" maxlength="4">
+                 <input type="button" name="phonecheck" id="phonecheck" value="중복확인">
                 </td>
             </tr>
             <tr>

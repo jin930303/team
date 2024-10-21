@@ -12,6 +12,8 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
@@ -53,7 +55,7 @@ public class MemberController {
 		ms.memberinput(id,nickname,pw,name,birth,phone,address,email);
 		
 		
-		return "membercongratulations";
+		return "redirect:/main";
 	}
 	
 	@ResponseBody
@@ -106,4 +108,19 @@ public class MemberController {
 			return "no";
 		}
 	}
+	
+	@RequestMapping(value = "/phonecheck1", method = RequestMethod.POST)
+	@ResponseBody
+	public String phoneCheck(@RequestParam("phone") String phone) {
+	    // 전화번호 중복 확인 로직
+		MemberService ms=sqlSession.getMapper(MemberService.class);
+	   int count = ms.phonecheck(phone); // 전화번호 중복 체크 메서드 호출
+	    if (count==0) {
+	        return "ok"; // 사용 가능한 전화번호
+	    } else {
+	        return "notok"; // 사용 중인 전화번호
+	    }
+	}
+	
+	
 }
