@@ -23,4 +23,8 @@
 	select count(*) from member where email=#{param1}	
 	</select>
 	
+	<select id="phonecheck" resultType="int">
+	select count(*) from member where phone=#{phone}	
+	</select>
+	
 </mapper>

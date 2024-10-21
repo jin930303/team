@@ -19,6 +19,8 @@ public interface MemberService {
 			String address, String email,String id);
 
 	int emailcheck(String email);
+	
+	int phonecheck(String phone);
 
 	
 

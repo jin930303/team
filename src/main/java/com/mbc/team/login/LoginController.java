@@ -38,8 +38,6 @@ public class LoginController {
 	@Autowired
 	SqlSession sqlSession;
 	
-	@Autowired
-	    private NaverLoginService naverLoginService;
 	
 	
 	@RequestMapping(value = "/login")
