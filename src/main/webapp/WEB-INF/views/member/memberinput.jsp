@@ -39,6 +39,11 @@
 
         $("#nicknamecheck").click(function() {
             var nickname = $("#nickname").val();
+            if (nickname.trim() === "") {
+                alert('닉네임을 입력해주세요');
+                $("#nickname").focus();
+                return; 
+            }
             $.ajax({
                 type: "post",
                 url: "nicknamecheck1",
@@ -59,6 +64,11 @@
         
         $("#emailcheck").click(function() {
             var email = $("#fdomain").val()+"@"+$("#bdomain").val();
+            if ($("#fdomain").val().trim() === "") {
+                alert('이메일을 입력해 주세요');
+                $("#fdomain").focus();
+                return; 
+            }
             $.ajax({
                 type: "post",
                 url: "emailcheck1",

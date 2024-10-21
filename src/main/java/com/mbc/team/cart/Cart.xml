@@ -11,7 +11,7 @@
 	</insert>
 	
 	<select id="selectitem" resultType="com.mbc.team.cart.CartItem">
-		select *from cart where
+		select * from cart where
 		id=#{id}
 	</select>
 
@@ -29,12 +29,7 @@
 		select count(*) from cart where id =#{param1} and itemnum = #{param2}
 	</select>
 
-	<insert id="buyDirectItem" parameterType="com.mbc.team.cart.CartItem">
-		insert into cart (itemnum, id, product, price, count, image1, op1)
-		values (#{itemnum}, #{id}, #{product}, #{price}, #{count}, #{image1},
-		#{op1})
-	</insert>
-
+	
 	<select id="getCartItemsByUserId"
 		resultType="com.mbc.team.cart.CartItem">
 		SELECT * FROM cart WHERE id = #{id, jdbcType=VARCHAR}
@@ -48,7 +43,5 @@
 		select count(*) from cart where id =#{param2} and itemnum = #{param1}
 	</select>
 	
-	<delete id="removeItemFromCart">
-    delete from cart where id=#{param2} and itemnum=#{param1}
-</delete>
+	
 </mapper>
