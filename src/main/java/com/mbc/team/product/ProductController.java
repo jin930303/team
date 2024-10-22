@@ -646,6 +646,7 @@ public class ProductController {
 		    String cg_code = mul.getParameter("cg_code");
 		    String scg_code = mul.getParameter("scg_code");
 		    String product = mul.getParameter("product");
+		    int sale = Integer.parseInt(mul.getParameter("sale"));
 		    int price = Integer.parseInt(mul.getParameter("price"));
 		    
 		    // itemnum 파라미터 가져오기
@@ -672,7 +673,7 @@ public class ProductController {
 
 		    // 파일 이름이 null인 경우 기존 값을 유지하도록 처리
 		    ProductService ps = sqlSession.getMapper(ProductService.class);
-		    ps.productupdatesave(fname1, cg_code, scg_code, product, price, fname2, itemnum);
+		    ps.productupdatesave(fname1, cg_code, scg_code, sale , product, price, fname2, itemnum);
 		    ArrayList<ProductDTO> list = ps.outd();
 		    mo.addAttribute("list", list);
 		    return "productdeleteout";

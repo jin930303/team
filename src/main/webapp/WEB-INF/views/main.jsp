@@ -42,7 +42,7 @@
 
       <div class="item active">
       <a href="outfielder">
-        <img src="./image/글러브-야수.jpg" alt="글러브야수" style="height:500px; width:850px;">
+        <img src="./image/메인이미지.jpg" alt="글러브야수" style="height:100%; width:auto;">
 		</a>
         <div class="carousel-caption">
         </div>
@@ -50,7 +50,7 @@
       
       <div class="item">
       <a href="pitcherallround">
-        <img src="./image/글러브-투수.jpg" alt="글러브투수" style="height:500px; width:850px;">
+        <img src="./image/메인이미지.jpg" alt="글러브투수" style="height:100%; width:auto;">
         </a>
         <div class="carousel-caption">
         </div>

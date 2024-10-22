@@ -6,74 +6,67 @@
 <meta charset="UTF-8">
 <title>Product Grid</title>
 <style>
-    /* General styling for grid layout */
-    .product-container {
+
+    .product-container {   /*상품 배열 하는거*/
         display: grid;
-        grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); /* 상품 카드 크기 증가 */
-        gap: 30px; /* 상품 간격 더 넓힘 */
-        max-width: 1200px; /* 그리드 전체 폭 더 넓힘 */
+        grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); 
+        gap: 30px; 
+        max-width: 1200px; 
         margin: 0 auto;
     }
-
-    .product {
+    
+    .product {            /*상품 테두리*/
         border: 1px solid #ddd;
-        padding: 30px; /* 상품 카드 패딩 증가 */
+        padding: 20px;
         text-align: center;
+        background-color: #f9f9f9; 
+        border-radius: 8px; 
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1); 
+        transition: transform 0.2s; 
     }
-
-    /* Increased image size */
-    .product img {
-        width: 200px; /* 이미지 크기 더 크게 설정 */
+    
+     .product:hover {
+        transform: scale(1.05); /* 마우스 오버 시 크기 증가 */
+    }
+                                           
+    .product img {       /*상품 이미지 크기*/
+        width: 200px; 
         height: 200px;
         object-fit: cover;
     }
 
-    .product a {
-        text-decoration: none;
-        color: inherit;
-    }
-
-    /* Increased font size for the product title */
-    .product-title {
+    .product-title {     /* 상품명 폰트 설정 */    
         font-weight: bold;
-        font-size: 24px; /* 상품명 폰트 크기 증가 */
+        font-size: 24px; 
         margin: 15px 0;
     }
-
-    /* Increased font size for the product price */
-    .product-price {
+    
+    .product-price {     /* 가격 폰트 설정 */  
         color: #d32f2f;
-        font-size: 20px; /* 가격 폰트 크기 증가 */
+        font-size: 20px; 
         margin: 10px 0;
     }
-
-    /* Right-align the sort select dropdown */
-    .sort-container {
+    
+    .sort-container { 	 /* 정렬 방식 위치 설정 */  
         display: flex;
-        justify-content: flex-end; /* 오른쪽 정렬 */
+        justify-content: flex-end;
         margin: 20px;
+        margin-right: 330px;
+        margin-top: 60px;
     }
 
-    .sort-container select {
-        margin-left: 10px; /* select와 다른 요소 사이에 공간 추가 */
-    }
-
-    /* Search container styling */
-    .search-container {
+    .search-container {   /* 검색 위치 설정 */  
         margin: 20px;
         display: flex;
-        justify-content: flex-end; /* 오른쪽 정렬 */
+        justify-content: flex-end;
+        margin-right: 330px;
+        margin-bottom: 60px;
     }
 
-    .search-container input {
-        margin-left: 10px; /* input과 label 사이 공간 추가 */
-        padding: 4px;
-    }
 </style>
 </head>
 
 <body>
-
 <div class="sort-container"> 
     <select id="sortSelect" onchange="sortProducts()">
         <option value="default">-정렬방식-</option>
@@ -116,14 +109,14 @@
                     <c:when test="${isLiked eq true}">
                         <div>
                             <a href="like_save?itemnum=${aa.itemnum}">
-                                <img src="./image/꽉하트.png">
+                               👍 따봉
                             </a>
                         </div>
                     </c:when>
                     <c:otherwise>
                         <div>
-                            <a href="like_save?itemnum=${aa.itemnum}">
-                                <img src="./image/빈하트.png">
+                            <a href="like_save?itemnum=${aa.itemnum}"> 	
+                                👍 따봉
                             </a>
                         </div>
                     </c:otherwise>
@@ -132,7 +125,7 @@
 
             <c:otherwise>
                 <div>
-                    <img src="./image/빈하트.png">
+                 👍 따봉
                 </div>
             </c:otherwise>
         </c:choose>

@@ -27,7 +27,7 @@ public interface ProductService  {
 
 	ProductDTO update(int itemnum);
 
-	void productupdatesave(String fname1, String cg_code, String scg_code, String product, int price, String fname2,
+	void productupdatesave(String fname1, String cg_code, String scg_code, int sale, String product, int price, String fname2,
 			int itemnum);
 
 	void pview(int itemnum);

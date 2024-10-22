@@ -6,44 +6,46 @@
     <meta charset="UTF-8">
     <title>Product Detail Page</title>
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-        }
-        table {
+
+        table {         /*화면 가운데 정렬*/
             margin: 50px auto;
             width: 90%;
             max-width: 1200px;
             border-collapse: collapse;
         }
-        td, th {
+        
+        td, th {        /*칸 마다 선으로 분류*/
             padding: 10px;
             border: 1px solid #ddd;
         }
-        .main-image {
+        
+        .main-image {   /*메인 이미지 크기*/
             width: 500px;
             height: 550px;
         }
-        .product-title {
+        
+        .product-title {  /*상품 이름 폰트*/
             font-size: 18px;
             font-weight: bold;
         }
-        .price {
+        
+        .price {        /*상품 가격 폰트*/
             color: black;
             font-size: 20px;
         }
-        .option-title {
+        
+        .option-title {  /*옵션 폰트*/
             font-size: 16px;
             font-weight: bold;
             margin-top: 20px;
             margin-left: 5px;
         }
-        .responsive-image {
+        .responsive-image {  /*디테일 이미지 가로 사이즈 조절*/
             width: 100%;
             height: auto;
             max-width: 1000px;
         }
+        
     </style>
     
     <script>

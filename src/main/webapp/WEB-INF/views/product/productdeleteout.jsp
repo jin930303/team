@@ -7,57 +7,52 @@
 <meta charset="UTF-8">
 <title>Product Grid</title>
 <style>
-    /* General styling for grid layout */
-    .product-container {
+
+   .product-container {   /*상품 배열 하는거*/
         display: grid;
-        grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-        gap: 30px;
-        max-width: 1200px;
+        grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); 
+        gap: 30px; 
+        max-width: 1200px; 
         margin: 0 auto;
     }
-
-    .product {
+    
+    .product {            /*상품 테두리*/
         border: 1px solid #ddd;
         padding: 30px;
         text-align: center;
-    }
-
-    .product img {
-        width: 200px;
+    }   
+                                           
+    .product img {       /*상품 이미지 크기*/
+        width: 200px; 
         height: 200px;
         object-fit: cover;
     }
 
-    .product a {
-        text-decoration: none;
-        color: inherit;
-    }
-
-    .product-title {
+    .product-title {     /* 상품명 폰트 설정 */    
         font-weight: bold;
-        font-size: 24px;
+        font-size: 24px; 
         margin: 15px 0;
     }
-
-    .product-price {
+    
+    .product-price {     /* 가격 폰트 설정 */  
         color: #d32f2f;
-        font-size: 20px;
+        font-size: 20px; 
         margin: 10px 0;
     }
-
-    .sort-container {
+    
+    .sort-container { 	 /* 정렬 방식 위치 설정 */  
         display: flex;
         justify-content: flex-end;
         margin: 20px;
     }
 
-    .search-container {
+    .search-container {   /* 검색 위치 설정 */  
         margin: 20px;
         display: flex;
         justify-content: flex-end;
     }
 
-    .delete-button {
+    .delete-button {     /* 삭제 버튼 폰트*/
         background-color: #d32f2f;
         color: white;
         border: none;
@@ -66,30 +61,16 @@
         margin-top: 10px;
     }
 
-    .delete-button:hover {
-        background-color: #c62828;
-    }
-
-    .category-container {
-        display: flex;
-        justify-content: center; /* 중앙 정렬 */
-        margin: 20px;
-        flex-wrap: wrap; /* 여러 줄로 감싸기 */
-    }
-
-    .category-button {
-        margin: 10px; /* 버튼 간격 조정 */
+    .category-button {   /* 수정,삭제 페이지 상단 카테고리 바 폰트 */
+        margin: 10px; 
         padding: 10px 15px;
         border: none;
-        background-color: #ccc; /* 회색 배경 */
-        color: black; /* 글자색 검정 */
+        background-color: #ccc; 
+        color: black; 
         cursor: pointer;
-        border-radius: 5px; /* 모서리 둥글게 */
+        border-radius: 5px; 
     }
-
-    .category-button:hover {
-        background-color: #bbb; /* 호버 시 색상 변경 */
-    }
+ 
 </style>
 </head>
 
@@ -129,7 +110,14 @@
                 <img src="./image/${aa.image1}" alt="Product Image">
             </a>
             <div class="product-title">${aa.product}</div>
-            <div class="product-price">${aa.price}원</div>
+    <c:choose>
+    <c:when test="${aa.sale > 0}"> <!-- sale이 0보다 큰 경우 -->
+        <div class="product-price">[${aa.sale}% 세일중] ${aa.price}원 → ${aa.saleprice}원</div>
+    </c:when>
+    <c:otherwise>
+        <div class="product-price">${aa.price}원</div> <!-- 기본 가격 -->
+    </c:otherwise>
+	</c:choose>
             <button class="edit-button" onclick="window.location.href='producteupdate?itemnum=${aa.itemnum}'">수정</button>
             <button class="delete-button" onclick="confirmDelete('${aa.itemnum}')">삭제</button>
         </div>

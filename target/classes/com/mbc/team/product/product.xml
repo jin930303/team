@@ -45,8 +45,8 @@
 	</select>
 	
 	<update id="productupdatesave">    <!-- 상품정보 수정 저장 -->
-		update product set image1=#{param1}, cg_code=#{param2}, scg_code=#{param3}, product=#{param4}, price=#{param5}, dimage=#{param6} 
-		where itemnum=#{param7}
+		update product set image1=#{param1}, cg_code=#{param2}, scg_code=#{param3}, sale=#{param4} ,product=#{param5}, price=#{param6}, dimage=#{param7} 
+		where itemnum=#{param8}
 	</update>
 	
 	<update id="pview">   <!-- 상품상세페이지 누를때마다 상품 조회수 증가 -->
