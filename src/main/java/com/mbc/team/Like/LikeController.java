@@ -52,14 +52,26 @@ public class LikeController {
 
 	// 찜 목록
 	@RequestMapping(value = "/like_product")
-	public String like2(HttpServletRequest request, Model mo) {
+	public String like2(HttpServletRequest request, Model mo, HttpServletResponse response) throws IOException {
 		HttpSession hs = request.getSession();
 		LoginDTO dto3 = (LoginDTO) hs.getAttribute("dto3");
-
+		Boolean loginState = (Boolean) hs.getAttribute("loginstate");
+		
 		LikeService ls = sqlSession.getMapper(LikeService.class);
+		
+		
+		if (!loginState || loginState == null) {
+
+			response.setContentType("text/html;charset=utf-8");
+			PrintWriter pww = response.getWriter();
+			pww.print("<script> alert('로그인 후 이용해주새요')</script>");
+			pww.print("<script> location.href='login'</script>");
+			pww.close();
+			return "redirect:/login";
+		}
 		ArrayList<LikeDTO> list = ls.like_product(dto3.getId());
 		mo.addAttribute("list", list);
-
+		
 		return "like_product_out";
 
 	}

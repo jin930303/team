@@ -6,45 +6,47 @@
 <head>
 <title>고객센터 문의 게시판</title>
 <style type="text/css">
-* {
-	margin: 0;
-	padding: 0;
-	box-sizing: border-box;
-}
 
+/* 백그라운드 배경 */
 body {
 	font-family: Arial, sans-serif;
 	background-color: #f9f9f9;
 	color: #333;
 }
 
+/* 목차+게시판 컨테이너 */
 .container {
 	display: flex;
 	width: 80%;
 }
 
+/* 좌측 목차 사이드 바 */
 .sidebar {
 	width: 350px;
 	background-color: #fff;
-	border-right: 1px solid #ddd;
+	border-right: 1px solid #ddd; /* 목차 - 게시판 사이 선*/
 	padding: 20px;
 }
 
+/* 좌측 사이드바 "고객센터" */
 .sidebar h2 {
 	font-size: 18px;
 	margin-bottom: 20px;
 }
 
+/* 목차 링크의 리스트 스타일 없애면 리스트별 . 생김 */
 .sidebar ul {
 	list-style: none;
 	padding: 0;
 	margin-bottom: 30px;
 }
 
+/* 목차 리스트 사이 간격 */
 .sidebar ul li {
 	margin-bottom: 10px;
 }
 
+/* 목차 리스트 별 버튼 모양 */
 .sidebar ul li a {
 	text-decoration: none;
 	color: #333;
@@ -59,163 +61,47 @@ body {
 	background-color: #ddd;
 }
 
+/* 게시판 하단 컨테이너와 게시글 테이블 사이 간격 */
 .contact-info, .account-info {
 	margin-bottom: 30px;
 }
 
+/* h3 텍스트(목차 하단 텍스트) */
 .contact-info h3, .account-info h3 {
 	font-size: 16px;
 	margin-bottom: 10px;
 }
 
+/* 목차 하단 텍스트 사이 간격 */
 .contact-info p, .account-info p {
 	margin-bottom: 5px;
 }
 
+/* 게시판 섹션 */
 .main-content {
 	flex-grow: 1;
 	padding: 20px;
 	background-color: #fff;
+	margin-right: 150px;
 }
 
+/* 게시판 "1:1 문의글 답변 수정" */
 .main-content h1 {
 	font-size: 24px;
 	margin-bottom: 20px;
 }
-
-.search-bar {
-	display: flex;
-	margin-bottom: 20px;
-}
-
-.search-bar input {
-	width: 300px;
-	padding: 10px;
-	border: 1px solid #ddd;
-	border-radius: 4px;
-	margin-right: 10px;
-}
-
-.search-bar button {
-	padding: 10px 20px;
-	background-color: #333;
-	color: #fff;
-	border: none;
-	border-radius: 4px;
-	cursor: pointer;
-}
-
-.search-bar button:hover {
-	background-color: #555;
-}
-
-.faq-table {
-	width: 100%;
-	border-collapse: collapse;
-	margin-top: 20px;
-}
-
-.faq-table caption {
-	font-size: 18px;
+table {
+	text-align: center;
 	margin-bottom: 10px;
-	text-align: left;
-}
-
-.faq-table th, .faq-table td {
-	border: 1px solid #ddd;
-	padding: 10px;
-	text-align: center;
-}
-
-.faq-table th {
-	background-color: #f4f4f4;
-}
-
-.faq-table tbody tr:hover {
-	background-color: #f9f9f9;
-}
-
-.trlink:hover {
-	cursor: pointer;
-	background-color: #ddd;
-}
-
-.pagination {
-	text-align: center;
-	margin-top: 20px;
-}
-
-.pagination a {
-	margin: 0 5px;
-	text-decoration: none;
-	padding: 5px 10px;
-	border: 1px solid #ddd;
-	color: #333;
-}
-
-.pagination a:hover {
-	background-color: #ddd;
-}
-
-.pagination .current {
-	font-weight: bold;
-	color: red;
-}
-/* 플로팅 메뉴 스타일 */
-#floating-menu {
-	position: fixed;
-	right: 30px;
-	top: 250px; /* 상단에서 150px 떨어짐 */
-	z-index: 600;
-	background-color: #fff;
-	border: 1px solid #ddd;
-	border-radius: 10px;
 	padding: 20px;
+	width: 90%;
 }
 
-.main-content {
-	margin-right: 150px;
-}
-
-#floating-menu ul {
-	list-style: none;
-	padding: 0;
-	margin: 0;
-}
-
-#floating-menu ul li {
-	margin-bottom: 10px;
-}
-
-#floating-menu ul li a {
-	text-decoration: none;
-	color: #333;
-	padding: 10px 20px;
-	display: block;
+th,td {
+	background-color: white;
 	border: 1px solid #ddd;
-	border-radius: 5px;
-	text-align: center;
-	transition: background-color 0.3s;
 }
 
-#floating-menu ul li a:hover {
-	background-color: #f4f4f4;
-}
-/* 탑버튼, 바텀버튼 */
-.scroll-button {
-	color: #333;
-	text-align: center;
-	padding: 10px 20px;
-	border: 1px solid #ddd;
-	font-size: 20px;
-	border-radius: 5px;
-	cursor: pointer;
-	margin-bottom: 8px;
-}
-
-.scroll-button:hover {
-	background-color: #f4f4f4;
-}
 </style>
 <meta charset="UTF-8">
 <title>Insert title here</title>
@@ -228,14 +114,11 @@ body {
 			<ul>
 				<li><a href="faq_community">고객센터</a></li>
 				<li><a href="#">공지사항</a></li>
-				<% 
-					Boolean FAQmember = (Boolean) session.getAttribute("loginstate");
-					if (FAQmember != null && FAQmember) {
-				%>
-					<li><a href="faqin">1:1 문의하기</a></li>
-				<%
-					}
-				%>
+				<c:choose>
+					<c:when test="${loginstate == true}">
+						<li><a href="faqin">1:1 문의하기</a></li>
+					</c:when>
+				</c:choose>
 				<li><a href="faqout">문의 내역</a></li>
 				<li><a href="faq">FAQ</a></li>
 			</ul>
@@ -251,27 +134,14 @@ body {
 				<p>행복은행 (예금주: 행복이)</p>
 			</div>
 		</aside>
-		<!-- 오른쪽 플로팅 메뉴 -->
-		<div id="floating-menu">
-			<ul>
-				<li><a href="cart">장바구니</a></li>
-				<li><a href="https://open.kakao.com/o/suixDsUg">KAKAO문의</a></li>
-				<li><a href="#">배송조회</a></li>
-				<li><a href="#">최근 본 상품</a></li>
-				<li><a href="#">관심상품</a></li>
-				<li><a href="myinfo">마이페이지</a></li>
-			</ul>
-			<!-- 
-            <div class="scroll-button" onclick="window.scrollTo({top: 0, behavior: 'smooth'});">△</div>
-            <div class="scroll-button" onclick="window.scrollTo({top: document.body.scrollHeight, behavior: 'smooth'});">▽</div>
-     -->
-		</div>
+	<!-- 메인 콘텐츠 -->
+	<main class="main-content">
+		<h1>1:1 문의 답변 수정</h1>	
 	<form action="faq_reply_update2" method="post" enctype="multipart/form-data">
-		<table>
-			<caption>
-				<span>문의글 수정</span>
-			</caption>
+		<table class="table_style">
+			<caption>UPDATE</caption>
 			<tr>
+				<th>문의 번호</th>
 				<td>
 					<input type="number" name="cnum" value="${dto.cnum}" readonly>
 				</td>
@@ -310,26 +180,16 @@ body {
 					<input type="file" name="fimage2"> 
 					<input type="file" name="fimage3">
 				</td>
-				<td>
-					<c:if test="${dto.fimage1 != null}">
-			            <img src="./image/${faq.fimage1}" width="80px" height="70px">
-			        </c:if>
-			        <c:if test="${dto.fimage2 != null}">
-						<img src="./image/${faq.fimage2}" width="80px" height="70px"> 
-			 		</c:if>
-					<c:if test="${dto.fimage3 != null}">
-						<img src="./image/${faq.fimage3}" width="80px" height="70px">
-					</c:if>	
-				</td>
 			</tr>
 			<tr>
-				<td>
+				<td colspan="2">
 					<input type="submit" value="수정 완료">
 					<input type="button" value="수정 취소" onclick="location.href='faqout'">
 				</td>
 			</tr>
 		</table>
 	</form>
+	</main>
 </div>
 </body>
 </html>
