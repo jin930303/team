@@ -6,42 +6,35 @@
 
 	<insert id="insert" parameterType="com.mbc.team.cart.CartItem">
 		insert into cart(itemnum, id, product, price, count, image1, op1)
-		values(#{itemnum}, #{id}, #{product}, #{price}, #{count}, #{image1},
-		#{op1})
+		values(#{itemnum}, #{id}, #{product}, #{price}, #{count}, #{image1}, #{op1})
 	</insert>
 	
 	<select id="selectitem" resultType="com.mbc.team.cart.CartItem">
-		select * from cart where
-		id=#{id}
+		select * from cart where id=#{id}
 	</select>
 
 	<delete id="deleteSelectItems">
-		delete from cart
-		where itemnum in
-		<foreach item="item" collection="items" open="(" separator=","
-			close=")">
+		delete from cart where itemnum in
+		<foreach item="item" collection="items" open="(" separator="," close=")">
 			#{item}
 		</foreach>
-		and id = #{id}
+		and id=#{id}
 	</delete>
 
 	<select id="isItemInCart" resultType="int">
-		select count(*) from cart where id =#{param1} and itemnum = #{param2}
+		select count(*) from cart where id=#{param1} and itemnum=#{param2}
 	</select>
-
 	
-	<select id="getCartItemsByUserId"
-		resultType="com.mbc.team.cart.CartItem">
-		SELECT * FROM cart WHERE id = #{id, jdbcType=VARCHAR}
+	<select id="getCartItemsByUserId" resultType="com.mbc.team.cart.CartItem">
+		select * from cart where id=#{id}
 	</select>
 	
 	<delete id="deleteCartItemByUserIdAndItemNum">
-    delete from cart where id=#{param1} and itemnum=#{param2}
-</delete>
+    	delete from cart where id=#{param1} and itemnum=#{param2}
+	</delete>
 
 	<select id="checkItemInCart" resultType="int">
-		select count(*) from cart where id =#{param2} and itemnum = #{param1}
+		select count(*) from cart where id=#{param2} and itemnum=#{param1}
 	</select>
-	
 	
 </mapper>
