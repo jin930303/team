@@ -11,6 +11,7 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,8 +35,20 @@ public class BoardController {
 	
 	//공지사항
 	@RequestMapping(value = "/gongjiinput", method = RequestMethod.GET)
-	public String gongjiinput() {
-		return "gongjiinput";
+	public String gongjiinput(HttpServletRequest request, HttpServletResponse response) throws IOException {
+		HttpSession hs=request.getSession();
+		Boolean adminloginstate = (Boolean) hs.getAttribute("adminloginstate");
+		if(adminloginstate==true) {
+			return "gongjiinput";
+		}
+		else {
+			response.setContentType("text/html;charset=utf-8");
+			PrintWriter pww = response.getWriter();
+			pww.print("<script> alert('관리자만 이용가능합니다.');</script>");
+			pww.print("<script> location.href='gongjiboard';</script>");
+			pww.flush();
+			return "gongjiboard";
+		}
 	}
 	
 	@RequestMapping(value = "/gongjisave", method = RequestMethod.POST)
@@ -46,7 +59,7 @@ public class BoardController {
 		String gtitle=mul.getParameter("gtitle");
 		String gcontents=mul.getParameter("gcontents");
 		MultipartFile mf=mul.getFile("gimage");
-	    if (mf == null || mf.isEmpty()) {
+		if (mf == null || mf.isEmpty()) {
 			bs.insertgongjix(id, nickname, gtitle, gcontents);
 		}
 		else {
@@ -179,28 +192,55 @@ public class BoardController {
 	
 	@RequestMapping(value = "/gongjidelete", method = RequestMethod.GET)
 	public String gongjidelete(HttpServletRequest request, HttpServletResponse response) throws IOException {
+		HttpSession hs=request.getSession();
+		Boolean adminloginstate=(Boolean) hs.getAttribute("adminloginstate");
 		int gnum=Integer.parseInt(request.getParameter("gnum"));
 		BoardService bs=sqlsession.getMapper(BoardService.class);
-		response.setContentType("text/html;charset=utf-8");
-		PrintWriter prw=response.getWriter();
-		prw.print("<script> alert('해당 글을 삭제하였습니다.');</script>");
-		prw.print("<script> location.href='gongjiboard';</script>");
-		prw.close();
-		bs.gongjidelete(gnum);
-		return "redirect:/gongjiboard";
+		if(adminloginstate==true) {
+			response.setContentType("text/html;charset=utf-8");
+			PrintWriter prw=response.getWriter();
+			prw.print("<script> alert('해당 글을 삭제하였습니다.');</script>");
+			prw.print("<script> location.href='gongjiboard';</script>");
+			prw.close();
+			bs.gongjidelete(gnum);
+			return "redirect:/gongjiboard";
+		}
+		else {
+			response.setContentType("text/html;charset=utf-8");
+			PrintWriter pww = response.getWriter();
+			pww.print("<script> alert('관리자만 이용가능합니다.');</script>");
+			pww.print("<script> location.href='gongjiboard';</script>");
+			pww.flush();
+			return "gongjiboard";
+		}
+
 	}
 	
 	@RequestMapping(value = "/gongjiupdateview", method = RequestMethod.GET)
-	public String gongjiupdateview(HttpServletRequest request, Model mo) {
+	public String gongjiupdateview(HttpServletRequest request, Model mo, HttpServletResponse response) throws IOException {
+		HttpSession hs=request.getSession();
+		Boolean adminloginstate=(Boolean) hs.getAttribute("adminloginstate");
 		int gnum=Integer.parseInt(request.getParameter("gnum"));
 		BoardService bs=sqlsession.getMapper(BoardService.class);
-		GongjiDTO list=bs.gongjiupdateview(gnum);
-		mo.addAttribute("list", list);
-		return "gongjiupdateview";
+		if(adminloginstate==true) {
+			GongjiDTO list=bs.gongjiupdateview(gnum);
+			mo.addAttribute("list", list);
+			return "gongjiupdateview";
+		}
+		else {
+			response.setContentType("text/html;charset=utf-8");
+			PrintWriter pww = response.getWriter();
+			pww.print("<script> alert('관리자만 이용가능합니다.');</script>");
+			pww.print("<script> location.href='gongjiboard';</script>");
+			pww.flush();
+			return "gongjiboard";
+		}
 	}
 	
 	@RequestMapping(value = "/gongjiupdate", method = RequestMethod.POST)
-	public String gongjiupdate(HttpServletResponse response, MultipartHttpServletRequest mul) throws IOException {
+	public String gongjiupdate(HttpServletRequest request, HttpServletResponse response, MultipartHttpServletRequest mul) throws IOException {
+		HttpSession hs=request.getSession();
+		Boolean adminloginstate=(Boolean) hs.getAttribute("adminloginstate");
 		BoardService bs=sqlsession.getMapper(BoardService.class);
 		int gnum=Integer.parseInt(mul.getParameter("gnum"));
 		String id=mul.getParameter("id");
@@ -208,20 +248,30 @@ public class BoardController {
 		String gtitle=mul.getParameter("gtitle");
 		String gcontents=mul.getParameter("gcontents");
 		MultipartFile mf=mul.getFile("gimage");
-	    if (mf == null || mf.isEmpty()) {
-	    	bs.gongjiupdatex(gnum, id, nickname, gtitle, gcontents);
+		if(adminloginstate==true) {
+			if (mf == null || mf.isEmpty()) {
+		    	bs.gongjiupdatex(gnum, id, nickname, gtitle, gcontents);
+			}
+			else {
+				String gimagefn=mf.getOriginalFilename();
+				mf.transferTo(new File(savepath+"//"+gimagefn));
+				bs.gongjiupdate(gnum, id, nickname, gtitle, gcontents, gimagefn);
+			}
+			response.setContentType("text/html;charset=utf-8");
+			PrintWriter prw=response.getWriter();
+			prw.print("<script> alert('수정이 완료되었습니다.');</script>");
+			prw.print("<script> location.href='gongjiboard';</script>");
+			prw.close();
+			return "redirect:/gongjidetail?gnum=" + gnum;
 		}
 		else {
-			String gimagefn=mf.getOriginalFilename();
-			mf.transferTo(new File(savepath+"//"+gimagefn));
-			bs.gongjiupdate(gnum, id, nickname, gtitle, gcontents, gimagefn);
+			response.setContentType("text/html;charset=utf-8");
+			PrintWriter pww = response.getWriter();
+			pww.print("<script> alert('관리자만 이용가능합니다.');</script>");
+			pww.print("<script> location.href='gongjiboard';</script>");
+			pww.flush();
+			return "gongjiboard";
 		}
-		response.setContentType("text/html;charset=utf-8");
-		PrintWriter prw=response.getWriter();
-		prw.print("<script> alert('수정이 완료되었습니다.');</script>");
-		prw.print("<script> location.href='gongjiboard';</script>");
-		prw.close();
-		return "redirect:/gongjidetail?gnum=" + gnum;
 	}
 	
 	@RequestMapping(value = "/gongjisearchsave", method = RequestMethod.POST)
@@ -603,8 +653,20 @@ public class BoardController {
 	}
 	
 	@RequestMapping(value = "/iljunginput", method = RequestMethod.GET)
-	public String iljunginput() {
-		return "iljunginput";
+	public String iljunginput(HttpServletRequest request, HttpServletResponse response) throws IOException {
+		HttpSession hs=request.getSession();
+		Boolean adminloginstate = (Boolean) hs.getAttribute("adminloginstate");
+		if(adminloginstate==true) {
+			return "iljunginput";
+		}
+		else {
+			response.setContentType("text/html;charset=utf-8");
+			PrintWriter pww = response.getWriter();
+			pww.print("<script> alert('관리자만 이용가능합니다.');</script>");
+			pww.print("<script> location.href='iljung';</script>");
+			pww.flush();
+			return "iljung";
+		}
 	}
 	
 	@RequestMapping(value = "/iljungsave", method = RequestMethod.POST)
@@ -698,49 +760,88 @@ public class BoardController {
 		String nowPage=request.getParameter("nowPage");
 		String cntPerPage=request.getParameter("cntPerPage");
 		BoardService bs=sqlsession.getMapper(BoardService.class);
-		int totalis=bs.totalis();
-		if(nowPage==null && cntPerPage == null) {
-			nowPage="1";
-			cntPerPage="15";
+		HttpSession hs=request.getSession();
+		Boolean adminloginstate = (Boolean) hs.getAttribute("adminloginstate");
+		if(adminloginstate==true) {
+			int totalis=bs.totalis();
+			if(nowPage==null && cntPerPage == null) {
+				nowPage="1";
+				cntPerPage="15";
+			}
+			else if(nowPage==null) {
+				nowPage="1";
+			}
+			else if(cntPerPage==null) {
+				cntPerPage="15";
+			} 
+			dto=new PageDTO(totalis,Integer.parseInt(nowPage),Integer.parseInt(cntPerPage));
+			mo.addAttribute("paging",dto);
+			mo.addAttribute("list", bs.pageis(dto));
+			return "iljungsetting";
 		}
-		else if(nowPage==null) {
-			nowPage="1";
+		else {
+			response.setContentType("text/html;charset=utf-8");
+			PrintWriter pww = response.getWriter();
+			pww.print("<script> alert('관리자만 이용가능합니다.');</script>");
+			pww.print("<script> location.href='iljung';</script>");
+			pww.flush();
+			return "iljung";
 		}
-		else if(cntPerPage==null) {
-			cntPerPage="15";
-		} 
-		dto=new PageDTO(totalis,Integer.parseInt(nowPage),Integer.parseInt(cntPerPage));
-		mo.addAttribute("paging",dto);
-		mo.addAttribute("list", bs.pageis(dto));
-		return "iljungsetting";
+
 	}
 	
 	@RequestMapping(value = "/iljungdelete", method = RequestMethod.GET)
 	public String iljungdelete(HttpServletRequest request, HttpServletResponse response) throws IOException {
+		HttpSession hs=request.getSession();
+		Boolean adminloginstate = (Boolean) hs.getAttribute("adminloginstate");
 		String gamedate=request.getParameter("gamedate");
 		String gameresult=request.getParameter("gameresult");
 		BoardService bs=sqlsession.getMapper(BoardService.class);
-		bs.iljungdelete(gamedate, gameresult);
-		response.setContentType("text/html;charset=utf-8");
-		PrintWriter prw=response.getWriter();
-		prw.print("<script> alert('해당 글을 삭제하였습니다.');</script>");
-		prw.print("<script> location.href='iljungsetting';</script>");
-		prw.close();
-		return "redirect:/iljungsetting";
+		if(adminloginstate==true) {
+			bs.iljungdelete(gamedate, gameresult);
+			response.setContentType("text/html;charset=utf-8");
+			PrintWriter prw=response.getWriter();
+			prw.print("<script> alert('해당 글을 삭제하였습니다.');</script>");
+			prw.print("<script> location.href='iljungsetting';</script>");
+			prw.close();
+			return "redirect:/iljungsetting";
+		}
+		else {
+			response.setContentType("text/html;charset=utf-8");
+			PrintWriter pww = response.getWriter();
+			pww.print("<script> alert('관리자만 이용가능합니다.');</script>");
+			pww.print("<script> location.href='iljung';</script>");
+			pww.flush();
+			return "iljung";
+		}
+
 	}
 	
 	@RequestMapping(value = "/iljungupdateview", method = RequestMethod.GET)
-	public String iljungupdateview(HttpServletRequest request, Model mo) {
+	public String iljungupdateview(HttpServletRequest request, Model mo, HttpServletResponse response) throws IOException {
+		HttpSession hs=request.getSession();
+		Boolean adminloginstate = (Boolean) hs.getAttribute("adminloginstate");
 		String gamedate=request.getParameter("gamedate");
 		String gameresult=request.getParameter("gameresult");
 		BoardService bs=sqlsession.getMapper(BoardService.class);
-		IljungDTO list=bs.iljungupdateview(gamedate, gameresult);
-		mo.addAttribute("list", list);
-		return "iljungupdateview";
+		if(adminloginstate==true) {
+			IljungDTO list=bs.iljungupdateview(gamedate, gameresult);
+			mo.addAttribute("list", list);
+			return "iljungupdateview";
+		}
+		else {
+			response.setContentType("text/html;charset=utf-8");
+			PrintWriter pww = response.getWriter();
+			pww.print("<script> alert('관리자만 이용가능합니다.');</script>");
+			pww.print("<script> location.href='iljung';</script>");
+			pww.flush();
+			return "iljung";
+		}
+
 	}
 	
 	@RequestMapping(value = "/iljungupdate", method = RequestMethod.POST)
-	public String iljungupdate(HttpServletRequest request) {
+	public String iljungupdate(HttpServletRequest request, HttpServletResponse response) throws IOException {
 		String fgamedate=request.getParameter("fgamedate");
 		String fgameresult=request.getParameter("fgameresult");
 		String leaguestate=request.getParameter("leaguestate");
@@ -808,18 +909,42 @@ public class BoardController {
 			gameresult=home+" 취소 "+away;
 		}
 		BoardService bs=sqlsession.getMapper(BoardService.class);
-		bs.iljungupdate(gamedate, gameresult, fgamedate, fgameresult);
-		return "iljung";
+		HttpSession hs=request.getSession();
+		Boolean adminloginstate = (Boolean) hs.getAttribute("adminloginstate");
+		if(adminloginstate==true) {
+			bs.iljungupdate(gamedate, gameresult, fgamedate, fgameresult);
+			return "iljung";
+		}
+		else {
+			response.setContentType("text/html;charset=utf-8");
+			PrintWriter pww = response.getWriter();
+			pww.print("<script> alert('관리자만 이용가능합니다.');</script>");
+			pww.print("<script> location.href='iljung';</script>");
+			pww.flush();
+			return "iljung";
+		}
 	}
 	
 	//경기소식
 	@RequestMapping(value = "/sosickinput", method = RequestMethod.GET)
-	public String sosickinput() {
-		return "sosickinput";
+	public String sosickinput(HttpServletRequest request, HttpServletResponse response) throws IOException {
+		HttpSession hs=request.getSession();
+		Boolean adminloginstate = (Boolean) hs.getAttribute("adminloginstate");
+		if(adminloginstate==true) {
+			return "sosickinput";
+		}
+		else {
+			response.setContentType("text/html;charset=utf-8");
+			PrintWriter pww = response.getWriter();
+			pww.print("<script> alert('관리자만 이용가능합니다.');</script>");
+			pww.print("<script> location.href='sosickboard';</script>");
+			pww.flush();
+			return "sosickboard";
+		}
 	}
 	
 	@RequestMapping(value = "/sosicksave", method = RequestMethod.POST)
-	public String sosicksave(MultipartHttpServletRequest mul) throws IllegalStateException, IOException {
+	public String sosicksave(MultipartHttpServletRequest mul, HttpServletRequest request, HttpServletResponse response) throws IllegalStateException, IOException {
 		BoardService bs=sqlsession.getMapper(BoardService.class);
 		String id=mul.getParameter("id");
 		String nickname=mul.getParameter("nickname");
@@ -827,15 +952,27 @@ public class BoardController {
 		String stitle=mul.getParameter("stitle");
 		String scontents=mul.getParameter("scontents");
 		MultipartFile mf=mul.getFile("simage");
-	    if (mf == null || mf.isEmpty()) {
-			bs.insertsosickx(id, nickname, stitle, scontents, stag);
+		HttpSession hs=request.getSession();
+		Boolean adminloginstate = (Boolean) hs.getAttribute("adminloginstate");
+		if(adminloginstate==true) {
+			if (mf == null || mf.isEmpty()) {
+				bs.insertsosickx(id, nickname, stitle, scontents, stag);
+			}
+			else {
+				String simagefn=mf.getOriginalFilename();
+				mf.transferTo(new File(savepath+"//"+simagefn));
+				bs.insertsosick(id, nickname, stitle, scontents, simagefn, stag);
+			}
+			return "redirect:/sosickboard";
 		}
 		else {
-			String simagefn=mf.getOriginalFilename();
-			mf.transferTo(new File(savepath+"//"+simagefn));
-			bs.insertsosick(id, nickname, stitle, scontents, simagefn, stag);
+			response.setContentType("text/html;charset=utf-8");
+			PrintWriter pww = response.getWriter();
+			pww.print("<script> alert('관리자만 이용가능합니다.');</script>");
+			pww.print("<script> location.href='sosickboard';</script>");
+			pww.flush();
+			return "sosickboard";
 		}
-		return "redirect:/sosickboard";
 	}
 	
 	@RequestMapping(value = "/sosickboard", method = RequestMethod.GET)
@@ -962,26 +1099,51 @@ public class BoardController {
 	public String sosickdelete(HttpServletRequest request, HttpServletResponse response) throws IOException {
 		int snum=Integer.parseInt(request.getParameter("snum"));
 		BoardService bs=sqlsession.getMapper(BoardService.class);
-		bs.sosickdelete(snum);
-		response.setContentType("text/html;charset=utf-8");
-		PrintWriter prw=response.getWriter();
-		prw.print("<script> alert('해당 글을 삭제하였습니다.');</script>");
-		prw.print("<script> location.href='sosickboard';</script>");
-		prw.close();
-		return "redirect:/sosickboard";
+		HttpSession hs=request.getSession();
+		Boolean adminloginstate = (Boolean) hs.getAttribute("adminloginstate");
+		if(adminloginstate==true) {
+			bs.sosickdelete(snum);
+			response.setContentType("text/html;charset=utf-8");
+			PrintWriter prw=response.getWriter();
+			prw.print("<script> alert('해당 글을 삭제하였습니다.');</script>");
+			prw.print("<script> location.href='sosickboard';</script>");
+			prw.close();
+			return "redirect:/sosickboard";
+		}
+		else {
+			response.setContentType("text/html;charset=utf-8");
+			PrintWriter pww = response.getWriter();
+			pww.print("<script> alert('관리자만 이용가능합니다.');</script>");
+			pww.print("<script> location.href='sosickboard';</script>");
+			pww.flush();
+			return "sosickboard";
+		}
+
 	}
 	
 	@RequestMapping(value = "/sosickupdateview", method = RequestMethod.GET)
-	public String sosickupdateview(HttpServletRequest request, Model mo) {
+	public String sosickupdateview(HttpServletRequest request, Model mo, HttpServletResponse response) throws IOException {
 		int snum=Integer.parseInt(request.getParameter("snum"));
 		BoardService bs=sqlsession.getMapper(BoardService.class);
-		SosickDTO list=bs.sosickupdateview(snum);
-		mo.addAttribute("list", list);
-		return "sosickupdateview";
+		HttpSession hs=request.getSession();
+		Boolean adminloginstate = (Boolean) hs.getAttribute("adminloginstate");
+		if(adminloginstate==true) {
+			SosickDTO list=bs.sosickupdateview(snum);
+			mo.addAttribute("list", list);
+			return "sosickupdateview";
+		}
+		else {
+			response.setContentType("text/html;charset=utf-8");
+			PrintWriter pww = response.getWriter();
+			pww.print("<script> alert('관리자만 이용가능합니다.');</script>");
+			pww.print("<script> location.href='sosickboard';</script>");
+			pww.flush();
+			return "sosickboard";
+		}
 	}
 	
 	@RequestMapping(value = "/sosickupdate", method = RequestMethod.POST)
-	public String sosickupdate(HttpServletResponse response, MultipartHttpServletRequest mul) throws IOException {
+	public String sosickupdate(HttpServletRequest request, HttpServletResponse response, MultipartHttpServletRequest mul) throws IOException {
 		int snum=Integer.parseInt(mul.getParameter("snum"));
 		BoardService bs=sqlsession.getMapper(BoardService.class);
 		String id=mul.getParameter("id");
@@ -990,21 +1152,34 @@ public class BoardController {
 		String stitle=mul.getParameter("stitle");
 		String scontents=mul.getParameter("scontents");
 		MultipartFile mf=mul.getFile("gimage");
-	    if (mf == null || mf.isEmpty()) {
-			bs.sosickupdatex(snum, id, nickname, stitle, scontents, stag);
+		HttpSession hs=request.getSession();
+		Boolean adminloginstate = (Boolean) hs.getAttribute("adminloginstate");
+		if(adminloginstate==true) {
+			if (mf == null || mf.isEmpty()) {
+				bs.sosickupdatex(snum, id, nickname, stitle, scontents, stag);
+			}
+			else {
+				String simagefn=mf.getOriginalFilename();
+				mf.transferTo(new File(savepath+"//"+simagefn));
+				bs.sosickupdate(snum, id, nickname, stitle, scontents, simagefn, stag);
+			}
+			response.setContentType("text/html;charset=utf-8");
+			PrintWriter prw=response.getWriter();
+			prw.print("<script> alert('수정이 완료되었습니다.');</script>");
+			prw.print("<script> location.href='sosickboard';</script>");
+			prw.close();
+			return "redirect:/sosickdetail?snum=" + snum;
 		}
 		else {
-			String simagefn=mf.getOriginalFilename();
-			mf.transferTo(new File(savepath+"//"+simagefn));
-			bs.sosickupdate(snum, id, nickname, stitle, scontents, simagefn, stag);
+			response.setContentType("text/html;charset=utf-8");
+			PrintWriter pww = response.getWriter();
+			pww.print("<script> alert('관리자만 이용가능합니다.');</script>");
+			pww.print("<script> location.href='sosickboard';</script>");
+			pww.flush();
+			return "sosickboard";
 		}
+		
 
-		response.setContentType("text/html;charset=utf-8");
-		PrintWriter prw=response.getWriter();
-		prw.print("<script> alert('수정이 완료되었습니다.');</script>");
-		prw.print("<script> location.href='sosickboard';</script>");
-		prw.close();
-		return "redirect:/sosickdetail?snum=" + snum;
 	}
 	
 	@RequestMapping(value = "/sosicksearchsave", method = RequestMethod.POST)
@@ -1059,29 +1234,54 @@ public class BoardController {
 	
 	//이벤트
 	@RequestMapping(value = "/eventinput", method = RequestMethod.GET)
-	public String eventinput() {
-		return "eventinput";
+	public String eventinput(HttpServletRequest request, HttpServletResponse response) throws IOException {
+		HttpSession hs=request.getSession();
+		Boolean adminloginstate = (Boolean) hs.getAttribute("adminloginstate");
+		if(adminloginstate==true) {
+			return "eventinput";
+		}
+		else {
+			response.setContentType("text/html;charset=utf-8");
+			PrintWriter pww = response.getWriter();
+			pww.print("<script> alert('관리자만 이용가능합니다.');</script>");
+			pww.print("<script> location.href='eventboard';</script>");
+			pww.flush();
+			return "eventboard";
+		}
 	}
 	
 	@RequestMapping(value = "/eventsave", method = RequestMethod.POST)
-	public String eventsave(MultipartHttpServletRequest mul) throws IllegalStateException, IOException {
+	public String eventsave(MultipartHttpServletRequest mul, HttpServletRequest request, HttpServletResponse response) throws IllegalStateException, IOException {
 		String id=mul.getParameter("id");
 		String nickname=mul.getParameter("nickname");
 		String etitle=mul.getParameter("etitle");
 		String econtents=mul.getParameter("econtents");
 		String estate=mul.getParameter("estate");
+		HttpSession hs=request.getSession();
+		Boolean adminloginstate = (Boolean) hs.getAttribute("adminloginstate");
+		if(adminloginstate==true) {
+			MultipartFile mf1=mul.getFile("eimagem");
+			String eimagemfn=mf1.getOriginalFilename();
+			mf1.transferTo(new File(savepath+"//"+eimagemfn));
+			
+			MultipartFile mf2=mul.getFile("eimaged");
+			String eimagedfn=mf2.getOriginalFilename();
+			mf2.transferTo(new File(savepath+"//"+eimagedfn));
+			
+			BoardService bs=sqlsession.getMapper(BoardService.class);
+			bs.insertevent(id, nickname, etitle, econtents, eimagemfn, eimagedfn, estate);
+			return "redirect:/eventboard";
+		}
+		else {
+			response.setContentType("text/html;charset=utf-8");
+			PrintWriter pww = response.getWriter();
+			pww.print("<script> alert('관리자만 이용가능합니다.');</script>");
+			pww.print("<script> location.href='eventboard';</script>");
+			pww.flush();
+			return "eventboard";
+		}
 		
-		MultipartFile mf1=mul.getFile("eimagem");
-		String eimagemfn=mf1.getOriginalFilename();
-		mf1.transferTo(new File(savepath+"//"+eimagemfn));
-		
-		MultipartFile mf2=mul.getFile("eimaged");
-		String eimagedfn=mf2.getOriginalFilename();
-		mf2.transferTo(new File(savepath+"//"+eimagedfn));
-		
-		BoardService bs=sqlsession.getMapper(BoardService.class);
-		bs.insertevent(id, nickname, etitle, econtents, eimagemfn, eimagedfn, estate);
-		return "redirect:/eventboard";
+
 	}
 	
 	@RequestMapping(value = "/eventboard", method = RequestMethod.GET)
@@ -1208,26 +1408,51 @@ public class BoardController {
 	public String eventdelete(HttpServletRequest request, HttpServletResponse response) throws IOException {
 		int evnum=Integer.parseInt(request.getParameter("evnum"));
 		BoardService bs=sqlsession.getMapper(BoardService.class);
-		response.setContentType("text/html;charset=utf-8");
-		PrintWriter prw=response.getWriter();
-		prw.print("<script> alert('해당 글을 삭제하였습니다.');</script>");
-		prw.print("<script> location.href='eventboard';</script>");
-		prw.close();
-		bs.eventdelete(evnum);
-		return "redirect:/eventboard";
+		HttpSession hs=request.getSession();
+		Boolean adminloginstate = (Boolean) hs.getAttribute("adminloginstate");
+		if(adminloginstate==true) {
+			response.setContentType("text/html;charset=utf-8");
+			PrintWriter prw=response.getWriter();
+			prw.print("<script> alert('해당 글을 삭제하였습니다.');</script>");
+			prw.print("<script> location.href='eventboard';</script>");
+			prw.close();
+			bs.eventdelete(evnum);
+			return "redirect:/eventboard";
+		}
+		else {
+			response.setContentType("text/html;charset=utf-8");
+			PrintWriter pww = response.getWriter();
+			pww.print("<script> alert('관리자만 이용가능합니다.');</script>");
+			pww.print("<script> location.href='eventboard';</script>");
+			pww.flush();
+			return "eventboard";
+		}
 	}
 	
 	@RequestMapping(value = "/eventupdateview", method = RequestMethod.GET)
-	public String eventupdateview(HttpServletRequest request, Model mo) {
+	public String eventupdateview(HttpServletRequest request, Model mo, HttpServletResponse response) throws IOException {
 		int evnum=Integer.parseInt(request.getParameter("evnum"));
 		BoardService bs=sqlsession.getMapper(BoardService.class);
-		EventDTO list=bs.eventupdateview(evnum);
-		mo.addAttribute("list", list);
-		return "eventupdateview";
+		HttpSession hs=request.getSession();
+		Boolean adminloginstate = (Boolean) hs.getAttribute("adminloginstate");
+		if(adminloginstate==true) {
+			EventDTO list=bs.eventupdateview(evnum);
+			mo.addAttribute("list", list);
+			return "eventupdateview";
+		}
+		else {
+			response.setContentType("text/html;charset=utf-8");
+			PrintWriter pww = response.getWriter();
+			pww.print("<script> alert('관리자만 이용가능합니다.');</script>");
+			pww.print("<script> location.href='eventboard';</script>");
+			pww.flush();
+			return "eventboard";
+		}
+
 	}
 	
 	@RequestMapping(value = "/eventupdate", method = RequestMethod.POST)
-	public String eventupdate(HttpServletResponse response, MultipartHttpServletRequest mul) throws IOException {
+	public String eventupdate(HttpServletRequest request, HttpServletResponse response, MultipartHttpServletRequest mul) throws IOException {
 		int evnum=Integer.parseInt(mul.getParameter("evnum"));
 		String id=mul.getParameter("id");
 		String nickname=mul.getParameter("nickname");
@@ -1237,34 +1462,45 @@ public class BoardController {
 		MultipartFile mf1=mul.getFile("eimagemu");
 		MultipartFile mf2=mul.getFile("eimagedu");
 		BoardService bs=sqlsession.getMapper(BoardService.class);
-
-		if ((mf1 == null || mf1.isEmpty()) && (mf2 == null || mf2.isEmpty())) {
-			bs.updateevent1(id, nickname, etitle, econtents, estate, evnum);
-		}
-		else if ((mf1 == null || mf1.isEmpty()) && (mf2 != null && !mf2.isEmpty())) {
-			String eimagedufn=mf2.getOriginalFilename();
-			mf2.transferTo(new File(savepath+"//"+eimagedufn));
-			bs.updateevent2(id, nickname, etitle, econtents, eimagedufn, estate, evnum);
-		}
-		else if ((mf1 != null && !mf1.isEmpty()) && (mf2 == null || mf2.isEmpty())) {
-			String eimagemufn=mf1.getOriginalFilename();
-			mf1.transferTo(new File(savepath+"//"+eimagemufn));
-			bs.updateevent3(id, nickname, etitle, econtents, eimagemufn, estate, evnum);
+		HttpSession hs=request.getSession();
+		Boolean adminloginstate = (Boolean) hs.getAttribute("adminloginstate");
+		if(adminloginstate==true) {
+			if ((mf1 == null || mf1.isEmpty()) && (mf2 == null || mf2.isEmpty())) {
+				bs.updateevent1(id, nickname, etitle, econtents, estate, evnum);
+			}
+			else if ((mf1 == null || mf1.isEmpty()) && (mf2 != null && !mf2.isEmpty())) {
+				String eimagedufn=mf2.getOriginalFilename();
+				mf2.transferTo(new File(savepath+"//"+eimagedufn));
+				bs.updateevent2(id, nickname, etitle, econtents, eimagedufn, estate, evnum);
+			}
+			else if ((mf1 != null && !mf1.isEmpty()) && (mf2 == null || mf2.isEmpty())) {
+				String eimagemufn=mf1.getOriginalFilename();
+				mf1.transferTo(new File(savepath+"//"+eimagemufn));
+				bs.updateevent3(id, nickname, etitle, econtents, eimagemufn, estate, evnum);
+			}
+			else {
+				String eimagemufn=mf1.getOriginalFilename();
+				mf1.transferTo(new File(savepath+"//"+eimagemufn));
+				String eimagedufn=mf2.getOriginalFilename();
+				mf2.transferTo(new File(savepath+"//"+eimagedufn));
+				bs.updateevent(id, nickname, etitle, econtents, eimagemufn, eimagedufn, estate, evnum);
+			}
+			
+			response.setContentType("text/html;charset=utf-8");
+			PrintWriter prw=response.getWriter();
+			prw.print("<script> alert('수정이 완료되었습니다.');</script>");
+			prw.print("<script> location.href='eventboard';</script>");
+			prw.close();
+			return "redirect:/eventdetail?evnum=" + evnum;
 		}
 		else {
-			String eimagemufn=mf1.getOriginalFilename();
-			mf1.transferTo(new File(savepath+"//"+eimagemufn));
-			String eimagedufn=mf2.getOriginalFilename();
-			mf2.transferTo(new File(savepath+"//"+eimagedufn));
-			bs.updateevent(id, nickname, etitle, econtents, eimagemufn, eimagedufn, estate, evnum);
+			response.setContentType("text/html;charset=utf-8");
+			PrintWriter pww = response.getWriter();
+			pww.print("<script> alert('관리자만 이용가능합니다.');</script>");
+			pww.print("<script> location.href='eventboard';</script>");
+			pww.flush();
+			return "eventboard";
 		}
-		
-		response.setContentType("text/html;charset=utf-8");
-		PrintWriter prw=response.getWriter();
-		prw.print("<script> alert('수정이 완료되었습니다.');</script>");
-		prw.print("<script> location.href='eventboard';</script>");
-		prw.close();
-		return "redirect:/eventdetail?evnum=" + evnum;
 	}
 	
 	@RequestMapping(value = "/eventsearchsave", method = RequestMethod.POST)
