@@ -21,73 +21,59 @@
       <put-attribute name="body" value="/WEB-INF/views/member/memberinput.jsp"/>
    </definition> 
    
-   <definition name="membercongratulations" extends="baseLayout">
-      <put-attribute name="title" value="메인화면"/>
-      <put-attribute name="body" value="/WEB-INF/views/member/membercongratulations.jsp"/>
-   </definition> 
-   
+   <!-- 로그인 -->
    <definition name="login" extends="baseLayout">
       <put-attribute name="title" value="메인화면"/>
       <put-attribute name="body" value="/WEB-INF/views/login/login.jsp"/>
    </definition> 
    
+   <!-- 개인정보 -->
     <definition name="myinfo" extends="baseLayout">
       <put-attribute name="title" value="메인화면"/>
       <put-attribute name="body" value="/WEB-INF/views/login/myinfo.jsp"/>
    </definition> 
    
+   <!-- 정보수정 -->
     <definition name="updateview" extends="baseLayout">
       <put-attribute name="title" value="메인화면"/>
       <put-attribute name="body" value="/WEB-INF/views/login/updateview.jsp"/>
    </definition> 
    
+   <!-- 삭제 -->
     <definition name="deleteview" extends="baseLayout">
       <put-attribute name="title" value="메인화면"/>
       <put-attribute name="body" value="/WEB-INF/views/login/deleteview.jsp"/>
    </definition> 
    
+   <!-- 삭제완료 -->
    <definition name="thanksforusing" extends="baseLayout">
       <put-attribute name="title" value="메인화면"/>
       <put-attribute name="body" value="/WEB-INF/views/login/thanksforusing.jsp"/>
    </definition> 
    
+   <!-- 아이디찾기 -->
     <definition name="findmyid" extends="baseLayout">
       <put-attribute name="title" value="메인화면"/>
       <put-attribute name="body" value="/WEB-INF/views/login/findmyid.jsp"/>
    </definition> 
    
-   <definition name="confirmid" extends="baseLayout">
-      <put-attribute name="title" value="메인화면"/>
-      <put-attribute name="body" value="/WEB-INF/views/login/confirmid.jsp"/>
-   </definition> 
-   
+   <!-- 비밀번호 찾기 -->
    <definition name="findmypw" extends="baseLayout">
       <put-attribute name="title" value="메인화면"/>
       <put-attribute name="body" value="/WEB-INF/views/login/findmypw.jsp"/>
    </definition> 
    
+   <!-- 비밀번호 확인 -->
    <definition name="confirmpw" extends="baseLayout">
       <put-attribute name="title" value="메인화면"/>
       <put-attribute name="body" value="/WEB-INF/views/login/confirmpw.jsp"/>
    </definition> 
    
+   <!-- 비밀번호 수정 -->
     <definition name="updatepw" extends="baseLayout">
       <put-attribute name="title" value="메인화면"/>
       <put-attribute name="body" value="/WEB-INF/views/login/updatepw.jsp"/>
    </definition> 
-   
-   <definition name="buyproduct" extends="baseLayout">
-      <put-attribute name="title" value="메인화면"/>
-      <put-attribute name="body" value="/WEB-INF/views/product/buyproduct.jsp"/>
-   </definition> 
-   
-   
-   <definition name="purchaseConfirmation" extends="baseLayout">
-      <put-attribute name="title" value="메인화면"/>
-      <put-attribute name="body" value="/WEB-INF/views/product/purchaseConfirmation.jsp"/>
-   </definition> 
-    
-    
    
 </tiles-definitions>
 
