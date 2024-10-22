@@ -17,8 +17,8 @@
 	</select>
 	
 	<update id="memberupdate2">
-		update member set nickname=#{param1}, pw=#{param2}, name=#{param3}, gender=#{param4}, birth=#{param5}, phone=#{param6}, 
-		address=#{param7}, email=#{param8} where id=#{param9}
+		update member set nickname=#{param1}, pw=#{param2}, name=#{param3}, birth=#{param4}, phone=#{param5}, 
+		address=#{param6}, email=#{param7} where id=#{param8}
 	</update>
 	
 	<select id="deleteview" resultType="com.mbc.team.login.LoginDTO">

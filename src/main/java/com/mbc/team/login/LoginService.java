@@ -11,8 +11,8 @@ public interface LoginService {
 
 	LoginDTO updateview(String id);
 
-	void memberupdate2(String nickname, String pw, String name, String gender, String birth, String phone,
-			String address, String email, String id);
+	void memberupdate2(String nickname, String pw, String name, String birth, String phone, String address,
+			String email, String id);
 
 	LoginDTO deleteview(String id);
 
@@ -23,6 +23,8 @@ public interface LoginService {
 	LoginDTO findpw(String id, String name, String email);
 
 	void updatepw(String id, String pw);
+
+	
 
 	
 
