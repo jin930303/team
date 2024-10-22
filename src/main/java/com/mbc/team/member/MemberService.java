@@ -1,6 +1,5 @@
 package com.mbc.team.member;
 
-
 import org.springframework.stereotype.Service;
 
 @Service
@@ -15,19 +14,11 @@ public interface MemberService {
 
 	int nicknamecheck1(String nickname);
 
-	void memberupdate( String nickname, String pw1, String name, String gender, String birth, String phone,
-			String address, String email,String id);
+	void memberupdate(String nickname, String pw1, String name, String gender, String birth, String phone,
+			String address, String email, String id);
 
 	int emailcheck(String email);
-	
+
 	int phonecheck(String phone);
 
-	
-
-	
-
-
-	
-	
-	
 }

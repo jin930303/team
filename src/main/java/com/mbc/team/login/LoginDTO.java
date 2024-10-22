@@ -2,21 +2,19 @@ package com.mbc.team.login;
 
 public class LoginDTO {
 	
-	String id,nickname,pw,name,gender,birth,phone,phone1,phone2,address,email,fdomain,bdomain,grade;
+	String id,nickname,pw,name,birth,phone,phone1,phone2,address,email,fdomain,bdomain,grade,auth;
 	int total;
 	public LoginDTO() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	public LoginDTO(String id, String nickname, String pw, String name, String gender, String birth, String phone,
-			String phone1, String phone2, String address, String email, String fdomain, String bdomain, String grade,
-			int total) {
+	public LoginDTO(String id, String nickname, String pw, String name, String birth, String phone, String phone1,
+			String phone2, String address, String email, String fdomain, String bdomain, String grade, int total) {
 		super();
 		this.id = id;
 		this.nickname = nickname;
 		this.pw = pw;
 		this.name = name;
-		this.gender = gender;
 		this.birth = birth;
 		this.phone = phone;
 		this.phone1 = phone1;
@@ -27,6 +25,16 @@ public class LoginDTO {
 		this.bdomain = bdomain;
 		this.grade = grade;
 		this.total = total;
+	}
+	public LoginDTO(String auth) {
+		super();
+		this.auth = auth;
+	}
+	public String getAuth() {
+		return auth;
+	}
+	public void setAuth(String auth) {
+		this.auth = auth;
 	}
 	public String getId() {
 		return id;
@@ -51,12 +59,6 @@ public class LoginDTO {
 	}
 	public void setName(String name) {
 		this.name = name;
-	}
-	public String getGender() {
-		return gender;
-	}
-	public void setGender(String gender) {
-		this.gender = gender;
 	}
 	public String getBirth() {
 		return birth;
@@ -118,6 +120,7 @@ public class LoginDTO {
 	public void setTotal(int total) {
 		this.total = total;
 	}
+	
 
 	
 }

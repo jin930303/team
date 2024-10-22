@@ -69,40 +69,37 @@ public class LoginController {
 		response.setContentType("text/html;charset=utf-8");
 		PrintWriter pww=response.getWriter();
 		
-		if(dto3!=null)
-		{
-			PasswordEncoder pe=new BCryptPasswordEncoder();
-			if(pe.matches(inputpw, dto3.getPw())) {
-				HttpSession hs=request.getSession();
-				hs.setAttribute("loginstate", true);
-				hs.setAttribute("dto3", dto3);
-				pww.print("<script> alert(' 로그인에 성공하였습니다...!');</script>");
-			    pww.print("<script> location.href='main';</script>");
-			    pww.flush();
-				return "redirect:/main";
-			}
-			else
-			{
-				pww.print("<script> alert('비밀번호를 확인해주세요'); history.go(-1);</script>");
-				pww.flush();
-				return null;
-			}
-		}
-		else if(id.equals("admin")&&inputpw.equals("admin1234"))
-		{
-			HttpSession hs=request.getSession();
-			hs.setAttribute("adminloginstate", true);
-			pww.print("<script> alert('관리자 로그인에 성공하였습니다...!');</script>");
-	         pww.print("<script> location.href='main';</script>");
-	         pww.close();
-	         return "redirect:/main";
-		}
-		else
-		{	
-			pww.print("<script> alert('존재하지 않는 사용자입니다.');history.go(-1);</script>");
-			pww.flush();
-			return "null";
-		}
+		 if (dto3 != null) {
+		        PasswordEncoder pe = new BCryptPasswordEncoder();
+		        if (pe.matches(inputpw, dto3.getPw())) {
+		            HttpSession hs = request.getSession();
+		            
+		            // 관리자 권한 확인
+		            if ("001".equals(dto3.getAuth())) {
+		                hs.setAttribute("adminloginstate", true);
+		                pww.print("<script> alert('관리자 로그인에 성공하였습니다...!');</script>");
+		                pww.print("<script> location.href='main';</script>");
+		                pww.flush();
+		                return "redirect:/main";
+		            } else {
+		                // 일반 사용자 로그인 처리
+		                hs.setAttribute("loginstate", true);
+		                hs.setAttribute("dto3", dto3);
+		                pww.print("<script> alert('로그인에 성공하였습니다...!');</script>");
+		                pww.print("<script> location.href='main';</script>");
+		                pww.flush();
+		                return "redirect:/main";
+		            }
+		        } else {
+		            pww.print("<script> alert('비밀번호를 확인해주세요'); history.go(-1);</script>");
+		            pww.flush();
+		            return null;
+		        }
+		    } else {
+		        pww.print("<script> alert('존재하지 않는 사용자입니다.'); history.go(-1);</script>");
+		        pww.flush();
+		        return null;
+		    }
 	}
 	
 	@RequestMapping(value = "/myinfo")
@@ -166,7 +163,6 @@ public class LoginController {
 		String pw=passwordEncoder.encode(pw1);
 		String nickname=request.getParameter("nickname");
 		String name=request.getParameter("name");
-		String gender=request.getParameter("gender");
 		String birth=request.getParameter("birth");
 		String phone1=request.getParameter("phone1");
 		String phone2=request.getParameter("phone2");
@@ -176,7 +172,7 @@ public class LoginController {
 		String email=fdomain+"@"+bdomain;
 		String address=request.getParameter("address");
 		LoginService ls=sqlSession.getMapper(LoginService.class);
-		ls.memberupdate2(nickname,pw,name,gender,birth,phone,address,email,id);
+		ls.memberupdate2(nickname,pw,name,birth,phone,address,email,id);
 		
 		return "redirect:main";
 	}
