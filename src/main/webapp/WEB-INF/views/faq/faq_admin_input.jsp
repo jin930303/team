@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -90,6 +91,7 @@ body {
 
 .main-content {
 	flex-grow: 1;
+	margin-right: 150px;
 	padding: 20px;
 	background-color: #fff;
 }
@@ -177,61 +179,6 @@ body {
 	font-weight: bold;
 	color: red;
 }
-/* 플로팅 메뉴 스타일 */
-#floating-menu {
-	position: fixed;
-	right: 30px;
-	top: 250px; /* 상단에서 150px 떨어짐 */
-	z-index: 600;
-	background-color: #fff;
-	border: 1px solid #ddd;
-	border-radius: 10px;
-	padding: 20px;
-}
-
-.main-content {
-	margin-right: 150px;
-}
-
-#floating-menu ul {
-	list-style: none;
-	padding: 0;
-	margin: 0;
-}
-
-#floating-menu ul li {
-	margin-bottom: 10px;
-}
-
-#floating-menu ul li a {
-	text-decoration: none;
-	color: #333;
-	padding: 10px 20px;
-	display: block;
-	border: 1px solid #ddd;
-	border-radius: 5px;
-	text-align: center;
-	transition: background-color 0.3s;
-}
-
-#floating-menu ul li a:hover {
-	background-color: #f4f4f4;
-}
-/* 탑버튼, 바텀버튼 */
-.scroll-button {
-	color: #333;
-	text-align: center;
-	padding: 10px 20px;
-	border: 1px solid #ddd;
-	font-size: 20px;
-	border-radius: 5px;
-	cursor: pointer;
-	margin-bottom: 8px;
-}
-
-.scroll-button:hover {
-	background-color: #f4f4f4;
-}
 </style>
 <meta charset="UTF-8">
 <title>Insert title here</title>
@@ -244,14 +191,11 @@ body {
 			<ul>
 				<li><a href="faq_community">고객센터</a></li>
 				<li><a href="gongjiboard">공지사항</a></li>
-				<% 
-					Boolean FAQmember = (Boolean) session.getAttribute("loginstate");
-					if (FAQmember != null && FAQmember) {
-				%>
-					<li><a href="faqin">1:1 문의하기</a></li>
-				<%
-					}
-				%>
+				<c:choose>
+					<c:when test="${loginstate == true}">
+						<li><a href="faqin">1:1 문의하기</a></li>
+					</c:when>
+				</c:choose>
 				<li><a href="faqout">문의 내역</a></li>
 				<li><a href="faq">FAQ</a></li>
 			</ul>
@@ -267,22 +211,6 @@ body {
 				<p>행복은행 (예금주: 행복이)</p>
 			</div>
 		</aside>
-		<!-- 오른쪽 플로팅 메뉴 -->
-		<div id="floating-menu">
-			<ul>
-				<li><a href="cart">장바구니</a></li>
-				<li><a href="https://open.kakao.com/o/suixDsUg">KAKAO문의</a></li>
-				<li><a href="#">배송조회</a></li>
-				<li><a href="#">최근 본 상품</a></li>
-				<li><a href="#">관심상품</a></li>
-				<li><a href="myinfo">마이페이지</a></li>
-			</ul>
-			<!-- 
-            <div class="scroll-button" onclick="window.scrollTo({top: 0, behavior: 'smooth'});">△</div>
-            <div class="scroll-button" onclick="window.scrollTo({top: document.body.scrollHeight, behavior: 'smooth'});">▽</div>
-     -->
-		</div>
-
 		<div class="container">
 			<form action="faq_admin_save" method="post" enctype="multipart/form-data">
 				<table>

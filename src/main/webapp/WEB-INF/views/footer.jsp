@@ -8,7 +8,7 @@
 </head>
 <body>
 <footer>
-오늘은 게시판 하는 날
+
 </footer>
 </body>
 </html>
