@@ -140,7 +140,6 @@ public class CartController {
 		CartService cs = sqlSession.getMapper(CartService.class);
 		List<CartItem> cart = cs.getCartItemsByUserId(id);
 
-		// 장바구니 또는 선택된 아이템이 없을 경우 처리
 		if (cart == null || selectedItems == null || selectedItems.isEmpty()) {
 			mo.addAttribute("errorMessage", "선택한 상품이 없습니다.");
 			return "errorPage";
@@ -149,7 +148,6 @@ public class CartController {
 		List<CartItem> purchasedItems = new ArrayList<>();
 		int totalPrice = 0;
 
-		// 선택된 상품만 구매 처리
 		for (CartItem item : cart) {
 			if (selectedItems.contains(String.valueOf(item.getItemnum()))) {
 				purchasedItems.add(item);
@@ -159,11 +157,10 @@ public class CartController {
 			}
 		}
 
-		// 구매된 상품과 총 금액을 모델에 담아 뷰로 전달
 		mo.addAttribute("purchasedItems", purchasedItems);
 		mo.addAttribute("totalPrice", totalPrice);
 
-		return "purchaseConfirmation"; // Tiles에 설정된 뷰 이름
+		return "purchaseConfirmation"; 
 	}
 
 }

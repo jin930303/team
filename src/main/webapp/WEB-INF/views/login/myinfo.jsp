@@ -12,10 +12,11 @@
 	<%
 	String grade="";
 	LoginDTO dto1=(LoginDTO)request.getAttribute("dto1");
-	int total=dto1.getTotal();
+	String grade_code=dto1.getGrade_code();
 	
-	if (total>=1000000) grade = "최우수회원";
-	else if (total>=500000) grade = "우수회원";
+	if (grade_code.equals("004")) grade = "vvip";
+	else if (grade_code.equals("003")) grade = "vip";
+	else if (grade_code.equals("002")) grade = "우수회원";
 	else grade = "일반회원";
 	%>
 	
