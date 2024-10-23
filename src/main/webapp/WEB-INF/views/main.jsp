@@ -4,6 +4,25 @@
 <!DOCTYPE html>
 <html>
 <head>
+<script>
+    window.addEventListener('scroll', function() {
+        var floatingMenu = document.getElementById('floating-menu');  // 사이드바 요소
+        var carousel = document.getElementById('myCarousel');  // 캐러셀 요소
+        var carouselBottom = carousel.getBoundingClientRect().bottom;  // 캐러셀의 하단 위치
+
+        // 캐러셀의 끝부분이 화면 위로 올라가면 사이드바를 보이게 설정
+        if (carouselBottom <= 0) {
+            floatingMenu.style.position = 'fixed';
+            floatingMenu.style.top = '250px';  // 고정된 위치 설정
+            floatingMenu.style.visibility = 'visible';  // 사이드바 보이게 함
+        } else {
+            // 캐러셀이 화면에 있을 때는 사이드바를 보이지 않도록 설정
+            floatingMenu.style.visibility = 'hidden';
+        }
+    });
+</script>
+
+
 <% 
     Boolean loginState = (Boolean) session.getAttribute("loginstate");
     System.out.println("Login state in main.jsp: " + loginState);
@@ -93,7 +112,7 @@
     </tr>
     <tr>
         <td colspan="4" style="text-align: right;"> <!-- colspan 속성으로 열을 병합 -->
-            <a href="#" style="text-decoration: none;">더보기</a>
+            <a href="bestitem" style="text-decoration: none;">더보기</a>
         </td>
     </tr>
 </table>
@@ -122,7 +141,7 @@
     </tr>
     <tr>
         <td colspan="4" style="text-align: right;"> <!-- colspan 속성으로 열을 병합 -->
-            <a href="#" style="text-decoration: none;">더보기</a>
+            <a href="newitem" style="text-decoration: none;">더보기</a>
         </td>
     </tr>
 </table>
