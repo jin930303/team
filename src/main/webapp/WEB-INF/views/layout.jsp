@@ -50,6 +50,7 @@ nav
       </div>
       <div id="body">
          <t:insertAttribute name="body"/>
+         <t:insertAttribute name="side-right"/>
       </div>
       <div id="footer">
          <t:insertAttribute name="footer"/>

@@ -216,89 +216,8 @@
         document.forms[0].submit();
     }
     </script>
-    <meta charset="UTF-8">
-    <title>회원가입 화면</title>
-</head>
-<body>
-    <form action="membersave" method="post" id="myform">
-        <table border="6" align="center" width="auto">
-            <caption>회원가입화면</caption>
-            <tr>
-                <th>아이디☆</th>
-                <td>
-                    <input type="text" name="id" id="id" placeholder="id를 입력해주세요" maxlength="12">
-                    <input type="button" name="idcheck" id="idcheck" value="중복확인">
-                </td>
-            </tr>
-            <tr>
-                <th>비밀번호☆</th>
-                <td>
-                    <div class="input-container">
-                        <input type="password" name="pw" id="pw" placeholder="비밀번호를 입력해주세요" maxlength="16">
-                        <a class="togglePassword" style="cursor: pointer;"><i class="fas fa-eye-slash"></i></a>
-                    </div>
-                </td>
-            </tr>
-            <tr>
-                <th>비밀번호 확인☆</th>
-                <td colspan="2">
-                    <div class="input-container">
-                        <input type="password" name="pwconfirm" id="pwconfirm" placeholder="비밀번호 확인" maxlength="16">
-                        <a class="togglePassword" style="cursor: pointer;"><i class="fas fa-eye-slash"></i></a>
-                    </div>
-                    <span id="confirmMsg"></span>
-                </td>
-            </tr>
-            <tr>
-                <th>닉네임☆</th>
-                <td>
-                    <input type="text" name="nickname" id="nickname" placeholder="닉네임을 입력해주세요">
-                    <input type="button" name="nicknamecheck" id="nicknamecheck" value="중복확인">
-                </td>
-            </tr>
-            <tr>
-                <th>이름☆</th>
-                <td>
-                    <input type="text" name="name" id="name" placeholder="이름을 입력해주세요" maxlength="6">
-                </td>
-            </tr>
-            <tr>
-                <th>생년월일</th>
-                <td>
-                    <input type="date" name="birth" id="birth">
-                </td>
-            </tr>
-            <tr>
-                <th>전화번호</th>
-                <td>
-                    010-<input type="text" name="phone1" id="phone1" maxlength="4">-<input type="text" name="phone2" id="phone2" maxlength="4">
-                 <input type="button" name="phonecheck" id="phonecheck" value="중복확인">
-                </td>
-            </tr>
-            <tr>
-                <th>이메일</th>
-                <td>
-                    <input type="email" name="fdomain" id="fdomain">@ 
-                    <select name="bdomain" id="bdomain">
-                        <option value="naver.com">naver.com</option>
-                        <option value="daum.net">daum.net</option>
-                        <option value="gmail.com">gmail.com</option>
-                        <option value="kakao.com">kakao.com</option>
-                        <option value="nate.com">nate.com</option>
-                    </select>
-                    <input type="button" name="emailcheck" id="emailcheck" value="중복확인">
-                </td>
-            </tr>
-            <tr>
-                <th>주소</th>
-                <td>
-                    <input type="text" id="postcode" placeholder="우편번호">
-                    <input type="button" onclick="sample6_execDaumPostcode()" value="우편번호 찾기"><br>
-                    <input type="text" id="mainaddress" placeholder="주소" name="mainaddress"><br>
-                    <input type="text" id="detailAddress" placeholder="상세주소" name="detailaddress">
-                    <input type="text" id="extraAddress" placeholder="참고항목" name="extraaddress">
-                    <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
-                    <script>
+<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+<script>
     function sample6_execDaumPostcode() {
         new daum.Postcode({
             oncomplete: function(data) {
@@ -347,6 +266,201 @@
         }).open();
     }
 </script>
+<style type="text/css">
+/* 전체 컨테이너 정렬 */
+.container {
+    width: 100%;
+    max-width: 750px;
+    margin: 0 auto; /* 가운데 정렬 */
+    padding: 20px;
+    border: 1px solid #ddd; 
+}
+
+/* 테이블 스타일 */
+table {
+    width: 100%; /* 테이블 너비 100% */
+    margin-top: 10px; /* 상단 간격 */
+    border-collapse: collapse; /* 테이블 경계 겹치지 않도록 */
+    text-align: c
+}
+
+caption {
+	text-align: center;
+}
+
+table tr td {
+    padding: 10px; /* 입력창 사이 간격 */
+    text-align: center;
+    border: none;
+}
+/* input 필드 공통 스타일 */
+input[type="text"],
+input[type="password"],
+input[type="date"],
+input[type="email"],
+select {
+    width: 100%;
+    padding: 12px; /* 내부 여백 */
+    border: 1px solid #ddd; /* 연한 테두리 */
+    border-radius: 5px; /* 모서리 둥글게 */
+    font-size: 14px; /* 글씨 크기 */
+    margin-top: 8px; /* 입력 필드 간 간격 */
+    box-sizing: border-box; /* 패딩과 테두리 포함한 전체 크기 */
+    background-color: #fff;
+    transition: border 0.3s ease; /* 테두리 변경 시 부드러운 전환 */
+}
+
+/* input 필드 포커스 시 스타일 */
+input[type="text"]:hover,
+input[type="password"]:hover,
+input[type="date"]:hover,
+input[type="email"]:hover,
+select
+ {
+    border-color: #be241c; /* 포커스 시 붉은색 테두리 */
+    outline: none; /* 포커스 시 외곽선 제거 */
+}
+
+/* input 필드 포커스 시 스타일 */
+input[type="text"]:focus,
+input[type="password"]:focus,
+input[type="date"]:focus,
+input[type="email"]:focus,
+select {
+    border-color: #be241c; /* 포커스 시 붉은색 테두리 */
+    outline: none; /* 포커스 시 외곽선 제거 */
+}
+
+/* 중복확인 버튼 text 안에 넣기 */
+/* input-container는 버튼과 텍스트 필드를 나란히 배치하기 위한 flexbox */
+.input-container {
+	display: flex;
+    align-items: center; /* 수직 가운데 정렬 */
+}
+
+/* id 입력 필드 스타일 수정 */
+.input-container input[type="text"] {
+	flex: 1; /* 텍스트 입력 필드가 남은 공간을 모두 차지하도록 설정 */
+    margin-right: 10px; /* 버튼과의 간격 설정 */
+}
+
+/* 중복확인 버튼 스타일 */
+#idcheck, #nicknamecheck, #phonecheck
+, #emailcheck, #addresscheck {
+    margin-top: 8px; /* 입력 필드 간 간격 */
+	padding: 12px 20px; /* 버튼 내부 여백 */
+	font-size: 14px; /* 버튼 글씨 크기 */
+	background-color: #be241c; /* 버튼 배경색 */
+	color: white; /* 글자 색상 */
+	border: none; /* 테두리 제거 */
+	border-radius: 5px; /* 둥근 모서리 */
+	cursor: pointer; /* 포인터 모양 변경 */
+	transition: background-color 0.3s ease; /* 배경색 전환 */
+}
+
+/* 중복확인 버튼 호버 효과 */
+#idcheck:hover, #nicknamecheck:hover,
+#phonecheck:hover, #emailcheck:hover,
+#addresscheck:hover {
+	background-color: #8e1a14;
+}
+
+
+</style>
+    <meta charset="UTF-8">
+    <title>회원가입 화면</title>
+</head>
+<body>
+<div class="container">
+    <form action="membersave" method="post" id="myform">
+        <table>
+            <caption><h2>회원가입</h2></caption>
+            <tr>
+			    <th>아이디</th>
+			    <td>
+			        <div class="input-container">
+			            <input type="text" name="id" id="id" placeholder="id를 입력해주세요" maxlength="12">
+			            <input type="button" name="idcheck" id="idcheck" value="중복확인">
+			        </div>
+			    </td>
+			</tr>
+
+            <tr>
+                <th>비밀번호☆</th>
+                <td>
+                    <div class="input-container">
+                        <input type="password" name="pw" id="pw" placeholder="비밀번호를 입력해주세요" maxlength="16">
+                        <a class="togglePassword" style="cursor: pointer;"><i class="fas fa-eye-slash"></i></a>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <th>비밀번호 확인☆</th>
+                <td colspan="2">
+                    <div class="input-container">
+                        <input type="password" name="pwconfirm" id="pwconfirm" placeholder="비밀번호 확인" maxlength="16">
+                        <a class="togglePassword"><i class="fas fa-eye-slash"></i></a>
+                    </div>
+                    <span id="confirmMsg"></span>
+                </td>
+            </tr>
+            <tr>
+                <th>닉네임☆</th>
+                <td>
+                	<div class="input-container">
+	                    <input type="text" name="nickname" id="nickname" placeholder="닉네임을 입력해주세요">
+	                    <input type="button" name="nicknamecheck" id="nicknamecheck" value="중복확인">
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <th>이름☆</th>
+                <td>
+                    <input type="text" name="name" id="name" placeholder="이름을 입력해주세요" maxlength="6">
+                </td>
+            </tr>
+            <tr>
+                <th>생년월일</th>
+                <td>
+                    <input type="date" name="birth" id="birth">
+                </td>
+            </tr>
+            <tr>
+                <th>전화번호</th>
+                <td>
+                	<div class="input-container">
+	                    010-<input type="text" name="phone1" id="phone1" maxlength="4">-<input type="text" name="phone2" id="phone2" maxlength="4">
+	                 	<input type="button" name="phonecheck" id="phonecheck" value="중복확인">
+                	</div>
+                </td>
+            </tr>
+            <tr>
+                <th>이메일</th>
+                <td>
+                <div class="input-container">
+                    <input type="email" name="fdomain" id="fdomain">@ 
+                    <select name="bdomain" id="bdomain">
+                        <option value="naver.com">naver.com</option>
+                        <option value="daum.net">daum.net</option>
+                        <option value="gmail.com">gmail.com</option>
+                        <option value="kakao.com">kakao.com</option>
+                        <option value="nate.com">nate.com</option>
+                    </select>
+                    <input type="button" name="emailcheck" id="emailcheck" value="중복확인">
+                </div>
+                </td>
+            </tr>
+            
+            <tr>
+                <th>주소</th>
+                <td>
+                <div class="input-container">
+                    <input type="text" id="postcode" placeholder="우편번호">
+                    <input type="button" id="addresscheck" onclick="sample6_execDaumPostcode()" value="우편번호 찾기">
+                </div><br>
+                    <input type="text" id="mainaddress" placeholder="주소" name="mainaddress"><br>
+                    <input type="text" id="detailAddress" placeholder="상세주소" name="detailaddress">
+                    <input type="text" id="extraAddress" placeholder="참고항목" name="extraaddress">
                 </td>
             </tr>
             <tr>
@@ -357,6 +471,7 @@
             </tr>
         </table>
     </form>
+</div>
 </body>
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 </html>
