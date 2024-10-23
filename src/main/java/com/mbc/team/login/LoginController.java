@@ -170,7 +170,10 @@ public class LoginController {
 		String fdomain=request.getParameter("fdomain");
 		String bdomain=request.getParameter("bdomain");
 		String email=fdomain+"@"+bdomain;
-		String address=request.getParameter("address");
+		String mainaddress = request.getParameter("mainaddress");
+		String detailaddress = request.getParameter("detailaddress");
+		String extraaddress = request.getParameter("extraaddress");
+		String address = mainaddress + detailaddress + extraaddress;
 		LoginService ls=sqlSession.getMapper(LoginService.class);
 		ls.memberupdate2(nickname,pw,name,birth,phone,address,email,id);
 		
