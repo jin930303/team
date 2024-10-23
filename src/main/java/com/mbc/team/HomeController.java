@@ -40,13 +40,11 @@ public class HomeController {
 	
 	@RequestMapping(value = "/main", method = RequestMethod.GET)
 	public String main(Model mo, HttpServletRequest request) {
-		
-		    ProductService ps = sqlsession.getMapper(ProductService.class);
-		    ArrayList<ProductDTO> list = ps.outmainbest();
-		    ArrayList<ProductDTO> list1 = ps.outmainnew();
-		    mo.addAttribute("list", list);
-		    mo.addAttribute("list1", list1);
-		    
-		    return "main";
+	    ProductService ps = sqlsession.getMapper(ProductService.class);
+	    ArrayList<ProductDTO> list = ps.outmainbest();
+	    ArrayList<ProductDTO> list1 = ps.outmainnew();
+	    mo.addAttribute("list", list);
+	    mo.addAttribute("list1", list1);
+	    return "main";
 	}
 }

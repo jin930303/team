@@ -52,11 +52,15 @@ body {
 
 /* 야구용품 */
 .container-head {
-   display: flex;
-   font-size: 60px;
-   justify-content: center;
-   align-items: center;
-   color: black;
+	display: flex;
+	font-size: 60px;
+	justify-content: center;
+	align-items: center;
+	color: black;
+}
+.container-fluid {
+	display:flex;
+	justify-content: center;
 }
 
 </style>
