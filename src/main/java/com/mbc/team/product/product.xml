@@ -68,8 +68,7 @@
 	<select id="salea" resultType="com.mbc.team.product.ProductDTO"> <!-- itemnum 가 높은순서대로 출력되게 함(조회수 높은 순서대로 출력) -->
 		select itemnum, image1, cg_code, scg_code, product, price, dimage, sale, (price*((100-sale)/100)) as saleprice from (
 		select itemnum, image1, cg_code, scg_code, product, price, dimage, sale, (price*((100-sale)/100)) as saleprice from product 
-		where sale>0 order by sale desc) 
-		where rownum &lt;= 12
+		where sale>0 order by sale desc) where rownum &lt;= 12
 	</select>
 
 </mapper>

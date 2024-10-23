@@ -80,14 +80,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 	<!-- 1:1 수정(문의글 상세페이지) -->
 	<select id="faqupdate" resultType="com.mbc.team.FAQ.FAQDTO">
-		select cnum, tab, title, to_char(fdate, 'yyyy-MM-dd') as fdate, fcontents, groups, step, indent, nickname, fimage1, fimage2, fimage3, 
-		faqcnt, openclose from faq where cnum=#{param1}
+		select cnum, tab, title, to_char(fdate, 'yyyy-MM-dd') as fdate, fcontents, groups, step, indent, nickname, 
+		fimage1, fimage2, fimage3, faqcnt, openclose from faq where cnum=#{param1}
 	</select>
 
 	<!-- 1:1 수정(완료) -->
 	<update id="faqupdate2">
-		update faq set tab=#{param2}, title=#{param3}, fcontents=#{param4}, nickname=#{param5}, fimage1=#{param6}, fimage2=#{param7}, 
-		fimage3=#{param8}, openclose=#{param9} where cnum=#{param1}
+		update faq set tab=#{param2}, title=#{param3}, fcontents=#{param4}, nickname=#{param5}, fimage1=#{param6}, 
+		fimage2=#{param7}, fimage3=#{param8}, openclose=#{param9} where cnum=#{param1}
 	</update>
 
 	<!-- 1:1 삭제 -->
@@ -125,7 +125,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 	<!-- 작성자 검색 -->
 	<select id="faqNicknameSearchWithDate" resultType="com.mbc.team.FAQ.FAQDTO">
-	    select * from faq where nickname like '%'||#{param1}||'%' and fdate>=SYSDATE-#{param2} and tab!='FAQ'
+	    select * from faq where nickname like '%'||#{param1}||'%' and fdate>=sysdate-#{param2} and tab!='FAQ'
 	</select>
 	
 	<!-- 1:1 문의내역 조회수 -->
@@ -135,14 +135,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 	<!-- 1:1 인기순 출력(조회수 많은 순) -->
 	<select id="category1" resultType="com.mbc.team.FAQ.FAQDTO">
-		select cnum, tab, title, nickname, to_char(fdate, 'yyyy-MM-dd') as fdate, fcontents, groups, step, indent, fimage1, fimage2, fimage3, 
-		faqcnt from faq where tab!='FAQ' order by faqcnt desc
+		select cnum, tab, title, nickname, to_char(fdate, 'yyyy-MM-dd') as fdate, fcontents, groups, step, indent, 
+		fimage1, fimage2, fimage3, faqcnt from faq where tab!='FAQ' order by faqcnt desc
 	</select>
 
 	<!-- 1:1 최신순 출력(날짜 빠른순) -->
 	<select id="category2" resultType="com.mbc.team.FAQ.FAQDTO">
-		select cnum, tab, title, nickname, to_char(fdate, 'yyyy-MM-dd') as fdate, fcontents, groups, step, indent, fimage1, fimage2, fimage3, 
-		faqcnt from faq where tab!='FAQ' order by fdate desc
+		select cnum, tab, title, nickname, to_char(fdate, 'yyyy-MM-dd') as fdate, fcontents, groups, step, indent, 
+		fimage1, fimage2, fimage3, faqcnt from faq where tab!='FAQ' order by fdate desc
 	</select>
 
 	<!-- 고객센터 홈 베스트 FAQ TOP 10 -->
