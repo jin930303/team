@@ -38,6 +38,8 @@ public interface ProductService  {
 
 	ArrayList<ProductDTO> salea();
 
+	ArrayList<ProductDTO> searchItem(String search);
+
 
 
 	

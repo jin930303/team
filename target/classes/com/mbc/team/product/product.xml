@@ -27,6 +27,12 @@
 		from product order by itemnum desc
 	</select>
 	
+	<select id="searchItem" resultType="com.mbc.team.product.ProductDTO"> 
+		select itemnum, image1, cg_code, scg_code, product, price, dimage, sale, (price*((100-sale)/100)) as saleprice 
+		from product where product like '%' || #{search,jdbcType=VARCHAR} || '%'
+	</select>
+	
+	
 	<select id="arbat" resultType="com.mbc.team.product.ProductDTO"> <!-- 카테코리2선택하면 코드마다 분류 -->
 		select itemnum, image1, cg_code, scg_code, product, price, dimage, sale, (price*((100-sale)/100)) as saleprice 
 		from product where scg_code=#{param1}
