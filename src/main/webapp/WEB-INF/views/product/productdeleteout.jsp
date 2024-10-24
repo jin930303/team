@@ -18,9 +18,17 @@
     
     .product {            /*상품 테두리*/
         border: 1px solid #ddd;
-        padding: 30px;
+        padding: 16px;
         text-align: center;
-    }   
+        background-color: #f9f9f9; 
+        border-radius: 8px; 
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1); 
+        transition: transform 0.2s; 
+    }
+    
+     .product:hover {
+        transform: scale(1.02); /* 마우스 오버 시 크기 증가 */
+    }
                                            
     .product img {       /*상품 이미지 크기*/
         width: 200px; 
@@ -30,13 +38,13 @@
 
     .product-title {     /* 상품명 폰트 설정 */    
         font-weight: bold;
-        font-size: 24px; 
+        font-size: 18px; 
         margin: 15px 0;
     }
     
     .product-price {     /* 가격 폰트 설정 */  
         color: #d32f2f;
-        font-size: 20px; 
+        font-size: 18px; 
         margin: 10px 0;
     }
     

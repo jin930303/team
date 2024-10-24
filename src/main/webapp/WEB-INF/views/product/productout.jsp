@@ -5,6 +5,8 @@
 <!DOCTYPE html>
 <html>
 <head>
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap" rel="stylesheet">
+
 <meta charset="UTF-8">
 <title>Product Grid</title>
 <style>
@@ -36,19 +38,24 @@
         object-fit: cover;
     }
 
-    .product-title {     /* 상품명 폰트 설정 */    
-        font-weight: bold;
-        font-size: 18px; 
-        margin: 15px 0;
-    }
+   .product-title {    
+    font-family: 'Roboto', sans-serif; /* Roboto 폰트 적용 */
+    font-weight: 300; /* 얇은 두께 설정 */
+    font-size: 15px; 
+    margin: 15px 0;
+    text-align: left; /* 왼쪽 정렬 추가 */
+}
     
     .product-price {     /* 가격 폰트 설정 */  
+    font-family: 'Roboto', sans-serif; /* Roboto 폰트 적용 */
         color: #d32f2f;
-        font-size: 18px; 
+        font-size: 15px; 
         margin: 10px 0;
+        text-align: left; /* 왼쪽 정렬 추가 */
     }
     
  .search-sort-container {
+ 
     display: flex;
     justify-content: flex-end;
     margin: 20px;
@@ -57,92 +64,302 @@
 }
 
 .search-container input {
-    padding: 10px; /* 패딩 추가 */
-    border: 2px solid #ccc; /* 테두리 스타일 */
+    padding: 7px; /* 패딩 추가 */
+    border: 1px solid #ccc; /* 테두리 스타일 */
     border-radius: 4px; /* 모서리 둥글게 */
     margin-right: 280px; /* 정렬을 위한 마진 */
     width: 400px; /* 원하는 길이로 설정 */
-    font-size: 16px; /* 폰트 크기 설정 */
+    font-size: 15px; /* 폰트 크기 설정 */
     
 }
-
 
 .sort-container select {
-    padding: 10px; /* 패딩 추가 */
-    border: 2px solid #ccc; /* 테두리 스타일 */
+    padding: 5px; /* 패딩 추가 */
+    border: 1px solid #ccc; /* 테두리 스타일 */
     border-radius: 4px; /* 모서리 둥글게 */
 }
-
-
-   .divider1 {   /* 상품 경계선 */  
+ 
+    .divider1 {   /* 상품 경계선 */  
     border: none; 
-    border-top: 2px solid #ddd; 
-    width: 65%;  
-    margin: 20px auto; 
-    margin-top: 40px;
-    margin-bottom: 28px;
-    
-    }
-    .divider {   /* 상품 경계선 */  
-    border: none; 
-    border-top: 2px solid #ddd; 
+    border-top: 1px solid #ddd; 
     width: 65%;  
     margin: 20px auto; 
     margin-top: 5px;
-    margin-bottom: 45px;
-    
+    margin-bottom: 45px;  
     }
-    .category-container {
-    width: 80%; /* 가로 너비를 줄였습니다 (기존 100% -> 80%) */
-    max-width: 1200px; /* 최대 너비를 설정하여 너무 넓어지지 않도록 함 */
-    height: auto; /* 세로 높이를 자동으로 설정 */
-    background-color: #fff; /* 전체 배경을 흰색으로 */
-    padding: 20px 40px; /* 상하 패딩을 늘려 세로 공간을 더 넓게 */
-    margin: 30px auto; /* 가운데 정렬을 위해 자동 여백 */
-    border: 2px solid #ddd; /* 1px 두께의 검은색 테두리 */
-    border-radius: 8px; /* 약간의 둥근 테두리 */
-    box-shadow: none; /* 그림자를 제거하여 깔끔한 테두리 */
-}
-
-.category-list {
-    display: flex;
-    gap: 20px; 
-    list-style-type: none;
-    padding: 0;
-    margin: 0;
-}
-
-.category-list li {
-    padding: 7px 15px;
-    background-color: #fff; 
-    border: 2px solid #ddd; 
-    border-radius: 4px;
-    box-shadow: none; 
-    transition: background-color 0.3s, border-color 0.3s;
-}
-
-.category-list li a {
-    text-decoration: none;
-    color: #333; 
-    font-size: 16px;
-}
-
-.category-list li:hover {
-    background-color: #f0f0f0; 
-    border-color: #333; 
-}
-
-.category-list li.active {
-    background-color: #ddd; 
-    font-weight: bold;
-}
+     .divider2 {   /* 상품 경계선 */  
+    border: none; 
+    border-top: 1px solid #ddd; 
+    width: 65%;  
+    margin: 20px auto; 
+    margin-top: -5px;
+    margin-bottom: 18px;   
+    }
     
+.divider3 {   /* 상품 경계선 */  
+    border: none; 
+    border-top: 2px solid #ddd; 
+    width: 65%;  
+    margin: 20px auto; 
+    margin-top: -20px;
+    margin-bottom: 80px;  
+}
+
+.divider4 {   /* 상품 경계선 */  
+   border: none; 
+    border-top: 1px solid #ddd; 
+    width: 65%;  
+    margin: 20px auto; 
+    margin-top: -20px;
+    margin-bottom: -5px;   
+    }
+
+ .category-container {
+        display: flex;
+        justify-content: center;
+        padding: 16px;
+        
+    }
+
+    .category-list {
+        list-style: none;
+        padding: 0;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    .category-list li {
+        margin: 10px;
+        padding: 15px;
+        border: 1px solid #ddd; /* 네모 테두리 */
+        text-align: center;
+        transition: background-color 0.3s;
+    }
+
+    .category-list li a {
+        text-decoration: none;
+        color: #333;
+        display: block; /* 전체 영역 클릭 가능 */
+    }
+
+    .category-list li:hover {
+        background-color: #f0f0f0; /* 호버 효과 */
+    }
+
+.category-title {
+ font-family: 'Roboto', sans-serif; /* Roboto 폰트 적용 */
+    font-size: 24px; /* 제목 크기 설정 */
+    font-weight: bold; /* 굵게 설정 */
+    text-align: center; /* 중앙 정렬 */
+    margin-bottom: 1px; /* 아래쪽 마진 추가 */
+}
+
+.category-items {
+    list-style: none; /* 기본 리스트 스타일 제거 */
+    padding: 0; /* 패딩 제거 */
+    text-align: center; /* 중앙 정렬 */
+}
+
+.category-items li {
+    margin: 5px 0; /* 리스트 항목 간의 간격 설정 */
+}
+
+.breadcrumb {
+    background-color: transparent; /* 배경색 없음 */
+    padding: 10px; /* 적당한 패딩 추가 (선택 사항) */
+    margin-left: 320px; /* 왼쪽 마진을 20px로 설정하여 약간 오른쪽으로 이동 */
+    margin-right: 0; /* 오른쪽 마진 0 */
+    text-align: left; /* 텍스트 왼쪽 정렬 */
+}
 
 </style>
 </head>
-
 <body>
+<div class="breadcrumb">
+	<c:choose>
+	    <c:when test="${scg_code == 'mitt001'}">
+	        <span>글러브 > </span><span>투수/올라운드</span>
+	    </c:when>
+	    <c:when test="${scg_code == 'mitt002'}">
+	        <span>글러브 > </span><span>내야수</span>
+	    </c:when>
+	    <c:when test="${scg_code == 'mitt003'}">
+	        <span>글러브 > </span><span>외야수</span>
+	    </c:when>
+	    <c:when test="${scg_code == 'mitt004'}">
+	        <span>글러브 > </span><span>포수 미트</span>
+	    </c:when>
+	    <c:when test="${scg_code == 'mitt005'}">
+	        <span>글러브 > </span><span>어린이용</span>
+	    </c:when>
+	    <c:when test="${scg_code == 'mitt006'}">
+	        <span>글러브 > </span><span>관리용품</span>
+	    </c:when>
+	    
+        <c:when test="${scg_code == 'bat001'}">
+            <span>배트 > </span><span>알루미늄 배트</span>
+        </c:when>
+        <c:when test="${scg_code == 'bat002'}">
+            <span>배트 > </span><span>카본/컴포짓</span>
+        </c:when>
+        <c:when test="${scg_code == 'bat003'}">
+            <span>배트 > </span><span>나무배트</span>
+        </c:when>
+        <c:when test="${scg_code == 'bat004'}">
+            <span>배트 > </span><span>펑고배트</span>
+        </c:when>
+        <c:when test="${scg_code == 'bat005'}">
+            <span>배트 > </span><span>유소년용 배트</span>
+        </c:when>
+        <c:when test="${scg_code == 'bat006'}">
+            <span>배트 > </span><span>트레이닝 배트</span>
+        </c:when>
+        <c:when test="${scg_code == 'bat008'}">
+            <span>배트 > </span><span>배트그립</span>
+        </c:when>
+        <c:when test="${scg_code == 'bat009'}">
+            <span>배트 > </span><span>배트용품</span>
+        </c:when>
+        
+	    <c:when test="${scg_code == 'glove001'}">
+	        <span>장갑 > </span><span>배팅장갑</span>
+	    </c:when>
+	    <c:when test="${scg_code == 'glove002'}">
+	        <span>장갑 > </span><span>수비장갑</span>
+	    </c:when>
+	    <c:when test="${scg_code == 'glove003'}">
+	        <span>장갑 > </span><span>주루장갑</span>
+	    </c:when>
+	    <c:when test="${scg_code == 'glove004'}">
+	        <span>장갑 > </span><span>방한장갑</span>
+	    </c:when>
+	    <c:when test="${scg_code == 'glove005'}">
+	        <span>장갑 > </span><span>유소년용 장갑</span>
+	    </c:when>
+	    
+	    <c:when test="${scg_code == 'shoes001'}">
+	        <span>신발 > </span><span>징 일체형</span>
+	    </c:when>
+	    <c:when test="${scg_code == 'shoes003'}">
+	        <span>신발 > </span><span>인조잔디화</span>
+	    </c:when>
+	    <c:when test="${scg_code == 'shoes004'}">
+	        <span>신발 > </span><span>포인트화</span>
+	    </c:when>
+	    <c:when test="${scg_code == 'shoes006'}">
+	        <span>신발 > </span><span>야구화부속품</span>
+	    </c:when>
+	    
+	    <c:when test="${scg_code == 'bag001'}">
+        <span>가방 > </span><span>백팩</span>
+	    </c:when>
+	    <c:when test="${scg_code == 'bag002'}">
+	        <span>가방 > </span><span>크로스백</span>
+	    </c:when>
+	    <c:when test="${scg_code == 'bag004'}">
+	        <span>가방 > </span><span>휠가방</span>
+	    </c:when>
+	    <c:when test="${scg_code == 'bag005'}">
+	        <span>가방 > </span><span>배트가방</span>
+	    </c:when>
+	    <c:when test="${scg_code == 'bag006'}">
+	        <span>가방 > </span><span>볼가방</span>
+	    </c:when>
+	        
+	    <c:when test="${scg_code == 'clothes001'}">
+	    <span>의류 > </span><span>티셔츠</span>
+	    </c:when>
+	    <c:when test="${scg_code == 'clothes002'}">
+	        <span>의류 > </span><span>언더셔츠</span>
+	    </c:when>
+	    <c:when test="${scg_code == 'clothes003'}">
+	        <span>의류 > </span><span>슬라이딩팬츠</span>
+	    </c:when>
+	    <c:when test="${scg_code == 'clothes004'}">
+	        <span>의류 > </span><span>롱/숏스판팬츠</span>
+	    </c:when>
+	    <c:when test="${scg_code == 'clothes005'}">
+	        <span>의류 > </span><span>아이싱웨어</span>
+	    </c:when>
+	    <c:when test="${scg_code == 'clothes006'}">
+	        <span>의류 > </span><span>바람막이</span>
+	    </c:when>
+	    <c:when test="${scg_code == 'clothes008'}">
+	        <span>의류 > </span><span>점퍼</span>
+	    </c:when>
+	    <c:when test="${scg_code == 'clothes009'}">
+	        <span>의류 > </span><span>트레이닝복</span>
+	    </c:when>
+	    <c:when test="${scg_code == 'clothes010'}">
+	        <span>의류 > </span><span>맨투맨/후디</span>
+	    </c:when>
+	    
+	    <c:when test="${scg_code == 'protect001'}">
+        <span>보호장비 > </span><span>타자헬멧</span>
+	    </c:when>
+	    <c:when test="${scg_code == 'protect002'}">
+	        <span>보호장비 > </span><span>암가드</span>
+	    </c:when>
+	    <c:when test="${scg_code == 'protect003'}">
+	        <span>보호장비 > </span><span>풋가드</span>
+	    </c:when>
+	    <c:when test="${scg_code == 'protect004'}">
+	        <span>보호장비 > </span><span>핸드가드</span>
+	    </c:when>
+	    <c:when test="${scg_code == 'protect005'}">
+	        <span>보호장비 > </span><span>안면마스크</span>
+	    </c:when>
+	    <c:when test="${scg_code == 'protect006'}">
+	        <span>보호장비 > </span><span>기타 보호장비</span>
+	    </c:when>
+	    
+	    <c:when test="${scg_code == 'baseball001'}">
+        <span>야구공 > </span><span>경식구</span>
+	    </c:when>
+	    <c:when test="${scg_code == 'baseball002'}">
+	        <span>야구공 > </span><span>연식구</span>
+	    </c:when>
+	    <c:when test="${scg_code == 'baseball004'}">
+	        <span>야구공 > </span><span>스냅볼</span>
+	    </c:when>
+	    <c:when test="${scg_code == 'baseball007'}">
+	        <span>야구공 > </span><span>야구공 보관함</span>
+	    </c:when>
+	    
+	    <c:when test="${scg_code == 'goods001'}">
+        <span>굿즈 > </span><span>키링</span>
+	    </c:when>
+	    <c:when test="${scg_code == 'goods002'}">
+	        <span>굿즈 > </span><span>타올</span>
+	    </c:when>
+	    <c:when test="${scg_code == 'goods003'}">
+	        <span>굿즈 > </span><span>인형</span>
+	    </c:when>
+	    <c:when test="${scg_code == 'goods004'}">
+	        <span>굿즈 > </span><span>슬리퍼</span>
+	    </c:when>
+	    
+	    <c:when test="${scg_code == 'etc001'}">
+        <span>기타용품 > </span><span>선글라스</span>
+	    </c:when>
+	    <c:when test="${scg_code == 'etc002'}">
+	        <span>기타용품 > </span><span>악세사리</span>
+	    </c:when>
+	    <c:when test="${scg_code == 'etc003'}">
+	        <span>기타용품 > </span><span>손목밴드</span>
+	    </c:when>
+	    <c:when test="${scg_code == 'etc004'}">
+	        <span>기타용품 > </span><span>로진백</span>
+	    </c:when>
+	    <c:when test="${scg_code == 'etc007'}">
+	        <span>기타용품 > </span><span>베이스</span>
+	    </c:when>
+       
+    </c:choose>
+</div>
 
+<hr class="divider4"> <!-- 경계선 추가 -->
 
 <div class="category-container">
     <nav>
@@ -151,7 +368,7 @@
         <c:choose>
         
             <c:when test="${scg_code == 'mitt001' || scg_code == 'mitt002' || scg_code == 'mitt003' 
-            || scg_code == 'mitt004' || scg_code == 'mitt005' || scg_code == 'mitt006'}">           
+            || scg_code == 'mitt004' || scg_code == 'mitt005' || scg_code == 'mitt006'}">                   
             <li><a href="pitcherallround">투수/올라운드</a></li>
             <li><a href="infielder">내야수</a></li>
             <li><a href="outfielder">외야수</a></li>
@@ -162,7 +379,7 @@
             
             <c:when test="${scg_code == 'bat001' || scg_code == 'bat002' || scg_code == 'bat003' 
                || scg_code == 'bat004' || scg_code == 'bat005' || scg_code == 'bat006' 
-               || scg_code == 'bat007' || scg_code == 'bat008' || scg_code == 'bat009'}">
+               || scg_code == 'bat007' || scg_code == 'bat008' || scg_code == 'bat009'}"> 
 		    <li><a href="arbat">알루미늄 배트</a></li>
 			<li><a href="carbonbat">카본/컴포짓</a></li>
 			<li><a href="woodbat">나무배트</a></li>
@@ -256,7 +473,7 @@
     </nav>
 </div>
 
-<hr class="divider1"> <!-- 경계선 추가 -->
+<hr class="divider2"> <!-- 경계선 추가 -->
 
 <div class="search-sort-container">
     <div class="search-container">
@@ -273,7 +490,7 @@
 </div>
 
 
-<hr class="divider"> <!-- 경계선 추가 -->
+<hr class="divider1"> <!-- 경계선 추가 -->
 
 <div class="product-container">
 <c:forEach items="${list}" var="aa">
@@ -323,18 +540,21 @@
                 </c:choose>
             </c:when>
 
-            <c:otherwise>
-                <div>
-                 👍 따봉
-                </div>
-            </c:otherwise>
+		<c:otherwise>
+		    <div>
+		        <a href="login?redirect" onclick="showLoginAlert()">👍 따봉</a>
+		    </div>
+		</c:otherwise>
+		
         </c:choose>
     </div>
 </c:forEach>
 </div>
 
 <script>
-
+function showLoginAlert() {
+    alert("로그인 후 이용해주세요!");
+}
     function sortProducts() {
         const select = document.getElementById("sortSelect");
         const sortBy = select.value;
