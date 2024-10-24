@@ -77,6 +77,10 @@ public interface BoardService {
 	void replyinsertb(int rpcnum, int rpcgroup, int rpstep, int rpindent, String ccontents, String nickname);
 	ArrayList<BoardDTO> replyout(int cnum);
 
+	//... 자유게시판 댓글 삭제
+	void replydelete(int cnum);
+
+	
 	//... 자유게시판 삭제
 	void boarddelete(int cnum);
 

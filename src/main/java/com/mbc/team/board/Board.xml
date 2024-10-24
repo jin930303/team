@@ -295,6 +295,11 @@
 		from community where cgroup=#{param1} and step>0 and indent>0 order by step desc
 	</select>
 	
+	<!-- 자유게시판 댓글삭제 -->
+	<delete id="replydelete">
+		delete from community where cnum=#{param1}
+	</delete>
+
 	<!-- 자유게시판 글삭제 -->
 	<delete id="boarddelete">
 		delete from community where cgroup=#{param1}

@@ -612,6 +612,19 @@ public class BoardController {
 		return "redirect:/board";
 	}
 	
+	@RequestMapping(value = "/replydelete", method = RequestMethod.GET)
+	public String replydelete(HttpServletRequest request, HttpServletResponse response) throws IOException {
+		int cnum=Integer.parseInt(request.getParameter("cnum"));
+		BoardService bs=sqlsession.getMapper(BoardService.class);
+		response.setContentType("text/html;charset=utf-8");
+		PrintWriter prw=response.getWriter();
+		prw.print("<script> alert('해당 댓글을 삭제하였습니다.');</script>");
+		prw.print("<script> location.href='board';</script>");
+		prw.close();
+		bs.replydelete(cnum);
+		return "redirect:/board";
+	}
+	
 	@RequestMapping(value = "/boardupdateview", method = RequestMethod.GET)
 	public String boardupdateview(HttpServletRequest request, Model mo) {
 		int cnum=Integer.parseInt(request.getParameter("cnum"));

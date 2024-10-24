@@ -11,11 +11,17 @@ text-align: center;
 </style>
 <script src="https://code.jquery.com/jquery-latest.min.js"></script>
 <script>
-    function delboard(cnum) {
-        if (confirm('삭제하시면 복구할 수 없습니다.\n정말로 삭제하시겠습니까?')) {
-            location.href = 'boarddelete?cnum=' + cnum;
-        }
-    }
+function delboard(cnum) {
+	if (confirm('삭제하시면 복구할 수 없습니다.\n정말로 삭제하시겠습니까?')) {
+		location.href = 'boarddelete?cnum=' + cnum;
+	}
+}
+    
+function delreply(cnum) {
+	if (confirm('삭제하시면 복구할 수 없습니다.\n정말로 삭제하시겠습니까?')) {
+		location.href = 'replydelete?cnum=' + cnum;
+	}
+}
 </script>
 <meta charset="UTF-8">
 <title>
@@ -126,7 +132,9 @@ text-align: center;
 	<c:forEach var="reply" items="${reply}">
 		<tr height="50px">
 			<td>${reply.nickname}</td>
-			<td colspan="7" style="text-align: left; padding-left:10px">☞ ${reply.ccontents}</td>
+			<td colspan="7" style="text-align: left; padding-left:10px">☞ ${reply.ccontents}
+			<input type="button" onclick="delreply(${reply.cnum})" value="삭제">
+			</td>
 		</tr>
 	</c:forEach>
 
@@ -203,7 +211,9 @@ text-align: center;
 	<c:forEach var="reply" items="${reply}">
 		<tr height="50px">
 			<td>${reply.nickname}</td>
-			<td colspan="7" style="text-align: left; padding-left:10px">☞ ${reply.ccontents}</td>
+			<td colspan="7" style="text-align: left; padding-left:10px">☞ ${reply.ccontents}
+			<input type="button" onclick="delreply(${reply.cnum})" value="삭제">
+			</td>
 		</tr>
 	</c:forEach>
 
@@ -242,7 +252,9 @@ text-align: center;
 	<c:forEach var="reply" items="${reply}">
 		<tr height="50px">
 			<td>${reply.nickname}</td>
-			<td colspan="7" style="text-align: left; padding-left:10px">☞ ${reply.ccontents}</td>
+			<td colspan="7" style="text-align: left; padding-left:10px">☞ ${reply.ccontents}
+			<input type="button" onclick="delreply(${reply.cnum})" value="삭제">
+			</td>
 		</tr>
 	</c:forEach>
 
