@@ -32,13 +32,13 @@ nav
 }
 #footer
 {
-   position: fixed;
+	position: fixed;
    bottom: 0px;
    width: 100%;
    text-align: center;
    font-size: 15px;
    line-height: 30px;
-   background-color: #6CC0FF;
+   background-color: #ddd;
    color: white; 
 }
 </style>

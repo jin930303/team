@@ -19,6 +19,9 @@ public class MemberController {
 	@Autowired
 	SqlSession sqlSession;
 
+	@RequestMapping(value = "/mypage")
+	public String mypage() {return "mypage";}
+	
 	@RequestMapping(value = "/memberinput")
 	public String member() {
 		return "memberinput";
