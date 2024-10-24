@@ -7,6 +7,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>고객센터</title>
+
 <style type="text/css">
 
 /* 백그라운드 배경 */
@@ -64,18 +65,18 @@ body {
 }
 
 /* 게시판 하단 컨테이너와 게시글 테이블 사이 간격 */
-.contact-info, .account-info {
+.contact-info {
 	margin-bottom: 30px;
 }
 
 /* h3 텍스트(목차 하단 텍스트) */
-.contact-info h3, .account-info h3 {
+.contact-info h3 {
 	font-size: 16px;
 	margin-bottom: 10px;
 }
 
 /* 목차 하단 텍스트 사이 간격 */
-.contact-info p, .account-info p {
+.contact-info p {
 	margin-bottom: 5px;
 }
 
@@ -184,7 +185,7 @@ body {
 				<p>안녕하세요@naver.com</p>
 				<p>운영 시간: 11:00 ~ 19:00 (연중무휴)</p>
 			</div>
-			<div class="account-info">
+			<div class="contact-info">
 				<h3>은행계좌 안내</h3>
 				<p>777777-77-777777</p>
 				<p>행복은행 (예금주: 행복이)</p>

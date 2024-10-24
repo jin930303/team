@@ -266,11 +266,12 @@
         }).open();
     }
 </script>
+<!-- table input css -->
 <style type="text/css">
 /* 전체 컨테이너 정렬 */
 .container {
     width: 100%;
-    max-width: 750px;
+    max-width: 850px;
     margin: 0 auto; /* 가운데 정렬 */
     padding: 20px;
     border: 1px solid #ddd; 
@@ -287,15 +288,26 @@ table {
 caption {
 	text-align: center;
 }
-
+table tr th, 
 table tr td {
-    padding: 10px; /* 입력창 사이 간격 */
-    text-align: center;
+    padding: 14px;
+    text-align: left; /* 모든 셀의 정렬을 왼쪽으로 */
+    vertical-align: middle; /* 수직 가운데 정렬 */
+    border-bottom: 1px solid #ddd; /* 테두리 유지 */
     border: none;
+}
+
+/* tr 사이 선*/
+table tr{
+	padding: 24px;
+	border-bottom: 1px solid #ddd;
+}
+
+table tr:last-child {
+	border-bottom: none;
 }
 /* input 필드 공통 스타일 */
 input[type="text"],
-input[type="password"],
 input[type="date"],
 input[type="email"],
 select {
@@ -309,7 +321,17 @@ select {
     background-color: #fff;
     transition: border 0.3s ease; /* 테두리 변경 시 부드러운 전환 */
 }
-
+/* 비밀번호 입력 필드 스타일 */
+.input-container input[type="password"] {
+    width: 95%; /* 비밀번호 입력 필드 너비 */
+	padding: 12px;
+    border: 1px solid #ddd; /* 연한 테두리 */
+    border-radius: 5px; /* 모서리 둥글게 */
+    font-size: 14px; /* 글씨 크기 */
+    margin-top: 8px;
+    box-sizing: border-box; /* 패딩과 테두리 포함한 전체 크기 */
+    transition: border 0.3s ease;
+}
 /* input 필드 포커스 시 스타일 */
 input[type="text"]:hover,
 input[type="password"]:hover,
@@ -331,22 +353,76 @@ select {
     outline: none; /* 포커스 시 외곽선 제거 */
 }
 
+
+/* 아이콘 스타일 */
+.input-container .togglePassword {
+    position: absolute;
+    right: 10%; /* 오른쪽 끝에서 10px 간격 */
+    top: 55%; /* 세로 가운데 정렬 */
+    transform: translateY(-50%); /* 중앙 정렬을 위한 변환 */
+    font-size: 16px; /* 아이콘 크기 */
+    color: #be241c; /* 아이콘 색상 */
+    cursor: pointer;
+    background: none;
+    border: none;
+    outline: none;
+}
+
+/* 아이콘 클릭 시 포커스 효과 제거 */
+.input-container .togglePassword:focus {
+    outline: none;
+}
+table tr td .phone-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between; /* 필드 간 간격을 일정하게 유지 */
+}
+table tr td .email-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between; /* 필드 간 간격을 일정하게 유지 */
+}
+
+/* 전화번호 입력 필드 및 버튼 크기 조정 */
+.phone-container select,
+.phone-container input[type="text"] {
+    width: 30%; /* 필드 너비 30%로 균일하게 조정 */
+}
+
+.phone-container input[type="button"] {
+    width: 100px; /* 버튼 너비를 고정 크기로 설정 */
+    margin-left: 10px; /* 입력 필드와 버튼 간격 설정 */
+}
+/* 전화번호 입력 필드 및 버튼 크기 조정 */
+.email-container select,
+.email-container input[type="email"] {
+    width: 45%; /* 필드 너비 30%로 균일하게 조정 */
+}
+
+.email-container input[type="button"] {
+    width: 100px; /* 버튼 너비를 고정 크기로 설정 */
+    margin-left: 10px; /* 입력 필드와 버튼 간격 설정 */
+}
 /* 중복확인 버튼 text 안에 넣기 */
 /* input-container는 버튼과 텍스트 필드를 나란히 배치하기 위한 flexbox */
 .input-container {
-	display: flex;
+    display: flex;
     align-items: center; /* 수직 가운데 정렬 */
+    position: relative;
+    width: 100%; /* 컨테이너 전체 너비 */
 }
 
 /* id 입력 필드 스타일 수정 */
 .input-container input[type="text"] {
-	flex: 1; /* 텍스트 입력 필드가 남은 공간을 모두 차지하도록 설정 */
+    flex: 1; /* 텍스트 입력 필드가 남은 공간을 모두 차지하도록 설정 */
     margin-right: 10px; /* 버튼과의 간격 설정 */
 }
 
 /* 중복확인 버튼 스타일 */
 #idcheck, #nicknamecheck, #phonecheck
-, #emailcheck, #addresscheck {
+, #emailcheck, #addresscheck,
+input[type="button"],
+input[type="reset"] {
     margin-top: 8px; /* 입력 필드 간 간격 */
 	padding: 12px 20px; /* 버튼 내부 여백 */
 	font-size: 14px; /* 버튼 글씨 크기 */
@@ -361,10 +437,20 @@ select {
 /* 중복확인 버튼 호버 효과 */
 #idcheck:hover, #nicknamecheck:hover,
 #phonecheck:hover, #emailcheck:hover,
-#addresscheck:hover {
+#addresscheck:hover,
+input[type="button"]:hover,
+input[type="reset"]:hover {
 	background-color: #8e1a14;
 }
 
+.submitbutton {
+	text-align: center;
+}
+
+.star {
+	color: #f09797;
+	font-size: 12px;
+}
 
 </style>
     <meta charset="UTF-8">
@@ -376,18 +462,18 @@ select {
         <table>
             <caption><h2>회원가입</h2></caption>
             <tr>
-			    <th>아이디</th>
+			    <th><strong class="star">⁕ </strong>아이디</th>
 			    <td>
 			        <div class="input-container">
 			            <input type="text" name="id" id="id" placeholder="id를 입력해주세요" maxlength="12">
 			            <input type="button" name="idcheck" id="idcheck" value="중복확인">
 			        </div>
 			    </td>
+			    
 			</tr>
-
             <tr>
-                <th>비밀번호☆</th>
-                <td>
+                <th><strong class="star">⁕ </strong>비밀번호</th>
+                <td colspan="2">
                     <div class="input-container">
                         <input type="password" name="pw" id="pw" placeholder="비밀번호를 입력해주세요" maxlength="16">
                         <a class="togglePassword" style="cursor: pointer;"><i class="fas fa-eye-slash"></i></a>
@@ -395,7 +481,7 @@ select {
                 </td>
             </tr>
             <tr>
-                <th>비밀번호 확인☆</th>
+                <th><strong class="star">⁕ </strong>비밀번호 확인</th>
                 <td colspan="2">
                     <div class="input-container">
                         <input type="password" name="pwconfirm" id="pwconfirm" placeholder="비밀번호 확인" maxlength="16">
@@ -404,8 +490,9 @@ select {
                     <span id="confirmMsg"></span>
                 </td>
             </tr>
+           
             <tr>
-                <th>닉네임☆</th>
+                <th><strong class="star">⁕ </strong>닉네임</th>
                 <td>
                 	<div class="input-container">
 	                    <input type="text" name="nickname" id="nickname" placeholder="닉네임을 입력해주세요">
@@ -413,32 +500,45 @@ select {
                     </div>
                 </td>
             </tr>
+            
             <tr>
-                <th>이름☆</th>
+                <th><strong class="star">⁕ </strong>이름</th>
                 <td>
                     <input type="text" name="name" id="name" placeholder="이름을 입력해주세요" maxlength="6">
                 </td>
             </tr>
+            
             <tr>
                 <th>생년월일</th>
                 <td>
                     <input type="date" name="birth" id="birth">
                 </td>
             </tr>
+            
             <tr>
-                <th>전화번호</th>
+                <th><strong class="star">⁕ </strong>전화번호</th>
                 <td>
-                	<div class="input-container">
-	                    010-<input type="text" name="phone1" id="phone1" maxlength="4">-<input type="text" name="phone2" id="phone2" maxlength="4">
+                	<div class="phone-container">
+                		<select>
+                			<option value="010">010</option>
+                			<option value="011">011</option>
+                			<option value="016">016</option>
+                			<option value="017">017</option>
+                			<option value="018">018</option>
+                			<option value="019">019</option>
+                		</select>-
+	                    <input type="text" name="phone1" id="phone1" maxlength="4">-
+	                    <input type="text" name="phone2" id="phone2" maxlength="4">
 	                 	<input type="button" name="phonecheck" id="phonecheck" value="중복확인">
                 	</div>
                 </td>
             </tr>
+            
             <tr>
-                <th>이메일</th>
+                <th><strong class="star">⁕ </strong>이메일</th>
                 <td>
-                <div class="input-container">
-                    <input type="email" name="fdomain" id="fdomain">@ 
+                <div class="email-container">
+                    <input type="email" name="fdomain" id="fdomain">@
                     <select name="bdomain" id="bdomain">
                         <option value="naver.com">naver.com</option>
                         <option value="daum.net">daum.net</option>
@@ -448,6 +548,8 @@ select {
                     </select>
                     <input type="button" name="emailcheck" id="emailcheck" value="중복확인">
                 </div>
+                </td>
+                <td>
                 </td>
             </tr>
             
@@ -465,10 +567,13 @@ select {
             </tr>
             <tr>
                 <td colspan="2">
-                    <input type="button" value="회원가입" onclick="check()"> 
-                    <input type="reset" value="취소">
+                	<div class="submitbutton">
+	                    <input type="button" value="회원가입" onclick="check()"> 
+	                    <input type="reset" value="취소">
+                    </div>
                 </td>
             </tr>
+
         </table>
     </form>
 </div>
