@@ -28,28 +28,46 @@
 <!-- 좌측 사이드바 -->
 <style type="text/css">
 /* 목차+게시판 컨테이너 */
-.container {
+.flex_container {
+	width: 100%;
 	display: flex;
-	width: 80%;
-}
-
-/* 좌측 목차 사이드 바 */
-.side-container {
-	background-color: #f7f7f7;
-	padding: 12px;
+	justify-content: center;
+	margin: 0 auto;
 }
 
 .sidebar {
-	width: 350px;
-	border-right: 1px solid #ddd; /* 목차 - 게시판 사이 선*/
+
+	width: 250px;
+	border: 1px solid #ddd;
+	border-top: none; /* 타이틀과 경계선 중복 방지 */
 	padding: 20px;
+    margin-right: 20px;
+    border-bottom-right-radius: 10px;
+    border-bottom-left-radius: 10px;
 	
 }
+.sidebar_container {
+	width: 250px;
+    display: block; /* 상하로 정렬 */
+    margin-right: 60px; /* 오른쪽에 여백 */
+}
 
-/* 좌측 사이드바 "고객센터" */
-.sidebar h2 {
-	margin-bottom: 50px;
-	padding-top: 30px;
+/* 상단 타이틀 부분 */
+.sidebar_title {
+    background-color: #be241c; /* 상단 배경색 */
+    padding: 60px;
+    text-align: center;
+    border: 2px thin #303030;
+    border-top-right-radius: 10px;
+    border-top-left-radius: 10px;
+}
+
+/* 타이틀 내부 h2 스타일링 */
+.sidebar_title h2 {
+    margin: 0;
+    color: white;
+    font-weight: bold;
+    font-size: 22px;
 }
 
 /* 목차 링크의 리스트 스타일 없애면 리스트별 . 생김 */
@@ -61,7 +79,7 @@
 
 /* 목차 리스트 사이 간격 */
 .sidebar ul li {
-	margin-bottom: 10px;
+	margin-bottom: 15px;
 	
 }
 
@@ -69,27 +87,37 @@
 .sidebar ul li a {
 	text-decoration: none;
 	color: #333;
+	font-size: 14px;
 	display: block;
 	padding: 10px;
+	border: 1px solid #ddd;
 	border-radius: 4px;
-	transition: background-color 0.3s;
+	transition: border 0.3s ease; /* 테두리 변경 시 부드러운 전환 */
+	transition: font 0.3s ease;
+	transition: background-color 0.2s ease;
 }
 
 .sidebar ul li a:hover {
+	border-color: #be241c;
 	background-color: #be241c;
+	font-weight: bold;
 	color: white;
 }
+
 </style>
 
 <!-- 테이블 스타일 -->
 <style type="text/css">
 /* 테이블 스타일 */
 .main-container {
-	width: 100%;
-    max-width: 850px;
-    margin: 0 auto; /* 가운데 정렬 */
+	flex: 1;
+	/*width: 100%;*/
+    max-width: 1100px;
     padding: 20px;
-    border-right: 1px solid #ddd; /* 목차 - 게시판 사이 선*/
+    padding-left: 60px;
+    padding-right: 60px;
+    border-right: 1px solid #ddd;  /*목차 - 게시판 사이 선*/
+    border-left: 1px solid #ddd;  /*목차 - 게시판 사이 선*/
 }
 
 table {
@@ -100,6 +128,7 @@ table {
 }
 
 caption {
+	color: black;
 	text-align: center;
 }
 
@@ -190,7 +219,8 @@ select:focus {
 
 /* 중복확인 버튼 스타일 */
 input[type="button"],
-input[type="submit"] {
+input[type="submit"],
+input[type="reset"] {
     margin-top: 8px; /* 입력 필드 간 간격 */
 	padding: 12px 20px; /* 버튼 내부 여백 */
 	font-size: 14px; /* 버튼 글씨 크기 */
@@ -207,19 +237,20 @@ input[type="submit"] {
 
 /* 중복확인 버튼 호버 효과 */
 input[type="button"]:hover,
-input[type="submit"]:hover {
+input[type="submit"]:hover,
+input[type="reset"]:hover {
 	background-color: #8e1a14;
 }
 </style>
 </head>
 <body>
-	<div class="container">
+<div class="flex_container">
 		<!-- 사이드 메뉴바 -->
+	<div class="sidebar_container">
+		<div class="sidebar_title"><h2>1:1 문의하기</h2></div>
 		<aside class="sidebar">
-			<div class="side-container">
-			<h2>고객센터</h2>
 			<ul>
-				<li><a href="faq_community">고객센터</a></li>
+				<li><a href="faq_community">고객센터 홈</a></li>
 				<li><a href="gongjiboard">공지사항</a></li>
 				<c:choose>
 					<c:when test="${loginstate == true}">
@@ -229,8 +260,8 @@ input[type="submit"]:hover {
 				<li><a href="faqout">문의 내역</a></li>
 				<li><a href="faq">FAQ</a></li>
 			</ul>
-			</div>
 		</aside>
+	</div>
 		<div class="main-container">
 			<form action="faqsave" method="post" enctype="multipart/form-data">
 				<table>
@@ -249,7 +280,7 @@ input[type="submit"]:hover {
 					<tr>
 					<c:choose>
 						<c:when test="${loginstate==true}">
-							<th>닉네임</th>
+							<th>작성자</th>
 							<td><input type="text" name="nickname" value="${sessionScope.dto3.nickname}" readonly></td>
 						</c:when>
 					</c:choose>
@@ -288,6 +319,7 @@ input[type="submit"]:hover {
 						<td colspan="2">
 						<div class="submitbutton">
 							<input type="submit" value="작성 완료">
+							<input type="reset" value="다시 작성">
 						</div></td>
 					</tr>
 				</table>
