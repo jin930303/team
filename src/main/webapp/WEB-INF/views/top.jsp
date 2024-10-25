@@ -145,13 +145,13 @@ body {
 						<li><a href="login"> 로그인</a></li>
 						<li><a href="cart"> 장바구니</a></li>
 						<li><a href="faq_community"> 고객센터</a></li>
-						<li>
+						<!-- <li>
 							<form action="searchItem" method="get" style="display: inline;"
 								onsubmit="return validateSearch()">
 								<input type="text" name="query" id="search" placeholder="검색">
 								<button type="submit">검색</button>
 							</form>
-						</li>
+						</li> -->
 					</c:otherwise>
 				</c:choose>
 			</ul>
