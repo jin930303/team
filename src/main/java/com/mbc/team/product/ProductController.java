@@ -83,12 +83,7 @@ public class ProductController {
 		public String search(HttpServletRequest request, Model mo) {
 		    String search = request.getParameter("query");
 		    
-		    System.out.println("검색어: " + search);  // 검색어 값 확인
-		    
-		    if (search == null || search.trim().isEmpty()) {
-		        mo.addAttribute("list", new ArrayList<ProductDTO>()); // 빈 리스트 전달
-		        return "searchresult"; // 빈 검색 결과 페이지로 이동
-		    }
+		    System.out.println("검색어: " + search);  
 
 		    ProductService ps = sqlSession.getMapper(ProductService.class);
 		    ArrayList<ProductDTO> list = ps.searchItem(search);
