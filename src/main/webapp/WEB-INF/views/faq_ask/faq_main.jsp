@@ -7,34 +7,49 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>고객센터</title>
-
+<!-- 사이드바 -->
 <style type="text/css">
-
-/* 백그라운드 배경 */
-body {
-	font-family: Arial, sans-serif;
-	background-color: #f9f9f9;
-	color: #333;
-}
-
 /* 목차+게시판 컨테이너 */
-.container {
+.flex_container {
+	width: 100%;
 	display: flex;
-	width: 80%;
+	justify-content: center;
+	margin: 0 auto;
 }
 
-/* 좌측 목차 사이드 바 */
 .sidebar {
-	width: 350px;
-	background-color: #fff;
-	border-right: 1px solid #ddd; /* 목차 - 게시판 사이 선*/
+
+	width: 250px;
+	border: 1px solid #ddd;
+	border-top: none; /* 타이틀과 경계선 중복 방지 */
 	padding: 20px;
+    margin-right: 20px;
+    border-bottom-right-radius: 10px;
+    border-bottom-left-radius: 10px;
+	
+}
+.sidebar_container {
+	width: 250px;
+    display: block; /* 상하로 정렬 */
+    margin-right: 60px; /* 오른쪽에 여백 */
 }
 
-/* 좌측 사이드바 "고객센터" */
-.sidebar h2 {
-	font-size: 18px;
-	margin-bottom: 20px;
+/* 상단 타이틀 부분 */
+.sidebar_title {
+    background-color: #be241c; /* 상단 배경색 */
+    padding: 60px;
+    text-align: center;
+    border: 2px thin #303030;
+    border-top-right-radius: 10px;
+    border-top-left-radius: 10px;
+}
+
+/* 타이틀 내부 h2 스타일링 */
+.sidebar_title h2 {
+    margin: 0;
+    color: white;
+    font-weight: bold;
+    font-size: 22px;
 }
 
 /* 목차 링크의 리스트 스타일 없애면 리스트별 . 생김 */
@@ -46,175 +61,198 @@ body {
 
 /* 목차 리스트 사이 간격 */
 .sidebar ul li {
-	margin-bottom: 10px;
+	margin-bottom: 15px;
+	
 }
 
 /* 목차 리스트 별 버튼 모양 */
 .sidebar ul li a {
 	text-decoration: none;
 	color: #333;
+	font-size: 14px;
 	display: block;
 	padding: 10px;
-	background-color: #f1f1f1;
+	border: 1px solid #ddd;
 	border-radius: 4px;
-	transition: background-color 0.3s;
+	transition: border 0.3s ease; /* 테두리 변경 시 부드러운 전환 */
+	transition: font 0.3s ease;
+	transition: background-color 0.3s ease;
 }
 
 .sidebar ul li a:hover {
-	background-color: #ddd;
+	/*border-bottom: 1px solid #be241c;*/
+	background-color: #f9f4f4;
+	font-weight: bold;
+	color: black;
+}
+</style>
+<!-- 메인 섹션 -->
+<style type="text/css">
+.main-container {
+	flex: 1;
+	/*width: 100%;*/
+    max-width: 1100px;
+    padding: 20px;
+    padding-left: 60px;
+    padding-right: 60px;
+    border-right: 1px solid #ddd;  /*목차 - 게시판 사이 선*/
+    border-left: 1px solid #ddd;  /*목차 - 게시판 사이 선*/
 }
 
-/* 게시판 하단 컨테이너와 게시글 테이블 사이 간격 */
-.contact-info {
-	margin-bottom: 30px;
+table {
+    width: 100%; /* 테이블 너비 100% */
+    margin-top: 10px; /* 상단 간격 */
+    border-collapse: collapse; /* 테이블 경계 겹치지 않도록 */
+    text-align: center;
 }
 
-/* h3 텍스트(목차 하단 텍스트) */
-.contact-info h3 {
-	font-size: 16px;
-	margin-bottom: 10px;
+table tr th, 
+table tr td {
+    padding: 15px;
+    text-align: center; /* 모든 셀의 정렬을 왼쪽으로 */
+    vertical-align: middle; /* 수직 가운데 정렬 */
+    border: none;
 }
 
-/* 목차 하단 텍스트 사이 간격 */
-.contact-info p {
-	margin-bottom: 5px;
+/* tr 사이 선*/
+table tr{
+	padding: 28px;
+	border-bottom: 1px solid #ddd;
+	transition: border-bottom 0.3s ease;
+	transition: background-color 0.3s ease;
 }
 
-/* 게시판 섹션 */
-.main-content {
-	flex-grow: 1;
-	padding: 20px;
-	background-color: #fff;
-	margin-right: 150px;
+table tr:last-child {
+	border-bottom: none;
 }
 
-/* 게시판 "FAQ - 자주묻는질문" */
-.main-content h1 {
-	font-size: 24px;
-	margin-bottom: 20px;
-}
-
-/* 검색창 조건 틀 */
-.search-bar {
-	display: flex;
-	margin-bottom: 20px;
-}
-
-/* 검색창 검색란 */
-.search-bar input {
-	width: 300px;
-	padding: 10px;
-	border: 1px solid #ddd;
-	border-radius: 4px;
-	margin-right: 10px;
-}
-
-/* 검색하기 버튼 */
-.search-bar button {
-	padding: 10px 20px;
-	background-color: #333;
-	color: #fff;
-	border: none;
-	border-radius: 4px;
-	cursor: pointer;
-}
-
-.search-bar button:hover {
-	background-color: #555;
-}
-
-/* 게시판 섹션 안 게시판 테이블 자체 */
-.faq-table {
-	width: 100%;
-	border-collapse: collapse;
-	margin-top: 20px;
-}
-
-/* 게시판 텍스트 "Best FAQ" */
-.faq-table caption {
-	font-size: 18px;
-	margin-bottom: 10px;
-	text-align: left;
-}
-
-/* 게시판 테이블 th,td 라인 */
-.faq-table th, .faq-table td {
-	border: 1px solid #ddd;
-	padding: 10px;
-	text-align: center;
-}
-
-/* 게시판 테이블 th 영역 */
-.faq-table th {
+/* 게시판 th td 배경 */
+th {
 	background-color: #f4f4f4;
 }
 
-/* 게시글에 커서 가져다대면 색 바뀜 */
-.faq-table tbody tr:hover {
+table tbody tr:hover {
+	background-color: #f9f4f4;
+	border-bottom: 1.5px solid #be241c;
 	cursor: pointer;
-	background-color: #f9f9f9;
+}
+
+/* 검색 영역을 가운데에 배치하는 컨테이너 */
+.search-bar {
+	padding-top: 25px;
+    display: flex;
+    justify-content: center; /* 검색창을 가운데 정렬 */
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+/* 검색 옵션 select 필드의 컨테이너 */
+.search-container {
+    display: flex;
+    gap: 10px; /* select 필드 간의 간격 */
+}
+
+.search-container select {
+	flex:1;
+    width: 30%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    transition: border-color 0.3s ease;
+}
+
+.search-container select:hover {
+    border-color: #be241c;
+}
+
+.search-container select:focus {
+    border-color: #be241c;
+}
+
+.search-bar input[type="text"] {
+	border: 1px solid #ddd;
+	width: 45%;
+	padding: 10px;
+	border-radius: 4px;
+	margin-left:10px;
+	transition: border-color 0.3s ease;
+}
+.search-bar input[type="text"]:hover {
+	border-color: #be241c;
+}
+.search-bar input[type="text"]:focus {
+	border-color: #be241c;
+}
+
+/* 검색 버튼 */
+.search-bar button {
+    padding: 10px 20px;
+    background-color: #be241c;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-left: 10px; /* 검색창과 버튼 사이의 간격 */
+    transition: background-color 0.3s ease;
+}
+
+.search-bar button:hover {
+    background-color: #8e1a14;
 }
 
 </style>
 </head>
 <body>
-	<div class="container">
+	<div class="flex_container">
 		<!-- 사이드 메뉴바 -->
-		<aside class="sidebar">
-			<h2>고객센터</h2>
-			<ul>
-				<li><a href="faq_community">고객센터</a></li>
-				<li><a href="gongjiboard">공지사항</a></li>
-				<c:choose>
-					<c:when test="${loginstate == true}">
-						<li><a href="faqin">1:1 문의하기</a></li>
-					</c:when>
-				</c:choose>
-				
-				<li><a href="faqout">문의 내역</a></li>
-				<li><a href="faq">FAQ</a></li>
+		<div class="sidebar_container">
+			<div class="sidebar_title"><h2>문의 내역</h2></div>
+			<aside class="sidebar">
+				<ul>
+					<li><a href="faq_community">고객센터 홈</a></li>
+					<li><a href="gongjiboard">공지사항</a></li>
+					<c:choose>
+						<c:when test="${loginstate == true}">
+							<li><a href="faqin">1:1 문의하기</a></li>
+						</c:when>
+					</c:choose>
+					<li><a href="faqout">문의 내역</a></li>
+					<li><a href="faq">FAQ</a></li>
 				<c:choose>
 					<c:when test="${adminloginstate == true}">
 					<li><a href="FAQ_in">FAQ 글 쓰기</a></li>
 					</c:when>
 				</c:choose>
-			</ul>
-			<div class="contact-info">
-				<h3>고객상담센터</h3>
-				<p>070-7777-7777</p>
-				<p>안녕하세요@naver.com</p>
-				<p>운영 시간: 11:00 ~ 19:00 (연중무휴)</p>
-			</div>
-			<div class="contact-info">
-				<h3>은행계좌 안내</h3>
-				<p>777777-77-777777</p>
-				<p>행복은행 (예금주: 행복이)</p>
-			</div>
-		</aside>
+				</ul>
+			</aside>
+		</div>
 
 		<!-- 메인 콘텐츠 -->
-		<main class="main-content">
+		<main class="main-container">
 			<h1>FAQ - 자주 묻는 질문 BEST 10</h1>
 		
 		<!-- 검색 바 -->
 			<form action="faq_main_serch" method="post" class="search-bar">
-				<!-- 기간 선택 -->
+				<div class="search-container">
+			    <!-- 기간 선택 -->
 			    <select name="faqkey1" id="faqkey1">
-			        <option value="">기간 선택</option>
-			        <option value="1">1일</option>
-			        <option value="7">1주일</option>
-			        <option value="30">1개월</option>
-			        <option value="90">3개월</option>
-			    </select>
-			
-			    <!-- 검색 조건 선택 -->
-			    <select name="faqkey2" id="faqkey2">
-			        <option value="">검색 조건 선택</option>
-			        <option value="title">제목</option>
-			        <option value="fcontents">내용</option>
-			        <option value="nickname">글쓴이</option>
-			    </select>
-			
+				    <optgroup label="기간 선택">
+				        <option value="1">1일</option>
+				        <option value="7">1주일</option>
+				        <option value="30">1개월</option>
+				        <option value="90">3개월</option>
+				    </optgroup>
+				</select>
+				
+				<!-- 검색 조건 선택 -->
+				<select name="faqkey2" id="faqkey2">
+				    <optgroup label="검색 조건 선택">
+				        <option value="title">제목</option>
+				        <option value="fcontents">내용</option>
+				        <option value="nickname">글쓴이</option>
+				    </optgroup>
+				</select>
+				</div>
 			    <!-- 검색어 입력 -->
 			    <input type="text" name="faqvalue" id="faqvalue" placeholder="검색어를 입력하세요" required>
 			
@@ -223,8 +261,7 @@ body {
 			</form>
 			
 		<!-- 메인 게시판 -->
-			<table class="faq-table">
-				<caption>BEST FAQ</caption>
+			<table>
 				<thead>
 					<tr>
 						<th>분류</th>
