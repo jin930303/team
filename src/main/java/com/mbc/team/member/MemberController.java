@@ -1,5 +1,7 @@
 package com.mbc.team.member;
 
+import java.util.ArrayList;
+
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.ibatis.session.SqlSession;
@@ -7,7 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
-
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -51,7 +53,31 @@ public class MemberController {
 
 		return "redirect:/main";
 	}
-
+	
+	@RequestMapping(value = "/memberout")
+	public String memberout(Model mo) {
+		MemberService ms = sqlSession.getMapper(MemberService.class);
+		ArrayList<MemberDTO>list=ms.memberout();
+		mo.addAttribute("list",list);
+		
+		return "memberout";
+	}
+	
+	@ResponseBody
+	@RequestMapping(value = "/memberdelete")
+	public String memberdelete(Model mo,@RequestParam("id") String id) {
+		MemberService ms = sqlSession.getMapper(MemberService.class);
+		 try {
+	           ms.memberdelete(id);
+	            return "success";  
+	        } catch (Exception e) {
+	            return "fail";  
+	        }
+	    }
+	
+	
+	
+	
 	@ResponseBody
 	@RequestMapping(value = "/idcheck1")
 	public String member2(HttpServletRequest request) {

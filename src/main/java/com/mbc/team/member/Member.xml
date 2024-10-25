@@ -9,6 +9,12 @@
 		values(#{param1}, #{param2}, #{param3}, #{param4}, #{param5}, #{param6}, #{param7}, #{param8}, '001', 0, '002')
 	</insert>
 	
+	<select id="memberout" resultType="com.mbc.team.member.MemberDTO">
+		 select m.*, mg.grade_name
+    FROM member m
+    JOIN member_grade mg ON m.grade_code = mg.grade_code
+	</select>
+	
 	<select id="idcheck" resultType="int">
 		select count(*) from member where id=#{param1}
 	</select>
@@ -28,5 +34,10 @@
 	<select id="phonecheck" resultType="int">
 		select count(*) from member where phone=#{phone}	
 	</select>
+	
+	<delete id="memberdelete">
+	delete from member where id=#{id}
+	</delete>
+	
 	
 </mapper>

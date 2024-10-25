@@ -302,7 +302,7 @@ public class LoginController {
     //네이버 로그인 매핑
     @RequestMapping("/naver")
     public String naverCallback(@RequestParam String code, @RequestParam String state, HttpServletRequest request, Model model) {
-        String accessTokenUrl = "https://nid.naver.com/oauth2.0/token?grant_type=authorization_code"
+        String accessTokenUrl = "https://nid.naver.com/oauth2.0/token?grant_type=MzF9TufJxvuIYOshvE"
                 + "&client_id=" + CLIENT_ID
                 + "&client_secret=" + CLIENT_SECRET
                 + "&code=" + code

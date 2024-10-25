@@ -1,5 +1,7 @@
 package com.mbc.team.member;
 
+import java.util.ArrayList;
+
 import org.springframework.stereotype.Service;
 
 @Service
@@ -8,6 +10,8 @@ public interface MemberService {
 	void memberinput(String id, String nickname, String pw, String name, String gender, String birth, String phone,
 			String address);
 
+	ArrayList<MemberDTO> memberout();
+	
 	int idcheck(String id);
 
 	int nicknamecheck(String nickname);
@@ -20,5 +24,9 @@ public interface MemberService {
 	int emailcheck(String email);
 
 	int phonecheck(String phone);
+
+	void memberdelete(String id);
+
+	
 
 }
