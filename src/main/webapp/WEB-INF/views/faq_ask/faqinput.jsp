@@ -113,9 +113,7 @@
 	flex: 1;
 	/*width: 100%;*/
     max-width: 1100px;
-    padding: 20px;
-    padding-left: 60px;
-    padding-right: 60px;
+    padding: 20px 60px;
     border-right: 1px solid #ddd;  /*목차 - 게시판 사이 선*/
     border-left: 1px solid #ddd;  /*목차 - 게시판 사이 선*/
 }
@@ -224,15 +222,12 @@ input[type="reset"] {
     margin-top: 8px; /* 입력 필드 간 간격 */
 	padding: 12px 20px; /* 버튼 내부 여백 */
 	font-size: 14px; /* 버튼 글씨 크기 */
-	background-color: #be241c; /* 버튼 배경색 */
 	color: white; /* 글자 색상 */
+	background-color: #be241c; /* 버튼 배경색 */
 	border: none; /* 테두리 제거 */
 	border-radius: 5px; /* 둥근 모서리 */
 	cursor: pointer; /* 포인터 모양 변경 */
 	transition: background-color 0.3s ease; /* 배경색 전환 */
-}
-.submitbutton {
-	text-align: center;
 }
 
 /* 중복확인 버튼 호버 효과 */
@@ -240,6 +235,10 @@ input[type="button"]:hover,
 input[type="submit"]:hover,
 input[type="reset"]:hover {
 	background-color: #8e1a14;
+}
+
+.submitbutton {
+	text-align: center;
 }
 </style>
 </head>
@@ -262,7 +261,7 @@ input[type="reset"]:hover {
 			</ul>
 		</aside>
 	</div>
-		<div class="main-container">
+		<main class="main-container">
 			<form action="faqsave" method="post" enctype="multipart/form-data">
 				<table>
 					<caption><h2>문의글 작성</h2></caption>
@@ -324,7 +323,7 @@ input[type="reset"]:hover {
 					</tr>
 				</table>
 			</form>
-		</div>
+		</main>
 	</div>	
 </body>
 </html>
