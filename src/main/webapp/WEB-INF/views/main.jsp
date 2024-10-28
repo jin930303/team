@@ -66,45 +66,7 @@
 
   }
   </style>
-   <script>
-   // 쿠키 설정 함수 (만료일을 하루로 설정)
-   function setCookie(name, value, days) {
-       const date = new Date();
-       date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000)); // 하루
-       const expires = "expires=" + date.toUTCString();
-       document.cookie = name + "=" + value + ";" + expires + ";path=/";
-   }
-
-   // 쿠키 가져오기 함수
-   function getCookie(name) {
-       const cookieArr = document.cookie.split("; ");
-       for (let i = 0; i < cookieArr.length; i++) {
-           const cookiePair = cookieArr[i].split("=");
-           if (cookiePair[0] === name) {
-               return cookiePair[1];
-           }
-       }
-       return null;
-   }
-
-   // 페이지 로드 시 쿠키를 확인하고 팝업 표시 여부 결정
-   window.onload = function() {
-       if (getCookie("hidePopup") !== "true") {
-           document.getElementById("popup").style.display = "block";
-       }
-   };
-
-   // 팝업 닫기 함수
-   function closePopup() {
-       document.getElementById("popup").style.display = "none";
-   }
-
-   // 오늘 하루 보지 않기 버튼 클릭 시 쿠키 설정 및 팝업 닫기
-   function closePopupForToday() {
-       setCookie("hidePopup", "true", 1); // 1일 동안 쿠키 유지
-       closePopup();
-   }
-   </script>
+  
 <meta charset="UTF-8">
 <title>Insert title here</title>
 </head>
@@ -207,14 +169,6 @@
         </td>
     </tr>
 </table>
-<div id="popup" class="popup-overlay">
-       <div class="popup-content">
-           <h3>팝업창 제목</h3>
-           <p>여기에 팝업 내용을 입력하세요.</p>
-           <button class="close-btn" onclick="closePopup()">닫기</button>
-           <button class="close-btn" onclick="closePopupForToday()">오늘 하루 보지 않기</button>
-       </div>
-   </div>
-</body>
 
+</body>
 </html>

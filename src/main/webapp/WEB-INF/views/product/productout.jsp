@@ -355,7 +355,6 @@
 	    <c:when test="${scg_code == 'etc007'}">
 	        <span>기타용품 > </span><span>베이스</span>
 	    </c:when>
-       
     </c:choose>
 </div>
 
@@ -510,9 +509,6 @@
         <div class="product-price"><fmt:formatNumber value="${aa.price}" type="number" groupingUsed="true"/>원</div>
     </c:otherwise>
 </c:choose>
-
-
-
         <c:choose>
             <c:when test="${loginstate eq true}">
                 <c:set var="isLiked" value="false" />
@@ -545,7 +541,6 @@
 		        <a href="login?redirect" onclick="showLoginAlert()">👍 따봉</a>
 		    </div>
 		</c:otherwise>
-		
         </c:choose>
     </div>
 </c:forEach>

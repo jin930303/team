@@ -7,7 +7,7 @@
 <meta charset="UTF-8">
 <title>장바구니</title>
 <script type="text/javascript">
-  // 선택된 상품이 없는 경우 경고 메시지 표시
+
   function validateSelection(action) {
     var checkboxes = document.getElementsByName('selectedItems');
     var selected = false;
@@ -21,10 +21,8 @@
 
     if (!selected) {
       alert("상품을 선택하세요.");
-      return false;  // 폼 전송을 막음
+      return false;  
     }
-    
-    
     
     if(action === 'delete'){
       var selectedItems = [];
@@ -43,17 +41,16 @@
           async: true,  
           success: function(response) {
             alert("선택한 상품이 삭제되었습니다.");
-            location.reload();  // 삭제 후 페이지 새로고침
+            location.reload();  
           },
           error: function(xhr, status, error) {
             alert("상품 삭제에 실패했습니다.");
           }
         });
       }
-      return false;  // 폼 전송 방지
+      return false;  
     }
     
-    // action에 따른 폼 전송
     var form = document.getElementById("cartForm");
     form.action = action === 'buy' ? 'buy' : 'delete';
     return true;
@@ -64,8 +61,7 @@
   <h1>장바구니</h1>
 
   <form id="cartForm" method="post" action="#">
-    <input type="hidden" id="loginState" value="${loginstate}"> <!-- 로그인 상태 저장 -->
-     <!-- 장바구니에 상품이 없을 경우 메시지 출력 -->
+    <input type="hidden" id="loginState" value="${loginstate}"> 
     <c:choose>
         <c:when test="${empty items}">
             <p>장바구니에 상품이 없습니다.</p>
@@ -99,7 +95,6 @@
                 </tbody>
             </table>
 
-            <!-- 구매 버튼 및 삭제 버튼 -->
             <button type="submit" onclick="return validateSelection('buy');">선택한 상품 구매</button>
             <button type="submit" onclick="return validateSelection('delete');">선택한 상품 삭제</button>
         </c:otherwise>

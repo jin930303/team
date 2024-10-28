@@ -12,19 +12,16 @@
 		var name = document.getElementById("name").value;
 		var email = document.getElementById("email").value;
 		
-
-		// 이름 입력 체크
 		if (name.trim() == "") {
 			alert('이름을 입력해주세요');
 			document.getElementById("name").focus();
-			return false; // 유효성 검사 실패 시 폼 제출 중지
+			return false; 
 		}
 
-		// 이메일 입력 체크
 		if (email.trim() == "") {
 			alert('이메일을 입력해주세요');
 			document.getElementById("email").focus();
-			return false; // 유효성 검사 실패 시 폼 제출 중지
+			return false; 
 		}
 	
 	$.ajax({

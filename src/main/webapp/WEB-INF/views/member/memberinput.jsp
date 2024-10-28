@@ -465,7 +465,7 @@ input[type="reset"]:hover {
 			    <th><strong class="star">⁕ </strong>아이디</th>
 			    <td>
 			        <div class="input-container">
-			            <input type="text" name="id" id="id" placeholder="id를 입력해주세요" maxlength="12">
+			            <input type="text" name="id" id="id" placeholder="아이디는 4자 이상 12자 이하의 영문자 또는 숫자만 가능합니다" maxlength="12">
 			            <input type="button" name="idcheck" id="idcheck" value="중복확인">
 			        </div>
 			    </td>
@@ -475,7 +475,7 @@ input[type="reset"]:hover {
                 <th><strong class="star">⁕ </strong>비밀번호</th>
                 <td colspan="2">
                     <div class="input-container">
-                        <input type="password" name="pw" id="pw" placeholder="비밀번호를 입력해주세요" maxlength="16">
+                        <input type="password" name="pw" id="pw" placeholder="비밀번호는 4자 이상 16자 이하로 영문자,숫자,특수문자를 포함해야합니다." maxlength="16">
                         <a class="togglePassword" style="cursor: pointer;"><i class="fas fa-eye-slash"></i></a>
                     </div>
                 </td>
