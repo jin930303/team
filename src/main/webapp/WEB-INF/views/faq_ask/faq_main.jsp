@@ -99,6 +99,10 @@
     border-left: 1px solid #ddd;  /*목차 - 게시판 사이 선*/
 }
 
+main h1{
+	text-align: left;
+}
+
 table {
     width: 100%; /* 테이블 너비 100% */
     margin-top: 10px; /* 상단 간격 */
@@ -206,7 +210,7 @@ table tbody tr:hover {
 	<div class="flex_container">
 		<!-- 사이드 메뉴바 -->
 		<div class="sidebar_container">
-			<div class="sidebar_title"><h2>문의 내역</h2></div>
+			<div class="sidebar_title"><h2>고객센터 홈</h2></div>
 			<aside class="sidebar">
 				<ul>
 					<li><a href="faq_community">고객센터 홈</a></li>
@@ -269,15 +273,15 @@ table tbody tr:hover {
 						<th>조회수</th>
 					</tr>
 				</thead>
+				<tbody>
 				<c:forEach items="${bestfaq}" var="bestfaq">
-					<tbody>
-						<tr onclick="location.href='faqdetail?cnum=${bestfaq.cnum}'" class="trlink">
-							<td>${bestfaq.tab}</td>
-							<td>${bestfaq.title}</td>
-							<td>${bestfaq.faqcnt}</td>
-						</tr>
-					</tbody>
+					<tr onclick="location.href='faqdetail?cnum=${bestfaq.cnum}'" class="trlink">
+						<td>${bestfaq.tab}</td>
+						<td>${bestfaq.title}</td>
+						<td>${bestfaq.faqcnt}</td>
+					</tr>
 				</c:forEach>
+				</tbody>
 			</table>
 		</main>
 	</div>
