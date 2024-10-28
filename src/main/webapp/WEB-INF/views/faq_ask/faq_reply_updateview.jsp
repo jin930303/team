@@ -4,6 +4,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+<!-- 
 <script>
 	let fileCount = 1;
 	const maxFiles = 3;
@@ -22,6 +23,8 @@
     document.getElementById('fileInputs').appendChild(newInput);
 }
 </script>
+ -->
+ 
 <title>고객센터 문의 게시판</title>
 <style type="text/css">
 /* 목차+게시판 컨테이너 */
@@ -299,11 +302,17 @@ input[type="reset"]:hover {
 				</tr>
 				<tr>
 					<th>첨부 이미지</th>
-					<td>
-						<div id="fileInputs">
-							<input type="file" name="fimage1" onclick="addFileInput()">
-						</div>
-					</td>
+					    <td>
+					    <!-- 
+					        <div id="fileInputs">
+					            <input type="file" name="fimage1" onclick="addFileInput()">
+					        </div>
+					        <button type="button" onclick="addFileInput()">이미지 추가</button>
+					     -->
+					        <input type="file" name="fimage1">
+					        <input type="file" name="fimage2">
+					    	<input type="file" name="fimage3">
+					    </td>
 				</tr>
 				<tr>
 					<td colspan="2">
