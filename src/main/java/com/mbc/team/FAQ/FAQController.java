@@ -12,6 +12,7 @@ import javax.servlet.http.HttpSession;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -639,7 +640,7 @@ public class FAQController {
 		response.setContentType("text/html;charset=utf-8");
 		PrintWriter prw=response.getWriter();
 		prw.print("<script> alert('수정이 완료되었습니다.');</script>");
-		prw.print("<script> location.href='faqout';</script>");
+		prw.print("<script> location.href='faq';</script>");
 		prw.close();
 		
 		FAQadminService fs2 = sqlSession.getMapper(FAQadminService.class);

@@ -275,7 +275,7 @@ table tbody tr:hover {
 				</thead>
 				<tbody>
 				<c:forEach items="${bestfaq}" var="bestfaq">
-					<tr onclick="location.href='faqdetail?cnum=${bestfaq.cnum}'" class="trlink">
+					<tr onclick="location.href='faq_questions_detail?cnum=${bestfaq.cnum}'">
 						<td>${bestfaq.tab}</td>
 						<td>${bestfaq.title}</td>
 						<td>${bestfaq.faqcnt}</td>

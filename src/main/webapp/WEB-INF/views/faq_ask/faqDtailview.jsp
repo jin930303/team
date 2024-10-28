@@ -5,6 +5,20 @@
 <!DOCTYPE html>
 <html>
 <head>
+<script src="https://code.jquery.com/jquery-latest.min.js"></script>
+<script>
+    function deleteFaq(cnum) {
+        if (confirm('삭제하시면 복구할 수 없습니다.\n정말로 삭제하시겠습니까?')) {
+            location.href = 'faqdelete?cnum=' + cnum;
+        }
+    }
+    
+    function delete_reply(cnum) {
+        if (confirm('삭제하시면 복구할 수 없습니다.\n정말로 삭제하시겠습니까?')) {
+            location.href = 'faq_reply_delete?cnum=' + cnum;
+        }
+    }
+</script>
 <!-- 사이드바 -->
 <style type="text/css">
 /* 목차+게시판 컨테이너 */
@@ -108,7 +122,24 @@ main h1, main h5 {
 }
 
 .caption-color {
-	background-color: #ddd;
+    background-color: #eef1f5; 
+    color: #333; /* 텍스트 색상 */
+    text-align: left;
+    padding: 20px;
+}
+
+.caption-color1 {
+    background-color: #eef1f5; 
+    color: #333; /* 텍스트 색상 */
+    text-align: left;
+    padding: 20px;
+    display: flex;
+   	align-items: center;  /* 세로 중앙 정렬 */
+}
+
+.contents {
+	display: flex;
+   	align-items: center;  /* 세로 중앙 정렬 */
 }
 
 table tr {
@@ -163,14 +194,6 @@ img {
 }
 
 </style>
-<script src="https://code.jquery.com/jquery-latest.min.js"></script>
-<script>
-    function deleteFaq(cnum) {
-        if (confirm('삭제하시면 복구할 수 없습니다.\n정말로 삭제하시겠습니까?')) {
-            location.href = 'faqdelete?cnum=' + cnum;
-        }
-    }
-</script>
 <meta charset="UTF-8">
 <title>1:1 문의 목록 상세페이지</title>
 </head>
@@ -198,15 +221,15 @@ img {
 			<div class="table-container">	
 				<table>
 					<c:forEach items="${list}" var="faq">
-						<tr class="caption-color">
+						<div class="caption-color">
 							<h1>${faq.nickname} 님의 문의 내용</h1>
 							<h5>문의 번호 : ${faq.cnum}</h5>
-						</tr>
+						</div>
 						<input type="hidden" value="${faq.cnum}" name="cnum">
 							<tr>
-								<th width="150px">문의 종류</th>
+								<th>문의 종류</th>
 								<th>제 목</th>
-								<th width="150px">문의일자</th>
+								<th>문의일자</th>
 							</tr>
 							<tr>
 								<td id="cnum">${faq.tab}</td>
@@ -260,10 +283,11 @@ img {
 					<c:choose>
 						<c:when test="${replylist ne null}">
 					
-					<tr class="caption-color"><br><h1>▶ Q&A : 답변 드립니다.</h1></tr>
+					<div class="caption-color1"><br><h1>▶ Q&A : 답변 드립니다.</h1>
+					</div>
 						<tr>
 							<th>문의 종류</th>
-							<th>제목</th>
+							<th>제 목</th>
 							<th>답변 일자</th>
 						</tr>
 						<tr>
@@ -272,10 +296,10 @@ img {
 							<td>${replylist.fdate}</td>
 						</tr>
 						<tr>
-							<td colspan="3" height="250px"><br>
+							<td colspan="3" height="250px">
 								<br> 말씀하신 문의 내용을 확인했습니다. 
 								<br> 이에 아래와 같이 답변 드리겠습니다.
-								<br> 답변 내용 : ${replylist.fcontents}
+								<br class="contents">${replylist.fcontents}
 							</td>
 						</tr>
 						<tr>
@@ -283,7 +307,10 @@ img {
 							<c:choose>
 								<c:when test="${adminloginstate == true}">
 									<input type="button" value="답변 수정" onclick="location.href='faq_reply_update1?cnum=${replylist.cnum}'">
+									<!-- 
 									<input type="button" value="답변 삭제" onclick="location.href='faq_reply_delete?cnum=${replylist.cnum}'">
+									 -->
+									<input type="button" value="답변 삭제" onclick="delete_reply(${replylist.cnum})">
 								</c:when>
 							</c:choose>
 							</td>

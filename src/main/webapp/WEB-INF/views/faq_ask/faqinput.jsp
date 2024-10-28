@@ -4,24 +4,27 @@
 <!DOCTYPE html>
 <html>
 <head>
+<!-- 
 <script>
-	let fileCount = 1;
-	const maxFiles = 3;
-		
-	function addFileInput() {
-    if (fileCount >= maxFiles) {
-	    alert("최대 3장까지 첨부 가능합니다.");
-	return;
-	}
-					
-    fileCount++;
-    const newInput = document.createElement('input');
-    newInput.type = 'file';
-    newInput.name = `fimage${fileCount}`;
-					
-    document.getElementById('fileInputs').appendChild(newInput);
-}
+    let fileCount = 1;
+    const maxFiles = 3;
+    
+    function addFileInput() {
+        if (fileCount >= maxFiles) {
+            alert("최대 3장까지 첨부 가능합니다.");
+            return;
+        }
+        
+        fileCount++;
+        const newInput = document.createElement('input');
+        newInput.type = 'file';
+        newInput.name = `fimage${fileCount}`;
+        newInput.style.display = 'block'; 
+        
+        document.getElementById('fileInputs').appendChild(newInput);
+    }
 </script>
+ -->
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>문의글 작성</title>
@@ -299,13 +302,18 @@ input[type="reset"]:hover {
 					<tr>
 					    <th>첨부 이미지</th>
 					    <td>
+					    <!-- 
 					        <div id="fileInputs">
 					            <input type="file" name="fimage1" onclick="addFileInput()">
 					        </div>
+					        <button type="button" onclick="addFileInput()">이미지 추가</button>
+					     -->
+					        <input type="file" name="fimage1">
+					        <input type="file" name="fimage2">
+					    	<input type="file" name="fimage3">
 					    </td>
 					</tr>
 					<tr>
-						<!-- 공개/비공개 체크박스 추가 -->
 					    <td>
 						    <label for="openclose">공개 여부</label>
 					    </td>
