@@ -7,7 +7,7 @@
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script type="text/javascript">
 $(document).ready(function(){
-	$(".delete-btn").click(function(e){
+	$(".delete_btn").click(function(e){
 		e.preventDefault();
 		var memberId=$(this).data("id");
 		
@@ -58,7 +58,7 @@ $(document).ready(function(){
 				<td>${my.address}</td>
 				<td>${my.email}</td>
 				<td>${my.grade_name}</td>
-				<td><button class="delete-btn" data-id="${my.id}">삭제</button></td>
+				<td><button class="delete_btn" data-id="${my.id}">삭제</button></td>
 	
 
 

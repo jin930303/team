@@ -91,8 +91,6 @@
         background-color: #f0f0f0; /* 호버 시 약간 밝아짐 */
     }
 </style>
-
-
     <script>
         function updateTotal() {
             const price = parseFloat("${dto.price}");
@@ -333,9 +331,6 @@
         </td>
     </tr>
 </c:when>
-
-                
-                
                 <c:otherwise>
                     <tr>
                         <td colspan="5">선택할 수 있는 옵션이 없습니다.</td>
@@ -362,7 +357,6 @@
         </c:choose>
     </td>
 </tr>
-
             <tr>
                 <td colspan="5">
                     <button type="button" class="button" onclick="buyNow()">바로구매</button>

@@ -20,10 +20,10 @@
 		        success: function(data) {
 		            if (data == "ok") {
 		                alert("사용 가능한 닉네임입니다.");
-		                isNicknameAvailable = true;  // 중복 확인 성공 시 true 설정
+		                isNicknameAvailable = true;  
 		            } else {
 		                alert("이미 사용중인 닉네임입니다.");
-		                isNicknameAvailable = false;  // 중복 확인 실패 시 false 설정
+		                isNicknameAvailable = false;  
 		            }
 		        }
 		    });
@@ -32,7 +32,7 @@
 		 $("#phonecheck").click(function() {
 	            var phone1 = $("#phone1").val();
 	            var phone2 = $("#phone2").val();
-	            var phoneRegex = /^[0-9]{4}$/; // 전화번호 형식 체크 (4자리 숫자)
+	            var phoneRegex = /^[0-9]{4}$/; 
 
 	            if (!phoneRegex.test(phone1) || !phoneRegex.test(phone2)) {
 	                alert('전화번호는 4자리 숫자만 가능합니다.');
@@ -40,20 +40,20 @@
 	                return;
 	            }
 
-	            var fullPhone = "010-" + phone1 + "-" + phone2; // 전체 전화번호 조합
+	            var fullPhone = "010-" + phone1 + "-" + phone2; 
 
 	            $.ajax({
 	                type: "post",
-	                url: "phonecheck1", // 서버에서 처리할 URL
+	                url: "phonecheck1", 
 	                data: { "phone": fullPhone },
 	                async: true,
 	                success: function(data) {
 	                    if (data == "ok") {
 	                        alert("사용 가능한 전화번호입니다.");
-	                        isPhoneAvailable = true; // 전화번호 사용 가능 플래그
+	                        isPhoneAvailable = true; 
 	                    } else {
 	                        alert("이미 사용중인 전화번호입니다.");
-	                        isPhoneAvailable = false; // 전화번호 사용 불가 플래그
+	                        isPhoneAvailable = false; 
 	                        $("#phone1").focus();
 	                    }
 	                }
@@ -90,7 +90,7 @@
 	
 	function check(){
 		var pw = $("#pw").val();
-		var pwRegex = /^(?=.*[a-zA-Z])(?=.*[0-9])(?=.*[!@#$%^&*])[A-Za-z\d!@#$%^&*]{4,16}$/; // 영문자, 숫자, 특수문자 포함
+		var pwRegex = /^(?=.*[a-zA-Z])(?=.*[0-9])(?=.*[!@#$%^&*])[A-Za-z\d!@#$%^&*]{4,16}$/; 
 		var koreanRegex = /^[가-힣]+$/;  
 	    var name = $("#name").val();
 	    var phone1 = $("#phone1").val();

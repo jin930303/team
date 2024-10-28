@@ -161,7 +161,6 @@ function updateScgCode() {
         </select>
     </td>
 </tr>
-
 <tr><th>상품이름</th><td><input type="text" name="product" value="${dto.product}"></td></tr>
 <tr><th>상품가격</th><td><input type="number" name="price" value="${dto.price}"></td></tr>
 <tr>
@@ -186,8 +185,6 @@ function updateScgCode() {
         <input type="button" value="취소" onclick="history.back();">
     </td>
 </tr>
-
-
 </table>
 </form>
 </body>
