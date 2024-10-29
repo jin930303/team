@@ -9,104 +9,104 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Do+Hyeon&family=Gowun+Batang&family=Nanum+Gothic&family=Song+Myung&display=swap" rel="stylesheet">
     <meta charset="UTF-8">
-    <title>관심상품</title>
     
-    <style>
-        .title{
-        font-family: "Nanum Gothic", sans-serif;
-        }
-     
-        /* 상품 배열 하는거 */
-        .product-container {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-            gap: 30px; 
-            max-width: 1200px; 
-            margin: 0 auto;
-        }
-        /* 상품 테두리 */
-        .product {
-            border: 1px solid #ddd;
-            padding: 16px;
-            text-align: center;
-            background-color: #f9f9f9; 
-            border-radius: 8px; 
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1); 
-            transition: transform 0.2s; 
-        }
+<style>
+ 
+    .h1 {
+        font-family: "Nanum Gothic", sans-serif; /* 폰트 설정 */
+        text-align: center; /* 제목을 중앙 정렬 */
+        color: black; /* 제목 색상을 검은색으로 설정 */
+        margin-bottom: 20px; /* 아래 여백 설정 */
+        font-weight: bold; /* 글씨를 굵게 설정 */
+    }
 
-        .product:hover {
-            transform: scale(1.02); /* 마우스 오버 시 크기 증가 */
-        }
+    .product-container {
+        display: grid; /* 그리드 레이아웃 사용 */
+        grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); /* 자동으로 열을 채움 */
+        gap: 30px; /* 상품 간 간격 */
+        max-width: 1200px; /* 최대 너비 설정 */
+        margin: 0 auto; /* 중앙 정렬 */
+    }
 
-        /* 이미지 크기 설정 */
-        .product img {
-            width: 200px; 
-            height: 200px;
-            object-fit: cover;
-        }
+    .product {
+        border: 1px solid #ddd; /* 테두리 색상 */
+        padding: 16px; /* 내부 여백 설정 */
+        text-align: center; /* 텍스트 중앙 정렬 */
+        background-color: #f9f9f9; /* 배경색 설정 */
+        border-radius: 8px; /* 모서리 둥글게 */
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1); /* 그림자 효과 */
+        transition: transform 0.2s; /* 크기 변화 애니메이션 */
+    }
 
-        /* 상품명 스타일 */
-        .product-title {
-            font-family: "Nanum Gothic", sans-serif;
-            font-weight: 300; /* 얇은 두께 설정 */
-            font-size: 15px; 
-            margin: 15px 0;
-            text-align: left; /* 왼쪽 정렬 */
-        }
+    .product:hover {
+        transform: scale(1.02); /* 마우스 오버 시 크기 증가 */
+    }
 
-        /* 가격 스타일 */
-        .product-price {
-            font-family: "Nanum Gothic", sans-serif;
-            color: #d32f2f;
-            font-size: 15px; 
-            margin: 10px 0;
-            text-align: left; /* 왼쪽 정렬 */
-        }
+    .product img {
+        width: 200px; /* 이미지 너비 */
+        height: 200px; /* 이미지 높이 */
+        object-fit: cover; /* 비율에 맞게 크기 조정 */
+    }
+
+    .product-title {
+        font-family: "Nanum Gothic", sans-serif; /* 폰트 설정 */
+        font-weight: 300; /* 얇은 두께 설정 */
+        font-size: 15px; /* 폰트 크기 */
+        margin: 15px 0; /* 여백 설정 */
+        text-align: left; /* 왼쪽 정렬 */
+    }
+
+    .product-price {
+        font-family: "Nanum Gothic", sans-serif; /* 폰트 설정 */
+        color: #d32f2f; /* 가격 색상 설정 */
+        font-size: 15px; /* 폰트 크기 */
+        margin: 10px 0; /* 여백 설정 */
+        text-align: left; /* 왼쪽 정렬 */
+    }
+
+    /* 전체 선택 버튼 스타일 */
     #selectAllButton {
-        padding: 10px 20px;
-        border: none;
-        border-radius: 5px;
+        padding: 10px 20px; /* 내부 여백 설정 */
+        border: none; /* 테두리 제거 */
+        border-radius: 5px; /* 모서리 둥글게 */
         background-color: #d3d3d3; /* 연한 회색 배경 */
         color: black; /* 검정색 텍스트 */
-        cursor: pointer;
-        transition: background-color 0.3s;
+        cursor: pointer; /* 포인터 커서 */
+        transition: background-color 0.3s; /* 배경색 변화 애니메이션 */
         font-size: 15px; /* 폰트 크기 */
-        margin-right: 10px; /* 간격 조정 */
+        margin-right: 10px; /* 오른쪽 여백 설정 */
     }
 
     #selectAllButton:hover {
         background-color: #c0c0c0; /* 호버 시 조금 어두운 회색 */
     }
-        /* 선택 삭제 버튼 스타일 */
-        input[type="submit"] {
-            padding: 10px 20px;
-            border: none;
-            border-radius: 5px;
-            background-color: black; /* 배경색 설정 */
-            color: white; /* 텍스트 색상 */
-            cursor: pointer;
-            transition: background-color 0.3s;
-        }
 
-        input[type="submit"]:hover {
-            background-color: #333; /* 호버 시 색상 변화 */
-        }
-        
-         .divider1 {   /* 상품 경계선 */  
-	    border: none; 
-	    border-top: 1px solid #ddd; 
-	    width: 65%;  
-	    margin: 20px auto; 
-	    margin-top: 20px;
-	    margin-bottom: 45px;  
-	    }  
-    
+    input[type="submit"] {
+        padding: 10px 20px; /* 내부 여백 설정 */
+        border: none; /* 테두리 제거 */
+        border-radius: 5px; /* 모서리 둥글게 */
+        background-color: black; /* 배경색 설정 */
+        color: white; /* 텍스트 색상 */
+        cursor: pointer; /* 포인터 커서 */
+        transition: background-color 0.3s; /* 배경색 변화 애니메이션 */
+    }
+
+    input[type="submit"]:hover {
+        background-color: #333; /* 호버 시 색상 변화 */
+    }
+
+    .divider1 {  
+        border-top: 1px solid #ddd; /* 상단 테두리 설정 */
+        width: 65%; /* 너비 설정 */
+        margin: 30px auto; /* 위아래 여백 설정, 중앙 정렬 */
+    }  
+
     .button-container {
-      margin-top: 40px; /* 상품 출력 부분과의 간격 */
+        margin-top: 40px; /* 상품 출력 부분과의 간격 */
     }
     
-    </style>
+</style>
+
     
     <script>
         // 선택 삭제 확인

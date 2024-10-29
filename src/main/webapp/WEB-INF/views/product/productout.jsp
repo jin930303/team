@@ -10,6 +10,7 @@
 <meta charset="UTF-8">
 <title>Product Grid</title>
 <style>
+
     .product-container {   /*상품 배열 하는거*/
         display: grid;
         grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); 
@@ -39,7 +40,7 @@
     }
 
    .product-title {    
-    font-family: 'Roboto', sans-serif; /* Roboto 폰트 적용 */
+    font-family: "Noto Sans KR", sans-serif;
     font-weight: 300; /* 얇은 두께 설정 */
     font-size: 15px; 
     margin: 15px 0;
@@ -47,9 +48,9 @@
 }
     
     .product-price {     /* 가격 폰트 설정 */  
-    font-family: 'Roboto', sans-serif; /* Roboto 폰트 적용 */
+        font-family: "Noto Sans KR", sans-serif;
+        font-size: 15px;
         color: #d32f2f;
-        font-size: 15px; 
         margin: 10px 0;
         text-align: left; /* 왼쪽 정렬 추가 */
     }
@@ -87,6 +88,7 @@
     margin-top: 5px;
     margin-bottom: 45px;  
     }
+    
      .divider2 {   /* 상품 경계선 */  
     border: none; 
     border-top: 1px solid #ddd; 
@@ -95,17 +97,8 @@
     margin-top: -5px;
     margin-bottom: 18px;   
     }
-    
-.divider3 {   /* 상품 경계선 */  
-    border: none; 
-    border-top: 2px solid #ddd; 
-    width: 65%;  
-    margin: 20px auto; 
-    margin-top: -20px;
-    margin-bottom: 80px;  
-}
 
-.divider4 {   /* 상품 경계선 */  
+.divider3 {   /* 상품 경계선 */  
    border: none; 
     border-top: 1px solid #ddd; 
     width: 65%;  
@@ -148,7 +141,7 @@
     }
 
 .category-title {
- font-family: 'Roboto', sans-serif; /* Roboto 폰트 적용 */
+    font-family: "Noto Sans KR", sans-serif;
     font-size: 24px; /* 제목 크기 설정 */
     font-weight: bold; /* 굵게 설정 */
     text-align: center; /* 중앙 정렬 */
@@ -358,7 +351,7 @@
     </c:choose>
 </div>
 
-<hr class="divider4"> <!-- 경계선 추가 -->
+<hr class="divider3"> <!-- 경계선 추가 -->
 
 <div class="category-container">
     <nav>
