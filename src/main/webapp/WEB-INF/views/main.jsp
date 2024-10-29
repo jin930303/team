@@ -24,7 +24,7 @@
 
 
 <% 
-    Boolean loginState = (Boolean) session.getAttribute("loginstate");
+    Boolean loginState = (Boolean) session.getAttribute("loginstate")||(Boolean) session.getAttribute("adminloginstate");
     System.out.println("Login state in main.jsp: " + loginState);
 %>
   <style>

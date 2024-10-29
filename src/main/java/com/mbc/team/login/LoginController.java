@@ -77,7 +77,7 @@ public class LoginController {
 		            // 관리자 권한 확인
 		            if ("001".equals(dto3.getAuth())) {
 		                hs.setAttribute("adminloginstate", true);
-		                pww.print("<script> alert('관리자 로그인에 성공하였습니다...!');</script>");
+		                pww.print("<script> alert('관리자님 반갑습니다!');</script>");
 		                pww.print("<script> location.href='main';</script>");
 		                pww.flush();
 		                return "redirect:/main";
@@ -119,7 +119,7 @@ public class LoginController {
 	        response.setContentType("text/html;charset=utf-8");
 	        PrintWriter pww = response.getWriter();
 	        pww.print("<script> alert('로그인 후 이용해주세요.');</script>");
-	        pww.print("<script> location.href='/login';</script>");
+	        pww.print("<script> location.href='/team/login';</script>");
 	        pww.flush();
 	        return null;
 	    }
