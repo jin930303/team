@@ -28,7 +28,6 @@ function check(){
         $('#email').focus();
         return false; 
     }
-
     return true; 
 }
 </script>

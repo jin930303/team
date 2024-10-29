@@ -94,7 +94,6 @@
                     </c:forEach>
                 </tbody>
             </table>
-
             <button type="submit" onclick="return validateSelection('buy');">선택한 상품 구매</button>
             <button type="submit" onclick="return validateSelection('delete');">선택한 상품 삭제</button>
         </c:otherwise>

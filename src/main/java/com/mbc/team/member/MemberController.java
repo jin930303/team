@@ -22,10 +22,14 @@ public class MemberController {
 	SqlSession sqlSession;
 
 	@RequestMapping(value = "/mypage")
-	public String mypage() {return "mypage";}
+	public String mypage() {
+		
+		return "mypage";
+	}
 	
 	@RequestMapping(value = "/memberinput")
 	public String member() {
+		
 		return "memberinput";
 	}
 
@@ -65,18 +69,20 @@ public class MemberController {
 	
 	@ResponseBody
 	@RequestMapping(value = "/memberdelete")
-	public String memberdelete(Model mo,@RequestParam("id") String id) {
+	public String memberdelete(Model mo,HttpServletRequest request) {
+		
+		String id=request.getParameter("id");
 		MemberService ms = sqlSession.getMapper(MemberService.class);
 		 try {
 	           ms.memberdelete(id);
-	            return "success";  
-	        } catch (Exception e) {
+	            return "success";
+ 
+	        } 
+		 catch (Exception e) {
+			 
 	            return "fail";  
 	        }
 	    }
-	
-	
-	
 	
 	@ResponseBody
 	@RequestMapping(value = "/idcheck1")
@@ -119,16 +125,14 @@ public class MemberController {
 
 	@RequestMapping(value = "/phonecheck1", method = RequestMethod.POST)
 	@ResponseBody
-	public String phoneCheck(@RequestParam("phone") String phone) {
-		// 전화번호 중복 확인 로직
+	public String phoneCheck(HttpServletRequest request) {
+		String phone=request.getParameter("phone");
 		MemberService ms = sqlSession.getMapper(MemberService.class);
 		int count = ms.phonecheck(phone);
-
 		if (count == 0) {
-			return "ok"; // 사용 가능한 전화번호
+			return "ok"; 
 		} else {
-			return "notok"; // 사용 중인 전화번호
+			return "notok"; 
 		}
 	}
-
 }

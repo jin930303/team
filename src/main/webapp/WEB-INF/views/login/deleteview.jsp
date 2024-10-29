@@ -20,15 +20,12 @@ function confirmdelete(id){
 <title>Insert title here</title>
 </head>
 <body>
-	
-	
 	<table border="6" align="center">
 		<caption>${deleteview.nickname}님의회원삭제 정보</caption>
 		<tr>
 			<th>당신의 현재 등급은</th>
 			<td>${deleteview.grade}입니다.</td>
 		</tr>
-		
 		<tr>
 			<td colspan="2">
 			<input type="button" value="삭제" onclick="confirmdelete('${deleteview.id}')"> 

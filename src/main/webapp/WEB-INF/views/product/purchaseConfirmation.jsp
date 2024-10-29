@@ -9,9 +9,7 @@
 </head>
 <body>
     <h1>구매가 완료되었습니다!</h1>
-
     <p>선택하신 상품이 성공적으로 구매되었습니다. 감사합니다!</p>
-
     <table>
         <thead>
             <tr>
@@ -24,7 +22,6 @@
             </tr>
         </thead>
         <tbody>
-            <!-- 구매된 상품 목록 표시 -->
             <c:forEach var="item" items="${purchasedItems}">
                 <tr>
                     <td>${item.product}</td>
@@ -37,9 +34,7 @@
             </c:forEach>
         </tbody>
     </table>
-
     <p>총 금액: <strong>${totalPrice}원</strong></p>
-
     <a href="${pageContext.request.contextPath}/main">메인 페이지로 돌아가기</a>
 </body>
 </html>

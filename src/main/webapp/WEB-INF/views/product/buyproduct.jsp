@@ -2,6 +2,14 @@
 <!DOCTYPE html>
 <html>
 <head>
+<script type="text/javascript">
+function confirmproduct(){
+	if(confirm("구매를 확정하시겠습니까?")){
+		alert("구매가 완료 되었습니다.");
+		location.href="/team/main";
+	}
+}
+</script>
     <meta charset="UTF-8">
     <title>구매 확인 페이지</title>
 </head>
@@ -30,6 +38,6 @@
         </tr>
     </table>
     <br>
-    <button onclick="location.href='/team/confirmPurchase'">구매 확정</button>
+    <button onclick="confirmproduct()">구매 확정</button>
 </body>
 </html>

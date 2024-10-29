@@ -151,7 +151,6 @@
 	        }
 	        return true;
 	}
-	
 </script>
 <meta charset="UTF-8">
 <title>Insert title here</title>
@@ -161,21 +160,23 @@
 		<table border="6" align="center" width="auto">
 			<caption>수정화면</caption>
 			<tr>
-				<td><input type="text" name="id" id="id" readonly
-					value="${updateview.id}"></td>
+				<td>
+					<input type="text" name="id" id="id" readonly value="${updateview.id}">
+				</td>
 			</tr>
 			<tr>
-				<td><input type="password" name="pw" id="pw" maxlength="16"
-					placeholder="비밀번호를 입력해주세요" ></td>
+				<td>
+					<input type="password" name="pw" id="pw" maxlength="16" placeholder="비밀번호를 입력해주세요" >
+				</td>
 			</tr>
 			<tr>
 				<td><input type="text" name="name" id="name" placeholder="이름을 입력해주세요"></td>
 			</tr>
-		<tr>
-				<td><input type="text" name="nickname" id="nickname"
-					placeholder="닉네임을 입력해주세요" value="${updateview.nickname}"> <input
-					type="button" name="nicknamecheck" id="nicknamecheck1"
-					value=" 중복확인"></td>
+			<tr>
+				<td>
+					<input type="text" name="nickname" id="nickname" placeholder="닉네임을 입력해주세요" 
+					value="${updateview.nickname}"> 
+					<input type="button" name="nicknamecheck" id="nicknamecheck1" value=" 중복확인"></td>
 			</tr>
 			<tr>
 				<td><input type="date" name="birth" id="birth" value="${updateview.birth}"></td>

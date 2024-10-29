@@ -10,9 +10,7 @@
 	</insert>
 	
 	<select id="memberout" resultType="com.mbc.team.member.MemberDTO">
-		 select m.*, mg.grade_name
-    FROM member m
-    JOIN member_grade mg ON m.grade_code = mg.grade_code
+		 select m.*, mg.grade_name from member m join member_grade mg on m.grade_code = mg.grade_code
 	</select>
 	
 	<select id="idcheck" resultType="int">
@@ -38,6 +36,5 @@
 	<delete id="memberdelete">
 	delete from member where id=#{id}
 	</delete>
-	
 	
 </mapper>

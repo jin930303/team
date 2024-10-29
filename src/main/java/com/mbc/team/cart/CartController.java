@@ -108,10 +108,15 @@ public class CartController {
 	}
 
 	@RequestMapping(value = "/buydirectitem", method = RequestMethod.POST)
-	public String buydirectitem(@RequestParam("itemnum") Long itemnum, @RequestParam("count") int count,
-			@RequestParam("op1") String op1, @RequestParam("product") String product,
-			@RequestParam("image1") String image1, @RequestParam("price") int price, HttpSession hs, Model mo) {
-
+	public String buydirectitem(HttpSession hs, Model mo, HttpServletRequest request) {
+		int itemnum=Integer.parseInt(request.getParameter("itemnum"));
+		int count=Integer.parseInt(request.getParameter("count"));
+		int price=Integer.parseInt(request.getParameter("price"));
+		String op1=request.getParameter("op1");
+		String product=request.getParameter("product");
+		String image1=request.getParameter("image1");
+		
+		
 		System.out.println("ItemNum: " + itemnum);
 		System.out.println("Price: " + price);
 		System.out.println("Product: " + product);
@@ -132,13 +137,13 @@ public class CartController {
 
 	@RequestMapping("/buy")
 	public String buySelectedItems(@RequestParam("selectedItems") List<String> selectedItems, HttpSession hs,
-			Model mo) {
+			Model mo, HttpServletRequest request) {
 
 		LoginDTO dto3 = (LoginDTO) hs.getAttribute("dto3");
 		String id = dto3.getId();
 		System.out.println("아이디 : " + id);
 		CartService cs = sqlSession.getMapper(CartService.class);
-		List<CartItem> cart = cs.getCartItemsByUserId(id);
+		List<CartItem> cart = cs.getCartItems(id);
 
 		if (cart == null || selectedItems == null || selectedItems.isEmpty()) {
 			mo.addAttribute("errorMessage", "선택한 상품이 없습니다.");
@@ -153,7 +158,7 @@ public class CartController {
 				purchasedItems.add(item);
 				totalPrice += item.getPrice() * item.getCount();
 				System.out.println("ID: " + id + ", ItemNum: " + item.getItemnum());
-				cs.deleteCartItemByUserIdAndItemNum(id, item.getItemnum());
+				cs.deleteCartItem(id, item.getItemnum());
 			}
 		}
 
