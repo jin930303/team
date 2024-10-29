@@ -57,15 +57,9 @@ public class ProductController {
 	
 		@RequestMapping(value = "productout", method = RequestMethod.GET)  //상품 정보 출력
 		public String lte3(Model mo, HttpServletRequest request) {
-			HttpSession hs = request.getSession();
-			LoginDTO dto3 = (LoginDTO) hs.getAttribute("dto3");
-			String loginid=dto3.getId();
 			ProductService ps = sqlSession.getMapper(ProductService.class);
 			ArrayList<ProductDTO> list = ps.outa();
-			ArrayList<LikeDTO> like = ps.outb(loginid);
 			mo.addAttribute("list", list);
-			mo.addAttribute("like", like);
-			System.out.println(like);
 			return "productout";
 		}
 	

@@ -14,6 +14,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.mbc.team.Like.LikeDTO;
+import com.mbc.team.login.LoginDTO;
 import com.mbc.team.product.ProductDTO;
 import com.mbc.team.product.ProductService;
 
@@ -40,11 +42,13 @@ public class HomeController {
 	
 	@RequestMapping(value = "/main", method = RequestMethod.GET)
 	public String main(Model mo, HttpServletRequest request) {
-	    ProductService ps = sqlsession.getMapper(ProductService.class);
-	    ArrayList<ProductDTO> list = ps.outmainbest();
+		ProductService ps = sqlsession.getMapper(ProductService.class);
+		ArrayList<ProductDTO> list = ps.outmainbest();
 	    ArrayList<ProductDTO> list1 = ps.outmainnew();
+	    ArrayList<ProductDTO> list2 = ps.outmainsale();
 	    mo.addAttribute("list", list);
 	    mo.addAttribute("list1", list1);
+	    mo.addAttribute("list2", list2);
 	    return "main";
 	}
 }

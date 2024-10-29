@@ -9,13 +9,11 @@ public interface ProductService  {
 
 	ArrayList<ProductDTO> outa();
 	
-	ArrayList<LikeDTO> outb(String loginid);
-
 	ProductDTO detail(int itemnum);
 
 	ArrayList<ProductDTO> outmainbest();
-	
 	ArrayList<ProductDTO> outmainnew();
+	ArrayList<ProductDTO> outmainsale();
 
 	ArrayList<ProductDTO> arbat(String scg_code);
 	
@@ -39,6 +37,8 @@ public interface ProductService  {
 	ArrayList<ProductDTO> salea();
 
 	ArrayList<ProductDTO> searchItem(String search);
+
+	
 
 
 

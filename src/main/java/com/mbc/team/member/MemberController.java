@@ -20,6 +20,7 @@ public class MemberController {
 
 	@Autowired
 	SqlSession sqlSession;
+	MemberService ms;
 
 	@RequestMapping(value = "/mypage")
 	public String mypage() {
@@ -52,7 +53,7 @@ public class MemberController {
 		String detailaddress = request.getParameter("detailaddress");
 		String extraaddress = request.getParameter("extraaddress");
 		String address = mainaddress + detailaddress + extraaddress;
-		MemberService ms = sqlSession.getMapper(MemberService.class);
+		ms = sqlSession.getMapper(MemberService.class);
 		ms.memberinput(id, nickname, pw, name, birth, phone, address, email);
 
 		return "redirect:/main";
@@ -60,7 +61,7 @@ public class MemberController {
 	
 	@RequestMapping(value = "/memberout")
 	public String memberout(Model mo) {
-		MemberService ms = sqlSession.getMapper(MemberService.class);
+		ms = sqlSession.getMapper(MemberService.class);
 		ArrayList<MemberDTO>list=ms.memberout();
 		mo.addAttribute("list",list);
 		
@@ -72,7 +73,7 @@ public class MemberController {
 	public String memberdelete(Model mo,HttpServletRequest request) {
 		
 		String id=request.getParameter("id");
-		MemberService ms = sqlSession.getMapper(MemberService.class);
+		ms = sqlSession.getMapper(MemberService.class);
 		 try {
 	           ms.memberdelete(id);
 	            return "success";
@@ -88,7 +89,7 @@ public class MemberController {
 	@RequestMapping(value = "/idcheck1")
 	public String member2(HttpServletRequest request) {
 		String id = request.getParameter("id");
-		MemberService ms = sqlSession.getMapper(MemberService.class);
+		ms = sqlSession.getMapper(MemberService.class);
 		int count = ms.idcheck(id);
 		if (count == 0) {
 			return "ok";
@@ -101,7 +102,7 @@ public class MemberController {
 	@RequestMapping(value = "/nicknamecheck1")
 	public String member3(HttpServletRequest request) {
 		String nickname = request.getParameter("nickname");
-		MemberService ms = sqlSession.getMapper(MemberService.class);
+		ms = sqlSession.getMapper(MemberService.class);
 		int count = ms.nicknamecheck(nickname);
 		if (count == 0) {
 			return "ok";
@@ -114,7 +115,7 @@ public class MemberController {
 	@RequestMapping(value = "/emailcheck1")
 	public String member4(HttpServletRequest request) {
 		String email = request.getParameter("email");
-		MemberService ms = sqlSession.getMapper(MemberService.class);
+		ms = sqlSession.getMapper(MemberService.class);
 		int count = ms.emailcheck(email);
 		if (count == 0) {
 			return "ok";
@@ -127,7 +128,7 @@ public class MemberController {
 	@ResponseBody
 	public String phoneCheck(HttpServletRequest request) {
 		String phone=request.getParameter("phone");
-		MemberService ms = sqlSession.getMapper(MemberService.class);
+		ms = sqlSession.getMapper(MemberService.class);
 		int count = ms.phonecheck(phone);
 		if (count == 0) {
 			return "ok"; 

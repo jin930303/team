@@ -38,10 +38,9 @@ body {
 /* header 전체 */
 .navbar-inverse {
 	font-family: 'Noto Sans KR', sans-serif;
-	font-size: 18px;
 	background-color: rgba(255, 255, 255, 0.5) !important;
 	border-color: rgba(255, 255, 255, 0.5) !important;
-	border-bottom: 2px solid #94c3ef !important;
+	border-bottom: 2px solid #be241c !important;
 }
 
 /* header 내 링크 section */
@@ -67,13 +66,28 @@ body {
 /* 야구용품 */
 .container-head {
 	display: flex;
-	font-size: 60px;
+	font-size: 60px !important;
 	justify-content: center;
 	align-items: center;
 	color: black;
 }
 
+.navbar-header {
+	background-image: url("./image/야구공 수정.png");
+	background-size : 700px 120px;
+	background-repeat: no-repeat;
+	background-position : center;
+	display: flex;
+	font-size: 60px !important;
+	justify-content: center;
+	align-items: center;
+	color: black;
+	width: 100%;
+	height: 120px;
+}
+
 .container-fluid {
+	font-size: 18px;
 	display: flex;
 	justify-content: center;
 }
@@ -165,7 +179,7 @@ body {
 
 		<div class="container-head">
 			<div class="navbar-header">
-				<a class="navbar-brand" href="main">야구용품</a>
+				<a class="navbar-brand" href="main" style="font-size:60px; color: black;">스윙스</a>
 			</div>
 		</div>
 
