@@ -94,13 +94,18 @@ body {
 
 		<div class="container-log" style="text-align: left;">
 			<ul class="nav navbar-nav navbar-left">
-
 				<c:choose>
 					<c:when test="${loginstate==true}">
-						<li><a href="#">${sessionScope.dto3.nickname} 님 반갑습니다.</a></li>
+					<li><a href="#">
+            		<c:choose>
+                	<c:when test="${not empty sessionScope.kakaoname}">  
+                	${sessionScope.kakaoname} 님 반갑습니다.</c:when>
+                <c:otherwise>  
+                ${sessionScope.dto3.nickname} 님 반갑습니다. 
+                </c:otherwise>
+            		</c:choose> </a> </li>
 						<li><a href="logout">로그아웃</a></li>
 						<li><a href="myinfo">마이페이지</a></li>
-
 						<!-- 로그인 상태에서만 접근 가능하도록 카트 링크 처리 -->
 						<c:choose>
 							<c:when test="${loginstate == true}">
