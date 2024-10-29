@@ -65,3 +65,47 @@ UI/UX 설계 / 상품DB관리 / 상품 CRUD / 상품페이지 / 상품상세페�
 ![git](https://img.shields.io/badge/Git-F05032?style=for-the-badge&logo=git&logoColor=white)
 ![github](https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white)
 
+<details>
+<summary><b>백엔드</summary>
+<div markdown="1">
+<ul>
+  <li>JAVA 11</li>
+  <li>Spring MVC</li>
+  <li>JSP</li>
+  <li>MyBatis</li>
+  <li>AJAX</li>
+  <li>JSON</li>
+</ul>
+</div>
+</details>
+ <details>
+<summary><b> 프론트엔드</b></summary>
+<ul>
+  <li>HTML</li>
+  <li>CSS</li>
+  <li>JavaScript</li>
+  <li>JQuery</li>
+</ul>
+</details>
+<details>
+<summary><b> DB & WAS</b></summary>
+<ul>
+  <li>Oracle(Oracle Database 11g Express Edition Release 11.2.0)</li>
+  <li>Tomcat 9(9.0.93)</li>
+</ul>
+</details>
+<details>
+<summary><b> Environment & Tool</b></summary>
+<ul>
+  <li>Windows 11</li>
+  <li>STS(3.9.18)</li>
+  <li>Git</li>
+  <li>GitHub</li>
+  <li>Fork</li>
+  <li>Oracle SQL Developer</li>
+</ul>
+</details>
+ 
+주요기능소개
+----------
+**메인화면**
