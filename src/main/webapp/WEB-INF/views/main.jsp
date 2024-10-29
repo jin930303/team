@@ -75,36 +75,44 @@
   }
 
 	.product-container-total {   /*상품 전체 컨테이너*/
-        border: 1px solid #ddd;
+        border: none;
         margin: 0 auto;
 		width:70%;
-		border-radius: 8px; 
-		box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1); 
-		transition: transform 0.2s;
 		margin-bottom:50px; 
     }
 
 	.product-container-title {   /*타이틀*/
+		border-bottom:3px solid #be241c;
 		font-family: "Noto Sans KR", sans-serif; /* 상세 설명 폰트 설정 */
         display: grid;
         grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); 
-		width:70%;
 		font-size: 30px;
 		padding-top:10px; 
 		padding-left:25px;
-		padding-bottom:15px;
+		padding-bottom:8px;
 		text-align:left;
     }
     
 	.product-container-more {   /*더보기*/
 		font-family: "Noto Sans KR", sans-serif; /* 상세 설명 폰트 설정 */
 		font-size: 18px;
-		padding-top:15px; 
+		color: #be241c;
+		padding-top:15px;
 		padding-bottom:20px;
 		margin-right:0 auto;
     }
+    
+	.product-container-more a {
+		color: #be241c;
+		text-decoration: none; /* 밑줄 제거 */
+	}
+	
+	.product-container-more a:hover {
+	    color: #d9534f; /* 마우스 오버 시 색상 */
+	}
 
       .product-container {   /*상품 배열 하는거*/
+		padding-top:30px; 
         display: grid;
         grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); 
         gap: 30px; 
