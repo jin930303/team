@@ -73,7 +73,7 @@
 }
 
 
-.kborank table tr:hover {
+.kborank table tbody tr:hover {
 	background-color: #f9f4f4;
 	border-bottom: 1.5px solid #be241c;
 }
@@ -133,7 +133,6 @@
 
 .main-container {
 	flex: 1;
-	/*width: 100%;*/
     max-width: 1000px;
     padding: 20px;
     padding-left: 60px;
@@ -146,44 +145,91 @@ main h1{
 	text-align: left;
 }
 
-.main-container table {
-    width: 100%; /* 테이블 너비 100% */
-    margin-top: 10px; /* 상단 간격 */
-    border-collapse: collapse; /* 테이블 경계 겹치지 않도록 */
+.mian-container table {
+    table-layout: fixed; /* 모든 td의 가로 크기를 동일하게 설정 */
+    width: 100%; /* 테이블의 전체 너비 설정 */
+}
+
+.event-container {
+    width: 30%; /* 3개가 나란히 배치될 수 있도록 30%로 설정 */
+    margin: 10px; /* 각 이벤트 박스 사이 간격 */
+    padding: 14px;
+    box-sizing: border-box;
     text-align: center;
+    cursor: pointer; /* 클릭 가능하게 설정 */
 }
 
-.main-container table tr th, 
-.main-container table tr td {
-    padding: 15px;
-    text-align: center; /* 모든 셀의 정렬을 왼쪽으로 */
-    vertical-align: middle; /* 수직 가운데 정렬 */
-    border: none;
+.eventbox { 
+	width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border: 1px solid #ddd;
+    border-radius: 8px; /* 부드러운 모서리 */
+    overflow: hidden;
+    transition: transform 0.3s, box-shadow 0.3s, border-color 0.2s;
 }
 
-/* tr 사이 선*/
-.main-container table tr{
-	padding: 28px;
-	border-bottom: 1px solid #ddd;
-	transition: border-bottom 0.3s ease;
-	transition: background-color 0.3s ease;
+.eventbox:hover {
+	transform: scale(1.02); 
+	box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1); 
+	border: 1px solid #be241c;
 }
 
-.main-container table tr:last-child {
-	border-bottom: none;
+.eventimage { 
+	position: relative; /* strong 태그의 위치 기준을 설정 */
+    width: 100%; /* 이미지를 박스에 맞추기 */
+    height: 150px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    background-color: #f9f9f9; /* 빈 공간을 보완할 배경색 */
 }
 
-/* 게시판 th td 배경 */
-.main-container th {
-	background-color: #f4f4f4;
+.eventimage img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* 이미지가 박스 안에 꽉 차도록 */
+    object-position: center; /* 이미지가 중앙에 맞춰지도록 */
 }
 
-.main-container table tbody tr:hover {
-	background-color: #f9f4f4;
-	border-bottom: 1.5px solid #be241c;
-	cursor: pointer;
+.eventtitle {
+    padding: 18px;
+    font-size: 1em;
+    max-height: 3em; /* 2줄 제한 */
+    font-weight: bold;
+    color: #333;
+    text-align: center;
+    line-height: 1.4;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
 }
 
+.eventimage strong {
+	position: absolute;
+    top: 0; /* 이미지 상단에서 8px 내려오게 */
+    left: 0; /* 이미지 오른쪽에서 8px 왼쪽으로 이동 */
+    background-color: rgba(190, 36, 28, 0.8); /* 배경색 추가 */
+    color: #fff; /* 상태 강조 색상 */
+    font-size: 1.1em;
+    display: block; /* 강한 강조와 중앙 정렬 */
+    margin-bottom: 4px; /* 상태와 제목 간격 */
+}
+
+.eventtitle span {
+    font-size: 1em;
+    color: #555;
+}
+
+</style>
+
+<!-- 검색 -->
+<style type="text/css">
 /* 검색 영역을 가운데에 배치하는 컨테이너 */
 .search-bar {
 	padding-top: 25px;
@@ -257,7 +303,7 @@ main h1{
 <div class="flex_container">
 <!-- 사이드 메뉴바 -->
 	<div class="sidebar_container">
-		<div class="sidebar_title"><h2>공지사항</h2></div>
+		<div class="sidebar_title"><h2>EVENT</h2></div>
 		<aside class="sidebar">
 				<ul>
 					<li><a href="gongjiboard">공지사항</a></li>
@@ -269,126 +315,130 @@ main h1{
 			<div class="kborank">
 				<h4>2024시즌 KBO순위</h4>
 				<table>
-					<tr>
-						<th>순위</th><th>팀</th><th>승</th><th>패</th><th>무</th><th>승률</th>
-					</tr>
-					<tr>
-						<td>1</td><td>기아</td><td>87</td><td>55</td><td>2</td><td>0.613</td>
-					</tr>
-					<tr>
-						<td>2</td><td>삼성</td><td>78</td><td>64</td><td>2</td><td>0.549</td>
-					</tr>
-					<tr>
-						<td>3</td><td>LG</td><td>76</td><td>66</td><td>2</td><td>0.535</td>
-					</tr>
-					<tr>
-						<td>4</td><td>두산</td><td>74</td><td>68</td><td>2</td><td>0.521</td>
-					</tr>
-					<tr>
-						<td>5</td><td>KT</td><td>72</td><td>70</td><td>2</td><td>0.507</td>
-					</tr>
-					<tr>
-						<td>6</td><td>SSG</td><td>72</td><td>70</td><td>2</td><td>0.507</td>
-					</tr>
-					<tr>
-						<td>7</td><td>롯데</td><td>66</td><td>74</td><td>4</td><td>0.471</td>
-					</tr>
-					<tr>
-						<td>8</td><td>한화</td><td>66</td><td>76</td><td>2</td><td>0.465</td>
-					</tr>
-					<tr>
-						<td>9</td><td>NC</td><td>61</td><td>81</td><td>2</td><td>0.430</td>
-					</tr>
-					<tr>
-						<td>10</td><td>키움</td><td>58</td><td>86</td><td>0</td><td>0.403</td>
-					</tr>
+					<thead>
+						<tr>
+							<th>순위</th><th>팀</th><th>승</th><th>패</th><th>무</th><th>승률</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td>1</td><td>기아</td><td>87</td><td>55</td><td>2</td><td>0.613</td>
+						</tr>
+						<tr>
+							<td>2</td><td>삼성</td><td>78</td><td>64</td><td>2</td><td>0.549</td>
+						</tr>
+						<tr>
+							<td>3</td><td>LG</td><td>76</td><td>66</td><td>2</td><td>0.535</td>
+						</tr>
+						<tr>
+							<td>4</td><td>두산</td><td>74</td><td>68</td><td>2</td><td>0.521</td>
+						</tr>
+						<tr>
+							<td>5</td><td>KT</td><td>72</td><td>70</td><td>2</td><td>0.507</td>
+						</tr>
+						<tr>
+							<td>6</td><td>SSG</td><td>72</td><td>70</td><td>2</td><td>0.507</td>
+						</tr>
+						<tr>
+							<td>7</td><td>롯데</td><td>66</td><td>74</td><td>4</td><td>0.471</td>
+						</tr>
+						<tr>
+							<td>8</td><td>한화</td><td>66</td><td>76</td><td>2</td><td>0.465</td>
+						</tr>
+						<tr>
+							<td>9</td><td>NC</td><td>61</td><td>81</td><td>2</td><td>0.430</td>
+						</tr>
+						<tr>
+							<td>10</td><td>키움</td><td>58</td><td>86</td><td>0</td><td>0.403</td>
+						</tr>
+					</tbody>
 				</table>
 			</div>
 		</aside>
 	</div>
+	
+<!-- 메인 콘텐츠 -->	
 	<main class="main-container">
-		<table border="1" width="800px" align="center">
-		<caption><h2>Event</h2></caption>
-		<tr style="border-bottom: none;" height="35px">
-			<th colspan="3" style="text-align: right;">
-				<a href="eventing" style="margin-right: 5px;">[진행중] </a>
-				<a href="eventend" style="margin-right: 5px;">[종료] </a>
-				최신 
-				<a href="eventdayup" style="margin-right: 3px;">↑ </a>
-				<a href="eventdaydown" style="margin-right: 5px;">↓ </a>
-				조회수 
-				<a href="eventviewup" style="margin-right: 3px;">↑ </a>
-				<a href="eventviewdown" style="margin-right: 5px;">↓ </a>
-			</th>
-		</tr>
+		<h1>EVENT</h1>		
+		<div class="ascdesc">
+			<a href="eventing">[진행중] </a>
+			<a href="eventend">[종료] </a>
+			최신 
+			<a href="eventdayup"><strong>▲</strong></a>
+			<a href="eventdaydown"><strong>▼</strong></a>
+			조회수 
+			<a href="eventviewup"><strong>▲</strong></a>
+			<a href="eventviewdown"><strong>▼</strong></a>
+		</div>
 		
-		<tr>
-		<c:forEach items="${list}" var="event" varStatus="status" end="9">
-		<td style="width: 250px; height: 200px; text-align: center; vertical-align: top; justify-content:left; height: 100%; border-right:none; border-left: none;">
-		    <div class="eventbox" style="display: flex; flex-direction: column; justify-content: left; align-items: center;">
-		        <div class="eventimage" style="width: 250px; height: 200px; display: flex; justify-content: center; align-items: center;">
-		            <a href="eventdetail?evnum=${event.evnum}">
-		                <img src="./image/${event.eimagem}" style="max-width: 100%; max-height: 100%; object-fit: cover;">
-		            </a>
-		        </div>
-		        <div class="eventtitle" style="margin-top: 25px; text-align: center;">
-		            <a href="eventdetail?evnum=${event.evnum}">[${event.estate}] ${event.etitle}</a>
-		        </div>
-		    </div>
-		</td>
-		<c:if test="${status.index % 3 == 2}">
-		    </tr><tr>
-		</c:if>
-		</c:forEach>
-		</tr>
+		<table>
+			<tr>
+				<c:forEach items="${list}" var="event" varStatus="status" end="9">
+				<td class="event-container" onclick="location.href='eventdetail?evnum=${event.evnum}'">
+				    <div class="eventbox">
+				        <div class="eventimage">
+				            <strong>${event.estate}</strong> 
+				            <a href="eventdetail?evnum=${event.evnum}">
+				                <img src="./image/${event.eimagem}">
+				            </a>
+				        </div>
+				        <div class="eventtitle">
+				            <span>${event.etitle} </span>
+				        </div>
+				    </div>
+				</td>
+				<c:if test="${status.index % 3 == 2}">
+				    </tr>
+				    
+				    <tr>
+				</c:if>
+				</c:forEach>
+			</tr>
+		</table>
 		
-		<!-- 페이징처리 4444444444-->
-		<tr style="border-bottom:none;" height="25px">
-		   <td colspan="8" style="text-align: center; border-bottom:none;">
-		   
-		   <c:if test="${paging.startPage!=1 }">
-		      <a href="eventboard?nowPage=${paging.startPage-1 }&cntPerPage=${paging.cntPerPage}"></a>
-		   </c:if>   
-		      <c:forEach begin="${paging.startPage }" end="${paging.endPage}" var="p"> 
-		         <c:choose>
-		            <c:when test="${p == paging.nowPage }">
-		               <b><span style="color: red;">${p}</span></b>
-		            </c:when>   
-		            <c:when test="${p != paging.nowPage }">
-		               <a href="eventboard?nowPage=${p}&cntPerPage=${paging.cntPerPage}">${p}</a>
-		            </c:when>   
-		         </c:choose>
-		      </c:forEach>
-		      
-		      <c:if test="${paging.endPage != paging.lastPage}">
-		      <a href="eventboard?nowPage=${paging.endPage+1}&cntPerPage=${paging.cntPerPage }">  </a>
-		   </c:if>
-		   
-		   </td>
-		</tr>
-		<!-- 페이징처리 4444444444-->
-		<tr style="border-top:none;" height="35px">
-			<td align="left" colspan="6">
-			<form action="eventsearchsave" method="post">
+<!-- 페이징 -->
+			<div class="pagination"> 
+			   <c:if test="${paging.startPage!=1 }">
+			      <a href="eventboard?nowPage=${paging.startPage-1 }&cntPerPage=${paging.cntPerPage}"></a>
+			   </c:if>   
+			      <c:forEach begin="${paging.startPage }" end="${paging.endPage}" var="p"> 
+			         <c:choose>
+			            <c:when test="${p == paging.nowPage }">
+			               <b><span style="color: red;">${p}</span></b>
+			            </c:when>   
+			            <c:when test="${p != paging.nowPage }">
+			               <a href="eventboard?nowPage=${p}&cntPerPage=${paging.cntPerPage}">${p}</a>
+			            </c:when>   
+			         </c:choose>
+			      </c:forEach>
+			      
+			      <c:if test="${paging.endPage != paging.lastPage}">
+			      <a href="eventboard?nowPage=${paging.endPage+1}&cntPerPage=${paging.cntPerPage }">  </a>
+			   </c:if>
+			</div>   
+		
+		
+<!-- 하단 검색 -->
+		<form action="eventsearchsave" method="post" class="search-bar">
+			<div class="search-container">
 				<select name="eventkey" >
 					<option value="etitle">제목
 					<option value="econtents">내용
 				</select>
-				<input type="text" name="svalue" style="width: 250px" placeholder="검색어를 입력해주세요.">
-				<input type="submit" value="찾기">
-		<c:choose>
-			<c:when test="${adminloginstate==true}">
-				<input type="button" onclick="location.href='eventinput'" value="글쓰기">
-				<input type="button" onclick="location.href='eventboard'" value="목록">
-			</c:when>
-			<c:otherwise>
-				<input type="button" onclick="location.href='eventboard'" value="목록">
-			</c:otherwise>
-		</c:choose>
-			</form>
-			</td>
-		</tr>
-		</table>
+			</div>
+				<input type="text" name="svalue" placeholder="검색어를 입력해주세요.">
+				<button type="submit">검색</button>
+			<c:choose>
+				<c:when test="${adminloginstate==true}">
+					<input type="button" onclick="location.href='eventinput'" value="글쓰기">
+					<input type="button" onclick="location.href='eventboard'" value="목록">
+				</c:when>
+				<c:otherwise>
+					<input type="button" onclick="location.href='eventboard'" value="목록">
+				</c:otherwise>
+			</c:choose>
+		</form>
+		
 	</main>
 </div>
 </body>

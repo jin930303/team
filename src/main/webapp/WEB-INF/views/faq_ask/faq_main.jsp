@@ -140,6 +140,11 @@ table tbody tr:hover {
 	border-bottom: 1.5px solid #be241c;
 	cursor: pointer;
 }
+</style>
+
+<!-- 검색 -->
+<style type="text/css">
+
 
 /* 검색 영역을 가운데에 배치하는 컨테이너 */
 .search-bar {
@@ -203,8 +208,8 @@ table tbody tr:hover {
 .search-bar button:hover {
     background-color: #8e1a14;
 }
-
 </style>
+
 </head>
 <body>
 	<div class="flex_container">

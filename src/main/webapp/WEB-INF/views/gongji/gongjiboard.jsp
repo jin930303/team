@@ -73,7 +73,7 @@
 }
 
 
-.kborank table tr:hover {
+.kborank table tbody tr:hover {
 	background-color: #f9f4f4;
 	border-bottom: 1.5px solid #be241c;
 }
@@ -184,6 +184,33 @@ main h1{
 	cursor: pointer;
 }
 
+/*페이지*/
+.pagination {
+	text-align: center;
+	margin-top: 20px;
+}
+
+.pagination a {
+	margin: 0 5px;
+	text-decoration: none;
+	padding: 5px 10px;
+	border: 1px solid #ddd;
+	color: #333;
+}
+
+.pagination a:hover {
+	background-color: #ddd;
+}
+
+.pagination .current {
+	font-weight: bold;
+	color: red;
+}
+</style>
+
+<!-- 검색 -->
+<style type="text/css">
+
 /* 검색 영역을 가운데에 배치하는 컨테이너 */
 .search-bar {
 	padding-top: 25px;
@@ -269,39 +296,43 @@ main h1{
 			<div class="kborank">
 				<h4>2024시즌 KBO순위</h4>
 				<table>
-					<tr>
-						<th>순위</th><th>팀</th><th>승</th><th>패</th><th>무</th><th>승률</th>
-					</tr>
-					<tr>
-						<td>1</td><td>기아</td><td>87</td><td>55</td><td>2</td><td>0.613</td>
-					</tr>
-					<tr>
-						<td>2</td><td>삼성</td><td>78</td><td>64</td><td>2</td><td>0.549</td>
-					</tr>
-					<tr>
-						<td>3</td><td>LG</td><td>76</td><td>66</td><td>2</td><td>0.535</td>
-					</tr>
-					<tr>
-						<td>4</td><td>두산</td><td>74</td><td>68</td><td>2</td><td>0.521</td>
-					</tr>
-					<tr>
-						<td>5</td><td>KT</td><td>72</td><td>70</td><td>2</td><td>0.507</td>
-					</tr>
-					<tr>
-						<td>6</td><td>SSG</td><td>72</td><td>70</td><td>2</td><td>0.507</td>
-					</tr>
-					<tr>
-						<td>7</td><td>롯데</td><td>66</td><td>74</td><td>4</td><td>0.471</td>
-					</tr>
-					<tr>
-						<td>8</td><td>한화</td><td>66</td><td>76</td><td>2</td><td>0.465</td>
-					</tr>
-					<tr>
-						<td>9</td><td>NC</td><td>61</td><td>81</td><td>2</td><td>0.430</td>
-					</tr>
-					<tr>
-						<td>10</td><td>키움</td><td>58</td><td>86</td><td>0</td><td>0.403</td>
-					</tr>
+					<thead>
+						<tr>
+							<th>순위</th><th>팀</th><th>승</th><th>패</th><th>무</th><th>승률</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td>1</td><td>기아</td><td>87</td><td>55</td><td>2</td><td>0.613</td>
+						</tr>
+						<tr>
+							<td>2</td><td>삼성</td><td>78</td><td>64</td><td>2</td><td>0.549</td>
+						</tr>
+						<tr>
+							<td>3</td><td>LG</td><td>76</td><td>66</td><td>2</td><td>0.535</td>
+						</tr>
+						<tr>
+							<td>4</td><td>두산</td><td>74</td><td>68</td><td>2</td><td>0.521</td>
+						</tr>
+						<tr>
+							<td>5</td><td>KT</td><td>72</td><td>70</td><td>2</td><td>0.507</td>
+						</tr>
+						<tr>
+							<td>6</td><td>SSG</td><td>72</td><td>70</td><td>2</td><td>0.507</td>
+						</tr>
+						<tr>
+							<td>7</td><td>롯데</td><td>66</td><td>74</td><td>4</td><td>0.471</td>
+						</tr>
+						<tr>
+							<td>8</td><td>한화</td><td>66</td><td>76</td><td>2</td><td>0.465</td>
+						</tr>
+						<tr>
+							<td>9</td><td>NC</td><td>61</td><td>81</td><td>2</td><td>0.430</td>
+						</tr>
+						<tr>
+							<td>10</td><td>키움</td><td>58</td><td>86</td><td>0</td><td>0.403</td>
+						</tr>
+					</tbody>
 				</table>
 			</div>
 		</aside>
@@ -315,27 +346,29 @@ main h1{
 			조회수 <a href="gongjiviewup"><strong>▲</strong> </a><a href="gongjiviewdown"><strong>▼</strong></a>
 		</div>
 		<table>
+			<thead>
+				<tr>
+					<th>번 호</th>
+					<th>제 목</th>
+					<th>작성일</th>
+					<th>조회수</th>
+				</tr>
+			</thead>
  			<tbody>	
-			<tr>
-				<th>번호</th>
-				<th>제목</th>
-				<th>작성일</th>
-				<th>조회수</th>
-			</tr>
-		
-		<c:forEach items="${list}" var="gongji">
-			<tr onclick="location.href='gongjidetail?gnum=${gongji.gnum}'">
-				<td>${gongji.gnum}</td>
-				<td>${gongji.gtitle}</td>
-				<td>${gongji.gdate}</td>
-				<td>${gongji.gcnt}</td>
-			</tr>
-		</c:forEach>
+				<c:forEach items="${list}" var="gongji">
+					<tr onclick="location.href='gongjidetail?gnum=${gongji.gnum}'">
+						<td>${gongji.gnum}</td>
+						<td>${gongji.gtitle}</td>
+						<td>${gongji.gdate}</td>
+						<td>${gongji.gcnt}</td>
+					</tr>
+				</c:forEach>
+			</tbody>
+		</table>
 
 <!-- 페이징 -->		
-			<tr>
-			   <td colspan="8" style="text-align: center;">
-			   
+			
+			<div class="pagination">   
 			   <c:if test="${paging.startPage!=1 }">
 			      <a href="gongjiboard?nowPage=${paging.startPage-1 }&cntPerPage=${paging.cntPerPage}"></a>
 			   </c:if>   
@@ -353,11 +386,9 @@ main h1{
 			      <c:if test="${paging.endPage != paging.lastPage}">
 			      <a href="gongjiboard?nowPage=${paging.endPage+1}&cntPerPage=${paging.cntPerPage }">  </a>
 			   </c:if>
+			  </div> 
 			   
-			   </td>
-			</tr>
-		</tbody>
-		</table>
+		
 <!-- 하단 검색 -->
 		<form action="gongjisearchsave" method="post" class="search-bar">
 			<div class="search-container">
@@ -367,7 +398,7 @@ main h1{
 					<option value="nickname">글쓴이
 				</select>
 			</div>
-				<input type="text" name="svalue" style="width: 250px" placeholder="검색어를 입력해주세요.">
+				<input type="text" name="svalue"placeholder="검색어를 입력해주세요.">
 				<button type="submit">검색</button>
 			<c:choose>
 				<c:when test="${adminloginstate==true}">

@@ -23,6 +23,7 @@ window.onload = function() {
 };
 </script>
 
+<!-- 사이드바 -->
 <style type="text/css">
 /* 목차+게시판 컨테이너 */
 .flex_container {
@@ -286,7 +287,7 @@ input[type="reset"]:hover {
 <div class="flex_container">
 	<!-- 사이드 메뉴바 -->
 	<div class="sidebar_container">
-		<div class="sidebar_title"><h2>공지사항 작성</h2></div>
+		<div class="sidebar_title"><h2>공지사항 WRITE</h2></div>
 		<aside class="sidebar">
 				<ul>
 					<li><a href="gongjiboard">공지사항</a></li>
@@ -357,17 +358,12 @@ input[type="reset"]:hover {
 			</tr>
 			
 			<tr>
-				<th rowspan="2">파일첨부</th>
-				<td>
+				<th>파일첨부</th>
+				<td id="imagestateon">
 					<select name="fileonoff" onchange="toggleStateOptions()">
 						<option value="fileo">파일첨부
 						<option value="filex">파일없음
 					</select>
-				</td>
-			</tr>
-			
-			<tr>
-				<td id="imagestateon">
 					<input type="file" name="gimage">
 				</td>
 				<td id="imagestateoff">
