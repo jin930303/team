@@ -13,10 +13,6 @@ import javax.servlet.http.HttpSession;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpEntity;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpMethod;
-import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
@@ -25,7 +21,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.client.RestTemplate;
 
 import com.mbc.team.member.MemberService;
 
@@ -37,8 +32,9 @@ public class LoginController {
 	
 	@Autowired
 	SqlSession sqlSession;
-	
-	
+	HttpSession hs;
+	MemberService ms;
+	LoginService ls;
 	
 	@RequestMapping(value = "/login")
 	public String login()
@@ -51,7 +47,7 @@ public class LoginController {
 	@RequestMapping(value = "/logout")
 	public String login0(HttpServletRequest request)
 	{
-		HttpSession hs=request.getSession();
+		hs=request.getSession();
 		hs.setAttribute("loginstate", false);
 		hs.setAttribute("adminloginstate", false);
 		hs.removeAttribute("dto3");
@@ -64,7 +60,7 @@ public class LoginController {
 	{
 		String id=request.getParameter("id");
 		String inputpw=request.getParameter("pw");
-		LoginService ls=sqlSession.getMapper(LoginService.class);
+		ls=sqlSession.getMapper(LoginService.class);
 		LoginDTO dto3=ls.logincheck(id);
 		response.setContentType("text/html;charset=utf-8");
 		PrintWriter pww=response.getWriter();
@@ -72,7 +68,7 @@ public class LoginController {
 		 if (dto3 != null) {
 		        PasswordEncoder pe = new BCryptPasswordEncoder();
 		        if (pe.matches(inputpw, dto3.getPw())) {
-		            HttpSession hs = request.getSession();
+		            hs = request.getSession();
 		            
 		            if ("001".equals(dto3.getAuth())) {
 		                hs.setAttribute("adminloginstate", true);
@@ -103,12 +99,12 @@ public class LoginController {
 	
 	@RequestMapping(value = "/myinfo")
 	public String myInfo(HttpServletRequest request, Model model, HttpServletResponse response) throws IOException {
-	    HttpSession session = request.getSession();
-	    Boolean loginState = (Boolean) session.getAttribute("loginstate");
+	    hs = request.getSession();
+	    Boolean loginState = (Boolean) hs.getAttribute("loginstate");
 
 	    if (loginState != null && loginState) {
-	        LoginDTO dto3 = (LoginDTO) session.getAttribute("dto3");
-	        LoginService ls = sqlSession.getMapper(LoginService.class);
+	        LoginDTO dto3 = (LoginDTO) hs.getAttribute("dto3");
+	        ls = sqlSession.getMapper(LoginService.class);
 	        LoginDTO dto1 = ls.myinfo(dto3.getId());
 	        model.addAttribute("dto1", dto1);
 	        return "myinfo";
@@ -128,7 +124,7 @@ public class LoginController {
 	public String login3(HttpServletRequest request,Model mo)
 	{
 		String id=request.getParameter("id");
-		LoginService ls=sqlSession.getMapper(LoginService.class);
+		ls=sqlSession.getMapper(LoginService.class);
 		LoginDTO updateview=ls.updateview(id);
 		mo.addAttribute("updateview",updateview);
 		
@@ -140,7 +136,7 @@ public class LoginController {
 	public String login5(HttpServletRequest request)
 	{
 		String nickname=request.getParameter("nickname");
-		MemberService ms=sqlSession.getMapper(MemberService.class);
+		ms=sqlSession.getMapper(MemberService.class);
 		int count=ms.nicknamecheck1(nickname);
 		if(count==0)
 		{
@@ -172,7 +168,7 @@ public class LoginController {
 		String detailaddress = request.getParameter("detailaddress");
 		String extraaddress = request.getParameter("extraaddress");
 		String address = mainaddress + detailaddress + extraaddress;
-		LoginService ls=sqlSession.getMapper(LoginService.class);
+		ls=sqlSession.getMapper(LoginService.class);
 		ls.memberupdate2(nickname,pw,name,birth,phone,address,email,id);
 		
 		return "redirect:main";
@@ -182,7 +178,7 @@ public class LoginController {
 	public String login7(HttpServletRequest request,Model mo)
 	{
 		String id=request.getParameter("id");
-		LoginService ls=sqlSession.getMapper(LoginService.class);
+		ls=sqlSession.getMapper(LoginService.class);
 		LoginDTO deleteview=ls.deleteview(id);
 		mo.addAttribute("deleteview",deleteview);
 		
@@ -194,7 +190,7 @@ public class LoginController {
 	{
 		String id=request.getParameter("id");
 		String pw=request.getParameter("pw");
-		LoginService ls=sqlSession.getMapper(LoginService.class);
+		ls=sqlSession.getMapper(LoginService.class);
 		boolean success=(boolean) ls.delete2(id);
 		if(success) {
 			mo.addAttribute("message","그동안 이용해 주셔서 감사합니다");
@@ -221,7 +217,7 @@ public class LoginController {
 		String name=request.getParameter("name");
 		String email=request.getParameter("email");
 		
-		LoginService ls=sqlSession.getMapper(LoginService.class);
+		ls=sqlSession.getMapper(LoginService.class);
 		LoginDTO findid=ls.findid(name,email);
 		
 		Map<String, Object> response= new HashMap<>();
@@ -253,7 +249,7 @@ public class LoginController {
 		String id=request.getParameter("id");
 		String name=request.getParameter("name");
 		String email=request.getParameter("email");
-		LoginService ls=sqlSession.getMapper(LoginService.class);
+		ls=sqlSession.getMapper(LoginService.class);
 		LoginDTO findpw=ls.findpw(id,name,email);
 		mo.addAttribute("findpw",findpw);
 		return "confirmpw";
@@ -266,7 +262,7 @@ public class LoginController {
 		String pw1=request.getParameter("pw");
 		PasswordEncoder passwordEncoder=new BCryptPasswordEncoder();
 		String pw=passwordEncoder.encode(pw1);
-		LoginService ls=sqlSession.getMapper(LoginService.class);
+		ls=sqlSession.getMapper(LoginService.class);
 		ls.updatepw(id,pw);
 		return "redirect:/login";
 	}
@@ -276,9 +272,9 @@ public class LoginController {
     public Map<String, Object> kakaoLoginCheck(HttpServletRequest request, @RequestParam String kakaoname) {
         Map<String, Object> responseMap = new HashMap<>();
         try {
-            HttpSession session = request.getSession();
-            session.setAttribute("loginstate", true);  // 로그인 상태 설정
-            session.setAttribute("kakaoname", kakaoname); // 카카오 닉네임 저장
+            hs= request.getSession();
+            hs.setAttribute("loginstate", true);  // 로그인 상태 설정
+            hs.setAttribute("kakaoname", kakaoname); // 카카오 닉네임 저장
             responseMap.put("redirect", "main"); // 성공 후 리다이렉트할 페이지 URL 반환
         } catch (Exception e) {
             e.printStackTrace();
