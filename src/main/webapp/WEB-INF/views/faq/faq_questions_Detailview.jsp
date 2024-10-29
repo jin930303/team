@@ -159,7 +159,7 @@ th {
 }
 /* textarea 스타일 */
 textarea {
-    resize: vertical; /* 사용자가 세로 크기 조절 가능하도록 설정 */
+    resize: none; /* 사용자가 세로 크기 조절 가능하도록 설정 */
     padding: 12px;
     border: 1px solid #ddd;
     border-radius: 5px;
