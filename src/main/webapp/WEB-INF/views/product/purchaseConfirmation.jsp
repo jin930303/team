@@ -92,14 +92,9 @@
             </c:forEach>
         </tbody>
     </table>
-<<<<<<< HEAD
-    <p>총 금액: <strong>${totalPrice}원</strong></p>
-    <a href="${pageContext.request.contextPath}/main">메인 페이지로 돌아가기</a>
-=======
 
     <p>총 금액: <strong><fmt:formatNumber value="${totalPrice}" type="number" pattern="#,##0원"/></strong></p>
-
     <a class="action-button" href="${pageContext.request.contextPath}/main">메인 페이지로 돌아가기</a>
->>>>>>> refs/heads/lte
+
 </body>
 </html>

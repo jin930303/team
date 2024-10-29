@@ -2,7 +2,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<<<<<<< HEAD
+
 <script type="text/javascript">
 function confirmproduct(){
 	if(confirm("구매를 확정하시겠습니까?")){
@@ -11,11 +11,10 @@ function confirmproduct(){
 	}
 }
 </script>
-=======
+
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&display=swap" rel="stylesheet">
->>>>>>> refs/heads/lte
     <meta charset="UTF-8">
     <title>구매 확인 페이지</title>
 
