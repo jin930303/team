@@ -502,39 +502,17 @@
         <div class="product-price"><fmt:formatNumber value="${aa.price}" type="number" groupingUsed="true"/>원</div>
     </c:otherwise>
 </c:choose>
-        <c:choose>
-            <c:when test="${loginstate eq true}">
-                <c:set var="isLiked" value="false" />
-                <c:forEach items="${like}" var="like">
-                    <c:if test="${sessionScope.dto3.id eq like.id && aa.itemnum eq like.itemnum}">
-                        <c:set var="isLiked" value="true" />
-                    </c:if>
-                </c:forEach>
 
-                <c:choose>
-                    <c:when test="${isLiked eq true}">
-                        <div>
-                            <a href="like_save?itemnum=${aa.itemnum}">
-                               👍 따봉
-                            </a>
-                        </div>
-                    </c:when>
-                    <c:otherwise>
-                        <div>
-                            <a href="like_save?itemnum=${aa.itemnum}"> 	
-                                👍 따봉
-                            </a>
-                        </div>
-                    </c:otherwise>
-                </c:choose>
-            </c:when>
-
-		<c:otherwise>
-		    <div>
-		        <a href="login?redirect" onclick="showLoginAlert()">👍 따봉</a>
-		    </div>
-		</c:otherwise>
-        </c:choose>
+<c:choose>
+	<c:when test="${loginstate==true}">
+		<div><a href="like_save?itemnum=${aa.itemnum}">👍 따봉</a></div>
+	</c:when>
+	
+	<c:otherwise>
+		<div><a href="login?redirect" onclick="showLoginAlert()">👍 따봉</a></div>
+	</c:otherwise>
+</c:choose>
+	
     </div>
 </c:forEach>
 </div>
