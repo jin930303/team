@@ -154,6 +154,7 @@
 </script>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+
 </head>
 <body>
 	<form action="memberupdate2" method="post"  onsubmit="return check()">

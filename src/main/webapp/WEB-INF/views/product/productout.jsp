@@ -5,7 +5,9 @@
 <!DOCTYPE html>
 <html>
 <head>
-<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Do+Hyeon&family=Gowun+Batang&family=Nanum+Gothic&family=Noto+Sans+KR:wght@100..900&family=Song+Myung&display=swap" rel="stylesheet">
 
 <meta charset="UTF-8">
 <title>Product Grid</title>
@@ -40,7 +42,7 @@
     }
 
    .product-title {    
-    font-family: "Noto Sans KR", sans-serif;
+    font-family: "Noto Sans KR", sans-serif; /* 기본 폰트 설정 */
     font-weight: 300; /* 얇은 두께 설정 */
     font-size: 15px; 
     margin: 15px 0;
@@ -48,7 +50,7 @@
 }
     
     .product-price {     /* 가격 폰트 설정 */  
-        font-family: "Noto Sans KR", sans-serif;
+        font-family: "Noto Sans KR", sans-serif; /* 기본 폰트 설정 */
         font-size: 15px;
         color: #d32f2f;
         margin: 10px 0;
@@ -56,7 +58,7 @@
     }
     
  .search-sort-container {
- 
+    font-family: "Noto Sans KR", sans-serif; /* 기본 폰트 설정 */
     display: flex;
     justify-content: flex-end;
     margin: 20px;
