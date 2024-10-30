@@ -139,7 +139,7 @@
 /* 메인 컨테이너 */
 .main-container {
     flex: 1;
-    max-width: 1100px;
+    max-width: 1000px;
     padding: 20px 60px;
     border-right: 1px solid #ddd;
     border-left: 1px solid #ddd;
@@ -290,8 +290,8 @@ img {
 						</c:when>
 						<c:otherwise>
 							<td colspan="4">
-							<img src="./image/${list.gimage}"><br>
-							<pre>${list.gcontents}</pre>
+								<img src="./image/${list.gimage}"><br>
+								<pre>${list.gcontents}</pre>
 							</td>
 						</c:otherwise>
 					</c:choose>
