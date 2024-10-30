@@ -150,12 +150,6 @@ function delreply(cnum) {
     border-right: 1px solid #ddd;
     border-left: 1px solid #ddd;
 }
-.caption-color {
-    background-color: #eef1f5; 
-    color: #333; /* 텍스트 색상 */
-    text-align: left;
-    padding: 20px;
-}
 
 table {
     width: 100%;
@@ -164,10 +158,10 @@ table {
     text-align: center;
 }
 
-main h1, main h5 {
+.title h1 {
     text-align: left;
-    color: #333;
-    margin-bottom: 20px;
+    padding: 30px;
+    border-bottom: 2px solid #be241c;
 }
 
 .main-container table tr {
@@ -308,7 +302,7 @@ img {
 	
 <!-- 메인 콘텐츠 -->
 	<main class="main-container">
-		<div class="caption-color"><h1>" ${list.nickname} " 님의 게시글</h1></div>
+		<div class="title"><h1>" ${list.nickname} " 님의 게시글</h1></div>
 		<table>
 			<tr>
 				<th>제 목</th>
@@ -327,14 +321,14 @@ img {
 			<c:choose>
 				<c:when test="${list.cimage==null}">
 					<td colspan="4">
-						<pre>${list.ccontents}</pre>
+						${list.ccontents}
 					</td>
 				</c:when>
 				
 				<c:otherwise>
 					<td colspan="4">
 						<img src="./image/${list.cimage}"><br>
-						<pre>${list.ccontents}</pre>
+						<br>${list.ccontents}<br>
 					</td>
 				</c:otherwise>
 			</c:choose>
@@ -372,17 +366,18 @@ img {
 		<c:choose>
 			<c:when test="${adminloginstate==true&&list.nickname!='관리자'}">		
 				<table>	
-				<div class="caption-color"><h1>댓글</h1></div>
+				<div class="title"><h1>댓글</h1></div>
 					<tr>
-						<th width="150px">닉네임</th>
+						<th>닉네임</th>
 						<th>내 용</th>
 					</tr>
 					
 					<c:forEach var="reply" items="${reply}">
 						<tr>
 							<td>${reply.nickname}</td>
-							<td colspan="4">☞ ${reply.ccontents}
-							<input type="button" onclick="delreply(${reply.cnum})" value="댓글 삭제">
+							<td>☞ ${reply.ccontents}</td>
+							<td width="100px">
+								<input type="button" onclick="delreply(${reply.cnum})" value="댓글 삭제">
 							</td>
 						</tr>
 					</c:forEach>
@@ -398,7 +393,7 @@ img {
 					<table>
 						<tr>
 							<td>관리자</td>
-							<td width="800px">
+							<td>
 								<textarea rows="1" cols="60" name="ccontents"></textarea>
 							</td>
 							<td class="submitbutton">
@@ -412,17 +407,18 @@ img {
 			
 			<c:when test="${adminloginstate==true&&list.nickname=='관리자'}">
 				<table>
-				<div class="caption-color"><h1>댓글</h1></div>
+				<div class="title"><h1>댓글</h1></div>
 					<tr>
-						<th width="150px">닉네임</th>
+						<th>닉네임</th>
 						<th>내 용</th>
 					</tr>
 					
 					<c:forEach var="reply" items="${reply}">
 						<tr>
 							<td>${reply.nickname}</td>
-							<td colspan="4">☞ ${reply.ccontents}
-								<input type="button" onclick="delreply(${reply.cnum})" value="삭제">
+							<td colspan="4">☞ ${reply.ccontents}</td>
+							<td width="100px">	
+								<input type="button" onclick="delreply(${reply.cnum})" value="댓글 삭제">
 							</td>
 						</tr>
 					</c:forEach>
@@ -435,9 +431,9 @@ img {
 						<input type="hidden" value="${list.indent}" name="indent" readonly>
 						
 					<table>	
-						<tr height="50px">
+						<tr>
 							<td>관리자</td>
-							<td width="800px">
+							<td>
 								<textarea rows="1" cols="60" name="ccontents"></textarea>
 							</td>
 							<td class="submitbutton">
@@ -451,16 +447,16 @@ img {
 			
 			<c:when test="${loginstate==true && list.nickname!=sessionScope.dto3.nickname}">
 				<table>
-				<div class="caption-color"><h1>댓글</h1></div>
+				<div class="title"><h1>댓글</h1></div>
 					<tr>
-						<th width="150px">닉네임</th>
+						<th>닉네임</th>
 						<th>내 용</th>
 					</tr>
 					
 					<c:forEach var="reply" items="${reply}">
 						<tr>
 							<td>${reply.nickname}</td>
-							<td colspan="4">☞ ${reply.ccontents}</td>
+							<td>☞ ${reply.ccontents}</td>
 						</tr>
 					</c:forEach>
 				</table>
@@ -474,7 +470,7 @@ img {
 					<table>
 						<tr>
 							<td>${sessionScope.dto3.nickname}</td>
-							<td width="800px">
+							<td>
 								<textarea rows="1" cols="60" name="ccontents"></textarea>
 							</td>
 							<td class="submitbutton">
@@ -487,17 +483,18 @@ img {
 			</c:when>
 			<c:when test="${loginstate==true && list.nickname==sessionScope.dto3.nickname}">
 				<table>
-				<div class="caption-color"><h1>댓글</h1></div>
+				<div class="title"><h1>댓글</h1></div>
 					<tr>
-						<th width="150px">닉네임</th>
+						<th>닉네임</th>
 						<th>내 용</th>
 					</tr>
 					
 					<c:forEach var="reply" items="${reply}">
 						<tr>
 							<td>${reply.nickname}</td>
-							<td colspan="4">☞ ${reply.ccontents}
-								<input type="button" onclick="delreply(${reply.cnum})" value="삭제">
+							<td>☞ ${reply.ccontents}</td>
+							<td width="100px">	
+								<input type="button" onclick="delreply(${reply.cnum})" value="댓글 삭제">
 							</td>
 						</tr>
 					</c:forEach>
@@ -525,15 +522,15 @@ img {
 			</c:when>
 			<c:otherwise>
 				<table>
-				<div class="caption-color"><h1>댓글</h1></div>
+				<div class="title"><h1>댓글</h1></div>
 					<c:forEach var="reply" items="${reply}">
 						<tr>
-							<th width="150px">닉네임</th>
+							<th>닉네임</th>
 							<th>내 용</th>
 						</tr>
 						<tr>
 							<td>${reply.nickname}</td>
-							<td colspan="4">☞ ${reply.ccontents}</td>
+							<td>☞ ${reply.ccontents}</td>
 						</tr>
 					</c:forEach>
 				</table>

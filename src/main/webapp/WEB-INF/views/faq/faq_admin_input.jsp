@@ -4,27 +4,6 @@
 <!DOCTYPE html>
 <html>
 <head>
-<!-- 
-<script>
-	let fileCount = 1;
-	const maxFiles = 3;
-		
-	function addFileInput() {
-    if (fileCount >= maxFiles) {
-	    alert("최대 3장까지 첨부 가능합니다");
-	return;
-	}
-					
-    fileCount++;
-    const newInput = document.createElement('input');
-    newInput.type = 'file';
-    newInput.name = `fimage${fileCount}`;
-					
-    document.getElementById('fileInputs').appendChild(newInput);
-}
-</script>
- -->
-
 <!-- 사이드바 -->
 <style type="text/css">
 /* 목차+게시판 컨테이너 */
@@ -124,9 +103,10 @@ table {
     text-align: center;
 }
 
-caption {
-	color: black;
-	text-align: center;
+.title h1 {
+	text-align: left;
+	padding: 30px;
+	border-bottom: 2px solid #be241c;
 }
 
 table tr th, 
@@ -241,11 +221,10 @@ input[type="reset"]:hover {
 <div class="flex_container">
 		<!-- 사이드 메뉴바 -->
 		<div class="sidebar_container">
-			<div class="sidebar_title"><h2>고객센터 홈</h2></div>
+			<div class="sidebar_title"><h2>FAQ 작성</h2></div>
 			<aside class="sidebar">
 				<ul>
 					<li><a href="faq_community">고객센터 홈</a></li>
-					<li><a href="gongjiboard">공지사항</a></li>
 					<c:choose>
 						<c:when test="${loginstate == true}">
 							<li><a href="faqin">1:1 문의하기</a></li>
@@ -255,7 +234,7 @@ input[type="reset"]:hover {
 					<li><a href="faq">FAQ</a></li>
 				<c:choose>
 					<c:when test="${adminloginstate == true}">
-					<li><a href="FAQ_in">FAQ 글 쓰기</a></li>
+					<li><a href="FAQ_in">FAQ 작성</a></li>
 					</c:when>
 				</c:choose>
 				</ul>
@@ -265,7 +244,9 @@ input[type="reset"]:hover {
 		<main class="main-container">
 			<form action="faq_admin_save" method="post" enctype="multipart/form-data">
 				<table>
-					<h1>FAQ : 글 작성</h1>
+				<div class="title">
+					<h1>FAQ WRITE</h1>
+				</div>
 					<input type="hidden" name="cnum">
 					<tr>
 						<th>문의 종류</th>
@@ -288,12 +269,6 @@ input[type="reset"]:hover {
 					<tr>
 						<th>첨부 이미지</th>
 					    <td>
-					    <!-- 
-					        <div id="fileInputs">
-					            <input type="file" name="fimage1" onclick="addFileInput()">
-					        </div>
-					        <button type="button" onclick="addFileInput()">이미지 추가</button>
-					     -->
 					        <input type="file" name="fimage1">
 					        <input type="file" name="fimage2">
 					    	<input type="file" name="fimage3">
