@@ -31,17 +31,29 @@
 		});
 		
 		 $("#phonecheck").click(function() {
+	            var phone0 = $("#phone0").val();
 	            var phone1 = $("#phone1").val();
 	            var phone2 = $("#phone2").val();
 	            var phoneRegex = /^[0-9]{4}$/; 
 
-	            if (!phoneRegex.test(phone1) || !phoneRegex.test(phone2)) {
-	                alert('전화번호는 4자리 숫자만 가능합니다.');
+	            if (phone0.trim() === "") {
+	                alert('전화번호 앞자리를 선택해주세요.');
+	                $("#phone0").focus();
+	                return;
+	            }
+	            
+	            if (!phoneRegex.test(phone1)) {
+	                alert('전화번호 중간자리는 4자리 숫자만 가능합니다.');
 	                $("#phone1").focus();
 	                return;
 	            }
+	            if (!phoneRegex.test(phone2)) {
+	                alert('전화번호 뒷자리는 4자리 숫자만 가능합니다.');
+	                $("#phone2").focus();
+	                return;
+	            }
 
-	            var fullPhone = "010-" + phone1 + "-" + phone2; 
+	            var fullPhone =  phone0 +"-"+ phone1 + "-" + phone2; 
 
 	            $.ajax({
 	                type: "post",
@@ -94,6 +106,7 @@
 		var pwRegex = /^(?=.*[a-zA-Z])(?=.*[0-9])(?=.*[!@#$%^&*])[A-Za-z\d!@#$%^&*]{4,16}$/; 
 		var koreanRegex = /^[가-힣]+$/;  
 	    var name = $("#name").val();
+	    var phone0 = $("#phone0").val();
 	    var phone1 = $("#phone1").val();
 	    var phone2 = $("#phone2").val();
 	    var fdomain = $("#fdomain").val();
@@ -125,8 +138,14 @@
 	            $('#name').focus();
 	            return false;
 	        }
-		 if (phone1.trim() == "") {
-	            alert('전화번호 앞자리를 입력해주세요');
+		 if (phone0.trim() == "") { 
+	            alert('전화번호 앞자리를 선택해주세요');
+	            $('#phone0').focus();
+	            return false;
+	        }
+	        
+	        if (phone1.trim() == "") {
+	            alert('전화번호 가운데 자리를 입력해주세요');
 	            $('#phone1').focus();
 	            return false;
 	        }
@@ -352,7 +371,14 @@
                     <th>전화번호</th>
                     <td>
                         <div style="display: flex; align-items: center;">
-                            <span> 0 1 0   -</span>
+                           <select name="phone0" id="phone0">
+                			<option value="010">010</option>
+                			<option value="011">011</option>
+                			<option value="016">016</option>
+                			<option value="017">017</option>
+                			<option value="018">018</option>
+                			<option value="019">019</option>
+                		</select>-
                             <input type="text" name="phone1" id="phone1" value="${updateview.phone1}" maxlength="4" style="width: 175px; margin-left: 9px; margin-right: 9px;">
                             <span>  -  </span>
                             <input type="text" name="phone2" id="phone2" value="${updateview.phone2}" maxlength="4" style="width: 175px; margin-left: 9px;">

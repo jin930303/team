@@ -7,8 +7,7 @@ import org.springframework.stereotype.Service;
 @Service
 public interface MemberService {
 
-	void memberinput(String id, String nickname, String pw, String name, String gender, String birth, String phone,
-			String address);
+	void memberinput(MemberDTO memberDTO);
 
 	ArrayList<MemberDTO> memberout();
 	
