@@ -114,20 +114,15 @@ main h1, main h5 {
     margin-bottom: 20px;
 }
 
-.caption-color {
-    background-color: #eef1f5; 
-    color: #333; /* 텍스트 색상 */
-    text-align: left;
-    padding: 20px;
-}
-
+.caption-color h1 {
+	text-align: left;
+	padding: 30px;
+} 
+.caption-color h5,
 .caption-color1 {
-    background-color: #eef1f5; 
-    color: #333; /* 텍스트 색상 */
-    text-align: left;
-    padding: 20px;
-    display: flex;
-   	align-items: center;  /* 세로 중앙 정렬 */
+	text-align: left;
+	padding: 30px;
+	border-bottom: 2px solid #be241c;
 }
 
 .contents {
@@ -210,11 +205,10 @@ img {
 <div class="flex_container">
 		<!-- 사이드 메뉴바 -->
 		<div class="sidebar_container">
-			<div class="sidebar_title"><h2>1:1 문의</h2></div>
+			<div class="sidebar_title"><h2>FAQ</h2></div>
 			<aside class="sidebar">
 				<ul>
 					<li><a href="faq_community">고객센터 홈</a></li>
-					<li><a href="gongjiboard">공지사항</a></li>
 					<c:choose>
 						<c:when test="${loginstate == true}">
 							<li><a href="faqin">1:1 문의하기</a></li>
@@ -222,6 +216,11 @@ img {
 					</c:choose>
 					<li><a href="faqout">문의 내역</a></li>
 					<li><a href="faq">FAQ</a></li>
+					<c:choose>
+						<c:when test="${adminloginstate == true}">
+							<li><a href="FAQ_in">FAQ 작성</a></li>
+						</c:when>
+					</c:choose>
 				</ul>
 			</aside>
 		</div>

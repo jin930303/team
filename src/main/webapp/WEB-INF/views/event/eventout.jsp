@@ -150,10 +150,10 @@ table {
     text-align: center;
 }
 
-main h1, main h5 {
+.title h1 {
     text-align: left;
-    color: #333;
-    margin-bottom: 20px;
+    padding: 30px;
+    border-bottom: 2px solid #be241c;
 }
 
 .main-container table tr {
@@ -271,6 +271,9 @@ img {
 	
 <!-- 메인 콘텐츠 -->
 	<main class="main-container">
+		<div class="title">
+			<h1>EVENT</h1>
+		</div>
 		<table>
 			<tr>
 				<th>상 태</th>
@@ -297,7 +300,7 @@ img {
 			            <td colspan="4">
 			                <img src="./image/${list.eimaged}">
 			                <br>
-			                <pre>${list.econtents}</pre>
+			                ${list.econtents}
 			            </td>
 			        </c:otherwise>
 			    </c:choose>

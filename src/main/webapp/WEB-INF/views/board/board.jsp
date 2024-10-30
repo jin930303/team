@@ -142,8 +142,37 @@
     border-left: 1px solid #ddd;  /*목차 - 게시판 사이 선*/
 }
 
-main h1{
+.title {
+	display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 2px solid #be241c;
+    padding: 30px;
+}
+
+/* 왼쪽 정렬된 공지사항 텍스트 */
+.title h1 {
 	text-align: left;
+    margin: 0;
+}
+
+/* 오른쪽 정렬된 ascdesc */
+.ascdesc {
+	text-align: right;
+    font-size: 1em;
+    margin-bottom: 5px;
+}
+
+/* ascdesc 내부 링크 스타일 */
+.ascdesc a {
+	text-decoration: none;
+	color: #333;
+    margin: 0 3px;
+}
+
+/* ascdesc 링크 호버 효과 */
+.ascdesc a:hover {
+	color: #be241c;
 }
 
 .main-container table {
@@ -340,12 +369,14 @@ main h1{
 	
 <!-- 메인 콘텐츠 -->
 	<main class="main-container">
-		<h1>자유게시판</h1>
+		<div class="title">
+			<h1>자유게시판</h1>
 			<div class="ascdesc">
 				최신 <a href="boarddayup"><strong>▲</strong></a><a href="boarddaydown"><strong>▼</strong></a> 
 				조회수 <a href="boardviewup"><strong>▲</strong></a><a href="boardviewdown"><strong>▼</strong></a>
 				추천수 <a href="boardlikeup"><strong>▲</strong></a><a href="boardlikedown"><strong>▼</strong></a>
 			</div>
+		</div>
 		<table>
 			<thead>
 				<tr>

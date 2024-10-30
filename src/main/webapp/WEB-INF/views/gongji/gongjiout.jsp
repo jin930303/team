@@ -151,10 +151,10 @@ table {
     text-align: center;
 }
 
-main h1, main h5 {
+.title h1 {
     text-align: left;
-    color: #333;
-    margin-bottom: 20px;
+    padding: 30px;
+    border-bottom: 2px solid #be241c;
 }
 
 .main-container table tr {
@@ -272,7 +272,10 @@ img {
 	
 <!-- 메인 콘텐츠 -->
 	<main class="main-container">
-		<table>
+		<div class="title">
+			<h1>공지사항</h1>
+		</div>	
+			<table>
 				<tr>
 					<th>제목</th>
 					<th>작성일시</th>
@@ -283,19 +286,24 @@ img {
 					<td>${list.gdate}</td>
 					<td>${list.gcnt}</td>
 				</tr>	
-				<tr>	
-					<c:choose>
-						<c:when test="${list.gimage==null}">
-							<td colspan="4"><pre>${list.gcontents}</pre></td>
-						</c:when>
-						<c:otherwise>
+				<c:choose>
+					<c:when test="${list.gimage==null}">
+						<tr>
+							<td colspan="4">
+								<div>${list.gcontents}</div>
+							</td>
+						</tr>
+					</c:when>
+					<c:otherwise>
+						<tr>
 							<td colspan="4">
 								<img src="./image/${list.gimage}"><br>
-								<pre>${list.gcontents}</pre>
+								<br>
+								<div>${list.gcontents}</div>
 							</td>
-						</c:otherwise>
-					</c:choose>
-				</tr>
+						</tr>
+					</c:otherwise>
+				</c:choose>
 			<c:choose>
 				<c:when test="${adminloginstate==true}">
 					<tr>	

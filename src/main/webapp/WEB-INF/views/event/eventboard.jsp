@@ -127,10 +127,6 @@
 
 <!-- 메인 섹션 -->
 <style type="text/css">
-.ascdesc {
-	text-align: right;
-}
-
 .main-container {
 	flex: 1;
     max-width: 1000px;
@@ -141,8 +137,37 @@
     border-left: 1px solid #ddd;  /*목차 - 게시판 사이 선*/
 }
 
-main h1{
+.title {
+	display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 2px solid #be241c;
+    padding: 30px;
+}
+
+/* 왼쪽 정렬된 공지사항 텍스트 */
+.title h1 {
 	text-align: left;
+    margin: 0;
+}
+
+/* 오른쪽 정렬된 ascdesc */
+.ascdesc {
+	text-align: right;
+    font-size: 1em;
+    margin-bottom: 5px;
+}
+
+/* ascdesc 내부 링크 스타일 */
+.ascdesc a {
+	text-decoration: none;
+	color: #333;
+    margin: 0 3px;
+}
+
+/* ascdesc 링크 호버 효과 */
+.ascdesc a:hover {
+	color: #be241c;
 }
 
 .mian-container table {
@@ -359,18 +384,19 @@ main h1{
 	
 <!-- 메인 콘텐츠 -->	
 	<main class="main-container">
-		<h1>EVENT</h1>		
-		<div class="ascdesc">
-			<a href="eventing">[진행중] </a>
-			<a href="eventend">[종료] </a>
-			최신 
-			<a href="eventdayup"><strong>▲</strong></a>
-			<a href="eventdaydown"><strong>▼</strong></a>
-			조회수 
-			<a href="eventviewup"><strong>▲</strong></a>
-			<a href="eventviewdown"><strong>▼</strong></a>
+		<div class="title">
+			<h1>EVENT</h1>		
+			<div class="ascdesc">
+				<a href="eventing">[진행중] </a>
+				<a href="eventend">[종료] </a>
+				최신 
+				<a href="eventdayup"><strong>▲</strong></a>
+				<a href="eventdaydown"><strong>▼</strong></a>
+				조회수 
+				<a href="eventviewup"><strong>▲</strong></a>
+				<a href="eventviewdown"><strong>▼</strong></a>
+			</div>
 		</div>
-		
 		<table>
 			<tr>
 				<c:forEach items="${list}" var="event" varStatus="status" end="9">
