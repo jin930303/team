@@ -49,7 +49,7 @@
 /* pre Style */
 	pre {
 		font-family: 'Gothic A1', sans-serif;
-		font-size:15px;
+		font-size: 15px;
 		background-color: transparent;
 		white-space: pre-wrap;
 		overflow-wrap: break-word;
@@ -65,12 +65,25 @@
 		background-color: rgba(255, 255, 255, 0.5) !important;
 		border-color: rgba(255, 255, 255, 0.5) !important;
 		border-bottom: 2px solid #be241c !important;
+	    position: relative;
+	}
+	
+	.navbar-inverse::after {
+	    content: "";
+	    position: absolute;
+	    bottom: 10px; /* 첫 번째 선과 간격 조정 */
+	    left: 0;
+	    width: 100%;
+	    height: 2px;
+	    background-color: #be241c; /* 두 번째 선 색상 */
 	}
 
 /* header 내 링크 section */
 	.navbar-inverse .navbar-nav>li>a {
+		padding-bottom: 35px;
 		color: #000 !important;						/* 기본 글씨 색상 검정 */
 		background-color: transparent !important;	/* 배경색 투명 */
+		transition: color 0.3s ease, background-color 0.3s ease-out; 
 	}
 	
 /* header 내 링크 section hover 시 */
@@ -99,18 +112,29 @@
 	}
 	
 	.navbar-header {
-		font-family: 'Gothic A1', sans-serif;
-		background-image: url("./image/야구공 수정.png");
-		background-size : 700px 120px;
-		background-repeat: no-repeat;
-		background-position : center;
-		display: flex;
-		font-size: 60px !important;
-		justify-content: center;
-		align-items: center;
-		color: black;
-		width: 100%;
-		height: 120px;
+	    font-family: 'Gothic A1', sans-serif;
+	    background-size: contain;
+	    background-repeat: no-repeat;
+	    background-position: center;
+	    display: flex;
+	    justify-content: center;
+	    align-items: center;
+	    color: black;
+	    width: 100%;
+	    height: 120px;
+	}
+	
+	.navbar-brand {
+	    display: flex;
+	    align-items: center;
+	    justify-content: center;
+	    font-size: 60px !important;
+	    color: black;
+	}
+	
+	.navbar-brand img {
+	    height: 300px; /* 필요한 크기로 수정 */
+	    object-fit: contain; /* 이미지 크기를 유지하며 영역에 맞게 조정 */
 	}
 
 	#search {
@@ -229,7 +253,9 @@
 
 		<div class="container-head">
 			<div class="navbar-header">
-				<a class="navbar-brand" href="main" style="font-size:60px; color: black;">스윙스</a>
+				<a class="navbar-brand" href="main" style="font-size:60px; color: black;">
+					<img src="./image/swings.png" height="250px">
+				</a>
 			</div>
 		</div>
 

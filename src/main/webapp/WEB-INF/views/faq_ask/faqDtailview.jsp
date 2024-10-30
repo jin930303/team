@@ -204,7 +204,7 @@ img {
 				<li><a href="faq">FAQ</a></li>
 				<c:choose>
 					<c:when test="${adminloginstate == true}">
-					<li><a href="FAQ_in">FAQ 글 작성</a></li>
+					<li><a href="FAQ_in">FAQ 작성</a></li>
 					</c:when>
 				</c:choose>
 			</ul>
@@ -221,9 +221,9 @@ img {
 						</div>
 						<input type="hidden" value="${faq.cnum}" name="cnum">
 							<tr>
-								<th>문의 종류</th>
+								<th width="100px">문의 종류</th>
 								<th>제 목</th>
-								<th>문의일자</th>
+								<th width="80px">문의일자</th>
 							</tr>
 							<tr>
 								<td id="cnum">${faq.tab}</td>
@@ -282,7 +282,7 @@ img {
 					</div>
 						<tr>
 							<th>문의 종류</th>
-							<th>제 목</th>
+							<th width="650px">제 목</th>
 							<th>답변 일자</th>
 						</tr>
 						<tr>

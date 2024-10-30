@@ -9,7 +9,84 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Do+Hyeon&family=Gowun+Batang&family=Nanum+Gothic&family=Song+Myung&display=swap" rel="stylesheet">
     <meta charset="UTF-8">
-    
+
+<style type="text/css">
+/* 목차+게시판 컨테이너 */
+.flex_container {
+	width: 100%;
+	display: flex;
+	justify-content: center;
+	margin: 0 auto;
+}
+
+.sidebar {
+	width: 250px;
+	border: 1px solid #ddd;
+	border-top: none; /* 타이틀과 경계선 중복 방지 */
+	padding: 20px;
+    margin-right: 20px;
+    border-bottom-right-radius: 10px;
+    border-bottom-left-radius: 10px;
+	
+}
+.sidebar_container {
+	width: 250px;
+    display: block; /* 상하로 정렬 */
+    margin-right: 60px; /* 오른쪽에 여백 */
+}
+
+/* 상단 타이틀 부분 */
+.sidebar_title {
+    background-color: #be241c; /* 상단 배경색 */
+    padding: 60px;
+    text-align: center;
+    border: 2px thin #303030;
+    border-top-right-radius: 10px;
+    border-top-left-radius: 10px;
+}
+
+/* 타이틀 내부 h2 스타일링 */
+.sidebar_title h2 {
+    margin: 0;
+    color: white;
+    font-weight: bold;
+    font-size: 22px;
+}
+
+/* 목차 링크의 리스트 스타일 없애면 리스트별 . 생김 */
+.sidebar ul {
+	list-style: none;
+	padding: 0;
+	margin-bottom: 30px;
+}
+
+/* 목차 리스트 사이 간격 */
+.sidebar ul li {
+	margin-bottom: 15px;
+	
+}
+
+/* 목차 리스트 별 버튼 모양 */
+.sidebar ul li a {
+	text-decoration: none;
+	color: #333;
+	font-size: 14px;
+	display: block;
+	padding: 10px;
+	border: 1px solid #ddd;
+	border-radius: 4px;
+	transition: border 0.3s ease; /* 테두리 변경 시 부드러운 전환 */
+	transition: font 0.3s ease;
+	transition: background-color 0.3s ease;
+}
+
+.sidebar ul li a:hover {
+	background-color: #f9f4f4;
+	font-weight: bold;
+	color: black;
+}
+</style>
+
 <style>
  
     .h1 {
@@ -158,27 +235,46 @@
 </script>
 </head>
 <body>
-<h1>관심상품</h1> 
-<hr class="divider1">
-<form action="like_items_delete" method="post" onsubmit="return confirmDelete();">
-    <div class="product-container">
-        <c:forEach items="${list}" var="like">
-            <div class="product">
-                <a href="productdetail?itemnum=${like.itemnum}">
-                    <img src="./image/${like.image1}" alt="Product Image" width="100px">
-                </a>
-                <div class="product-title">${like.product}</div>
-                <div class="product-price">
-                    <fmt:formatNumber value="${like.price}" type="number" pattern="#,##0"/>원
-                </div>
-                <input type="checkbox" name="selectedItems" value="${like.likenum}">
-            </div>
-        </c:forEach>
-    </div>
-    <div class="button-container">
-        <button type="button" id="selectAllButton" onclick="toggleSelectAll()">전체 선택</button>
-        <input type="submit" value="선택 삭제">
-    </div>
-</form>
+<div class="flex_container">
+
+	<div class="sidebar_container">
+		<div class="sidebar_title"><h2>관심상품</h2></div>
+		<aside class="sidebar">
+			<ul>
+				<li><a href="cart">장바구니</a></li>
+				<li><a href="like_product">관심상품</a></li>
+				<li><a href="update?id=${sessionScope.dto3.id}">회원정보 수정</a></li>
+				<li><a href="delete?id=${sessionScope.dto3.id}&pw=${sessionScope.dto3.pw}">회원탈퇴</a></li>
+			</ul>
+		</aside>
+	</div>
+	
+	<main class="main-container">
+		<div class="title">
+			<h1>" ${sessionScope.dto3.nickname} " 님의 관심상품</h1>
+		</div>
+		<hr class="divider1">
+		<form action="like_items_delete" method="post" onsubmit="return confirmDelete();">
+		    <div class="product-container">
+		        <c:forEach items="${list}" var="like">
+		            <div class="product">
+		                <a href="productdetail?itemnum=${like.itemnum}">
+		                    <img src="./image/${like.image1}" alt="Product Image" width="100px">
+		                </a>
+		                <div class="product-title">${like.product}</div>
+		                <div class="product-price">
+		                    <fmt:formatNumber value="${like.price}" type="number" pattern="#,##0"/>원
+		                </div>
+		                <input type="checkbox" name="selectedItems" value="${like.likenum}">
+		            </div>
+		        </c:forEach>
+		    </div>
+		    <div class="button-container">
+		        <button type="button" id="selectAllButton" onclick="toggleSelectAll()">전체 선택</button>
+		        <input type="submit" value="선택 삭제">
+		    </div>
+		</form>
+	</main>
+</div>
 </body>
 </html>

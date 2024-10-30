@@ -391,10 +391,10 @@
 			</c:choose>
 		<table>	
 			<tr>
-				<th>번호</th>
-				<th>제목</th>
-				<th>작성일</th>
-				<th>조회수</th>
+				<th width="80px">번 호</th>
+				<th width="260px">제 목</th>
+				<th width="80px">작성일</th>
+				<th width="50px">조회수</th>
 			</tr>
 			
 			<c:choose>

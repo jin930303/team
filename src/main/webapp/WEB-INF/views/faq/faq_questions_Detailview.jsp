@@ -234,7 +234,7 @@ img {
 					<input type="hidden" value="${faq.cnum}" name="cnum">
 					<tr>
 						<th>문의 종류</th>
-						<th>제 목</th>
+						<th width="550px">제 목</th>
 						<th>작성 일자</th>
 						<th>조회수</th>
 					</tr>
@@ -286,7 +286,7 @@ img {
 				<c:forEach items="${faqreply}" var="reply">
 					<tr>	
 						<td>${reply.nickname}</td>
-						<td>
+						<td style="text-align: left;">
 							${reply.fcontents}
 						</td>
 					</tr>

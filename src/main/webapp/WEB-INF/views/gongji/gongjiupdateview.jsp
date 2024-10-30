@@ -377,8 +377,8 @@ input[type="reset"]:hover {
 				<tr>
 					<td colspan="2">
 						<div class="submitbutton">
-							<input type="submit" value="수정">
-							<input type="reset" value="수정취소">
+							<input type="submit" value="수정완료">
+							<input type="reset" value="다시작성">
 							<input type="button" onclick="location.href='gongjiboard'" value="목록">
 						</div>
 					</td>

@@ -306,9 +306,9 @@ img {
 		<table>
 			<tr>
 				<th>제 목</th>
-				<th>작성일자</th>
-				<th>추천수</th>
-				<th>조회수</th>
+				<th width="130px">작성일자</th>
+				<th width="80px">추천수</th>
+				<th width="80px">조회수</th>
 			</tr>
 			<tr>	
 				<td>[${list.tab}] ${list.title}</td>
@@ -390,7 +390,7 @@ img {
 				<table>	
 				<div class="title"><h1>댓글</h1></div>
 					<tr>
-						<th>닉네임</th>
+						<th width="150px">닉네임</th>
 						<th>내 용</th>
 					</tr>
 					
@@ -431,7 +431,7 @@ img {
 				<table>	
 				<div class="title"><h1>댓글</h1></div>
 					<tr>
-						<th>닉네임</th>
+						<th width="150px">닉네임</th>
 						<th>내 용</th>
 					</tr>
 					
@@ -480,7 +480,7 @@ img {
 				<table>
 				<div class="title"><h1>댓글</h1></div>
 						<tr>
-							<th>닉네임</th>
+							<th width="150px">닉네임</th>
 							<th>내 용</th>
 						</tr>
 						

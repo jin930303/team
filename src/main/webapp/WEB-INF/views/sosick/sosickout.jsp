@@ -279,8 +279,8 @@ img {
 			<thead>
 				<tr>
 					<th>제목</th>
-					<th>작성일시</th>
-					<th>조회수</th>
+					<th width="130px">작성일자</th>
+					<th width="80px">조회수</th>
 				</tr>
 			</thead>
 			<tbody>

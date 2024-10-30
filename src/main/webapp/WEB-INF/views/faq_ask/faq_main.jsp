@@ -230,7 +230,7 @@ table tbody tr:hover {
 					<li><a href="faq">FAQ</a></li>
 					<c:choose>
 						<c:when test="${adminloginstate == true}">
-						<li><a href="FAQ_in">FAQ 글 작성</a></li>
+						<li><a href="FAQ_in">FAQ 작성</a></li>
 						</c:when>
 					</c:choose>
 				</ul>
@@ -246,9 +246,9 @@ table tbody tr:hover {
 			<table>
 				<thead>
 					<tr>
-						<th>분류</th>
-						<th>제목</th>
-						<th>조회수</th>
+						<th width="80px">TAB</th>
+						<th width="340px">제목</th>
+						<th width="50px">조회수</th>
 					</tr>
 				</thead>
 				<tbody>

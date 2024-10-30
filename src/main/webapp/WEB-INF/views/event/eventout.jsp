@@ -276,10 +276,10 @@ img {
 		</div>
 		<table>
 			<tr>
-				<th>상 태</th>
+				<th width="100px">진행현황</th>
 				<th>제 목</th>
-				<th>작성일자</th>
-				<th>조회수</th>
+				<th width="130px">작성일자</th>
+				<th width="80px">조회수</th>
 				
 			</tr>	
 			<tr>	

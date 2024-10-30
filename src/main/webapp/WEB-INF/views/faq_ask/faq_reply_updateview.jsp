@@ -241,7 +241,7 @@ input[type="reset"]:hover {
 				<li><a href="faq">FAQ</a></li>
 				<c:choose>
 					<c:when test="${adminloginstate == true}">
-					<li><a href="FAQ_in">FAQ 글 작성</a></li>
+					<li><a href="FAQ_in">FAQ 작성</a></li>
 					</c:when>
 				</c:choose>
 			</ul>
