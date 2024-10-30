@@ -189,6 +189,12 @@
     border-left: 1px solid #ddd;  /*목차 - 게시판 사이 선*/
 }
 
+.title h1 {
+    text-align: left;
+    padding: 30px;
+    border-bottom: 2px solid #be241c;
+}
+
 .calendar-container {
 	margin-top: 10px;
 	padding-bottom: 10px;
@@ -281,7 +287,9 @@
 	
 <!-- 메인 콘텐츠 -->
 	<main class="main-container">
-		<h2>KBO 일정</h2>
+		<div class="title">
+			<h1>KBO 일정</h1>
+		</div>
 		<div class="calendar-container">
 			<div id="calendar"></div>
 		</div>

@@ -286,7 +286,6 @@ img {
 				<th>${list.estate}</th>
 				<th>${list.etitle}</th>
 				<td>${list.edate}</td>
-				
 				<td>${list.ecnt}</td>
 			</tr>	
 			<tr>    
