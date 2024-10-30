@@ -42,6 +42,7 @@
         font-size: 15px; 
         margin: 15px 0;
         text-align: left; 
+        height: 50px;
     }
     
     .product-price {     

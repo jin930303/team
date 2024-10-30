@@ -43,7 +43,7 @@
     }
 
     .product img {
-        width: 200px; /* 이미지 너비 */
+        width: 230px; /* 이미지 너비 */
         height: 200px; /* 이미지 높이 */
         object-fit: cover; /* 비율에 맞게 크기 조정 */
     }
@@ -54,6 +54,7 @@
         font-size: 15px; /* 폰트 크기 */
         margin: 15px 0; /* 여백 설정 */
         text-align: left; /* 왼쪽 정렬 */
+        height: 50px;
     }
 
     .product-price {
@@ -69,8 +70,8 @@
         padding: 10px 20px; /* 내부 여백 설정 */
         border: none; /* 테두리 제거 */
         border-radius: 5px; /* 모서리 둥글게 */
-        background-color: #d3d3d3; /* 연한 회색 배경 */
-        color: black; /* 검정색 텍스트 */
+        background-color: #be241c; /* 연한 회색 배경 */
+        color: white; /* 검정색 텍스트 */
         cursor: pointer; /* 포인터 커서 */
         transition: background-color 0.3s; /* 배경색 변화 애니메이션 */
         font-size: 15px; /* 폰트 크기 */
@@ -78,21 +79,21 @@
     }
 
     #selectAllButton:hover {
-        background-color: #c0c0c0; /* 호버 시 조금 어두운 회색 */
+        background-color: #8e1a14; /* 호버 시 조금 어두운 회색 */
     }
 
     input[type="submit"] {
         padding: 10px 20px; /* 내부 여백 설정 */
         border: none; /* 테두리 제거 */
         border-radius: 5px; /* 모서리 둥글게 */
-        background-color: black; /* 배경색 설정 */
+        background-color: #be241c; /* 배경색 설정 */
         color: white; /* 텍스트 색상 */
         cursor: pointer; /* 포인터 커서 */
         transition: background-color 0.3s; /* 배경색 변화 애니메이션 */
     }
 
     input[type="submit"]:hover {
-        background-color: #333; /* 호버 시 색상 변화 */
+        background-color: #8e1a14; /* 호버 시 색상 변화 */
     }
 
     .divider1 {  
@@ -104,36 +105,65 @@
     .button-container {
         margin-top: 40px; /* 상품 출력 부분과의 간격 */
     }
-    
+     /* 기존 코드 유지, 체크박스 숨김 */
+    input[type="checkbox"] {
+        display: none; /* 체크박스 숨김 */
+    }
+
+    /* 체크 상태 표시를 위한 스타일 */
+    .product.selected {
+        background-color: #e0f7fa; /* 선택 시 배경색 변경 */
+        border-color: #0097a7; /* 테두리 색상 변경 */
+    }
 </style>
 
     
-    <script>
-        // 선택 삭제 확인
-        function confirmDelete() {
-            return confirm('선택한 항목들을 삭제하시겠습니까?');
-        }
+   <script>
+    function confirmDelete() {
+        return confirm('선택한 항목들을 삭제하시겠습니까?');
+    }
 
-        // 전체 선택/해제 기능
-        function toggleSelectAll() {
-    const checkboxes = document.querySelectorAll('input[name="selectedItems"]');
-    const allChecked = Array.from(checkboxes).every(checkbox => checkbox.checked);
-    checkboxes.forEach((checkbox) => {
-        checkbox.checked = !allChecked; // 현재 상태와 반대로 설정
+    function toggleSelectAll() {
+        const checkboxes = document.querySelectorAll('input[name="selectedItems"]');
+        const allChecked = Array.from(checkboxes).every(checkbox => checkbox.checked);
+        
+        checkboxes.forEach((checkbox) => {
+            checkbox.checked = !allChecked; // 현재 상태와 반대로 설정
+            const product = checkbox.closest('.product');
+
+            // 체크 상태에 따라 클래스 추가/제거
+            if (checkbox.checked) {
+                product.classList.add('selected');
+            } else {
+                product.classList.remove('selected');
+            }
+        });
+    }
+
+    document.addEventListener('DOMContentLoaded', function() {
+        document.querySelectorAll('.product').forEach((product) => {
+            product.addEventListener('click', function() {
+                const checkbox = product.querySelector('input[type="checkbox"]');
+                checkbox.checked = !checkbox.checked;
+
+                // 체크 여부에 따라 선택된 스타일 적용
+                if (checkbox.checked) {
+                    product.classList.add('selected');
+                } else {
+                    product.classList.remove('selected');
+                }
+            });
+        });
     });
-}
-
-    </script>
+</script>
 </head>
 <body>
 <h1>관심상품</h1> 
 <hr class="divider1">
 <form action="like_items_delete" method="post" onsubmit="return confirmDelete();">
-    
     <div class="product-container">
         <c:forEach items="${list}" var="like">
             <div class="product">
-                <!-- 개별 상품 선택 체크박스 -->
                 <a href="productdetail?itemnum=${like.itemnum}">
                     <img src="./image/${like.image1}" alt="Product Image" width="100px">
                 </a>
@@ -145,12 +175,10 @@
             </div>
         </c:forEach>
     </div>
-    <!-- 전체 선택 체크박스 -->
-<div class="button-container">
-    <button type="button" id="selectAllButton" onclick="toggleSelectAll()">전체 선택</button>
-    <input type="submit" value="선택 삭제">
-</div>
-
+    <div class="button-container">
+        <button type="button" id="selectAllButton" onclick="toggleSelectAll()">전체 선택</button>
+        <input type="submit" value="선택 삭제">
+    </div>
 </form>
 </body>
 </html>

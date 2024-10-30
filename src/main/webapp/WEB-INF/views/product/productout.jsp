@@ -47,6 +47,7 @@
     font-size: 15px; 
     margin: 15px 0;
     text-align: left; /* 왼쪽 정렬 추가 */
+    height: 50px; 
 }
     
     .product-price {     /* 가격 폰트 설정 */  

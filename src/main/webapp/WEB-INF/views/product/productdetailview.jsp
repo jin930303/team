@@ -60,6 +60,10 @@ th, td {
     margin-left: 10px; /* 왼쪽 여백 설정 */
 }
 
+.d-image{
+    width: 750px; /* 이미지 너비 설정 */
+}
+
 .button {
     background-color: black; /* 기본 버튼 배경 색상 */
     color: white; /* 버튼 글자 색상 */
@@ -408,7 +412,7 @@ label {
             
             <tr>
                 <td colspan="5" align="center">
-                    <img src="./image/${dto.dimage}" class="main-image" alt="상세 이미지">
+                    <img src="./image/${dto.dimage}" class="d-image" alt="상세 이미지">
                 </td>
             </tr>
         </table>

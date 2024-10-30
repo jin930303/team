@@ -141,13 +141,12 @@ else grade = "일반회원";
     <tr>
         <td colspan="2" class="btn-container">
             <input type="button" class="button" value="정보수정" onclick="location.href='update?id=${dto1.id}'"> 
+            <input type="button" class="button3" value="회원탈퇴" onclick="location.href='delete?id=${dto1.id}&pw=${dto1.pw}'">
             <input type="button" class="button1" value="메인으로" onclick="location.href='main'"> 
             <input type="button" class="button2" value="장바구니" onclick="location.href='cart'"> 
         </td>
     </tr>
 </table>
-<div class="btn-container">
-    <input type="button" class="button3" value="회원탈퇴" onclick="location.href='delete?id=${dto1.id}&pw=${dto1.pw}'">
-</div>
+
 </body>
 </html>
