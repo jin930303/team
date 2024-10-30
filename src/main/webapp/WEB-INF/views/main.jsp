@@ -61,14 +61,14 @@
        }
   .carousel-inner > .item > img,
   .carousel-inner > .item > a > img {
-    width: 70%;
+    height:550px; 
+    width:1300px;
     margin: auto;
   }
   .main-container{
     display: flex !important;
     justify-content: center; /* 가로 중앙 정렬 */
     align-items: center;     /* 세로 중앙 정렬 (필요할 경우) */
-    width: 70%;
     height: 100%;            /* 부모 요소에 맞추기 위해 높이 설정 */
     margin: 0 auto !important; /* 상하 여백을 없애고 가로 중앙에 배치 */
 	padding-bottom:60px;
@@ -169,22 +169,58 @@
     <ol class="carousel-indicators">
       <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
       <li data-target="#myCarousel" data-slide-to="1"></li>
+      <li data-target="#myCarousel" data-slide-to="2"></li>
+      <li data-target="#myCarousel" data-slide-to="3"></li>
+      <li data-target="#myCarousel" data-slide-to="4"></li>
+      <li data-target="#myCarousel" data-slide-to="5"></li>
     </ol>
 
     <!-- Wrapper for slides -->
     <div class="carousel-inner" role="listbox">
 
       <div class="item active">
+      <a href="pitcherallround">
+        <img src="./image/글러브-투수.jpg" alt="글러브-투수">
+		</a>
+        <div class="carousel-caption">
+        </div>
+      </div>
+
+      <div class="item">
       <a href="outfielder">
-        <img src="./image/메인이미지.jpg" alt="글러브야수" style="height:100%; width:auto;">
+        <img src="./image/글러브-야수.jpg" alt="글러브-야수">
 		</a>
         <div class="carousel-caption">
         </div>
       </div>
       
       <div class="item">
-      <a href="pitcherallround">
-        <img src="./image/메인이미지.jpg" alt="글러브투수" style="height:100%; width:auto;">
+      <a href="eventdetail?evnum=4">
+        <img src="./image/무료배송.jpg" alt="무료배송">
+        </a>
+        <div class="carousel-caption">
+        </div>
+      </div>
+      
+      <div class="item">
+      <a href="eventdetail?evnum=2">
+        <img src="./image/자수이벤트-메인.jpg" alt="자수이벤트">
+        </a>
+        <div class="carousel-caption">
+        </div>
+      </div>
+      
+      <div class="item">
+      <a href="eventdetail?evnum=5">
+        <img src="./image/할인.jpg" alt="할인">
+        </a>
+        <div class="carousel-caption">
+        </div>
+      </div>
+      
+      <div class="item">
+      <a href="eventdetail?evnum=3">
+        <img src="./image/자사몰 오픈 감사 이벤트.jpg" alt="오픈이벤트">
         </a>
         <div class="carousel-caption">
         </div>
