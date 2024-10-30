@@ -25,7 +25,6 @@
 <style type="text/css">
 	body {
 		font-family: Arial, sans-serif;
-		background-color: #f0f0f0;
 		margin: 0;
 		padding: 20px;
 		background-size: cover;			/* 이미지가 화면 전체를 덮도록 설정 */
