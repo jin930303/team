@@ -6,29 +6,27 @@
 
 	<insert id="memberinput">
 		insert into member (id, nickname, pw, name, birth, phone, address, email, grade_code, total, auth) 
-		values(#{param1}, #{param2}, #{param3}, #{param4}, #{param5}, #{param6}, #{param7}, #{param8}, '001', 0, '002')
+		values(#{id}, #{nickname}, #{pw}, #{name}, #{birth}, #{phone}, #{address}, #{address}, '001', 0, '002')
 	</insert>
 	
 	<select id="memberout" resultType="com.mbc.team.member.MemberDTO">
-		 select m.*, mg.grade_name
-    FROM member m
-    JOIN member_grade mg ON m.grade_code = mg.grade_code
+		 select m.*, mg.grade_name from member m join member_grade mg on m.grade_code = mg.grade_code
 	</select>
 	
 	<select id="idcheck" resultType="int">
-		select count(*) from member where id=#{param1}
+		select count(*) from member where id=#{id}
 	</select>
 	
 	<select id="nicknamecheck" resultType="int">
-		select count(*) from member where nickname=#{param1}	
+		select count(*) from member where nickname=#{nickname}	
 	</select>
 	
 	<select id="nicknamecheck1" resultType="int">
-		select count(*) from member where nickname=#{param1}	
+		select count(*) from member where nickname=#{nickname}	
 	</select>
 	
 	<select id="emailcheck" resultType="int">
-		select count(*) from member where email=#{param1}	
+		select count(*) from member where email=#{email}	
 	</select>
 	
 	<select id="phonecheck" resultType="int">
@@ -38,6 +36,5 @@
 	<delete id="memberdelete">
 	delete from member where id=#{id}
 	</delete>
-	
 	
 </mapper>

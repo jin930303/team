@@ -25,11 +25,11 @@
 		select count(*) from cart where id=#{param1} and itemnum=#{param2}
 	</select>
 	
-	<select id="getCartItemsByUserId" resultType="com.mbc.team.cart.CartItem">
+	<select id="getCartItems" resultType="com.mbc.team.cart.CartItem">
 		select * from cart where id=#{id}
 	</select>
 	
-	<delete id="deleteCartItemByUserIdAndItemNum">
+	<delete id="deleteCartItem">
     	delete from cart where id=#{param1} and itemnum=#{param2}
 	</delete>
 

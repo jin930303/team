@@ -23,17 +23,20 @@ public class LikeController {
 
 	@Autowired
 	SqlSession sqlSession;
+	HttpSession hs;
+	LikeService ls;
+	
 	// 경로 수정해야합니다.
 	String path = "C:\\Users\\3-16\\git\\team\\src\\main\\webapp\\image";
 
 	// 찜하기
 	@RequestMapping(value = "/like_save")
 	public String like1(HttpServletRequest request, HttpServletResponse response) throws IOException {
-		HttpSession hs = request.getSession();
+		hs = request.getSession();
 		Boolean loginState = (Boolean) hs.getAttribute("loginstate");
 		int itemnum = Integer.parseInt(request.getParameter("itemnum"));
 		LoginDTO dto3 = (LoginDTO) hs.getAttribute("dto3");
-		LikeService ls2 = sqlSession.getMapper(LikeService.class);
+		ls = sqlSession.getMapper(LikeService.class);
 
 		if (!loginState || loginState == null) {
 
@@ -44,7 +47,7 @@ public class LikeController {
 			pww.close();
 			return "redirect:/login";
 		}
-		ls2.like_insert(itemnum, dto3.getId());
+		ls.like_insert(itemnum, dto3.getId());
 
 		return "redirect:/main";
 
@@ -53,11 +56,11 @@ public class LikeController {
 	// 찜 목록
 	@RequestMapping(value = "/like_product")
 	public String like2(HttpServletRequest request, Model mo, HttpServletResponse response) throws IOException {
-		HttpSession hs = request.getSession();
+		hs = request.getSession();
 		LoginDTO dto3 = (LoginDTO) hs.getAttribute("dto3");
 		Boolean loginState = (Boolean) hs.getAttribute("loginstate");
 		
-		LikeService ls = sqlSession.getMapper(LikeService.class);
+		ls = sqlSession.getMapper(LikeService.class);
 		
 		
 		if (!loginState || loginState == null) {
@@ -82,7 +85,7 @@ public class LikeController {
 	    // 체크박스로 선택한 항목들 가져오기
 	    String[] selectedItems = request.getParameterValues("selectedItems");
 
-	    LikeService ls = sqlSession.getMapper(LikeService.class);
+	    ls = sqlSession.getMapper(LikeService.class);
 
 	    if (selectedItems != null) {
 	        // Arrays.asList(selectedItems)는 고정된 크기의 리스트를 반환하므로 ArrayList로 변환

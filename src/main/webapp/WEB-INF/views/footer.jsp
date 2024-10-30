@@ -8,7 +8,6 @@
 </head>
 <body>
 <footer>
-fsdsd
 </footer>
 </body>
 </html>

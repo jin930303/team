@@ -5,11 +5,14 @@
 <!DOCTYPE html>
 <html>
 <head>
-<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Do+Hyeon&family=Gowun+Batang&family=Nanum+Gothic&family=Noto+Sans+KR:wght@100..900&family=Song+Myung&display=swap" rel="stylesheet">
 
 <meta charset="UTF-8">
 <title>Product Grid</title>
 <style>
+
     .product-container {   /*상품 배열 하는거*/
         display: grid;
         grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); 
@@ -39,23 +42,24 @@
     }
 
    .product-title {    
-    font-family: 'Roboto', sans-serif; /* Roboto 폰트 적용 */
+    font-family: "Noto Sans KR", sans-serif; /* 기본 폰트 설정 */
     font-weight: 300; /* 얇은 두께 설정 */
     font-size: 15px; 
     margin: 15px 0;
     text-align: left; /* 왼쪽 정렬 추가 */
+    height: 50px; 
 }
     
     .product-price {     /* 가격 폰트 설정 */  
-    font-family: 'Roboto', sans-serif; /* Roboto 폰트 적용 */
+        font-family: "Noto Sans KR", sans-serif; /* 기본 폰트 설정 */
+        font-size: 15px;
         color: #d32f2f;
-        font-size: 15px; 
         margin: 10px 0;
         text-align: left; /* 왼쪽 정렬 추가 */
     }
     
  .search-sort-container {
- 
+    font-family: "Noto Sans KR", sans-serif; /* 기본 폰트 설정 */
     display: flex;
     justify-content: flex-end;
     margin: 20px;
@@ -87,6 +91,7 @@
     margin-top: 5px;
     margin-bottom: 45px;  
     }
+    
      .divider2 {   /* 상품 경계선 */  
     border: none; 
     border-top: 1px solid #ddd; 
@@ -95,17 +100,8 @@
     margin-top: -5px;
     margin-bottom: 18px;   
     }
-    
-.divider3 {   /* 상품 경계선 */  
-    border: none; 
-    border-top: 2px solid #ddd; 
-    width: 65%;  
-    margin: 20px auto; 
-    margin-top: -20px;
-    margin-bottom: 80px;  
-}
 
-.divider4 {   /* 상품 경계선 */  
+.divider3 {   /* 상품 경계선 */  
    border: none; 
     border-top: 1px solid #ddd; 
     width: 65%;  
@@ -148,7 +144,7 @@
     }
 
 .category-title {
- font-family: 'Roboto', sans-serif; /* Roboto 폰트 적용 */
+    font-family: "Noto Sans KR", sans-serif;
     font-size: 24px; /* 제목 크기 설정 */
     font-weight: bold; /* 굵게 설정 */
     text-align: center; /* 중앙 정렬 */
@@ -355,11 +351,10 @@
 	    <c:when test="${scg_code == 'etc007'}">
 	        <span>기타용품 > </span><span>베이스</span>
 	    </c:when>
-       
     </c:choose>
 </div>
 
-<hr class="divider4"> <!-- 경계선 추가 -->
+<hr class="divider3"> <!-- 경계선 추가 -->
 
 <div class="category-container">
     <nav>
@@ -511,42 +506,16 @@
     </c:otherwise>
 </c:choose>
 
-
-
-        <c:choose>
-            <c:when test="${loginstate eq true}">
-                <c:set var="isLiked" value="false" />
-                <c:forEach items="${like}" var="like">
-                    <c:if test="${sessionScope.dto3.id eq like.id && aa.itemnum eq like.itemnum}">
-                        <c:set var="isLiked" value="true" />
-                    </c:if>
-                </c:forEach>
-
-                <c:choose>
-                    <c:when test="${isLiked eq true}">
-                        <div>
-                            <a href="like_save?itemnum=${aa.itemnum}">
-                               👍 따봉
-                            </a>
-                        </div>
-                    </c:when>
-                    <c:otherwise>
-                        <div>
-                            <a href="like_save?itemnum=${aa.itemnum}"> 	
-                                👍 따봉
-                            </a>
-                        </div>
-                    </c:otherwise>
-                </c:choose>
-            </c:when>
-
-		<c:otherwise>
-		    <div>
-		        <a href="login?redirect" onclick="showLoginAlert()">👍 따봉</a>
-		    </div>
-		</c:otherwise>
-		
-        </c:choose>
+<c:choose>
+	<c:when test="${loginstate==true}">
+		<div><a href="like_save?itemnum=${aa.itemnum}">👍 따봉</a></div>
+	</c:when>
+	
+	<c:otherwise>
+		<div><a href="login?redirect" onclick="showLoginAlert()">👍 따봉</a></div>
+	</c:otherwise>
+</c:choose>
+	
     </div>
 </c:forEach>
 </div>

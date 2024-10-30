@@ -4,24 +4,6 @@
 <!DOCTYPE html>
 <html>
 <head>
-<script>
-	let fileCount = 1;
-	const maxFiles = 3;
-		
-	function addFileInput() {
-    if (fileCount >= maxFiles) {
-	    alert("최대 3장까지 첨부 가능합니다.");
-	return;
-	}
-					
-    fileCount++;
-    const newInput = document.createElement('input');
-    newInput.type = 'file';
-    newInput.name = `fimage${fileCount}`;
-					
-    document.getElementById('fileInputs').appendChild(newInput);
-}
-</script>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>문의글 작성</title>
@@ -113,9 +95,7 @@
 	flex: 1;
 	/*width: 100%;*/
     max-width: 1100px;
-    padding: 20px;
-    padding-left: 60px;
-    padding-right: 60px;
+    padding: 20px 60px;
     border-right: 1px solid #ddd;  /*목차 - 게시판 사이 선*/
     border-left: 1px solid #ddd;  /*목차 - 게시판 사이 선*/
 }
@@ -127,9 +107,10 @@ table {
     text-align: center;
 }
 
-caption {
-	color: black;
-	text-align: center;
+.title h1 {
+	text-align: left;
+	padding: 30px;
+	border-bottom: 2px solid #be241c;
 }
 
 table tr th, 
@@ -224,15 +205,12 @@ input[type="reset"] {
     margin-top: 8px; /* 입력 필드 간 간격 */
 	padding: 12px 20px; /* 버튼 내부 여백 */
 	font-size: 14px; /* 버튼 글씨 크기 */
-	background-color: #be241c; /* 버튼 배경색 */
 	color: white; /* 글자 색상 */
+	background-color: #be241c; /* 버튼 배경색 */
 	border: none; /* 테두리 제거 */
 	border-radius: 5px; /* 둥근 모서리 */
 	cursor: pointer; /* 포인터 모양 변경 */
 	transition: background-color 0.3s ease; /* 배경색 전환 */
-}
-.submitbutton {
-	text-align: center;
 }
 
 /* 중복확인 버튼 호버 효과 */
@@ -241,17 +219,20 @@ input[type="submit"]:hover,
 input[type="reset"]:hover {
 	background-color: #8e1a14;
 }
+
+.submitbutton {
+	text-align: center;
+}
 </style>
 </head>
 <body>
 <div class="flex_container">
-		<!-- 사이드 메뉴바 -->
+<!-- 사이드 메뉴바 -->
 	<div class="sidebar_container">
-		<div class="sidebar_title"><h2>1:1 문의하기</h2></div>
+		<div class="sidebar_title"><h2>문의 내역</h2></div>
 		<aside class="sidebar">
 			<ul>
 				<li><a href="faq_community">고객센터 홈</a></li>
-				<li><a href="gongjiboard">공지사항</a></li>
 				<c:choose>
 					<c:when test="${loginstate == true}">
 						<li><a href="faqin">1:1 문의하기</a></li>
@@ -259,13 +240,20 @@ input[type="reset"]:hover {
 				</c:choose>
 				<li><a href="faqout">문의 내역</a></li>
 				<li><a href="faq">FAQ</a></li>
+				<c:choose>
+					<c:when test="${adminloginstate == true}">
+					<li><a href="FAQ_in">FAQ 글 작성</a></li>
+					</c:when>
+				</c:choose>
 			</ul>
 		</aside>
 	</div>
-		<div class="main-container">
+		<main class="main-container">
 			<form action="faqsave" method="post" enctype="multipart/form-data">
+				<div class="title">
+					<h1>문의글 WRITE</h1>
+				</div>
 				<table>
-					<caption><h2>문의글 작성</h2></caption>
 					<tr>
 						<th>문의 종류</th>
 						<td><select name="tab">
@@ -300,13 +288,12 @@ input[type="reset"]:hover {
 					<tr>
 					    <th>첨부 이미지</th>
 					    <td>
-					        <div id="fileInputs">
-					            <input type="file" name="fimage1" onclick="addFileInput()">
-					        </div>
+					        <input type="file" name="fimage1">
+					        <input type="file" name="fimage2">
+					    	<input type="file" name="fimage3">
 					    </td>
 					</tr>
 					<tr>
-						<!-- 공개/비공개 체크박스 추가 -->
 					    <td>
 						    <label for="openclose">공개 여부</label>
 					    </td>
@@ -324,7 +311,7 @@ input[type="reset"]:hover {
 					</tr>
 				</table>
 			</form>
-		</div>
+		</main>
 	</div>	
 </body>
 </html>

@@ -10,6 +10,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -20,43 +21,45 @@ public class MemberController {
 
 	@Autowired
 	SqlSession sqlSession;
-
+	MemberService ms;
+	
 	@RequestMapping(value = "/mypage")
-	public String mypage() {return "mypage";}
+	public String mypage() {
+		
+		return "mypage";
+	}
 	
 	@RequestMapping(value = "/memberinput")
 	public String member() {
+		
 		return "memberinput";
 	}
 
 	@RequestMapping(value = "/membersave")
-	public String member0(HttpServletRequest request) {
-		String id = request.getParameter("id");
-		String pw1 = request.getParameter("pw");
+	public String member0(@ModelAttribute MemberDTO memberDTO,@RequestParam("pw") String rawPw, 
+			@RequestParam("phone0") String phone0,@RequestParam("phone1") String phone1,
+			@RequestParam("phone2") String phone2,@RequestParam("fdomain") String fdomain,
+			@RequestParam("bdomain") String bdomain,@RequestParam("mainaddress") String mainaddress,
+			@RequestParam("detailaddress") String detailaddress,@RequestParam("extraaddress") String extraaddress
+			) {
 		PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
-		String pw = passwordEncoder.encode(pw1);
-		String nickname = request.getParameter("nickname");
-		String name = request.getParameter("name");
-		String birth = request.getParameter("birth");
-		String phone1 = request.getParameter("phone1");
-		String phone2 = request.getParameter("phone2");
-		String phone = "010-" + phone1 + "-" + phone2;
-		String fdomain = request.getParameter("fdomain");
-		String bdomain = request.getParameter("bdomain");
+		String pw = passwordEncoder.encode(rawPw);
+		String phone = phone0 +"-"+ phone1 + "-" + phone2;
 		String email = fdomain + "@" + bdomain;
-		String mainaddress = request.getParameter("mainaddress");
-		String detailaddress = request.getParameter("detailaddress");
-		String extraaddress = request.getParameter("extraaddress");
 		String address = mainaddress + detailaddress + extraaddress;
-		MemberService ms = sqlSession.getMapper(MemberService.class);
-		ms.memberinput(id, nickname, pw, name, birth, phone, address, email);
+		memberDTO.setPw(pw);
+		memberDTO.setPhone(phone);
+		memberDTO.setEmail(email);
+		memberDTO.setAddress(address);
+		ms = sqlSession.getMapper(MemberService.class);
+		ms.memberinput(memberDTO);
 
 		return "redirect:/main";
 	}
 	
 	@RequestMapping(value = "/memberout")
 	public String memberout(Model mo) {
-		MemberService ms = sqlSession.getMapper(MemberService.class);
+		ms = sqlSession.getMapper(MemberService.class);
 		ArrayList<MemberDTO>list=ms.memberout();
 		mo.addAttribute("list",list);
 		
@@ -65,24 +68,26 @@ public class MemberController {
 	
 	@ResponseBody
 	@RequestMapping(value = "/memberdelete")
-	public String memberdelete(Model mo,@RequestParam("id") String id) {
-		MemberService ms = sqlSession.getMapper(MemberService.class);
+	public String memberdelete(Model mo,HttpServletRequest request) {
+		
+		String id=request.getParameter("id");
+		ms = sqlSession.getMapper(MemberService.class);
 		 try {
 	           ms.memberdelete(id);
-	            return "success";  
-	        } catch (Exception e) {
+	            return "success";
+ 
+	        } 
+		 catch (Exception e) {
+			 
 	            return "fail";  
 	        }
 	    }
-	
-	
-	
 	
 	@ResponseBody
 	@RequestMapping(value = "/idcheck1")
 	public String member2(HttpServletRequest request) {
 		String id = request.getParameter("id");
-		MemberService ms = sqlSession.getMapper(MemberService.class);
+		ms = sqlSession.getMapper(MemberService.class);
 		int count = ms.idcheck(id);
 		if (count == 0) {
 			return "ok";
@@ -95,7 +100,7 @@ public class MemberController {
 	@RequestMapping(value = "/nicknamecheck1")
 	public String member3(HttpServletRequest request) {
 		String nickname = request.getParameter("nickname");
-		MemberService ms = sqlSession.getMapper(MemberService.class);
+		ms = sqlSession.getMapper(MemberService.class);
 		int count = ms.nicknamecheck(nickname);
 		if (count == 0) {
 			return "ok";
@@ -108,7 +113,7 @@ public class MemberController {
 	@RequestMapping(value = "/emailcheck1")
 	public String member4(HttpServletRequest request) {
 		String email = request.getParameter("email");
-		MemberService ms = sqlSession.getMapper(MemberService.class);
+		ms = sqlSession.getMapper(MemberService.class);
 		int count = ms.emailcheck(email);
 		if (count == 0) {
 			return "ok";
@@ -119,16 +124,14 @@ public class MemberController {
 
 	@RequestMapping(value = "/phonecheck1", method = RequestMethod.POST)
 	@ResponseBody
-	public String phoneCheck(@RequestParam("phone") String phone) {
-		// 전화번호 중복 확인 로직
-		MemberService ms = sqlSession.getMapper(MemberService.class);
+	public String phoneCheck(HttpServletRequest request) {
+		String phone=request.getParameter("phone");
+		ms = sqlSession.getMapper(MemberService.class);
 		int count = ms.phonecheck(phone);
-
 		if (count == 0) {
-			return "ok"; // 사용 가능한 전화번호
+			return "ok"; 
 		} else {
-			return "notok"; // 사용 중인 전화번호
+			return "notok"; 
 		}
 	}
-
 }

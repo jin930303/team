@@ -14,9 +14,9 @@ public interface CartService {
 
 	void deleteSelectItems(@Param("id") String id, @Param("items") List<String> items);
 
-	public List<CartItem> getCartItemsByUserId(String id);
+	public List<CartItem> getCartItems(String id);
 
-	public void deleteCartItemByUserIdAndItemNum(String id, int itemnum);
+	public void deleteCartItem(String id, int itemnum);
 
 
 

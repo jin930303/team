@@ -92,9 +92,7 @@
 	flex: 1;
 	/*width: 100%;*/
     max-width: 1100px;
-    padding: 20px;
-    padding-left: 60px;
-    padding-right: 60px;
+    padding: 20px 60px;
     border-right: 1px solid #ddd;  /*목차 - 게시판 사이 선*/
     border-left: 1px solid #ddd;  /*목차 - 게시판 사이 선*/
 }
@@ -106,9 +104,10 @@ table {
     text-align: center;
 }
 
-caption {
-	color: black;
-	text-align: center;
+.title h1 {
+	text-align: left;
+	padding: 30px;
+	border-bottom: 2px solid #be241c;
 }
 
 table tr th, 
@@ -169,19 +168,79 @@ input[type="checkbox"] {
 /* textarea 스타일 */
 textarea {
     resize: vertical; /* 사용자가 세로 크기 조절 가능하도록 설정 */
+    padding: 12px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 14px;
+    margin-top: 8px;
+    width: 100%; /* 텍스트영역이 td 내에서 전체 너비를 차지 */
+    box-sizing: border-box;
+    background-color: #fff;
+}
+/* input 필드 포커스 시 스타일 */
+input[type="text"]:hover,
+input[type="file"]:hover,
+textarea:hover,
+select:hover {
+    border-color: #be241c; /* 포커스 시 붉은색 테두리 */
+    outline: none; /* 포커스 시 외곽선 제거 */
+}
+
+/* input 필드 포커스 시 스타일 */
+input[type="text"]:focus,
+input[type="file"]:focus,
+textarea:focus,
+select:focus {
+    border-color: #be241c; /* 포커스 시 붉은색 테두리 */
+    outline: none; /* 포커스 시 외곽선 제거 */
+}
+
+/* 중복확인 버튼 스타일 */
+input[type="button"],
+input[type="submit"],
+input[type="reset"] {
+    margin-top: 8px; /* 입력 필드 간 간격 */
+	padding: 12px 20px; /* 버튼 내부 여백 */
+	font-size: 14px; /* 버튼 글씨 크기 */
+	color: white; /* 글자 색상 */
+	background-color: #be241c; /* 버튼 배경색 */
+	border: none; /* 테두리 제거 */
+	border-radius: 5px; /* 둥근 모서리 */
+	cursor: pointer; /* 포인터 모양 변경 */
+	transition: background-color 0.3s ease; /* 배경색 전환 */
+}
+
+/* 중복확인 버튼 호버 효과 */
+input[type="button"]:hover,
+input[type="submit"]:hover,
+input[type="reset"]:hover {
+	background-color: #8e1a14;
+}
+
+.submitbutton {
+	text-align: center;
+}
+
+td img {
+	display: inline-block; 
+    margin: 5px auto;  
+    border-radius: 4px;
+    height: 150px;
+    vertical-align: middle;
+}
+</style>
  
 <meta charset="UTF-8">
 <title>Insert title here</title>
 </head>
 <body>
 <div class="flex_container">
-	<!-- 사이드 메뉴바 -->
+<!-- 사이드 메뉴바 -->
 	<div class="sidebar_container">
-		<div class="sidebar_title"><h2>1:1 문의하기</h2></div>
+		<div class="sidebar_title"><h2>문의 내역</h2></div>
 		<aside class="sidebar">
 			<ul>
 				<li><a href="faq_community">고객센터 홈</a></li>
-				<li><a href="gongjiboard">공지사항</a></li>
 				<c:choose>
 					<c:when test="${loginstate == true}">
 						<li><a href="faqin">1:1 문의하기</a></li>
@@ -189,68 +248,96 @@ textarea {
 				</c:choose>
 				<li><a href="faqout">문의 내역</a></li>
 				<li><a href="faq">FAQ</a></li>
+				<c:choose>
+					<c:when test="${adminloginstate == true}">
+					<li><a href="FAQ_in">FAQ 글 작성</a></li>
+					</c:when>
+				</c:choose>
 			</ul>
 		</aside>
 	</div>
-	<form action="faqupdate2" method="post" enctype="multipart/form-data">
-		<table>
-			<tr>
-				<td><input type="number" name="cnum" value="${dto.cnum}"
-					readonly></td>
-			</tr>
-			<tr>
-				<th>문의 종류</th>
-				<td><select name="tab">
-						<option value="회원관련 문의">회원관련 문의</option>
-						<option value="이벤트/혜택">이벤트/혜택</option>
-						<option value="상품옵션 문의">상품옵션</option>
-						<option value="교환/환불 문의">교환/환불</option>
-						<option value="배송 문의">배송 문의</option>
-						<option value="기타 문의">기타 문의</option>
-				</select></td>
-			</tr>
-			<tr>
-				<th>작성자</th>
-				<td><input type="text" name="nickname" value="${dto.nickname}"></td>
-			</tr>
-			<tr>
-				<th>제목</th>
-				<td><input type="text" name="title" value="${dto.title}"></td>
-			</tr>
-			<tr>
-				<th>문의 내용</th>
-				<td><textarea rows="10" cols="25" name="fcontents">${dto.fcontents}</textarea>
-				</td>
-			</tr>
-			<tr>
-				<th>첨부이미지</th>
-
-				<td>
-					<div id="fileInputs">
-						<input type="file" name="fimage1" onclick="addFileInput()">
-					</div>
-				</td>
-				<td><img src="./image/${dto.fimage1}" width="80px" height="70px"> 
-					<img src="./image/${dto.fimage2}" width="80px" height="70px"> 
-					<img src="./image/${dto.fimage3}" width="80px" height="70px">
-				</td>
-			</tr>
-			<tr>
-				<!-- 공개/비공개 체크박스 -->
-			    <td>
-				    <label for="openclose">공개 여부:</label>
-				    <input type="checkbox" name="openclose" value="공개"> 공개
-				    <input type="checkbox" name="openclose" value="비공개"> 비공개
-				</td>
-			</tr>
-			<tr>
-				<td>
-					<input type="submit" value="수정 완료">
-					<input type="button" value="수정 취소" onclick="location.href='faqout'">
-				</td>
-			</tr>
-		</table>
-	</form>
+	<main class="main-container">
+		<form action="faqupdate2" method="post" enctype="multipart/form-data">
+			<div class="title">
+				<h1>문의글 UPDATE</h1>
+			</div>
+			<table>
+				<tr>
+					<th>문의 번호</th>
+					<td><input type="text" name="cnum" value="${dto.cnum}" readonly></td>
+				</tr>
+				<tr>
+					<th>문의 종류</th>
+					<td><select name="tab">
+							<option value="회원관련 문의">회원관련 문의</option>
+							<option value="이벤트/혜택">이벤트/혜택</option>
+							<option value="상품옵션 문의">상품옵션</option>
+							<option value="교환/환불 문의">교환/환불</option>
+							<option value="배송 문의">배송 문의</option>
+							<option value="기타 문의">기타 문의</option>
+					</select></td>
+				</tr>
+				<tr>
+					<th>작성자</th>
+					<td><input type="text" name="nickname" value="${dto.nickname}"></td>
+				</tr>
+				<tr>
+					<th>제목</th>
+					<td><input type="text" name="title" value="${dto.title}"></td>
+				</tr>
+				<tr>
+					<th>문의 내용</th>
+					<td><textarea rows="10" cols="25" name="fcontents">${dto.fcontents}</textarea>
+					</td>
+				</tr>
+				<tr>
+				    <th>첨부 이미지</th>
+				    <td>
+				    <!-- 
+				        <div id="fileInputs">
+				            <input type="file" name="fimage1">
+				        </div>
+				        <button type="button" onclick="addFileInput()">이미지 추가</button>
+				     -->
+				     	<input type="file" name="fimage1">
+						<input type="file" name="fimage2">
+					    <input type="file" name="fimage3">
+				    </td>
+				</tr>
+				<tr>
+					<td colspan="2" style="text-align: center;">
+						<c:if test="${dto.fimage1 != null}">
+						    <img src="./image/${dto.fimage1}" height="100px">
+					    </c:if>
+					    <c:if test="${dto.fimage2 != null}">
+							<img src="./image/${dto.fimage2}" height="100px"> 
+						</c:if>
+						<c:if test="${dto.fimage3 != null}">
+							<img src="./image/${dto.fimage3}" height="100px">
+						</c:if>	
+					</td>
+				</tr>
+				<tr>
+					<!-- 공개/비공개 체크박스 -->
+				    <td>
+					    <label for="openclose">공개 여부</label>
+					</td>
+					<td>
+					    <input type="checkbox" name="openclose" value="공개"> 공개
+					    <input type="checkbox" name="openclose" value="비공개"> 비공개
+					</td>
+				</tr>
+				<tr>
+					<td colspan="2">
+						<div class="submitbutton">
+							<input type="submit" value="수정 완료">
+							<input type="button" value="수정 취소" onclick="location.href='faqout'">
+						</div>
+					</td>
+				</tr>
+			</table>
+		</form>
+	</main>
 </div>	
 </body>
 </html>

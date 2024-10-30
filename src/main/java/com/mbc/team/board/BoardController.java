@@ -31,12 +31,13 @@ public class BoardController {
 	
 	@Autowired
 	SqlSession sqlsession;
-	
+	HttpSession hs;
+	BoardService bs;
 	
 	//공지사항
 	@RequestMapping(value = "/gongjiinput", method = RequestMethod.GET)
 	public String gongjiinput(HttpServletRequest request, HttpServletResponse response) throws IOException {
-		HttpSession hs=request.getSession();
+		hs=request.getSession();
 		Boolean adminloginstate = (Boolean) hs.getAttribute("adminloginstate");
 		if(adminloginstate==true) {
 			return "gongjiinput";
@@ -53,7 +54,7 @@ public class BoardController {
 	
 	@RequestMapping(value = "/gongjisave", method = RequestMethod.POST)
 	public String gongjisave(MultipartHttpServletRequest mul) throws IllegalStateException, IOException {
-		BoardService bs=sqlsession.getMapper(BoardService.class);
+		bs=sqlsession.getMapper(BoardService.class);
 		String id=mul.getParameter("id");
 		String nickname=mul.getParameter("nickname");
 		String gtitle=mul.getParameter("gtitle");
@@ -74,7 +75,7 @@ public class BoardController {
 	public String gongjiboard(Model mo, PageDTO dto, HttpServletRequest request) {
 		String nowPage=request.getParameter("nowPage");
 		String cntPerPage=request.getParameter("cntPerPage");
-		BoardService bs=sqlsession.getMapper(BoardService.class);
+		bs=sqlsession.getMapper(BoardService.class);
 		int total=bs.total();
 		if(nowPage==null && cntPerPage == null) {
 			nowPage="1";
@@ -96,7 +97,7 @@ public class BoardController {
 	public String gongjidayup(Model mo, PageDTO dto, HttpServletRequest request) {
 		String nowPage=request.getParameter("nowPage");
 		String cntPerPage=request.getParameter("cntPerPage");
-		BoardService bs=sqlsession.getMapper(BoardService.class);
+		bs=sqlsession.getMapper(BoardService.class);
 		int total=bs.total();
 		if(nowPage==null && cntPerPage == null) {
 			nowPage="1";
@@ -118,7 +119,7 @@ public class BoardController {
 	public String gongjidaydown(Model mo, PageDTO dto, HttpServletRequest request) {
 		String nowPage=request.getParameter("nowPage");
 		String cntPerPage=request.getParameter("cntPerPage");
-		BoardService bs=sqlsession.getMapper(BoardService.class);
+		bs=sqlsession.getMapper(BoardService.class);
 		int total=bs.total();
 		if(nowPage==null && cntPerPage == null) {
 			nowPage="1";
@@ -140,7 +141,7 @@ public class BoardController {
 	public String gongjiviewdown(Model mo, PageDTO dto, HttpServletRequest request) {
 		String nowPage=request.getParameter("nowPage");
 		String cntPerPage=request.getParameter("cntPerPage");
-		BoardService bs=sqlsession.getMapper(BoardService.class);
+		bs=sqlsession.getMapper(BoardService.class);
 		int total=bs.total();
 		if(nowPage==null && cntPerPage == null) {
 			nowPage="1";
@@ -162,7 +163,7 @@ public class BoardController {
 	public String gongjiviewup(Model mo, PageDTO dto, HttpServletRequest request) {
 		String nowPage=request.getParameter("nowPage");
 		String cntPerPage=request.getParameter("cntPerPage");
-		BoardService bs=sqlsession.getMapper(BoardService.class);
+		bs=sqlsession.getMapper(BoardService.class);
 		int total=bs.total();
 		if(nowPage==null && cntPerPage == null) {
 			nowPage="1";
@@ -183,7 +184,7 @@ public class BoardController {
 	@RequestMapping(value = "/gongjidetail", method = RequestMethod.GET)
 	public String gongjidetail(Model mo, HttpServletRequest request) {
 		int gnum=Integer.parseInt(request.getParameter("gnum"));
-		BoardService bs=sqlsession.getMapper(BoardService.class);
+		bs=sqlsession.getMapper(BoardService.class);
 		bs.gongjicount(gnum);
 		GongjiDTO list=bs.gongjidetail(gnum);
 		mo.addAttribute("list",list);
@@ -195,7 +196,7 @@ public class BoardController {
 		HttpSession hs=request.getSession();
 		Boolean adminloginstate=(Boolean) hs.getAttribute("adminloginstate");
 		int gnum=Integer.parseInt(request.getParameter("gnum"));
-		BoardService bs=sqlsession.getMapper(BoardService.class);
+		bs=sqlsession.getMapper(BoardService.class);
 		if(adminloginstate==true) {
 			response.setContentType("text/html;charset=utf-8");
 			PrintWriter prw=response.getWriter();
@@ -218,10 +219,10 @@ public class BoardController {
 	
 	@RequestMapping(value = "/gongjiupdateview", method = RequestMethod.GET)
 	public String gongjiupdateview(HttpServletRequest request, Model mo, HttpServletResponse response) throws IOException {
-		HttpSession hs=request.getSession();
+		hs=request.getSession();
 		Boolean adminloginstate=(Boolean) hs.getAttribute("adminloginstate");
 		int gnum=Integer.parseInt(request.getParameter("gnum"));
-		BoardService bs=sqlsession.getMapper(BoardService.class);
+		bs=sqlsession.getMapper(BoardService.class);
 		if(adminloginstate==true) {
 			GongjiDTO list=bs.gongjiupdateview(gnum);
 			mo.addAttribute("list", list);
@@ -239,9 +240,9 @@ public class BoardController {
 	
 	@RequestMapping(value = "/gongjiupdate", method = RequestMethod.POST)
 	public String gongjiupdate(HttpServletRequest request, HttpServletResponse response, MultipartHttpServletRequest mul) throws IOException {
-		HttpSession hs=request.getSession();
+		hs=request.getSession();
 		Boolean adminloginstate=(Boolean) hs.getAttribute("adminloginstate");
-		BoardService bs=sqlsession.getMapper(BoardService.class);
+		bs=sqlsession.getMapper(BoardService.class);
 		int gnum=Integer.parseInt(mul.getParameter("gnum"));
 		String id=mul.getParameter("id");
 		String nickname=mul.getParameter("nickname");
@@ -278,7 +279,7 @@ public class BoardController {
 	public String gongjisearchsave(HttpServletRequest request, Model mo, PageDTO dto, @RequestParam("svalue") String svalue, @RequestParam("gongjikey") String gongjikey, HttpServletResponse response) throws IOException {
 		String nowPage=request.getParameter("nowPage");
 		String cntPerPage=request.getParameter("cntPerPage");
-		BoardService bs=sqlsession.getMapper(BoardService.class);
+		bs=sqlsession.getMapper(BoardService.class);
 		
 		if(nowPage==null && cntPerPage == null) {
 			nowPage="1";
@@ -328,7 +329,7 @@ public class BoardController {
 	public String boarddayup(Model mo, PageDTO dto, HttpServletRequest request) {
 		String nowPage=request.getParameter("nowPage");
 		String cntPerPage=request.getParameter("cntPerPage");
-		BoardService bs=sqlsession.getMapper(BoardService.class);
+		bs=sqlsession.getMapper(BoardService.class);
 		int btotal=bs.boardtotal();
 		if(nowPage==null && cntPerPage == null) {
 			nowPage="1";
@@ -350,7 +351,7 @@ public class BoardController {
 	public String boarddaydown(Model mo, PageDTO dto, HttpServletRequest request) {
 		String nowPage=request.getParameter("nowPage");
 		String cntPerPage=request.getParameter("cntPerPage");
-		BoardService bs=sqlsession.getMapper(BoardService.class);
+		bs=sqlsession.getMapper(BoardService.class);
 		int btotal=bs.boardtotal();
 		if(nowPage==null && cntPerPage == null) {
 			nowPage="1";
@@ -372,7 +373,7 @@ public class BoardController {
 	public String boardviewup(Model mo, PageDTO dto, HttpServletRequest request) {
 		String nowPage=request.getParameter("nowPage");
 		String cntPerPage=request.getParameter("cntPerPage");
-		BoardService bs=sqlsession.getMapper(BoardService.class);
+		bs=sqlsession.getMapper(BoardService.class);
 		int btotal=bs.boardtotal();
 		if(nowPage==null && cntPerPage == null) {
 			nowPage="1";
@@ -394,7 +395,7 @@ public class BoardController {
 	public String boardviewdown(Model mo, PageDTO dto, HttpServletRequest request) {
 		String nowPage=request.getParameter("nowPage");
 		String cntPerPage=request.getParameter("cntPerPage");
-		BoardService bs=sqlsession.getMapper(BoardService.class);
+		bs=sqlsession.getMapper(BoardService.class);
 		int btotal=bs.boardtotal();
 		if(nowPage==null && cntPerPage == null) {
 			nowPage="1";
@@ -416,7 +417,7 @@ public class BoardController {
 	public String boardlikeup(Model mo, PageDTO dto, HttpServletRequest request) {
 		String nowPage=request.getParameter("nowPage");
 		String cntPerPage=request.getParameter("cntPerPage");
-		BoardService bs=sqlsession.getMapper(BoardService.class);
+		bs=sqlsession.getMapper(BoardService.class);
 		int btotal=bs.boardtotal();
 		if(nowPage==null && cntPerPage == null) {
 			nowPage="1";
@@ -438,7 +439,7 @@ public class BoardController {
 	public String boardlikedown(Model mo, PageDTO dto, HttpServletRequest request) {
 		String nowPage=request.getParameter("nowPage");
 		String cntPerPage=request.getParameter("cntPerPage");
-		BoardService bs=sqlsession.getMapper(BoardService.class);
+		bs=sqlsession.getMapper(BoardService.class);
 		int btotal=bs.boardtotal();
 		if(nowPage==null && cntPerPage == null) {
 			nowPage="1";
@@ -466,7 +467,7 @@ public class BoardController {
 	public String board(Model mo, PageDTO dto, HttpServletRequest request) {
 		String nowPage=request.getParameter("nowPage");
 		String cntPerPage=request.getParameter("cntPerPage");
-		BoardService bs=sqlsession.getMapper(BoardService.class);
+		bs=sqlsession.getMapper(BoardService.class);
 		int btotal=bs.boardtotal();
 		if(nowPage==null && cntPerPage == null) {
 			nowPage="1";
@@ -486,7 +487,7 @@ public class BoardController {
 	
 	@RequestMapping(value = "/boardsave", method = RequestMethod.POST)
 	public String boardsave(MultipartHttpServletRequest mul) throws IllegalStateException, IOException {
-		BoardService bs=sqlsession.getMapper(BoardService.class);
+		bs=sqlsession.getMapper(BoardService.class);
 		String tag=mul.getParameter("tag");
 		String nickname=mul.getParameter("nickname");
 		String title=mul.getParameter("title");
@@ -506,7 +507,7 @@ public class BoardController {
 	@RequestMapping(value = "/boarddetail", method = RequestMethod.GET)
 	public String boarddetail(Model mo, HttpServletRequest request) {
 		int cnum=Integer.parseInt(request.getParameter("cnum"));
-		BoardService bs=sqlsession.getMapper(BoardService.class);
+		bs=sqlsession.getMapper(BoardService.class);
 		bs.boardcount(cnum);
 		BoardDTO list=bs.boarddetail(cnum);
 		mo.addAttribute("list",list);
@@ -517,7 +518,7 @@ public class BoardController {
 	
 	@RequestMapping(value = "/boardlike", method = RequestMethod.GET)
 	public String boardlike(Model mo, @RequestParam("cnum") int cnum) {
-		BoardService bs=sqlsession.getMapper(BoardService.class);
+		bs=sqlsession.getMapper(BoardService.class);
 		bs.boardlike(cnum);
 		BoardDTO list=bs.boarddetail(cnum);
 		mo.addAttribute("list",list);
@@ -526,7 +527,7 @@ public class BoardController {
 	
 	@RequestMapping(value = "/boardhate", method = RequestMethod.GET)
 	public String boardhate(Model mo, @RequestParam("cnum") int cnum) {
-		BoardService bs=sqlsession.getMapper(BoardService.class);
+		bs=sqlsession.getMapper(BoardService.class);
 		bs.boardhate(cnum);
 		BoardDTO list=bs.boarddetail(cnum);
 		mo.addAttribute("list",list);
@@ -537,7 +538,7 @@ public class BoardController {
 	public String boardsearchsave(HttpServletRequest request, Model mo, PageDTO dto, @RequestParam("svalue") String svalue, @RequestParam("boardkey") String boardkey, HttpServletResponse response) throws IOException {
 		String nowPage=request.getParameter("nowPage");
 		String cntPerPage=request.getParameter("cntPerPage");
-		BoardService bs=sqlsession.getMapper(BoardService.class);
+		bs=sqlsession.getMapper(BoardService.class);
 		
 		if(nowPage==null && cntPerPage == null) {
 			nowPage="1";
@@ -591,7 +592,7 @@ public class BoardController {
 		int rpindent=Integer.parseInt(request.getParameter("indent"));
 		String ccontents=request.getParameter("ccontents");
 		String nickname=request.getParameter("nickname");
-		BoardService bs=sqlsession.getMapper(BoardService.class);
+		bs=sqlsession.getMapper(BoardService.class);
 		bs.stepup(rpcgroup, rpstep);
 		rpstep++;
 		rpindent++;
@@ -602,7 +603,7 @@ public class BoardController {
 	@RequestMapping(value = "/boarddelete", method = RequestMethod.GET)
 	public String boarddelete(HttpServletRequest request, HttpServletResponse response) throws IOException {
 		int cnum=Integer.parseInt(request.getParameter("cnum"));
-		BoardService bs=sqlsession.getMapper(BoardService.class);
+		bs=sqlsession.getMapper(BoardService.class);
 		response.setContentType("text/html;charset=utf-8");
 		PrintWriter prw=response.getWriter();
 		prw.print("<script> alert('해당 글을 삭제하였습니다.');</script>");
@@ -615,7 +616,7 @@ public class BoardController {
 	@RequestMapping(value = "/replydelete", method = RequestMethod.GET)
 	public String replydelete(HttpServletRequest request, HttpServletResponse response) throws IOException {
 		int cnum=Integer.parseInt(request.getParameter("cnum"));
-		BoardService bs=sqlsession.getMapper(BoardService.class);
+		bs=sqlsession.getMapper(BoardService.class);
 		response.setContentType("text/html;charset=utf-8");
 		PrintWriter prw=response.getWriter();
 		prw.print("<script> alert('해당 댓글을 삭제하였습니다.');</script>");
@@ -628,7 +629,7 @@ public class BoardController {
 	@RequestMapping(value = "/boardupdateview", method = RequestMethod.GET)
 	public String boardupdateview(HttpServletRequest request, Model mo) {
 		int cnum=Integer.parseInt(request.getParameter("cnum"));
-		BoardService bs=sqlsession.getMapper(BoardService.class);
+		bs=sqlsession.getMapper(BoardService.class);
 		BoardDTO list=bs.boardupdateview(cnum);
 		mo.addAttribute("list", list);
 		return "boardupdateview";
@@ -636,7 +637,7 @@ public class BoardController {
 	
 	@RequestMapping(value = "/boardupdate", method = RequestMethod.POST)
 	public String boardupdate(HttpServletResponse response, MultipartHttpServletRequest mul) throws IOException {
-		BoardService bs=sqlsession.getMapper(BoardService.class);
+		bs=sqlsession.getMapper(BoardService.class);
 		int cnum=Integer.parseInt(mul.getParameter("cnum"));
 		String tag=mul.getParameter("tag");
 		String nickname=mul.getParameter("nickname");
@@ -667,7 +668,7 @@ public class BoardController {
 	
 	@RequestMapping(value = "/iljunginput", method = RequestMethod.GET)
 	public String iljunginput(HttpServletRequest request, HttpServletResponse response) throws IOException {
-		HttpSession hs=request.getSession();
+		hs=request.getSession();
 		Boolean adminloginstate = (Boolean) hs.getAttribute("adminloginstate");
 		if(adminloginstate==true) {
 			return "iljunginput";
@@ -748,7 +749,7 @@ public class BoardController {
 		else if(gamestate.equals("취소")&&leaguestate.equals("정규시즌")) {
 			gameresult=home+" 취소 "+away;
 		}
-		BoardService bs=sqlsession.getMapper(BoardService.class);
+		bs=sqlsession.getMapper(BoardService.class);
 		bs.iljunginput(gamedate, gameresult);
 		return "iljung";
 	}
@@ -756,7 +757,7 @@ public class BoardController {
 	@RequestMapping(value = "gameiljung", method = RequestMethod.POST)
 	@ResponseBody
 	public List<Map<String, Object>> events() {
-	    BoardService bs = sqlsession.getMapper(BoardService.class);
+	    bs = sqlsession.getMapper(BoardService.class);
 	    ArrayList<IljungDTO> list = bs.iljungout();
 	    List<Map<String, Object>> jsonList = new ArrayList<>();
 	    for (IljungDTO dto : list) {
@@ -772,7 +773,7 @@ public class BoardController {
 	public String iljungsetting(HttpServletRequest request, Model mo, PageDTO dto, HttpServletResponse response) throws IOException {
 		String nowPage=request.getParameter("nowPage");
 		String cntPerPage=request.getParameter("cntPerPage");
-		BoardService bs=sqlsession.getMapper(BoardService.class);
+		bs=sqlsession.getMapper(BoardService.class);
 		HttpSession hs=request.getSession();
 		Boolean adminloginstate = (Boolean) hs.getAttribute("adminloginstate");
 		if(adminloginstate==true) {
@@ -805,11 +806,11 @@ public class BoardController {
 	
 	@RequestMapping(value = "/iljungdelete", method = RequestMethod.GET)
 	public String iljungdelete(HttpServletRequest request, HttpServletResponse response) throws IOException {
-		HttpSession hs=request.getSession();
+		hs=request.getSession();
 		Boolean adminloginstate = (Boolean) hs.getAttribute("adminloginstate");
 		String gamedate=request.getParameter("gamedate");
 		String gameresult=request.getParameter("gameresult");
-		BoardService bs=sqlsession.getMapper(BoardService.class);
+		bs=sqlsession.getMapper(BoardService.class);
 		if(adminloginstate==true) {
 			bs.iljungdelete(gamedate, gameresult);
 			response.setContentType("text/html;charset=utf-8");
@@ -832,11 +833,11 @@ public class BoardController {
 	
 	@RequestMapping(value = "/iljungupdateview", method = RequestMethod.GET)
 	public String iljungupdateview(HttpServletRequest request, Model mo, HttpServletResponse response) throws IOException {
-		HttpSession hs=request.getSession();
+		hs=request.getSession();
 		Boolean adminloginstate = (Boolean) hs.getAttribute("adminloginstate");
 		String gamedate=request.getParameter("gamedate");
 		String gameresult=request.getParameter("gameresult");
-		BoardService bs=sqlsession.getMapper(BoardService.class);
+		bs=sqlsession.getMapper(BoardService.class);
 		if(adminloginstate==true) {
 			IljungDTO list=bs.iljungupdateview(gamedate, gameresult);
 			mo.addAttribute("list", list);
@@ -921,8 +922,8 @@ public class BoardController {
 		else if(gamestate.equals("취소")&&leaguestate.equals("정규시즌")) {
 			gameresult=home+" 취소 "+away;
 		}
-		BoardService bs=sqlsession.getMapper(BoardService.class);
-		HttpSession hs=request.getSession();
+		bs=sqlsession.getMapper(BoardService.class);
+		hs=request.getSession();
 		Boolean adminloginstate = (Boolean) hs.getAttribute("adminloginstate");
 		if(adminloginstate==true) {
 			bs.iljungupdate(gamedate, gameresult, fgamedate, fgameresult);
@@ -941,7 +942,7 @@ public class BoardController {
 	//경기소식
 	@RequestMapping(value = "/sosickinput", method = RequestMethod.GET)
 	public String sosickinput(HttpServletRequest request, HttpServletResponse response) throws IOException {
-		HttpSession hs=request.getSession();
+		hs=request.getSession();
 		Boolean adminloginstate = (Boolean) hs.getAttribute("adminloginstate");
 		if(adminloginstate==true) {
 			return "sosickinput";
@@ -958,14 +959,14 @@ public class BoardController {
 	
 	@RequestMapping(value = "/sosicksave", method = RequestMethod.POST)
 	public String sosicksave(MultipartHttpServletRequest mul, HttpServletRequest request, HttpServletResponse response) throws IllegalStateException, IOException {
-		BoardService bs=sqlsession.getMapper(BoardService.class);
+		bs=sqlsession.getMapper(BoardService.class);
 		String id=mul.getParameter("id");
 		String nickname=mul.getParameter("nickname");
 		String stag=mul.getParameter("stag");
 		String stitle=mul.getParameter("stitle");
 		String scontents=mul.getParameter("scontents");
 		MultipartFile mf=mul.getFile("simage");
-		HttpSession hs=request.getSession();
+		hs=request.getSession();
 		Boolean adminloginstate = (Boolean) hs.getAttribute("adminloginstate");
 		if(adminloginstate==true) {
 			if (mf == null || mf.isEmpty()) {
@@ -992,7 +993,7 @@ public class BoardController {
 	public String sosickboard(Model mo, PageDTO dto, HttpServletRequest request) {
 		String nowPage=request.getParameter("nowPage");
 		String cntPerPage=request.getParameter("cntPerPage");
-		BoardService bs=sqlsession.getMapper(BoardService.class);
+		bs=sqlsession.getMapper(BoardService.class);
 		int totals=bs.totals();
 		if(nowPage==null && cntPerPage == null) {
 			nowPage="1";
@@ -1014,7 +1015,7 @@ public class BoardController {
 	public String sosickdayup(Model mo, PageDTO dto, HttpServletRequest request) {
 		String nowPage=request.getParameter("nowPage");
 		String cntPerPage=request.getParameter("cntPerPage");
-		BoardService bs=sqlsession.getMapper(BoardService.class);
+		bs=sqlsession.getMapper(BoardService.class);
 		int totals=bs.totals();
 		if(nowPage==null && cntPerPage == null) {
 			nowPage="1";
@@ -1036,7 +1037,7 @@ public class BoardController {
 	public String sosickdaydown(Model mo, PageDTO dto, HttpServletRequest request) {
 		String nowPage=request.getParameter("nowPage");
 		String cntPerPage=request.getParameter("cntPerPage");
-		BoardService bs=sqlsession.getMapper(BoardService.class);
+		bs=sqlsession.getMapper(BoardService.class);
 		int totals=bs.totals();
 		if(nowPage==null && cntPerPage == null) {
 			nowPage="1";
@@ -1058,7 +1059,7 @@ public class BoardController {
 	public String sosickviewup(Model mo, PageDTO dto, HttpServletRequest request) {
 		String nowPage=request.getParameter("nowPage");
 		String cntPerPage=request.getParameter("cntPerPage");
-		BoardService bs=sqlsession.getMapper(BoardService.class);
+		bs=sqlsession.getMapper(BoardService.class);
 		int totals=bs.totals();
 		if(nowPage==null && cntPerPage == null) {
 			nowPage="1";
@@ -1080,7 +1081,7 @@ public class BoardController {
 	public String sosickviewdown(Model mo, PageDTO dto, HttpServletRequest request) {
 		String nowPage=request.getParameter("nowPage");
 		String cntPerPage=request.getParameter("cntPerPage");
-		BoardService bs=sqlsession.getMapper(BoardService.class);
+		bs=sqlsession.getMapper(BoardService.class);
 		int totals=bs.totals();
 		if(nowPage==null && cntPerPage == null) {
 			nowPage="1";
@@ -1101,7 +1102,7 @@ public class BoardController {
 	@RequestMapping(value = "/sosickdetail", method = RequestMethod.GET)
 	public String sosickdetail(Model mo, HttpServletRequest request) {
 		int snum=Integer.parseInt(request.getParameter("snum"));
-		BoardService bs=sqlsession.getMapper(BoardService.class);
+		bs=sqlsession.getMapper(BoardService.class);
 		bs.sosickcount(snum);
 		SosickDTO list=bs.sosickdetail(snum);
 		mo.addAttribute("list",list);
@@ -1111,8 +1112,8 @@ public class BoardController {
 	@RequestMapping(value = "/sosickdelete", method = RequestMethod.GET)
 	public String sosickdelete(HttpServletRequest request, HttpServletResponse response) throws IOException {
 		int snum=Integer.parseInt(request.getParameter("snum"));
-		BoardService bs=sqlsession.getMapper(BoardService.class);
-		HttpSession hs=request.getSession();
+		bs=sqlsession.getMapper(BoardService.class);
+		hs=request.getSession();
 		Boolean adminloginstate = (Boolean) hs.getAttribute("adminloginstate");
 		if(adminloginstate==true) {
 			bs.sosickdelete(snum);
@@ -1137,8 +1138,8 @@ public class BoardController {
 	@RequestMapping(value = "/sosickupdateview", method = RequestMethod.GET)
 	public String sosickupdateview(HttpServletRequest request, Model mo, HttpServletResponse response) throws IOException {
 		int snum=Integer.parseInt(request.getParameter("snum"));
-		BoardService bs=sqlsession.getMapper(BoardService.class);
-		HttpSession hs=request.getSession();
+		bs=sqlsession.getMapper(BoardService.class);
+		hs=request.getSession();
 		Boolean adminloginstate = (Boolean) hs.getAttribute("adminloginstate");
 		if(adminloginstate==true) {
 			SosickDTO list=bs.sosickupdateview(snum);
@@ -1158,14 +1159,14 @@ public class BoardController {
 	@RequestMapping(value = "/sosickupdate", method = RequestMethod.POST)
 	public String sosickupdate(HttpServletRequest request, HttpServletResponse response, MultipartHttpServletRequest mul) throws IOException {
 		int snum=Integer.parseInt(mul.getParameter("snum"));
-		BoardService bs=sqlsession.getMapper(BoardService.class);
+		bs=sqlsession.getMapper(BoardService.class);
 		String id=mul.getParameter("id");
 		String nickname=mul.getParameter("nickname");
 		String stag=mul.getParameter("stag");
 		String stitle=mul.getParameter("stitle");
 		String scontents=mul.getParameter("scontents");
 		MultipartFile mf=mul.getFile("gimage");
-		HttpSession hs=request.getSession();
+		hs=request.getSession();
 		Boolean adminloginstate = (Boolean) hs.getAttribute("adminloginstate");
 		if(adminloginstate==true) {
 			if (mf == null || mf.isEmpty()) {
@@ -1199,7 +1200,7 @@ public class BoardController {
 	public String sosicksearchsave(HttpServletRequest request, Model mo, PageDTO dto, @RequestParam("svalue") String svalue, @RequestParam("sosickkey") String sosickkey, HttpServletResponse response) throws IOException {
 		String nowPage=request.getParameter("nowPage");
 		String cntPerPage=request.getParameter("cntPerPage");
-		BoardService bs=sqlsession.getMapper(BoardService.class);
+		bs=sqlsession.getMapper(BoardService.class);
 		
 		if(nowPage==null && cntPerPage == null) {
 			nowPage="1";
@@ -1248,7 +1249,7 @@ public class BoardController {
 	//이벤트
 	@RequestMapping(value = "/eventinput", method = RequestMethod.GET)
 	public String eventinput(HttpServletRequest request, HttpServletResponse response) throws IOException {
-		HttpSession hs=request.getSession();
+		hs=request.getSession();
 		Boolean adminloginstate = (Boolean) hs.getAttribute("adminloginstate");
 		if(adminloginstate==true) {
 			return "eventinput";
@@ -1270,7 +1271,7 @@ public class BoardController {
 		String etitle=mul.getParameter("etitle");
 		String econtents=mul.getParameter("econtents");
 		String estate=mul.getParameter("estate");
-		HttpSession hs=request.getSession();
+		hs=request.getSession();
 		Boolean adminloginstate = (Boolean) hs.getAttribute("adminloginstate");
 		if(adminloginstate==true) {
 			MultipartFile mf1=mul.getFile("eimagem");
@@ -1281,7 +1282,7 @@ public class BoardController {
 			String eimagedfn=mf2.getOriginalFilename();
 			mf2.transferTo(new File(savepath+"//"+eimagedfn));
 			
-			BoardService bs=sqlsession.getMapper(BoardService.class);
+			bs=sqlsession.getMapper(BoardService.class);
 			bs.insertevent(id, nickname, etitle, econtents, eimagemfn, eimagedfn, estate);
 			return "redirect:/eventboard";
 		}
@@ -1301,7 +1302,7 @@ public class BoardController {
 	public String eventboard(Model mo, PageDTO dto, HttpServletRequest request) {
 		String nowPage=request.getParameter("nowPage");
 		String cntPerPage=request.getParameter("cntPerPage");
-		BoardService bs=sqlsession.getMapper(BoardService.class);
+		bs=sqlsession.getMapper(BoardService.class);
 		int totalev=bs.totalev();
 		if(nowPage==null && cntPerPage == null) {
 			nowPage="1";
@@ -1323,7 +1324,7 @@ public class BoardController {
 	public String eventdaydown(Model mo, PageDTO dto, HttpServletRequest request) {
 		String nowPage=request.getParameter("nowPage");
 		String cntPerPage=request.getParameter("cntPerPage");
-		BoardService bs=sqlsession.getMapper(BoardService.class);
+		bs=sqlsession.getMapper(BoardService.class);
 		int totalev=bs.totalev();
 		if(nowPage==null && cntPerPage == null) {
 			nowPage="1";
@@ -1345,7 +1346,7 @@ public class BoardController {
 	public String eventdayup(Model mo, PageDTO dto, HttpServletRequest request) {
 		String nowPage=request.getParameter("nowPage");
 		String cntPerPage=request.getParameter("cntPerPage");
-		BoardService bs=sqlsession.getMapper(BoardService.class);
+		bs=sqlsession.getMapper(BoardService.class);
 		int totalev=bs.totalev();
 		if(nowPage==null && cntPerPage == null) {
 			nowPage="1";
@@ -1367,7 +1368,7 @@ public class BoardController {
 	public String eventviewdown(Model mo, PageDTO dto, HttpServletRequest request) {
 		String nowPage=request.getParameter("nowPage");
 		String cntPerPage=request.getParameter("cntPerPage");
-		BoardService bs=sqlsession.getMapper(BoardService.class);
+		bs=sqlsession.getMapper(BoardService.class);
 		int totalev=bs.totalev();
 		if(nowPage==null && cntPerPage == null) {
 			nowPage="1";
@@ -1389,7 +1390,7 @@ public class BoardController {
 	public String eventviewup(Model mo, PageDTO dto, HttpServletRequest request) {
 		String nowPage=request.getParameter("nowPage");
 		String cntPerPage=request.getParameter("cntPerPage");
-		BoardService bs=sqlsession.getMapper(BoardService.class);
+		bs=sqlsession.getMapper(BoardService.class);
 		int totalev=bs.totalev();
 		if(nowPage==null && cntPerPage == null) {
 			nowPage="1";
@@ -1410,7 +1411,7 @@ public class BoardController {
 	@RequestMapping(value = "/eventdetail", method = RequestMethod.GET)
 	public String eventdetail(Model mo, HttpServletRequest request) {
 		int evnum=Integer.parseInt(request.getParameter("evnum"));
-		BoardService bs=sqlsession.getMapper(BoardService.class);
+		bs=sqlsession.getMapper(BoardService.class);
 		bs.eventcount(evnum);
 		EventDTO list=bs.eventdetail(evnum);
 		mo.addAttribute("list",list);
@@ -1420,8 +1421,8 @@ public class BoardController {
 	@RequestMapping(value = "/eventdelete", method = RequestMethod.GET)
 	public String eventdelete(HttpServletRequest request, HttpServletResponse response) throws IOException {
 		int evnum=Integer.parseInt(request.getParameter("evnum"));
-		BoardService bs=sqlsession.getMapper(BoardService.class);
-		HttpSession hs=request.getSession();
+		bs=sqlsession.getMapper(BoardService.class);
+		hs=request.getSession();
 		Boolean adminloginstate = (Boolean) hs.getAttribute("adminloginstate");
 		if(adminloginstate==true) {
 			response.setContentType("text/html;charset=utf-8");
@@ -1445,8 +1446,8 @@ public class BoardController {
 	@RequestMapping(value = "/eventupdateview", method = RequestMethod.GET)
 	public String eventupdateview(HttpServletRequest request, Model mo, HttpServletResponse response) throws IOException {
 		int evnum=Integer.parseInt(request.getParameter("evnum"));
-		BoardService bs=sqlsession.getMapper(BoardService.class);
-		HttpSession hs=request.getSession();
+		bs=sqlsession.getMapper(BoardService.class);
+		hs=request.getSession();
 		Boolean adminloginstate = (Boolean) hs.getAttribute("adminloginstate");
 		if(adminloginstate==true) {
 			EventDTO list=bs.eventupdateview(evnum);
@@ -1474,8 +1475,8 @@ public class BoardController {
 		String estate=mul.getParameter("estate");
 		MultipartFile mf1=mul.getFile("eimagemu");
 		MultipartFile mf2=mul.getFile("eimagedu");
-		BoardService bs=sqlsession.getMapper(BoardService.class);
-		HttpSession hs=request.getSession();
+		bs=sqlsession.getMapper(BoardService.class);
+		hs=request.getSession();
 		Boolean adminloginstate = (Boolean) hs.getAttribute("adminloginstate");
 		if(adminloginstate==true) {
 			if ((mf1 == null || mf1.isEmpty()) && (mf2 == null || mf2.isEmpty())) {
@@ -1520,7 +1521,7 @@ public class BoardController {
 	public String eventsearchsave(HttpServletRequest request, Model mo, PageDTO dto, @RequestParam("svalue") String svalue, @RequestParam("eventkey") String eventkey, HttpServletResponse response) throws IOException {
 		String nowPage=request.getParameter("nowPage");
 		String cntPerPage=request.getParameter("cntPerPage");
-		BoardService bs=sqlsession.getMapper(BoardService.class);
+		bs=sqlsession.getMapper(BoardService.class);
 		
 		if(nowPage==null && cntPerPage == null) {
 			nowPage="1";
@@ -1564,7 +1565,7 @@ public class BoardController {
 	public String eventing(HttpServletRequest request, Model mo, PageDTO dto, HttpServletResponse response) throws IOException {
 		String nowPage=request.getParameter("nowPage");
 		String cntPerPage=request.getParameter("cntPerPage");
-		BoardService bs=sqlsession.getMapper(BoardService.class);
+		bs=sqlsession.getMapper(BoardService.class);
 		if(nowPage==null && cntPerPage == null) {
 			nowPage="1";
 			cntPerPage="6";
@@ -1587,7 +1588,7 @@ public class BoardController {
 	public String eventend(HttpServletRequest request, Model mo, PageDTO dto, HttpServletResponse response) throws IOException {
 		String nowPage=request.getParameter("nowPage");
 		String cntPerPage=request.getParameter("cntPerPage");
-		BoardService bs=sqlsession.getMapper(BoardService.class);
+		bs=sqlsession.getMapper(BoardService.class);
 		if(nowPage==null && cntPerPage == null) {
 			nowPage="1";
 			cntPerPage="6";

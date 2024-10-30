@@ -41,16 +41,12 @@ $(document).ready(function() {
             confirmMsg.style.color = correctColor;
             confirmMsg.innerHTML = "비밀번호 일치";
         }
-
         
         $.ajax({
-            type: "POST",
+            type: "post",
             url: "updatepw", 
             async: true,
-            data: {
-                id: id,  
-                pw: pw  
-            },
+            data: {id:id,pw:pw},  
             success: function(response) {
                 alert("비밀번호가 변경되었습니다.");
                 window.location.href = "login"; 

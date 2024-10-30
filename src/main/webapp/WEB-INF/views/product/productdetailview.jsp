@@ -5,94 +5,127 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Do+Hyeon&family=Gowun+Batang&family=Nanum+Gothic&family=Noto+Sans+KR:wght@100..900&family=Song+Myung&display=swap" rel="stylesheet">
     <meta charset="UTF-8">
     <title>상품 상세 페이지</title>
  <style>
+ 
     body {
-        font-family: 'Roboto', sans-serif; /* Roboto 폰트 적용 */
-        background-color: #f4f4f4;
-        margin: 0;
-        padding: 20px;
-    }
-    table {
-        width: 70%;
-        margin: auto;
-        border-collapse: collapse;
-        background-color: #fff;
-        border-radius: 10px;
-        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-    }
-    th, td {
-        padding: 15px;
-        text-align: center;
-        border-bottom: 1px solid #ddd;
-        font-family: 'Roboto', sans-serif; /* Roboto 폰트 적용 */
-    }
-    th {
-        background-color: #007BFF;
-        color: white;
-    }
-  .main-image {
-        width: 600px; /* 크기를 키움 (예: 500px) */
-        border-radius: 10px;
-        display: block; /* 이미지 중앙 정렬을 위해 추가 */
-        margin: 0 auto; /* 중앙 정렬 */
-    }
-    .product-title {
-        font-size: 24px;
-        font-weight: bold;
-        color: #333;
-    }
-    .price {
-        font-size: 20px;
-        color: #FF5722;
-    }
-    .option-title {
-        font-size: 18px;
-        font-weight: bold;
-        margin: 10px 0;
-    }
-    .count-input {
-        width: 50px;
-        margin-left: 10px;
-    }
-  .button {
-        background-color: black; /* 검은색 */
-        color: white;
-        border: none;
-        padding: 12px 20px; /* 사이즈를 키움 */
-        border-radius: 5px;
-        cursor: pointer;
-        transition: background-color 0.3s;
-        margin: 5px;
-        font-family: 'Roboto', sans-serif; /* Roboto 폰트 적용 */
-        font-size: 16px; /* 글자 크기 조정 */
-    }
+    font-family: "Noto Sans KR", sans-serif; /* 기본 폰트 설정 */
+    background-color: #f4f4f4; /* 배경 색상 설정 */
+}
 
-    .button:hover {
-        background-color: #333; /* 호버 시 약간 밝아짐 */
-    }
+table {
+    width: 70%; /* 테이블 너비 설정 */
+    margin: auto; /* 중앙 정렬 */
+    background-color: #fff; /* 테이블 배경 색상 */
+    border-radius: 10px; /* 모서리 둥글게 */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* 그림자 효과 */
+}
 
-    .button1 {
-        background-color: white; /* 흰색 */
-        color: black; /* 글자 색상 */
-        border: 1px solid #ccc; /* 테두리 추가 */
-        padding: 12px 20px; /* 사이즈를 키움 */
-        border-radius: 5px;
-        cursor: pointer;
-        transition: background-color 0.3s;
-        margin: 5px;
-        font-family: 'Roboto', sans-serif; /* Roboto 폰트 적용 */
-        font-size: 16px; /* 글자 크기 조정 */
-    }
+th, td {
+    padding: 15px; /* 셀 안쪽 여백 설정 */
+    text-align: center; /* 텍스트 중앙 정렬 */
+    border-bottom: 1px solid #ddd; /* 하단 경계선 설정 */
+}
 
-    .button1:hover {
-        background-color: #f0f0f0; /* 호버 시 약간 밝아짐 */
-    }
+.main-image {
+    width: 500px; /* 이미지 너비 설정 */
+    border-radius: 10px; /* 이미지 모서리 둥글게 */   
+}
+
+.product-title {
+    font-family: "Noto Sans KR", sans-serif; /* 제목 폰트 설정 */
+    font-size: 24px; /* 제목 글자 크기 */
+    color: #333; /* 제목 글자 색상 */
+}
+
+.price {
+    font-family: "Noto Sans KR", sans-serif; /* 가격 폰트 설정 */
+    font-size: 16px; /* 가격 글자 크기 */
+    color: #FF5722; /* 가격 글자 색상 */
+}
+
+.option-title {
+    font-family: "Noto Sans KR", sans-serif; /* 옵션 제목 폰트 설정 */
+    font-size: 16px; /* 옵션 제목 글자 크기 */
+    margin: 10px 0; /* 상하 여백 설정 */
+}
+
+.count-input {
+    font-family: "Noto Sans KR", sans-serif; /* 수량 입력 필드 폰트 설정 */
+    width: 50px; /* 수량 입력 필드 너비 설정 */
+    margin-left: 10px; /* 왼쪽 여백 설정 */
+}
+
+.d-image{
+    width: 750px; /* 이미지 너비 설정 */
+}
+
+.button {
+    background-color: black; /* 기본 버튼 배경 색상 */
+    color: white; /* 버튼 글자 색상 */
+    border: none; /* 테두리 제거 */
+    padding: 12px 20px; /* 버튼 패딩 설정 */
+    border-radius: 5px; /* 버튼 모서리 둥글게 */
+    cursor: pointer; /* 커서 변경 */
+    transition: background-color 0.3s; /* 배경 색상 변화 애니메이션 */
+    margin: 5px; /* 여백 설정 */
+    font-size: 16px; /* 버튼 글자 크기 */
+}
+
+.button:hover {
+    background-color: #333; /* 호버 시 배경 색상 변화 */
+}
+
+.button1 {
+    background-color: white; /* 흰색 버튼 배경 */
+    color: black; /* 버튼 글자 색상 */
+    border: 1px solid #ccc; /* 테두리 설정 */
+    padding: 12px 20px; /* 버튼 패딩 설정 */
+    border-radius: 5px; /* 버튼 모서리 둥글게 */
+    cursor: pointer; /* 커서 변경 */
+    transition: background-color 0.3s; /* 배경 색상 변화 애니메이션 */
+    margin: 5px; /* 여백 설정 */
+    font-size: 16px; /* 버튼 글자 크기 */
+}
+
+.button1:hover {
+    background-color: #f0f0f0; /* 호버 시 배경 색상 변화 */
+}
+
+.button2 {
+    background-color: #be241c; /* 두 번째 버튼 배경 색상 */
+    color: white; /* 버튼 글자 색상 */
+    border: 1px solid #ccc; /* 테두리 설정 */
+    padding: 12px 20px; /* 버튼 패딩 설정 */
+    border-radius: 5px; /* 버튼 모서리 둥글게 */
+    cursor: pointer; /* 커서 변경 */
+    transition: background-color 0.3s; /* 배경 색상 변화 애니메이션 */
+    margin: 5px; /* 여백 설정 */
+    font-size: 16px; /* 버튼 글자 크기 */
+}
+
+.button2:hover {
+    background-color: #8e1a14; /* 호버 시 배경 색상 변화 */
+}
+
+.detail {
+    font-family: "Noto Sans KR", sans-serif; /* 상세 설명 폰트 설정 */
+    font-size: 16px; /* 상세 설명 글자 크기 */
+    padding: 15px; /* 패딩 설정 */
+    margin-top: 80px; /* 상단 여백 설정 */
+}
+
+label {
+    font-family: "Noto Sans KR", sans-serif; /* 폰트 설정 */
+    font-size: 16px; /* 글자 크기 설정 */
+    font-weight: normal; /* 폰트 두께 설정 */
+}
+
 </style>
-
-
     <script>
         function updateTotal() {
             const price = parseFloat("${dto.price}");
@@ -135,6 +168,7 @@
             document.getElementById("productForm").action = "/team/buydirectitem";
             document.getElementById("productForm").submit();
         }
+        
         function formatNumber(num) {
             return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
         }
@@ -146,6 +180,7 @@
             const total = (saleprice > 0 ? saleprice : price) * count;
             document.getElementById("tot").innerText = "합계: " + formatNumber(total) + "원";
         }
+        
 
     </script>
 </head>
@@ -333,9 +368,6 @@
         </td>
     </tr>
 </c:when>
-
-                
-                
                 <c:otherwise>
                     <tr>
                         <td colspan="5">선택할 수 있는 옵션이 없습니다.</td>
@@ -346,7 +378,7 @@
 
             <tr>
                 <td colspan="5">
-                    <label for="count">수량:</label>
+                    <label for="count" style="font-size: 16;">수량:</label>
                     <input type="number" id="count" name="count" min="1" value="1" onchange="updateTotal()" oninput="updateTotal()" class="count-input">
                 </td>
             </tr>
@@ -362,16 +394,25 @@
         </c:choose>
     </td>
 </tr>
-
             <tr>
                 <td colspan="5">
                     <button type="button" class="button" onclick="buyNow()">바로구매</button>
                     <button type="button" class="button1" onclick="addToCart()">장바구니</button>
+                    <button type="button" class="button2" onclick="location.href='like_save?itemnum=${dto.itemnum}'">찜하기</button>
                 </td>
             </tr>
+            
+            <tr>
+                <td colspan="5">
+                   <div class="detail">
+                   PRODUCT DETAIL / 상품 상세정보
+                   </div>
+                </td>
+            </tr>
+            
             <tr>
                 <td colspan="5" align="center">
-                    <img src="./image/${dto.dimage}" class="main-image" alt="상세 이미지">
+                    <img src="./image/${dto.dimage}" class="d-image" alt="상세 이미지">
                 </td>
             </tr>
         </table>

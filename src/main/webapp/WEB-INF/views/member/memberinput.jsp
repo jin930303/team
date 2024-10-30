@@ -96,17 +96,29 @@
         });
         
         $("#phonecheck").click(function() {
+        	var phone0 = $("#phone0").val();
             var phone1 = $("#phone1").val();
             var phone2 = $("#phone2").val();
             var phoneRegex = /^[0-9]{4}$/; // 전화번호 형식 체크 (4자리 숫자)
-
-            if (!phoneRegex.test(phone1) || !phoneRegex.test(phone2)) {
-                alert('전화번호는 4자리 숫자만 가능합니다.');
+			
+            if (phone0.trim() === "") {
+                alert('전화번호 앞자리를 선택해주세요.');
+                $("#phone0").focus();
+                return;
+            }
+            
+            if (!phoneRegex.test(phone1)) {
+                alert('전화번호 중간자리는 4자리 숫자만 가능합니다.');
                 $("#phone1").focus();
                 return;
             }
+            if (!phoneRegex.test(phone2)) {
+                alert('전화번호 뒷자리는 4자리 숫자만 가능합니다.');
+                $("#phone2").focus();
+                return;
+            }
 
-            var fullPhone = "010-" + phone1 + "-" + phone2; // 전체 전화번호 조합
+            var fullPhone = phone0 +"-"+ phone1 + "-" + phone2; // 전체 전화번호 조합
 
             $.ajax({
                 type: "post",
@@ -134,6 +146,7 @@
         var pwconfirm = $("#pwconfirm").val();
         var nickname = $("#nickname").val();
         var name = $("#name").val();
+        var phone0 = $("#phone0").val();
         var phone1 = $("#phone1").val();
         var phone2 = $("#phone2").val();
         var fdomain = $("#fdomain").val();
@@ -188,8 +201,15 @@
             $('#name').focus();
             return false;
         }
+        
+        if (phone0.trim() == "") { 
+            alert('전화번호 앞자리를 선택해주세요');
+            $('#phone0').focus();
+            return false;
+        }
+        
         if (phone1.trim() == "") {
-            alert('전화번호 앞자리를 입력해주세요');
+            alert('전화번호 가운데 자리를 입력해주세요');
             $('#phone1').focus();
             return false;
         }
@@ -213,6 +233,7 @@
             $('#phonecheck').focus();
             return false;
         }
+        alert('회원가입을 축하드립니다!');
         document.forms[0].submit();
     }
     </script>
@@ -465,7 +486,7 @@ input[type="reset"]:hover {
 			    <th><strong class="star">⁕ </strong>아이디</th>
 			    <td>
 			        <div class="input-container">
-			            <input type="text" name="id" id="id" placeholder="id를 입력해주세요" maxlength="12">
+			            <input type="text" name="id" id="id" placeholder="아이디는 4자 이상 12자 이하의 영문자 또는 숫자만 가능합니다" maxlength="12">
 			            <input type="button" name="idcheck" id="idcheck" value="중복확인">
 			        </div>
 			    </td>
@@ -475,7 +496,7 @@ input[type="reset"]:hover {
                 <th><strong class="star">⁕ </strong>비밀번호</th>
                 <td colspan="2">
                     <div class="input-container">
-                        <input type="password" name="pw" id="pw" placeholder="비밀번호를 입력해주세요" maxlength="16">
+                        <input type="password" name="pw" id="pw" placeholder="비밀번호는 4자 이상 16자 이하로 영문자,숫자,특수문자를 포함해야합니다." maxlength="16">
                         <a class="togglePassword" style="cursor: pointer;"><i class="fas fa-eye-slash"></i></a>
                     </div>
                 </td>
@@ -519,7 +540,7 @@ input[type="reset"]:hover {
                 <th><strong class="star">⁕ </strong>전화번호</th>
                 <td>
                 	<div class="phone-container">
-                		<select>
+                		<select name="phone0" id="phone0">
                 			<option value="010">010</option>
                 			<option value="011">011</option>
                 			<option value="016">016</option>

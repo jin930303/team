@@ -1,10 +1,11 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
-<script src="https://code.jquery.com/jquery-latest.min.js"></script>
-<script type="text/javascript">
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <script src="https://code.jquery.com/jquery-latest.min.js"></script>
+    <script type="text/javascript">
 	var isPhoneAvailable = false;
 	var isemailAvailable = false;
 	var isNicknameAvailable = false;
@@ -20,40 +21,52 @@
 		        success: function(data) {
 		            if (data == "ok") {
 		                alert("사용 가능한 닉네임입니다.");
-		                isNicknameAvailable = true;  // 중복 확인 성공 시 true 설정
+		                isNicknameAvailable = true;  
 		            } else {
 		                alert("이미 사용중인 닉네임입니다.");
-		                isNicknameAvailable = false;  // 중복 확인 실패 시 false 설정
+		                isNicknameAvailable = false;  
 		            }
 		        }
 		    });
 		});
 		
 		 $("#phonecheck").click(function() {
+	            var phone0 = $("#phone0").val();
 	            var phone1 = $("#phone1").val();
 	            var phone2 = $("#phone2").val();
-	            var phoneRegex = /^[0-9]{4}$/; // 전화번호 형식 체크 (4자리 숫자)
+	            var phoneRegex = /^[0-9]{4}$/; 
 
-	            if (!phoneRegex.test(phone1) || !phoneRegex.test(phone2)) {
-	                alert('전화번호는 4자리 숫자만 가능합니다.');
+	            if (phone0.trim() === "") {
+	                alert('전화번호 앞자리를 선택해주세요.');
+	                $("#phone0").focus();
+	                return;
+	            }
+	            
+	            if (!phoneRegex.test(phone1)) {
+	                alert('전화번호 중간자리는 4자리 숫자만 가능합니다.');
 	                $("#phone1").focus();
 	                return;
 	            }
+	            if (!phoneRegex.test(phone2)) {
+	                alert('전화번호 뒷자리는 4자리 숫자만 가능합니다.');
+	                $("#phone2").focus();
+	                return;
+	            }
 
-	            var fullPhone = "010-" + phone1 + "-" + phone2; // 전체 전화번호 조합
+	            var fullPhone =  phone0 +"-"+ phone1 + "-" + phone2; 
 
 	            $.ajax({
 	                type: "post",
-	                url: "phonecheck1", // 서버에서 처리할 URL
+	                url: "phonecheck1", 
 	                data: { "phone": fullPhone },
 	                async: true,
 	                success: function(data) {
 	                    if (data == "ok") {
 	                        alert("사용 가능한 전화번호입니다.");
-	                        isPhoneAvailable = true; // 전화번호 사용 가능 플래그
+	                        isPhoneAvailable = true; 
 	                    } else {
 	                        alert("이미 사용중인 전화번호입니다.");
-	                        isPhoneAvailable = false; // 전화번호 사용 불가 플래그
+	                        isPhoneAvailable = false; 
 	                        $("#phone1").focus();
 	                    }
 	                }
@@ -90,9 +103,10 @@
 	
 	function check(){
 		var pw = $("#pw").val();
-		var pwRegex = /^(?=.*[a-zA-Z])(?=.*[0-9])(?=.*[!@#$%^&*])[A-Za-z\d!@#$%^&*]{4,16}$/; // 영문자, 숫자, 특수문자 포함
+		var pwRegex = /^(?=.*[a-zA-Z])(?=.*[0-9])(?=.*[!@#$%^&*])[A-Za-z\d!@#$%^&*]{4,16}$/; 
 		var koreanRegex = /^[가-힣]+$/;  
 	    var name = $("#name").val();
+	    var phone0 = $("#phone0").val();
 	    var phone1 = $("#phone1").val();
 	    var phone2 = $("#phone2").val();
 	    var fdomain = $("#fdomain").val();
@@ -124,8 +138,14 @@
 	            $('#name').focus();
 	            return false;
 	        }
-		 if (phone1.trim() == "") {
-	            alert('전화번호 앞자리를 입력해주세요');
+		 if (phone0.trim() == "") { 
+	            alert('전화번호 앞자리를 선택해주세요');
+	            $('#phone0').focus();
+	            return false;
+	        }
+	        
+	        if (phone1.trim() == "") {
+	            alert('전화번호 가운데 자리를 입력해주세요');
 	            $('#phone1').focus();
 	            return false;
 	        }
@@ -151,49 +171,8 @@
 	        }
 	        return true;
 	}
-	
 </script>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-</head>
-<body>
-	<form action="memberupdate2" method="post"  onsubmit="return check()">
-		<table border="6" align="center" width="auto">
-			<caption>수정화면</caption>
-			<tr>
-				<td><input type="text" name="id" id="id" readonly
-					value="${updateview.id}"></td>
-			</tr>
-			<tr>
-				<td><input type="password" name="pw" id="pw" maxlength="16"
-					placeholder="비밀번호를 입력해주세요" ></td>
-			</tr>
-			<tr>
-				<td><input type="text" name="name" id="name" placeholder="이름을 입력해주세요"></td>
-			</tr>
-		<tr>
-				<td><input type="text" name="nickname" id="nickname"
-					placeholder="닉네임을 입력해주세요" value="${updateview.nickname}"> <input
-					type="button" name="nicknamecheck" id="nicknamecheck1"
-					value=" 중복확인"></td>
-			</tr>
-			<tr>
-				<td><input type="date" name="birth" id="birth" value="${updateview.birth}"></td>
-			</tr>
-			<tr>
-				<td>010-<input type="text" name="phone1" id="phone1" value="${updateview.phone1}" maxlength="4">
-				-<input type="text" name="phone2" id="phone2" value="${updateview.phone2}" maxlength="4">
-				<input type="button" name="phonecheck" id="phonecheck" value="중복확인">
-				</td>
-			</tr>
-			<tr>
-                <td>
-                    <input type="text" id="postcode" placeholder="우편번호">
-                    <input type="button" onclick="sample6_execDaumPostcode()" value="우편번호 찾기"><br>
-                    <input type="text" id="mainaddress" placeholder="주소" name="mainaddress"><br>
-                    <input type="text" id="detailAddress" placeholder="상세주소" name="detailaddress">
-                    <input type="text" id="extraAddress" placeholder="참고항목" name="extraaddress">
-                    <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+ <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
                     <script>
     function sample6_execDaumPostcode() {
         new daum.Postcode({
@@ -243,26 +222,210 @@
         }).open();
     }
 </script>
-                </td>
-            </tr>
-			<tr>
-                <td>
-                    <input type="text" name="fdomain" id="fdomain">@ 
-                    <select name="bdomain" id="bdomain">
-                        <option value="naver.com">naver.com</option>
-                        <option value="daum.net">daum.net</option>
-                        <option value="gmail.com">gmail.com</option>
-                        <option value="kakao.com">kakao.com</option>
-                        <option value="nate.com">nate.com</option>
-                    </select>
-                    <input type="button" name="emailcheck" id="emailcheck" value="중복확인">
-                </td>
-            </tr>
-			<tr>
-				<td colspan="2"><input type="submit" value="수정" >
-					<input type="reset" value="취소"></td>
-			</tr>
-		</table>
-	</form>
+
+    <style>
+        
+        body {
+		    font-family: 'Roboto', sans-serif;
+		}
+   
+        .title{
+         text-align: center;
+         font-size: 30px;
+        }
+
+        .form-container {
+            max-width: 850px;
+            margin: 0 auto;
+            padding: 20px;
+            border: 1px solid #ddd;
+            background-color: white;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        caption {
+            font-size: 1.5em;
+            margin-bottom: 20px;
+            font-weight: bold;
+        }
+
+        th, td {
+            padding: 15px;
+            text-align: left;
+        }
+
+        th {
+            font-weight: bold;
+            width: 20%;
+            padding-left: 70px; /* 왼쪽 여백 추가 */
+        }
+
+        .form-container input[type="text"], 
+		.form-container input[type="password"], 
+		.form-container input[type="date"], 
+		.form-container select {
+		    width: calc(100% - 100px);
+		    padding: 8px;
+		    border: 1px solid #ccc;
+		    border-radius: 4px;
+		    font-size: 1em;
+		}
+
+        .button-inline {
+            width: auto;
+            margin-left: 10px;
+            padding: 8px 12px;
+            font-size: 1em;
+            color: white; /* 버튼 글자 색상 */
+            background-color: #be241c;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .address-section input[type="text"] {
+		    width: calc(100% - 100px);
+		    margin-bottom: 8px;
+		}
+
+
+        .address-section .button-inline {
+            margin-top: 4px;
+            width: 120px;
+        }
+        .address-section1 input[type="text"] {
+            width: calc(100% - 120px);
+            margin-bottom: 8px;
+        }
+
+        .button-container input[type="submit"], .button-container button[type="button"] {
+            width: 100px;
+            padding: 10px;
+            font-size: 1em;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .button-container input[type="submit"] {
+            background-color: #be241c;
+            color: white;
+            margin-right: 10px;
+        }
+
+        .button-container button[type="button"] {
+            background-color: #777;
+            color: #fff;
+        }
+        
+        #nickname {
+		    width: calc(100% - 190px); /* 기존보다 조금 줄임 */
+		}
+		#postcode {
+		    width: calc(100% - 235px); /* 우편번호 입력 칸 너비 조정 */
+		}
+		.address-section1{
+		   width: calc(100% - -20px);
+		}
+		     
+    </style>
+    
+</head>
+<body>
+    <div class="form-container">
+    <h1 class="title">회원 정보 수정</h1>
+        <form action="memberupdate2" method="post" onsubmit="return check()">
+            <table>
+                <tr>
+                    <th>아이디</th>
+                    <td>
+                        <input type="text" name="id" id="id" readonly value="${updateview.id}">
+                    </td>
+                </tr>
+                <tr>
+                    <th>비밀번호</th>
+                    <td>
+                        <input type="password" name="pw" id="pw" maxlength="16" placeholder="비밀번호를 입력해주세요">
+                    </td>
+                </tr>
+                <tr>
+                    <th>이름</th>
+                    <td><input type="text" name="name" id="name" placeholder="이름을 입력해주세요"></td>
+                </tr>
+                <tr>
+                    <th>닉네임</th>
+                    <td>
+                        <input type="text" name="nickname" id="nickname" placeholder="닉네임을 입력해주세요" value="${updateview.nickname}">
+                        <button type="button" name="nicknamecheck" id="nicknamecheck1" class="button-inline">중복확인</button>
+                    </td>
+                </tr>
+                <tr>
+                    <th>생년월일</th>
+                    <td><input type="date" name="birth" id="birth" value="${updateview.birth}"></td>
+                </tr>
+                <tr>
+                    <th>전화번호</th>
+                    <td>
+                        <div style="display: flex; align-items: center;">
+                           <select name="phone0" id="phone0">
+                			<option value="010">010</option>
+                			<option value="011">011</option>
+                			<option value="016">016</option>
+                			<option value="017">017</option>
+                			<option value="018">018</option>
+                			<option value="019">019</option>
+                		</select>-
+                            <input type="text" name="phone1" id="phone1" value="${updateview.phone1}" maxlength="4" style="width: 175px; margin-left: 9px; margin-right: 9px;">
+                            <span>  -  </span>
+                            <input type="text" name="phone2" id="phone2" value="${updateview.phone2}" maxlength="4" style="width: 175px; margin-left: 9px;">
+                            <button type="button" name="phonecheck" id="phonecheck" class="button-inline">중복확인</button>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <th>주소</th>
+                    <td>
+                        <div class="address-section">
+                            <input type="text" id="postcode" placeholder="우편번호">
+                            <button type="button" onclick="sample6_execDaumPostcode()" class="button-inline">우편번호 찾기</button>
+                         </div>
+                          <div class="address-section1">
+                            <input type="text" id="mainaddress" placeholder="주소" name="mainaddress">
+                            <input type="text" id="detailAddress" placeholder="상세주소" name="detailaddress">
+                            <input type="text" id="extraAddress" placeholder="참고항목" name="extraaddress">
+                        </div>
+                    </td>
+                </tr>
+                
+                <tr>
+                    <th>이메일</th>
+                    <td>
+                        <div style="display: flex; align-items: center;">
+                            <input type="text" name="fdomain" id="fdomain" placeholder="이메일을 입력해 주세요" style="width: 35%;">
+                            <span style="margin: 0 5px;">@</span>
+                            <select name="bdomain" id="bdomain" style="width: 30%;">
+                                <option value="naver.com">naver.com</option>
+                                <option value="daum.net">daum.net</option>
+                                <option value="gmail.com">gmail.com</option>
+                                <option value="kakao.com">kakao.com</option>
+                                <option value="nate.com">nate.com</option>
+                            </select>
+                            <button type="button" name="emailcheck" id="emailcheck" class="button-inline">중복확인</button>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2" class="button-container" style="text-align: center;">
+                        <input type="submit" value="수정">
+                        <button type="button" onclick="window.history.back();">취소</button>
+                    </td>
+                </tr>
+            </table>
+        </form>
+    </div>
 </body>
 </html>

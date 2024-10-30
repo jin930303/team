@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %> 
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %> 
 
 <!DOCTYPE html>
 <html>
@@ -7,8 +8,7 @@
 <meta charset="UTF-8">
 <title>Product Grid</title>
 <style>
-
-   .product-container {   /*상품 배열 하는거*/
+    .product-container {   
         display: grid;
         grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); 
         gap: 30px; 
@@ -16,7 +16,7 @@
         margin: 0 auto;
     }
     
-    .product {            /*상품 테두리*/
+    .product {            
         border: 1px solid #ddd;
         padding: 16px;
         text-align: center;
@@ -26,67 +26,137 @@
         transition: transform 0.2s; 
     }
     
-     .product:hover {
-        transform: scale(1.02); /* 마우스 오버 시 크기 증가 */
+    .product:hover {
+        transform: scale(1.02); 
     }
                                            
-    .product img {       /*상품 이미지 크기*/
+    .product img {       
         width: 200px; 
         height: 200px;
         object-fit: cover;
     }
 
-    .product-title {     /* 상품명 폰트 설정 */    
-        font-weight: bold;
-        font-size: 18px; 
+    .product-title {    
+        font-family: 'Roboto', sans-serif; 
+        font-weight: 300; 
+        font-size: 15px; 
         margin: 15px 0;
+        text-align: left; 
+        height: 50px;
     }
     
-    .product-price {     /* 가격 폰트 설정 */  
+    .product-price {     
+        font-family: 'Roboto', sans-serif; 
         color: #d32f2f;
-        font-size: 18px; 
+        font-size: 15px; 
         margin: 10px 0;
+        text-align: left; 
     }
     
-    .sort-container { 	 /* 정렬 방식 위치 설정 */  
+    .sort-search-container { /* 정렬 및 검색 컨테이너 */
         display: flex;
-        justify-content: flex-end;
-        margin: 20px;
+        justify-content: center; /* 중앙 정렬 */
+        margin: 20px 0; /* 위아래 여백 설정, 좌우 여백 제거 */
     }
 
-    .search-container {   /* 검색 위치 설정 */  
-        margin: 20px;
-        display: flex;
-        justify-content: flex-end;
+    .search-container input {
+        padding: 7px; 
+        border: 1px solid #ccc; 
+        border-radius: 4px; 
+        margin-right: 20px; 
+        width: 400px; 
+        font-size: 15px; 
     }
 
-    .delete-button {     /* 삭제 버튼 폰트*/
-        background-color: #d32f2f;
+    .sort-container select {
+        padding: 5px; 
+        border: 1px solid #ccc; 
+        border-radius: 4px; 
+    }
+
+    .category-container {
+        display: flex;
+        justify-content: center;
+        padding: 16px;
+    }
+
+    .category-button { 
+        margin: 5px; 
+        padding: 10px 15px;
+        border: 1px solid #ddd; 
+        background-color: #f9f9f9; 
+        color: black; 
+        border-radius: 5px; 
+        font-family: 'Roboto', sans-serif; 
+        font-weight: 300; 
+        transition: background-color 0.3s; 
+    }
+
+    .category-button:hover {
+        background-color: #e0e0e0; 
+    }
+
+    .action-button {     
+        background-color: #007bff; 
         color: white;
         border: none;
-        padding: 8px 12px;
+        padding: 10px 15px;
         cursor: pointer;
-        margin-top: 10px;
+        margin: 5px;
+        border-radius: 5px;
+        transition: background-color 0.3s, transform 0.2s;
     }
 
-    .category-button {   /* 수정,삭제 페이지 상단 카테고리 바 폰트 */
-        margin: 10px; 
-        padding: 10px 15px;
-        border: none;
-        background-color: #ccc; 
-        color: black; 
-        cursor: pointer;
-        border-radius: 5px; 
+    .action-button:hover {
+        background-color: #0056b3; 
+        transform: translateY(-2px); 
     }
- 
+
+    .delete-button {
+        background-color: #d32f2f; 
+    }
+
+    .delete-button:hover {
+        background-color: #c62828; 
+    }
+
+    .edit-button {  
+        background-color: #444; 
+        color: white; 
+    }
+    
+    .edit-button:hover {
+        background-color: #333; 
+    }
+    
+    .divider1 {  
+        border: none; 
+        border-top: 1px solid #ddd; 
+        width: 65%;  
+        margin: 20px auto; 
+        margin-top: 5px;
+        margin-bottom: 45px;  
+    }
+    
+    .divider2 {  
+        border: none; 
+        border-top: 1px solid #ddd; 
+        width: 65%;  
+        margin: 20px auto; 
+        margin-top: 15px;
+        margin-bottom: 18px;   
+    }
 </style>
+
+
+
 </head>
 
 <body>
 
 <!-- 카테고리 버튼 추가 -->
 <div class="category-container">
-    <button class="category-button" onclick="filterByCategory('')">모두 보기</button> <!-- 모든 상품 보기 버튼 -->
+    <button class="category-button" onclick="filterByCategory('')">모두 보기</button>
     <button class="category-button" onclick="filterByCategory('fcg001')">글러브</button>
     <button class="category-button" onclick="filterByCategory('fcg002')">배트</button>
     <button class="category-button" onclick="filterByCategory('fcg003')">장갑</button>
@@ -99,17 +169,22 @@
     <button class="category-button" onclick="filterByCategory('fcg011')">기타용품</button>
 </div>
 
-<div class="sort-container"> 
-    <select id="sortSelect" onchange="sortProducts()">
-        <option value="default">-정렬방식-</option>
-        <option value="priceAsc">가격 낮은 순</option>
-        <option value="priceDesc">가격 높은 순</option>
-    </select>
-</div>
+<!-- 정렬 및 검색 부분 -->
+<hr class="divider2"> <!-- 경계선 추가 -->
+<div class="sort-search-container"> 
+    <div class="search-container">
+        <input type="text" id="searchInput" oninput="filterProducts()" placeholder="상품명을 입력하세요 🔍">
+    </div>
 
-<div class="search-container">
-    <input type="text" id="searchInput" oninput="filterProducts()" placeholder="상품명을 입력하세요 🔍">
+    <div class="sort-container"> 
+        <select id="sortSelect" onchange="sortProducts()">
+            <option value="default">-정렬방식-</option>
+            <option value="priceAsc">가격 낮은 순</option>
+            <option value="priceDesc">가격 높은 순</option>
+        </select>
+    </div>    
 </div>
+<hr class="divider1"> <!-- 경계선 추가 -->
 
 <div class="product-container">
     <c:forEach items="${list}" var="aa">
@@ -118,16 +193,21 @@
                 <img src="./image/${aa.image1}" alt="Product Image">
             </a>
             <div class="product-title">${aa.product}</div>
-    <c:choose>
-    <c:when test="${aa.sale > 0}"> <!-- sale이 0보다 큰 경우 -->
-        <div class="product-price">[${aa.sale}% 세일중] ${aa.price}원 → ${aa.saleprice}원</div>
-    </c:when>
-    <c:otherwise>
-        <div class="product-price">${aa.price}원</div> <!-- 기본 가격 -->
-    </c:otherwise>
-	</c:choose>
-            <button class="edit-button" onclick="window.location.href='producteupdate?itemnum=${aa.itemnum}'">수정</button>
-            <button class="delete-button" onclick="confirmDelete('${aa.itemnum}')">삭제</button>
+            <c:choose>
+                <c:when test="${aa.sale > 0}"> <!-- sale이 0보다 큰 경우 -->
+                    <div class="product-price">
+                        <fmt:formatNumber value="${aa.price}" type="currency" currencySymbol="" /> [${aa.sale}% 세일중] 
+                        <fmt:formatNumber value="${aa.saleprice}" type="currency" currencySymbol="" />원
+                    </div>
+                </c:when>
+                <c:otherwise>
+                    <div class="product-price">
+                        <fmt:formatNumber value="${aa.price}" type="currency" currencySymbol="" />원
+                    </div> <!-- 기본 가격 -->
+                </c:otherwise>
+            </c:choose>
+            <button class="action-button edit-button" onclick="window.location.href='producteupdate?itemnum=${aa.itemnum}'">수정</button>
+            <button class="action-button delete-button" onclick="confirmDelete('${aa.itemnum}')">삭제</button>
         </div>
     </c:forEach>
 </div>

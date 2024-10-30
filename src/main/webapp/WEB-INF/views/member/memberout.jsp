@@ -7,7 +7,7 @@
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script type="text/javascript">
 $(document).ready(function(){
-	$(".delete-btn").click(function(e){
+	$(".delete_btn").click(function(e){
 		e.preventDefault();
 		var memberId=$(this).data("id");
 		
@@ -34,6 +34,50 @@ $(document).ready(function(){
 </script>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+ <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 20px;
+        }
+        
+        table {
+        width: 70%;
+        border-collapse: collapse;
+        margin: 20px auto; /* 중앙 정렬을 위해 auto 사용 */
+        background-color: #fff;
+        margin-top: 50px;
+        }
+        
+        th, td {
+            padding: 10px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+        th {
+            background-color: #be241c;
+            color: white;
+        }
+
+        tr:hover {
+            background-color: #f1f1f1;
+        }
+
+        .delete_btn {
+            background-color: #be241c;
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            cursor: pointer;
+            border-radius: 4px;
+        }
+
+        .delete_btn:hover {
+            background-color: #8e1a14;
+        }
+    </style>
+    
 </head>
 <body>
 <table>
@@ -58,7 +102,7 @@ $(document).ready(function(){
 				<td>${my.address}</td>
 				<td>${my.email}</td>
 				<td>${my.grade_name}</td>
-				<td><button class="delete-btn" data-id="${my.id}">삭제</button></td>
+				<td><button class="delete_btn" data-id="${my.id}">삭제</button></td>
 	
 
 

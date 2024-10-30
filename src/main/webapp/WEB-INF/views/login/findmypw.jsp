@@ -14,23 +14,21 @@ function check(){
     if (id.trim() == "") {
         alert('아이디를 입력해주세요');
         $('#id').focus();
-        return false; // 유효성 검사 실패 시 폼 제출 중지
+        return false; 
     }
-    // 이름 입력 체크
+    
     if (name.trim() == "") {
         alert('이름을 입력해주세요');
         $('#name').focus();
-        return false; // 유효성 검사 실패 시 폼 제출 중지
+        return false; 
     }
 
-    // 이메일 입력 체크
     if (email.trim() == "") {
         alert('이메일을 입력해주세요');
         $('#email').focus();
-        return false; // 유효성 검사 실패 시 폼 제출 중지
+        return false; 
     }
-
-    return true; // 폼 제출 중지
+    return true; 
 }
 </script>
 </head>

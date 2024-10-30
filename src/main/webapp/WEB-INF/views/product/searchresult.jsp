@@ -6,9 +6,65 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>검색결과</title>
+<style>
+    .product-container {   /*상품 배열 하는거*/
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); 
+        gap: 30px; 
+        max-width: 1200px; 
+        margin: 0 auto;
+    }
+    
+    .product {            /*상품 테두리*/
+        border: 1px solid #ddd;
+        padding: 16px;
+        text-align: center;
+        background-color: #f9f9f9; 
+        border-radius: 8px; 
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1); 
+        transition: transform 0.2s; 
+    }
+    
+     .product:hover {
+        transform: scale(1.02); /* 마우스 오버 시 크기 증가 */
+    }
+                                           
+    .product img {       /*상품 이미지 크기*/
+        width: 200px; 
+        height: 200px;
+        object-fit: cover;
+    }
+
+   .product-title {    
+    font-family: "Nanum Gothic", sans-serif;
+    font-weight: 300; /* 얇은 두께 설정 */
+    font-size: 15px; 
+    margin: 15px 0;
+    text-align: left; /* 왼쪽 정렬 추가 */
+    height: 50px;
+}
+    
+    .product-price {     /* 가격 폰트 설정 */  
+        font-family: "Nanum Gothic", sans-serif;
+        color: #d32f2f;
+        font-size: 15px; 
+        margin: 10px 0;
+        text-align: left; /* 왼쪽 정렬 추가 */
+    }
+     .divider1 {   /* 상품 경계선 */  
+	    border: none; 
+	    border-top: 1px solid #ddd; 
+	    width: 65%;  
+	    margin: 20px auto; 
+	    margin-top: 20px;
+	    margin-bottom: 45px;  
+	    }  
+    </style>
 </head>
 <body>
+<h1>검색상품</h1>
+<hr class="divider1"> 
 <div class="product-container">
 <c:forEach items="${list}" var="aa">
     <div class="product">

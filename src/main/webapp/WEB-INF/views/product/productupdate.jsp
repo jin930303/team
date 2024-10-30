@@ -5,7 +5,82 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>상품정보등록</title>
+<title>상품정보수정</title>
+  <style>
+
+    table {      
+        width: 100%; /* 테이블 너비를 100%로 설정 */
+        max-width: 600px; /* 최대 너비를 600px로 설정 */
+        margin: auto; /* 테이블을 중앙 정렬 */
+        background: white; /* 배경색을 흰색으로 설정 */
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* 테이블에 그림자 효과 추가 */
+    }
+
+    caption {
+        font-size: 1.5em; /* 글꼴 크기를 1.5em으로 설정 */
+        margin: 10px 0; /* 위아래 여백 추가 */
+        color: #333; /* 글자색을 어두운 회색으로 설정 */
+    }
+
+    th, td {
+        padding: 12px; /* 셀 안쪽 여백을 12px로 설정 */
+        border: 1px solid #ddd; /* 경계선을 연한 회색으로 설정 */
+        text-align: left; /* 텍스트를 왼쪽 정렬 */
+    }
+
+    th {
+        background-color: #f2f2f2; /* 헤더 배경색을 연한 회색으로 설정 */
+        color: #555; /* 헤더 글자색을 중간 회색으로 설정 */
+    }
+
+    input[type="text"],
+    input[type="number"],
+    select {
+        width: 100%; /* 입력 필드와 선택 상자의 너비를 100%로 설정 */
+        padding: 8px; /* 안쪽 여백을 8px로 설정 */
+        margin: 4px 0; /* 위아래 여백을 4px로 설정 */
+        border: 1px solid #ccc; /* 경계선을 연한 회색으로 설정 */
+        border-radius: 4px; /* 모서리를 둥글게 설정 */
+        box-sizing: border-box; /* 패딩과 테두리를 포함한 전체 너비 계산 */
+    }
+
+    input[type="file"] {
+        padding: 4px; /* 안쪽 여백을 4px로 설정 */
+    }
+
+    /* 제출 버튼 스타일 설정 */
+    input[type="submit"] {
+        background-color: #be241c; /* 버튼 배경색을 붉은색으로 설정 */
+        color: white; /* 글자색을 흰색으로 설정 */
+        padding: 10px 15px; /* 버튼 안쪽 여백을 10px 위아래, 15px 좌우로 설정 */
+        border: none; /* 테두리 없음 */
+        border-radius: 4px; /* 모서리를 둥글게 설정 */
+        cursor: pointer; /* 마우스 커서를 포인터로 변경 */
+        font-size: 1em; /* 글꼴 크기를 기본 크기로 설정 */
+        margin-top: 10px; /* 위쪽 여백을 10px로 설정 */
+    }
+
+    input[type="submit"]:hover {
+        background-color: #8e1a14; /* 마우스를 올렸을 때 배경색을 더 어두운 붉은색으로 변경 */
+    }
+    
+    /* 제출 버튼 스타일 설정 */
+    input[type="button"] {
+        background-color: #444; /* 버튼 배경색 설정 */
+        color: white; /* 글자색을 흰색으로 설정 */
+        padding: 10px 15px; /* 버튼 안쪽 여백을 10px 위아래, 15px 좌우로 설정 */
+        border: none; /* 테두리 없음 */
+        border-radius: 4px; /* 모서리를 둥글게 설정 */
+        cursor: pointer; /* 마우스 커서를 포인터로 변경 */
+        font-size: 1em; /* 글꼴 크기를 기본 크기로 설정 */
+        margin-top: 10px; /* 위쪽 여백을 10px로 설정 */
+    }
+
+    input[type="button"]:hover {
+        background-color: #333; /* 마우스를 올렸을 때 배경색을 더 어두운 붉은색으로 변경 */
+    }
+    
+</style>
 <script>
 function updateScgCode() {
     const cg_code = document.getElementById("cg_code").value;
@@ -161,7 +236,6 @@ function updateScgCode() {
         </select>
     </td>
 </tr>
-
 <tr><th>상품이름</th><td><input type="text" name="product" value="${dto.product}"></td></tr>
 <tr><th>상품가격</th><td><input type="number" name="price" value="${dto.price}"></td></tr>
 <tr>
@@ -181,12 +255,11 @@ function updateScgCode() {
 <tr><th>상세내용이미지</th><td><!-- 기존 이미지 파일명 표시 --><span>${dto.dimage}</span><br><input type="file" name="dimage"></td></tr>
 
 <tr>
-    <td>
-        <input type="submit" value="수정 완료">
-        <input type="button" value="취소" onclick="history.back();">
+    <td colspan="2" style="text-align: center;"> <!-- 두 열을 합치고 중앙 정렬 -->
+        <input type="submit" value="수정 완료" style="margin-right: 10px;"> <!-- 수정 완료 버튼 -->
+        <input type="button" value="취소" onclick="history.back();"> <!-- 취소 버튼 -->
     </td>
 </tr>
-
 
 </table>
 </form>

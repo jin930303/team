@@ -12,10 +12,10 @@
 	right: 100px; /* 우측 기준 30px 떨어짐 */
 	top: 285px; /* 상단에서 250px 떨어짐 */
 	z-index: 600;
-	background-color: #fff;
 	border: 1px solid #ddd;
 	border-radius: 10px;
 	padding: 10px; /* 버튼과 테두리 사이 간격 */
+	
 }
 
 /* 우측 사이드바 버튼 리스트 스타일 */
@@ -39,11 +39,12 @@
 	border: 1px solid #ddd;
 	border-radius: 5px;
 	text-align: center;
+	background-color: white; /* 배경색 변경 */
 	transition: background-color 0.3s;
 }
 
 #floating-menu ul li a:hover {
-	background-color: #f4f4f4;
+	background-color: #c9302c;  /*메인에 호버랑 색 똑같게 맞출려고*/
 }
 
 /* 맨 위로 맨 아래로 */
@@ -56,10 +57,11 @@
 	border-radius: 5px;
 	text-align: center;
 	transition: background-color 0.3s;
+	background-color: white; /* 배경색 변경 */
 }
 
 .scroll-button:hover {
-	background-color: #f4f4f4;
+	background-color: #c9302c;  /*메인에 호버랑 색 똑같게 맞출려고*/
 }
 </style>
 <meta charset="UTF-8">

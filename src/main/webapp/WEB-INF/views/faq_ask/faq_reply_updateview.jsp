@@ -4,24 +4,6 @@
 <!DOCTYPE html>
 <html>
 <head>
-<script>
-	let fileCount = 1;
-	const maxFiles = 3;
-		
-	function addFileInput() {
-    if (fileCount >= maxFiles) {
-	    alert("최대 3장까지 첨부 가능합니다.");
-	return;
-	}
-					
-    fileCount++;
-    const newInput = document.createElement('input');
-    newInput.type = 'file';
-    newInput.name = `fimage${fileCount}`;
-					
-    document.getElementById('fileInputs').appendChild(newInput);
-}
-</script>
 <title>고객센터 문의 게시판</title>
 <style type="text/css">
 /* 목차+게시판 컨테이너 */
@@ -244,13 +226,12 @@ input[type="reset"]:hover {
 </head>
 <body>
 <div class="flex_container">
-	<!-- 사이드 메뉴바 -->
+<!-- 사이드 메뉴바 -->
 	<div class="sidebar_container">
-		<div class="sidebar_title"><h2>1:1 문의하기</h2></div>
+		<div class="sidebar_title"><h2>문의 내역</h2></div>
 		<aside class="sidebar">
 			<ul>
 				<li><a href="faq_community">고객센터 홈</a></li>
-				<li><a href="gongjiboard">공지사항</a></li>
 				<c:choose>
 					<c:when test="${loginstate == true}">
 						<li><a href="faqin">1:1 문의하기</a></li>
@@ -258,6 +239,11 @@ input[type="reset"]:hover {
 				</c:choose>
 				<li><a href="faqout">문의 내역</a></li>
 				<li><a href="faq">FAQ</a></li>
+				<c:choose>
+					<c:when test="${adminloginstate == true}">
+					<li><a href="FAQ_in">FAQ 글 작성</a></li>
+					</c:when>
+				</c:choose>
 			</ul>
 		</aside>
 	</div>
@@ -267,7 +253,7 @@ input[type="reset"]:hover {
 				<tr>
 					<th>문의 번호</th>
 					<td>
-						<input type="number" name="cnum" value="${dto.cnum}" readonly>
+						<input type="text" name="cnum" value="${dto.cnum}" readonly>
 					</td>
 				</tr>
 				<tr>
@@ -300,15 +286,17 @@ input[type="reset"]:hover {
 				<tr>
 					<th>첨부 이미지</th>
 					<td>
-						<div id="fileInputs">
-							<input type="file" name="fimage1" onclick="addFileInput()">
-						</div>
+						<input type="file" name="fimage1">
+						<input type="file" name="fimage2">
+						<input type="file" name="fimage3">
 					</td>
 				</tr>
 				<tr>
 					<td colspan="2">
-						<input type="submit" value="수정 완료">
-						<input type="button" value="수정 취소" onclick="location.href='faqout'">
+						<div class="submitbutton">
+							<input type="submit" value="수정 완료">
+							<input type="button" value="수정 취소" onclick="location.href='faqout'">
+						</div>
 					</td>
 				</tr>
 			</table>
