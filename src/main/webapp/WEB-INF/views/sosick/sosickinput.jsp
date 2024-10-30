@@ -164,9 +164,10 @@ window.onload = function() {
     text-align: center;
 }
 
-caption {
-	color: black;
-	text-align: center;
+.title h1 {
+    text-align: left;
+    padding: 30px;
+    border-bottom: 2px solid #be241c;
 }
 
 .main-container table tr th, 
@@ -288,7 +289,7 @@ input[type="reset"]:hover {
 <div class="flex_container">
 	<!-- 사이드 메뉴바 -->
 	<div class="sidebar_container">
-		<div class="sidebar_title"><h2>야구소식 WRITE</h2></div>
+		<div class="sidebar_title"><h2>야구소식</h2></div>
 		<aside class="sidebar">
 				<ul>
 					<li><a href="gongjiboard">공지사항</a></li>
@@ -344,6 +345,9 @@ input[type="reset"]:hover {
 	
 <!-- 메인 콘텐츠 -->
 	<main class="main-container">
+		<div class="title">
+			<h1>야구소식 WRITE</h1>
+		</div>
 		<form action="sosicksave" method="post" enctype="multipart/form-data">
 			<table>
 				<tr>

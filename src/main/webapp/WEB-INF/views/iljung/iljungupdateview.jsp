@@ -172,6 +172,12 @@ function toggleScoreFields() {
     text-align: center;
 }
 
+.title h1 {
+    text-align: left;
+    padding: 30px;
+    border-bottom: 2px solid #be241c;
+}
+
 .main-container table tr th, 
 .main-container table tr td {
     padding: 14px;
@@ -284,7 +290,7 @@ input[type="reset"]:hover {
 <div class="flex_container">
 	<!-- 사이드 메뉴바 -->
 	<div class="sidebar_container">
-		<div class="sidebar_title"><h2>경기일정 UPDATE</h2></div>
+		<div class="sidebar_title"><h2>경기일정</h2></div>
 		<aside class="sidebar">
 				<ul>
 					<li><a href="gongjiboard">공지사항</a></li>
@@ -336,7 +342,9 @@ input[type="reset"]:hover {
 	<!-- 메인 콘텐츠 -->
 	<main class="main-container">
 		<form action="iljungupdate" method="post">
-			<h1>KBO 일정</h1>
+			<div class="title">
+				<h1>KBO 일정 UPDATE</h1>
+			</div>
 			<table>
 				<thead>
 					<tr>
