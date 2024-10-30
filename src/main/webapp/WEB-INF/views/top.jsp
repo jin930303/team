@@ -45,6 +45,19 @@
 		background-repeat: no-repeat;	/* 이미지를 반복하지 않음 */
 		background-attachment: fixed;	/* 배경이 고정된 상태로 스크롤 */
 	}
+	
+/* pre Style */
+	pre {
+		font-family: 'Gothic A1', sans-serif;
+		font-size:15px;
+		background-color: transparent;
+		white-space: pre-wrap;
+		overflow-wrap: break-word;
+		text-align: left;
+		max-width: 1000px;
+		overflow: hidden;
+		border: none !important;
+	}
 
 /* header 전체 */
 	.navbar-inverse {
@@ -67,7 +80,6 @@
 	}
 
 /* 좌측 상단 로그인쪽 */
-
 .container-log {
     display: flex;
     font-size: 13px;
@@ -75,15 +87,6 @@
     color: #666666;
     align-items: center;
 }
-
-	.container-log {
-		display: flex;
-		font-size: 13px;
-		justify-content: flex-start;
-		color: #666666;
-		align-items: center;
-	}
-
 
 /* 타이틀 */
 	.container-head {
@@ -110,51 +113,31 @@
 		height: 120px;
 	}
 
-.navbar-header {
-	background-image: url("./image/야구공 수정.png");
-	background-size : 700px 120px;
-	background-repeat: no-repeat;
-	background-position : center;
-	display: flex;
-	font-size: 60px !important;
-	justify-content: center;
-	align-items: center;
-	color: black;
-	width: 100%;
-	height: 120px;
-}
+	#search {
+	    width: calc(100% - 100px); /* 버튼의 너비를 고려 */
+	    padding: 4px;
+	    border: 1px solid #ccc;
+	    border-radius: 4px;
+	    font-size: 1em;
+	    transition: border-color 0.3s;
+	    margin-top: 10px;
+	}
 
-.container-fluid {
-	font-size: 18px;
-	display: flex;
-	justify-content: center;
-}
+	button[type="submit"] {
+	    padding: 5px 12px;
+	    margin-left: 5px;
+	    border: none;
+	    border-radius: 4px;
+	    background-color: #be241c;
+	    color: white;
+	    font-size: 1em;
+	    cursor: pointer;
+	    transition: background-color 0.3s;
+	}
 
-#search {
-    width: calc(100% - 100px); /* 버튼의 너비를 고려 */
-    padding: 4px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    font-size: 1em;
-    transition: border-color 0.3s;
-    margin-top: 10px;
-}
-
-button[type="submit"] {
-    padding: 5px 12px;
-    margin-left: 5px;
-    border: none;
-    border-radius: 4px;
-    background-color: #be241c;
-    color: white;
-    font-size: 1em;
-    cursor: pointer;
-    transition: background-color 0.3s;
-}
-
-button[type="submit"]:hover {
-    background-color: #8e1a14; /* 호버 시 색상 변경 */
-}
+	button[type="submit"]:hover {
+	    background-color: #8e1a14; /* 호버 시 색상 변경 */
+	}
 
 	.navbar-header>a:hover {
 		color: #ddd !important;	/* hover 상태에서도 색상 변화 없음 */
@@ -165,7 +148,6 @@ button[type="submit"]:hover {
 		display: flex;
 		justify-content: center;
 	}
-
 </style>
 <meta charset="UTF-8">
 <title>Insert title here</title>

@@ -104,9 +104,10 @@ table {
     text-align: center;
 }
 
-caption {
-	color: black;
-	text-align: center;
+.title h1 {
+	text-align: left;
+	padding: 30px;
+	border-bottom: 2px solid #be241c;
 }
 
 table tr th, 
@@ -235,11 +236,10 @@ td img {
 <div class="flex_container">
 	<!-- 사이드 메뉴바 -->
 	<div class="sidebar_container">
-		<div class="sidebar_title"><h2>1:1 문의</h2></div>
+		<div class="sidebar_title"><h2>FAQ</h2></div>
 		<aside class="sidebar">
 			<ul>
 				<li><a href="faq_community">고객센터 홈</a></li>
-				<li><a href="gongjiboard">공지사항</a></li>
 				<c:choose>
 					<c:when test="${loginstate == true}">
 						<li><a href="faqin">1:1 문의하기</a></li>
@@ -247,6 +247,11 @@ td img {
 				</c:choose>
 				<li><a href="faqout">문의 내역</a></li>
 				<li><a href="faq">FAQ</a></li>
+				<c:choose>
+					<c:when test="${adminloginstate == true}">
+						<li><a href="FAQ_in">FAQ 작성</a></li>
+					</c:when>
+				</c:choose>
 			</ul>
 		</aside>
 	</div>
@@ -254,7 +259,9 @@ td img {
 		<form action="faq_admin_update2" method="post"
 			enctype="multipart/form-data">
 			<table>
-				<caption><h2>FAQ : 수정</h2></caption>
+				<div class="title">
+					<h1>FAQ UPDATE</h1>
+				</div>
 				<tr>
 					<th>FAQ 번호</th>
 					<td><input type="text" name="cnum" value="${dto.cnum}" readonly>

@@ -43,9 +43,10 @@ public class MemberController {
 		String nickname = request.getParameter("nickname");
 		String name = request.getParameter("name");
 		String birth = request.getParameter("birth");
+		String phone0 = request.getParameter("phone0");
 		String phone1 = request.getParameter("phone1");
 		String phone2 = request.getParameter("phone2");
-		String phone = "010-" + phone1 + "-" + phone2;
+		String phone = phone0 +"-"+ phone1 + "-" + phone2;
 		String fdomain = request.getParameter("fdomain");
 		String bdomain = request.getParameter("bdomain");
 		String email = fdomain + "@" + bdomain;

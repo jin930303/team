@@ -159,8 +159,10 @@ window.onload = function() {
     border-left: 1px solid #ddd;  /*목차 - 게시판 사이 선*/
 }
 
-main h1{
-	text-align: left;
+.title h1 {
+    text-align: left;
+    padding: 30px;
+    border-bottom: 2px solid #be241c;
 }
 
 .main-container table {
@@ -281,7 +283,7 @@ input[type="reset"]:hover {
 <div class="flex_container">
 	<!-- 사이드 메뉴바 -->
 	<div class="sidebar_container">
-		<div class="sidebar_title"><h2>공지사항 UPDATE</h2></div>
+		<div class="sidebar_title"><h2>공지사항</h2></div>
 		<aside class="sidebar">
 				<ul>
 					<li><a href="gongjiboard">공지사항</a></li>
@@ -338,6 +340,9 @@ input[type="reset"]:hover {
 <!-- 메인 콘텐츠 -->
 	<main class="main-container">
 		<form action="gongjiupdate" method="post" enctype="multipart/form-data">
+			<div class="title">
+				<h1>공지사항 UPDATE</h1>
+			</div>
 			<table>
 				<tr>
 					<th>제목</th>

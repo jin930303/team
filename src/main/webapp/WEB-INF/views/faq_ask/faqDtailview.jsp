@@ -115,26 +115,16 @@ table {
     text-align: center;
 }
 
-main h1, main h5 {
+.title h1 {
     text-align: left;
-    color: #333;
-    margin-bottom: 20px;
+	padding: 30px;
 }
 
-.caption-color {
-    background-color: #eef1f5; 
-    color: #333; /* 텍스트 색상 */
-    text-align: left;
-    padding: 20px;
-}
-
-.caption-color1 {
-    background-color: #eef1f5; 
-    color: #333; /* 텍스트 색상 */
-    text-align: left;
-    padding: 20px;
-    display: flex;
-   	align-items: center;  /* 세로 중앙 정렬 */
+.title h5,
+.title1 h1 {
+	text-align: left;
+	padding: 30px;
+	border-bottom: 2px solid #be241c;
 }
 
 .contents {
@@ -199,29 +189,33 @@ img {
 </head>
 <body>
 <div class="flex_container">
-		<!-- 사이드 메뉴바 -->
-		<div class="sidebar_container">
-			<div class="sidebar_title"><h2>1:1 문의</h2></div>
-			<aside class="sidebar">
-				<ul>
-					<li><a href="faq_community">고객센터 홈</a></li>
-					<li><a href="gongjiboard">공지사항</a></li>
-					<c:choose>
-						<c:when test="${loginstate == true}">
-							<li><a href="faqin">1:1 문의하기</a></li>
-						</c:when>
-					</c:choose>
-					<li><a href="faqout">문의 내역</a></li>
-					<li><a href="faq">FAQ</a></li>
-				</ul>
-			</aside>
-		</div>
+<!-- 사이드 메뉴바 -->
+	<div class="sidebar_container">
+		<div class="sidebar_title"><h2>문의 내역</h2></div>
+		<aside class="sidebar">
+			<ul>
+				<li><a href="faq_community">고객센터 홈</a></li>
+				<c:choose>
+					<c:when test="${loginstate == true}">
+						<li><a href="faqin">1:1 문의하기</a></li>
+					</c:when>
+				</c:choose>
+				<li><a href="faqout">문의 내역</a></li>
+				<li><a href="faq">FAQ</a></li>
+				<c:choose>
+					<c:when test="${adminloginstate == true}">
+					<li><a href="FAQ_in">FAQ 글 작성</a></li>
+					</c:when>
+				</c:choose>
+			</ul>
+		</aside>
+	</div>
 	<main class="main-container">
 		<form action="faqreply" method="post" enctype="multipart/form-data">
 			<div class="table-container">	
-				<table>
-					<c:forEach items="${list}" var="faq">
-						<div class="caption-color">
+				<c:forEach items="${list}" var="faq">
+					<table>
+						<div class="title">
 							<h1>${faq.nickname} 님의 문의 내용</h1>
 							<h5>문의 번호 : ${faq.cnum}</h5>
 						</div>
@@ -272,8 +266,8 @@ img {
 									<input type="button" value="돌아가기" onclick="location.href='./faqout'">
 							</td>
 						</tr>
-					</c:forEach>
-				</table>
+					</table>
+				</c:forEach>
 			</div>
 			<br>
 			<br>
@@ -283,7 +277,8 @@ img {
 					<c:choose>
 						<c:when test="${replylist ne null}">
 					
-					<div class="caption-color1"><br><h1>▶ Q&A : 답변 드립니다.</h1>
+					<div class="title1">
+						<h1>Q&A : 답변 드립니다.</h1>
 					</div>
 						<tr>
 							<th>문의 종류</th>
@@ -307,9 +302,6 @@ img {
 							<c:choose>
 								<c:when test="${adminloginstate == true}">
 									<input type="button" value="답변 수정" onclick="location.href='faq_reply_update1?cnum=${replylist.cnum}'">
-									<!-- 
-									<input type="button" value="답변 삭제" onclick="location.href='faq_reply_delete?cnum=${replylist.cnum}'">
-									 -->
 									<input type="button" value="답변 삭제" onclick="delete_reply(${replylist.cnum})">
 								</c:when>
 							</c:choose>
