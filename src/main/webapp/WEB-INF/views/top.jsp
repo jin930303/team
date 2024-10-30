@@ -56,11 +56,11 @@ body {
 
 /* 좌측 상단 로그인쪽 */
 .container-log {
-	display: flex;
-	font-size: 13px;
-	justify-content: flex-start;
-	color: #666666;
-	align-items: center;
+    display: flex;
+    font-size: 13px;
+    justify-content: flex-end; /* 왼쪽에서 오른쪽으로 정렬 변경 */
+    color: #666666;
+    align-items: center;
 }
 
 /* 야구용품 */
@@ -91,6 +91,33 @@ body {
 	display: flex;
 	justify-content: center;
 }
+
+#search {
+    width: calc(100% - 100px); /* 버튼의 너비를 고려 */
+    padding: 4px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 1em;
+    transition: border-color 0.3s;
+    margin-top: 10px;
+}
+
+button[type="submit"] {
+    padding: 5px 12px;
+    margin-left: 5px;
+    border: none;
+    border-radius: 4px;
+    background-color: #be241c;
+    color: white;
+    font-size: 1em;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+button[type="submit"]:hover {
+    background-color: #8e1a14; /* 호버 시 색상 변경 */
+}
+
 </style>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet"
