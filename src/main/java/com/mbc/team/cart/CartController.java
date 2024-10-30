@@ -14,6 +14,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -30,35 +31,12 @@ public class CartController {
 	CartService cs;
 	
 	@RequestMapping(value = "/insertcart")
-	public String cart(HttpServletRequest request, HttpSession hs) {
-
-		String itemnumStr = request.getParameter("itemnum");
-		String priceStr = request.getParameter("price");
-		String countStr = request.getParameter("count");
-		String product = request.getParameter("product");
-		String op1 = request.getParameter("op1");
-		String image1 = request.getParameter("image1");
-		String id = request.getParameter("id");
-
-		int itemnum = Integer.parseInt(itemnumStr);
-		int price = Integer.parseInt(priceStr);
-		int count = Integer.parseInt(countStr);
-
-		
-		CartItem cartItem = new CartItem();
-		cartItem.setItemnum(itemnum);
-		cartItem.setId(id);
-		cartItem.setProduct(product);
-		cartItem.setPrice(price);
-		cartItem.setCount(count);
-		cartItem.setImage1(image1);
-		cartItem.setOp1(op1);
+	public String cart(HttpSession hs,@ModelAttribute CartItem cartItem) {
 
 		cs = sqlSession.getMapper(CartService.class);
 		cs.insert(cartItem);
 
-		return "redirect:/productdetail?itemnum=" + itemnum;
-
+		return "redirect:/productdetail?itemnum=" + cartItem.getItemnum();
 	}
 
 	@RequestMapping(value = "/cart")
@@ -109,29 +87,22 @@ public class CartController {
 	}
 
 	@RequestMapping(value = "/buydirectitem", method = RequestMethod.POST)
-	public String buydirectitem(HttpSession hs, Model mo, HttpServletRequest request) {
-		int itemnum=Integer.parseInt(request.getParameter("itemnum"));
-		int count=Integer.parseInt(request.getParameter("count"));
-		int price=Integer.parseInt(request.getParameter("price"));
-		String op1=request.getParameter("op1");
-		String product=request.getParameter("product");
-		String image1=request.getParameter("image1");
+	public String buydirectitem(HttpSession hs, Model mo,@ModelAttribute CartItem cartItem) {
 		
-		
-		System.out.println("ItemNum: " + itemnum);
-		System.out.println("Price: " + price);
-		System.out.println("Product: " + product);
-		System.out.println("Option: " + op1);
-		System.out.println("Count: " + count);
+		System.out.println("ItemNum: " +cartItem.getItemnum());
+		System.out.println("Price: " + cartItem.getPrice());
+		System.out.println("Product: " +cartItem.getProduct());
+		System.out.println("Option: " +cartItem.getOp1());
+		System.out.println("Count: " +cartItem.getCount());
 
 		LoginDTO dto3 = (LoginDTO) hs.getAttribute("dto3");
 		String id = dto3.getId();
 
-		mo.addAttribute("itemnum", itemnum);
-		mo.addAttribute("product", product);
-		mo.addAttribute("count", count);
-		mo.addAttribute("op1", op1);
-		mo.addAttribute("price", price);
+		mo.addAttribute("itemnum",cartItem.getItemnum());
+		mo.addAttribute("product",cartItem.getProduct());
+		mo.addAttribute("count", cartItem.getCount());
+		mo.addAttribute("op1", cartItem.getOp1());
+		mo.addAttribute("price", cartItem.getPrice());
 
 		return "buyproduct";
 	}

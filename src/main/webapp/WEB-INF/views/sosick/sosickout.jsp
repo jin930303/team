@@ -151,10 +151,10 @@ table {
     text-align: center;
 }
 
-main h1, main h5 {
+.title h1 {
     text-align: left;
-    color: #333;
-    margin-bottom: 20px;
+    padding: 30px;
+    border-bottom: 2px solid #be241c;
 }
 
 .main-container table tr {
@@ -272,6 +272,9 @@ img {
 	
 <!-- 메인 콘텐츠 -->
 	<main class="main-container">
+		<div class="title">
+			<h1>야구소식</h1>
+		</div>
 		<table>
 			<thead>
 				<tr>
@@ -286,22 +289,25 @@ img {
 					<td>${list.sdate}</td>
 					<td>${list.scnt}</td>
 				</tr>	
-				<tr>
-					<c:choose>
-						<c:when test="${list.simage==null}">
-							<td colspan="3">
-								<pre>${list.scontents}</pre>
+				<c:choose>
+					<c:when test="${list.simage==null}">
+						<tr>
+							<td colspan="4">
+								${list.scontents}
 							</td>
-						</c:when>
-						
-						<c:otherwise>
-							<td colspan="3">
-					    		<img src="./image/${list.simage}"><br>
-					    		<pre>${list.scontents}</pre>
+						</tr>
+					</c:when>
+					
+					<c:otherwise>
+						<tr>
+							<td colspan="4">
+					    		<img src="./image/${list.simage}">
+					    		<br>
+					   			${list.scontents}<br>
 							</td>
-						</c:otherwise>
-					</c:choose>
-				</tr>
+				   		</tr>
+					</c:otherwise>
+				</c:choose>
 			</tbody>
 			<c:choose>
 				<c:when test="${adminloginstate==true}">

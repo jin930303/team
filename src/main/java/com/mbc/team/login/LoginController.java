@@ -17,6 +17,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -56,10 +57,13 @@ public class LoginController {
 	
 	
 	@RequestMapping(value = "/logincheck")
-	public String login1(HttpServletRequest request, Model mo,HttpServletResponse response) throws IOException
+	public String login1(@RequestParam("id") String id,@RequestParam("pw") String inputpw,
+			Model mo,HttpServletResponse response,HttpServletRequest request) throws IOException
 	{
-		String id=request.getParameter("id");
-		String inputpw=request.getParameter("pw");
+		/*
+		 * String id=request.getParameter("id"); String
+		 * inputpw=request.getParameter("pw");
+		 */
 		ls=sqlSession.getMapper(LoginService.class);
 		LoginDTO dto3=ls.logincheck(id);
 		response.setContentType("text/html;charset=utf-8");
@@ -149,27 +153,24 @@ public class LoginController {
 	}
 	
 	@RequestMapping(value = "/memberupdate2")
-	public String login6(HttpServletRequest request)
+	public String login6(HttpServletRequest request,@ModelAttribute LoginDTO loginDTO,
+			@RequestParam("pw") String pw1,@RequestParam("phone0") String phone0,
+			@RequestParam("phone1") String phone1,@RequestParam("phone2") String phone2,
+			@RequestParam("fdomain") String fdomain,@RequestParam("bdomain") String bdomain,
+			@RequestParam("mainaddress") String mainaddress,@RequestParam("detailaddress") String detailaddress,
+			@RequestParam("extraaddress") String extraaddress)
 	{
-		String id=request.getParameter("id");
-		String pw1=request.getParameter("pw");
 		PasswordEncoder passwordEncoder=new BCryptPasswordEncoder();
 		String pw=passwordEncoder.encode(pw1);
-		String nickname=request.getParameter("nickname");
-		String name=request.getParameter("name");
-		String birth=request.getParameter("birth");
-		String phone1=request.getParameter("phone1");
-		String phone2=request.getParameter("phone2");
-		String phone="010-"+phone1+"-"+phone2;
-		String fdomain=request.getParameter("fdomain");
-		String bdomain=request.getParameter("bdomain");
+		String phone=phone0+"-"+phone1+"-"+phone2;
 		String email=fdomain+"@"+bdomain;
-		String mainaddress = request.getParameter("mainaddress");
-		String detailaddress = request.getParameter("detailaddress");
-		String extraaddress = request.getParameter("extraaddress");
 		String address = mainaddress + detailaddress + extraaddress;
+		loginDTO.setPw(pw);
+		loginDTO.setPhone(phone);
+		loginDTO.setEmail(email);
+		loginDTO.setAddress(address);
 		ls=sqlSession.getMapper(LoginService.class);
-		ls.memberupdate2(nickname,pw,name,birth,phone,address,email,id);
+		ls.memberupdate2(loginDTO);
 		
 		return "redirect:main";
 	}
