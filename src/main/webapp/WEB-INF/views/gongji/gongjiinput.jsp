@@ -214,15 +214,7 @@ table input[type="file"] {
     box-sizing: border-box;
     cursor: pointer; /* 마우스 오버 시 커서가 포인터로 변경 */
 }
-/* checkbox 스타일 */
-table input[type="checkbox"] {
-    margin-right: 8px;
-}
-/* 파일 업로드 컨테이너 스타일 */
-#fileInputs {
-    display: flex;
-    flex-direction: column;
-}
+
 /* textarea 스타일 */
 textarea {
     resize: vertical; /* 사용자가 세로 크기 조절 가능하도록 설정 */
@@ -337,52 +329,52 @@ input[type="reset"]:hover {
 		</aside>
 	</div>
 	<!-- 메인 콘텐츠 -->
-	<div class="main-container">
+	<main class="main-container">
 		<form action="gongjisave" method="post" enctype="multipart/form-data">
-		<table>
-			<caption><h2>공지사항 작성</h2></caption>
-			<tr height="35px">
-				<th>제목</th>
-				<td>
-					<input type="text" name="gtitle" required="required">
-					<input type="hidden" name="id" value="admin" readonly>
-					<input type="hidden" name="nickname" value="관리자" readonly>
-				</td>
-			</tr>
-			
-			<tr>
-				<th>내용</th>
-				<td>
-					<textarea rows="20" cols="100px" name="gcontents" required="required"></textarea>
-				</td>
-			</tr>
-			
-			<tr>
-				<th>파일첨부</th>
-				<td id="imagestateon">
-					<select name="fileonoff" onchange="toggleStateOptions()">
-						<option value="fileo">파일첨부
-						<option value="filex">파일없음
-					</select>
-					<input type="file" name="gimage">
-				</td>
-				<td id="imagestateoff">
-					첨부된 파일없음
-				</td>
-			</tr>
-			
-			<tr>
-				<td colspan="2">
-					<div class="submitbutton">
-						<input type="submit" value="작성완료">
-						<input type="reset" value="작성취소">
-						<input type="button" onclick="location.href='gongjiboard'" value="목록">
-					</div>
-				</td>
-			</tr>
-		</table>
+			<table>
+				<caption><h2>공지사항 작성</h2></caption>
+				<tr height="35px">
+					<th>제목</th>
+					<td>
+						<input type="text" name="gtitle" required="required">
+						<input type="hidden" name="id" value="admin" readonly>
+						<input type="hidden" name="nickname" value="관리자" readonly>
+					</td>
+				</tr>
+				
+				<tr>
+					<th>내용</th>
+					<td>
+						<textarea rows="20" cols="100px" name="gcontents" required="required"></textarea>
+					</td>
+				</tr>
+				
+				<tr>
+					<th>파일첨부</th>
+					<td id="imagestateon">
+						<select name="fileonoff" onchange="toggleStateOptions()">
+							<option value="fileo">파일첨부
+							<option value="filex">파일없음
+						</select>
+						<input type="file" name="gimage">
+					</td>
+					<td id="imagestateoff">
+						첨부된 파일없음
+					</td>
+				</tr>
+				
+				<tr>
+					<td colspan="2">
+						<div class="submitbutton">
+							<input type="submit" value="작성완료">
+							<input type="reset" value="작성취소">
+							<input type="button" onclick="location.href='gongjiboard'" value="목록">
+						</div>
+					</td>
+				</tr>
+			</table>
 		</form>
-	</div>
+	</main>
 </div>
 </body>
 </html>

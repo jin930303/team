@@ -30,6 +30,10 @@ public class FAQController {
 	
 	@Autowired
 	SqlSession sqlSession;
+	HttpSession hs;
+	FAQService fs;
+	FAQadminService fs2;
+	
 	// 경로 수정해야합니다.
 	String path = "C:\\Users\\3-16\\git\\team\\src\\main\\webapp\\image";
 
@@ -37,7 +41,7 @@ public class FAQController {
 	@RequestMapping(value = "/faqin")
 	public String faq0member(HttpServletResponse response, HttpServletRequest request, Model mo) throws IOException {
 		
-		HttpSession hs = request.getSession();
+		hs = request.getSession();
 		Boolean FAQinput = (Boolean) hs.getAttribute("loginstate");
 		
 		if (FAQinput == null || !FAQinput) {
@@ -86,7 +90,7 @@ public class FAQController {
 	    }
 
 	    // FAQ 데이터 저장
-	    FAQService fs = sqlSession.getMapper(FAQService.class);
+	    fs = sqlSession.getMapper(FAQService.class);
 	    fs.faqinsert(tab, title, fcontents, nickname, fname1, fname2, fname3, openclose);
 	    int cnum = fs.save_detail();
 
@@ -100,7 +104,7 @@ public class FAQController {
 		String nowPage = request.getParameter("nowPage");
 		String cntPerPage = request.getParameter("cntPerPage");
 
-		FAQService fs = sqlSession.getMapper(FAQService.class);
+		fs = sqlSession.getMapper(FAQService.class);
 		ArrayList<FAQDTO> list = fs.faqboard();
 		
 		mo.addAttribute("list", list);
@@ -130,7 +134,7 @@ public class FAQController {
 		String nowPage = request.getParameter("nowPage");
 		String cntPerPage = request.getParameter("cntPerPage");
 
-		FAQService fs = sqlSession.getMapper(FAQService.class);
+		fs = sqlSession.getMapper(FAQService.class);
 		ArrayList<FAQDTO> list = null;
 		if (faq_category.equals("faqcnt")) {
 			list = fs.category1();
@@ -159,13 +163,13 @@ public class FAQController {
 	@RequestMapping(value = "/faqreply", method = RequestMethod.POST)
 	public String faq4admin(HttpServletResponse response, HttpServletRequest request, Model mo) throws IOException {
 		
-		HttpSession hs = request.getSession();
+		hs = request.getSession();
 		boolean login = (Boolean)hs.getAttribute("adminloginstate");
 		
 		if(login)
 		{
 			int cnum = Integer.parseInt(request.getParameter("cnum"));
-			FAQService fs = sqlSession.getMapper(FAQService.class);
+			fs = sqlSession.getMapper(FAQService.class);
 			ArrayList<FAQDTO> list = fs.faqreply(cnum);
 			mo.addAttribute("faqlist", list);
 	
@@ -187,7 +191,7 @@ public class FAQController {
 		int step = Integer.parseInt(request.getParameter("step"));
 		int indent = Integer.parseInt(request.getParameter("indent"));
 
-		FAQService fs = sqlSession.getMapper(FAQService.class);
+		fs = sqlSession.getMapper(FAQService.class);
 		fs.faqstepup(groups, step);
 		step++;
 		indent++;
@@ -200,7 +204,7 @@ public class FAQController {
 	// 1:1 문의글 상세페이지(상세페이지 출력 + 관리자 답변 동시 출력 +관리자 및 회원만 확인 가능) +@ 회원만x 비회원도 공개는 같이 볼 수 있어야됨 O
 	@RequestMapping(value = "/faqdetail")
 	public String faq6(Model mo, HttpServletRequest request, FAQDTO dto) {
-		HttpSession hs = request.getSession();
+		hs = request.getSession();
 		Boolean FAQadmin = (Boolean) hs.getAttribute("adminloginstate");
 		Boolean FAQmember = (Boolean) hs.getAttribute("loginstate");
 		int cnum = Integer.parseInt(request.getParameter("cnum"));
@@ -214,7 +218,7 @@ public class FAQController {
 			return "redirect:/faqout";
 		}
 		else { 
-			FAQService fs = sqlSession.getMapper(FAQService.class);
+			fs = sqlSession.getMapper(FAQService.class);
 	
 			ArrayList<FAQDTO> list = fs.faqdetail(cnum);
 			mo.addAttribute("list", list);
@@ -232,7 +236,7 @@ public class FAQController {
 	public String faq7admin(HttpServletRequest request, Model mo) throws IllegalStateException, IOException {
 		int cnum = Integer.parseInt(request.getParameter("cnum"));
 
-		FAQService fs = sqlSession.getMapper(FAQService.class);
+		fs = sqlSession.getMapper(FAQService.class);
 
 		FAQDTO dto = fs.faq_reply_update1(cnum);
 		mo.addAttribute("dto", dto);
@@ -276,7 +280,7 @@ public class FAQController {
 		prw.print("<script> location.href='faqout';</script>");
 		prw.close();
 		
-		FAQService fs = sqlSession.getMapper(FAQService.class);
+		fs = sqlSession.getMapper(FAQService.class);
 		fs.faq_reply_update2(cnum, tab, title, fcontents, nickname, fname1, fname2, fname3);
 
 		return "redirect:/faqout";
@@ -286,7 +290,7 @@ public class FAQController {
 	@RequestMapping(value = "/faq_reply_delete")
 	public String faq9admin(HttpServletRequest request) {
 		int cnum = Integer.parseInt(request.getParameter("cnum"));
-		FAQService fs = sqlSession.getMapper(FAQService.class);
+		fs = sqlSession.getMapper(FAQService.class);
 		fs.faq_reply_delete(cnum);
 
 		return "redirect:/faqout";
@@ -297,7 +301,7 @@ public class FAQController {
 	public String faq10member(HttpServletRequest request, Model mo) throws IllegalStateException, IOException {
 		int cnum = Integer.parseInt(request.getParameter("cnum"));
 
-		FAQService fs = sqlSession.getMapper(FAQService.class);
+		fs = sqlSession.getMapper(FAQService.class);
 
 		FAQDTO dto = fs.faqupdate(cnum);
 		mo.addAttribute("dto", dto);
@@ -342,7 +346,7 @@ public class FAQController {
 		prw.print("<script> location.href='faqout';</script>");
 		prw.close();
 
-		FAQService fs = sqlSession.getMapper(FAQService.class);
+		fs = sqlSession.getMapper(FAQService.class);
 		fs.faqupdate2(cnum, tab, title, fcontents, nickname, fname1, fname2, fname3, openclose);
 
 		return "redirect:/faqout";
@@ -352,7 +356,7 @@ public class FAQController {
 	@RequestMapping(value = "/faqdelete")
 	public String faq12member(HttpServletRequest request) {
 		int cnum = Integer.parseInt(request.getParameter("cnum"));
-		FAQService fs = sqlSession.getMapper(FAQService.class);
+		fs = sqlSession.getMapper(FAQService.class);
 		fs.faqdelete(cnum);
 
 		return "redirect:/faqout";
@@ -366,7 +370,7 @@ public class FAQController {
 		String faqkey2 = request.getParameter("faqkey2"); // 검색 조건 (제목, 내용, 작성자)
 		String faqvalue = request.getParameter("faqvalue"); // 검색어
 
-		FAQService fs = sqlSession.getMapper(FAQService.class);
+		fs = sqlSession.getMapper(FAQService.class);
 		ArrayList<FAQDTO> list = new ArrayList<>();
 
 		// 둘 다 입력된 경우
@@ -405,7 +409,7 @@ public class FAQController {
 	@RequestMapping(value = "/faq_community")
 	public String faq14(Model mo) {
 
-		FAQService fs = sqlSession.getMapper(FAQService.class);
+		fs = sqlSession.getMapper(FAQService.class);
 		ArrayList<FAQDTO> bestfaq = fs.best_faq10();
 		mo.addAttribute("bestfaq", bestfaq);
 
@@ -420,7 +424,7 @@ public class FAQController {
 		String faqkey2 = request.getParameter("faqkey2"); // 검색 조건 (제목, 내용, 작성자)
 		String faqvalue = request.getParameter("faqvalue"); // 검색어
 
-		FAQadminService fs2 = sqlSession.getMapper(FAQadminService.class);
+		fs2 = sqlSession.getMapper(FAQadminService.class);
 		ArrayList<FAQadminDTO> list = new ArrayList<>();
 
 		// 둘 다 입력된 경우
@@ -457,8 +461,8 @@ public class FAQController {
 	// FAQ-자주 묻는 질문 작성(관리자만 작성 가능)
 	@RequestMapping(value = "/FAQ_in")
 	public String faq16admin(HttpServletResponse response, HttpServletRequest request, Model mo) throws IOException {
-		HttpSession session = request.getSession();
-		Boolean FAQinput = (Boolean) session.getAttribute("adminloginstate");
+		hs = request.getSession();
+		Boolean FAQinput = (Boolean) hs.getAttribute("adminloginstate");
 
 		// 관리자 로그인이 되어 있지 않으면 메인 페이지로 리다이렉트
 		if (FAQinput == null || !FAQinput) {
@@ -498,8 +502,8 @@ public class FAQController {
 	    }
 
 	    // FAQ 데이터 저장
-	    FAQadminService fs = sqlSession.getMapper(FAQadminService.class);
-	    fs.faqinsert(tab, title, fcontents, nickname, fname1, fname2, fname3);
+	    fs2 = sqlSession.getMapper(FAQadminService.class);
+	    fs2.faqinsert(tab, title, fcontents, nickname, fname1, fname2, fname3);
 
 	    // 작성 후 곧바로 상세페이지로 이동함
 	    int cnum = fs.save_detail();
@@ -515,7 +519,7 @@ public class FAQController {
 		String nowPage = request.getParameter("nowPage");
 		String cntPerPage = request.getParameter("cntPerPage");
 
-		FAQadminService fs2 = sqlSession.getMapper(FAQadminService.class);
+		fs2 = sqlSession.getMapper(FAQadminService.class);
 		ArrayList<FAQadminDTO> list = fs2.faqboard(tab);
 		mo.addAttribute("faq_admin_board", list);
 
@@ -543,7 +547,7 @@ public class FAQController {
 		String faqkey2 = request.getParameter("faqkey2"); // 검색 조건 (제목, 내용, 작성자)
 		String faqvalue = request.getParameter("faqvalue"); // 검색어
 
-		FAQadminService fs2 = sqlSession.getMapper(FAQadminService.class);
+		fs2 = sqlSession.getMapper(FAQadminService.class);
 		ArrayList<FAQadminDTO> list = new ArrayList<>();
 
 		// 둘 다 입력된 경우
@@ -583,7 +587,7 @@ public class FAQController {
 	public String faq19(Model mo, HttpServletRequest request) {
 		int cnum = Integer.parseInt(request.getParameter("cnum"));
 
-		FAQadminService fs2 = sqlSession.getMapper(FAQadminService.class);
+		fs2 = sqlSession.getMapper(FAQadminService.class);
 
 		FAQadminDTO faq = fs2.faq_questions_detail(cnum);
 		mo.addAttribute("faq", faq);
@@ -600,7 +604,7 @@ public class FAQController {
 	public String faq20admin(Model mo, HttpServletRequest request) {
 		int cnum = Integer.parseInt(request.getParameter("cnum"));
 
-		FAQadminService fs2 = sqlSession.getMapper(FAQadminService.class);
+		fs2 = sqlSession.getMapper(FAQadminService.class);
 		FAQadminDTO dto = fs2.faq_admin_update(cnum);
 		mo.addAttribute("dto", dto);
 
@@ -643,7 +647,7 @@ public class FAQController {
 		prw.print("<script> location.href='faq';</script>");
 		prw.close();
 		
-		FAQadminService fs2 = sqlSession.getMapper(FAQadminService.class);
+		fs2 = sqlSession.getMapper(FAQadminService.class);
 		fs2.faq_admin_update2(cnum, tab, title, fcontents, nickname, fname1, fname2, fname3);
 		int cnum1 = fs2.update_detail();
 		
@@ -655,7 +659,7 @@ public class FAQController {
 	public String faq22admin(Model mo, HttpServletRequest request) {
 		int cnum = Integer.parseInt(request.getParameter("cnum"));
 
-		FAQadminService fs2 = sqlSession.getMapper(FAQadminService.class);
+		fs2 = sqlSession.getMapper(FAQadminService.class);
 		fs2.faq_admin_delete(cnum);
 
 		return "redirect:/faq";
@@ -665,8 +669,8 @@ public class FAQController {
 	@RequestMapping(value = "/faq_questions_reply_save", method = RequestMethod.POST)
 	public String faq23member(HttpServletResponse response, HttpServletRequest request, Model mo) throws IOException {
 		
-		HttpSession session = request.getSession();
-		Boolean FAQinput = (Boolean) session.getAttribute("loginstate");
+		hs = request.getSession();
+		Boolean FAQinput = (Boolean) hs.getAttribute("loginstate");
 		
 		if (FAQinput == null || !FAQinput) {
 		
@@ -687,7 +691,7 @@ public class FAQController {
 			String fcontents = request.getParameter("fcontents");
 			String nickname = request.getParameter("nickname");
 			String tab = request.getParameter("tab");
-			FAQadminService fs2 = sqlSession.getMapper(FAQadminService.class);
+			fs2 = sqlSession.getMapper(FAQadminService.class);
 			fs2.faq_questions_stepup(groups, step);
 			step++;
 			indent++;
