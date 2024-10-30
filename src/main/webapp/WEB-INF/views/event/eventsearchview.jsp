@@ -392,7 +392,7 @@ main h1{
 		<table>	
 			<c:choose>
 			    <c:when test="${empty list}">
-					<tr height="250px">
+					<tr>
 						<td colspan="6">"${svalue}"로 검색한 결과가 없습니다.</td>
 					</tr>
 				</c:when>
