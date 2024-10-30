@@ -34,6 +34,50 @@ $(document).ready(function(){
 </script>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+ <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 20px;
+        }
+        
+        table {
+        width: 70%;
+        border-collapse: collapse;
+        margin: 20px auto; /* 중앙 정렬을 위해 auto 사용 */
+        background-color: #fff;
+        margin-top: 50px;
+        }
+        
+        th, td {
+            padding: 10px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+        th {
+            background-color: #be241c;
+            color: white;
+        }
+
+        tr:hover {
+            background-color: #f1f1f1;
+        }
+
+        .delete_btn {
+            background-color: #be241c;
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            cursor: pointer;
+            border-radius: 4px;
+        }
+
+        .delete_btn:hover {
+            background-color: #8e1a14;
+        }
+    </style>
+    
 </head>
 <body>
 <table>

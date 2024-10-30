@@ -29,6 +29,7 @@
     th {
         background-color: #f2f2f2;
         color: black;
+        font-weight: normal;
     }
     
     .button {
@@ -45,6 +46,7 @@
 
 .button:hover {
     background-color: #333; /* 호버 시 배경 색상 변화 */
+    transform: translateY(-2px); /* 호버 시 살짝 위로 이동 */
 }
 
 .button1 {
@@ -61,6 +63,7 @@
 
 .button1:hover {
     background-color: #f0f0f0; /* 호버 시 배경 색상 변화 */
+    transform: translateY(-2px); /* 호버 시 살짝 위로 이동 */
 }
 
 .button2 {
@@ -77,6 +80,7 @@
 
 .button2:hover {
     background-color: #8e1a14; /* 호버 시 배경 색상 변화 */
+    transform: translateY(-2px); /* 호버 시 살짝 위로 이동 */
 }
     .btn-container {
         text-align: center;
@@ -96,6 +100,7 @@
 
 .button3:hover {
     background-color: white; /* 호버 시 배경 색상 변화 */
+    transform: translateY(-2px); /* 호버 시 살짝 위로 이동 */
 }
     .btn-container {
         text-align: center;
