@@ -209,7 +209,7 @@
         }
         
         if (phone1.trim() == "") {
-            alert('전화번호 앞자리를 입력해주세요');
+            alert('전화번호 가운데 자리를 입력해주세요');
             $('#phone1').focus();
             return false;
         }
