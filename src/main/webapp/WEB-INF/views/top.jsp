@@ -21,8 +21,21 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Black+Han+Sans&display=swap" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap"	rel="stylesheet">
+
+<!-- Noto Sans Korean -->
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&display=swap" rel="stylesheet">
+
+<!-- Gothic A1 -->
+<link href="https://fonts.googleapis.com/css2?family=Gothic+A1&family=Noto+Sans+KR:wght@100..900&display=swap" rel="stylesheet">
+
+<!-- Nanum Gothic -->
+<link href="https://fonts.googleapis.com/css2?family=Gothic+A1&family=Nanum+Gothic+Coding&family=Noto+Sans+KR:wght@100..900&display=swap" rel="stylesheet">
+
+<!-- Noto Serif Korean -->
+<link href="https://fonts.googleapis.com/css2?family=Gothic+A1&family=Nanum+Gothic+Coding&family=Noto+Sans+KR:wght@100..900&family=Noto+Serif+KR:wght@200..900&display=swap" rel="stylesheet">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <style type="text/css">
+/* body 전체 */
 	body {
 		font-family: Arial, sans-serif;
 		margin: 0;
@@ -50,7 +63,7 @@
 /* header 내 링크 section hover 시 */
 	.navbar-inverse .navbar-nav>li>a:hover {
 		color: #ddd !important;					/* hover 상태에서도 색상 변화 없음 */
-		background-color: #94c3ef !important;	/* 배경색 변화 없음 */
+		background-color: #be241c !important;	/* 배경색 변화 없음 */
 	}
 
 /* 좌측 상단 로그인쪽 */
@@ -62,16 +75,18 @@
 		align-items: center;
 	}
 
-/* 야구용품 */
+/* 타이틀 */
 	.container-head {
+		font-family: 'Gothic A1', sans-serif;
 		display: flex;
 		font-size: 60px !important;
 		justify-content: center;
 		align-items: center;
 		color: black;
 	}
-
+	
 	.navbar-header {
+		font-family: 'Gothic A1', sans-serif;
 		background-image: url("./image/야구공 수정.png");
 		background-size : 700px 120px;
 		background-repeat: no-repeat;
@@ -83,6 +98,10 @@
 		color: black;
 		width: 100%;
 		height: 120px;
+	}
+
+	.navbar-header>a:hover {
+		color: #ddd !important;	/* hover 상태에서도 색상 변화 없음 */
 	}
 	
 	.container-fluid {
