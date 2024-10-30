@@ -27,7 +27,8 @@ public class CartController {
 
 	@Autowired
 	SqlSession sqlSession;
-
+	CartService cs;
+	
 	@RequestMapping(value = "/insertcart")
 	public String cart(HttpServletRequest request, HttpSession hs) {
 
@@ -53,7 +54,7 @@ public class CartController {
 		cartItem.setImage1(image1);
 		cartItem.setOp1(op1);
 
-		CartService cs = sqlSession.getMapper(CartService.class);
+		cs = sqlSession.getMapper(CartService.class);
 		cs.insert(cartItem);
 
 		return "redirect:/productdetail?itemnum=" + itemnum;
@@ -72,7 +73,7 @@ public class CartController {
 			LoginDTO dto3 = (LoginDTO) hs.getAttribute("dto3");
 			String id = dto3.getId();
 
-			CartService cs = sqlSession.getMapper(CartService.class);
+			cs = sqlSession.getMapper(CartService.class);
 			List<CartItem> items = cs.selectitem(id);
 			mo.addAttribute("items", items);
 
@@ -101,7 +102,7 @@ public class CartController {
 		}
 		System.out.println("아이템 : " + items);
 		System.out.println("아이디 : " + dto3.getId());
-		CartService cs = sqlSession.getMapper(CartService.class);
+		cs = sqlSession.getMapper(CartService.class);
 		cs.deleteSelectItems(dto3.getId(), items);
 
 		return "success";
@@ -142,7 +143,7 @@ public class CartController {
 		LoginDTO dto3 = (LoginDTO) hs.getAttribute("dto3");
 		String id = dto3.getId();
 		System.out.println("아이디 : " + id);
-		CartService cs = sqlSession.getMapper(CartService.class);
+		cs = sqlSession.getMapper(CartService.class);
 		List<CartItem> cart = cs.getCartItems(id);
 
 		if (cart == null || selectedItems == null || selectedItems.isEmpty()) {
