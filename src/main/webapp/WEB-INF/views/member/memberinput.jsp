@@ -233,6 +233,7 @@
             $('#phonecheck').focus();
             return false;
         }
+        alert('회원가입을 축하드립니다!');
         document.forms[0].submit();
     }
     </script>
