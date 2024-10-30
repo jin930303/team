@@ -290,16 +290,16 @@ img {
 					<c:when test="${list.gimage==null}">
 						<tr>
 							<td colspan="4">
-								<div>${list.gcontents}</div>
+								<pre>${list.gcontents}</pre>
 							</td>
 						</tr>
 					</c:when>
+					
 					<c:otherwise>
 						<tr>
 							<td colspan="4">
 								<img src="./image/${list.gimage}"><br>
-								<br>
-								<div>${list.gcontents}</div>
+								<pre>${list.gcontents}</pre>
 							</td>
 						</tr>
 					</c:otherwise>

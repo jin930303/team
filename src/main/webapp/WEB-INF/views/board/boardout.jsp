@@ -316,24 +316,25 @@ img {
 				<td>${list.clike}</td>
 				<td>${list.ccnt}</td>
 			</tr>
-			
+
 			<tr>
 			<c:choose>
+
 				<c:when test="${list.cimage==null}">
 					<td colspan="4">
-						${list.ccontents}
+						<pre>${list.ccontents}</pre>
 					</td>
 				</c:when>
-				
+
 				<c:otherwise>
 					<td colspan="4">
 						<img src="./image/${list.cimage}"><br>
-						<br>${list.ccontents}<br>
+						<pre>${list.ccontents}</pre>
 					</td>
 				</c:otherwise>
 			</c:choose>
 			</tr>
-		
+
 			<tr>	
 				<td colspan="4" class="likehate">
 					${list.clike}
@@ -344,8 +345,20 @@ img {
 					${list.chate}
 				</td>
 			</tr>
+			
+
 			<c:choose>
-				<c:when test="${adminloginstate==true&&list.nickname=='관리자'}">
+				<c:when test="${(adminloginstate==true&&list.nickname=='관리자') || (loginstate==true&&list.nickname==sessionScope.dto3.nickname)}">
+					<tr>	
+						<td colspan="4">
+							<input type="button" onclick="location.href='board'" value="목록">
+							<input type="button" onclick="location.href='boardupdate?cnum=${list.cnum}'" value="수정">
+							<input type="button" onclick="delboard(${list.cnum})" value="삭제">
+						</td>
+					</tr>
+				</c:when>
+				
+				<c:when test="${adminloginstate==true&&list.nickname!='관리자'}">
 					<tr>	
 						<td colspan="4">
 							<input type="button" onclick="location.href='board'" value="목록">
@@ -353,6 +366,15 @@ img {
 						</td>
 					</tr>
 				</c:when>
+				
+				<c:when test="${loginstate==true&&list.nickname!=sessionScope.dto3.nickname}">
+					<tr>	
+						<td colspan="4">
+							<input type="button" onclick="location.href='board'" value="목록">
+						</td>
+					</tr>
+				</c:when>
+				
 				<c:otherwise>
 					<tr>	
 						<td colspan="4">
@@ -364,7 +386,7 @@ img {
 		</table>
 		
 		<c:choose>
-			<c:when test="${adminloginstate==true&&list.nickname!='관리자'}">		
+			<c:when test="${adminloginstate==true}">
 				<table>	
 				<div class="title"><h1>댓글</h1></div>
 					<tr>
@@ -375,9 +397,9 @@ img {
 					<c:forEach var="reply" items="${reply}">
 						<tr>
 							<td>${reply.nickname}</td>
-							<td>☞ ${reply.ccontents}</td>
-							<td width="100px">
-								<input type="button" onclick="delreply(${reply.cnum})" value="댓글 삭제">
+							<td style="text-align:left;">${reply.ccontents}</td>
+							<td style="width:100px; text-align:right;">
+								<input type="button" onclick="delreply(${reply.cnum})" value="댓글삭제">
 							</td>
 						</tr>
 					</c:forEach>
@@ -405,8 +427,8 @@ img {
 				</form>
 			</c:when>
 			
-			<c:when test="${adminloginstate==true&&list.nickname=='관리자'}">
-				<table>
+			<c:when test="${loginstate==true}">
+				<table>	
 				<div class="title"><h1>댓글</h1></div>
 					<tr>
 						<th>닉네임</th>
@@ -416,23 +438,32 @@ img {
 					<c:forEach var="reply" items="${reply}">
 						<tr>
 							<td>${reply.nickname}</td>
-							<td colspan="4">☞ ${reply.ccontents}</td>
-							<td width="100px">	
-								<input type="button" onclick="delreply(${reply.cnum})" value="댓글 삭제">
+					<c:choose>
+						<c:when test="${reply.nickname==sessionScope.dto3.nickname}">
+							<td style="text-align:left;">${reply.ccontents}</td>
+							<td style="width:100px; text-align:right;">
+								<input type="button" onclick="delreply(${reply.cnum})" value="댓글삭제">
 							</td>
+						</c:when>
+							
+						<c:when test="${reply.nickname!=sessionScope.dto3.nickname}">
+							<td style="text-align:left;">${reply.ccontents}</td>
+						</c:when>
+					</c:choose>
 						</tr>
 					</c:forEach>
 				</table>
+				
 				<form action="boardreplysave" method="post">
 						<input type="hidden" value="${list.cnum}" name="cnum" readonly>
-						<input type="hidden" value="관리자" name="nickname" readonly>
+						<input type="hidden" value="${sessionScope.dto3.nickname}" name="nickname" readonly>
 						<input type="hidden" value="${list.cgroup}" name="cgroup" readonly>
 						<input type="hidden" value="${list.step}" name="step" readonly>
 						<input type="hidden" value="${list.indent}" name="indent" readonly>
-						
-					<table>	
+					
+					<table>
 						<tr>
-							<td>관리자</td>
+							<td>${sessionScope.dto3.nickname}</td>
 							<td>
 								<textarea rows="1" cols="60" name="ccontents"></textarea>
 							</td>
@@ -445,92 +476,18 @@ img {
 				</form>
 			</c:when>
 			
-			<c:when test="${loginstate==true && list.nickname!=sessionScope.dto3.nickname}">
-				<table>
-				<div class="title"><h1>댓글</h1></div>
-					<tr>
-						<th>닉네임</th>
-						<th>내 용</th>
-					</tr>
-					
-					<c:forEach var="reply" items="${reply}">
-						<tr>
-							<td>${reply.nickname}</td>
-							<td>☞ ${reply.ccontents}</td>
-						</tr>
-					</c:forEach>
-				</table>
-				<form action="boardreplysave" method="post">
-						<input type="hidden" value="${list.cnum}" name="cnum" readonly>
-						<input type="hidden" value="${sessionScope.dto3.nickname}" name="nickname" readonly>
-						<input type="hidden" value="${list.cgroup}" name="cgroup" readonly>
-						<input type="hidden" value="${list.step}" name="step" readonly>
-						<input type="hidden" value="${list.indent}" name="indent" readonly>
-						
-					<table>
-						<tr>
-							<td>${sessionScope.dto3.nickname}</td>
-							<td>
-								<textarea rows="1" cols="60" name="ccontents"></textarea>
-							</td>
-							<td class="submitbutton">
-								<input type="submit" value="댓글등록">
-								<input type="reset" value="작성취소">
-							</td>
-						</tr>
-					</table>
-				</form>
-			</c:when>
-			<c:when test="${loginstate==true && list.nickname==sessionScope.dto3.nickname}">
-				<table>
-				<div class="title"><h1>댓글</h1></div>
-					<tr>
-						<th>닉네임</th>
-						<th>내 용</th>
-					</tr>
-					
-					<c:forEach var="reply" items="${reply}">
-						<tr>
-							<td>${reply.nickname}</td>
-							<td>☞ ${reply.ccontents}</td>
-							<td width="100px">	
-								<input type="button" onclick="delreply(${reply.cnum})" value="댓글 삭제">
-							</td>
-						</tr>
-					</c:forEach>
-				</table>
-				<form action="boardreplysave" method="post">
-						<input type="hidden" value="${list.cnum}" name="cnum" readonly>
-						<input type="hidden" value="${sessionScope.dto3.nickname}" name="nickname" readonly>
-						<input type="hidden" value="${list.cgroup}" name="cgroup" readonly>
-						<input type="hidden" value="${list.step}" name="step" readonly>
-						<input type="hidden" value="${list.indent}" name="indent" readonly>
-						
-					<table>
-						<tr>
-							<td>${sessionScope.dto3.nickname}</td>
-							<td>
-								<textarea rows="1" cols="60" name="ccontents"></textarea>
-							</td>
-							<td class="submitbutton">
-								<input type="submit" value="댓글등록">
-								<input type="reset" value="작성취소">
-							</td>
-						</tr>
-					</table>
-				</form>
-			</c:when>
 			<c:otherwise>
 				<table>
 				<div class="title"><h1>댓글</h1></div>
-					<c:forEach var="reply" items="${reply}">
 						<tr>
 							<th>닉네임</th>
 							<th>내 용</th>
 						</tr>
+						
+					<c:forEach var="reply" items="${reply}">
 						<tr>
 							<td>${reply.nickname}</td>
-							<td>☞ ${reply.ccontents}</td>
+							<td style="text-align:left;">${reply.ccontents}</td>
 						</tr>
 					</c:forEach>
 				</table>
