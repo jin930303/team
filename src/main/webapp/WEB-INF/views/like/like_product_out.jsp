@@ -241,6 +241,7 @@
 		<div class="sidebar_title"><h2>관심상품</h2></div>
 		<aside class="sidebar">
 			<ul>
+				<li><a href="myinfo">마이페이지</a></li>
 				<li><a href="cart">장바구니</a></li>
 				<li><a href="like_product">관심상품</a></li>
 				<li><a href="update?id=${sessionScope.dto3.id}">회원정보 수정</a></li>
