@@ -4,10 +4,18 @@
 
 <mapper namespace="com.mbc.team.cart.CartService">
 
+	<select id="checkItem" resultType="int">
+	    select count(*) from cart where itemnum= #{itemnum} and id=#{id} and op1=#{op1}
+	</select>
+
 	<insert id="insert" parameterType="com.mbc.team.cart.CartItem">
-		insert into cart(itemnum, id, product, price, count, image1, op1)
-		values(#{itemnum}, #{id}, #{product}, #{price}, #{count}, #{image1}, #{op1})
+	   insert into  cart(itemnum, id, product, price, count, image1, op1)
+	   values(#{itemnum}, #{id}, #{product}, #{price}, #{count}, #{image1}, #{op1})
 	</insert>
+
+	<update id="update" parameterType="com.mbc.team.cart.CartItem">
+	 update cart set count= count+#{count} where itemnum=#{itemnum} and id=#{id} and op1=#{op1}
+	</update>	
 	
 	<select id="selectitem" resultType="com.mbc.team.cart.CartItem">
 		select * from cart where id=#{id}

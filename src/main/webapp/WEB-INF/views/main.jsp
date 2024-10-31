@@ -14,32 +14,6 @@
 	}
 </script>
 <style>
-/* 팝업창 스타일 */
-	.popup-overlay {
-		position: fixed;
-		top: 0;
-		left: 0;
-		width: 100%;
-		height: 100%;
-		display: none;
-	}
-
-	.popup-content {
-		position: absolute;
-		top: 20px;
-		left: 20px;
-		background: white;
-		padding: 20px;
-		width: 300px;
-		border-radius: 8px;
-		text-align: center;
-	}
-
-	.close-btn {
-		cursor: pointer;
-		color: red;
-	}
-	
 	.carousel-inner > .item > img,
 	.carousel-inner > .item > a > img {
 		height:550px; 
@@ -51,7 +25,7 @@
 		display: flex !important;
 		justify-content: center;	/* 가로 중앙 정렬 */
 		align-items: center;		/* 세로 중앙 정렬 (필요할 경우) */
-		height: 100%				/* 부모 요소에 맞추기 위해 높이 설정 */
+		height: 100%;				/* 부모 요소에 맞추기 위해 높이 설정 */
 		margin: 0 auto !important;	/* 상하 여백을 없애고 가로 중앙에 배치 */
 		padding-bottom:60px;
 	}
@@ -83,8 +57,8 @@
 		font-size: 18px;
 		color: #be241c;
 		padding-top:15px;
-		padding-bottom:20px;
-		margin-right:0 auto;
+		padding-bottom:20px;	margin-right:0 auto;
+		
 	}
     
 	.product-container-more a {
@@ -108,23 +82,25 @@
     
 /*상품 테두리*/
 	.product {
-		border: 1px solid #ddd;
+		border: 1px solid #be241c;
+		border-top: 12px solid #be241c;
 		padding: 16px;
 		text-align: center;
 		background-color: #f9f9f9; 
 		border-radius: 8px; 
 		box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1); 
-		transition: transform 0.2s; 
+		transition: transform 0.2s ease, border 0.2s ease; 
 	}
     
 	.product:hover {
+		border: 1px solid #be241c;
 		transform: scale(1.02); /* 마우스 오버 시 크기 증가 */
 	}
 
 /*상품 이미지 크기*/
 	.product img {
-		width: 200px; 
-		height: 200px;
+		width: 230px; 
+		height: 230px;
 		object-fit: cover;
 	}
 
@@ -134,6 +110,7 @@
 		font-size: 15px; 
 		margin: 15px 0;
 		text-align: left; /* 왼쪽 정렬 추가 */
+		height: 50px;
 	}
     
 	.product-price {     /* 가격 폰트 설정 */  
@@ -181,7 +158,7 @@
 
 		<div class="item">
 			<a href="eventdetail?evnum=4">
-				<img src="./image/무료배송.jpg" alt="무료배송">
+				<img src="./image/5만원무료배송.jpg" alt="무료배송">
 			</a>
 			<div class="carousel-caption"></div>
 		</div>
@@ -195,7 +172,7 @@
 
 		<div class="item">
 			<a href="eventdetail?evnum=5">
-				<img src="./image/할인.jpg" alt="할인">
+				<img src="./image/할인1.jpg" alt="할인">
 			</a>
 			<div class="carousel-caption"></div>
 		</div>
@@ -232,15 +209,20 @@
 				<div class="product-title">
 					<a href="productdetail?itemnum=${aa.itemnum}" style="text-decoration: none; color: black;">${aa.product}</a>
 				</div>
-				
+		<div style="display: flex; justify-content: space-between; align-items: center;">
 				<c:choose>
-					<c:when test="${aa.sale > 0}">
-						<div class="product-price">[${aa.sale}% 세일중] <fmt:formatNumber value="${aa.price}" type="number" groupingUsed="true"/>원 → <fmt:formatNumber value="${aa.saleprice}" type="number" groupingUsed="true"/>원</div>
-					</c:when>
-					<c:otherwise>
-						<div class="product-price"><fmt:formatNumber value="${aa.price}" type="number" groupingUsed="true"/>원</div>
-					</c:otherwise>
-				</c:choose>
+    <c:when test="${aa.sale > 0}">
+        <div class="product-price">
+            [${aa.sale}%] <span style="text-decoration: line-through; font-size: 13px; color: #aaaaaa;"> 
+            <fmt:formatNumber value="${aa.price}" type="number" groupingUsed="true"/></span> 
+            <fmt:formatNumber value="${aa.saleprice}" type="number" groupingUsed="true"/>원
+        </div>
+    </c:when>
+    <c:otherwise>
+        <div class="product-price"><fmt:formatNumber value="${aa.price}" type="number" groupingUsed="true"/>원</div>
+    </c:otherwise>
+</c:choose>
+
 	
 				<c:choose>
 					<c:when test="${loginstate==true}">
@@ -252,6 +234,7 @@
 					</c:otherwise>
 				</c:choose>
     		</div>
+       </div>
 		</c:forEach>
 	</div>
 	<div class="product-container-more"><a href="bestitem">더보기</a></div>
@@ -268,15 +251,20 @@
 	        <div class="product-title">
 	             <a href="productdetail?itemnum=${aa1.itemnum}" style="text-decoration: none; color: black;">${aa1.product}</a>
 	        </div>
-	        
+	   <div style="display: flex; justify-content: space-between; align-items: center;">
 			<c:choose>
-				<c:when test="${aa1.sale > 0}">
-	        		<div class="product-price">[${aa1.sale}% 세일중] <fmt:formatNumber value="${aa1.price}" type="number" groupingUsed="true"/>원 → <fmt:formatNumber value="${aa1.saleprice}" type="number" groupingUsed="true"/>원</div>
-	    		</c:when>
-	    		<c:otherwise>
-	        		<div class="product-price"><fmt:formatNumber value="${aa1.price}" type="number" groupingUsed="true"/>원</div>
-	    		</c:otherwise>
-			</c:choose>
+    <c:when test="${aa1.sale > 0}">
+        <div class="product-price">
+            [${aa1.sale}%] <span style="text-decoration: line-through; font-size: 13px; color: #aaaaaa;"> 
+            <fmt:formatNumber value="${aa1.price}" type="number" groupingUsed="true"/></span> 
+            <fmt:formatNumber value="${aa1.saleprice}" type="number" groupingUsed="true"/>원
+        </div>
+    </c:when>
+    <c:otherwise>
+        <div class="product-price"><fmt:formatNumber value="${aa1.price}" type="number" groupingUsed="true"/>원</div>
+    </c:otherwise>
+</c:choose>
+
 			
 			<c:choose>
 				<c:when test="${loginstate==true}">
@@ -287,6 +275,7 @@
 				</c:otherwise>
 			</c:choose>
 		</div>
+	</div>	
 		</c:forEach>
 	</div>
 	<div class="product-container-more"><a href="newitem">더보기</a></div>
@@ -304,14 +293,20 @@
           	   <a href="productdetail?itemnum=${aa2.itemnum}" style="text-decoration: none; color: black;">${aa2.product}</a>
 			</div>
  
+ <div style="display: flex; justify-content: space-between; align-items: center;">
 			<c:choose>
-			    <c:when test="${aa2.sale > 0}">
-			        <div class="product-price">[${aa2.sale}% 세일중] <fmt:formatNumber value="${aa2.price}" type="number" groupingUsed="true"/>원 → <fmt:formatNumber value="${aa2.saleprice}" type="number" groupingUsed="true"/>원</div>
-			    </c:when>
-			    <c:otherwise>
-			        <div class="product-price"><fmt:formatNumber value="${aa2.price}" type="number" groupingUsed="true"/>원</div>
-			    </c:otherwise>
-			</c:choose>
+    <c:when test="${aa2.sale > 0}">
+        <div class="product-price">
+            [${aa2.sale}%] <span style="text-decoration: line-through; font-size: 13px; color: #aaaaaa;"> 
+            <fmt:formatNumber value="${aa2.price}" type="number" groupingUsed="true"/></span> 
+            <fmt:formatNumber value="${aa2.saleprice}" type="number" groupingUsed="true"/>원
+        </div>
+    </c:when>
+    <c:otherwise>
+        <div class="product-price"><fmt:formatNumber value="${aa2.price}" type="number" groupingUsed="true"/>원</div>
+    </c:otherwise>
+</c:choose>
+
 
 			<c:choose>
 				<c:when test="${loginstate==true}">
@@ -321,11 +316,14 @@
 				<c:otherwise>
 					<div><a href="login?redirect" onclick="showLoginAlert()">👍 따봉</a></div>
 				</c:otherwise>
-			</c:choose>
+			</c:choose>	    
 	    </div>
+	  </div>  
 		</c:forEach>
 	</div>
+	
 	<div class="product-container-more"><a href="saleitem">더보기</a></div>
 </div>
+
 </body>
 </html>

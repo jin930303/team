@@ -17,7 +17,7 @@
     }
     
     .product {            
-        border: 1px solid #ddd;
+        border: 1px solid #be241c;
         padding: 16px;
         text-align: center;
         background-color: #f9f9f9; 

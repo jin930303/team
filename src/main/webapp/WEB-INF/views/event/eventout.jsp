@@ -299,7 +299,7 @@ img {
 			            <td colspan="4">
 			                <img src="./image/${list.eimaged}">
 			                <br>
-			                ${list.econtents}
+			                <pre>${list.econtents}</pre>
 			            </td>
 			        </c:otherwise>
 			    </c:choose>
