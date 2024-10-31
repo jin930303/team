@@ -182,7 +182,7 @@
 
 		<div class="item">
 			<a href="eventdetail?evnum=4">
-				<img src="./image/무료배송.jpg" alt="무료배송">
+				<img src="./image/5만원무료배송.jpg" alt="무료배송">
 			</a>
 			<div class="carousel-caption"></div>
 		</div>
@@ -196,7 +196,7 @@
 
 		<div class="item">
 			<a href="eventdetail?evnum=5">
-				<img src="./image/할인.jpg" alt="할인">
+				<img src="./image/할인1.jpg" alt="할인">
 			</a>
 			<div class="carousel-caption"></div>
 		</div>
