@@ -88,40 +88,46 @@
 </style>
 
 <style>
- 
-    .h1 {
-        font-family: "Nanum Gothic", sans-serif; /* 폰트 설정 */
-        text-align: center; /* 제목을 중앙 정렬 */
-        color: black; /* 제목 색상을 검은색으로 설정 */
-        margin-bottom: 20px; /* 아래 여백 설정 */
-        font-weight: bold; /* 글씨를 굵게 설정 */
-    }
+ /* 메인 컨테이너 */
+.main-container {
+    flex: 1;
+    max-width: 1100px;
+    padding: 20px 60px;
+    border-right: 1px solid #ddd;
+    border-left: 1px solid #ddd;
+}
+
+.title h1 {
+    text-align: left;
+	padding: 30px;
+	border-bottom: 2px solid #be241c;
+}
 
     .product-container {
         display: grid; /* 그리드 레이아웃 사용 */
-        grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); /* 자동으로 열을 채움 */
-        gap: 30px; /* 상품 간 간격 */
-        max-width: 1200px; /* 최대 너비 설정 */
-        margin: 0 auto; /* 중앙 정렬 */
+        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); /* 자동으로 열을 채움 */
+        gap:10px; /* 상품 간 간격 */
     }
 
     .product {
-        border: 1px solid #ddd; /* 테두리 색상 */
-        padding: 16px; /* 내부 여백 설정 */
+        border: 1px solid #be241c; /* 테두리 색상 */
+        border-top: 12px solid #be241c; /* 테두리 색상 */
+        padding: 10px; /* 내부 여백 설정 */
         text-align: center; /* 텍스트 중앙 정렬 */
         background-color: #f9f9f9; /* 배경색 설정 */
         border-radius: 8px; /* 모서리 둥글게 */
         box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1); /* 그림자 효과 */
-        transition: transform 0.2s; /* 크기 변화 애니메이션 */
+        transition: transform 0.2s ease, border 0.1s ease; /* 크기 변화 애니메이션 */
     }
 
     .product:hover {
+    	border: 2px solid #be241c; /* 테두리 색상 */
         transform: scale(1.02); /* 마우스 오버 시 크기 증가 */
     }
 
     .product img {
-        width: 230px; /* 이미지 너비 */
-        height: 200px; /* 이미지 높이 */
+        width: 190px; /* 이미지 너비 */
+        height: 160px; /* 이미지 높이 */
         object-fit: cover; /* 비율에 맞게 크기 조정 */
     }
 
@@ -172,12 +178,6 @@
     input[type="submit"]:hover {
         background-color: #8e1a14; /* 호버 시 색상 변화 */
     }
-
-    .divider1 {  
-        border-top: 1px solid #ddd; /* 상단 테두리 설정 */
-        width: 65%; /* 너비 설정 */
-        margin: 30px auto; /* 위아래 여백 설정, 중앙 정렬 */
-    }  
 
     .button-container {
         margin-top: 40px; /* 상품 출력 부분과의 간격 */
@@ -254,7 +254,6 @@
 		<div class="title">
 			<h1>" ${sessionScope.dto3.nickname} " 님의 관심상품</h1>
 		</div>
-		<hr class="divider1">
 		<form action="like_items_delete" method="post" onsubmit="return confirmDelete();">
 		    <div class="product-container">
 		        <c:forEach items="${list}" var="like">
