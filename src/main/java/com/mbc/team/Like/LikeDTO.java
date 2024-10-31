@@ -1,27 +1,26 @@
 package com.mbc.team.Like;
 
 public class LikeDTO {
-
-	int likenum, itemnum, price;
 	String id, image1, cg_code, scg_code, product, dimage;
-	public LikeDTO() {}
-	public int getLikenum() {
-		return likenum;
+	int likenum, itemnum, price , sale , saleprice;
+	public LikeDTO() {
+		super();
+		// TODO Auto-generated constructor stub
 	}
-	public void setLikenum(int likenum) {
+	public LikeDTO(String id, String image1, String cg_code, String scg_code, String product, String dimage,
+			int likenum, int itemnum, int price, int sale, int saleprice) {
+		super();
+		this.id = id;
+		this.image1 = image1;
+		this.cg_code = cg_code;
+		this.scg_code = scg_code;
+		this.product = product;
+		this.dimage = dimage;
 		this.likenum = likenum;
-	}
-	public int getItemnum() {
-		return itemnum;
-	}
-	public void setItemnum(int itemnum) {
 		this.itemnum = itemnum;
-	}
-	public int getPrice() {
-		return price;
-	}
-	public void setPrice(int price) {
 		this.price = price;
+		this.sale = sale;
+		this.saleprice = saleprice;
 	}
 	public String getId() {
 		return id;
@@ -59,5 +58,34 @@ public class LikeDTO {
 	public void setDimage(String dimage) {
 		this.dimage = dimage;
 	}
-	
+	public int getLikenum() {
+		return likenum;
+	}
+	public void setLikenum(int likenum) {
+		this.likenum = likenum;
+	}
+	public int getItemnum() {
+		return itemnum;
+	}
+	public void setItemnum(int itemnum) {
+		this.itemnum = itemnum;
+	}
+	public int getPrice() {
+		return price;
+	}
+	public void setPrice(int price) {
+		this.price = price;
+	}
+	public int getSale() {
+		return sale;
+	}
+	public void setSale(int sale) {
+		this.sale = sale;
+	}
+	public int getSaleprice() {
+		return saleprice;
+	}
+	public void setSaleprice(int saleprice) {
+		this.saleprice = saleprice;
+	}
 }

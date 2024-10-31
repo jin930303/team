@@ -263,9 +263,18 @@
 		                    <img src="./image/${like.image1}" alt="Product Image" width="100px">
 		                </a>
 		                <div class="product-title">${like.product}</div>
-		                <div class="product-price">
-		                    <fmt:formatNumber value="${like.price}" type="number" pattern="#,##0"/>원
-		                </div>
+				<c:choose>
+				    <c:when test="${like.sale > 0}">
+				        <div class="product-price">
+				            [${like.sale}%] <span style="text-decoration: line-through; font-size: 13px; color: #aaaaaa;"> 
+				            <fmt:formatNumber value="${like.price}" type="number" groupingUsed="true"/></span> 
+				            <fmt:formatNumber value="${like.saleprice}" type="number" groupingUsed="true"/>원
+				        </div>
+				    </c:when>
+				    <c:otherwise>
+				        <div class="product-price"><fmt:formatNumber value="${like.price}" type="number" groupingUsed="true"/>원</div>
+				    </c:otherwise>
+				</c:choose>
 		                <input type="checkbox" name="selectedItems" value="${like.likenum}">
 		            </div>
 		        </c:forEach>
