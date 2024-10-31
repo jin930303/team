@@ -37,7 +37,7 @@ $(document).ready(function(){
  <style>
         body {
             font-family: Arial, sans-serif;
-            background-color: #f4f4f4;
+            background-color: white;
             margin: 20px;
         }
         
@@ -45,7 +45,7 @@ $(document).ready(function(){
         width: 70%;
         border-collapse: collapse;
         margin: 20px auto; /* 중앙 정렬을 위해 auto 사용 */
-        background-color: #fff;
+        background-color: white;
         margin-top: 50px;
         }
         
