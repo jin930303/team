@@ -2,6 +2,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -107,17 +108,28 @@
 }
 
 table {
-    width: 70%; /* 테이블 너비 설정 */
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* 그림자 효과 추가 */
+    width: 100%; /* 테이블 너비 설정 */
     text-align: center; /* 텍스트 중앙 정렬 */
     margin: 0 auto 20px; /* 중앙에 위치하도록 설정 */ 
+}
+
+table tbody tr {
+	padding: 28px;
+	border-bottom: 1px solid #ddd;
+	transition: border 0.3s ease;
+	transition: background-color 0.3s ease;
+}
+
+table tbody tr:hover {
+    background-color: #f9f4f4;
+	border-bottom: 1.5px solid #be241c;
+	cursor: pointer;
 }
 
 th, td {
     font-family: "Noto Sans KR", sans-serif;
     padding: 16px; /* 셀의 패딩 설정 */
-    text-align: left; /* 텍스트 왼쪽 정렬 */
-    border-bottom: 1px solid #ddd; /* 하단 테두리 설정 */
+    text-align: center; /* 텍스트 왼쪽 정렬 */
     font-size: 15px;
 }
 
@@ -126,9 +138,6 @@ th {
     color: white; /* 헤더 글자색을 흰색으로 설정 */
 }
 
-tr:hover {
-    background-color: #f1f1f1; /* 마우스를 올렸을 때 행 배경색 변경 */
-}
 
 img {
     border-radius: 5px; /* 이미지에 둥근 모서리 적용 */
@@ -149,6 +158,26 @@ img {
 
 .action-button:hover {
     background-color: #8e1a14; /* 마우스를 올렸을 때 버튼 배경색 변경 */
+}
+
+.main-container .submitbutton button {
+	padding: 12px 20px;
+    font-size: 14px;
+    color: white;
+    background-color: #be241c;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-right: 10px;
+    transition: background-color 0.3s ease;
+}
+
+.main-container .submitbutton button:hover {
+	background-color: #8e1a14;
+}
+
+.submitbutton {
+	text-align: center;
 }
 </style>
 
@@ -209,6 +238,7 @@ img {
 		<div class="sidebar_title"><h2>장바구니</h2></div>
 		<aside class="sidebar">
 			<ul>
+				<li><a href="myinfo">마이페이지</a></li>
 				<li><a href="cart">장바구니</a></li>
 				<li><a href="like_product">관심상품</a></li>
 				<li><a href="update?id=${sessionScope.dto3.id}">회원정보 수정</a></li>
@@ -226,38 +256,38 @@ img {
 			<input type="hidden" id="loginState" value="${loginstate}"> 
 			<c:choose>
 				<c:when test="${empty items}">
-					<p>장바구니에 상품이 없습니다.</p>
+					<p><h1>장바구니에 상품이 없습니다.</h1></p>
 				</c:when>
 				<c:otherwise>
 					<table>
-                		<thead>
-                    		<tr>
-		                        <th>상품명</th>
-		                        <th>상품이미지</th>
-		                        <th>옵션</th>
-		                        <th>수량</th>
-		                        <th>가격</th>
-		                        <th>총 가격</th>
-		                        <th>선택</th> 
-                    		</tr>
+	                	<thead>
+	                   		<tr>
+			        			<th>상품명</th>
+			                    <th>상품이미지</th>
+			                    <th width="130px">옵션</th>
+								<th width="60px">수량</th>
+								<th width="130px">가격</th>
+								<th width="130px">총 가격</th>
+								<th width="60px">선택</th> 
+	                    	</tr>
                 		</thead>
 						<tbody>
 							<c:forEach var="item" items="${items}">
-		                        <tr>
-		                            <td>${item.product}</td>
-		                            <td><img src="./image/${item.image1}" alt="${item.image1}" width="100"></td>
-		                            <td>${item.op1}</td>
-		                            <td>${item.count}</td>
-		                            <td><fmt:formatNumber value="${item.price}" type="number" pattern="#,##0"/> 원</td>
-		                            <td><fmt:formatNumber value="${item.price * item.count}" type="number" pattern="#,##0"/> 원</td>
-		                            <td><input type="checkbox" name="selectedItems" value="${item.itemnum}"></td> 
-		                        </tr>
-                    		</c:forEach>
-		                </tbody>
-		            </table>
+			                	<tr>
+			                    	<td>${item.product}</td>
+			                        <td><img src="./image/${item.image1}" alt="${item.image1}" width="100"></td>
+			                        <td>${item.op1}</td>
+			                        <td>${item.count}</td>
+			                        <td><fmt:formatNumber value="${item.price}" type="number" pattern="#,##0"/> 원</td>
+			                        <td><fmt:formatNumber value="${item.price * item.count}" type="number" pattern="#,##0"/> 원</td>
+			                        <td><input type="checkbox" name="selectedItems" value="${item.itemnum}"></td> 
+								</tr>
+							</c:forEach>
+		               	</tbody>
+		           	</table>
 					<div class="submitbutton">
-			            <button type="submit" class="action-button" onclick="return validateSelection('buy');">선택한 상품 구매</button>
-			            <button type="submit" class="action-button" onclick="return validateSelection('delete');">선택한 상품 삭제</button>
+			            <button type="submit" onclick="return validateSelection('buy');">선택한 상품 구매</button>
+			            <button type="submit" onclick="return validateSelection('delete');">선택한 상품 삭제</button>
 					</div>
 				</c:otherwise>
 			</c:choose>

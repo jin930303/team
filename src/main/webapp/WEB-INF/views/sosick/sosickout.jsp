@@ -293,7 +293,7 @@ img {
 					<c:when test="${list.simage==null}">
 						<tr>
 							<td colspan="4">
-								${list.scontents}
+								<pre>${list.scontents}</pre>
 							</td>
 						</tr>
 					</c:when>
@@ -303,7 +303,7 @@ img {
 							<td colspan="4">
 					    		<img src="./image/${list.simage}">
 					    		<br>
-					   			${list.scontents}<br>
+					   			<pre>${list.scontents}</pre>
 							</td>
 				   		</tr>
 					</c:otherwise>

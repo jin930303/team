@@ -223,180 +223,320 @@
     }
 </script>
 
+<style type="text/css">
+/* 목차+게시판 컨테이너 */
+.flex_container {
+	width: 100%;
+	display: flex;
+	justify-content: center;
+	margin: 0 auto;
+}
+
+.sidebar {
+	width: 250px;
+	border: 1px solid #ddd;
+	border-top: none; /* 타이틀과 경계선 중복 방지 */
+	padding: 20px;
+    margin-right: 20px;
+    border-bottom-right-radius: 10px;
+    border-bottom-left-radius: 10px;
+	
+}
+.sidebar_container {
+	width: 250px;
+    display: block; /* 상하로 정렬 */
+    margin-right: 60px; /* 오른쪽에 여백 */
+}
+
+/* 상단 타이틀 부분 */
+.sidebar_title {
+    background-color: #be241c; /* 상단 배경색 */
+    padding: 60px;
+    text-align: center;
+    border: 2px thin #303030;
+    border-top-right-radius: 10px;
+    border-top-left-radius: 10px;
+}
+
+/* 타이틀 내부 h2 스타일링 */
+.sidebar_title h2 {
+    margin: 0;
+    color: white;
+    font-weight: bold;
+    font-size: 22px;
+}
+
+/* 목차 링크의 리스트 스타일 없애면 리스트별 . 생김 */
+.sidebar ul {
+	list-style: none;
+	padding: 0;
+	margin-bottom: 30px;
+}
+
+/* 목차 리스트 사이 간격 */
+.sidebar ul li {
+	margin-bottom: 15px;
+	
+}
+
+/* 목차 리스트 별 버튼 모양 */
+.sidebar ul li a {
+	text-decoration: none;
+	color: #333;
+	font-size: 14px;
+	display: block;
+	padding: 10px;
+	border: 1px solid #ddd;
+	border-radius: 4px;
+	transition: border 0.3s ease; /* 테두리 변경 시 부드러운 전환 */
+	transition: font 0.3s ease;
+	transition: background-color 0.3s ease;
+}
+
+.sidebar ul li a:hover {
+	background-color: #f9f4f4;
+	font-weight: bold;
+	color: black;
+}
+</style>
+
     <style>
         
         body {
 		    font-family: 'Roboto', sans-serif;
 		}
-   
-        .title{
-         text-align: center;
-         font-size: 30px;
-        }
 
-        .form-container {
-            max-width: 850px;
-            margin: 0 auto;
-            padding: 20px;
-            border: 1px solid #ddd;
-            background-color: white;
+        .main-container {
+        	flex: 1;
+            max-width: 1100px;
+            padding: 20px 60px;
+            border-right: 1px solid #ddd;
+    		border-left: 1px solid #ddd;
         }
 
         table {
             width: 100%;
+            margin-top: 10px;
             border-collapse: collapse;
+            text-align: center;
         }
-
-        caption {
-            font-size: 1.5em;
-            margin-bottom: 20px;
-            font-weight: bold;
-        }
-
+        
+		.title h1 {
+		    text-align: left;
+			padding: 30px;
+			border-bottom: 2px solid #be241c;
+		}
+		
+		table tr {
+		    padding: 28px;
+		    border-bottom: 1px solid #ddd;
+		}
+		
+		table tr:last-child {
+		    border-bottom: none;
+		}
+			
         th, td {
-            padding: 15px;
-            text-align: left;
+            padding: 14px;
+            text-align: center;
+            vertical-align: middle;
+            border: none; /* 하단 테두리 설정 */
+   			font-size: 16px;
         }
 
         th {
             font-weight: bold;
-            width: 20%;
-            padding-left: 70px; /* 왼쪽 여백 추가 */
         }
 
-        .form-container input[type="text"], 
-		.form-container input[type="password"], 
-		.form-container input[type="date"], 
-		.form-container select {
-		    width: calc(100% - 100px);
-		    padding: 8px;
-		    border: 1px solid #ccc;
-		    border-radius: 4px;
-		    font-size: 1em;
+        .main-container input[type="text"], 
+		.main-container input[type="password"], 
+		.main-container input[type="date"], 
+		.main-container input[type="email"], 
+		.main-container select {
+		    width: 100%;
+		    padding: 12px; /* 내부 여백 */
+		    border: 1px solid #ddd; /* 연한 테두리 */
+		    border-radius: 5px; /* 모서리 둥글게 */
+		    font-size: 14px; /* 글씨 크기 */
+		    margin-top: 8px; /* 입력 필드 간 간격 */
+		    box-sizing: border-box; /* 패딩과 테두리 포함한 전체 크기 */
+		    background-color: #fff;
+		    transition: border 0.3s ease; /* 테두리 변경 시 부드러운 전환 */
 		}
-
-        .button-inline {
-            width: auto;
-            margin-left: 10px;
-            padding: 8px 12px;
-            font-size: 1em;
-            color: white; /* 버튼 글자 색상 */
-            background-color: #be241c;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-        }
-
-        .address-section input[type="text"] {
-		    width: calc(100% - 100px);
-		    margin-bottom: 8px;
+		
+		.main-container input[type="text"]:hover, 
+		.main-container input[type="password"]:hover, 
+		.main-container input[type="date"]:hover, 
+		.main-container input[type="email"]:hover, 
+		.main-container select:hover {
+		    border-color: #be241c; /* 포커스 시 붉은색 테두리 */
+			outline: none; /* 포커스 시 외곽선 제거 */
 		}
-
-
-        .address-section .button-inline {
-            margin-top: 4px;
-            width: 120px;
-        }
-        .address-section1 input[type="text"] {
-            width: calc(100% - 120px);
-            margin-bottom: 8px;
-        }
-
-        .button-container input[type="submit"], .button-container button[type="button"] {
-            width: 100px;
-            padding: 10px;
-            font-size: 1em;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-        }
-
-        .button-container input[type="submit"] {
-            background-color: #be241c;
-            color: white;
-            margin-right: 10px;
-        }
-
-        .button-container button[type="button"] {
-            background-color: #777;
-            color: #fff;
-        }
-        
-        #nickname {
-		    width: calc(100% - 190px); /* 기존보다 조금 줄임 */
+		
+		.main-container input[type="text"]:focus, 
+		.main-container input[type="password"]:focus, 
+		.main-container input[type="date"]:focus, 
+		.main-container input[type="email"]:focus, 
+		.main-container select:focus {
+		    border-color: #be241c; /* 포커스 시 붉은색 테두리 */
+			outline: none; /* 포커스 시 외곽선 제거 */
 		}
-		#postcode {
-		    width: calc(100% - 235px); /* 우편번호 입력 칸 너비 조정 */
-		}
-		.address-section1{
-		   width: calc(100% - -20px);
-		}
-		     
+/* 아이콘 클릭 시 포커스 효과 제거 */
+.input-container .togglePassword:focus {
+    outline: none;
+}
+table tr td .phone-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between; /* 필드 간 간격을 일정하게 유지 */
+}
+table tr td .email-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between; /* 필드 간 간격을 일정하게 유지 */
+}
+
+/* 전화번호 입력 필드 및 버튼 크기 조정 */
+.phone-container select,
+.phone-container input[type="text"] {
+    width: 30%; /* 필드 너비 30%로 균일하게 조정 */
+}
+
+.phone-container input[type="button"] {
+    width: 100px; /* 버튼 너비를 고정 크기로 설정 */
+    margin-left: 10px; /* 입력 필드와 버튼 간격 설정 */
+}
+/* 전화번호 입력 필드 및 버튼 크기 조정 */
+.email-container select,
+.email-container input[type="email"] {
+    width: 45%; /* 필드 너비 30%로 균일하게 조정 */
+}
+
+.email-container input[type="button"] {
+    width: 100px; /* 버튼 너비를 고정 크기로 설정 */
+    margin-left: 10px; /* 입력 필드와 버튼 간격 설정 */
+}
+/* 중복확인 버튼 text 안에 넣기 */
+/* input-container는 버튼과 텍스트 필드를 나란히 배치하기 위한 flexbox */
+.input-container {
+    display: flex;
+    align-items: center; /* 수직 가운데 정렬 */
+    position: relative;
+    width: 100%; /* 컨테이너 전체 너비 */
+}
+
+/* id 입력 필드 스타일 수정 */
+.input-container input[type="text"] {
+    flex: 1; /* 텍스트 입력 필드가 남은 공간을 모두 차지하도록 설정 */
+    margin-right: 10px; /* 버튼과의 간격 설정 */
+}
+
+/* 중복확인 버튼 스타일 */
+#idcheck, #nicknamecheck, #phonecheck
+, #emailcheck, #addresscheck,
+input[type="button"],
+input[type="submit"],
+input[type="reset"] {
+    margin-top: 8px; /* 입력 필드 간 간격 */
+	padding: 12px 20px; /* 버튼 내부 여백 */
+	font-size: 14px; /* 버튼 글씨 크기 */
+	background-color: #be241c; /* 버튼 배경색 */
+	color: white; /* 글자 색상 */
+	border: none; /* 테두리 제거 */
+	border-radius: 5px; /* 둥근 모서리 */
+	cursor: pointer; /* 포인터 모양 변경 */
+	transition: background-color 0.3s ease; /* 배경색 전환 */
+}
+
+/* 중복확인 버튼 호버 효과 */
+#idcheck:hover, #nicknamecheck:hover,
+#phonecheck:hover, #emailcheck:hover,
+#addresscheck:hover,
+input[type="button"]:hover,
+input[type="submit"]:hover,
+input[type="reset"]:hover {
+	background-color: #8e1a14;
+}
+
+.submitbutton {
+	text-align: center;
+}
     </style>
     
 </head>
 <body>
-    <div class="form-container">
-    <h1 class="title">회원 정보 수정</h1>
+<div class="flex_container">
+
+	<div class="sidebar_container">
+		<div class="sidebar_title"><h2>회원정보</h2></div>
+		<aside class="sidebar">
+			<ul>
+				<li><a href="myinfo">마이페이지</a></li>
+				<li><a href="cart">장바구니</a></li>
+				<li><a href="like_product">관심상품</a></li>
+				<li><a href="update?id=${sessionScope.dto3.id}">회원정보 수정</a></li>
+				<li><a href="delete?id=${sessionScope.dto3.id}&pw=${sessionScope.dto3.pw}">회원탈퇴</a></li>
+			</ul>
+		</aside>
+	</div>
+    <main class="main-container">
+    	<div class="title">
+    		<h1>회원 정보 수정</h1>
+    	</div>
         <form action="memberupdate2" method="post" onsubmit="return check()">
+			<input type="hidden" name="id" id="id" readonly value="${updateview.id}">
             <table>
-                <tr>
-                    <th>아이디</th>
+            	<tr>
+                    <th>이름</th>
                     <td>
-                        <input type="text" name="id" id="id" readonly value="${updateview.id}">
-                    </td>
+                    	<div class="input-container">
+                    		<input type="text" name="name" id="name" placeholder="이름을 입력해주세요">
+                		</div>
+					</td>
                 </tr>
                 <tr>
                     <th>비밀번호</th>
                     <td>
-                        <input type="password" name="pw" id="pw" maxlength="16" placeholder="비밀번호를 입력해주세요">
+                    	<div class="input-container">
+                        	<input type="password" name="pw" id="pw" maxlength="16" placeholder="비밀번호를 입력해주세요">
+                    	</div>
                     </td>
-                </tr>
-                <tr>
-                    <th>이름</th>
-                    <td><input type="text" name="name" id="name" placeholder="이름을 입력해주세요"></td>
                 </tr>
                 <tr>
                     <th>닉네임</th>
                     <td>
-                        <input type="text" name="nickname" id="nickname" placeholder="닉네임을 입력해주세요" value="${updateview.nickname}">
-                        <button type="button" name="nicknamecheck" id="nicknamecheck1" class="button-inline">중복확인</button>
+                    	<div class="input-container">
+	                        <input type="text" name="nickname" id="nickname" placeholder="닉네임을 입력해주세요" value="${updateview.nickname}">
+	                        <input type="button" name="nicknamecheck" id="nicknamecheck1" value="중복확인">
+                    	</div>
                     </td>
                 </tr>
+                
                 <tr>
                     <th>생년월일</th>
-                    <td><input type="date" name="birth" id="birth" value="${updateview.birth}"></td>
+                    <td>
+						<div class="input-container">
+                    		<input type="date" name="birth" id="birth" value="${updateview.birth}">
+                    	</div>
+                    </td>
                 </tr>
                 <tr>
                     <th>전화번호</th>
                     <td>
-                        <div style="display: flex; align-items: center;">
-                           <select name="phone0" id="phone0">
+                        <div class="phone-container">
+							<select name="phone0" id="phone0">
                 			<option value="010">010</option>
                 			<option value="011">011</option>
                 			<option value="016">016</option>
                 			<option value="017">017</option>
                 			<option value="018">018</option>
                 			<option value="019">019</option>
-                		</select>-
-                            <input type="text" name="phone1" id="phone1" value="${updateview.phone1}" maxlength="4" style="width: 175px; margin-left: 9px; margin-right: 9px;">
-                            <span>  -  </span>
-                            <input type="text" name="phone2" id="phone2" value="${updateview.phone2}" maxlength="4" style="width: 175px; margin-left: 9px;">
-                            <button type="button" name="phonecheck" id="phonecheck" class="button-inline">중복확인</button>
-                        </div>
-                    </td>
-                </tr>
-                <tr>
-                    <th>주소</th>
-                    <td>
-                        <div class="address-section">
-                            <input type="text" id="postcode" placeholder="우편번호">
-                            <button type="button" onclick="sample6_execDaumPostcode()" class="button-inline">우편번호 찾기</button>
-                         </div>
-                          <div class="address-section1">
-                            <input type="text" id="mainaddress" placeholder="주소" name="mainaddress">
-                            <input type="text" id="detailAddress" placeholder="상세주소" name="detailaddress">
-                            <input type="text" id="extraAddress" placeholder="참고항목" name="extraaddress">
+                		</select> 
+                				<span style="margin: 6px;"> - </span>
+                            <input type="text" name="phone1" id="phone1" value="${updateview.phone1}" maxlength="4">
+                            	<span style="margin: 6px;"> - </span>
+                            <input type="text" name="phone2" id="phone2" value="${updateview.phone2}" maxlength="4">
+                            <input type="button" name="phonecheck" id="phonecheck" value="중복확인">
                         </div>
                     </td>
                 </tr>
@@ -404,28 +544,44 @@
                 <tr>
                     <th>이메일</th>
                     <td>
-                        <div style="display: flex; align-items: center;">
-                            <input type="text" name="fdomain" id="fdomain" placeholder="이메일을 입력해 주세요" style="width: 35%;">
-                            <span style="margin: 0 5px;">@</span>
-                            <select name="bdomain" id="bdomain" style="width: 30%;">
+                        <div class="email-container">
+                            <input type="email" name="fdomain" id="fdomain" placeholder="이메일을 입력해 주세요">
+                            	<span style="margin: 6px;"> @ </span>
+                            <select name="bdomain" id="bdomain">
                                 <option value="naver.com">naver.com</option>
                                 <option value="daum.net">daum.net</option>
                                 <option value="gmail.com">gmail.com</option>
                                 <option value="kakao.com">kakao.com</option>
                                 <option value="nate.com">nate.com</option>
                             </select>
-                            <button type="button" name="emailcheck" id="emailcheck" class="button-inline">중복확인</button>
+                            <input type="button" name="emailcheck" id="emailcheck" value="중복확인">
                         </div>
                     </td>
                 </tr>
                 <tr>
-                    <td colspan="2" class="button-container" style="text-align: center;">
-                        <input type="submit" value="수정">
-                        <button type="button" onclick="window.history.back();">취소</button>
+                    <th>주소</th>
+                    <td>
+                        <div class="input-container">
+							<input type="text" id="postcode" placeholder="우편번호">
+                        	<input type="button" onclick="sample6_execDaumPostcode()" value="우편번호 찾기">
+						</div>
+						<input type="text" id="mainaddress" placeholder="주소" name="mainaddress">
+                        <input type="text" id="detailAddress" placeholder="상세주소" name="detailaddress">
+                        <input type="text" id="extraAddress" placeholder="참고항목" name="extraaddress">
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+						<div class="submitbutton">
+	                        <input type="submit" value="수정완료">
+	                        <input type="reset" value="다시작성">
+	                        <input type="button" onclick="window.history.back();" value="수정취소">
+                    	</div>
                     </td>
                 </tr>
             </table>
         </form>
-    </div>
+    </main>
+</div>
 </body>
 </html>

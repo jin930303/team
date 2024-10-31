@@ -75,11 +75,8 @@
     right: 70px;
     top: 305px;
     z-index: 600;
-    background-color: #ffffff; /* 화이트 배경 */
-    border: 2px solid #be241c; /* 테두리 색 */
+    border: 1px thin #ddd; /* 테두리 색 */
     border-radius: 10px;
-    padding: 15px; /* 버튼과 테두리 간격 */
-    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.15); /* 그림자 추가 */
 }
 
 /* 우측 사이드바 버튼 리스트 스타일 */
@@ -89,48 +86,41 @@
     margin: 0;
 }
 
-/* 버튼 간 간격 */
-#floating-menu ul li {
-    margin-bottom: 12px;
-}
-
 /* 버튼 스타일 */
-#floating-menu ul li a {
+#floating-menu ul li a,
+.scroll-button li {
     text-decoration: none;
-    color: #be241c; /* 텍스트 색상 */
-    padding: 10px 20px;
+    color: #333; /* 텍스트 색상 */
     display: block;
-    border: 2px solid #be241c; /* 버튼 테두리 */
-    border-radius: 5px;
+    padding: 15px 20px;
+    border-bottom: 1px solid #ddd;
+    font-weight: bold;
     text-align: center;
     background-color: #ffffff; /* 버튼 배경색 */
-    transition: background-color 0.3s, color 0.3s, box-shadow 0.3s;
+    transition: background-color 0.3s ease, color 0.3s, box-shadow 0.3s;
 }
 
 /* 호버 시 스타일 */
-#floating-menu ul li a:hover {
-    background-color: #be241c;
-    color: #ffffff; /* 호버 시 텍스트 색상 */
-    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2); /* 호버 시 그림자 */
+#floating-menu ul li a:hover,
+.scroll-button li:hover {
+    color: #be241c;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.3); /* 호버 시 그림자 */
 }
 
 /* 스크롤 버튼 스타일 */
 .scroll-button {
     text-decoration: none;
-    color: #be241c;
-    padding: 10px 20px;
+    color: #333;
+    padding: 15px 20px;
     display: block;
-    border: 2px solid #be241c;
-    border-radius: 5px;
     text-align: center;
     background-color: #ffffff;
-    transition: background-color 0.3s, color 0.3s, box-shadow 0.3s;
+    transition: color 0.3s ease, box-shadow 0.3s;
 }
 
 .scroll-button:hover {
-    background-color: #be241c;
-    color: #ffffff;
-    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+    color: #be241c;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.3);
 }
 </style>
 <meta charset="UTF-8">
@@ -139,14 +129,19 @@
 <body>
 	<div id="floating-menu">
 		<ul>
-			<li><a href="cart">장바구니</a></li>
-			<li><a href="https://open.kakao.com/o/suixDsUg">KAKAO문의</a></li>
-			<li><a href="like_product">관심상품</a></li>
-			<li><a href="myinfo">마이페이지</a></li>
+			<li>
+				<img src="./image/야구공.jfif" height="180px">
+			</li>			
+		</ul>
+		<ul>
+			<li><a href="cart">CART</a></li>
+			<li><a href="https://open.kakao.com/o/suixDsUg">KAKAO</a></li>
+			<li><a href="like_product">LIKE</a></li>
+			<li><a href="myinfo">MYPAGE</a></li>
 			<li class="scroll-button"
-				onclick="window.scrollTo({top: 0, behavior: 'smooth'});">△</li>
+				onclick="window.scrollTo({top: 0, behavior: 'smooth'});">▲</li>
 			<li class="scroll-button"
-				onclick="window.scrollTo({top: document.body.scrollHeight, behavior: 'smooth'});">▽</li>
+				onclick="window.scrollTo({top: document.body.scrollHeight, behavior: 'smooth'});">▼</li>
 		</ul>
 	</div>
 </body>

@@ -134,7 +134,7 @@ label {
             const total = (saleprice > 0 ? saleprice : price) * count;
             document.getElementById("tot").innerText = "합계: " + total + "원";
         }
-
+        
         function addToCart() {
             const loginState = document.getElementById("loginState").value;
             if (!loginState) {
@@ -147,7 +147,6 @@ label {
                 alert("옵션을 선택해주세요.");
                 return;
             }
-            document.getElementById("op1").value = op1Select ? op1Select.value : "옵션없음";
             document.getElementById("productForm").submit();
             alert("장바구니에 상품이 추가되었습니다.");
         }
@@ -164,7 +163,6 @@ label {
                 alert("옵션을 선택해 주세요.");
                 return;
             }
-            document.getElementById("op1").value = op1Select ? op1Select.value : "";
             document.getElementById("productForm").action = "/team/buydirectitem";
             document.getElementById("productForm").submit();
         }
@@ -180,7 +178,6 @@ label {
             const total = (saleprice > 0 ? saleprice : price) * count;
             document.getElementById("tot").innerText = "합계: " + formatNumber(total) + "원";
         }
-        
 
     </script>
 </head>
@@ -192,7 +189,6 @@ label {
         <input type="hidden" name="itemnum" id="itemnum" value="${dto.itemnum}">
         <input type="hidden" name="price" id="price" value="${dto.sale > 0 ? dto.saleprice : dto.price}">
         <input type="hidden" name="product" id="product" value="${dto.product}">
-        <input type="hidden" name="op1" id="op1" value="${param.op1}">
         <input type="hidden" name="image1" id="image1" value="${dto.image1}">
         <input type="hidden" id="loginState" value="${sessionScope.loginstate}">
         <input type="hidden" name="id" id="id" value="${sessionScope.dto3.id}">
@@ -206,18 +202,16 @@ label {
             </tr>
             <tr>
                 <td colspan="5" class="price">
-    <c:choose>
-        <c:when test="${dto.sale == 0}">
-            판매가 <fmt:formatNumber value="${dto.price}" pattern="#,###"/>원
-        </c:when>
-        <c:otherwise>
-            판매가 [${dto.sale}% 세일중] <fmt:formatNumber value="${dto.price}" pattern="#,###"/>원 → <fmt:formatNumber value="${dto.saleprice}" pattern="#,###"/>원
-        </c:otherwise>
-    </c:choose>
-</td>
-
+   				 <c:choose>
+       				 <c:when test="${dto.sale > 0}">
+        				 판매가 [${dto.sale}% 세일중] <fmt:formatNumber value="${dto.price}" pattern="#,###"/>원 → <fmt:formatNumber value="${dto.saleprice}" pattern="#,###"/>원
+       				 </c:when>
+       			 <c:otherwise>
+          			 판매가 <fmt:formatNumber value="${dto.price}" pattern="#,###"/>원
+        		</c:otherwise>
+  				  </c:choose>
+				</td>
             </tr>
-
             <c:choose>
 <c:when test="${dto.cg_code == 'fcg001'}">
     <tr>
@@ -228,7 +222,7 @@ label {
                 <input type="hidden" name="op1" value="옵션없음">
             </c:if>
             <c:if test="${dto.scg_code != 'mitt006'}">
-                <select name="op1" id="op1_select" style="display: inline-block;">
+                <select name="op1" id="op1_select" style="display: inline-block;" >
                     <option value="">[필수] 옵션을 선택해 주세요</option>
                     <option value="우투(왼손착용)">우투(왼손착용)</option>
                     <option value="좌투(오른손착용)">좌투(오른손착용)</option>
@@ -247,7 +241,7 @@ label {
                 <input type="hidden" name="op1" value="옵션없음">
             </c:if>
             <c:if test="${dto.scg_code != 'bat008' && dto.scg_code != 'bat009'}">
-                <select name="op1" id="op1_select" style="display: inline-block;">
+                <select name="op1" id="op1_select" style="display: inline-block;" >
                     <option value="">[필수] 옵션을 선택해 주세요</option>
                     <option value="33인치/28온스">33인치/28온스</option>
                     <option value="32인치/27온스">32인치/27온스</option>
@@ -261,7 +255,7 @@ label {
     <tr>
         <td colspan="5">
             <div class="option-title" style="display: inline-block; margin-right: 10px;">장갑 사이즈</div>
-            <select name="op1" id="op1_select" onchange="this.options[this.selectedIndex].value = this.value;" style="display: inline-block;">
+            <select name="op1" id="op1_select"  style="display: inline-block;">
                 <option value="">[필수] 옵션을 선택해 주세요</option>
                 <option value="S">S</option>
                 <option value="M">M</option>
@@ -280,7 +274,7 @@ label {
                 <input type="hidden" name="op1" id="op1" value="옵션없음">
             </c:if>
             <c:if test="${dto.scg_code != 'shoes006'}">
-                <select name="op1" id="op1_select" onchange="this.options[this.selectedIndex].value = this.value;" style="display: inline-block;">
+                <select name="op1" id="op1_select"  style="display: inline-block;">
                     <option value="">[필수] 옵션을 선택해 주세요</option>
                     <option value="250">250</option>
                     <option value="255">255</option>
@@ -308,7 +302,7 @@ label {
                 <input type="hidden" name="op1" id="op1" value="옵션없음">
             </c:if>
             <c:if test="${dto.scg_code != 'clothes010'}">
-                <select name="op1" id="op1_select" onchange="this.options[this.selectedIndex].value = this.value;" style="display: inline-block;">
+                <select name="op1" id="op1_select"  style="display: inline-block;">
                     <option value="">[필수] 옵션을 선택해 주세요</option>
                     <option value="S">S</option>
                     <option value="M">M</option>
@@ -330,7 +324,7 @@ label {
                 <input type="hidden" name="op1" id="op1" value="옵션없음">
             </c:if>
             <c:if test="${dto.scg_code != 'protect001' && dto.scg_code != 'protect005'}">
-                <select name="op1" id="op1_select" onchange="this.options[this.selectedIndex].value = this.value;" style="display: inline-block;">
+                <select name="op1" id="op1_select"  style="display: inline-block;">
                     <option value="">[필수] 옵션을 선택해 주세요</option>
                     <option value="S">S</option>
                     <option value="M">M</option>
@@ -346,7 +340,7 @@ label {
         <td colspan="5">
             <div class="option-title" style="display: inline-block; margin-right: 10px;">사이즈</div>
             <c:if test="${dto.scg_code == 'goods004'}">
-                <select name="op1" id="op1_select" onchange="this.options[this.selectedIndex].value = this.value;" style="display: inline-block;">
+                <select name="op1" id="op1_select"  style="display: inline-block;">
                     <option value="">[필수] 옵션을 선택해 주세요</option>
                     <option value="250">250</option>
                     <option value="255">255</option>

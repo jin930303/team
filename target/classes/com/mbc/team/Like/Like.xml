@@ -11,7 +11,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 	<!-- 찜 목록 -->	
 	<select id="like_product" resultType="com.mbc.team.Like.LikeDTO">
-		select p.itemnum, p.image1, p.product, p.price, l.likenum from plike l, product p, member m
+		select p.itemnum, p.image1, p.product, p.price, p.sale, (p.price*((100-p.sale)/100)) as saleprice, l.likenum from plike l, product p, member m
 		where l.itemnum=p.itemnum and l.id=m.id and l.id=#{param1}
 	</select>
 	

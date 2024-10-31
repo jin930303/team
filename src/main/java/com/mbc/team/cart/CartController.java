@@ -32,10 +32,18 @@ public class CartController {
 	
 	@RequestMapping(value = "/insertcart")
 	public String cart(HttpSession hs,@ModelAttribute CartItem cartItem) {
-
 		cs = sqlSession.getMapper(CartService.class);
-		cs.insert(cartItem);
-
+		int existCount=cs.checkItem(cartItem);
+		 
+		if (existCount == 0) {
+			 cs.insert(cartItem);
+		    }
+		else {
+			cs.update(cartItem);
+		}
+		
+		
+		System.out.println(cartItem.getOp1());
 		return "redirect:/productdetail?itemnum=" + cartItem.getItemnum();
 	}
 
