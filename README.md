@@ -1,4 +1,4 @@
-![로고]()
+<img src="https://github.com/jin930303/team/blob/main/%EB%A1%9C%EA%B3%A0.jpg"  width="800" height="500"/>
 
 # 스윙스(Base ball shop)
 
