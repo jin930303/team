@@ -1,4 +1,4 @@
-<img src="https://github.com/jin930303/team/blob/main/%EB%A1%9C%EA%B3%A0.jpg"  width="800" height="500"/>
+<img src="https://github.com/jin930303/team/blob/main/%EB%A1%9C%EA%B3%A0.jpg"  width="800" height="800"/>
 
 # 스윙스(Base ball shop)
 
@@ -10,19 +10,13 @@
 
 야구와 관련된 정보를 얻고 주고받으며 소통하는 사이트를 추구하였습니다.
 
----
-## ⚾스윙스를 소개합니다!
 
-
-이미지 들어갈 자리
-
----
 ## 🗓️ 프로젝트 기간
 
 기간 : 2024/08/21 ~ 2024/10/31
 
 ## 👨‍👩‍👧‍👦 팀 소개
--------------
+
 |Name|육진|김수한|김찬우|이태헌|
 |---| ---  | ---  | ---      | ---   |
 |profile| ---  | ---  | ---   |--- |
