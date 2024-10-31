@@ -78,8 +78,8 @@
 }
 
 .search-container input:focus {
-    border-color: black; /* 포커스 시 테두리 색상 변경 */
-    box-shadow: 0 0 8px rgba(0, 123, 255, 0.5); /* 포커스 시 그림자 효과 */
+    border-color: #be241c; /* 포커스 시 테두리 색상 변경 */
+     box-shadow: 0 0 8px rgba(255, 0, 0, 0.5); /* 포커스 시 빨간색 그림자 효과 */
     outline: none; /* 기본 아웃라인 제거 */
 }
 
