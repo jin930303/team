@@ -25,7 +25,7 @@
 		display: flex !important;
 		justify-content: center;	/* 가로 중앙 정렬 */
 		align-items: center;		/* 세로 중앙 정렬 (필요할 경우) */
-		height: 100%				/* 부모 요소에 맞추기 위해 높이 설정 */
+		height: 100%;				/* 부모 요소에 맞추기 위해 높이 설정 */
 		margin: 0 auto !important;	/* 상하 여백을 없애고 가로 중앙에 배치 */
 		padding-bottom:60px;
 	}

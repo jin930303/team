@@ -49,7 +49,6 @@
 /* footer Style */
 	footer {
 		width: 100%;
-		padding: 100px 0;
 		font-family: 'Noto Sans KR', sans-serif;
 		font-size: 12px;
 		color: #333;
