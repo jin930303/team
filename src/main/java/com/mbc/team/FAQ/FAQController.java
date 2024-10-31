@@ -35,7 +35,7 @@ public class FAQController {
 	FAQadminService fs2;
 	
 	// 경로 수정해야합니다.
-	String path = "C:\\Users\\3-16\\git\\team\\src\\main\\webapp\\image";
+	String path = "C:\\Users\\gkdlf\\git\\team\\src\\main\\webapp\\image";
 
 	// 1:1 문의글 작성 (회원만 글 작성 가능)
 	@RequestMapping(value = "/faqin")
