@@ -45,28 +45,6 @@
 		background-repeat: no-repeat;	/* 이미지를 반복하지 않음 */
 		background-attachment: fixed;	/* 배경이 고정된 상태로 스크롤 */
 	}
-	
-/* footer Style */
-	footer {
-		width: 100%;
-		font-family: 'Noto Sans KR', sans-serif;
-		font-size: 12px;
-		color: #333;
-		background-color: #fafafa;
-	}
-	
-/* pre Style */
-	pre {
-		font-family: 'Gothic A1', sans-serif;
-		font-size: 15px;
-		background-color: transparent;
-		white-space: pre-wrap;
-		overflow-wrap: break-word;
-		text-align: left;
-		max-width: 1000px;
-		overflow: hidden;
-		border: none !important;
-	}
 
 /* header 전체 */
 	.navbar-inverse {
@@ -130,8 +108,14 @@
 	    align-items: center;
 	    color: black;
 	    width: 100%;
+	    padding-bottom: 40px;
 	    height: 120px;
 	}
+	
+	.navbar-header>a:hover {
+		color: #ddd !important;	/* hover 상태에서도 색상 변화 없음 */
+	}
+	
 	
 	.navbar-brand {
 	    display: flex;
@@ -172,10 +156,6 @@
 	    background-color: #8e1a14; /* 호버 시 색상 변경 */
 	}
 
-	.navbar-header>a:hover {
-		color: #ddd !important;	/* hover 상태에서도 색상 변화 없음 */
-	}
-	
 	.container-fluid {
 		font-size: 20px;
 		display: flex;
@@ -262,8 +242,8 @@
 
 		<div class="container-head">
 			<div class="navbar-header">
-				<a class="navbar-brand" href="main" style="font-size:60px; color: black;">
-					<img src="./image/swings.png" height="250px">
+				<a class="navbar-brand" href="main">
+					<img src="./image/swings.png">
 				</a>
 			</div>
 		</div>

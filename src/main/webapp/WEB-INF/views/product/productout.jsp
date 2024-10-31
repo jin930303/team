@@ -23,23 +23,23 @@
     
     .product {            /*상품 테두리*/
         border: 1px solid #be241c;
-        padding: 16px;
+        padding: 15px;
         text-align: center;
         background-color: #f9f9f9; 
         border-radius: 8px; 
         box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1); 
-        transition: transform 0.2s ease, border 0.1s ease; 
+        transition: transform 0.2s ease, border 0.2s ease; 
     }
     
      .product:hover {
         transform: scale(1.02); /* 마우스 오버 시 크기 증가 */
-        border: 2px solid #be241c;
+        border: 1px solid #be241c;
         border-top: 12px solid #be241c;
     }
                                            
     .product img {       /*상품 이미지 크기*/
-        width: 200px; 
-        height: 200px;
+        width: 230px; 
+        height: 230px;
         object-fit: cover;
     }
 
