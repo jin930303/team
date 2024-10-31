@@ -107,7 +107,7 @@
 }
 
 table {
-    width: 70%; /* 테이블 너비 설정 */
+    width: 1000px; /* 테이블 너비 설정 */
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* 그림자 효과 추가 */
     text-align: center; /* 텍스트 중앙 정렬 */
     margin: 0 auto 20px; /* 중앙에 위치하도록 설정 */ 
