@@ -9,6 +9,10 @@
 
 </head>
 <body>
+<<<<<<< HEAD
+=======
+
+>>>>>>> refs/remotes/origin/stage
 </body>
 <!-- Footer -->
 <footer style=" padding: 100px 0; font-family: 'Noto Sans KR', sans-serif; font-size: 12px; color: #333;">

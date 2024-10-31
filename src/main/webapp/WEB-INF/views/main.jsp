@@ -14,32 +14,6 @@
 	}
 </script>
 <style>
-/* 팝업창 스타일 */
-	.popup-overlay {
-		position: fixed;
-		top: 0;
-		left: 0;
-		width: 100%;
-		height: 100%;
-		display: none;
-	}
-
-	.popup-content {
-		position: absolute;
-		top: 20px;
-		left: 20px;
-		background: white;
-		padding: 20px;
-		width: 300px;
-		border-radius: 8px;
-		text-align: center;
-	}
-
-	.close-btn {
-		cursor: pointer;
-		color: red;
-	}
-	
 	.carousel-inner > .item > img,
 	.carousel-inner > .item > a > img {
 		height:550px; 
@@ -83,8 +57,8 @@
 		font-size: 18px;
 		color: #be241c;
 		padding-top:15px;
-		padding-bottom:20px;
-		margin-right:0 auto;
+		padding-bottom:20px;	margin-right:0 auto;
+		
 	}
     
 	.product-container-more a {
@@ -108,7 +82,7 @@
     
 /*상품 테두리*/
 	.product {
-		border: 1px solid #ddd;
+		border: 1px solid #be241c;
 		padding: 16px;
 		text-align: center;
 		background-color: #f9f9f9; 
@@ -182,7 +156,7 @@
 
 		<div class="item">
 			<a href="eventdetail?evnum=4">
-				<img src="./image/무료배송.jpg" alt="무료배송">
+				<img src="./image/5만원무료배송.jpg" alt="무료배송">
 			</a>
 			<div class="carousel-caption"></div>
 		</div>
@@ -196,7 +170,7 @@
 
 		<div class="item">
 			<a href="eventdetail?evnum=5">
-				<img src="./image/할인.jpg" alt="할인">
+				<img src="./image/할인1.jpg" alt="할인">
 			</a>
 			<div class="carousel-caption"></div>
 		</div>
@@ -326,7 +300,9 @@
 	    </div>
 		</c:forEach>
 	</div>
+	
 	<div class="product-container-more"><a href="saleitem">더보기</a></div>
 </div>
+
 </body>
 </html>

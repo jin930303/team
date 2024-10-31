@@ -105,12 +105,6 @@ function confirmdelete(id){
     border-right: 1px solid #ddd;
     border-left: 1px solid #ddd;
 }
-table {
-    width: 100%;
-    margin-top: 10px;
-    border-collapse: collapse;
-    text-align: center;
-}
 
 .title h1 {
     text-align: left;
@@ -118,52 +112,53 @@ table {
 	border-bottom: 2px solid #be241c;
 }
 
-.contents {
-	display: flex;
-   	align-items: center;  /* 세로 중앙 정렬 */
+<style type="text/css">
+/* 전체 버튼 컨테이너 */
+.submitbutton {
+    display: flex;
+    width: 500px;
+    height: 500px;
+    margin: 0 auto; /* 화면 중앙 정렬 */
+    border: 2px solid #ddd;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    overflow: hidden;
 }
 
-table tr {
-    padding: 28px;
-    border-bottom: 1px solid #ddd;
+/* 리스트 및 리스트 항목 스타일 */
+.submitbutton ul {
+    display: flex;
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    list-style: none;
 }
 
-table tr:last-child {
-    border-bottom: none;
-}
-
-table tr th, 
-table tr td {
-    padding: 14px;
-    text-align: center;
-    vertical-align: middle;
-    border: none;
-    font-size: 16px;
-}
-
-th {
-    font-weight: 600;
+.submitbutton li {
+    width: 50%; /* 좌우 버튼 각각 절반 너비 */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 10px;
 }
 
 /* 버튼 스타일 */
-input[type="button"] {
-    padding: 12px 20px;
-    font-size: 14px;
-    color: white;
-    background-color: #be241c;
-    border: none;
+.submitbutton button {
+    width: 100%;
+    height: 400px;
+    font-size: 16px;
+    color: #aaaaaa;
+    border: 1px solid #777777;
     border-radius: 5px;
+    background-color: white;
     cursor: pointer;
-    margin-right: 10px;
-    transition: background-color 0.3s ease;
+    transition: border 0.1s ease;
 }
 
-input[type="button"]:hover {
-    background-color: #8e1a14;
-}
-
-.submitbutton {
-	text-align: center;
+.submitbutton button:hover {
+    border: 3px solid #be241c;
+    color: #be241c;
 }
 
 </style>
@@ -171,12 +166,12 @@ input[type="button"]:hover {
 <title>Insert title here</title>
 </head>
 <body>
-
-<div class="flex-container">
+<div class="flex_container">
 	<div class="sidebar_container">
-		<div class="sidebar_title"><h2>장바구니</h2></div>
+		<div class="sidebar_title"><h2>회원탈퇴</h2></div>
 		<aside class="sidebar">
 			<ul>
+				<li><a href="myinfo">마이페이지</a></li>
 				<li><a href="cart">장바구니</a></li>
 				<li><a href="like_product">관심상품</a></li>
 				<li><a href="update?id=${sessionScope.dto3.id}">회원정보 수정</a></li>
@@ -189,27 +184,46 @@ input[type="button"]:hover {
 		<div class="title">
 			<h1>" ${deleteview.nickname} " 님의 정보</h1>
 		</div>
-		<table>
-			<tr>
-				<th>당신의 현재 등급은</th>
-				<td>
-				 <c:choose>
-	                <c:when test="${grade_code == '004'}">vvip</c:when>
-	                <c:when test="${grade_code == '003'}">vip</c:when>
-	                <c:when test="${grade_code == '002'}">우수회원</c:when>
-	                <c:otherwise>일반회원</c:otherwise>
-	            </c:choose> 
-	            입니다.</td>
-			</tr>
-			<tr>
-				<td colspan="2">
-					<div class="submitbutton">
-						<input type="button" value="삭제 하겠습니다," onclick="confirmdelete('${deleteview.id}')"> 
+			<p><h2> 회원님의 현재 등급은 
+				<strong>
+					<c:choose>
+			        	<c:when test="${grade_code == '004'}">vvip</c:when>
+			            <c:when test="${grade_code == '003'}">vip</c:when>
+			            <c:when test="${grade_code == '002'}">우수회원</c:when>
+			            <c:otherwise>일반회원</c:otherwise>
+					</c:choose>
+				</strong>
+				입니다.</h2>
+			</p> 
+					
+					<!-- 
+						<input type="button" value="삭제 하겠습니다." onclick="confirmdelete('${deleteview.id}')">
 						<input type="button" value="삭제 하지않겠습니다." onclick="location.href='main'"> 
-					</div>
-				</td>
-			</tr>
-		</table>
+					 --> 
+		<div class="submitbutton">
+			<ul>
+				<li>
+					<button onclick="confirmdelete('${deleteview.id}')"> 
+						<h1>삭제하겠습니다.</h1>
+						<br>
+						<br>
+						<span>그동안 많은 관심주셔서 감사했습니다.</span>
+						<br>
+						<strong>회원탈퇴 완료</strong>
+					</button>
+				</li>
+				<li>
+					<button onclick="location.href='main'"> 
+						<h1>삭제하지 않겠습니다.</h1>
+						<br>
+						<br>
+						<span>앞으로도 더 나은 서비스를 제공하겠습니다.</span>
+						<br>
+						<strong>메인으로 돌아가기</strong>
+					</button>
+				</li>
+			</ul>
+		</div>
 	</main>
 </div>
 </body>
