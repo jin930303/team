@@ -28,11 +28,13 @@
         background-color: #f9f9f9; 
         border-radius: 8px; 
         box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1); 
-        transition: transform 0.2s; 
+        transition: transform 0.2s ease, border 0.1s ease; 
     }
     
      .product:hover {
         transform: scale(1.02); /* 마우스 오버 시 크기 증가 */
+        border: 2px solid #be241c;
+        border-top: 12px solid #be241c;
     }
                                            
     .product img {       /*상품 이미지 크기*/
@@ -58,34 +60,55 @@
         text-align: left; /* 왼쪽 정렬 추가 */
     }
     
- .search-sort-container {
-    font-family: "Noto Sans KR", sans-serif; /* 기본 폰트 설정 */
+.search-container {
     display: flex;
-    justify-content: flex-end;
-    margin: 20px;
-    margin-right: 330px;
-    margin-top: 4px;
+    justify-content: center; /* 가로 중앙 정렬 */
+    align-items: center; /* 세로 중앙 정렬 (필요시) */
+    padding: 20px; /* 적절한 여백 추가 (선택 사항) */
 }
 
 .search-container input {
-    padding: 7px; /* 패딩 추가 */
-    border: 1px solid #ccc; /* 테두리 스타일 */
-    border-radius: 4px; /* 모서리 둥글게 */
-    margin-right: 280px; /* 정렬을 위한 마진 */
+    padding: 10px; /* 패딩을 약간 늘림 */
+    border: 1px solid #ccc; /* 더 부드러운 테두리 색상 */
     width: 400px; /* 원하는 길이로 설정 */
-    font-size: 15px; /* 폰트 크기 설정 */
-    
+    font-size: 16px; /* 폰트 크기 조정 */
+    border-radius: 20px; /* 모서리 둥글게 */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* 부드러운 그림자 추가 */
+    transition: border-color 0.3s, box-shadow 0.3s; /* 애니메이션 효과 추가 */
+}
+
+.search-container input:focus {
+    border-color: black; /* 포커스 시 테두리 색상 변경 */
+    box-shadow: 0 0 8px rgba(0, 123, 255, 0.5); /* 포커스 시 그림자 효과 */
+    outline: none; /* 기본 아웃라인 제거 */
+}
+
+.search-container input::placeholder {
+    color: #999; /* 플레이스홀더 색상 조정 */
+    font-style: italic; /* 이탤릭체로 스타일 변경 */
+}
+
+
+
+.sort-container {
+    display: flex; /* Flexbox 사용 */
+    justify-content: flex-end; /* 오른쪽 정렬 */
+    margin: 20px 0; /* 여백 조정 */
+    margin-right: 330px;
 }
 
 .sort-container select {
     padding: 5px; /* 패딩 추가 */
-    border: 1px solid #ccc; /* 테두리 스타일 */
+    border: 1px solid #ddd; /* 테두리 스타일 */
     border-radius: 4px; /* 모서리 둥글게 */
+    margin-right: 0; /* 오른쪽 여백 제거 */
 }
+
+
  
     .divider1 {   /* 상품 경계선 */  
     border: none; 
-    border-top: 1px solid #ddd; 
+    border-top: 2px solid #be241c; 
     width: 65%;  
     margin: 20px auto; 
     margin-top: 5px;
@@ -113,7 +136,8 @@
  .category-container {
         display: flex;
         justify-content: center;
-        padding: 16px;
+        padding: 8px;
+        margin-bottom: -50px;
         
     }
 
@@ -122,15 +146,16 @@
         padding: 0;
         display: flex;
         flex-wrap: wrap;
-        justify-content: center;
+        justify-content: center;      
     }
 
     .category-list li {
-        margin: 10px;
+        margin: 5px;
         padding: 15px;
         border: 1px solid #ddd; /* 네모 테두리 */
         text-align: center;
         transition: background-color 0.3s;
+        border-radius: 4px; /* 모서리 둥글게 */
     }
 
     .category-list li a {
@@ -354,7 +379,11 @@
     </c:choose>
 </div>
 
-<hr class="divider3"> <!-- 경계선 추가 -->
+
+    <div class="search-container">
+        <input type="text" id="searchInput" oninput="filterProducts()" placeholder="상품명을 입력하세요                                             🔍">
+    </div>
+
 
 <div class="category-container">
     <nav>
@@ -466,24 +495,15 @@
         
         </ul>
     </nav>
+   
 </div>
-
-<hr class="divider2"> <!-- 경계선 추가 -->
-
-<div class="search-sort-container">
-    <div class="search-container">
-        <input type="text" id="searchInput" oninput="filterProducts()" placeholder="상품명을 입력하세요 🔍">
-    </div>
-
-    <div class="sort-container"> 
-        <select id="sortSelect" onchange="sortProducts()">
-            <option value="default">-정렬방식-</option>
-            <option value="priceAsc">가격 낮은 순</option>
-            <option value="priceDesc">가격 높은 순</option>
-        </select>
-    </div>
+<div class="sort-container"> 
+	        <select id="sortSelect" onchange="sortProducts()">
+	            <option value="default">-정렬방식-</option>
+	            <option value="priceAsc">가격 낮은 순</option>
+	            <option value="priceDesc">가격 높은 순</option>
+	        </select>
 </div>
-
 
 <hr class="divider1"> <!-- 경계선 추가 -->
 
@@ -497,14 +517,19 @@
              <a href="productdetail?itemnum=${aa.itemnum}" style="text-decoration: none; color: black;">${aa.product}</a>
         </div>
 <div style="display: flex; align-items: center; justify-content: space-between;"> 
- <c:choose>
+<c:choose>
     <c:when test="${aa.sale > 0}">
-        <div class="product-price">[${aa.sale}%] <fmt:formatNumber value="${aa.price}" type="number" groupingUsed="true"/>원 → <fmt:formatNumber value="${aa.saleprice}" type="number" groupingUsed="true"/>원</div>
+        <div class="product-price">
+            [${aa.sale}%] <span style="text-decoration: line-through; font-size: 13px; color: #aaaaaa;"> 
+            <fmt:formatNumber value="${aa.price}" type="number" groupingUsed="true"/></span> 
+            <fmt:formatNumber value="${aa.saleprice}" type="number" groupingUsed="true"/>원
+        </div>
     </c:when>
     <c:otherwise>
         <div class="product-price"><fmt:formatNumber value="${aa.price}" type="number" groupingUsed="true"/>원</div>
     </c:otherwise>
 </c:choose>
+
 
 <c:choose>
 	<c:when test="${loginstate==true}">
@@ -564,3 +589,4 @@ function showLoginAlert() {
 </script>
 </body>
 </html>
+
