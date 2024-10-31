@@ -18,14 +18,14 @@
 ## 👨‍👩‍👧‍👦 팀 소개
 
 |Name|육진|김수한|김찬우|이태헌|
-|---| ---  | ---  | ---      | ---   |
-|profile| ---  | ---  | ---   |--- |
+|---| ---  |---  | ---      | ---   |
+|profile| <img src="https://github.com/jin930303/photo/blob/main/4.jpg"  width="180" height="220"/> |  <img src="https://github.com/jin930303/photo/blob/main/1.jpg"  width="180" height="220"/> | <img src="https://github.com/jin930303/photo/blob/main/3.jpg"  width="180" height="220"/>   | <img src="https://github.com/jin930303/photo/blob/main/2.jpg"  width="180" height="220"/> |
 |Position|BackendDevelop|Front/Backend<br>Develop|Front/Backend<br>Develop|Front/Backend<br>Develop|
 |Git|[@jin930303](https://github.com/jin930303)|[@shk0349](https://github.com/shk0349)|[@Somallcool](https://github.com/Somallcool)|[@TaeHoen-Lee](https://github.com/TaeHeon-Lee1)|
 |E-mail|<dbrwls12@gmail.com>|<shk0349@naver.com>|<gkdlfn1578@naver.com>|<dlxojs1924@naver.com>|
 
 ## 👨‍💻역할
- -------------
+
 **육진(팀장)**<br>
 DB 설계 / ERD 제작 / 유스케이스 다이어그램 제작 / 로그인 / 장바구니 / 부분 통합검색(로그인 상태) / 회원관리 CRUD /  전반적인 코드<br> 관리 담당  
 
@@ -35,7 +35,7 @@ DB 설계 / ERD 제작 / 경기일정 / 야구소식 / 이벤트 / 공지사항 
 **김찬우**<br>
 UI/UX 설계 / FAQ / 문의내역 / 사이드바 / 관심상품 / 1대1 문의하기(로그인 상태) / 전반적인 CSS 담당
 
-**이테헌**<br>
+**이태헌**<br>
 UI/UX 설계 / 상품DB관리 / 상품 CRUD / 상품페이지 / 상품상세페이지 / 상품정렬 / 전반적인 CSS 담당 
 
 ## 📚 프로젝트 구성 및 설계
@@ -102,6 +102,6 @@ UI/UX 설계 / 상품DB관리 / 상품 CRUD / 상품페이지 / 상품상세페�
 </ul>
 </details>
  
-주요기능소개
-----------
+# 🛠️주요기능소개
+
 **메인화면**
