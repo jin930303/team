@@ -186,10 +186,10 @@
 						<li><a href="#">
 		            	<c:choose>
 		               		<c:when test="${not empty sessionScope.kakaoname}">  
-		               			${sessionScope.kakaoname} 님 반갑습니다.
+		               			${sessionScope.kakaoname}님 반갑습니다.
 		               		</c:when>
 		               		<c:otherwise>  
-		               			${sessionScope.dto3.nickname} 님 반갑습니다. 
+		               			${sessionScope.dto3.nickname}님 반갑습니다. 
 		               		</c:otherwise>
 		            	</c:choose>
             			</a></li>
@@ -230,7 +230,7 @@
 							</ul>
 						</li>
 						 -->
-						<li><a href="faq_community"><span class="glyphicon glyphicon-log-out"></span>고객센터</a></li>
+						<li><a href="faq_community">고객센터</a></li>
 						<li><a href="logout"><span class="glyphicon glyphicon-log-out"></span>로그아웃</a></li>
 					</c:when>
 
