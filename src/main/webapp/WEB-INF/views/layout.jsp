@@ -29,10 +29,10 @@ nav
 {
    text-align: center;
    width: 100%;
+   padding-bottom:50px;
 }
 #footer
 {
-	position: fixed;
    bottom: 0px;
    width: 100%;
    text-align: center;

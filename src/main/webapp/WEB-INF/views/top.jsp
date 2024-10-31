@@ -46,6 +46,16 @@
 		background-attachment: fixed;	/* 배경이 고정된 상태로 스크롤 */
 	}
 	
+/* footer Style */
+	footer {
+		width: 100%;
+		padding: 100px 0;
+		font-family: 'Noto Sans KR', sans-serif;
+		font-size: 12px;
+		color: #333;
+		background-color: #fafafa;
+	}
+	
 /* pre Style */
 	pre {
 		font-family: 'Gothic A1', sans-serif;
