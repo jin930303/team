@@ -68,12 +68,26 @@
 }
 
 .search-container input {
-    padding: 7px; /* 패딩 추가 */
-    border: 1px solid black; /* 테두리 스타일 */
+    padding: 10px; /* 패딩을 약간 늘림 */
+    border: 1px solid #ccc; /* 더 부드러운 테두리 색상 */
     width: 400px; /* 원하는 길이로 설정 */
-    font-size: 15px; /* 폰트 크기 설정 */
-    border-radius: 4px; /* 모서리 둥글게 */
+    font-size: 16px; /* 폰트 크기 조정 */
+    border-radius: 20px; /* 모서리 둥글게 */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* 부드러운 그림자 추가 */
+    transition: border-color 0.3s, box-shadow 0.3s; /* 애니메이션 효과 추가 */
 }
+
+.search-container input:focus {
+    border-color: black; /* 포커스 시 테두리 색상 변경 */
+    box-shadow: 0 0 8px rgba(0, 123, 255, 0.5); /* 포커스 시 그림자 효과 */
+    outline: none; /* 기본 아웃라인 제거 */
+}
+
+.search-container input::placeholder {
+    color: #999; /* 플레이스홀더 색상 조정 */
+    font-style: italic; /* 이탤릭체로 스타일 변경 */
+}
+
 
 
 .sort-container {
@@ -85,7 +99,7 @@
 
 .sort-container select {
     padding: 5px; /* 패딩 추가 */
-    border: 1px solid black; /* 테두리 스타일 */
+    border: 1px solid #ddd; /* 테두리 스타일 */
     border-radius: 4px; /* 모서리 둥글게 */
     margin-right: 0; /* 오른쪽 여백 제거 */
 }
@@ -138,7 +152,7 @@
     .category-list li {
         margin: 5px;
         padding: 15px;
-        border: 1px solid black; /* 네모 테두리 */
+        border: 1px solid #ddd; /* 네모 테두리 */
         text-align: center;
         transition: background-color 0.3s;
         border-radius: 4px; /* 모서리 둥글게 */
@@ -186,7 +200,7 @@
 <div class="breadcrumb">
 	<c:choose>
 	    <c:when test="${scg_code == 'mitt001'}">
-	        <span>[글러브 > </span><span>투수/올라운드]</span>
+	        <span>글러브 > </span><span>투수/올라운드</span>
 	    </c:when>
 	    <c:when test="${scg_code == 'mitt002'}">
 	        <span>글러브 > </span><span>내야수</span>
@@ -367,7 +381,7 @@
 
 
     <div class="search-container">
-        <input type="text" id="searchInput" oninput="filterProducts()" placeholder="상품명을 입력하세요 🔍">
+        <input type="text" id="searchInput" oninput="filterProducts()" placeholder="상품명을 입력하세요                                             🔍">
     </div>
 
 
