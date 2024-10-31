@@ -107,11 +107,6 @@ table {
 	border-bottom: 2px solid #be241c;
 }
 
-.contents {
-	display: flex;
-   	align-items: center;  /* 세로 중앙 정렬 */
-}
-
 table tr {
     padding: 28px;
     border-bottom: 1px solid #ddd;
@@ -175,6 +170,7 @@ else grade = "일반회원";
 		<div class="sidebar_title"><h2>MYPAGE</h2></div>
 		<aside class="sidebar">
 			<ul>
+				<li><a href="myinfo">마이페이지</a></li>
 				<li><a href="cart">장바구니</a></li>
 				<li><a href="like_product">관심상품</a></li>
 				<li><a href="update?id=${dto1.id}">회원정보 수정</a></li>

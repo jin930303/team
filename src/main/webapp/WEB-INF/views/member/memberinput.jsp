@@ -547,8 +547,10 @@ input[type="reset"]:hover {
                 			<option value="017">017</option>
                 			<option value="018">018</option>
                 			<option value="019">019</option>
-                		</select>-
-	                    <input type="text" name="phone1" id="phone1" maxlength="4">-
+                		</select>
+                			<span style="margin: 6px;"> - </span>
+	                    <input type="text" name="phone1" id="phone1" maxlength="4">
+	                    	<span style="margin: 6px;"> - </span>
 	                    <input type="text" name="phone2" id="phone2" maxlength="4">
 	                 	<input type="button" name="phonecheck" id="phonecheck" value="중복확인">
                 	</div>
@@ -559,7 +561,8 @@ input[type="reset"]:hover {
                 <th><strong class="star">⁕ </strong>이메일</th>
                 <td>
                 <div class="email-container">
-                    <input type="email" name="fdomain" id="fdomain">@
+                    <input type="email" name="fdomain" id="fdomain">
+                    	<span style="margin: 6px;"> @ </span>
                     <select name="bdomain" id="bdomain">
                         <option value="naver.com">naver.com</option>
                         <option value="daum.net">daum.net</option>
