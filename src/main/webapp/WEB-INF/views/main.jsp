@@ -14,32 +14,6 @@
 	}
 </script>
 <style>
-/* 팝업창 스타일 */
-	.popup-overlay {
-		position: fixed;
-		top: 0;
-		left: 0;
-		width: 100%;
-		height: 100%;
-		display: none;
-	}
-
-	.popup-content {
-		position: absolute;
-		top: 20px;
-		left: 20px;
-		background: white;
-		padding: 20px;
-		width: 300px;
-		border-radius: 8px;
-		text-align: center;
-	}
-
-	.close-btn {
-		cursor: pointer;
-		color: red;
-	}
-	
 	.carousel-inner > .item > img,
 	.carousel-inner > .item > a > img {
 		height:550px; 
