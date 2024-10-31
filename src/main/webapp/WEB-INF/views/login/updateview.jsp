@@ -371,17 +371,18 @@
                     <th>전화번호</th>
                     <td>
                         <div style="display: flex; align-items: center;">
-                           <select name="phone0" id="phone0">
+                           <select name="phone0" id="phone0" style="width: 128px;">
                 			<option value="010">010</option>
                 			<option value="011">011</option>
                 			<option value="016">016</option>
                 			<option value="017">017</option>
                 			<option value="018">018</option>
                 			<option value="019">019</option>
-                		</select>-
-                            <input type="text" name="phone1" id="phone1" value="${updateview.phone1}" maxlength="4" style="width: 175px; margin-left: 9px; margin-right: 9px;">
-                            <span>  -  </span>
-                            <input type="text" name="phone2" id="phone2" value="${updateview.phone2}" maxlength="4" style="width: 175px; margin-left: 9px;">
+                		</select> 
+                		<span style="margin-left: 6px;"> - </span>
+                            <input type="text" name="phone1" id="phone1" value="${updateview.phone1}" maxlength="4" style="width: 128px; margin-left: 9px; margin-right: 9px;">
+                            <span> - </span>
+                            <input type="text" name="phone2" id="phone2" value="${updateview.phone2}" maxlength="4" style="width: 128px; margin-left: 9px;">
                             <button type="button" name="phonecheck" id="phonecheck" class="button-inline">중복확인</button>
                         </div>
                     </td>
