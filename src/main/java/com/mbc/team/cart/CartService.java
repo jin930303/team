@@ -7,8 +7,12 @@ import org.springframework.stereotype.Service;
 
 @Service
 public interface CartService {
-
+	
+	public int checkItem(CartItem cartItem);
+	
 	public void insert(CartItem cartItem);
+	
+	public void update(CartItem cartItem);
 
 	public List<CartItem> selectitem(String id);
 
@@ -17,6 +21,10 @@ public interface CartService {
 	public List<CartItem> getCartItems(String id);
 
 	public void deleteCartItem(String id, int itemnum);
+
+	
+
+	
 
 
 
