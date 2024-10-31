@@ -5,9 +5,9 @@
 <head>
 <meta charset="UTF-8">
 <title>footer.jsp</title>
+
 </head>
 <body>
-<footer>
-</footer>
+
 </body>
 </html>

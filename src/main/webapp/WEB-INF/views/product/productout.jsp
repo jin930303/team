@@ -22,7 +22,7 @@
     }
     
     .product {            /*상품 테두리*/
-        border: 1px solid #ddd;
+        border: 1px solid #be241c;
         padding: 16px;
         text-align: center;
         background-color: #f9f9f9; 
@@ -496,10 +496,10 @@
         <div class="product-title">
              <a href="productdetail?itemnum=${aa.itemnum}" style="text-decoration: none; color: black;">${aa.product}</a>
         </div>
- 
+<div style="display: flex; align-items: center; justify-content: space-between;"> 
  <c:choose>
     <c:when test="${aa.sale > 0}">
-        <div class="product-price">[${aa.sale}% 세일중] <fmt:formatNumber value="${aa.price}" type="number" groupingUsed="true"/>원 → <fmt:formatNumber value="${aa.saleprice}" type="number" groupingUsed="true"/>원</div>
+        <div class="product-price">[${aa.sale}%] <fmt:formatNumber value="${aa.price}" type="number" groupingUsed="true"/>원 → <fmt:formatNumber value="${aa.saleprice}" type="number" groupingUsed="true"/>원</div>
     </c:when>
     <c:otherwise>
         <div class="product-price"><fmt:formatNumber value="${aa.price}" type="number" groupingUsed="true"/>원</div>
@@ -515,7 +515,7 @@
 		<div><a href="login?redirect" onclick="showLoginAlert()">👍 따봉</a></div>
 	</c:otherwise>
 </c:choose>
-	
+</div>	
     </div>
 </c:forEach>
 </div>
@@ -562,6 +562,5 @@ function showLoginAlert() {
         });
     }
 </script>
-
 </body>
 </html>

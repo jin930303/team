@@ -83,8 +83,8 @@
 		font-size: 18px;
 		color: #be241c;
 		padding-top:15px;
-		padding-bottom:20px;
-		margin-right:0 auto;
+		padding-bottom:20px;	margin-right:0 auto;
+		
 	}
     
 	.product-container-more a {
@@ -108,7 +108,7 @@
     
 /*상품 테두리*/
 	.product {
-		border: 1px solid #ddd;
+		border: 1px solid #be241c;
 		padding: 16px;
 		text-align: center;
 		background-color: #f9f9f9; 
@@ -326,7 +326,9 @@
 	    </div>
 		</c:forEach>
 	</div>
+	
 	<div class="product-container-more"><a href="saleitem">더보기</a></div>
 </div>
+
 </body>
 </html>
