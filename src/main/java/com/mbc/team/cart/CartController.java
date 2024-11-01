@@ -98,25 +98,42 @@ public class CartController {
 	}
 
 	@RequestMapping(value = "/buydirectitem", method = RequestMethod.POST)
-	public String buydirectitem(HttpSession hs, Model mo,@ModelAttribute CartItem cartItem) {
+	public String buydirectitem(HttpSession hs, Model mo,@ModelAttribute CartItem cartItem,HttpServletResponse response) throws IOException {
 		
-		System.out.println("ItemNum: " +cartItem.getItemnum());
-		System.out.println("Price: " + cartItem.getPrice());
-		System.out.println("Product: " +cartItem.getProduct());
-		System.out.println("Option: " +cartItem.getOp1());
-		System.out.println("Count: " +cartItem.getCount());
+		Boolean loginState = Boolean.TRUE.equals(hs.getAttribute("loginstate"));
+		if (loginState) {
+			
+			LoginDTO dto3 = (LoginDTO) hs.getAttribute("dto3");
+			
+			System.out.println("ItemNum: " +cartItem.getItemnum());
+			System.out.println("Price: " + cartItem.getPrice());
+			System.out.println("Product: " +cartItem.getProduct());
+			System.out.println("Option: " +cartItem.getOp1());
+			System.out.println("Count: " +cartItem.getCount());
 
-		LoginDTO dto3 = (LoginDTO) hs.getAttribute("dto3");
-		String id = dto3.getId();
+			
+			String id = dto3.getId();
 
-		mo.addAttribute("itemnum",cartItem.getItemnum());
-		mo.addAttribute("product",cartItem.getProduct());
-		mo.addAttribute("count", cartItem.getCount());
-		mo.addAttribute("op1", cartItem.getOp1());
-		mo.addAttribute("price", cartItem.getPrice());
-
-		return "buyproduct";
+			mo.addAttribute("itemnum",cartItem.getItemnum());
+			mo.addAttribute("product",cartItem.getProduct());
+			mo.addAttribute("count", cartItem.getCount());
+			mo.addAttribute("op1", cartItem.getOp1());
+			mo.addAttribute("price", cartItem.getPrice());
+			return "buyproduct";
+		}
+		else {
+	        // 로그인 상태가 false일 경우 경고 메시지 출력
+	        sendAlertAndRedirect2(response, "로그인 후 이용해주세요.", "/team/login");
+	        return null;
+	    }
 	}
+	 private void sendAlertAndRedirect2(HttpServletResponse response, String message, String redirectUrl) throws IOException {
+	        response.setContentType("text/html;charset=utf-8");
+	        PrintWriter pww = response.getWriter();
+	        pww.print("<script> alert('" + message + "');</script>");
+	        pww.print("<script> location.href='" + redirectUrl + "';</script>");
+	        pww.flush();
+	    }
 
 	@RequestMapping("/buy")
 	public String buySelectedItems(@RequestParam("selectedItems") List<String> selectedItems, HttpSession hs,
