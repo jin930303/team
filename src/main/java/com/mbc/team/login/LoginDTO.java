@@ -2,21 +2,20 @@ package com.mbc.team.login;
 
 public class LoginDTO {
 	
-	String id,nickname,pw,name,gender,birth,phone,phone1,phone2,address,email,fdomain,bdomain,grade;
+	String id,nickname,pw,name,birth,phone,phone1,phone2,address,email,fdomain,bdomain,grade_code,auth;
 	int total;
 	public LoginDTO() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	public LoginDTO(String id, String nickname, String pw, String name, String gender, String birth, String phone,
-			String phone1, String phone2, String address, String email, String fdomain, String bdomain, String grade,
+	public LoginDTO(String id, String nickname, String pw, String name, String birth, String phone, String phone1,
+			String phone2, String address, String email, String fdomain, String bdomain, String grade_code, String auth,
 			int total) {
 		super();
 		this.id = id;
 		this.nickname = nickname;
 		this.pw = pw;
 		this.name = name;
-		this.gender = gender;
 		this.birth = birth;
 		this.phone = phone;
 		this.phone1 = phone1;
@@ -25,7 +24,8 @@ public class LoginDTO {
 		this.email = email;
 		this.fdomain = fdomain;
 		this.bdomain = bdomain;
-		this.grade = grade;
+		this.grade_code = grade_code;
+		this.auth = auth;
 		this.total = total;
 	}
 	public String getId() {
@@ -51,12 +51,6 @@ public class LoginDTO {
 	}
 	public void setName(String name) {
 		this.name = name;
-	}
-	public String getGender() {
-		return gender;
-	}
-	public void setGender(String gender) {
-		this.gender = gender;
 	}
 	public String getBirth() {
 		return birth;
@@ -106,11 +100,17 @@ public class LoginDTO {
 	public void setBdomain(String bdomain) {
 		this.bdomain = bdomain;
 	}
-	public String getGrade() {
-		return grade;
+	public String getGrade_code() {
+		return grade_code;
 	}
-	public void setGrade(String grade) {
-		this.grade = grade;
+	public void setGrade_code(String grade_code) {
+		this.grade_code = grade_code;
+	}
+	public String getAuth() {
+		return auth;
+	}
+	public void setAuth(String auth) {
+		this.auth = auth;
 	}
 	public int getTotal() {
 		return total;
@@ -118,6 +118,8 @@ public class LoginDTO {
 	public void setTotal(int total) {
 		this.total = total;
 	}
+	
+	
 
 	
 }

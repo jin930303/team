@@ -3,20 +3,38 @@
     "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.mbc.team.member.MemberService">
+
 	<insert id="memberinput">
-		insert into member values(#{param1},#{param2},#{param3},#{param4},#{param5},#{param6},#{param7},#{param8},1,0)
+		insert into member (id, nickname, pw, name, birth, phone, address, email, grade_code, total, auth) 
+		values(#{id}, #{nickname}, #{pw}, #{name}, #{birth}, #{phone}, #{address}, #{email}, '001', 0, '002')
 	</insert>
 	
+	<select id="memberout" resultType="com.mbc.team.member.MemberDTO">
+		 select m.*, mg.grade_name from member m join member_grade mg on m.grade_code = mg.grade_code
+	</select>
+	
 	<select id="idcheck" resultType="int">
-	select count(*) from member where id=#{param1}	
+		select count(*) from member where id=#{id}
 	</select>
 	
 	<select id="nicknamecheck" resultType="int">
-	select count(*) from member where nickname=#{param1}	
+		select count(*) from member where nickname=#{nickname}	
 	</select>
 	
 	<select id="nicknamecheck1" resultType="int">
-	select count(*) from member where nickname=#{param1}	
+		select count(*) from member where nickname=#{nickname}	
 	</select>
+	
+	<select id="emailcheck" resultType="int">
+		select count(*) from member where email=#{email}	
+	</select>
+	
+	<select id="phonecheck" resultType="int">
+		select count(*) from member where phone=#{phone}	
+	</select>
+	
+	<delete id="memberdelete">
+	delete from member where id=#{id}
+	</delete>
 	
 </mapper>

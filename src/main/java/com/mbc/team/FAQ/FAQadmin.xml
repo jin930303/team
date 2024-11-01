@@ -2,59 +2,56 @@
 PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.mbc.team.FAQ.FAQadminService">
+
 	<!-- FAQ 저장(관리자) -->
 	<insert id="faqinsert" parameterType="map">
-		insert into
-		faq(cnum,tab,title,fcontents,nickname,fimage1,fimage2,fimage3,groups)
-		values(faq_seq.nextval,#{param1},#{param2},#{param3},#{param4},#{param5},#{param6},#{param7},faq_seq.currval)
+		insert into faq(cnum, tab, title, fcontents, nickname, fimage1, fimage2, fimage3, groups)
+		values(faq_seq.nextval, #{param1}, #{param2}, #{param3}, #{param4}, #{param5}, #{param6}, #{param7}, faq_seq.currval)
 	</insert>
+	<select id="save_detail" resultType="int">
+	    select max(cnum) from faq
+	</select>
 
 	<!-- FAQ 출력(관리자) -->
 	<select id="faqboard" resultType="com.mbc.team.FAQ.FAQadminDTO">
-		select
-		cnum,tab,title,nickname,to_char(fdate,'yyyy-MM-dd')fdate,faqcnt 
-		from faq where
-		tab='FAQ' and indent=0 and step=0
+		select cnum, tab, title, nickname, to_char(fdate, 'yyyy-MM-dd') fdate, faqcnt from faq where tab='FAQ' and indent=0 and step=0
 	</select>
 
 	<!-- FAQ 페이지 -->
 	<select id="total" resultType="int">
-		select count(*)from faq
+		select count(*) from faq where tab='FAQ'
 	</select>
 
 	<select id="page" resultType="com.mbc.team.FAQ.FAQadminDTO">
 		select * from (
-		select rownum rn,A.*
-		from(
-		select
-		cnum,tab,title,nickname,to_char(fdate,'yyyy-MM-dd')fdate,fcontents,groups,step,indent,fimage1,fimage2,fimage3,faqcnt 
-		from faq where tab ='FAQ' and indent=0 and step=0 order by cnum
-		desc)A)
-		where rn
-		between #{start} AND #{end}
+	    select rownum rn, A.* from (
+		select cnum, tab, title, nickname, to_char(fdate, 'yyyy-MM-dd') fdate, faqcnt from faq 
+		where tab='FAQ' and indent=0 and step=0 order by cnum asc)A)
+		where rn between #{start} and #{end}
 	</select>
 
 	<!-- FAQ 출력(상세페이지) -->
 	<select id="faq_questions_detail" resultType="com.mbc.team.FAQ.FAQadminDTO">
-		select
-		cnum,tab,title,to_char(fdate,'yyyy-MM-dd')fdate,fcontents,groups,step,indent,nickname,fimage1,fimage2,fimage3,faqcnt
-		from faq where cnum=#{param1}
+		select cnum, tab, title, to_char(fdate, 'yyyy-MM-dd') fdate, fcontents, groups, step, indent, nickname, fimage1, fimage2, fimage3, 
+		faqcnt from faq where cnum=#{param1}
 	</select>
 
 	<!-- FAQ 수정(FAQ 상세페이지) -->
 	<select id="faq_admin_update" resultType="com.mbc.team.FAQ.FAQadminDTO">
-		select
-		cnum,tab,title,to_char(fdate,'yyyy-MM-dd')fdate,fcontents,groups,step,indent,nickname,fimage1,fimage2,fimage3
+		select cnum, tab, title, to_char(fdate, 'yyyy-MM-dd') fdate, fcontents, groups, step, indent, nickname, fimage1, fimage2, fimage3
 		from faq where cnum=#{param1}
 	</select>
 
 	<!-- FAQ 수정(완료) -->
 	<update id="faq_admin_update2">
-		update faq set
-		tab=#{param2},title=#{param3},fcontents=#{param4},nickname=#{param5},fimage1=#{param6},fimage2=#{param7},fimage3=#{param8}
-		where cnum=#{param1}
+		update faq set tab=#{param2}, title=#{param3}, fcontents=#{param4}, nickname=#{param5}, fimage1=#{param6}, fimage2=#{param7}, 
+		fimage3=#{param8} where cnum=#{param1}
 	</update>
 
+	<select id="update_detail" resultType="int">
+	    select cnum from faq
+	</select>
+	
 	<!-- FAQ 삭제(완료) -->
 	<delete id="faq_admin_delete">
 		delete from faq where cnum=#{param1}
@@ -62,22 +59,18 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 	<!-- FAQ 댓글 스탭업 -->
 	<update id="faq_questions_stepup">
-		update faq set step=step+1
-		where groups=#{param1} and
-		step>#{param2}
+		update faq set step=step+1 where groups=#{param1} and step>#{param2}
 	</update>
 
 	<!-- FAQ 댓글 저장 -->
 	<insert id="faq_questions_faqreplysave">
-		insert into
-		faq(cnum,groups,step,indent,fcontents,tab,nickname)
-		values(faq_seq.nextval,#{param2},#{param3},#{param4},#{param5},#{param6},#{param7})
+		insert into faq(cnum, groups, step, indent, fcontents, tab, nickname) 
+		values(faq_seq.nextval, #{param2}, #{param3}, #{param4}, #{param5}, #{param6}, #{param7})
 	</insert>
 
 	<!-- FAQ 댓글 출력(상세페이지) -->
 	<select id="faq_questions_reply" resultType="com.mbc.team.FAQ.FAQadminDTO">
-		select
-		cnum,tab,title,nickname,to_char(fdate,'yyyy-MM-dd')fdate,fcontents
+		select cnum, tab, title, nickname, to_char(fdate, 'yyyy-MM-dd') fdate, fcontents
 		from faq where groups=#{param1} and step>0 and indent>0
 	</select>
 	
@@ -85,4 +78,38 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<update id="faqcount2">
 		update faq set faqcnt=faqcnt+1 where cnum=#{param1}
 	</update>
+
+	<!-- FAQ 문의내역 검색 -->
+	<select id="faqTitleSearchWithDate" resultType="com.mbc.team.FAQ.FAQDTO">
+	    select * from faq where title like '%'||#{param1}||'%' and fdate>=sysdate-#{param2} and tab='FAQ'
+	</select>
+	
+	<!-- 내용 검색 -->
+	<select id="faqContentsSearchWithDate" resultType="com.mbc.team.FAQ.FAQDTO">
+	    select * from faq where fcontents like '%'||#{param1}||'%' and fdate>=sysdate-#{param2} and tab='FAQ'
+	</select>
+	
+	<!-- 기간 검색 -->
+	<select id="faqSearchByDateOnly" resultType="com.mbc.team.FAQ.FAQDTO">
+	    select * from faq where fdate>=sysdate-#{param1} and tab='FAQ'
+	</select>
+	
+	<!-- 검색 조건만 있을 때 쿼리들 -->
+	<select id="faqTitleSearch" resultType="com.mbc.team.FAQ.FAQDTO">
+	    select * from faq where title like '%'||#{param1}||'%' and tab='FAQ'
+	</select>
+	
+	<select id="faqContentsSearch" resultType="com.mbc.team.FAQ.FAQDTO">
+	    select * from faq where fcontents like '%'||#{param1}||'%' and tab='FAQ'
+	</select>
+	
+	<select id="faqNicknameSearch" resultType="com.mbc.team.FAQ.FAQDTO">
+	    select * from faq where nickname like '%'||#{param1}||'%' and tab='FAQ'
+	</select>
+	
+	<!-- 작성자 검색 -->
+	<select id="faqNicknameSearchWithDate" resultType="com.mbc.team.FAQ.FAQDTO">
+	    select * from faq where nickname like '%'||#{param1}||'%' and fdate>=sysdate-#{param2} and tab='FAQ'
+	</select>
+
 </mapper>

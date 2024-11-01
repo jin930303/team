@@ -8,7 +8,7 @@
 		template="/WEB-INF/views/layout.jsp">
 		<put-attribute name="title" value="" />
 		<put-attribute name="top" value="/WEB-INF/views/top.jsp" />
-		<put-attribute name="body" value="" />
+		<put-attribute name="side-right" value="/WEB-INF/views/side.jsp" />
 		<put-attribute name="footer"
 			value="/WEB-INF/views/footer.jsp" />
 	</definition>
@@ -84,6 +84,16 @@
       <put-attribute name="body" value="/WEB-INF/views/iljung/iljung.jsp"/>
    </definition>
    
+    <definition name="iljungsetting" extends="baseLayout">
+      <put-attribute name="title" value="메인화면"/>
+      <put-attribute name="body" value="/WEB-INF/views/iljung/iljungsetting.jsp"/>
+   </definition>
+   
+    <definition name="iljungupdateview" extends="baseLayout">
+      <put-attribute name="title" value="메인화면"/>
+      <put-attribute name="body" value="/WEB-INF/views/iljung/iljungupdateview.jsp"/>
+   </definition>
+   
     <definition name="sosickboard" extends="baseLayout">
       <put-attribute name="title" value="메인화면"/>
       <put-attribute name="body" value="/WEB-INF/views/sosick/sosickboard.jsp"/>
@@ -109,7 +119,30 @@
       <put-attribute name="body" value="/WEB-INF/views/sosick/sosicksearchview.jsp"/>
 	</definition>
 	
-	
+    <definition name="eventboard" extends="baseLayout">
+      <put-attribute name="title" value="메인화면"/>
+      <put-attribute name="body" value="/WEB-INF/views/event/eventboard.jsp"/>
+   </definition> 
+   
+   <definition name="eventinput" extends="baseLayout">
+      <put-attribute name="title" value="메인화면"/>
+      <put-attribute name="body" value="/WEB-INF/views/event/eventinput.jsp"/>
+   </definition>
+
+    <definition name="eventout" extends="baseLayout">
+      <put-attribute name="title" value="메인화면"/>
+      <put-attribute name="body" value="/WEB-INF/views/event/eventout.jsp"/>
+   </definition> 
+   
+    <definition name="eventupdateview" extends="baseLayout">
+      <put-attribute name="title" value="메인화면"/>
+      <put-attribute name="body" value="/WEB-INF/views/event/eventupdateview.jsp"/>
+   </definition>
+
+    <definition name="eventsearchview" extends="baseLayout">
+      <put-attribute name="title" value="메인화면"/>
+      <put-attribute name="body" value="/WEB-INF/views/event/eventsearchview.jsp"/>
+   </definition>
 	
 </tiles-definitions>
 

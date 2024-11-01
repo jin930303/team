@@ -5,246 +5,644 @@
 <mapper namespace="com.mbc.team.board.BoardService">
 
 <!-- 공지사항 -->
+	
+	<!-- 공지사항 입력(이미지 O) -->
 	<insert id="insertgongji">
 		insert into gongji values(#{param1}, #{param2}, gnum_seq.nextval, #{param3}, #{param4}, sysdate, 0, #{param5})
 	</insert>
 	
-	<select id="gongjiout" resultType="com.mbc.team.board.GongjiDTO">
-		select id, nickname, gnum, gtitle, gcontents, gdate, gcnt, gimage from gongji
-	</select>
+	<!-- 공지사항 입력(이미지 X) -->
+	<insert id="insertgongjix">
+		insert into gongji values(#{param1}, #{param2}, gnum_seq.nextval, #{param3}, #{param4}, sysdate, 0, (null))
+	</insert>
 	
+	<!-- 공지사항 메인 목록 출력 + 페이지 기능 -->
 	<select id="total" resultType="int">
    		select count(*) from gongji
 	</select>
 	
 	<select id="page" resultType="com.mbc.team.board.GongjiDTO">
 	   select * from (
-	   select rownum rn,A.* from(  
-	   select id, nickname, gnum, gtitle, gcontents, to_char(gdate, 'yyyy-MM-dd') as gdate, gcnt, gimage from gongji order by gnum desc)A)
-	   where rn between #{start} AND #{end}
+	   select rownum rn, A.* from(  
+	   select id, nickname, gnum, gtitle, gcontents, to_char(gdate, 'yyyy-MM-dd') as gdate, gcnt, gimage 
+	   from gongji order by gnum desc)A)
+	   where rn between #{start} and #{end}
 	</select>
 	
+	<!-- 공지사항 메인 게시날짜 정렬(내림차순) -->
+	<select id="gongjidayup" resultType="com.mbc.team.board.GongjiDTO">
+	   select * from (
+	   select rownum rn, A.* from(  
+	   select id, nickname, gnum, gtitle, gcontents, to_char(gdate, 'yyyy-MM-dd') as gdate, gcnt, gimage 
+	   from gongji order by gdate desc, gnum desc)A)
+	   where rn between #{start} and #{end}
+	</select>
+	
+	<!-- 공지사항 메인 게시날짜 정렬(오림차순) -->
+	<select id="gongjidaydown" resultType="com.mbc.team.board.GongjiDTO">
+	   select * from (
+	   select rownum rn, A.* from(  
+	   select id, nickname, gnum, gtitle, gcontents, to_char(gdate, 'yyyy-MM-dd') as gdate, gcnt, gimage 
+	   from gongji order by gdate asc, gnum asc)A)
+	   where rn between #{start} and #{end}
+	</select>
+	
+	<!-- 공지사항 메인 조회순 정렬(내림차순) -->
+	<select id="gongjiviewup" resultType="com.mbc.team.board.GongjiDTO">
+	   select * from (
+	   select rownum rn, A.* from(  
+	   select id, nickname, gnum, gtitle, gcontents, to_char(gdate, 'yyyy-MM-dd') as gdate, gcnt, gimage 
+	   from gongji order by gcnt desc)A)
+	   where rn between #{start} and #{end}
+	</select>
+	
+	<!-- 공지사항 메인 조회순 정렬(오름차순) -->
+	<select id="gongjiviewdown" resultType="com.mbc.team.board.GongjiDTO">
+	   select * from (
+	   select rownum rn, A.* from(  
+	   select id, nickname, gnum, gtitle, gcontents, to_char(gdate, 'yyyy-MM-dd') as gdate, gcnt, gimage 
+	   from gongji order by gcnt asc)A)
+	   where rn between #{start} and #{end}
+	</select>
+	
+	<!-- 공지사항 디테일 출력 -->
 	<select id="gongjidetail" resultType="com.mbc.team.board.GongjiDTO">
-		select id, nickname, gnum, gtitle, gcontents, to_char(gdate, 'yyyy-MM-dd') as gdate, gcnt, gimage from gongji where gnum=#{param1}
+		select id, nickname, gnum, gtitle, gcontents, to_char(gdate, 'yyyy-MM-dd') as gdate, gcnt, gimage 
+		from gongji where gnum=#{param1}
 	</select>
 	
+	<!-- 공지사항 조회수 증가 -->
 	<update id="gongjicount">
 		update gongji set gcnt=gcnt+1 where gnum=#{param1}
 	</update>
 	
+	<!-- 공지사항 삭제 -->
 	<delete id="gongjidelete">
 		delete from gongji where gnum=#{param1}
 	</delete>
 	
+	<!-- 공지사항 수정화면 출력 -->
 	<select id="gongjiupdateview" resultType="com.mbc.team.board.GongjiDTO">
-		select id, nickname, gnum, gtitle, gcontents, to_char(gdate, 'yyyy-MM-dd') as gdate, gcnt, gimage from gongji where gnum=#{param1}
+		select id, nickname, gnum, gtitle, gcontents, to_char(gdate, 'yyyy-MM-dd') as gdate, gcnt, gimage 
+		from gongji where gnum=#{param1}
 	</select>
 	
+	<!-- 공지사항 수정(이미지 O) -->
 	<update id="gongjiupdate">
 		update gongji set gtitle=#{param4}, gcontents=#{param5}, gimage=#{param6} where gnum=#{param1}
 	</update>
+	
+	<!-- 공지사항 수정(이미지 X / 기존 이미지 O이면 그대로 사용) -->
+	<update id="gongjiupdatex">
+		update gongji set gtitle=#{param4}, gcontents=#{param5} where gnum=#{param1}
+	</update>	
+
+	<!-- 공지사항 검색(글제목 검색 + 글번호 내림차순 정렬 + 페이지 기능) -->
+	<select id="totalt" resultType="int">
+   		select count(*) from gongji where gtitle like #{svalue}
+	</select>
 
 	<select id="paget" resultType="com.mbc.team.board.GongjiDTO">
 	   select * from (
-	   select rownum rn,A.* from(  
-	   select id, nickname, gnum, gtitle, gcontents, to_char(gdate, 'yyyy-MM-dd') as gdate, gcnt, gimage from gongji where gtitle like #{param2} order by gnum desc)A)
-	   where rn between #{param1.start} AND #{param1.end}
+	   select rownum rn, A.* from(  
+	   select id, nickname, gnum, gtitle, gcontents, to_char(gdate, 'yyyy-MM-dd') as gdate, gcnt, gimage from gongji 
+	   where gtitle like #{param2} order by gnum desc)A)
+	   where rn between #{param1.start} and #{param1.end}
+	</select>
+
+	<!-- 공지사항 검색(글내용 검색 + 글번호 내림차순 정렬 + 페이지 기능) -->
+	<select id="totalc" resultType="int">
+   		select count(*) from gongji where gcontents like #{svalue}
 	</select>
 
 	<select id="pagec" resultType="com.mbc.team.board.GongjiDTO">
 	   select * from (
-	   select rownum rn,A.* from(  
-	   select id, nickname, gnum, gtitle, gcontents, to_char(gdate, 'yyyy-MM-dd') as gdate, gcnt, gimage from gongji where gcontents like #{param2} order by gnum desc)A)
-	   where rn between #{param1.start} AND #{param1.end}
+	   select rownum rn, A.* from(  
+	   select id, nickname, gnum, gtitle, gcontents, to_char(gdate, 'yyyy-MM-dd') as gdate, gcnt, gimage 
+	   from gongji where gcontents like #{param2} order by gnum desc)A)
+	   where rn between #{param1.start} and #{param1.end}
 	</select>
 	
-	<select id="pagen" resultType="com.mbc.team.board.GongjiDTO">
-	   select * from (
-	   select rownum rn,A.* from(  
-	   select id, nickname, gnum, gtitle, gcontents, to_char(gdate, 'yyyy-MM-dd') as gdate, gcnt, gimage from gongji where nickname like #{param2} order by gnum desc)A)
-	   where rn between #{param1.start} AND #{param1.end}
-	</select>
-	
-	<select id="totalt" resultType="int">
-   		select count(*) from gongji where gtitle like #{svalue}
-	</select>
-	
-	<select id="totalc" resultType="int">
-   		select count(*) from gongji where gcontents like #{svalue}
-	</select>
-	
+	<!-- 공지사항 검색(작성자 검색 + 글번호 내림차순 정렬 + 페이지 기능) -->
 	<select id="totaln" resultType="int">
    		select count(*) from gongji where nickname like #{svalue}
+	</select>
+
+	<select id="pagen" resultType="com.mbc.team.board.GongjiDTO">
+	   select * from (
+	   select rownum rn, A.* from(  
+	   select id, nickname, gnum, gtitle, gcontents, to_char(gdate, 'yyyy-MM-dd') as gdate, gcnt, gimage 
+	   from gongji where nickname like #{param2} order by gnum desc)A)
+	   where rn between #{param1.start} and #{param1.end}
 	</select>
 	
 
 <!-- 자유게시판 -->	
+
+	<!-- 자유게시판 입력(이미지 O) -->
 	<insert id="insertboard">
-		insert into community(cnum, tab, title, ccontents, cgroup, nickname, cimage) values(cnum_seq.nextval, #{param2}, #{param3}, #{param4}, cnum_seq.nextval, #{param1}, #{param5})
+		insert into community(cnum, tab, title, ccontents, cgroup, nickname, cimage) 
+		values(cnum_seq.nextval, #{param2}, #{param3}, #{param4}, cnum_seq.nextval, #{param1}, #{param5})
 	</insert>
 	
+	<!-- 자유게시판 입력(이미지 X) -->
+	<insert id="insertboardx">
+		insert into community(cnum, tab, title, ccontents, cgroup, nickname) 
+		values(cnum_seq.nextval, #{param2}, #{param3}, #{param4}, cnum_seq.nextval, #{param1})
+	</insert>
+	
+	<!-- 자유게시판 메인 출력 + 페이지 기능 -->
 	<select id="boardtotal" resultType="int">
    		select count(*) from community where step=0 and indent=0
 	</select>
 	
 	<select id="boardpage" resultType="com.mbc.team.board.BoardDTO">
 	   select * from (
-	   select rownum rn,A.* from(  
-	   select cnum, tab, title, to_char(cdate, 'yyyy-MM-dd') as cdate, ccontents, cgroup, step, indent, clike, chate, ccnt, nickname, cimage from community where step=0 and indent=0 order by cnum desc)A)
-	   where rn between #{start} AND #{end}
+	   select rownum rn, A.* from(  
+	   select cnum, tab, title, to_char(cdate, 'yyyy-MM-dd') as cdate, ccontents, cgroup, step, indent, clike, chate, ccnt, nickname, cimage 
+	   from community where step=0 and indent=0 order by cnum desc)A)
+	   where rn between #{start} and #{end}
 	</select>
 	
+	<!-- 자유게시판 메인 게시날짜 정렬(내림차순) -->
+	<select id="boarddayup" resultType="com.mbc.team.board.BoardDTO">
+	   select * from (
+	   select rownum rn, A.* from(  
+	   select cnum, tab, title, to_char(cdate, 'yyyy-MM-dd') as cdate, ccontents, cgroup, step, indent, clike, chate, ccnt, nickname, cimage 
+	   from community where step=0 and indent=0 order by cdate desc, cnum desc)A)
+	   where rn between #{start} and #{end}
+	</select>
+	
+	<!-- 자유게시판 메인 게시날짜 정렬(올림차순) -->
+	<select id="boarddaydown" resultType="com.mbc.team.board.BoardDTO">
+	   select * from (
+	   select rownum rn, A.* from(  
+	   select cnum, tab, title, to_char(cdate, 'yyyy-MM-dd') as cdate, ccontents, cgroup, step, indent, clike, chate, ccnt, nickname, cimage 
+	   from community where step=0 and indent=0 order by cdate asc, cnum asc)A)
+	   where rn between #{start} and #{end}
+	</select>
+	
+	<!-- 자유게시판 메인 조회순 정렬(내림차순) -->
+	<select id="boardviewup" resultType="com.mbc.team.board.BoardDTO">
+	   select * from (
+	   select rownum rn, A.* from(  
+	   select cnum, tab, title, to_char(cdate, 'yyyy-MM-dd') as cdate, ccontents, cgroup, step, indent, clike, chate, ccnt, nickname, cimage 
+	   from community where step=0 and indent=0 order by ccnt desc)A)
+	   where rn between #{start} and #{end}
+	</select>
+	
+	<!-- 자유게시판 메인 조회순 정렬(올림차순) -->
+	<select id="boardviewdown" resultType="com.mbc.team.board.BoardDTO">
+	   select * from (
+	   select rownum rn, A.* from(  
+	   select cnum, tab, title, to_char(cdate, 'yyyy-MM-dd') as cdate, ccontents, cgroup, step, indent, clike, chate, ccnt, nickname, cimage 
+	   from community where step=0 and indent=0 order by ccnt asc)A)
+	   where rn between #{start} and #{end}
+	</select>
+	
+	<!-- 자유게시판 메인 추천순 정렬(내림차순) -->
+	<select id="boardlikeup" resultType="com.mbc.team.board.BoardDTO">
+	   select * from (
+	   select rownum rn, A.* from(  
+	   select cnum, tab, title, to_char(cdate, 'yyyy-MM-dd') as cdate, ccontents, cgroup, step, indent, clike, chate, ccnt, nickname, cimage 
+	   from community where step=0 and indent=0 order by clike desc)A)
+	   where rn between #{start} and #{end}
+	</select>
+	
+	<!-- 자유게시판 메인 추천순 정렬(올림차순) -->
+	<select id="boardlikedown" resultType="com.mbc.team.board.BoardDTO">
+	   select * from (
+	   select rownum rn, A.* from(  
+	   select cnum, tab, title, to_char(cdate, 'yyyy-MM-dd') as cdate, ccontents, cgroup, step, indent, clike, chate, ccnt, nickname, cimage 
+	   from community where step=0 and indent=0 order by clike asc)A)
+	   where rn between #{start} and #{end}
+	</select>
+	
+	<!-- 자유게시판 디테일 출력 -->
 	<select id="boarddetail" resultType="com.mbc.team.board.BoardDTO">
-		select cnum, tab, title, to_char(cdate, 'yyyy-MM-dd') as cdate, ccontents, cgroup, step, indent, clike, chate, ccnt, nickname, cimage from community where cnum=#{param1}
+		select cnum, tab, title, to_char(cdate, 'yyyy-MM-dd') as cdate, ccontents, cgroup, step, indent, clike, chate, ccnt, nickname, cimage 
+		from community where cnum=#{param1}
 	</select>
 	
+	<!-- 자유게시판 조회수 증가 -->
 	<update id="boardcount">
 		update community set ccnt=ccnt+1 where cnum=#{param1}
 	</update>
 	
+	<!-- 자유게시판 좋아요 증가 -->
 	<update id="boardlike">
 		update community set clike=clike+1 where cnum=#{param1}
 	</update>
 	
+	<!-- 자유게시판 싫어요 증가 -->
 	<update id="boardhate">
 		update community set chate=chate+1 where cnum=#{param1}
 	</update>
 	
+	<!-- 자유게시판 검색(글제목 검색 + 글번호 내림차순 정렬 + 페이지 기능) -->
 	<select id="pagect" resultType="com.mbc.team.board.BoardDTO">
 	   select * from (
-	   select rownum rn,A.* from(  
-	   select cnum, tab, title, to_char(cdate, 'yyyy-MM-dd') as cdate, ccontents, cgroup, step, indent, clike, chate, ccnt, nickname, cimage from community where title like #{param2} order by cnum desc)A)
-	   where rn between #{param1.start} AND #{param1.end}
+	   select rownum rn, A.* from(  
+	   select cnum, tab, title, to_char(cdate, 'yyyy-MM-dd') as cdate, ccontents, cgroup, step, indent, clike, chate, ccnt, nickname, cimage 
+	   from community where title like #{param2} order by cnum desc)A)
+	   where rn between #{param1.start} and #{param1.end}
 	</select>
 
-	<select id="pagecc" resultType="com.mbc.team.board.BoardDTO">
-	   select * from (
-	   select rownum rn,A.* from(  
-	   select cnum, tab, title, to_char(cdate, 'yyyy-MM-dd') as cdate, ccontents, cgroup, step, indent, clike, chate, ccnt, nickname, cimage from community where ccontents like #{param2} order by cnum desc)A)
-	   where rn between #{param1.start} AND #{param1.end}
-	</select>
-	
-	<select id="pagecn" resultType="com.mbc.team.board.BoardDTO">
-	   select * from (
-	   select rownum rn,A.* from(  
-	   select cnum, tab, title, to_char(cdate, 'yyyy-MM-dd') as cdate, ccontents, cgroup, step, indent, clike, chate, ccnt, nickname, cimage from community where nickname like #{param2} order by cnum desc)A)
-	   where rn between #{param1.start} AND #{param1.end}
-	</select>
-	
 	<select id="totalct" resultType="int">
    		select count(*) from community where title like #{svalue} and step=0 and indent=0
 	</select>
-	
+
+	<!-- 자유게시판 검색(글내용 검색 + 글번호 내림차순 정렬 + 페이지 기능) -->
+	<select id="pagecc" resultType="com.mbc.team.board.BoardDTO">
+	   select * from (
+	   select rownum rn, A.* from(  
+	   select cnum, tab, title, to_char(cdate, 'yyyy-MM-dd') as cdate, ccontents, cgroup, step, indent, clike, chate, ccnt, nickname, cimage 
+	   from community where ccontents like #{param2} order by cnum desc)A)
+	   where rn between #{param1.start} and #{param1.end}
+	</select>
+
 	<select id="totalcc" resultType="int">
    		select count(*) from community where ccontents like #{svalue} and step=0 and indent=0
 	</select>
 	
+	<!-- 자유게시판 검색(작성자 검색 + 글번호 내림차순 정렬 + 페이지 기능) -->
+	<select id="pagecn" resultType="com.mbc.team.board.BoardDTO">
+	   select * from (
+	   select rownum rn, A.* from(  
+	   select cnum, tab, title, to_char(cdate, 'yyyy-MM-dd') as cdate, ccontents, cgroup, step, indent, clike, chate, ccnt, nickname, cimage 
+	   from community where nickname like #{param2} order by cnum desc)A)
+	   where rn between #{param1.start} and #{param1.end}
+	</select>
+
 	<select id="totalcn" resultType="int">
    		select count(*) from community where nickname like #{svalue} and step=0 and indent=0
 	</select>
 	
+	<!-- 자유게시판 댓글기능 -->
 	<update id="stepup">
-		update community set step=step+1 where cgroup = #{param1} and step > #{param2} 
+		update community set step=step+1 where cgroup=#{param1} and step>#{param2} 
 	</update>
 
+	<!-- 자유게시판 댓글작성 -->
 	<insert id="replyinsertb">
-		insert into community(cnum, cgroup, step, indent, ccontents, nickname) values(cnum_seq.nextval, #{param2}, #{param3}, #{param4}, #{param5}, #{param6})
+		insert into community(cnum, cgroup, step, indent, ccontents, nickname) 
+		values(cnum_seq.nextval, #{param2}, #{param3}, #{param4}, #{param5}, #{param6})
 	</insert>
 	
+	<!-- 자유게시판 댓글출력 -->
 	<select id="replyout" resultType="com.mbc.team.board.BoardDTO">
-		select cnum, tab, title, to_char(cdate, 'yyyy-MM-dd') as cdate, ccontents, cgroup, step, indent, clike, chate, ccnt, nickname, cimage from community where cgroup=#{param1} and step>0 and indent>0 order by step desc
+		select cnum, tab, title, to_char(cdate, 'yyyy-MM-dd') as cdate, ccontents, cgroup, step, indent, clike, chate, ccnt, nickname, cimage 
+		from community where cgroup=#{param1} and step>0 and indent>0 order by step desc
 	</select>
 	
+	<!-- 자유게시판 댓글삭제 -->
+	<delete id="replydelete">
+		delete from community where cnum=#{param1}
+	</delete>
+
+	<!-- 자유게시판 글삭제 -->
 	<delete id="boarddelete">
 		delete from community where cgroup=#{param1}
 	</delete>
 	
+	<!-- 자유게시판 글 수정화면 출력 -->
 	<select id="boardupdateview" resultType="com.mbc.team.board.BoardDTO">
-		select cnum, tab, title, to_char(cdate, 'yyyy-MM-dd') as cdate, ccontents, cgroup, step, indent, clike, chate, ccnt, nickname, cimage from community where cnum=#{param1}
+		select cnum, tab, title, to_char(cdate, 'yyyy-MM-dd') as cdate, ccontents, cgroup, step, indent, clike, chate, ccnt, nickname, cimage 
+		from community where cnum=#{param1}
 	</select>
 	
+	<!-- 자유게시판 수정(이미지 O) -->
 	<update id="boardupdate">
-		update community set tab=#{param3}, title=#{param4}, ccontents=#{param5}, cimage=#{param6} where cnum=#{param1} and nickname=#{param2} 
+		update community set tab=#{param3}, title=#{param4}, ccontents=#{param5}, cimage=#{param6} where cnum=#{param1}
+	</update>
+	
+	<!-- 자유게시판 수정(이미지 X / 기존 이미지 O이면 이미지 미변경) -->
+	<update id="boardupdatex">
+		update community set tab=#{param3}, title=#{param4}, ccontents=#{param5} where cnum=#{param1}
 	</update>
 	
 
 <!-- 경기일정 -->
+
+	<!-- 경기일정 입력 -->
 	<insert id="iljunginput">
 		insert into iljung values(#{param1}, #{param2})
 	</insert>
 	
+	<!-- 경기일정 출력(캘린더) -->
 	<select id="iljungout" resultType="com.mbc.team.board.IljungDTO">
 		select to_char(gamedate, 'yyyy-MM-dd') as gamedate, gameresult from iljung
 	</select>
 	
+	<!-- 경기일정 출력(게시판 형태 + 페이지 기능 + 관리자 Only) -->
+	<select id="totalis" resultType="int">
+   		select count(*) from iljung
+	</select>
+	
+	<select id="pageis" resultType="com.mbc.team.board.IljungDTO">
+	   select * from (
+	   select rownum rn, A.* from(  
+	   select to_char(gamedate, 'yyyy-MM-dd') as gamedate, gameresult from iljung order by gamedate desc)A)
+	   where rn between #{start} and #{end}
+	</select>
+	
+	<!-- 경기일정 삭제(관리자 Only) -->
+	<delete id="iljungdelete">
+		delete from iljung where gamedate=#{param1} and gameresult=#{param2}
+	</delete>
+	
+	<!-- 경기일정 수정화면 출력(관리자 Only) -->
+	<select id="iljungupdateview" resultType="com.mbc.team.board.IljungDTO">
+		select to_char(gamedate, 'yyyy-MM-dd') as gamedate, gameresult from iljung where gamedate=#{param1} and gameresult=#{param2}
+	</select>
+	
+	<!-- 경기일정 수정(관리자 Only) -->
+	<update id="iljungupdate">
+		update iljung set gamedate=#{param1}, gameresult=#{param2} where gamedate=#{param3} and gameresult=#{param4} 
+	</update>
+	
 
 <!-- 야구소식 -->
+
+	<!-- 야구소식 입력(이미지 O) -->
 	<insert id="insertsosick">
 		insert into sosick values(#{param1}, #{param2}, snum_seq.nextval, #{param3}, #{param4}, sysdate, 0, #{param5}, #{param6})
 	</insert>
 	
+	<!-- 야구소식 입력(이미지 X) -->
+	<insert id="insertsosickx">
+		insert into sosick values(#{param1}, #{param2}, snum_seq.nextval, #{param3}, #{param4}, sysdate, 0, (null), #{param5})
+	</insert>
+	
+	<!-- 야구소식 메인화면 출력(페이지 기능 + 글번호 내림차순 정렬) -->
 	<select id="totals" resultType="int">
    		select count(*) from sosick
 	</select>
 	
 	<select id="pages" resultType="com.mbc.team.board.SosickDTO">
 	   select * from (
-	   select rownum rn,A.* from(  
-	   select id, nickname, snum, stitle, scontents, to_char(sdate, 'yyyy-MM-dd') as sdate, scnt, simage, stag from sosick order by snum desc)A)
-	   where rn between #{start} AND #{end}
+	   select rownum rn, A.* from(  
+	   select id, nickname, snum, stitle, scontents, to_char(sdate, 'yyyy-MM-dd') as sdate, scnt, simage, stag 
+	   from sosick order by snum desc)A)
+	   where rn between #{start} and #{end}
 	</select>
 	
+	<!-- 야구소식 메인화면 글번호 내림차순 정렬 -->
+	<select id="sosickdayup" resultType="com.mbc.team.board.SosickDTO">
+	   select * from (
+	   select rownum rn, A.* from(  
+	   select id, nickname, snum, stitle, scontents, to_char(sdate, 'yyyy-MM-dd') as sdate, scnt, simage, stag 
+	   from sosick order by sdate desc, snum desc)A)
+	   where rn between #{start} and #{end}
+	</select>
+	
+	<!-- 야구소식 메인화면 글번호 오름차순 정렬 -->
+	<select id="sosickdaydown" resultType="com.mbc.team.board.SosickDTO">
+	   select * from (
+	   select rownum rn, A.* from(  
+	   select id, nickname, snum, stitle, scontents, to_char(sdate, 'yyyy-MM-dd') as sdate, scnt, simage, stag 
+	   from sosick order by sdate asc, snum asc)A)
+	   where rn between #{start} and #{end}
+	</select>
+	
+	<!-- 야구소식 메인화면 조회수 내림차순 정렬 -->
+	<select id="sosickviewup" resultType="com.mbc.team.board.SosickDTO">
+	   select * from (
+	   select rownum rn, A.* from(  
+	   select id, nickname, snum, stitle, scontents, to_char(sdate, 'yyyy-MM-dd') as sdate, scnt, simage, stag 
+	   from sosick order by scnt desc)A)
+	   where rn between #{start} and #{end}
+	</select>
+	
+	<!-- 야구소식 메인화면 조회수 오름차순 정렬 -->
+	<select id="sosickviewdown" resultType="com.mbc.team.board.SosickDTO">
+	   select * from (
+	   select rownum rn, A.* from(  
+	   select id, nickname, snum, stitle, scontents, to_char(sdate, 'yyyy-MM-dd') as sdate, scnt, simage, stag 
+	   from sosick order by scnt asc)A)
+	   where rn between #{start} and #{end}
+	</select>
+	
+	<!-- 야구소식 디테일 출력 -->
 	<select id="sosickdetail" resultType="com.mbc.team.board.SosickDTO">
-		select id, nickname, snum, stitle, scontents, to_char(sdate, 'yyyy-MM-dd') as sdate, scnt, simage, stag from sosick where snum=#{param1}
+		select id, nickname, snum, stitle, scontents, to_char(sdate, 'yyyy-MM-dd') as sdate, scnt, simage, stag 
+		from sosick where snum=#{param1}
 	</select>
 	
+	<!-- 야구소식 조회수 증가 -->
 	<update id="sosickcount">
 		update sosick set scnt=scnt+1 where snum=#{param1}
 	</update>
 	
+	<!-- 야구소식 글삭제 -->
 	<delete id="sosickdelete">
 		delete from sosick where snum=#{param1}
 	</delete>
 	
+	<!-- 야구소식 글 수정화면 출력-->
 	<select id="sosickupdateview" resultType="com.mbc.team.board.SosickDTO">
-		select id, nickname, snum, stitle, scontents, to_char(sdate, 'yyyy-MM-dd') as sdate, scnt, simage, stag from sosick where snum=#{param1}
+		select id, nickname, snum, stitle, scontents, to_char(sdate, 'yyyy-MM-dd') as sdate, scnt, simage, stag 
+		from sosick where snum=#{param1}
 	</select>
 	
+	<!-- 야구소식 글 수정(이미지 O)-->
 	<update id="sosickupdate">
 		update sosick set stitle=#{param4}, scontents=#{param5}, simage=#{param6}, stag=#{param7} where snum=#{param1}
 	</update>
+	
+	<!-- 야구소식 글 수정(이미지 X / 기존 이미지 O이면 기존 이미지 유지)-->
+	<update id="sosickupdatex">
+		update sosick set stitle=#{param4}, scontents=#{param5}, stag=#{param6} where snum=#{param1}
+	</update>
 
+	<!-- 야구소식 검색(글 제목 검색 + 글번호 내림차순 정렬 + 페이지 기능) -->
 	<select id="pagest" resultType="com.mbc.team.board.SosickDTO">
 	   select * from (
-	   select rownum rn,A.* from(  
-	   select id, nickname, snum, stitle, scontents, to_char(sdate, 'yyyy-MM-dd') as sdate, scnt, simage, stag from sosick where stitle like #{param2} order by snum desc)A)
-	   where rn between #{param1.start} AND #{param1.end}
-	</select>
-
-	<select id="pagesc" resultType="com.mbc.team.board.SosickDTO">
-	   select * from (
-	   select rownum rn,A.* from(  
-	   select id, nickname, snum, stitle, scontents, to_char(sdate, 'yyyy-MM-dd') as sdate, scnt, simage, stag from sosick where scontents like #{param2} order by snum desc)A)
-	   where rn between #{param1.start} AND #{param1.end}
-	</select>
-	
-	<select id="pagesn" resultType="com.mbc.team.board.SosickDTO">
-	   select * from (
-	   select rownum rn,A.* from(  
-	   select id, nickname, snum, stitle, scontents, to_char(sdate, 'yyyy-MM-dd') as sdate, scnt, simage, stag from sosick where nickname like #{param2} order by snum desc)A)
-	   where rn between #{param1.start} AND #{param1.end}
+	   select rownum rn, A.* from(  
+	   select id, nickname, snum, stitle, scontents, to_char(sdate, 'yyyy-MM-dd') as sdate, scnt, simage, stag from sosick 
+	   where stitle like #{param2} order by snum desc)A)
+	   where rn between #{param1.start} and #{param1.end}
 	</select>
 	
 	<select id="totalst" resultType="int">
    		select count(*) from sosick where stitle like #{svalue}
 	</select>
-	
+
+	<!-- 야구소식 검색(글 내용 검색 + 글번호 내림차순 정렬 + 페이지 기능) -->
+	<select id="pagesc" resultType="com.mbc.team.board.SosickDTO">
+	   select * from (
+	   select rownum rn, A.* from(  
+	   select id, nickname, snum, stitle, scontents, to_char(sdate, 'yyyy-MM-dd') as sdate, scnt, simage, stag from sosick 
+	   where scontents like #{param2} order by snum desc)A)
+	   where rn between #{param1.start} and #{param1.end}
+	</select>
+
 	<select id="totalsc" resultType="int">
    		select count(*) from sosick where scontents like #{svalue}
+	</select>
+		
+	<!-- 야구소식 검색(작성자 검색 + 글번호 내림차순 정렬 + 페이지 기능) -->
+	<select id="pagesn" resultType="com.mbc.team.board.SosickDTO">
+	   select * from (
+	   select rownum rn, A.* from(  
+	   select id, nickname, snum, stitle, scontents, to_char(sdate, 'yyyy-MM-dd') as sdate, scnt, simage, stag from sosick 
+	   where nickname like #{param2} order by snum desc)A)
+	   where rn between #{param1.start} and #{param1.end}
 	</select>
 	
 	<select id="totalsn" resultType="int">
    		select count(*) from sosick where nickname like #{svalue}
 	</select>
 	
+
+<!-- 이벤트 -->
+
+	<!-- 이벤트 입력 -->
+	<insert id="insertevent">
+		insert into event values(evnum_seq.nextval, #{param1}, #{param2}, #{param3}, #{param4}, sysdate, #{param5}, #{param6}, #{param7}, 0)
+	</insert>
+
+	<!-- 이벤트 메인화면 출력(페이지 기능 + 글 내림차순 정렬) -->
+	<select id="totalev" resultType="int">
+   		select count(*) from event
+	</select>
+	
+	<select id="pageev" resultType="com.mbc.team.board.EventDTO">
+	   select * from (
+	   select rownum rn, A.* from(  
+	   select evnum, id, nickname, etitle, econtents, to_char(edate, 'yyyy-MM-dd') as edate, eimagem, eimaged, estate, ecnt 
+	   from event order by evnum desc)A)
+	   where rn between #{start} and #{end}
+	</select>
+	
+	<!-- 이벤트 메인화면 출력(페이지 기능 + 글번호 내림차순 정렬) -->
+	<select id="eventdayup" resultType="com.mbc.team.board.EventDTO">
+	   select * from (
+	   select rownum rn, A.* from(  
+	   select evnum, id, nickname, etitle, econtents, to_char(edate, 'yyyy-MM-dd') as edate, eimagem, eimaged, estate, ecnt 
+	   from event order by edate desc, evnum desc)A)
+	   where rn between #{start} and #{end}
+	</select>
+	
+	<!-- 이벤트 메인화면 출력(페이지 기능 + 글번호 오름차순 정렬) -->
+	<select id="eventdaydown" resultType="com.mbc.team.board.EventDTO">
+	   select * from (
+	   select rownum rn, A.* from(  
+	   select evnum, id, nickname, etitle, econtents, to_char(edate, 'yyyy-MM-dd') as edate, eimagem, eimaged, estate, ecnt 
+	   from event order by edate asc, evnum asc)A)
+	   where rn between #{start} and #{end}
+	</select>
+	
+	<!-- 이벤트 메인화면 출력(페이지 기능 + 조회순 내림차순 정렬) -->
+	<select id="eventviewup" resultType="com.mbc.team.board.EventDTO">
+	   select * from (
+	   select rownum rn, A.* from(  
+	   select evnum, id, nickname, etitle, econtents, to_char(edate, 'yyyy-MM-dd') as edate, eimagem, eimaged, estate, ecnt 
+	   from event order by ecnt desc)A)
+	   where rn between #{start} and #{end}
+	</select>
+	
+	<!-- 이벤트 메인화면 출력(페이지 기능 + 조회순 오름차순 정렬) -->
+	<select id="eventviewdown" resultType="com.mbc.team.board.EventDTO">
+	   select * from (
+	   select rownum rn, A.* from(  
+	   select evnum, id, nickname, etitle, econtents, to_char(edate, 'yyyy-MM-dd') as edate, eimagem, eimaged, estate, ecnt 
+	   from event order by ecnt asc)A)
+	   where rn between #{start} AND #{end}
+	</select>
+	
+	<!-- 이벤트 디테일 출력 -->
+	<select id="eventdetail" resultType="com.mbc.team.board.EventDTO">
+		select evnum, id, nickname, etitle, econtents, to_char(edate, 'yyyy-MM-dd') as edate, eimagem, eimaged, estate, ecnt 
+		from event where evnum=#{param1}
+	</select>
+	
+	<!-- 이벤트 조회수 증가 -->
+	<update id="eventcount">
+		update event set ecnt=ecnt+1 where evnum=#{param1}
+	</update>
+	
+	<!-- 이벤트 삭제 -->
+	<delete id="eventdelete">
+		delete from event where evnum=#{param1}
+	</delete>
+	
+	<!-- 이벤트 수정화면 출력 -->
+	<select id="eventupdateview" resultType="com.mbc.team.board.EventDTO">
+		select evnum, id, nickname, etitle, econtents, to_char(edate, 'yyyy-MM-dd') as edate, eimagem, eimaged, estate, ecnt 
+		from event where evnum=#{param1}
+	</select>
+
+	<!-- 이벤트 수정(메인이미지 O + 상세이미지 O) -->
+	<update id="updateevent">
+		update event set etitle=#{param3}, econtents=#{param4}, eimagem=#{param5}, eimaged=#{param6}, estate=#{param7} where evnum=#{param8}
+	</update>
+
+	<!-- 이벤트 수정(메인이미지 X + 상세이미지 X + 기존 이미지 유지) -->
+	<update id="updateevent1">
+		update event set etitle=#{param3}, econtents=#{param4}, estate=#{param5} where evnum=#{param6}
+	</update>
+
+	<!-- 이벤트 수정(메인이미지 X + 상세이미지 O + 기존 이미지 유지) -->
+	<update id="updateevent2">
+		update event set etitle=#{param3}, econtents=#{param4}, eimaged=#{param5}, estate=#{param6} where evnum=#{param7}
+	</update>
+
+	<!-- 이벤트 수정(메인이미지 O + 상세이미지 X + 기존 이미지 유지) -->
+	<update id="updateevent3">
+		update event set etitle=#{param3}, econtents=#{param4}, eimagem=#{param5}, estate=#{param6} where evnum=#{param7}
+	</update>
+
+	<!-- 이벤트 검색(글 제목 검색 + 글번호 내림차순 정렬 + 페이지 기능) -->
+	<select id="pageet" resultType="com.mbc.team.board.EventDTO">
+	   select * from (
+	   select rownum rn, A.* from(  
+	   select evnum, id, nickname, etitle, econtents, to_char(edate, 'yyyy-MM-dd') as edate, eimagem, eimaged, estate, ecnt 
+	   from event where etitle like #{param2} order by evnum desc)A)
+	   where rn between #{param1.start} and #{param1.end}
+	</select>
+	
+	<select id="totalet" resultType="int">
+   		select count(*) from event where etitle like #{svalue}
+	</select>
+
+	<!-- 이벤트 검색(글 내용 검색 + 글번호 내림차순 정렬 + 페이지 기능) -->
+	<select id="pageec" resultType="com.mbc.team.board.EventDTO">
+	   select * from (
+	   select rownum rn, A.* from(  
+	   select evnum, id, nickname, etitle, econtents, to_char(edate, 'yyyy-MM-dd') as edate, eimagem, eimaged, estate, ecnt 
+	   from event where econtents like #{param2} order by evnum desc)A)
+	   where rn between #{param1.start} and #{param1.end}
+	</select>
+	
+	<select id="totalec" resultType="int">
+   		select count(*) from event where econtents like #{svalue}
+	</select>
+
+	<!-- 이벤트 메인화면 출력(이벤트 글 상태 '진행중' 출력 + 페이지 기능 + 글번호 내림차순 정렬) -->
+	<select id="pageevsi" resultType="com.mbc.team.board.EventDTO">
+	   select * from (
+	   select rownum rn, A.* from(  
+	   select evnum, id, nickname, etitle, econtents, to_char(edate, 'yyyy-MM-dd') as edate, eimagem, eimaged, estate, ecnt 
+	   from event where estate=#{param2} order by evnum desc)A)
+	   where rn between #{param1.start} and #{param1.end}
+	</select>
+	
+	<select id="totalevsi" resultType="int">
+   		select count(*) from event where estate=#{param1}
+	</select>
+	
+	<!-- 이벤트 메인화면 출력(이벤트 글 상태 '종료' 출력 + 페이지 기능 + 글번호 내림차순 정렬) -->
+	<select id="pageevse" resultType="com.mbc.team.board.EventDTO">
+	   select * from (
+	   select rownum rn, A.* from(  
+	   select evnum, id, nickname, etitle, econtents, to_char(edate, 'yyyy-MM-dd') as edate, eimagem, eimaged, estate, ecnt 
+	   from event where estate=#{param2} order by evnum desc)A)
+	   where rn between #{param1.start} and #{param1.end}
+	</select>
+	
+	<select id="totalevse" resultType="int">
+   		select count(*) from event where estate=#{param1}
+	</select>
+
 </mapper>

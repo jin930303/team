@@ -7,7 +7,7 @@
    <definition name="baseLayout" template="/WEB-INF/views/layout.jsp">
       <put-attribute name="title" value=""/>
       <put-attribute name="top" value="/WEB-INF/views/top.jsp"/>
-      <put-attribute name="body" value=""/>
+      <put-attribute name="side-right" value="/WEB-INF/views/side.jsp"/>
       <put-attribute name="footer" value="/WEB-INF/views/footer.jsp"/>
    </definition>
    
@@ -26,13 +26,44 @@
       <put-attribute name="body" value="/WEB-INF/views/product/productdetailview.jsp"/>
    </definition> 
    
+   <definition name="productdeleteout" extends="baseLayout">
+      <put-attribute name="title" value="메인화면"/>
+      <put-attribute name="body" value="/WEB-INF/views/product/productdeleteout.jsp"/>
+   </definition> 
    
+   <definition name="productupdate" extends="baseLayout">
+      <put-attribute name="title" value="메인화면"/>
+      <put-attribute name="body" value="/WEB-INF/views/product/productupdate.jsp"/>
+   </definition> 
+   
+   <definition name="searchresult" extends="baseLayout">
+      <put-attribute name="title" value="메인화면"/>
+      <put-attribute name="body" value="/WEB-INF/views/product/searchresult.jsp"/>
+   </definition> 
+   
+   
+   <definition name="cart" extends="baseLayout">
+      <put-attribute name="title" value="메인화면"/>
+      <put-attribute name="body" value="/WEB-INF/views/product/cart.jsp"/>
+   </definition> 
+   
+   <definition name="buyproduct" extends="baseLayout">
+      <put-attribute name="title" value="메인화면"/>
+      <put-attribute name="body" value="/WEB-INF/views/product/buyproduct.jsp"/>
+   </definition> 
+   
+   <definition name="purchaseConfirmation" extends="baseLayout">
+      <put-attribute name="title" value="메인화면"/>
+      <put-attribute name="body" value="/WEB-INF/views/product/purchaseConfirmation.jsp"/>
+   </definition> 
+    
 </tiles-definitions>
 
 
 
 
 
+ 
 
 
 

@@ -5,353 +5,315 @@
 <!DOCTYPE html>
 <html>
 <head>
+<script src="https://code.jquery.com/jquery-latest.min.js"></script>
+<script>
+    function deleteFaq(cnum) {
+        if (confirm('삭제하시면 복구할 수 없습니다.\n정말로 삭제하시겠습니까?')) {
+            location.href = 'faqdelete?cnum=' + cnum;
+        }
+    }
+    
+    function delete_reply(cnum) {
+        if (confirm('삭제하시면 복구할 수 없습니다.\n정말로 삭제하시겠습니까?')) {
+            location.href = 'faq_reply_delete?cnum=' + cnum;
+        }
+    }
+</script>
+<!-- 사이드바 -->
 <style type="text/css">
-* {
-	margin: 0;
-	padding: 0;
-	box-sizing: border-box;
-}
-
-body {
-	font-family: Arial, sans-serif;
-	background-color: #f9f9f9;
-	color: #333;
-}
-
-.container {
+/* 목차+게시판 컨테이너 */
+.flex_container {
+	width: 100%;
 	display: flex;
-	width: 80%;
+	justify-content: center;
+	margin: 0 auto;
 }
 
 .sidebar {
-	width: 350px;
-	background-color: #fff;
-	border-right: 1px solid #ddd;
+
+	width: 250px;
+	border: 1px solid #ddd;
+	border-top: none; /* 타이틀과 경계선 중복 방지 */
 	padding: 20px;
+    margin-right: 20px;
+    border-bottom-right-radius: 10px;
+    border-bottom-left-radius: 10px;
+	
+}
+.sidebar_container {
+	width: 250px;
+    display: block; /* 상하로 정렬 */
+    margin-right: 60px; /* 오른쪽에 여백 */
 }
 
-.sidebar h2 {
-	font-size: 18px;
-	margin-bottom: 20px;
+/* 상단 타이틀 부분 */
+.sidebar_title {
+    background-color: #be241c; /* 상단 배경색 */
+    padding: 60px;
+    text-align: center;
+    border: 2px thin #303030;
+    border-top-right-radius: 10px;
+    border-top-left-radius: 10px;
 }
 
+/* 타이틀 내부 h2 스타일링 */
+.sidebar_title h2 {
+    margin: 0;
+    color: white;
+    font-weight: bold;
+    font-size: 22px;
+}
+
+/* 목차 링크의 리스트 스타일 없애면 리스트별 . 생김 */
 .sidebar ul {
 	list-style: none;
 	padding: 0;
 	margin-bottom: 30px;
 }
 
+/* 목차 리스트 사이 간격 */
 .sidebar ul li {
-	margin-bottom: 10px;
+	margin-bottom: 15px;
+	
 }
 
+/* 목차 리스트 별 버튼 모양 */
 .sidebar ul li a {
 	text-decoration: none;
 	color: #333;
+	font-size: 14px;
 	display: block;
 	padding: 10px;
-	background-color: #f1f1f1;
+	border: 1px solid #ddd;
 	border-radius: 4px;
-	transition: background-color 0.3s;
+	transition: border 0.3s ease; /* 테두리 변경 시 부드러운 전환 */
+	transition: font 0.3s ease;
+	transition: background-color 0.3s ease;
 }
 
 .sidebar ul li a:hover {
-	background-color: #ddd;
-}
-
-.contact-info, .account-info {
-	margin-bottom: 30px;
-}
-
-.contact-info h3, .account-info h3 {
-	font-size: 16px;
-	margin-bottom: 10px;
-}
-
-.contact-info p, .account-info p {
-	margin-bottom: 5px;
-}
-
-.main-content {
-	flex-grow: 1;
-	padding: 20px;
-	background-color: #fff;
-}
-
-.main-content h1 {
-	font-size: 24px;
-	margin-bottom: 20px;
-}
-
-.search-bar {
-	display: flex;
-	margin-bottom: 20px;
-}
-
-.search-bar input {
-	width: 300px;
-	padding: 10px;
-	border: 1px solid #ddd;
-	border-radius: 4px;
-	margin-right: 10px;
-}
-
-.search-bar button {
-	padding: 10px 20px;
-	background-color: #333;
-	color: #fff;
-	border: none;
-	border-radius: 4px;
-	cursor: pointer;
-}
-
-.search-bar button:hover {
-	background-color: #555;
-}
-
-.faq-table {
-	width: 100%;
-	border-collapse: collapse;
-	margin-top: 20px;
-}
-
-.faq-table caption {
-	font-size: 18px;
-	margin-bottom: 10px;
-	text-align: left;
-}
-
-.faq-table th, .faq-table td {
-	border: 1px solid #ddd;
-	padding: 10px;
-	text-align: center;
-}
-
-.faq-table th {
-	background-color: #f4f4f4;
-}
-
-.faq-table tbody tr:hover {
-	background-color: #f9f9f9;
-}
-
-.trlink:hover {
-	cursor: pointer;
-	background-color: #ddd;
-}
-
-.pagination {
-	text-align: center;
-	margin-top: 20px;
-}
-
-.pagination a {
-	margin: 0 5px;
-	text-decoration: none;
-	padding: 5px 10px;
-	border: 1px solid #ddd;
-	color: #333;
-}
-
-.pagination a:hover {
-	background-color: #ddd;
-}
-
-.pagination .current {
+	/*border-bottom: 1px solid #be241c;*/
+	background-color: #f9f4f4;
 	font-weight: bold;
-	color: red;
-}
-/* 플로팅 메뉴 스타일 */
-#floating-menu {
-	position: fixed;
-	right: 30px;
-	top: 250px; /* 상단에서 150px 떨어짐 */
-	z-index: 600;
-	background-color: #fff;
-	border: 1px solid #ddd;
-	border-radius: 10px;
-	padding: 20px;
-}
-
-.main-content {
-	margin-right: 150px;
-}
-
-#floating-menu ul {
-	list-style: none;
-	padding: 0;
-	margin: 0;
-}
-
-#floating-menu ul li {
-	margin-bottom: 10px;
-}
-
-#floating-menu ul li a {
-	text-decoration: none;
-	color: #333;
-	padding: 10px 20px;
-	display: block;
-	border: 1px solid #ddd;
-	border-radius: 5px;
-	text-align: center;
-	transition: background-color 0.3s;
-}
-
-#floating-menu ul li a:hover {
-	background-color: #f4f4f4;
-}
-/* 탑버튼, 바텀버튼 */
-.scroll-button {
-	color: #333;
-	text-align: center;
-	padding: 10px 20px;
-	border: 1px solid #ddd;
-	font-size: 20px;
-	border-radius: 5px;
-	cursor: pointer;
-	margin-bottom: 8px;
-}
-
-.scroll-button:hover {
-	background-color: #f4f4f4;
+	color: black;
 }
 </style>
-<script src="https://code.jquery.com/jquery-latest.min.js"></script>
+<!-- 메인 섹션 -->
+<style type="text/css">
+/* 메인 컨테이너 */
+.main-container {
+    flex: 1;
+    max-width: 1100px;
+    padding: 20px 60px;
+    border-right: 1px solid #ddd;
+    border-left: 1px solid #ddd;
+}
+table {
+    width: 100%;
+    margin-top: 10px;
+    border-collapse: collapse;
+    text-align: center;
+}
+
+.title h1 {
+    text-align: left;
+	padding: 30px;
+}
+
+.title h5,
+.title1 h1 {
+	text-align: left;
+	padding: 30px;
+	border-bottom: 2px solid #be241c;
+}
+
+.contents {
+	display: flex;
+   	align-items: center;  /* 세로 중앙 정렬 */
+}
+
+table tr {
+    padding: 28px;
+    border-bottom: 1px solid #ddd;
+}
+
+table tr:last-child {
+    border-bottom: none;
+}
+
+table tr th, 
+table tr td {
+    padding: 14px;
+    text-align: center;
+    vertical-align: middle;
+    border: none;
+    font-size: 16px;
+}
+
+th {
+    font-weight: 600;
+}
+
+/* 버튼 스타일 */
+button[type="submit"], 
+input[type="button"] {
+    padding: 12px 20px;
+    font-size: 14px;
+    color: white;
+    background-color: #be241c;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-right: 10px;
+    transition: background-color 0.3s ease;
+}
+
+button[type="submit"]:hover, 
+input[type="button"]:hover {
+    background-color: #8e1a14;
+}
+
+/* 이미지 스타일 */
+img {
+    margin: 5px;
+    border-radius: 4px;
+    height: 150px;
+}
+.submitbutton {
+	text-align: center;
+}
+
+</style>
 <meta charset="UTF-8">
 <title>1:1 문의 목록 상세페이지</title>
 </head>
 <body>
-<div class="container">
-		<!-- 사이드 메뉴바 -->
+<div class="flex_container">
+<!-- 사이드 메뉴바 -->
+	<div class="sidebar_container">
+		<div class="sidebar_title"><h2>문의 내역</h2></div>
 		<aside class="sidebar">
-			<h2>고객센터</h2>
 			<ul>
-				<li><a href="faq_community">고객센터</a></li>
-				<li><a href="gongjiboard">공지사항</a></li>
-				<li><a href="faqin">1:1 문의하기</a></li>
+				<li><a href="faq_community">고객센터 홈</a></li>
+				<c:choose>
+					<c:when test="${loginstate == true}">
+						<li><a href="faqin">1:1 문의하기</a></li>
+					</c:when>
+				</c:choose>
 				<li><a href="faqout">문의 내역</a></li>
 				<li><a href="faq">FAQ</a></li>
+				<c:choose>
+					<c:when test="${adminloginstate == true}">
+					<li><a href="FAQ_in">FAQ 작성</a></li>
+					</c:when>
+				</c:choose>
 			</ul>
-			<div class="contact-info">
-				<h3>고객상담센터</h3>
-				<p>070-7777-7777</p>
-				<p>example@naver.com</p>
-				<p>운영 시간: 11:00 ~ 19:00 (연중무휴)</p>
-			</div>
-			<div class="account-info">
-				<h3>은행계좌 안내</h3>
-				<p>777777-77-777777</p>
-				<p>행복은행 (예금주: 행복이)</p>
-			</div>
 		</aside>
-		<!-- 오른쪽 플로팅 메뉴 -->
-		<div id="floating-menu">
-			<ul>
-				<li><a href="#">CART</a></li>
-				<li><a href="#">KAKAO</a></li>
-				<li><a href="#">CREDIT CARD</a></li>
-				<li><a href="#">EMS</a></li>
-			</ul>
-			<!-- 
-            <div class="scroll-button" onclick="window.scrollTo({top: 0, behavior: 'smooth'});">△</div>
-            <div class="scroll-button" onclick="window.scrollTo({top: document.body.scrollHeight, behavior: 'smooth'});">▽</div>
-     -->
-		</div>
-	<form action="faqreply" method="post" enctype="multipart/form-data">
-		<table align="center" width="900px" border="1">
-			<c:forEach items="${list}" var="faq">
-				<caption>
-					<h1>${faq.nickname}님의문의 내용</h1>
-				</caption>
-				<input type="hidden" value="${faq.cnum}" name="cnum">
-				<tr>
-					<th colspan="4" id="cnum">${faq.cnum} / ${faq.tab} / ${faq.fdate} / ${faq.faqcnt}</th>
-				</tr>
-				<tr>
-					<th>제 목</th>
-					<td>${faq.title}</td>
-					<th>작성자</th>
-					<td>${faq.nickname}</td>
-					<th>조회수</th>
-					<td>${faq.faqcnt}</td>
+	</div>
+	<main class="main-container">
+		<form action="faqreply" method="post" enctype="multipart/form-data">
+			<div class="table-container">	
+				<c:forEach items="${list}" var="faq">
+					<table>
+						<div class="title">
+							<h1>${faq.nickname} 님의 문의 내용</h1>
+							<h5>문의 번호 : ${faq.cnum}</h5>
+						</div>
+						<input type="hidden" value="${faq.cnum}" name="cnum">
+							<tr>
+								<th width="100px">문의 종류</th>
+								<th>제 목</th>
+								<th width="80px">문의일자</th>
+							</tr>
+							<tr>
+								<td id="cnum">${faq.tab}</td>
+								<td>${faq.title}</td>
+								<td>${faq.fdate}</td>
+							</tr>
+						<tr>
+							
+							<td colspan="3" height="250px">${faq.fcontents}</td>
+						</tr>
+						<tr>
+							<td colspan="4">
+								<c:if test="${faq.fimage1 != null}">
+					                <img src="./image/${faq.fimage1}">
+					            </c:if>
+					            <c:if test="${faq.fimage2 != null}">
+									<img src="./image/${faq.fimage2}"> 
+								</c:if>
+								<c:if test="${faq.fimage3 != null}">
+									<img src="./image/${faq.fimage3}">
+								</c:if>	
+							</td>
+						</tr>
+						<tr>
+							<td colspan="3" class="submitbutton">
+						<!-- 관리자 문의 답변달기 버튼 -->
+							<c:choose>
+								<c:when test="${adminloginstate==true}">
+									<button type="submit">문의 답변 달기</button>
+								</c:when>
+							</c:choose>
+								
+							<!-- 회원 문의 수정, 삭제 버튼 (로그인한 사람이며 작성자와 nickname이 같을 때만 가능) -->
+							<c:choose>
+								<c:when test="${loginstate eq true && sessionScope.dto3.nickname eq faq.nickname}">
+									<input type="button" value="문의글 수정" onclick="location.href='faqupdate?cnum=${faq.cnum}'">
+									<input type="button" value="문의글 삭제" onclick="deleteFaq(${faq.cnum})">
+								</c:when>
+							</c:choose>
+									<input type="button" value="돌아가기" onclick="location.href='./faqout'">
+							</td>
+						</tr>
+					</table>
+				</c:forEach>
+			</div>
+			<br>
+			<br>
+			<div class="table-container">
+				<table>
+					<c:forEach items="${replylist}" var="replylist">
+					<c:choose>
+						<c:when test="${replylist ne null}">
 					
-				<tr>
-					<td colspan="4">${faq.fcontents}</td>
-				</tr>
-				<tr>
-					<td colspan="4">
-						<img src="./image/${faq.fimage1}" width="80px" height="70px"> 
-						<img src="./image/${faq.fimage2}" width="80px" height="70px"> 
-						<img src="./image/${faq.fimage3}" width="80px" height="70px">
-					</td>
-				</tr>
-				<tr>
-					<td colspan="4">
-					<!-- 관리자 문의 답변달기 버튼 -->
-					<% 
-						Boolean FAQadmin = (Boolean) session.getAttribute("adminloginstate");
-						if (FAQadmin != null && FAQadmin) {
-					%>
-						<button type="submit">문의 답변 달기</button>
-					<% 
-						}
-					%>
-					
-					<!-- 회원 문의 수정,삭제 버튼(작성한 회원만 사용하게끔 보완해야됨) -->
-					<% 
-						Boolean FAQmember = (Boolean) session.getAttribute("loginstate");
-						if (FAQmember != null && FAQmember) {
-					%>
-						<input type="button" value="문의글 수정" onclick="location.href='faqupdate?cnum=${faq.cnum}'">
-						<input id="deletecheck" type="button" value="문의글 삭제" onclick="location.href='faqdelete?cnum=${faq.cnum}'"> 
-					<% 
-						}
-					%>
-						<input type="button" value="돌아가기" onclick="location.href='./faqout'">
-					</td>
-				</tr>
-			</c:forEach>
-		</table>
-
-		<table align="center" width="900px" border="1">
-			<caption>
-				<br>
-				<h2>↳ Q&A : 답변 드립니다.</h2>
-			</caption>
-			<c:forEach items="${replylist}" var="replylist">
-				<tr>
-					<th>문의 종류</th>
-					<td>${replylist.tab}</td>
-				</tr>
-				<tr>
-					<th>답변 제목</th>
-					<td>${replylist.title}</td>
-					<th>문의 일자</th>
-					<td>${replylist.fdate}</td>
-				</tr>
-				<tr>
-					<td colspan="4"><br>
-						<br> 말씀하신 문의 내용을 확인했습니다. <br> 이에
-						아래와 같이 답변 드리겠습니다.<br> 답변 내용 : ${replylist.fcontents}
-					</td>
-				</tr>
-				<% 
-					Boolean FAQadmin = (Boolean) session.getAttribute("adminloginstate");
-					if (FAQadmin != null && FAQadmin) {
-				%>
-				<tr>
-					<td colspan="6">
-						<input type="button" value="답변 수정" onclick="location.href='faq_reply_update1?cnum=${replylist.cnum}'">
-						<input type="button" value="답변 삭제" onclick="location.href='faq_reply_delete?cnum=${replylist.cnum}'">
-					</td>
-				</tr>
-				<% 
-					}
-				%>
-			</c:forEach>
-		</table>
-	</form>
+					<div class="title1">
+						<h1>Q&A : 답변 드립니다.</h1>
+					</div>
+						<tr>
+							<th>문의 종류</th>
+							<th width="650px">제 목</th>
+							<th>답변 일자</th>
+						</tr>
+						<tr>
+							<td>${replylist.tab}</td>
+							<td>${replylist.title}</td>
+							<td>${replylist.fdate}</td>
+						</tr>
+						<tr>
+							<td colspan="3" height="250px">
+								<br> 말씀하신 문의 내용을 확인했습니다. 
+								<br> 이에 아래와 같이 답변 드리겠습니다.
+								<br class="contents">${replylist.fcontents}
+							</td>
+						</tr>
+						<tr>
+							<td colspan="3">
+							<c:choose>
+								<c:when test="${adminloginstate == true}">
+									<input type="button" value="답변 수정" onclick="location.href='faq_reply_update1?cnum=${replylist.cnum}'">
+									<input type="button" value="답변 삭제" onclick="delete_reply(${replylist.cnum})">
+								</c:when>
+							</c:choose>
+							</td>
+						</tr>
+						</c:when>
+					</c:choose>
+					</c:forEach>
+				</table>
+			</div>
+		</form>
+	</main>
 </div>
 </body>
 </html>

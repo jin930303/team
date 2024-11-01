@@ -5,141 +5,206 @@
 <html>
 <head>
 <title>FAQ-자주 묻는 질문 게시판</title>
+<!-- 사이드바 -->
 <style type="text/css">
-* {
-	margin: 0;
-	padding: 0;
-	box-sizing: border-box;
-}
-
-body {
-	font-family: Arial, sans-serif;
-	background-color: #f9f9f9;
-	color: #333;
-}
-
-.container {
+/* 목차+게시판 컨테이너 */
+.flex_container {
+	width: 100%;
 	display: flex;
-	width: 80%;
+	justify-content: center;
+	margin: 0 auto;
 }
 
 .sidebar {
-	width: 350px;
-	background-color: #fff;
-	border-right: 1px solid #ddd;
+
+	width: 250px;
+	border: 1px solid #ddd;
+	border-top: none; /* 타이틀과 경계선 중복 방지 */
 	padding: 20px;
+    margin-right: 20px;
+    border-bottom-right-radius: 10px;
+    border-bottom-left-radius: 10px;
+	
+}
+.sidebar_container {
+	width: 250px;
+    display: block; /* 상하로 정렬 */
+    margin-right: 60px; /* 오른쪽에 여백 */
 }
 
-.sidebar h2 {
-	font-size: 18px;
-	margin-bottom: 20px;
+/* 상단 타이틀 부분 */
+.sidebar_title {
+    background-color: #be241c; /* 상단 배경색 */
+    padding: 60px;
+    text-align: center;
+    border: 2px thin #303030;
+    border-top-right-radius: 10px;
+    border-top-left-radius: 10px;
 }
 
+/* 타이틀 내부 h2 스타일링 */
+.sidebar_title h2 {
+    margin: 0;
+    color: white;
+    font-weight: bold;
+    font-size: 22px;
+}
+
+/* 목차 링크의 리스트 스타일 없애면 리스트별 . 생김 */
 .sidebar ul {
 	list-style: none;
 	padding: 0;
 	margin-bottom: 30px;
 }
 
+/* 목차 리스트 사이 간격 */
 .sidebar ul li {
-	margin-bottom: 10px;
+	margin-bottom: 15px;
+	
 }
 
+/* 목차 리스트 별 버튼 모양 */
 .sidebar ul li a {
 	text-decoration: none;
 	color: #333;
+	font-size: 14px;
 	display: block;
 	padding: 10px;
-	background-color: #f1f1f1;
+	border: 1px solid #ddd;
 	border-radius: 4px;
-	transition: background-color 0.3s;
+	transition: border 0.3s ease; /* 테두리 변경 시 부드러운 전환 */
+	transition: font 0.3s ease;
+	transition: background-color 0.3s ease;
 }
 
 .sidebar ul li a:hover {
-	background-color: #ddd;
+	/*border-bottom: 1px solid #be241c;*/
+	background-color: #f9f4f4;
+	font-weight: bold;
+	color: black;
+}
+</style>
+
+<!-- 메인 섹션 -->
+<style type="text/css">
+.main-container {
+	flex: 1;
+	/*width: 100%;*/
+    max-width: 1100px;
+    padding: 20px;
+    padding-left: 60px;
+    padding-right: 60px;
+    border-right: 1px solid #ddd;  /*목차 - 게시판 사이 선*/
+    border-left: 1px solid #ddd;  /*목차 - 게시판 사이 선*/
 }
 
-.contact-info, .account-info {
-	margin-bottom: 30px;
+table {
+    width: 100%; /* 테이블 너비 100% */
+    margin-top: 10px; /* 상단 간격 */
+    border-collapse: collapse; /* 테이블 경계 겹치지 않도록 */
+    text-align: center;
 }
-
-.contact-info h3, .account-info h3 {
-	font-size: 16px;
-	margin-bottom: 10px;
-}
-
-.contact-info p, .account-info p {
-	margin-bottom: 5px;
-}
-
-.main-content {
-	flex-grow: 1;
-	padding: 20px;
-	background-color: #fff;
-}
-
-.main-content h1 {
-	font-size: 24px;
-	margin-bottom: 20px;
-}
-
-.search-bar {
-	display: flex;
-	margin-bottom: 20px;
-}
-
-.search-bar input {
-	width: 300px;
-	padding: 10px;
-	border: 1px solid #ddd;
-	border-radius: 4px;
-	margin-right: 10px;
-}
-
-.search-bar button {
-	padding: 10px 20px;
-	background-color: #333;
-	color: #fff;
-	border: none;
-	border-radius: 4px;
-	cursor: pointer;
-}
-
-.search-bar button:hover {
-	background-color: #555;
-}
-
-.faq-table {
-	width: 100%;
-	border-collapse: collapse;
-	margin-top: 20px;
-}
-
-.faq-table caption {
-	font-size: 18px;
-	margin-bottom: 10px;
+.title h1 {
 	text-align: left;
+	padding: 30px;
+	border-bottom: 2px solid #be241c;
+}
+table tr th, 
+table tr td {
+    padding: 15px;
+    text-align: center; /* 모든 셀의 정렬을 왼쪽으로 */
+    vertical-align: middle; /* 수직 가운데 정렬 */
+    border: none;
 }
 
-.faq-table th, .faq-table td {
-	border: 1px solid #ddd;
-	padding: 10px;
-	text-align: center;
+/* tr 사이 선*/
+table tr{
+	padding: 28px;
+	border-bottom: 1px solid #ddd;
+	transition: border-bottom 0.3s ease;
+	transition: background-color 0.3s ease;
 }
 
-.faq-table th {
+table tr:last-child {
+	border-bottom: none;
+}
+
+/* 게시판 th td 배경 */
+th {
 	background-color: #f4f4f4;
 }
 
-.faq-table tbody tr:hover {
-	background-color: #f9f9f9;
-}
-
-.trlink:hover {
+table tbody tr:hover {
+	background-color: #f9f4f4;
+	border-bottom: 1.5px solid #be241c;
 	cursor: pointer;
-	background-color: #ddd;
 }
 
+/* 검색 영역을 가운데에 배치하는 컨테이너 */
+.search-bar {
+	padding-top: 25px;
+    display: flex;
+    justify-content: center; /* 검색창을 가운데 정렬 */
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+/* 검색 옵션 select 필드의 컨테이너 */
+.search-container {
+    display: flex;
+    gap: 10px; /* select 필드 간의 간격 */
+}
+
+.search-container select {
+	flex:1;
+    width: 30%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    transition: border-color 0.3s ease;
+}
+
+.search-container select:hover {
+    border-color: #be241c;
+}
+
+.search-container select:focus {
+    border-color: #be241c;
+}
+
+.search-bar input[type="text"] {
+	border: 1px solid #ddd;
+	width: 45%;
+	padding: 10px;
+	border-radius: 4px;
+	margin-left:10px;
+	transition: border-color 0.3s ease;
+}
+.search-bar input[type="text"]:hover {
+	border-color: #be241c;
+}
+.search-bar input[type="text"]:focus {
+	border-color: #be241c;
+}
+
+/* 검색 버튼 */
+.search-bar button {
+    padding: 10px 20px;
+    background-color: #be241c;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-left: 10px; /* 검색창과 버튼 사이의 간격 */
+    transition: background-color 0.3s ease;
+}
+
+.search-bar button:hover {
+    background-color: #8e1a14;
+}
+
+
+/*페이지*/
 .pagination {
 	text-align: center;
 	margin-top: 20px;
@@ -161,127 +226,48 @@ body {
 	font-weight: bold;
 	color: red;
 }
-/* 플로팅 메뉴 스타일 */
-#floating-menu {
-	position: fixed;
-	right: 30px;
-	top: 250px; /* 상단에서 150px 떨어짐 */
-	z-index: 600;
-	background-color: #fff;
-	border: 1px solid #ddd;
-	border-radius: 10px;
-	padding: 20px;
-}
-
-.main-content {
-	margin-right: 150px;
-}
-
-#floating-menu ul {
-	list-style: none;
-	padding: 0;
-	margin: 0;
-}
-
-#floating-menu ul li {
-	margin-bottom: 10px;
-}
-
-#floating-menu ul li a {
-	text-decoration: none;
-	color: #333;
-	padding: 10px 20px;
-	display: block;
-	border: 1px solid #ddd;
-	border-radius: 5px;
-	text-align: center;
-	transition: background-color 0.3s;
-}
-
-#floating-menu ul li a:hover {
-	background-color: #f4f4f4;
-}
-/* 탑버튼, 바텀버튼 */
-.scroll-button {
-	color: #333;
-	text-align: center;
-	padding: 10px 20px;
-	border: 1px solid #ddd;
-	font-size: 20px;
-	border-radius: 5px;
-	cursor: pointer;
-	margin-bottom: 8px;
-}
-
-.scroll-button:hover {
-	background-color: #f4f4f4;
-}
 </style>
 <meta charset="UTF-8">
 <title>Insert title here</title>
 </head>
 <body>
-	<div class="container">
+<div class="flex_container">
 		<!-- 사이드 메뉴바 -->
+	<div class="sidebar_container">
+		<div class="sidebar_title"><h2>FAQ</h2></div>
 		<aside class="sidebar">
-			<h2>고객센터</h2>
 			<ul>
-				<li><a href="faq_community">고객센터</a></li>
-				<li><a href="gongjiboard">공지사항</a></li>
-				<li><a href="faqin">1:1 문의하기</a></li>
+				<li><a href="faq_community">고객센터 홈</a></li>
+				<c:choose>
+					<c:when test="${loginstate == true}">
+						<li><a href="faqin">1:1 문의하기</a></li>
+					</c:when>
+				</c:choose>
 				<li><a href="faqout">문의 내역</a></li>
 				<li><a href="faq">FAQ</a></li>
+				<c:choose>
+					<c:when test="${adminloginstate == true}">
+						<li><a href="FAQ_in">FAQ 작성</a></li>
+					</c:when>
+				</c:choose>
 			</ul>
-			<div class="contact-info">
-				<h3>고객상담센터</h3>
-				<p>070-7777-7777</p>
-				<p>example@naver.com</p>
-				<p>운영 시간: 11:00 ~ 19:00 (연중무휴)</p>
-			</div>
-			<div class="account-info">
-				<h3>은행계좌 안내</h3>
-				<p>777777-77-777777</p>
-				<p>행복은행 (예금주: 행복이)</p>
-			</div>
 		</aside>
-		<!-- 오른쪽 플로팅 메뉴 -->
-		<div id="floating-menu">
-			<ul>
-				<li><a href="#">CART</a></li>
-				<li><a href="#">KAKAO</a></li>
-				<li><a href="#">CREDIT CARD</a></li>
-				<li><a href="#">EMS</a></li>
-			</ul>
-			<!-- 
-            <div class="scroll-button" onclick="window.scrollTo({top: 0, behavior: 'smooth'});">△</div>
-            <div class="scroll-button" onclick="window.scrollTo({top: document.body.scrollHeight, behavior: 'smooth'});">▽</div>
-     -->
-		</div>
+	</div>
+<!-- 메인 콘텐츠 -->
+		<main class="main-container">
+			<div class="title">
+				<h1>FAQ - 자주 묻는 질문</h1>
+			</div>
 
-		<!-- 메인 콘텐츠 -->
-		<main class="main-content">
-			<h1>문의 게시판</h1>
-
-			<!-- 검색 바 -->
-			<form action="faqsearch" method="post" class="search-bar">
-				<select name="faqkey">
-					<option value="title">제목</option>
-					<option value="nickname">작성자</option>
-				</select> <input type="text" name="faqvalue" placeholder="검색어를 입력하세요">
-				<button type="submit">검색</button>
-			</form>
-
-			<!-- 문의 리스트 테이블 -->
-			<table class="faq-table">
-				<caption>문의 내역</caption>
+<!-- 문의 리스트 테이블 -->
+			<table>
 				<thead>
 					<tr class="faq-small-title">
-						<th width="60px">문의번호</th>
-						<th width="120px">TAB</th>
-						<th width="350px">제목</th>
-						<th width="120px">작성자</th>
-						<th width="150px">작성일자</th>
-						<th width="90px">조회수</th>
+						<th width="80px">TAB</th>
+						<th width="200px">제목</th>
+						<th width="60px">작성자</th>
+						<th width="80px">작성일자</th>
+						<th width="50px">조회수</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -289,7 +275,6 @@ body {
 						<tr
 							onclick="location.href='faq_questions_detail?cnum=${faq_admin.cnum}'"
 							class="trlink">
-							<td>${faq_admin.cnum}</td>
 							<td>${faq_admin.tab}</td>
 							<td style="text-align: left;">${faq_admin.title}</td>
 							<td>${faq_admin.nickname}</td>
@@ -300,15 +285,14 @@ body {
 				</tbody>
 			</table>
 
-			<!-- 페이지 네비게이션 -->
+<!-- 페이지 -->
 			<div class="pagination">
 				<c:if test="${paging.startPage != 1}">
 					<a
 						href="faq?nowPage=${paging.startPage-1}&cntPerPage=${paging.cntPerPage}">이전</a>
 				</c:if>
 
-				<c:forEach begin="${paging.startPage}" end="${paging.endPage}"
-					var="p">
+				<c:forEach begin="${paging.startPage}" end="${paging.endPage}" var="p">
 					<c:choose>
 						<c:when test="${p == paging.nowPage}">
 							<span class="current">${p}</span>
@@ -324,6 +308,34 @@ body {
 						href="faq?nowPage=${paging.endPage+1}&cntPerPage=${paging.cntPerPage}">다음</a>
 				</c:if>
 			</div>
+<!-- 하단 검색 -->			
+			<form action="faq_questions_search" method="post" class="search-bar">
+			    <div class="search-container">
+			    <!-- 기간 선택 -->
+			    <select name="faqkey1" id="faqkey1">
+				    <optgroup label="기간 선택">
+				        <option value="1">1일</option>
+				        <option value="7">1주일</option>
+				        <option value="30">1개월</option>
+				        <option value="90">3개월</option>
+				    </optgroup>
+				</select>
+				
+				<!-- 검색 조건 선택 -->
+				<select name="faqkey2" id="faqkey2">
+				    <optgroup label="검색 조건 선택">
+				        <option value="title">제목</option>
+				        <option value="fcontents">내용</option>
+				        <option value="nickname">글쓴이</option>
+				    </optgroup>
+				</select>
+				</div>
+			    <!-- 검색어 입력 -->
+			    <input type="text" name="faqvalue" id="faqvalue" placeholder="검색어를 입력하세요" required>
+			
+			    <!-- 검색 버튼 -->
+			    <button type="submit">검색</button>
+			</form>
 		</main>
 	</div>
 </body>

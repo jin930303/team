@@ -29,16 +29,16 @@ nav
 {
    text-align: center;
    width: 100%;
+   padding-bottom:50px;
 }
 #footer
 {
-   position: fixed;
    bottom: 0px;
    width: 100%;
    text-align: center;
    font-size: 15px;
    line-height: 30px;
-   background-color: #6CC0FF;
+   background-color: #ddd;
    color: white; 
 }
 </style>
@@ -50,6 +50,7 @@ nav
       </div>
       <div id="body">
          <t:insertAttribute name="body"/>
+         <t:insertAttribute name="side-right"/>
       </div>
       <div id="footer">
          <t:insertAttribute name="footer"/>
