@@ -223,7 +223,7 @@ input[type="button"]:hover {
 }
 
 /* 이미지 스타일 */
-img {
+.mainimage img {
 	width: 80%;
     margin: 5px;
     border-radius: 4px;
@@ -321,13 +321,13 @@ img {
 			<c:choose>
 
 				<c:when test="${list.cimage==null}">
-					<td colspan="4">
+					<td colspan="4" class="mainimage">
 						<pre>${list.ccontents}</pre>
 					</td>
 				</c:when>
 
 				<c:otherwise>
-					<td colspan="4">
+					<td colspan="4" class="mainimage">
 						<img src="./image/${list.cimage}"><br>
 						<pre>${list.ccontents}</pre>
 					</td>
@@ -352,7 +352,7 @@ img {
 					<tr>	
 						<td colspan="4">
 							<input type="button" onclick="location.href='board'" value="목록">
-							<input type="button" onclick="location.href='boardupdate?cnum=${list.cnum}'" value="수정">
+							<input type="button" onclick="location.href='boardupdateview?cnum=${list.cnum}'" value="수정">
 							<input type="button" onclick="delboard(${list.cnum})" value="삭제">
 						</td>
 					</tr>
