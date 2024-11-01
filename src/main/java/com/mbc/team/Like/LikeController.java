@@ -58,26 +58,31 @@ public class LikeController {
 	public String like2(HttpServletRequest request, Model mo, HttpServletResponse response) throws IOException {
 		hs = request.getSession();
 		LoginDTO dto3 = (LoginDTO) hs.getAttribute("dto3");
-		Boolean loginState = (Boolean) hs.getAttribute("loginstate");
+		Boolean loginState = Boolean.TRUE.equals(hs.getAttribute("loginstate")); 
 		
 		ls = sqlSession.getMapper(LikeService.class);
 		
 		
-		if (!loginState || loginState == null) {
+		if (loginState) {
 
-			response.setContentType("text/html;charset=utf-8");
-			PrintWriter pww = response.getWriter();
-			pww.print("<script> alert('로그인 후 이용해주새요')</script>");
-			pww.print("<script> location.href='login'</script>");
-			pww.close();
-			return "redirect:/login";
+			ArrayList<LikeDTO> list = ls.like_product(dto3.getId());
+			mo.addAttribute("list", list);
+			
+			return "like_product_out";
 		}
-		ArrayList<LikeDTO> list = ls.like_product(dto3.getId());
-		mo.addAttribute("list", list);
-		
-		return "like_product_out";
-
+		else {
+	        // 로그인 상태가 false일 경우 경고 메시지 출력
+	        sendAlertAndRedirect(response, "로그인 후 이용해주세요.", "/team/login");
+	        return null;
+	    }
 	}
+	 private void sendAlertAndRedirect(HttpServletResponse response, String message, String redirectUrl) throws IOException {
+	        response.setContentType("text/html;charset=utf-8");
+	        PrintWriter pww = response.getWriter();
+	        pww.print("<script> alert('" + message + "');</script>");
+	        pww.print("<script> location.href='" + redirectUrl + "';</script>");
+	        pww.flush();
+	    }
 
 	// 찜 상품 삭제
 	@RequestMapping(value = "/like_items_delete", method = RequestMethod.POST)
