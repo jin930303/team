@@ -21,6 +21,10 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Black+Han+Sans&display=swap" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap"	rel="stylesheet">
+<!-- 좀 뽀짝한거 -->
+<link href="https://fonts.googleapis.com/css2?family=Black+Han+Sans&display=swap" rel="stylesheet">
+<!-- Mulish -->
+<link href="https://fonts.googleapis.com/css2?family=Mulish:ital,wght@0,599;1,599&display=swap" rel="stylesheet">
 
 <!-- Noto Sans Korean -->
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&display=swap" rel="stylesheet">
@@ -59,93 +63,104 @@
 	}
 
 /* header 전체 */
-	.navbar-inverse {
-		font-family: 'Noto Sans KR', sans-serif;
-		background-color: rgba(255, 255, 255, 0.5) !important;
-		border-color: rgba(255, 255, 255, 0.5) !important;
-		border-bottom: 2px solid #be241c !important;
-	    position: relative;
-	}
-	
-	.navbar-inverse::after {
-	    content: "";
-	    position: absolute;
-	    bottom: 10px; /* 첫 번째 선과 간격 조정 */
-	    left: 0;
-	    width: 100%;
-	    height: 2px;
-	    background-color: #be241c; /* 두 번째 선 색상 */
-	}
+.navbar-inverse {
+	font-family: 'Noto Sans KR', sans-serif;
+	background-color: rgba(255, 255, 255, 0.5) !important;
+	border-color: rgba(255, 255, 255, 0.5) !important;
+}	
 
-/* header 내 링크 section */
-	.navbar-inverse .navbar-nav>li>a {
-		padding-bottom: 35px;
-		color: #000 !important;						/* 기본 글씨 색상 검정 */
-		background-color: transparent !important;	/* 배경색 투명 */
-		transition: color 0.3s ease, background-color 0.3s ease-out; 
-	}
 	
-/* header 내 링크 section hover 시 */
-	.navbar-inverse .navbar-nav>li>a:hover {
-		color: #ddd !important;					/* hover 상태에서도 색상 변화 없음 */
-		background-color: #be241c !important;	/* 배경색 변화 없음 */
-	}
+/* header 내 링크 section *//* ========================================================== 로그인 + 링크 */
+/* 우측 상단 로그인쪽 */
 
-/* 좌측 상단 로그인쪽 */
 .container-log {
+	display: flex;
+	justify-content: flex-end; /* 왼쪽에서 오른쪽으로 정렬 변경 */
+	padding: 10px 20px;
+}
+
+#right-top {
     display: flex;
-    font-size: 13px;
-    justify-content: flex-end; /* 왼쪽에서 오른쪽으로 정렬 변경 */
-    color: #666666;
+    list-style: none;           /* 불릿 포인트 제거 */
+    padding-left: 0;
+    margin: 0;
+}
+
+#right-top li {
+    font-size: 14px;
+    font-family: Arial, sans-serif;
+    color: black;               /* 기본 텍스트 색상 흰색 */
+    padding: 0 3px;
+    display: flex;
     align-items: center;
 }
 
-/* 타이틀 */
-	.container-head {
-		font-family: 'Gothic A1', sans-serif;
-		display: flex;
-		font-size: 60px !important;
-		justify-content: center;
-		align-items: center;
-		color: black;
-	}
-	
-	.navbar-header {
-	    font-family: 'Gothic A1', sans-serif;
-	    background-size: contain;
-	    background-repeat: no-repeat;
-	    background-position: center;
-	    display: flex;
-	    justify-content: center;
-	    align-items: center;
-	    color: black;
-	    width: 100%;
-	    padding-bottom: 40px;
-	    height: 120px;
-	}
-	
-	.navbar-header>a:hover {
-		color: #ddd !important;	/* hover 상태에서도 색상 변화 없음 */
-	}
-	
-	
-	.navbar-brand {
-	    display: flex;
-	    align-items: center;
-	    justify-content: center;
-	    font-size: 60px !important;
-	    color: black;
-	}
-	
-	.navbar-brand img {
-	    height: 300px; /* 필요한 크기로 수정 */
-	    object-fit: contain; /* 이미지 크기를 유지하며 영역에 맞게 조정 */
-	}
+#right-top li a {
+    color: black;     /* 링크 텍스트 색상 흰색 */
+    background-color: transparent !important; /* 배경 투명 */
+    text-decoration: none;       /* 밑줄 제거 */
+    font-size: inherit;          /* li와 동일한 텍스트 크기 */
+    font-family: inherit;        /* li와 동일한 폰트 */
+    transition: color 0.3s ease,border 0.3s ease; /* 색상 변화 애니메이션 */
+    font-weight: normal;                /* 기본 폰트 두께 */
+    position: relative;                 /* ::after 가상 요소 사용을 위한 position 설정 */
+}
 
+#right-top li a::after {
+    content: "";                        /* 가상 요소로 콘텐츠 설정 */
+    position: absolute;
+    bottom: 0;
+    right: 100%;
+    width: 0;                           /* 초기 너비 0 */
+    height: 2px;                        /* 하단선 두께 */
+    background-color: #be241c;          /* 하단선 색상 */
+    transition: width 0.3s ease, right 0.3s ease; /* 애니메이션 설정 */
+    transform: translateX(0%);        /* 가운데 정렬 */
+}
+
+#right-top li a:hover {
+	color: #be241c;
+	font-weight: bold;
+	transform: scale(1.0);
+}
+
+#right-top li a:hover::after {
+    width: 100%;                        /* hover 시 전체 너비로 확장 */
+    right: 0;                            /* 시작점 조정 */
+}
+
+/* 로고 위치 *//* ================================================================== 로고 */
+.container-head {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+	
+.navbar-header a{
+    background-position: center;
+    display: flex;
+    width: 100%;
+    padding-bottom: 50px;
+    height: 125px;
+}
+	
+.navbar-brand {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+	
+.navbar-brand img {
+    height: 400px; /* 필요한 크기로 수정 */
+    object-fit: contain; /* 이미지 크기를 유지하며 영역에 맞게 조정 */
+    padding-bottom: 40px;
+}
+
+/* 검색 *//* ==================================================================== 검색 */
 	#search {
 	    width: calc(100% - 100px); /* 버튼의 너비를 고려 */
 	    padding: 4px;
-	    border: 1px solid #ccc;
+	    border: 1px solid #be241c;
 	    border-radius: 4px;
 	    font-size: 1em;
 	    transition: border-color 0.3s;
@@ -167,33 +182,126 @@
 	button[type="submit"]:hover {
 	    background-color: #8e1a14; /* 호버 시 색상 변경 */
 	}
+/* ================================================================================ 드롭다운 메뉴 */
+.container-fluid {
+	display: flex;
+	justify-content: center;
+    padding-bottom: 12px;                  /* 패딩 추가로 클릭 가능한 영역 확장 */
+	border-bottom: 2px solid #be241c !important;
+    position: relative;
+}
+	
+.container-fluid::after {
+    content: "";
+    position: absolute;
+    bottom: 10px; /* 첫 번째 선과 간격 조정 */
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background-color: #be241c; /* 두 번째 선 색상 */
+}
 
-	.container-fluid {
-		font-size: 20px;
-		display: flex;
-		justify-content: center;
-	}
+.container-fluid .navbar-nav > li > a {
+    color: #333333;
+    font-size: 20px;                     /* 텍스트 크기 */
+    font-family: "Mulish", sans-serif;      /* 폰트 스타일 */
+    font-weight: bold;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    text-decoration: none;               /* 링크 밑줄 제거 */
+    position: relative;
+    outline: none;                       /* 기본 포커스 outline 제거 */
+    transition: color 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
+    background-color: transparent;       /* 기본 배경색 */
+}
+
+/* nav 텍스트 hover 시 스타일 */
+.container-fluid .navbar-nav > li > a:hover,
+.container-fluid .navbar-nav > li > a:focus,
+.container-fluid .navbar-nav > li > a:active {
+    background-color: #f9f9f9;           /* hover 및 active 시 배경색 */
+    color: #be241c;                      /* hover 및 active 시 텍스트 색상 */
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    box-shadow: 0px 0px 0px 2px #be241c;
+    outline: none;
+}
+
+/* 드롭다운 메뉴의 항목 스타일 */
+.dropdown-menu > li > a {
+    color: white;                         /* 드롭다운 텍스트 색상 */
+    background-color: #333;               /* 기본 배경색 */
+    padding: 10px 20px;                   /* 드롭다운 항목 간격 */
+    font-size: 16px;                      /* 드롭다운 텍스트 크기 */
+    text-decoration: none;                /* 링크 밑줄 제거 */
+    transition: background-color 0.3s ease; /* 배경색 애니메이션 */
+}
+
+/* 드롭다운 항목 hover 및 active 스타일 */
+.dropdown-menu > li > a:hover,
+.dropdown-menu > li > a:focus,
+.dropdown-menu > li > a:active {
+    background-color: #be241c;           /* hover 및 active 시 배경색 */
+    color: #fff;                         /* hover 및 active 시 텍스트 색상 */
+}
+
+/* 드롭다운 버튼 스타일 */
+.container-fluid .navbar-nav > .dropdown > a {
+    padding-right: 10px;
+    margin-left: 2px;
+}
+
+.container-fluid .navbar-nav > .dropdown > a .caret {
+    margin-left: 6px;                    /* 화살표와 텍스트 간격 */
+}
+
+/* 드롭다운 메뉴 스타일 */
+.dropdown-menu {
+    background-color: #f9f9f9;           /* 드롭다운 배경색 */
+    border: 1px solid #ddd;              /* 테두리 색상 */
+    min-width: 180px;                    /* 드롭다운 최소 너비 */
+    padding: 0;                          /* 패딩 제거 */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15); /* 그림자 효과 */
+}
+
+/* 드롭다운 메뉴의 항목 스타일 */
+.dropdown-menu > li > a {
+    color: #fff;                         /* 드롭다운 텍스트 색상 */
+    background-color: black;
+    padding: 10px 20px;                  /* 드롭다운 항목 간격 */
+    font-size: 16px;                     /* 드롭다운 텍스트 크기 */
+    text-decoration: none;               /* 링크 밑줄 제거 */
+    transition: background-color 0.3s ease; /* 배경색 애니메이션 */
+}
+
+/* 드롭다운 항목 hover 스타일 */
+.dropdown-menu > li > a:hover {
+    background-color: #be241c;           /* hover 시 배경색 */
+    color: #fff;                         /* hover 시 텍스트 색상 */
+}
 </style>
 <meta charset="UTF-8">
 <title>Insert title here</title>
 </head>
 <body>
+
+<!-- <li class="left-top">
+		            		<c:choose>
+			               		<c:when test="${not empty sessionScope.kakaoname}">  
+			               			${sessionScope.kakaoname}님 반갑습니다 
+			               		</c:when>
+			               		<c:otherwise>  
+			               			${sessionScope.dto3.nickname}님 반갑습니다 
+			               		</c:otherwise>
+		            		</c:choose>
+            			</li> -->
 <!-- 앞에 navbar 빼면 메인이미지 - 상품카테고리 사이 간격 사라짐 -->
 	<nav class="navbar navbar-inverse">
-		<div class="container-log" style="text-align: left;">
-			<ul class="nav navbar-nav navbar-left">
+		<div class="container-log">
+			<ul class="nav navbar-nav" id="right-top">
 				<c:choose>
 					<c:when test="${loginstate==true}">
-						<li><a href="#">
-		            	<c:choose>
-		               		<c:when test="${not empty sessionScope.kakaoname}">  
-		               			${sessionScope.kakaoname}님 반갑습니다.
-		               		</c:when>
-		               		<c:otherwise>  
-		               			${sessionScope.dto3.nickname}님 반갑습니다. 
-		               		</c:otherwise>
-		            	</c:choose>
-            			</a></li>
+						
 						<li><a href="logout">로그아웃</a></li>
 						<li><a href="myinfo">마이페이지</a></li>
 
@@ -224,29 +332,15 @@
 								<li><a href="productdelete">상품자료출력</a></li>
 								<li><a href="memberout">회원정보관리</a></li>
 							</ul></li>
-						<!-- 
-						<li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">고객센터<span class="caret"></span></a>
-							<ul class="dropdown-menu">
-								<li><a href="faq_community">고객센터</a></li>
-							</ul>
-						</li>
-						 -->
 						<li><a href="faq_community">고객센터</a></li>
 						<li><a href="logout"><span class="glyphicon glyphicon-log-out"></span>로그아웃</a></li>
 					</c:when>
 
 					<c:otherwise>
-						<li><a href="memberinput">회원가입</a></li>
 						<li><a href="login">로그인</a></li>
+						<li><a href="memberinput">회원가입</a></li>
 						<li><a href="cart">장바구니</a></li>
 						<li><a href="faq_community">고객센터</a></li>
-						<!-- <li>
-							<form action="searchItem" method="get" style="display: inline;"
-								onsubmit="return validateSearch()">
-								<input type="text" name="query" id="search" placeholder="검색">
-								<button type="submit">검색</button>
-							</form>
-						</li> -->
 					</c:otherwise>
 				</c:choose>
 			</ul>
@@ -262,9 +356,9 @@
 
 		<div class="container-fluid">
 			<ul class="nav navbar-nav">
-				<li><a href="bestitem">Best</a></li>
-				<li><a href="newitem">New</a></li>
-				<li><a href="saleitem">Sale</a></li>
+				<li><a href="bestitem">BEST</a></li>
+				<li><a href="newitem">NEW</a></li>
+				<li><a href="saleitem">SALE</a></li>
 				<li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">글러브<span class="caret"></span></a>
 					<ul class="dropdown-menu">
 						<li><a href="pitcherallround">투수/올라운드</a></li>

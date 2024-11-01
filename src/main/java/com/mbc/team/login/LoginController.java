@@ -104,25 +104,29 @@ public class LoginController {
 	@RequestMapping(value = "/myinfo")
 	public String myInfo(HttpServletRequest request, Model model, HttpServletResponse response) throws IOException {
 	    hs = request.getSession();
-	    Boolean loginState = (Boolean) hs.getAttribute("loginstate");
+	    
+	    boolean loginState = Boolean.TRUE.equals(hs.getAttribute("loginstate"));
 
-	    if (loginState != null && loginState) {
+	    if (loginState) {
 	        LoginDTO dto3 = (LoginDTO) hs.getAttribute("dto3");
-	        ls = sqlSession.getMapper(LoginService.class);
+	        LoginService ls = sqlSession.getMapper(LoginService.class);
 	        LoginDTO dto1 = ls.myinfo(dto3.getId());
 	        model.addAttribute("dto1", dto1);
 	        return "myinfo";
-	    } 
-	    else {
-	        response.setContentType("text/html;charset=utf-8");
-	        PrintWriter pww = response.getWriter();
-	        pww.print("<script> alert('로그인 후 이용해주세요.');</script>");
-	        pww.print("<script> location.href='/team/login';</script>");
-	        pww.flush();
+	        
+	    } else {
+	        // 로그인 상태가 false일 경우 경고 메시지 출력
+	        sendAlertAndRedirect(response, "로그인 후 이용해주세요.", "/team/login");
 	        return null;
 	    }
-		
 	}
+	 private void sendAlertAndRedirect(HttpServletResponse response, String message, String redirectUrl) throws IOException {
+	        response.setContentType("text/html;charset=utf-8");
+	        PrintWriter pww = response.getWriter();
+	        pww.print("<script> alert('" + message + "');</script>");
+	        pww.print("<script> location.href='" + redirectUrl + "';</script>");
+	        pww.flush();
+	    }
 	
 	@RequestMapping(value = "/update")
 	public String login3(HttpServletRequest request,Model mo)

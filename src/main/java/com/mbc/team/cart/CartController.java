@@ -52,9 +52,9 @@ public class CartController {
 			throws IOException {
 
 		hs = request.getSession();
-		Boolean loginState = (Boolean) hs.getAttribute("loginstate");
+		Boolean loginState = Boolean.TRUE.equals(hs.getAttribute("loginstate")); 
 
-		if (loginState != null && loginState) {
+		if (loginState) {
 
 			LoginDTO dto3 = (LoginDTO) hs.getAttribute("dto3");
 			String id = dto3.getId();
@@ -64,17 +64,20 @@ public class CartController {
 			mo.addAttribute("items", items);
 
 			return "cart";
+			
 		} else {
-
-			response.setContentType("text/html;charset=utf-8");
-			PrintWriter pww = response.getWriter();
-			pww.print("<script> alert('로그인 후 이용해주세요.');</script>");
-			pww.print("<script> location.href='/team/login';</script>");
-			pww.flush();
-			return null;
-		}
-
+	        // 로그인 상태가 false일 경우 경고 메시지 출력
+	        sendAlertAndRedirect(response, "로그인 후 이용해주세요.", "/team/login");
+	        return null;
+	    }
 	}
+	 private void sendAlertAndRedirect(HttpServletResponse response, String message, String redirectUrl) throws IOException {
+	        response.setContentType("text/html;charset=utf-8");
+	        PrintWriter pww = response.getWriter();
+	        pww.print("<script> alert('" + message + "');</script>");
+	        pww.print("<script> location.href='" + redirectUrl + "';</script>");
+	        pww.flush();
+	    }
 
 	@ResponseBody
 	@RequestMapping(value = "/deleteitems", method = RequestMethod.POST)
