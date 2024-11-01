@@ -20,6 +20,7 @@
         font-size: 1.5em; /* 글꼴 크기를 1.5em으로 설정 */
         margin: 10px 0; /* 위아래 여백 추가 */
         color: #333; /* 글자색을 어두운 회색으로 설정 */
+        font-weight: bold;
     }
 
     th, td {
@@ -28,9 +29,9 @@
         text-align: left; /* 텍스트를 왼쪽 정렬 */
     }
 
-    th {
-        background-color: #f2f2f2; /* 헤더 배경색을 연한 회색으로 설정 */
-        color: #555; /* 헤더 글자색을 중간 회색으로 설정 */
+     th {
+        background-color: #be241c; 
+        color: white; 
     }
 
     input[type="text"],
