@@ -102,6 +102,39 @@ UI/UX 설계 / 상품DB관리 / 상품 CRUD / 상품페이지 / 상품상세페�
 </ul>
 </details>
  
-# 🛠️주요기능소개
+# 🛠️페이지 소개
 
-**메인화면**
+## 메인화면
+
+<img src="https://github.com/jin930303/photo/blob/main/%EB%A9%94%EC%9D%B8%20(1).gif"  width="1000" height="400"/>
+
+
+## 상품페이지
+
+<img src="https://github.com/jin930303/photo/blob/main/%EC%83%81%ED%92%88.gif"  width="1000" height="400"/>
+
+## 커뮤니티
+
+<img src="https://github.com/jin930303/photo/blob/main/%EC%BB%A4%EB%AE%A4%EB%8B%88%ED%8B%B0.gif"  width="1000" height="400"/>
+
+## 회원가입
+
+<img src="https://github.com/jin930303/photo/blob/main/%ED%9A%8C%EC%9B%90%EA%B0%80%EC%9E%85.gif"  width="1000" height="400"/>
+
+## 카카오 로그인
+
+<img src="https://github.com/jin930303/photo/blob/main/%EC%B9%B4%EC%B9%B4%EC%98%A4-%EB%A1%9C%EA%B7%B8%EC%9D%B8.gif"  width="1000" height="400"/>
+
+## 관리자 로그인 및 관련 페이지 접근
+
+<img src="https://github.com/jin930303/photo/blob/main/%EA%B4%80%EB%A6%AC%EC%9E%90-%EB%A1%9C%EA%B7%B8%EC%9D%B8-%EA%B3%A0%EA%B0%9D%EC%84%BC%ED%84%B0.gif"  width="1000" height="400"/>
+
+## 회원 로그인-장바구니-찜
+
+<img src="https://github.com/jin930303/photo/blob/main/%EB%A1%9C%EA%B7%B8%EC%9D%B8-%EC%9E%A5%EB%B0%94%EA%B5%AC%EB%8B%88-%EA%B4%80%EC%8B%AC%EC%83%81%ED%92%88.gif"  width="1000" height="400"/>
+
+## 아이디 찾기-비밀번호 변경
+
+<img src="https://github.com/jin930303/photo/blob/main/%EC%95%84%EC%9D%B4%EB%94%94%EC%B0%BE%EA%B8%B0-%EB%B9%84%EB%B0%80%EB%B2%88%ED%98%B8%EB%B3%80%EA%B2%BD.gif"  width="1000" height="400"/>
+
+# 자세한 기능은 ppt를 참고해주세요!
