@@ -29,16 +29,16 @@
 		delete from member where id=#{id}
 	</delete>
 	
-	<select id="findid" resultType="com.mbc.team.login.LoginDTO">
+	<select id="findid" parameterType="map" resultType="com.mbc.team.login.LoginDTO">
 		select id from member where name=#{name} and email=#{email} 
 	</select>
 	
 	<select id="findpw" resultType="com.mbc.team.login.LoginDTO">
-		select id, pw from member where id=#{id} and name=#{name} and email=#{email} 
+		select id, pw from member where id=#{param1} and name=#{param2} and email=#{param3} 
 	</select>
 	
 	<update id="updatepw">
-		update member set pw=#{pw} where id=#{id}
+		update member set pw=#{param2} where id=#{param1}
 	</update>
 	
 </mapper>

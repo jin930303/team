@@ -37,9 +37,10 @@
 				alert(response.message);
 			}
 		},
-		error: function(){
-			  alert("아이디 찾기에 실패하였습니다.");
-		}
+		  error: function(xhr, status, error) {
+              console.error("Error: " + error); // 추가적인 오류 정보
+              alert("아이디 찾기에 실패하였습니다.");
+          }
 	});
 	return false;
 	}

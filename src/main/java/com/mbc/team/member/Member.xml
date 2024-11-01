@@ -6,7 +6,7 @@
 
 	<insert id="memberinput">
 		insert into member (id, nickname, pw, name, birth, phone, address, email, grade_code, total, auth) 
-		values(#{id}, #{nickname}, #{pw}, #{name}, #{birth}, #{phone}, #{address}, #{address}, '001', 0, '002')
+		values(#{id}, #{nickname}, #{pw}, #{name}, #{birth}, #{phone}, #{address}, #{email}, '001', 0, '002')
 	</insert>
 	
 	<select id="memberout" resultType="com.mbc.team.member.MemberDTO">

@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.apache.ibatis.session.SqlSession;
+import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -216,29 +217,29 @@ public class LoginController {
 	}
 	
 	@ResponseBody
-	@RequestMapping(value = "/findidcheck",method = RequestMethod.POST)
-	public Map<String, Object> login11(HttpServletRequest request)
-	{
-		String name=request.getParameter("name");
-		String email=request.getParameter("email");
-		
-		ls=sqlSession.getMapper(LoginService.class);
-		LoginDTO findid=ls.findid(name,email);
-		
-		Map<String, Object> response= new HashMap<>();
-		if(findid!=null)
-		{
-			response.put("id", findid.getId());
-			response.put("message", "아이디를 찾았습니다.");
-		}
-		else
-		{
-			response.put("id", null);
-			response.put("message","아이디를 찾을 수 없습니다." );
-		}
-		
-		return response;
-		
+	@RequestMapping(value = "/findidcheck", method = RequestMethod.POST)
+	public Map<String, Object> findIdCheck(HttpServletRequest request) {
+	    String name = request.getParameter("name");
+	    String email = request.getParameter("email");
+
+	    Map<String, String> params = new HashMap<>();
+	    params.put("name", name);
+	    params.put("email", email);
+
+	    ls = sqlSession.getMapper(LoginService.class);
+	    LoginDTO findid = ls.findid(params); 
+
+	    // JSON 응답 처리
+	    Map<String, Object> response = new HashMap<>();
+	    if (findid != null) {
+	        response.put("id", findid.getId());
+	        response.put("message", "아이디를 찾았습니다.");
+	    } else {
+	        response.put("id", null);
+	        response.put("message", "아이디를 찾을 수 없습니다.");
+	    }
+
+	    return response; 
 	}
 	
 	@RequestMapping(value = "/findmypw")
