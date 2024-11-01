@@ -50,6 +50,18 @@
 		background-attachment: fixed;	/* 배경이 고정된 상태로 스크롤 */
 	}
 
+/* pre 전체 */
+	pre {
+		font-family: 'Gothic A1', sans-serif;
+		font-size : 14px;
+		text-align: left;
+		white-space: pre-wrap;			/* 줄바꿈을 입력한 대로 유지 */
+		word-wrap: break-word;			/* 1200px을 넘어가면 줄바꿈 */
+		max-width: 1200px;				/* 최대 너비 설정 */
+		background-color: transparent;	/* 배경색 제거 */
+		border: none;					/* 테두리 제거 */
+	}
+
 /* header 전체 */
 .navbar-inverse {
 	font-family: 'Noto Sans KR', sans-serif;
