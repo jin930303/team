@@ -199,7 +199,7 @@ input[type="button"]:hover {
 }
 
 /* 이미지 스타일 */
-img {
+.mainimage img {
 	width: 80%;
     margin: 5px;
     border-radius: 4px;
@@ -289,7 +289,7 @@ img {
 				<c:choose>
 					<c:when test="${list.gimage==null}">
 						<tr>
-							<td colspan="4">
+							<td colspan="4" class="mainimage">
 								<pre>${list.gcontents}</pre>
 							</td>
 						</tr>
@@ -297,7 +297,7 @@ img {
 					
 					<c:otherwise>
 						<tr>
-							<td colspan="4">
+							<td colspan="4" class="mainimage">
 								<img src="./image/${list.gimage}"><br>
 								<pre>${list.gcontents}</pre>
 							</td>
