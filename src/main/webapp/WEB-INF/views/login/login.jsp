@@ -83,7 +83,7 @@ table {
     width: 100%; /* 테이블 너비 100% */
     margin-top: 10px; /* 상단 간격 */
     border-collapse: collapse; /* 테이블 경계 겹치지 않도록 */
-    text-align: c
+    text-align: center;
 }
 
 caption {
@@ -254,7 +254,7 @@ a img {
 
         </table>
         <a id="kakao-login-btn" href="javascript:void(0);">
-            <img src="./image/kakao login.png" width="222" alt="카카오 로그인 버튼" height="60px">
+            <img src="./image/kakao login.png" width="222" alt="카카오 로그인 버튼" height="50px">
         </a>
 
         <% 
