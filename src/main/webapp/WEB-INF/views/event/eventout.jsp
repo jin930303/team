@@ -198,7 +198,7 @@ input[type="button"]:hover {
 }
 
 /* 이미지 스타일 */
-img {
+.mainimage img {
 	width: 80%;
     margin: 5px;
     border-radius: 4px;
@@ -291,12 +291,12 @@ img {
 			<tr>    
 			    <c:choose>
 			        <c:when test="${list.econtents=='default'}">
-			            <td colspan="4">
+			            <td colspan="4" class="mainimage">
 			                <img src="./image/${list.eimaged}">
 			            </td>
 			        </c:when>
 			        <c:otherwise>
-			            <td colspan="4">
+			            <td colspan="4" class="mainimage">
 			                <img src="./image/${list.eimaged}">
 			                <br>
 			                <pre>${list.econtents}</pre>
