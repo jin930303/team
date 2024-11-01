@@ -154,23 +154,13 @@
         background-color: #333; 
     }
     
-    .divider1 {  
-        border: none; 
-        border-top: 1px solid #ddd; 
-        width: 65%;  
-        margin: 20px auto; 
-        margin-top: 5px;
-        margin-bottom: 40px;  
-    }
-    
-    .divider2 {  
-        border: none; 
-        border-top: 1px solid #ddd; 
-        width: 65%;  
-        margin: 20px auto; 
-        margin-top: 30px;
-        margin-bottom: 10px;   
-    }
+   .category-line {
+	border-bottom: 2px solid #be241c;
+	margin: 0 auto;
+    width: 65%;
+    padding-top: 40px;
+    padding-bottom: 30px;
+}
 </style>
 
 
@@ -201,7 +191,7 @@
 
 <!-- 정렬 및 검색 부분 -->
 
-<hr class="divider1"> <!-- 경계선 추가 -->
+<div class="category-line"></div>
 
 <div class="sort-container"> 
         <select id="sortSelect" onchange="sortProducts()">
