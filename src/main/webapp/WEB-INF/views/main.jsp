@@ -51,11 +51,27 @@
 		text-align: center;
 	}
 	
+	.product-container-title-best {
+		font-family: "Mulish", sans-serif;	/* 상세 설명 폰트 설정 */
+		font-size: 35px;
+		font-weight: bold;
+		padding-top:40px; 
+		padding-bottom:8px;
+		text-align: center;
+	}
+	
 	.product-container-title p{
 		font-family: "Noto Sans KR", sans-serif;
 		font-size: 18px;
 		color: #545454;
 	}
+	
+	.product-container-title-best p{
+		font-family: "Noto Sans KR", sans-serif;
+		font-size: 18px;
+		color: #545454;
+	}
+	
 /*더보기*/
 	.product-container-more {   
 		font-family: "Noto Sans KR", sans-serif; /* 상세 설명 폰트 설정 */
@@ -138,26 +154,26 @@
 	<!-- Wrapper for slides -->
 	<div class="carousel-inner" role="listbox">
 		<div class="item active">
-			<a href="pitcherallround">
-				<img src="./image/메인1.JPG" alt="글러브-투수">
+			<a href="trainingbat">
+				<img src="./image/메인1.JPG" alt="연습배트">
 			</a>
         	<div class="carousel-caption"></div>
 		</div>
 		<div class="item">
-			<a href="outfielder">
-        		<img src="./image/메인2.JPG" alt="글러브-야수">
+			<a href="woodbat">
+        		<img src="./image/메인2.JPG" alt="나무배트">
 			</a>
 			<div class="carousel-caption"></div>
 		</div>
 		<div class="item">
-			<a href="outfielder">
-        		<img src="./image/메인3.JPG" alt="글러브-야수">
+			<a href="pitcherallround">
+        		<img src="./image/메인3.JPG" alt="글러브-투수">
 			</a>
 			<div class="carousel-caption"></div>
 		</div>
 		<div class="item">
-			<a href="outfielder">
-        		<img src="./image/글러브-투수.jpg" alt="글러브-야수">
+			<a href="pitcherallround">
+        		<img src="./image/글러브-투수.jpg" alt="글러브-투수">
 			</a>
 			<div class="carousel-caption"></div>
 		</div>
@@ -225,7 +241,7 @@
 </div>
 
 <div class="product-container-total">
-	<div class="product-container-title">
+	<div class="product-container-title-best">
 		BEST
 	<br>
 	<p>가장 인기 많은 상품</p>

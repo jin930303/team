@@ -16,84 +16,109 @@
         margin: 0 auto;
     }
     
-    .product {            
+    .product {            /*상품 테두리*/
         border: 1px solid #be241c;
-        padding: 16px;
+        padding: 15px;
         text-align: center;
         background-color: #f9f9f9; 
         border-radius: 8px; 
         box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1); 
-        transition: transform 0.2s; 
+        transition: transform 0.2s ease, border 0.2s ease; 
     }
     
-    .product:hover {
-        transform: scale(1.02); 
+     .product:hover {
+        transform: scale(1.02); /* 마우스 오버 시 크기 증가 */
+        border: 1px solid #be241c;
+        border-top: 12px solid #be241c;
     }
                                            
-    .product img {       
-        width: 200px; 
-        height: 200px;
+    .product img {       /*상품 이미지 크기*/
+        width: 230px; 
+        height: 230px;
         object-fit: cover;
     }
 
     .product-title {    
-        font-family: 'Roboto', sans-serif; 
-        font-weight: 300; 
-        font-size: 15px; 
-        margin: 15px 0;
-        text-align: left; 
-        height: 50px;
+    font-family: "Noto Sans KR", sans-serif; /* 기본 폰트 설정 */
+    font-weight: 300; /* 얇은 두께 설정 */
+    font-size: 15px; 
+    margin: 15px 0;
+    text-align: left; /* 왼쪽 정렬 추가 */
+    height: 50px; 
     }
     
-    .product-price {     
-        font-family: 'Roboto', sans-serif; 
+    .product-price {     /* 가격 폰트 설정 */  
+        font-family: "Noto Sans KR", sans-serif; /* 기본 폰트 설정 */
+        font-size: 15px;
         color: #d32f2f;
-        font-size: 15px; 
         margin: 10px 0;
-        text-align: left; 
+        text-align: left; /* 왼쪽 정렬 추가 */
     }
     
-    .sort-search-container { /* 정렬 및 검색 컨테이너 */
-        display: flex;
-        justify-content: center; /* 중앙 정렬 */
-        margin: 20px 0; /* 위아래 여백 설정, 좌우 여백 제거 */
+    .search-container {
+    display: flex;
+    justify-content: center; /* 가로 중앙 정렬 */
+    align-items: center; /* 세로 중앙 정렬 (필요시) */
+    padding: 20px; /* 적절한 여백 추가 (선택 사항) */
+    padding-top: 50px;
     }
-
+    
     .search-container input {
-        padding: 7px; 
-        border: 1px solid #ccc; 
-        border-radius: 4px; 
-        margin-right: 20px; 
-        width: 400px; 
-        font-size: 15px; 
+    padding: 10px; /* 패딩을 약간 늘림 */
+    border: 1px solid #ccc; /* 더 부드러운 테두리 색상 */
+    width: 400px; /* 원하는 길이로 설정 */
+    font-size: 16px; /* 폰트 크기 조정 */
+    border-radius: 20px; /* 모서리 둥글게 */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* 부드러운 그림자 추가 */
+    transition: border-color 0.3s, box-shadow 0.3s; /* 애니메이션 효과 추가 */
+	}
+	
+	.search-container input:focus {
+    border-color: #be241c; /* 포커스 시 테두리 색상 변경 */
+    	box-shadow: 0 0 8px rgba(255, 0, 0, 0.5); /* 포커스 시 빨간색 그림자 효과 */
+    outline: none; /* 기본 아웃라인 제거 */
+	}
+
+	.search-container input::placeholder {
+    color: #999; /* 플레이스홀더 색상 조정 */
+    font-style: italic; /* 이탤릭체로 스타일 변경 */
     }
 
-    .sort-container select {
-        padding: 5px; 
-        border: 1px solid #ccc; 
-        border-radius: 4px; 
-    }
+   .sort-container {
+    display: flex; /* Flexbox 사용 */
+    justify-content: flex-end; /* 오른쪽 정렬 */
+    margin: 20px 0; /* 여백 조정 */
+    margin-right: 330px;
+	}
+
+	.sort-container select {
+    padding: 5px; /* 패딩 추가 */
+    border: 1px solid #ddd; /* 테두리 스타일 */
+    border-radius: 4px; /* 모서리 둥글게 */
+    margin-right: 0; /* 오른쪽 여백 제거 */
+	}
 
     .category-container {
         display: flex;
         justify-content: center;
-        padding: 16px;
+        padding: 8px;
+        margin-bottom: -50px;     
     }
 
     .category-button { 
         margin: 5px; 
         padding: 10px 15px;
         border: 1px solid #ddd; 
-        background-color: #f9f9f9; 
+        background-color: white; 
         color: black; 
-        border-radius: 5px; 
+        border-radius: 4px; 
         font-family: 'Roboto', sans-serif; 
         font-weight: 300; 
         transition: background-color 0.3s; 
     }
 
     .category-button:hover {
-        background-color: #e0e0e0; 
+        background-color: #f0f0f0; 
     }
 
     .action-button {     
@@ -129,23 +154,13 @@
         background-color: #333; 
     }
     
-    .divider1 {  
-        border: none; 
-        border-top: 1px solid #ddd; 
-        width: 65%;  
-        margin: 20px auto; 
-        margin-top: 5px;
-        margin-bottom: 45px;  
-    }
-    
-    .divider2 {  
-        border: none; 
-        border-top: 1px solid #ddd; 
-        width: 65%;  
-        margin: 20px auto; 
-        margin-top: 15px;
-        margin-bottom: 18px;   
-    }
+   .category-line {
+	border-bottom: 2px solid #be241c;
+	margin: 0 auto;
+    width: 65%;
+    padding-top: 40px;
+    padding-bottom: 30px;
+}
 </style>
 
 
@@ -153,6 +168,11 @@
 </head>
 
 <body>
+
+<div class="search-container">
+      <input type="text" id="searchInput" oninput="filterProducts()" placeholder="상품명을 입력하세요                                             🔍">
+</div>
+
 
 <!-- 카테고리 버튼 추가 -->
 <div class="category-container">
@@ -170,21 +190,16 @@
 </div>
 
 <!-- 정렬 및 검색 부분 -->
-<hr class="divider2"> <!-- 경계선 추가 -->
-<div class="sort-search-container"> 
-    <div class="search-container">
-        <input type="text" id="searchInput" oninput="filterProducts()" placeholder="상품명을 입력하세요 🔍">
-    </div>
 
-    <div class="sort-container"> 
+<div class="category-line"></div>
+
+<div class="sort-container"> 
         <select id="sortSelect" onchange="sortProducts()">
             <option value="default">-정렬방식-</option>
             <option value="priceAsc">가격 낮은 순</option>
             <option value="priceDesc">가격 높은 순</option>
         </select>
-    </div>    
-</div>
-<hr class="divider1"> <!-- 경계선 추가 -->
+</div>    
 
 <div class="product-container">
     <c:forEach items="${list}" var="aa">
