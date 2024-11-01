@@ -35,8 +35,10 @@ public class HomeController {
 		ProductService ps=sqlsession.getMapper(ProductService.class);
 	    ArrayList<ProductDTO>list=ps.outmainbest();
 	    ArrayList<ProductDTO>list1=ps.outmainnew();
+	    ArrayList<ProductDTO> list2 = ps.outmainsale();
 	    mo.addAttribute("list", list);
 	    mo.addAttribute("list1", list1);
+	    mo.addAttribute("list2", list2);
 		return "main";
 	}
 	

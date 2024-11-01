@@ -46,7 +46,7 @@
 		background-attachment: fixed;	/* 배경이 고정된 상태로 스크롤 */
 	}
 
-/* header 전체 */
+/* pre 전체 */
 	pre {
 		font-family: 'Gothic A1', sans-serif;
 		font-size : 14px;

@@ -29,7 +29,7 @@
 	
 	<select id="outmainsale" resultType="com.mbc.team.product.ProductDTO"> <!-- main 화면에서 최근 db에 입력된 순서대로 출력 -->
 		select itemnum, image1, cg_code, scg_code, product, price, dimage, sale, (price*((100-sale)/100)) as saleprice 
-		from product where sale>0 order by sale desc
+		from product where sale>0 order by itemnum desc
 	</select>
 	
 	<select id="searchItem" resultType="com.mbc.team.product.ProductDTO"> 
