@@ -456,7 +456,7 @@
 						<li><a href="eventboard">이벤트</a></li>
 						<li><a href="board">자유게시판</a></li>
 						<li><a href="sosickboard">야구소식</a></li>
-						<li><a href="iljung">경기일정</a></li>
+						<li><a href="iljung">경기일정</a></li> 
 					</ul>
 				</li>
 			</ul>
