@@ -109,16 +109,16 @@
         margin: 5px; 
         padding: 10px 15px;
         border: 1px solid #ddd; 
-        background-color: #f9f9f9; 
+        background-color: white; 
         color: black; 
-        border-radius: 5px; 
+        border-radius: 4px; 
         font-family: 'Roboto', sans-serif; 
         font-weight: 300; 
         transition: background-color 0.3s; 
     }
 
     .category-button:hover {
-        background-color: #e0e0e0; 
+        background-color: #f0f0f0; 
     }
 
     .action-button {     
