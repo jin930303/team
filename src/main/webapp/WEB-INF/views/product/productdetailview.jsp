@@ -182,9 +182,6 @@ label {
     </script>
 </head>
 <body>
-<% 
-    Boolean loginState = (Boolean) session.getAttribute("loginstate");
-%>
     <form id="productForm" action="/team/insertcart" method="post" enctype="multipart/form-data">
         <input type="hidden" name="itemnum" id="itemnum" value="${dto.itemnum}">
         <input type="hidden" name="price" id="price" value="${dto.sale > 0 ? dto.saleprice : dto.price}">
