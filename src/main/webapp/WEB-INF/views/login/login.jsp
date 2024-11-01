@@ -266,9 +266,9 @@ a img {
              + "&client_id=" + clientId
              + "&redirect_uri=" + redirectURI
              + "&state=" + state;
-        session.setAttribute("state", state);
+        session.setAttribute("loginstate", state);
         %>
-        <a href="<%=apiURL%>"><img src="./image/naver login.png" alt="네이버 로그인 버튼" height="60px"></a>
+       <!--  <a href="<%=apiURL%>"><img src="./image/naver login.png" alt="네이버 로그인 버튼" height="60px"></a>  --> 
     </form>
     <br>
 	<div id="memberinput" class="container" onclick="location.href='memberinput'">
