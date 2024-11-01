@@ -103,16 +103,11 @@ public class CartController {
 		Boolean loginState = Boolean.TRUE.equals(hs.getAttribute("loginstate"));
 		if (loginState) {
 			
-			LoginDTO dto3 = (LoginDTO) hs.getAttribute("dto3");
-			
 			System.out.println("ItemNum: " +cartItem.getItemnum());
 			System.out.println("Price: " + cartItem.getPrice());
 			System.out.println("Product: " +cartItem.getProduct());
 			System.out.println("Option: " +cartItem.getOp1());
 			System.out.println("Count: " +cartItem.getCount());
-
-			
-			String id = dto3.getId();
 
 			mo.addAttribute("itemnum",cartItem.getItemnum());
 			mo.addAttribute("product",cartItem.getProduct());

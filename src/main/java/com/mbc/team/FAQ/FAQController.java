@@ -205,8 +205,8 @@ public class FAQController {
 	@RequestMapping(value = "/faqdetail")
 	public String faq6(Model mo, HttpServletRequest request, FAQDTO dto) {
 		hs = request.getSession();
-		Boolean FAQadmin = (Boolean) hs.getAttribute("adminloginstate");
-		Boolean FAQmember = (Boolean) hs.getAttribute("loginstate");
+		Boolean FAQadmin = Boolean.TRUE.equals(hs.getAttribute("adminloginstate"));   
+		Boolean FAQmember = Boolean.TRUE.equals(hs.getAttribute("loginstate"));
 		int cnum = Integer.parseInt(request.getParameter("cnum"));
 		String openclose = request.getParameter("openclose");
 		
