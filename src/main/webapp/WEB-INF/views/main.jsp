@@ -16,8 +16,10 @@
 <style>
 	.carousel-inner > .item > img,
 	.carousel-inner > .item > a > img {
-		height:550px; 
-		width:1300px;
+		/*height:550px; 
+		width:1300px;*/
+		height:500px; 
+		width:100%;
 		margin: auto;
 	}
 	
@@ -27,7 +29,7 @@
 		align-items: center;		/* 세로 중앙 정렬 (필요할 경우) */
 		height: 100%;				/* 부모 요소에 맞추기 위해 높이 설정 */
 		margin: 0 auto !important;	/* 상하 여백을 없애고 가로 중앙에 배치 */
-		padding-bottom:60px;
+		background-color: black;
 	}
 
 /*상품 전체 컨테이너*/
@@ -40,17 +42,20 @@
 	
 /*타이틀*/
 	.product-container-title {
-		border-bottom:3px solid #be241c;
-		font-family: "Noto Sans KR", sans-serif;	/* 상세 설명 폰트 설정 */
-		display: grid;
-		grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); 
-		font-size: 30px;
-		padding-top:10px; 
-		padding-left:25px;
+		border-top:2px solid #be241c;
+		font-family: "Mulish", sans-serif;	/* 상세 설명 폰트 설정 */
+		font-size: 35px;
+		font-weight: bold;
+		padding-top:40px; 
 		padding-bottom:8px;
-		text-align:left;
+		text-align: center;
 	}
-
+	
+	.product-container-title p{
+		font-family: "Noto Sans KR", sans-serif;
+		font-size: 18px;
+		color: #545454;
+	}
 /*더보기*/
 	.product-container-more {   
 		font-family: "Noto Sans KR", sans-serif; /* 상세 설명 폰트 설정 */
@@ -130,23 +135,31 @@
 <div class="main-container"><br>
 	<div id="myCarousel" class="carousel slide" data-ride="carousel">
 
-	<!-- Indicators -->
-		<ol class="carousel-indicators">
-			<li data-target="#myCarousel" data-slide-to="0" class="active"></li>
-			<li data-target="#myCarousel" data-slide-to="1"></li>
-			<li data-target="#myCarousel" data-slide-to="2"></li>
-			<li data-target="#myCarousel" data-slide-to="3"></li>
-			<li data-target="#myCarousel" data-slide-to="4"></li>
-			<li data-target="#myCarousel" data-slide-to="5"></li>
-		</ol>
-
 	<!-- Wrapper for slides -->
 	<div class="carousel-inner" role="listbox">
 		<div class="item active">
 			<a href="pitcherallround">
-				<img src="./image/글러브-투수.jpg" alt="글러브-투수">
+				<img src="./image/메인1.JPG" alt="글러브-투수">
 			</a>
         	<div class="carousel-caption"></div>
+		</div>
+		<div class="item">
+			<a href="outfielder">
+        		<img src="./image/메인2.JPG" alt="글러브-야수">
+			</a>
+			<div class="carousel-caption"></div>
+		</div>
+		<div class="item">
+			<a href="outfielder">
+        		<img src="./image/메인3.JPG" alt="글러브-야수">
+			</a>
+			<div class="carousel-caption"></div>
+		</div>
+		<div class="item">
+			<a href="outfielder">
+        		<img src="./image/글러브-투수.jpg" alt="글러브-야수">
+			</a>
+			<div class="carousel-caption"></div>
 		</div>
 
 		<div class="item">
@@ -184,6 +197,16 @@
 			<div class="carousel-caption"></div>
 		</div>
 	</div>
+	
+	<!-- Indicators -->
+		<ol class="carousel-indicators">
+			<li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+			<li data-target="#myCarousel" data-slide-to="1"></li>
+			<li data-target="#myCarousel" data-slide-to="2"></li>
+			<li data-target="#myCarousel" data-slide-to="3"></li>
+			<li data-target="#myCarousel" data-slide-to="4"></li>
+			<li data-target="#myCarousel" data-slide-to="5"></li>
+		</ol>
 
 	<!-- Left and right controls -->
 		<a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
@@ -199,7 +222,11 @@
 </div>
 
 <div class="product-container-total">
-	<div class="product-container-title">Best</div>
+	<div class="product-container-title">
+		BEST
+	<br>
+	<p>가장 인기 많은 상품</p>
+	</div>
 		<div class="product-container">
 			<c:forEach items="${list}" var="aa" varStatus="status" end="3">
 			<div class="product">
@@ -237,11 +264,15 @@
        </div>
 		</c:forEach>
 	</div>
-	<div class="product-container-more"><a href="bestitem">더보기</a></div>
+	<div class="product-container-more"><a href="bestitem"><br>더보기</a></div>
 </div>
 
 <div class="product-container-total">
-	<div class="product-container-title">New</div>
+	<div class="product-container-title">
+		NEW
+		<br>
+		<p>새로운 상품</p>
+	</div>
 	<div class="product-container">
 		<c:forEach items="${list1}" var="aa1" varStatus="status" end="3">
     	<div class="product">
@@ -278,11 +309,15 @@
 	</div>	
 		</c:forEach>
 	</div>
-	<div class="product-container-more"><a href="newitem">더보기</a></div>
+	<div class="product-container-more"><a href="newitem"><br>더보기</a></div>
 </div>
 
 <div class="product-container-total">
-	<div class="product-container-title">Sale</div>
+	<div class="product-container-title">
+		SALE
+		<br>
+		<p>할인중인 상품</p>
+	</div>
 	<div class="product-container">
 		<c:forEach items="${list2}" var="aa2" varStatus="status" end="3">
 		<div class="product">
@@ -322,7 +357,7 @@
 		</c:forEach>
 	</div>
 	
-	<div class="product-container-more"><a href="saleitem">더보기</a></div>
+	<div class="product-container-more"><a href="saleitem"><br>더보기</a></div>
 </div>
 
 </body>
