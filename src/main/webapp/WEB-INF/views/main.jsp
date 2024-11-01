@@ -154,13 +154,13 @@
 	<!-- Wrapper for slides -->
 	<div class="carousel-inner" role="listbox">
 		<div class="item active">
-			<a href="trainingbat">
-				<img src="./image/메인1.JPG" alt="연습배트">
+			<a href="main">
+				<img src="./image/메인1.JPG" alt="SWINGS">
 			</a>
         	<div class="carousel-caption"></div>
 		</div>
 		<div class="item">
-			<a href="woodbat">
+			<a href="trainingbat">
         		<img src="./image/메인2.JPG" alt="나무배트">
 			</a>
 			<div class="carousel-caption"></div>
@@ -168,6 +168,12 @@
 		<div class="item">
 			<a href="pitcherallround">
         		<img src="./image/메인3.JPG" alt="글러브-투수">
+			</a>
+			<div class="carousel-caption"></div>
+		</div>
+		<div class="item">
+			<a href="hard-balls">
+        		<img src="./image/메인4.JPG" alt="야구공">
 			</a>
 			<div class="carousel-caption"></div>
 		</div>

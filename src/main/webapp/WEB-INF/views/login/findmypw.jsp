@@ -149,7 +149,7 @@ input[type="button"]:hover {
 	<div id="memberinput" class="container" onclick="location.href='login'">
 		<br><br>
 		<strong>이미 회원이신가요?</strong>
-		<p>로그을 하고 다양한 혜을 확인해보세요!<br>
+		<p>로그인을 하고 다양한 혜택을 확인해보세요!<br>
 		<strong>이 곳!</strong>클릭하여 <strong>로그인</strong>하러 바로가기!</p>
 	</div>
 </main>
