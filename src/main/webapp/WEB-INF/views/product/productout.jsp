@@ -96,42 +96,13 @@
     margin: 20px 0; /* 여백 조정 */
     margin-right: 330px;
 }
-
+    
 .sort-container select {
     padding: 5px; /* 패딩 추가 */
     border: 1px solid #ddd; /* 테두리 스타일 */
     border-radius: 4px; /* 모서리 둥글게 */
     margin-right: 0; /* 오른쪽 여백 제거 */
 }
-
-
- 
-    .divider1 {   /* 상품 경계선 */  
-    border: none; 
-    border-top: 2px solid #be241c; 
-    width: 65%;  
-    margin: 20px auto; 
-    margin-top: 5px;
-    margin-bottom: 45px;  
-    }
-    
-     .divider2 {   /* 상품 경계선 */  
-    border: none; 
-    border-top: 1px solid #ddd; 
-    width: 65%;  
-    margin: 20px auto; 
-    margin-top: -5px;
-    margin-bottom: 18px;   
-    }
-
-.divider3 {   /* 상품 경계선 */  
-   border: none; 
-    border-top: 1px solid #ddd; 
-    width: 65%;  
-    margin: 20px auto; 
-    margin-top: -20px;
-    margin-bottom: -5px;   
-    }
 
  .category-container {
         display: flex;
@@ -143,11 +114,18 @@
 
     .category-list {
         list-style: none;
-        padding: 0;
         display: flex;
         flex-wrap: wrap;
         justify-content: center;      
     }
+    
+.category-line {
+	border-bottom: 2px solid #be241c;
+	margin: 0 auto;
+    width: 65%;
+    padding-top: 30px;
+    padding-bottom: 30px;
+}
 
     .category-list li {
         margin: 5px;
@@ -497,15 +475,15 @@
     </nav>
    
 </div>
-<div class="sort-container"> 
-	        <select id="sortSelect" onchange="sortProducts()">
-	            <option value="default">-정렬방식-</option>
-	            <option value="priceAsc">가격 낮은 순</option>
-	            <option value="priceDesc">가격 높은 순</option>
-	        </select>
-</div>
+<div class="category-line"></div>
 
-<hr class="divider1"> <!-- 경계선 추가 -->
+<div class="sort-container"> 
+	<select id="sortSelect" onchange="sortProducts()">
+		<option value="default">-정렬방식-</option>
+	    <option value="priceAsc">가격 낮은 순</option>
+	    <option value="priceDesc">가격 높은 순</option>
+	</select>
+</div>
 
 <div class="product-container">
 <c:forEach items="${list}" var="aa">
