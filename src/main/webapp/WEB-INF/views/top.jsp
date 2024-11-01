@@ -201,8 +201,8 @@
     background-color: #be241c; /* 두 번째 선 색상 */
 }
 
-.container-fluid .navbar-nav > li > a {
-    color: #333333;
+.container-fluid #dropdown-title > li > a{
+	color: #333333;
     font-size: 20px;                     /* 텍스트 크기 */
     font-family: "Mulish", sans-serif;      /* 폰트 스타일 */
     font-weight: bold;
@@ -215,10 +215,9 @@
     background-color: transparent;       /* 기본 배경색 */
 }
 
-/* nav 텍스트 hover 시 스타일 */
-.container-fluid .navbar-nav > li > a:hover,
-.container-fluid .navbar-nav > li > a:focus,
-.container-fluid .navbar-nav > li > a:active {
+.container-fluid #dropdown-title > li > a:hover,
+.container-fluid #dropdown-title > li > a:focus,
+.container-fluid #dropdown-title > li > a:active {
     background-color: #f9f9f9;           /* hover 및 active 시 배경색 */
     color: #be241c;                      /* hover 및 active 시 텍스트 색상 */
     border-top-left-radius: 10px;
@@ -227,57 +226,42 @@
     outline: none;
 }
 
-/* 드롭다운 메뉴의 항목 스타일 */
-.dropdown-menu > li > a {
-    color: white;                         /* 드롭다운 텍스트 색상 */
-    background-color: #333;               /* 기본 배경색 */
-    padding: 10px 20px;                   /* 드롭다운 항목 간격 */
-    font-size: 16px;                      /* 드롭다운 텍스트 크기 */
-    text-decoration: none;                /* 링크 밑줄 제거 */
-    transition: background-color 0.3s ease; /* 배경색 애니메이션 */
-}
-
-/* 드롭다운 항목 hover 및 active 스타일 */
-.dropdown-menu > li > a:hover,
-.dropdown-menu > li > a:focus,
-.dropdown-menu > li > a:active {
-    background-color: #be241c;           /* hover 및 active 시 배경색 */
-    color: #fff;                         /* hover 및 active 시 텍스트 색상 */
-}
-
-/* 드롭다운 버튼 스타일 */
-.container-fluid .navbar-nav > .dropdown > a {
-    padding-right: 10px;
-    margin-left: 2px;
-}
-
-.container-fluid .navbar-nav > .dropdown > a .caret {
-    margin-left: 6px;                    /* 화살표와 텍스트 간격 */
-}
-
-/* 드롭다운 메뉴 스타일 */
 .dropdown-menu {
-    background-color: #f9f9f9;           /* 드롭다운 배경색 */
-    border: 1px solid #ddd;              /* 테두리 색상 */
+	border: 2px solid #be241c;
+    background-color: f9f9f9;           /* 드롭다운 배경색 */
     min-width: 180px;                    /* 드롭다운 최소 너비 */
     padding: 0;                          /* 패딩 제거 */
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15); /* 그림자 효과 */
 }
 
-/* 드롭다운 메뉴의 항목 스타일 */
-.dropdown-menu > li > a {
-    color: #fff;                         /* 드롭다운 텍스트 색상 */
-    background-color: black;
-    padding: 10px 20px;                  /* 드롭다운 항목 간격 */
-    font-size: 16px;                     /* 드롭다운 텍스트 크기 */
-    text-decoration: none;               /* 링크 밑줄 제거 */
-    transition: background-color 0.3s ease; /* 배경색 애니메이션 */
+/* 드롭다운 메뉴 항목 스타일 */
+#dropdown-menubar li a {
+    color: #333333;                     /* 기본 텍스트 색상 */
+    font-family: "Mulish", sans-serif;
+    font-size: 16px;
+    padding: 10px 20px;                 /* 텍스트 영역을 포함한 여백 */
+    text-decoration: none;              /* 링크 밑줄 제거 */
+    background-color: #f9f9f9;          /* 기본 배경색 */
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
 }
 
-/* 드롭다운 항목 hover 스타일 */
-.dropdown-menu > li > a:hover {
-    background-color: #be241c;           /* hover 시 배경색 */
-    color: #fff;                         /* hover 시 텍스트 색상 */
+/* 드롭다운 항목 hover, focus, active 스타일 */
+#dropdown-menubar li a:hover,
+#dropdown-menubar li a:focus,
+#dropdown-menubar li a:active {
+    background-color: #be241c;          /* hover 및 active 시 배경색 */
+    color: #ffffff;                     /* hover 및 active 시 텍스트 색상 */
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.3); /* 그림자 효과 */
+}
+
+
+.container-fluid #dropdown-title > .dropdown > a {
+    padding-right: 10px;
+    margin-left: 2px;
+}
+
+.container-fluid #dropdown-title > .dropdown > a .caret {
+    margin-left: 6px;                    /* 화살표와 텍스트 간격 */
 }
 </style>
 <meta charset="UTF-8">
@@ -355,12 +339,12 @@
 		</div>
 
 		<div class="container-fluid">
-			<ul class="nav navbar-nav">
+			<ul class="nav navbar-nav" id="dropdown-title">
 				<li><a href="bestitem">BEST</a></li>
 				<li><a href="newitem">NEW</a></li>
 				<li><a href="saleitem">SALE</a></li>
 				<li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">글러브<span class="caret"></span></a>
-					<ul class="dropdown-menu">
+					<ul class="dropdown-menu" id="dropdown-menubar">
 						<li><a href="pitcherallround">투수/올라운드</a></li>
 						<li><a href="infielder">내야수</a></li>
 						<li><a href="outfielder">외야수</a></li>
@@ -371,7 +355,7 @@
 				</li>
 
 				<li class="dropdown"><a class="dropdown-toggle"data-toggle="dropdown" href="#">배트<span class="caret"></span></a>
-					<ul class="dropdown-menu">
+					<ul class="dropdown-menu" id="dropdown-menubar">
 						<li><a href="arbat">알루미늄 배트</a></li>
 						<li><a href="carbonbat">카본/컴포짓</a></li>
 						<li><a href="woodbat">나무배트</a></li>
@@ -384,7 +368,7 @@
 				</li>
 
 				<li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">장갑<span class="caret"></span></a>
-					<ul class="dropdown-menu">
+					<ul class="dropdown-menu" id="dropdown-menubar">
 						<li><a href="batting-gloves">배팅장갑</a></li>
 						<li><a href="fielding-gloves">수비장갑</a></li>
 						<li><a href="base-running-gloves">주루장갑</a></li>
@@ -394,7 +378,7 @@
 				</li>
 
 				<li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">야구화<span class="caret"></span></a>
-					<ul class="dropdown-menu">
+					<ul class="dropdown-menu" id="dropdown-menubar">
 						<li><a href="integrated-spikes">징 일체형</a></li>
 						<li><a href="turf-shoes">인조잔디화</a></li>
 						<li><a href="point-shoes">포인트화</a></li>
@@ -403,7 +387,7 @@
 				</li>
 
 				<li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">가방<span class="caret"></span></a>
-					<ul class="dropdown-menu">
+					<ul class="dropdown-menu" id="dropdown-menubar">
 						<li><a href="backpacks">백팩</a></li>
 						<li><a href="crossbody-bags">크로스백</a></li>
 						<li><a href="wheeled-bags">휠가방</a></li>
@@ -413,7 +397,7 @@
 				</li>
 
 				<li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">의류<span class="caret"></span></a>
-					<ul class="dropdown-menu">
+					<ul class="dropdown-menu" id="dropdown-menubar">
 						<li><a href="t-shirts">티셔츠</a></li>
 						<li><a href="undershirts">언더셔츠</a></li>
 						<li><a href="sliding-pants">슬라이딩팬츠</a></li>
@@ -428,7 +412,7 @@
 				</li>
 
 				<li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">보호장비<span class="caret"></span></a>
-					<ul class="dropdown-menu">
+					<ul class="dropdown-menu" id="dropdown-menubar">
 						<li><a href="batter-helmets">타자헬멧</a></li>
 						<li><a href="arm-guards">암가드</a></li>
 						<li><a href="foot-guards">풋가드</a></li>
@@ -439,7 +423,7 @@
 				</li>
 
 				<li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">야구공<span class="caret"></span></a>
-					<ul class="dropdown-menu">
+					<ul class="dropdown-menu" id="dropdown-menubar">
 						<li><a href="hard-balls">경식구</a></li>
 						<li><a href="soft-balls">연식구</a></li>
 						<li><a href="snap-balls">스냅볼</a></li>
@@ -448,7 +432,7 @@
 				</li>
 
 				<li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">굿즈<span class="caret"></span></a>
-					<ul class="dropdown-menu">
+					<ul class="dropdown-menu" id="dropdown-menubar">
 						<li><a href="keyring">키링</a></li>
 						<li><a href="towel">타올</a></li>
 						<li><a href="doll">인형</a></li>
@@ -457,7 +441,7 @@
 				</li>
 
 				<li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">기타용품<span class="caret"></span></a>
-					<ul class="dropdown-menu">
+					<ul class="dropdown-menu" id="dropdown-menubar">
 						<li><a href="sunglasses">선글라스</a></li>
 						<li><a href="accessories">악세사리</a></li>
 						<li><a href="wristbands">손목밴드</a></li>
@@ -467,7 +451,7 @@
 				</li>
 
 				<li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">커뮤니티<span class="caret"></span></a>
-					<ul class="dropdown-menu">
+					<ul class="dropdown-menu" id="dropdown-menubar">
 						<li><a href="gongjiboard">공지사항</a></li>
 						<li><a href="eventboard">이벤트</a></li>
 						<li><a href="board">자유게시판</a></li>
