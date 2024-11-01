@@ -163,7 +163,7 @@ input[type="button"]:hover {
 		<div class="input-container">
 			<input type="hidden" name="id" value="${findpw.id}">
 			<div>
-				<input type="text" name="pw" id="pw" placeholder="새로운 비밀번호 입력" maxlength="16"></div>
+				<input type="password" name="pw" id="pw" placeholder="새로운 비밀번호 입력" maxlength="16"></div>
 			<div>
 			    <input type="password" name="pwconfirm" id="pwconfirm" placeholder="비밀번호 확인" maxlength="16">
 			    <span id="confirmMsg"></span>
