@@ -46,7 +46,7 @@ UI/UX 설계 / 상품DB관리 / 상품 CRUD / 상품페이지 / 상품상세페�
 ## 📚 프로젝트 구성 및 설계
 
 ### 💡유스케이스 다이어그램 (UseCase Diagram)
-![유스케이스 다이어그램](https://github.com/user-attachments/assets/16d0dbe1-bd1c-4384-bc5f-26a0344fe117)
+![유스케이스 다이어그램](https://github.com/user-attachments/assets/829b03fd-f4e2-4b74-9c82-b374ccdc591b)
 
 ### 💡Database ERD (Entity Relation Diagram)
 
