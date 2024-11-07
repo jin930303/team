@@ -146,4 +146,5 @@ UI/UX 설계 / 상품DB관리 / 상품 CRUD / 상품페이지 / 상품상세페�
 
 <img src="https://github.com/jin930303/photo/blob/main/%EA%B3%A0%EA%B0%9D%EC%84%BC%ED%84%B0%EA%B8%B0%EB%8A%A5.gif"  width="1000" height="400"/>
 
-# 자세한 기능은 ppt를 참고해주세요!
+
+# [자세한 기능은 PPT를 참고해주세요!](https://github.com/jin930303/team/blob/main/SWINGS%20.pdf)
