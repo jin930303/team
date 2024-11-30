@@ -1,6 +1,7 @@
 package com.mbc.team.cart;
 
 public class CartItem {
+	int cartnum;
 	int itemnum;
 	String id,product;
 	int price,count;
@@ -9,8 +10,10 @@ public class CartItem {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	public CartItem(int itemnum, String id, String product, int price, int count, String image1, String op1) {
+	public CartItem(int cartnum, int itemnum, String id, String product, int price, int count, String image1,
+			String op1) {
 		super();
+		this.cartnum = cartnum;
 		this.itemnum = itemnum;
 		this.id = id;
 		this.product = product;
@@ -18,6 +21,12 @@ public class CartItem {
 		this.count = count;
 		this.image1 = image1;
 		this.op1 = op1;
+	}
+	public int getCartnum() {
+		return cartnum;
+	}
+	public void setCartnum(int cartnum) {
+		this.cartnum = cartnum;
 	}
 	public int getItemnum() {
 		return itemnum;

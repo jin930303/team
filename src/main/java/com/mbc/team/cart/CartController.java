@@ -81,16 +81,20 @@ public class CartController {
 
 	@ResponseBody
 	@RequestMapping(value = "/deleteitems", method = RequestMethod.POST)
-	public String deleteSelectedItems(@RequestBody Map<String, List<String>> param, HttpSession hs) {
-		List<String> items = param.get("items");
+	public String deleteSelectedItems(@RequestBody Map<String, List<Map<String, String>>> param, HttpSession hs) {
+		 List<Map<String, String>> items = param.get("items");
 
 		LoginDTO dto3 = (LoginDTO) hs.getAttribute("dto3");
 
 		if (dto3 == null) {
 			return "로그인 후 이용해주세요.";
 		}
-		System.out.println("아이템 : " + items);
-		System.out.println("아이디 : " + dto3.getId());
+		
+		for (Map<String, String> item : items) {
+	        System.out.println("아이템 번호: " + item.get("itemnum"));
+	        System.out.println("카트 번호: " + item.get("cartnum"));
+	    }
+		
 		cs = sqlSession.getMapper(CartService.class);
 		cs.deleteSelectItems(dto3.getId(), items);
 

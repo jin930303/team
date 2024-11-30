@@ -202,7 +202,9 @@ img {
       var selectedItems = [];
       for (var i = 0; i < checkboxes.length; i++) {
         if (checkboxes[i].checked) {
-          selectedItems.push(checkboxes[i].value);
+        	 var itemnum = checkboxes[i].value; // itemnum 값
+             var cartnum = checkboxes[i].getAttribute('data-cartnum'); // data-cartnum 값
+          selectedItems.push({ itemnum: itemnum, cartnum: cartnum });
         }
       }
 
@@ -280,7 +282,8 @@ img {
 			                        <td>${item.count}</td>
 			                        <td><fmt:formatNumber value="${item.price}" type="number" pattern="#,##0"/> 원</td>
 			                        <td><fmt:formatNumber value="${item.price * item.count}" type="number" pattern="#,##0"/> 원</td>
-			                        <td><input type="checkbox" name="selectedItems" value="${item.itemnum}"></td> 
+			                        <td><input type="checkbox" name="selectedItems" value="${item.itemnum}" data-cartnum="${item.cartnum}"></td> 
+			                        
 								</tr>
 							</c:forEach>
 		               	</tbody>

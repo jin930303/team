@@ -1,6 +1,7 @@
 package com.mbc.team.cart;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Service;
@@ -16,11 +17,13 @@ public interface CartService {
 
 	public List<CartItem> selectitem(String id);
 
-	void deleteSelectItems(@Param("id") String id, @Param("items") List<String> items);
+	
 
 	public List<CartItem> getCartItems(String id);
 
 	public void deleteCartItem(String id, int itemnum);
+
+	public void deleteSelectItems(@Param("id") String id,@Param("items") List<Map<String, String>> items);
 
 	
 

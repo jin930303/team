@@ -9,8 +9,8 @@
 	</select>
 
 	<insert id="insert" parameterType="com.mbc.team.cart.CartItem">
-	   insert into  cart(itemnum, id, product, price, count, image1, op1)
-	   values(#{itemnum}, #{id}, #{product}, #{price}, #{count}, #{image1}, #{op1})
+	   insert into  cart(cartnum,itemnum, id, product, price, count, image1, op1)
+	   values(cart_seq.nextval,#{itemnum}, #{id}, #{product}, #{price}, #{count}, #{image1}, #{op1})
 	</insert>
 
 	<update id="update" parameterType="com.mbc.team.cart.CartItem">
@@ -21,12 +21,11 @@
 		select * from cart where id=#{id}
 	</select>
 
-	<delete id="deleteSelectItems">
-		delete from cart where itemnum in
-		<foreach item="item" collection="items" open="(" separator="," close=")">
-			#{item}
+	<delete id="deleteSelectItems" parameterType="map">
+		<foreach collection="items" item="item" separator=";">
+		delete from cart where id=#{id} and itemnum=#{item.itemnum} and cartnum=#{item.cartnum}
 		</foreach>
-		and id=#{id}
+		
 	</delete>
 
 	<select id="isItemInCart" resultType="int">
