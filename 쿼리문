@@ -1,0 +1,1388 @@
+#sequence
+-----------------
+   CREATE SEQUENCE  "CNUM_SEQ"  MINVALUE 1 MAXVALUE 9999999999999999999999999999 INCREMENT BY 1 START WITH 41 CACHE 20 NOORDER  NOCYCLE ;
+   CREATE SEQUENCE  "FAQ_SEQ"  MINVALUE 1 MAXVALUE 9999999999999999999999999999 INCREMENT BY 1 START WITH 21 CACHE 20 NOORDER  NOCYCLE ;
+   CREATE SEQUENCE  "GNUM_SEQ"  MINVALUE 1 MAXVALUE 9999999999999999999999999999 INCREMENT BY 1 START WITH 21 CACHE 20 NOORDER  NOCYCLE ;
+   CREATE SEQUENCE  "LIKE_SEQ"  MINVALUE 1 MAXVALUE 9999999999999999999999999999 INCREMENT BY 1 START WITH 61 CACHE 20 NOORDER  NOCYCLE ;
+   CREATE SEQUENCE  "PRODUCT_SEQ"  MINVALUE 1 MAXVALUE 9999999999999999999999999999 INCREMENT BY 1 START WITH 10000 CACHE 20 NOORDER  NOCYCLE ;
+   CREATE SEQUENCE  "SNUM_SEQ"  MINVALUE 1 MAXVALUE 9999999999999999999999999999 INCREMENT BY 1 START WITH 21 CACHE 20 NOORDER  NOCYCLE ;
+
+
+#table 생성
+----------------
+  CREATE TABLE "BAG_CATEGORY" 
+   (	"FCG_CODE" VARCHAR2(50 BYTE) DEFAULT 'fcg005', 
+	"SCG_CODE" VARCHAR2(50 BYTE), 
+	"SCG_NAME" VARCHAR2(50 BYTE), 
+	"SCG_ENG" VARCHAR2(50 BYTE)
+   ) ;
+
+  CREATE TABLE "BASEBALL_CATEGORY" 
+   (	"FCG_CODE" VARCHAR2(50 BYTE) DEFAULT 'fcg008', 
+	"SCG_CODE" VARCHAR2(50 BYTE), 
+	"SCG_NAME" VARCHAR2(50 BYTE), 
+	"SCG_ENG" VARCHAR2(50 BYTE)
+   ) ;
+
+  CREATE TABLE "BAT_CATEGORY" 
+   (	"FCG_CODE" VARCHAR2(50 BYTE) DEFAULT 'fcg002', 
+	"SCG_CODE" VARCHAR2(50 BYTE), 
+	"SCG_NAME" VARCHAR2(50 BYTE), 
+	"SCG_ENG" VARCHAR2(50 BYTE)
+   ) ;
+
+  CREATE TABLE "CART" 
+   (	"ITEMNUM" NUMBER(10,0), 
+	"ID" VARCHAR2(200 BYTE), 
+	"PRODUCT" VARCHAR2(200 BYTE), 
+	"PRICE" NUMBER(15,0), 
+	"COUNT" NUMBER(10,0), 
+	"IMAGE1" VARCHAR2(200 BYTE), 
+	"OP1" VARCHAR2(200 BYTE)
+   ) ;
+
+  CREATE TABLE "CLOTHES_CATEGORY" 
+   (	"FCG_CODE" VARCHAR2(50 BYTE) DEFAULT 'fcg006', 
+	"SCG_CODE" VARCHAR2(50 BYTE), 
+	"SCG_NAME" VARCHAR2(50 BYTE), 
+	"SCG_ENG" VARCHAR2(50 BYTE)
+   ) ;
+
+  CREATE TABLE "COMMUNITY" 
+   (	"CNUM" NUMBER(10,0) DEFAULT 0, 
+	"TAB" VARCHAR2(200 BYTE), 
+	"TITLE" VARCHAR2(200 BYTE), 
+	"CDATE" DATE DEFAULT sysdate, 
+	"CCONTENTS" CLOB, 
+	"CGROUP" NUMBER(10,0), 
+	"STEP" NUMBER(10,0) DEFAULT 0, 
+	"INDENT" NUMBER(10,0) DEFAULT 0, 
+	"CLIKE" NUMBER(10,0) DEFAULT 0, 
+	"CHATE" NUMBER(10,0) DEFAULT 0, 
+	"CCNT" NUMBER(10,0) DEFAULT 0, 
+	"NICKNAME" VARCHAR2(200 BYTE), 
+	"CIMAGE" VARCHAR2(200 BYTE)
+   ) ;
+
+  CREATE TABLE "ETC_CATEGORY" 
+   (	"FCG_CODE" VARCHAR2(50 BYTE) DEFAULT 'fcg011', 
+	"SCG_CODE" VARCHAR2(50 BYTE), 
+	"SCG_NAME" VARCHAR2(50 BYTE), 
+	"SCG_ENG" VARCHAR2(50 BYTE)
+   ) ;
+
+  CREATE TABLE "EVENT" 
+   (	"EVNUM" NUMBER, 
+	"ID" VARCHAR2(100 BYTE), 
+	"NICKNAME" VARCHAR2(100 BYTE), 
+	"ETITLE" VARCHAR2(1000 BYTE), 
+	"ECONTENTS" CLOB, 
+	"EDATE" DATE DEFAULT sysdate, 
+	"EIMAGEM" VARCHAR2(1000 BYTE), 
+	"EIMAGED" VARCHAR2(1000 BYTE), 
+	"ESTATE" VARCHAR2(1000 BYTE), 
+	"ECNT" NUMBER DEFAULT 0
+   ) ;
+
+  CREATE TABLE "FAQ" 
+   (	"CNUM" NUMBER DEFAULT 0, 
+	"TAB" VARCHAR2(200 BYTE), 
+	"TITLE" VARCHAR2(200 BYTE), 
+	"FDATE" DATE DEFAULT sysdate, 
+	"FCONTENTS" VARCHAR2(3000 BYTE), 
+	"GROUPS" NUMBER(10,0) DEFAULT 0, 
+	"STEP" NUMBER(10,0) DEFAULT 0, 
+	"INDENT" NUMBER(10,0) DEFAULT 0, 
+	"NICKNAME" VARCHAR2(200 BYTE), 
+	"FIMAGE1" VARCHAR2(200 BYTE), 
+	"FIMAGE2" VARCHAR2(200 BYTE), 
+	"FIMAGE3" VARCHAR2(200 BYTE), 
+	"FAQCNT" NUMBER DEFAULT 0, 
+	"OPENCLOSE" VARCHAR2(100 BYTE)
+   ) ;
+
+   COMMENT ON COLUMN "FAQ"."CNUM" IS '시퀀스';
+
+  CREATE TABLE "FIRST_CATEGORY" 
+   (	"CG_CODE" VARCHAR2(50 BYTE), 
+	"CG_NAME" VARCHAR2(50 BYTE), 
+	"CG_ENG" VARCHAR2(50 BYTE)
+   ) ;
+
+  CREATE TABLE "GLOVE_CATEGORY" 
+   (	"FCG_CODE" VARCHAR2(50 BYTE) DEFAULT 'fcg003', 
+	"SCG_CODE" VARCHAR2(50 BYTE), 
+	"SCG_NAME" VARCHAR2(50 BYTE), 
+	"SCG_ENG" VARCHAR2(50 BYTE)
+   ) ;
+
+  CREATE TABLE "GONGJI" 
+   (	"ID" VARCHAR2(100 BYTE), 
+	"NICKNAME" VARCHAR2(100 BYTE), 
+	"GNUM" NUMBER(10,0), 
+	"GTITLE" VARCHAR2(100 BYTE), 
+	"GCONTENTS" VARCHAR2(1000 BYTE), 
+	"GDATE" DATE DEFAULT sysdate, 
+	"GCNT" NUMBER(10,0) DEFAULT 0, 
+	"GIMAGE" VARCHAR2(1000 BYTE)
+   ) ;
+
+  CREATE TABLE "GOODS_CATEGORY" 
+   (	"FCG_CODE" VARCHAR2(50 BYTE) DEFAULT 'fcg010', 
+	"SCG_CODE" VARCHAR2(50 BYTE), 
+	"SCG_NAME" VARCHAR2(50 BYTE), 
+	"SCG_ENG" VARCHAR2(50 BYTE)
+   ) ;
+
+  CREATE TABLE "ILJUNG" 
+   (	"GAMEDATE" DATE, 
+	"GAMERESULT" VARCHAR2(1000 BYTE)
+   ) ;
+
+  CREATE TABLE "MEMBER" 
+   (	"ID" VARCHAR2(200 BYTE), 
+	"NICKNAME" VARCHAR2(200 BYTE), 
+	"PW" VARCHAR2(200 BYTE), 
+	"NAME" VARCHAR2(200 BYTE), 
+	"BIRTH" DATE, 
+	"PHONE" VARCHAR2(200 BYTE), 
+	"ADDRESS" VARCHAR2(500 BYTE), 
+	"EMAIL" VARCHAR2(200 BYTE), 
+	"GRADE_CODE" VARCHAR2(20 BYTE) DEFAULT NULL, 
+	"TOTAL" NUMBER(20,0) DEFAULT 0, 
+	"AUTH" VARCHAR2(20 BYTE) DEFAULT '002'
+   ) ;
+
+  CREATE TABLE "MEMBER_AUTH" 
+   (	"AUTH_CODE" VARCHAR2(20 BYTE), 
+	"AUTH_NAME" VARCHAR2(20 BYTE), 
+	"AUTH_ENG" VARCHAR2(20 BYTE)
+   ) ;
+
+  CREATE TABLE "MEMBER_GRADE" 
+   (	"GRADE_CODE" VARCHAR2(20 BYTE) DEFAULT NULL, 
+	"GRADE_NAME" VARCHAR2(20 BYTE), 
+	"GRADE_ENG" VARCHAR2(20 BYTE), 
+	"TOT" NUMBER(10,0) DEFAULT 0
+   ) ;
+
+  CREATE TABLE "MITT_CATEGORY" 
+   (	"FCG_CODE" VARCHAR2(50 BYTE) DEFAULT 'fcg001', 
+	"SCG_CODE" VARCHAR2(50 BYTE), 
+	"SCG_NAME" VARCHAR2(50 BYTE), 
+	"SCG_ENG" VARCHAR2(50 BYTE)
+   ) ;
+
+  CREATE TABLE "PLIKE" 
+   (	"LIKENUM" NUMBER(10,0), 
+	"ITEMNUM" NUMBER(10,0), 
+	"ID" VARCHAR2(100 BYTE)
+   ) ;
+
+  CREATE TABLE "PRODUCT" 
+   (	"ITEMNUM" NUMBER(10,0), 
+	"IMAGE1" VARCHAR2(200 BYTE), 
+	"CG_CODE" VARCHAR2(200 BYTE), 
+	"SCG_CODE" VARCHAR2(200 BYTE), 
+	"PRODUCT" VARCHAR2(200 BYTE), 
+	"PRICE" NUMBER(15,0), 
+	"DIMAGE" VARCHAR2(1000 BYTE), 
+	"PCNT" NUMBER(20,0) DEFAULT 0, 
+	"SALE" NUMBER DEFAULT 0
+   ) ;
+
+   COMMENT ON COLUMN "PRODUCT"."ITEMNUM" IS '시퀀스';
+
+  CREATE TABLE "PROTECT_CATEGORY" 
+   (	"FCG_CODE" VARCHAR2(50 BYTE) DEFAULT 'fcg007', 
+	"SCG_CODE" VARCHAR2(50 BYTE), 
+	"SCG_NAME" VARCHAR2(50 BYTE), 
+	"SCG_ENG" VARCHAR2(50 BYTE)
+   ) ;
+
+  CREATE TABLE "SHOES_CATEGORY" 
+   (	"FCG_CODE" VARCHAR2(50 BYTE) DEFAULT 'fcg004', 
+	"SCG_CODE" VARCHAR2(50 BYTE), 
+	"SCG_NAME" VARCHAR2(50 BYTE), 
+	"SCG_ENG" VARCHAR2(50 BYTE)
+   ) ;
+
+  CREATE TABLE "SOSICK" 
+   (	"ID" VARCHAR2(100 BYTE), 
+	"NICKNAME" VARCHAR2(100 BYTE), 
+	"SNUM" NUMBER(10,0), 
+	"STITLE" VARCHAR2(1000 BYTE), 
+	"SCONTENTS" VARCHAR2(4000 BYTE), 
+	"SDATE" DATE DEFAULT SYSDATE, 
+	"SCNT" NUMBER(10,0) DEFAULT 0, 
+	"SIMAGE" VARCHAR2(1000 BYTE), 
+	"STAG" VARCHAR2(20 BYTE)
+   ) ;
+
+  CREATE TABLE "UNIFORM_CATEGORY" 
+   (	"FCG_CODE" VARCHAR2(50 BYTE) DEFAULT 'fcg009', 
+	"SCG_CODE" VARCHAR2(50 BYTE), 
+	"SCG_NAME" VARCHAR2(50 BYTE), 
+	"SCG_ENG" VARCHAR2(50 BYTE)
+   ) ;
+
+#db 
+
+REM INSERTING into BAG_CATEGORY
+SET DEFINE OFF;
+Insert into BAG_CATEGORY (FCG_CODE,SCG_CODE,SCG_NAME,SCG_ENG) values ('fcg005','bag001','백팩','bagpack');
+Insert into BAG_CATEGORY (FCG_CODE,SCG_CODE,SCG_NAME,SCG_ENG) values ('fcg005','bag002','크로스백','crossbag');
+Insert into BAG_CATEGORY (FCG_CODE,SCG_CODE,SCG_NAME,SCG_ENG) values ('fcg005','bag003','팀장비','team');
+Insert into BAG_CATEGORY (FCG_CODE,SCG_CODE,SCG_NAME,SCG_ENG) values ('fcg005','bag004','휠가방','wheelbag');
+Insert into BAG_CATEGORY (FCG_CODE,SCG_CODE,SCG_NAME,SCG_ENG) values ('fcg005','bag005','배트가방','batbag');
+Insert into BAG_CATEGORY (FCG_CODE,SCG_CODE,SCG_NAME,SCG_ENG) values ('fcg005','bag006','볼가방','ballbag');
+Insert into BAG_CATEGORY (FCG_CODE,SCG_CODE,SCG_NAME,SCG_ENG) values ('fcg005','bag007','유소년용','youth');
+Insert into BAG_CATEGORY (FCG_CODE,SCG_CODE,SCG_NAME,SCG_ENG) values ('fcg005','bag008','포켓','pocket');
+Insert into BAG_CATEGORY (FCG_CODE,SCG_CODE,SCG_NAME,SCG_ENG) values ('fcg005','bag009','기타','etc');
+commit;
+REM INSERTING into BASEBALL_CATEGORY
+SET DEFINE OFF;
+Insert into BASEBALL_CATEGORY (FCG_CODE,SCG_CODE,SCG_NAME,SCG_ENG) values ('fcg008','baseball001','경식구','hardball');
+Insert into BASEBALL_CATEGORY (FCG_CODE,SCG_CODE,SCG_NAME,SCG_ENG) values ('fcg008','baseball002','소프트볼','softball');
+Insert into BASEBALL_CATEGORY (FCG_CODE,SCG_CODE,SCG_NAME,SCG_ENG) values ('fcg008','baseball003','캐치볼','catchball');
+Insert into BASEBALL_CATEGORY (FCG_CODE,SCG_CODE,SCG_NAME,SCG_ENG) values ('fcg008','baseball004','스냅볼','snapball');
+Insert into BASEBALL_CATEGORY (FCG_CODE,SCG_CODE,SCG_NAME,SCG_ENG) values ('fcg008','baseball005','피칭머신볼','pitchingball');
+Insert into BASEBALL_CATEGORY (FCG_CODE,SCG_CODE,SCG_NAME,SCG_ENG) values ('fcg008','baseball006','기념구','celebrate');
+Insert into BASEBALL_CATEGORY (FCG_CODE,SCG_CODE,SCG_NAME,SCG_ENG) values ('fcg008','baseball007','케이스','ballcase');
+commit;
+REM INSERTING into BAT_CATEGORY
+SET DEFINE OFF;
+Insert into BAT_CATEGORY (FCG_CODE,SCG_CODE,SCG_NAME,SCG_ENG) values ('fcg002','bat001','알루미늄','aluminum');
+Insert into BAT_CATEGORY (FCG_CODE,SCG_CODE,SCG_NAME,SCG_ENG) values ('fcg002','bat002','카본/컴포짓','carbon/composit');
+Insert into BAT_CATEGORY (FCG_CODE,SCG_CODE,SCG_NAME,SCG_ENG) values ('fcg002','bat003','나무','wood');
+Insert into BAT_CATEGORY (FCG_CODE,SCG_CODE,SCG_NAME,SCG_ENG) values ('fcg002','bat004','펑고','fungo');
+Insert into BAT_CATEGORY (FCG_CODE,SCG_CODE,SCG_NAME,SCG_ENG) values ('fcg002','bat005','유소년','youth');
+Insert into BAT_CATEGORY (FCG_CODE,SCG_CODE,SCG_NAME,SCG_ENG) values ('fcg002','bat006','트레이닝','trainning');
+Insert into BAT_CATEGORY (FCG_CODE,SCG_CODE,SCG_NAME,SCG_ENG) values ('fcg002','bat007','소프트볼','softball');
+Insert into BAT_CATEGORY (FCG_CODE,SCG_CODE,SCG_NAME,SCG_ENG) values ('fcg002','bat008','그립','grip');
+Insert into BAT_CATEGORY (FCG_CODE,SCG_CODE,SCG_NAME,SCG_ENG) values ('fcg002','bat009','배트용품','batcare');
+commit;
+REM INSERTING into CART
+SET DEFINE OFF;
+Insert into CART (ITEMNUM,ID,PRODUCT,PRICE,COUNT,IMAGE1,OP1) values (10509,'id12','프랭클린 CFX PRO FP 커스텀 배팅장갑',80000,1,'프랭클린 CFX PRO FP 커스텀 배팅장갑.jpg','S');
+commit;
+REM INSERTING into CLOTHES_CATEGORY
+SET DEFINE OFF;
+Insert into CLOTHES_CATEGORY (FCG_CODE,SCG_CODE,SCG_NAME,SCG_ENG) values ('fcg006','clothes001','티셔츠','t-shirts');
+Insert into CLOTHES_CATEGORY (FCG_CODE,SCG_CODE,SCG_NAME,SCG_ENG) values ('fcg006','clothes002','언더셔츠','under');
+Insert into CLOTHES_CATEGORY (FCG_CODE,SCG_CODE,SCG_NAME,SCG_ENG) values ('fcg006','clothes003','슬라이딩','slidingpants');
+Insert into CLOTHES_CATEGORY (FCG_CODE,SCG_CODE,SCG_NAME,SCG_ENG) values ('fcg006','clothes004','롱/숏스판','long/shortspan');
+Insert into CLOTHES_CATEGORY (FCG_CODE,SCG_CODE,SCG_NAME,SCG_ENG) values ('fcg006','clothes005','아이싱','icing');
+Insert into CLOTHES_CATEGORY (FCG_CODE,SCG_CODE,SCG_NAME,SCG_ENG) values ('fcg006','clothes006','바람막이','wind-protect');
+Insert into CLOTHES_CATEGORY (FCG_CODE,SCG_CODE,SCG_NAME,SCG_ENG) values ('fcg006','clothes007','점퍼','jumper');
+Insert into CLOTHES_CATEGORY (FCG_CODE,SCG_CODE,SCG_NAME,SCG_ENG) values ('fcg006','clothes008','트레이닝','trainning');
+Insert into CLOTHES_CATEGORY (FCG_CODE,SCG_CODE,SCG_NAME,SCG_ENG) values ('fcg006','clothes009','맨투맨/후디','mtm/hood');
+Insert into CLOTHES_CATEGORY (FCG_CODE,SCG_CODE,SCG_NAME,SCG_ENG) values ('fcg006','clothes010','모자/밸트/양말','hat/belt/socks');
+Insert into CLOTHES_CATEGORY (FCG_CODE,SCG_CODE,SCG_NAME,SCG_ENG) values ('fcg006','clothes011','기타','etc');
+commit;
+REM INSERTING into COMMUNITY
+SET DEFINE OFF;
+Insert into COMMUNITY (CNUM,TAB,TITLE,CDATE,CGROUP,STEP,INDENT,CLIKE,CHATE,CCNT,NICKNAME,CIMAGE) values (242,'국내야구','기아 1위',to_date('24/10/17','RR/MM/DD'),242,0,0,4,4,37,'관리자',null);
+Insert into COMMUNITY (CNUM,TAB,TITLE,CDATE,CGROUP,STEP,INDENT,CLIKE,CHATE,CCNT,NICKNAME,CIMAGE) values (21,null,null,to_date('24/11/01','RR/MM/DD'),242,1,1,0,0,0,'홍길동',null);
+commit;
+REM INSERTING into ETC_CATEGORY
+SET DEFINE OFF;
+Insert into ETC_CATEGORY (FCG_CODE,SCG_CODE,SCG_NAME,SCG_ENG) values ('fcg011','etc001','선글라스','sunglass');
+Insert into ETC_CATEGORY (FCG_CODE,SCG_CODE,SCG_NAME,SCG_ENG) values ('fcg011','etc002','악세사리','accessory');
+Insert into ETC_CATEGORY (FCG_CODE,SCG_CODE,SCG_NAME,SCG_ENG) values ('fcg011','etc003','손목밴드','wristband');
+Insert into ETC_CATEGORY (FCG_CODE,SCG_CODE,SCG_NAME,SCG_ENG) values ('fcg011','etc004','로진백','rosinbag');
+Insert into ETC_CATEGORY (FCG_CODE,SCG_CODE,SCG_NAME,SCG_ENG) values ('fcg011','etc005','아이패치','eyepatch');
+Insert into ETC_CATEGORY (FCG_CODE,SCG_CODE,SCG_NAME,SCG_ENG) values ('fcg011','etc006','피규어','figure');
+Insert into ETC_CATEGORY (FCG_CODE,SCG_CODE,SCG_NAME,SCG_ENG) values ('fcg011','etc007','베이스','base');
+Insert into ETC_CATEGORY (FCG_CODE,SCG_CODE,SCG_NAME,SCG_ENG) values ('fcg011','etc008','기타','etc');
+commit;
+REM INSERTING into EVENT
+SET DEFINE OFF;
+Insert into EVENT (EVNUM,ID,NICKNAME,ETITLE,EDATE,EIMAGEM,EIMAGED,ESTATE,ECNT) values (3,'admin','관리자','자사몰 오픈 감사 이벤트',to_date('24/10/11','RR/MM/DD'),'자사몰 오픈 감사 이벤트.jpg','자사몰 오픈 감사 이벤트.jpg','진행중',10);
+Insert into EVENT (EVNUM,ID,NICKNAME,ETITLE,EDATE,EIMAGEM,EIMAGED,ESTATE,ECNT) values (4,'admin','관리자','무료배송',to_date('24/10/11','RR/MM/DD'),'5만원무료배송.jpg','5만원무료배송.jpg','진행중',22);
+Insert into EVENT (EVNUM,ID,NICKNAME,ETITLE,EDATE,EIMAGEM,EIMAGED,ESTATE,ECNT) values (5,'admin','관리자','야구용품 할인',to_date('24/10/11','RR/MM/DD'),'할인1.jpg','할인1.jpg','진행중',25);
+Insert into EVENT (EVNUM,ID,NICKNAME,ETITLE,EDATE,EIMAGEM,EIMAGED,ESTATE,ECNT) values (2,'admin','관리자','무료 자수 작업 안내',to_date('24/10/11','RR/MM/DD'),'자수이벤트-메인.jpg','자수이벤트-상세.jpg','진행중',25);
+commit;
+REM INSERTING into FAQ
+SET DEFINE OFF;
+Insert into FAQ (CNUM,TAB,TITLE,FDATE,FCONTENTS,GROUPS,STEP,INDENT,NICKNAME,FIMAGE1,FIMAGE2,FIMAGE3,FAQCNT,OPENCLOSE) values (4,'FAQ','환불문의',to_date('24/10/24','RR/MM/DD'),'환불문의는 유선상 또는 카카오 문의하기를 이용해주세요',4,0,0,'운영자',null,null,null,8,null);
+Insert into FAQ (CNUM,TAB,TITLE,FDATE,FCONTENTS,GROUPS,STEP,INDENT,NICKNAME,FIMAGE1,FIMAGE2,FIMAGE3,FAQCNT,OPENCLOSE) values (5,'FAQ',null,to_date('24/10/24','RR/MM/DD'),'123123',4,1,1,'하하',null,null,null,0,null);
+Insert into FAQ (CNUM,TAB,TITLE,FDATE,FCONTENTS,GROUPS,STEP,INDENT,NICKNAME,FIMAGE1,FIMAGE2,FIMAGE3,FAQCNT,OPENCLOSE) values (3,'회원관련 문의','11',to_date('24/10/24','RR/MM/DD'),'232',3,0,0,'홍홍3',null,null,null,6,'비공개');
+commit;
+REM INSERTING into FIRST_CATEGORY
+SET DEFINE OFF;
+Insert into FIRST_CATEGORY (CG_CODE,CG_NAME,CG_ENG) values ('fcg001','미트','mitt');
+Insert into FIRST_CATEGORY (CG_CODE,CG_NAME,CG_ENG) values ('fcg002','배트','bat');
+Insert into FIRST_CATEGORY (CG_CODE,CG_NAME,CG_ENG) values ('fcg003','글러브','glove');
+Insert into FIRST_CATEGORY (CG_CODE,CG_NAME,CG_ENG) values ('fcg004','야구화','shoes');
+Insert into FIRST_CATEGORY (CG_CODE,CG_NAME,CG_ENG) values ('fcg005','가방','bag');
+Insert into FIRST_CATEGORY (CG_CODE,CG_NAME,CG_ENG) values ('fcg006','의류','clothes');
+Insert into FIRST_CATEGORY (CG_CODE,CG_NAME,CG_ENG) values ('fcg007','보호장비','protect_eqipment');
+Insert into FIRST_CATEGORY (CG_CODE,CG_NAME,CG_ENG) values ('fcg008','야구공','baseball');
+Insert into FIRST_CATEGORY (CG_CODE,CG_NAME,CG_ENG) values ('fcg009','유니폼','uniform');
+Insert into FIRST_CATEGORY (CG_CODE,CG_NAME,CG_ENG) values ('fcg010','굿즈','goods');
+Insert into FIRST_CATEGORY (CG_CODE,CG_NAME,CG_ENG) values ('fcg011','기타용품','etc');
+commit;
+REM INSERTING into GLOVE_CATEGORY
+SET DEFINE OFF;
+Insert into GLOVE_CATEGORY (FCG_CODE,SCG_CODE,SCG_NAME,SCG_ENG) values ('fcg003','glove001','배팅','batting');
+Insert into GLOVE_CATEGORY (FCG_CODE,SCG_CODE,SCG_NAME,SCG_ENG) values ('fcg003','glove002','수비','defence');
+Insert into GLOVE_CATEGORY (FCG_CODE,SCG_CODE,SCG_NAME,SCG_ENG) values ('fcg003','glove003','주루','running');
+Insert into GLOVE_CATEGORY (FCG_CODE,SCG_CODE,SCG_NAME,SCG_ENG) values ('fcg003','glove004','방한','heat');
+Insert into GLOVE_CATEGORY (FCG_CODE,SCG_CODE,SCG_NAME,SCG_ENG) values ('fcg003','glove005','유소년','youth');
+Insert into GLOVE_CATEGORY (FCG_CODE,SCG_CODE,SCG_NAME,SCG_ENG) values ('fcg003','glove006','기타','etc');
+commit;
+REM INSERTING into GONGJI
+SET DEFINE OFF;
+Insert into GONGJI (ID,NICKNAME,GNUM,GTITLE,GCONTENTS,GDATE,GCNT,GIMAGE) values ('admin','관리자',1,'긴급공지!','이것은 긴급공지입니다.',to_date('24/10/22','RR/MM/DD'),16,null);
+commit;
+REM INSERTING into GOODS_CATEGORY
+SET DEFINE OFF;
+Insert into GOODS_CATEGORY (FCG_CODE,SCG_CODE,SCG_NAME,SCG_ENG) values ('fcg010','goods001','인형','doll');
+Insert into GOODS_CATEGORY (FCG_CODE,SCG_CODE,SCG_NAME,SCG_ENG) values ('fcg010','goods002','쿠션','cushion');
+Insert into GOODS_CATEGORY (FCG_CODE,SCG_CODE,SCG_NAME,SCG_ENG) values ('fcg010','goods003','키링','keyring');
+Insert into GOODS_CATEGORY (FCG_CODE,SCG_CODE,SCG_NAME,SCG_ENG) values ('fcg010','goods004','머리띠/팔찌','hat/arm');
+Insert into GOODS_CATEGORY (FCG_CODE,SCG_CODE,SCG_NAME,SCG_ENG) values ('fcg010','goods005','기타','etc');
+commit;
+REM INSERTING into ILJUNG
+SET DEFINE OFF;
+Insert into ILJUNG (GAMEDATE,GAMERESULT) values (to_date('24/10/14','RR/MM/DD'),'PO2 삼성 취소 LG');
+Insert into ILJUNG (GAMEDATE,GAMERESULT) values (to_date('24/09/10','RR/MM/DD'),'LG 1 : 2 롯데');
+Insert into ILJUNG (GAMEDATE,GAMERESULT) values (to_date('24/09/10','RR/MM/DD'),'KT 11 : 8 NC');
+Insert into ILJUNG (GAMEDATE,GAMERESULT) values (to_date('24/09/01','RR/MM/DD'),'삼성 5 : 6 기아');
+Insert into ILJUNG (GAMEDATE,GAMERESULT) values (to_date('24/09/01','RR/MM/DD'),'두산 3 : 4 롯데');
+Insert into ILJUNG (GAMEDATE,GAMERESULT) values (to_date('24/09/01','RR/MM/DD'),'SSG 2 : 8 NC');
+Insert into ILJUNG (GAMEDATE,GAMERESULT) values (to_date('24/10/06','RR/MM/DD'),'준PO2 LG 7 : 2 KT');
+Insert into ILJUNG (GAMEDATE,GAMERESULT) values (to_date('24/10/08','RR/MM/DD'),'준PO3 KT 5 : 6 LG');
+Insert into ILJUNG (GAMEDATE,GAMERESULT) values (to_date('24/08/07','RR/MM/DD'),'키움 2 : 6 SSG');
+Insert into ILJUNG (GAMEDATE,GAMERESULT) values (to_date('24/10/09','RR/MM/DD'),'준PO4 KT 6 : 5 LG');
+Insert into ILJUNG (GAMEDATE,GAMERESULT) values (to_date('24/10/28','RR/MM/DD'),'KS6 기아 예정 삼성');
+Insert into ILJUNG (GAMEDATE,GAMERESULT) values (to_date('24/10/29','RR/MM/DD'),'KS7 기아 예정 삼성');
+Insert into ILJUNG (GAMEDATE,GAMERESULT) values (to_date('24/08/08','RR/MM/DD'),'두산 3 : 10 LG');
+Insert into ILJUNG (GAMEDATE,GAMERESULT) values (to_date('24/08/08','RR/MM/DD'),'키움 3 : 0 SSG');
+Insert into ILJUNG (GAMEDATE,GAMERESULT) values (to_date('24/08/09','RR/MM/DD'),'KT 10 : 6 롯데');
+Insert into ILJUNG (GAMEDATE,GAMERESULT) values (to_date('24/08/09','RR/MM/DD'),'LG 10 : 9 NC');
+Insert into ILJUNG (GAMEDATE,GAMERESULT) values (to_date('24/10/01','RR/MM/DD'),'TB KT 4 : 3 SSG');
+Insert into ILJUNG (GAMEDATE,GAMERESULT) values (to_date('24/03/09','RR/MM/DD'),'NC 3 : 10 기아');
+Insert into ILJUNG (GAMEDATE,GAMERESULT) values (to_date('24/03/09','RR/MM/DD'),'KT 2 : 5 LG');
+Insert into ILJUNG (GAMEDATE,GAMERESULT) values (to_date('24/03/09','RR/MM/DD'),'롯데 6 : 1 SSG');
+Insert into ILJUNG (GAMEDATE,GAMERESULT) values (to_date('24/03/09','RR/MM/DD'),'한화 6 : 2 삼성');
+Insert into ILJUNG (GAMEDATE,GAMERESULT) values (to_date('24/03/09','RR/MM/DD'),'두산 12 : 8 키움');
+Insert into ILJUNG (GAMEDATE,GAMERESULT) values (to_date('24/10/03','RR/MM/DD'),'WC2 두산 0 : 1 KT');
+Insert into ILJUNG (GAMEDATE,GAMERESULT) values (to_date('24/10/01','RR/MM/DD'),'NC 1 : 5 롯데');
+Insert into ILJUNG (GAMEDATE,GAMERESULT) values (to_date('24/09/30','RR/MM/DD'),'SSG 7 : 2 키움');
+Insert into ILJUNG (GAMEDATE,GAMERESULT) values (to_date('24/09/29','RR/MM/DD'),'한화 2 : 7 NC');
+Insert into ILJUNG (GAMEDATE,GAMERESULT) values (to_date('24/09/28','RR/MM/DD'),'삼성 4 : 11 LG');
+Insert into ILJUNG (GAMEDATE,GAMERESULT) values (to_date('24/09/28','RR/MM/DD'),'NC 3 : 4 두산');
+Insert into ILJUNG (GAMEDATE,GAMERESULT) values (to_date('24/09/28','RR/MM/DD'),'한화 2 : 6 SSG');
+Insert into ILJUNG (GAMEDATE,GAMERESULT) values (to_date('24/09/27','RR/MM/DD'),'한화 8 : 0 기아');
+Insert into ILJUNG (GAMEDATE,GAMERESULT) values (to_date('24/09/27','RR/MM/DD'),'롯데 13 : 6 NC');
+Insert into ILJUNG (GAMEDATE,GAMERESULT) values (to_date('24/09/27','RR/MM/DD'),'KT 8 : 7 키움');
+Insert into ILJUNG (GAMEDATE,GAMERESULT) values (to_date('24/09/26','RR/MM/DD'),'롯데 3 : 4 두산');
+Insert into ILJUNG (GAMEDATE,GAMERESULT) values (to_date('24/09/26','RR/MM/DD'),'NC 1 : 10 SSG');
+Insert into ILJUNG (GAMEDATE,GAMERESULT) values (to_date('24/09/26','RR/MM/DD'),'LG 6 : 3 키움');
+Insert into ILJUNG (GAMEDATE,GAMERESULT) values (to_date('24/09/25','RR/MM/DD'),'LG 2 : 4 한화');
+Insert into ILJUNG (GAMEDATE,GAMERESULT) values (to_date('24/09/25','RR/MM/DD'),'기아 2 : 5 롯데');
+Insert into ILJUNG (GAMEDATE,GAMERESULT) values (to_date('24/09/25','RR/MM/DD'),'NC 2 : 8 SSG');
+Insert into ILJUNG (GAMEDATE,GAMERESULT) values (to_date('24/09/25','RR/MM/DD'),'삼성 6 : 3 키움');
+Insert into ILJUNG (GAMEDATE,GAMERESULT) values (to_date('24/09/24','RR/MM/DD'),'키움 5 : 4 한화');
+Insert into ILJUNG (GAMEDATE,GAMERESULT) values (to_date('24/09/24','RR/MM/DD'),'SSG 5 : 14 LG');
+Insert into ILJUNG (GAMEDATE,GAMERESULT) values (to_date('24/09/24','RR/MM/DD'),'KT 5 : 1 롯데');
+Insert into ILJUNG (GAMEDATE,GAMERESULT) values (to_date('24/09/24','RR/MM/DD'),'두산 10 : 5 NC');
+Insert into ILJUNG (GAMEDATE,GAMERESULT) values (to_date('24/09/24','RR/MM/DD'),'기아 7 : 1 삼성');
+Insert into ILJUNG (GAMEDATE,GAMERESULT) values (to_date('24/09/23','RR/MM/DD'),'한화 2 : 3 롯데');
+Insert into ILJUNG (GAMEDATE,GAMERESULT) values (to_date('24/09/23','RR/MM/DD'),'두산 8 : 4 SSG');
+Insert into ILJUNG (GAMEDATE,GAMERESULT) values (to_date('24/09/23','RR/MM/DD'),'기아 5 : 3 삼성');
+Insert into ILJUNG (GAMEDATE,GAMERESULT) values (to_date('24/09/22','RR/MM/DD'),'기아 취소 NC');
+Insert into ILJUNG (GAMEDATE,GAMERESULT) values (to_date('24/09/22','RR/MM/DD'),'한화 8 : 4 롯데');
+Insert into ILJUNG (GAMEDATE,GAMERESULT) values (to_date('24/09/22','RR/MM/DD'),'LG 9 : 5 두산');
+Insert into ILJUNG (GAMEDATE,GAMERESULT) values (to_date('24/09/22','RR/MM/DD'),'KT 2 : 6 SSG');
+Insert into ILJUNG (GAMEDATE,GAMERESULT) values (to_date('24/09/22','RR/MM/DD'),'삼성 9 : 8 키움');
+Insert into ILJUNG (GAMEDATE,GAMERESULT) values (to_date('24/09/21','RR/MM/DD'),'LG 7 : 14 두산');
+Insert into ILJUNG (GAMEDATE,GAMERESULT) values (to_date('24/09/21','RR/MM/DD'),'한화 취소 롯데');
+Insert into ILJUNG (GAMEDATE,GAMERESULT) values (to_date('24/09/21','RR/MM/DD'),'기아 취소 NC');
+Insert into ILJUNG (GAMEDATE,GAMERESULT) values (to_date('24/09/21','RR/MM/DD'),'삼성 취소 키움');
+Insert into ILJUNG (GAMEDATE,GAMERESULT) values (to_date('24/09/21','RR/MM/DD'),'KT 1 : 4 SSG');
+Insert into ILJUNG (GAMEDATE,GAMERESULT) values (to_date('24/09/21','RR/MM/DD'),'LG 2 : 0 두산');
+Insert into ILJUNG (GAMEDATE,GAMERESULT) values (to_date('24/09/20','RR/MM/DD'),'NC 취소 롯데');
+Insert into ILJUNG (GAMEDATE,GAMERESULT) values (to_date('24/09/20','RR/MM/DD'),'LG 취소 두산');
+Insert into ILJUNG (GAMEDATE,GAMERESULT) values (to_date('24/09/20','RR/MM/DD'),'SSG 취소 키움');
+Insert into ILJUNG (GAMEDATE,GAMERESULT) values (to_date('24/09/19','RR/MM/DD'),'롯데 6 : 7 LG');
+Insert into ILJUNG (GAMEDATE,GAMERESULT) values (to_date('24/09/19','RR/MM/DD'),'NC 6 : 7 한화');
+Insert into ILJUNG (GAMEDATE,GAMERESULT) values (to_date('24/09/19','RR/MM/DD'),'두산 9 : 4 기아');
+Insert into ILJUNG (GAMEDATE,GAMERESULT) values (to_date('24/09/19','RR/MM/DD'),'KT 12 : 5 삼성');
+Insert into ILJUNG (GAMEDATE,GAMERESULT) values (to_date('24/09/19','RR/MM/DD'),'SSG 8 : 6 키움');
+Insert into ILJUNG (GAMEDATE,GAMERESULT) values (to_date('24/09/14','RR/MM/DD'),'롯데 12 : 9 한화');
+Insert into ILJUNG (GAMEDATE,GAMERESULT) values (to_date('24/09/14','RR/MM/DD'),'SSG 11 : 9 삼성');
+Insert into ILJUNG (GAMEDATE,GAMERESULT) values (to_date('24/09/14','RR/MM/DD'),'두산 2 : 1 KT');
+Insert into ILJUNG (GAMEDATE,GAMERESULT) values (to_date('24/09/14','RR/MM/DD'),'NC 7 : 10 LG');
+Insert into ILJUNG (GAMEDATE,GAMERESULT) values (to_date('24/09/14','RR/MM/DD'),'기아 3 : 2 키움');
+Insert into ILJUNG (GAMEDATE,GAMERESULT) values (to_date('24/09/07','RR/MM/DD'),'LG 9 : 3 한화');
+Insert into ILJUNG (GAMEDATE,GAMERESULT) values (to_date('24/09/07','RR/MM/DD'),'삼성 1 : 9 NC');
+Insert into ILJUNG (GAMEDATE,GAMERESULT) values (to_date('24/09/07','RR/MM/DD'),'KT 2 : 12 두산');
+Insert into ILJUNG (GAMEDATE,GAMERESULT) values (to_date('24/09/07','RR/MM/DD'),'롯데 1 : 1 SSG');
+Insert into ILJUNG (GAMEDATE,GAMERESULT) values (to_date('24/09/10','RR/MM/DD'),'키움 7 : 1 두산');
+Insert into ILJUNG (GAMEDATE,GAMERESULT) values (to_date('24/09/08','RR/MM/DD'),'LG 14 : 3 한화');
+Insert into ILJUNG (GAMEDATE,GAMERESULT) values (to_date('24/09/08','RR/MM/DD'),'삼성 10 : 2 NC');
+Insert into ILJUNG (GAMEDATE,GAMERESULT) values (to_date('24/09/07','RR/MM/DD'),'기아 6 : 2 키움');
+Insert into ILJUNG (GAMEDATE,GAMERESULT) values (to_date('24/09/18','RR/MM/DD'),'NC 5 : 2 한화');
+Insert into ILJUNG (GAMEDATE,GAMERESULT) values (to_date('24/09/18','RR/MM/DD'),'롯데 3 : 5 LG');
+Insert into ILJUNG (GAMEDATE,GAMERESULT) values (to_date('24/09/18','RR/MM/DD'),'KT 6 : 8 삼성');
+Insert into ILJUNG (GAMEDATE,GAMERESULT) values (to_date('24/09/17','RR/MM/DD'),'NC 1 : 4 한화');
+Insert into ILJUNG (GAMEDATE,GAMERESULT) values (to_date('24/09/17','RR/MM/DD'),'SSG 2 : 0 기아');
+Insert into ILJUNG (GAMEDATE,GAMERESULT) values (to_date('24/09/17','RR/MM/DD'),'키움 2 : 4 KT');
+Insert into ILJUNG (GAMEDATE,GAMERESULT) values (to_date('24/09/17','RR/MM/DD'),'롯데 7 : 3 LG');
+Insert into ILJUNG (GAMEDATE,GAMERESULT) values (to_date('24/09/17','RR/MM/DD'),'두산 8 : 4 삼성');
+Insert into ILJUNG (GAMEDATE,GAMERESULT) values (to_date('24/09/16','RR/MM/DD'),'기아 11 : 5 KT');
+Insert into ILJUNG (GAMEDATE,GAMERESULT) values (to_date('24/09/16','RR/MM/DD'),'두산 5 : 4 키움');
+Insert into ILJUNG (GAMEDATE,GAMERESULT) values (to_date('24/09/15','RR/MM/DD'),'롯데 16 : 9 한화');
+Insert into ILJUNG (GAMEDATE,GAMERESULT) values (to_date('24/09/15','RR/MM/DD'),'NC 4 : 1 LG');
+Insert into ILJUNG (GAMEDATE,GAMERESULT) values (to_date('24/09/15','RR/MM/DD'),'SSG 14 : 9 삼성');
+Insert into ILJUNG (GAMEDATE,GAMERESULT) values (to_date('24/09/15','RR/MM/DD'),'기아 5 : 10 키움');
+Insert into ILJUNG (GAMEDATE,GAMERESULT) values (to_date('24/09/13','RR/MM/DD'),'SSG 취소 LG');
+Insert into ILJUNG (GAMEDATE,GAMERESULT) values (to_date('24/09/13','RR/MM/DD'),'두산 취소 NC');
+Insert into ILJUNG (GAMEDATE,GAMERESULT) values (to_date('24/09/13','RR/MM/DD'),'롯데 4 : 8 한화');
+Insert into ILJUNG (GAMEDATE,GAMERESULT) values (to_date('24/09/12','RR/MM/DD'),'LG 취소 키움');
+Insert into ILJUNG (GAMEDATE,GAMERESULT) values (to_date('24/09/12','RR/MM/DD'),'기아 10 : 0 롯데');
+Insert into ILJUNG (GAMEDATE,GAMERESULT) values (to_date('24/09/12','RR/MM/DD'),'KT 10 : 4 NC');
+Insert into ILJUNG (GAMEDATE,GAMERESULT) values (to_date('24/09/12','RR/MM/DD'),'한화 1 : 7 삼성');
+commit;
+Insert into ILJUNG (GAMEDATE,GAMERESULT) values (to_date('24/09/11','RR/MM/DD'),'SSG 2 : 10 롯데');
+Insert into ILJUNG (GAMEDATE,GAMERESULT) values (to_date('24/09/11','RR/MM/DD'),'KT 2 : 1 NC');
+Insert into ILJUNG (GAMEDATE,GAMERESULT) values (to_date('24/09/11','RR/MM/DD'),'한화 1 : 10 삼성');
+Insert into ILJUNG (GAMEDATE,GAMERESULT) values (to_date('24/09/11','RR/MM/DD'),'LG 5 : 9 키움');
+Insert into ILJUNG (GAMEDATE,GAMERESULT) values (to_date('24/09/10','RR/MM/DD'),'SSG 5 : 0 한화');
+Insert into ILJUNG (GAMEDATE,GAMERESULT) values (to_date('24/09/08','RR/MM/DD'),'롯데 6 : 11 SSG');
+Insert into ILJUNG (GAMEDATE,GAMERESULT) values (to_date('24/09/10','RR/MM/DD'),'키움 7 : 1 두산');
+Insert into ILJUNG (GAMEDATE,GAMERESULT) values (to_date('24/09/08','RR/MM/DD'),'기아 5 : 2 키움');
+Insert into ILJUNG (GAMEDATE,GAMERESULT) values (to_date('24/09/06','RR/MM/DD'),'LG 1 : 3 한화');
+Insert into ILJUNG (GAMEDATE,GAMERESULT) values (to_date('24/09/06','RR/MM/DD'),'NC 3 : 9 KT');
+Insert into ILJUNG (GAMEDATE,GAMERESULT) values (to_date('24/09/06','RR/MM/DD'),'롯데 2 : 7 삼성');
+Insert into ILJUNG (GAMEDATE,GAMERESULT) values (to_date('24/09/06','RR/MM/DD'),'기아 14 : 0 키움');
+Insert into ILJUNG (GAMEDATE,GAMERESULT) values (to_date('24/09/05','RR/MM/DD'),'기아 4 : 3 한화');
+Insert into ILJUNG (GAMEDATE,GAMERESULT) values (to_date('24/09/05','RR/MM/DD'),'롯데 2 : 12 KT');
+Insert into ILJUNG (GAMEDATE,GAMERESULT) values (to_date('24/09/05','RR/MM/DD'),'LG 2 : 4 SSG');
+Insert into ILJUNG (GAMEDATE,GAMERESULT) values (to_date('24/09/05','RR/MM/DD'),'NC 2 : 12 키움');
+Insert into ILJUNG (GAMEDATE,GAMERESULT) values (to_date('24/09/04','RR/MM/DD'),'기아 4 : 5 한화');
+Insert into ILJUNG (GAMEDATE,GAMERESULT) values (to_date('24/09/04','RR/MM/DD'),'롯데 7 : 5 KT');
+Insert into ILJUNG (GAMEDATE,GAMERESULT) values (to_date('24/09/04','RR/MM/DD'),'삼성 7 : 3 두산');
+Insert into ILJUNG (GAMEDATE,GAMERESULT) values (to_date('24/09/04','RR/MM/DD'),'LG 5 : 0 SSG');
+Insert into ILJUNG (GAMEDATE,GAMERESULT) values (to_date('24/09/04','RR/MM/DD'),'NC 13 : 6 키움');
+Insert into ILJUNG (GAMEDATE,GAMERESULT) values (to_date('24/09/03','RR/MM/DD'),'기아 7 : 5 LG');
+Insert into ILJUNG (GAMEDATE,GAMERESULT) values (to_date('24/09/03','RR/MM/DD'),'삼성 5 : 1 롯데');
+Insert into ILJUNG (GAMEDATE,GAMERESULT) values (to_date('24/09/03','RR/MM/DD'),'한화 7 : 1 두산');
+Insert into ILJUNG (GAMEDATE,GAMERESULT) values (to_date('24/09/03','RR/MM/DD'),'NC 11 : 5 키움');
+Insert into ILJUNG (GAMEDATE,GAMERESULT) values (to_date('24/09/30','RR/MM/DD'),'기아 10 : 5 NC');
+Insert into ILJUNG (GAMEDATE,GAMERESULT) values (to_date('24/09/28','RR/MM/DD'),'롯데 8 : 12 기아');
+Insert into ILJUNG (GAMEDATE,GAMERESULT) values (to_date('24/10/11','RR/MM/DD'),'준PO5 LG 4 : 1 KT');
+Insert into ILJUNG (GAMEDATE,GAMERESULT) values (to_date('24/08/08','RR/MM/DD'),'롯데 취소 NC');
+Insert into ILJUNG (GAMEDATE,GAMERESULT) values (to_date('24/08/01','RR/MM/DD'),'KT 8 : 14 한화');
+Insert into ILJUNG (GAMEDATE,GAMERESULT) values (to_date('24/08/01','RR/MM/DD'),'SSG 2 : 4 롯데');
+Insert into ILJUNG (GAMEDATE,GAMERESULT) values (to_date('24/08/01','RR/MM/DD'),'키움 14 : 9 NC');
+Insert into ILJUNG (GAMEDATE,GAMERESULT) values (to_date('24/08/01','RR/MM/DD'),'기아 0 : 1 두산');
+Insert into ILJUNG (GAMEDATE,GAMERESULT) values (to_date('24/08/01','RR/MM/DD'),'LG 0 : 7 삼성');
+Insert into ILJUNG (GAMEDATE,GAMERESULT) values (to_date('24/08/02','RR/MM/DD'),'롯데 취소 LG');
+Insert into ILJUNG (GAMEDATE,GAMERESULT) values (to_date('24/08/02','RR/MM/DD'),'NC 7 : 9 KT');
+Insert into ILJUNG (GAMEDATE,GAMERESULT) values (to_date('24/08/02','RR/MM/DD'),'삼성 4 : 3 SSG');
+Insert into ILJUNG (GAMEDATE,GAMERESULT) values (to_date('24/08/02','RR/MM/DD'),'두산 4 : 6 키움');
+Insert into ILJUNG (GAMEDATE,GAMERESULT) values (to_date('24/08/02','RR/MM/DD'),'한화 10 : 3 기아');
+Insert into ILJUNG (GAMEDATE,GAMERESULT) values (to_date('24/08/03','RR/MM/DD'),'NC 취소 KT');
+Insert into ILJUNG (GAMEDATE,GAMERESULT) values (to_date('24/08/03','RR/MM/DD'),'한화 3 : 7 기아');
+Insert into ILJUNG (GAMEDATE,GAMERESULT) values (to_date('24/08/03','RR/MM/DD'),'롯데 8 : 3 LG');
+Insert into ILJUNG (GAMEDATE,GAMERESULT) values (to_date('24/08/03','RR/MM/DD'),'삼성 12 : 4 SSG');
+Insert into ILJUNG (GAMEDATE,GAMERESULT) values (to_date('24/08/03','RR/MM/DD'),'두산 5 : 15 키움');
+Insert into ILJUNG (GAMEDATE,GAMERESULT) values (to_date('24/08/04','RR/MM/DD'),'한화 취소 기아');
+Insert into ILJUNG (GAMEDATE,GAMERESULT) values (to_date('24/08/04','RR/MM/DD'),'롯데 취소 LG');
+Insert into ILJUNG (GAMEDATE,GAMERESULT) values (to_date('24/08/04','RR/MM/DD'),'두산 취소 키움');
+Insert into ILJUNG (GAMEDATE,GAMERESULT) values (to_date('24/08/04','RR/MM/DD'),'NC 15 : 5 KT');
+Insert into ILJUNG (GAMEDATE,GAMERESULT) values (to_date('24/08/04','RR/MM/DD'),'삼성 8 : 3 SSG');
+Insert into ILJUNG (GAMEDATE,GAMERESULT) values (to_date('24/08/06','RR/MM/DD'),'삼성 5 : 8 한화');
+Insert into ILJUNG (GAMEDATE,GAMERESULT) values (to_date('24/08/06','RR/MM/DD'),'기아 2 : 0 KT');
+Insert into ILJUNG (GAMEDATE,GAMERESULT) values (to_date('24/08/06','RR/MM/DD'),'두산 7 : 6 LG');
+Insert into ILJUNG (GAMEDATE,GAMERESULT) values (to_date('24/08/06','RR/MM/DD'),'롯데 6 : 5 NC');
+Insert into ILJUNG (GAMEDATE,GAMERESULT) values (to_date('24/08/06','RR/MM/DD'),'키움 2 : 6 SSG');
+Insert into ILJUNG (GAMEDATE,GAMERESULT) values (to_date('24/08/07','RR/MM/DD'),'삼성 10 : 6 한화');
+Insert into ILJUNG (GAMEDATE,GAMERESULT) values (to_date('24/08/07','RR/MM/DD'),'기아 2 : 13 KT');
+Insert into ILJUNG (GAMEDATE,GAMERESULT) values (to_date('24/08/07','RR/MM/DD'),'두산 8 : 4 LG');
+Insert into ILJUNG (GAMEDATE,GAMERESULT) values (to_date('24/08/07','RR/MM/DD'),'롯데 14 : 7 NC');
+Insert into ILJUNG (GAMEDATE,GAMERESULT) values (to_date('24/10/13','RR/MM/DD'),'PO1 삼성 10 : 4 LG');
+Insert into ILJUNG (GAMEDATE,GAMERESULT) values (to_date('24/10/02','RR/MM/DD'),'WC1 두산 0 : 4 KT');
+Insert into ILJUNG (GAMEDATE,GAMERESULT) values (to_date('24/10/05','RR/MM/DD'),'준PO1 LG 2 : 3 KT');
+Insert into ILJUNG (GAMEDATE,GAMERESULT) values (to_date('24/10/17','RR/MM/DD'),'PO3 LG 예정 삼성');
+Insert into ILJUNG (GAMEDATE,GAMERESULT) values (to_date('24/10/18','RR/MM/DD'),'PO4 LG 예정 삼성');
+Insert into ILJUNG (GAMEDATE,GAMERESULT) values (to_date('24/10/20','RR/MM/DD'),'PO5 삼성 예정 LG');
+Insert into ILJUNG (GAMEDATE,GAMERESULT) values (to_date('24/10/21','RR/MM/DD'),'KS1 기아 예정 삼성');
+Insert into ILJUNG (GAMEDATE,GAMERESULT) values (to_date('24/10/22','RR/MM/DD'),'KS2 기아 예정 삼성');
+Insert into ILJUNG (GAMEDATE,GAMERESULT) values (to_date('24/10/24','RR/MM/DD'),'KS3 삼성 예정 기아');
+Insert into ILJUNG (GAMEDATE,GAMERESULT) values (to_date('24/10/25','RR/MM/DD'),'KS4 삼성 예정 기아');
+Insert into ILJUNG (GAMEDATE,GAMERESULT) values (to_date('24/10/27','RR/MM/DD'),'KS5 기아 예정 삼성');
+Insert into ILJUNG (GAMEDATE,GAMERESULT) values (to_date('24/08/08','RR/MM/DD'),'삼성 4 : 6 한화');
+Insert into ILJUNG (GAMEDATE,GAMERESULT) values (to_date('24/08/08','RR/MM/DD'),'기아 0 : 1 KT');
+Insert into ILJUNG (GAMEDATE,GAMERESULT) values (to_date('24/08/09','RR/MM/DD'),'SSG 11 : 13 두산');
+Insert into ILJUNG (GAMEDATE,GAMERESULT) values (to_date('24/08/09','RR/MM/DD'),'기아 9 : 8 삼성');
+Insert into ILJUNG (GAMEDATE,GAMERESULT) values (to_date('24/08/09','RR/MM/DD'),'한화 7 : 5 키움');
+Insert into ILJUNG (GAMEDATE,GAMERESULT) values (to_date('24/08/10','RR/MM/DD'),'기아 취소 삼성');
+Insert into ILJUNG (GAMEDATE,GAMERESULT) values (to_date('24/08/10','RR/MM/DD'),'KT 0 : 2 롯데');
+Insert into ILJUNG (GAMEDATE,GAMERESULT) values (to_date('24/08/10','RR/MM/DD'),'LG 9 : 3 NC');
+Insert into ILJUNG (GAMEDATE,GAMERESULT) values (to_date('24/08/10','RR/MM/DD'),'SSG 6 : 10 두산');
+Insert into ILJUNG (GAMEDATE,GAMERESULT) values (to_date('24/08/10','RR/MM/DD'),'한화 1 : 3 키움');
+Insert into ILJUNG (GAMEDATE,GAMERESULT) values (to_date('24/08/11','RR/MM/DD'),'KT 7 : 9 롯데');
+Insert into ILJUNG (GAMEDATE,GAMERESULT) values (to_date('24/08/11','RR/MM/DD'),'LG 4 : 3 NC');
+Insert into ILJUNG (GAMEDATE,GAMERESULT) values (to_date('24/08/11','RR/MM/DD'),'SSG 11 : 9 두산');
+Insert into ILJUNG (GAMEDATE,GAMERESULT) values (to_date('24/08/11','RR/MM/DD'),'기아 4 : 5 삼성');
+Insert into ILJUNG (GAMEDATE,GAMERESULT) values (to_date('24/08/11','RR/MM/DD'),'한화 3 : 7 키움');
+Insert into ILJUNG (GAMEDATE,GAMERESULT) values (to_date('24/09/28','RR/MM/DD'),'KT 10 : 7 키움');
+Insert into ILJUNG (GAMEDATE,GAMERESULT) values (to_date('24/10/15','RR/MM/DD'),'PO2 삼성 예정 LG');
+Insert into ILJUNG (GAMEDATE,GAMERESULT) values (to_date('24/10/14','RR/MM/DD'),'PO2 삼성 취소 LG');
+Insert into ILJUNG (GAMEDATE,GAMERESULT) values (to_date('24/10/14','RR/MM/DD'),'PO2 삼성 취소 LG');
+commit;
+REM INSERTING into MEMBER
+SET DEFINE OFF;
+Insert into MEMBER (ID,NICKNAME,PW,NAME,BIRTH,PHONE,ADDRESS,EMAIL,GRADE_CODE,TOTAL,AUTH) values ('id12','홍홍3','$2a$10$yZCPyuHLjzhhuMZp/sLezutkvfS2pds8Qn9vJfh/Q2zQ0gTfiGRC.','홍길',to_date('24/10/01','RR/MM/DD'),'010-1234-2211','경기 성남시 분당구 판교로 2012 (판교동, 판교원마을3단지아파트)','32111@naver.com','001',0,'002');
+Insert into MEMBER (ID,NICKNAME,PW,NAME,BIRTH,PHONE,ADDRESS,EMAIL,GRADE_CODE,TOTAL,AUTH) values ('admin','관리자','$2a$10$hJagH.tODLMnAeb1vbVNNO6sr5UKFBzr5AzZUClqfdnWSKAqlM4AC','관리자',to_date('24/10/01','RR/MM/DD'),'010-0000-0000','부산 사상구 낙동대로1234번길 3 (삼락동)','0000@naver.com','001',0,'001');
+Insert into MEMBER (ID,NICKNAME,PW,NAME,BIRTH,PHONE,ADDRESS,EMAIL,GRADE_CODE,TOTAL,AUTH) values ('id123','홍길동','$2a$10$gHGzwkrjw5atRveX4rDDfOwYvG.KKcxuYNDooVw/UT/8PkujVf8pC','홍길동',to_date('24/10/30','RR/MM/DD'),'010-1234-1234','경기 성남시 분당구 판교로 20 (판교동, 판교원마을3단지아파트)','sgnuwu1@naver.com','001',0,'002');
+commit;
+REM INSERTING into MEMBER_AUTH
+SET DEFINE OFF;
+Insert into MEMBER_AUTH (AUTH_CODE,AUTH_NAME,AUTH_ENG) values ('001','관리자','admin');
+Insert into MEMBER_AUTH (AUTH_CODE,AUTH_NAME,AUTH_ENG) values ('002','회원','member');
+Insert into MEMBER_AUTH (AUTH_CODE,AUTH_NAME,AUTH_ENG) values ('003','비회원','user');
+commit;
+REM INSERTING into MEMBER_GRADE
+SET DEFINE OFF;
+Insert into MEMBER_GRADE (GRADE_CODE,GRADE_NAME,GRADE_ENG,TOT) values ('001','신규회원','newbie',0);
+Insert into MEMBER_GRADE (GRADE_CODE,GRADE_NAME,GRADE_ENG,TOT) values ('002','우수회원','excellent',1000000);
+Insert into MEMBER_GRADE (GRADE_CODE,GRADE_NAME,GRADE_ENG,TOT) values ('003','vip','vip',5000000);
+Insert into MEMBER_GRADE (GRADE_CODE,GRADE_NAME,GRADE_ENG,TOT) values ('004','vvip','vvip',10000000);
+commit;
+REM INSERTING into MITT_CATEGORY
+SET DEFINE OFF;
+Insert into MITT_CATEGORY (FCG_CODE,SCG_CODE,SCG_NAME,SCG_ENG) values ('fcg001','mitt001','투수/올라운드','pitcher_allround');
+Insert into MITT_CATEGORY (FCG_CODE,SCG_CODE,SCG_NAME,SCG_ENG) values ('fcg001','mitt002','내야수','infielder');
+Insert into MITT_CATEGORY (FCG_CODE,SCG_CODE,SCG_NAME,SCG_ENG) values ('fcg001','mitt003','외야수','outfielder');
+Insert into MITT_CATEGORY (FCG_CODE,SCG_CODE,SCG_NAME,SCG_ENG) values ('fcg001','mitt004','1루/포수','first/hunter');
+Insert into MITT_CATEGORY (FCG_CODE,SCG_CODE,SCG_NAME,SCG_ENG) values ('fcg001','mitt005','어린이/유소년용','child/youth');
+Insert into MITT_CATEGORY (FCG_CODE,SCG_CODE,SCG_NAME,SCG_ENG) values ('fcg001','mitt006','글러브관리용품','mittcare');
+commit;
+REM INSERTING into PLIKE
+SET DEFINE OFF;
+Insert into PLIKE (LIKENUM,ITEMNUM,ID) values (49,10511,'id22');
+commit;
+REM INSERTING into PRODUCT
+SET DEFINE OFF;
+Insert into PRODUCT (ITEMNUM,IMAGE1,CG_CODE,SCG_CODE,PRODUCT,PRICE,DIMAGE,PCNT,SALE) values (10609,'러펠스 시그니쳐 반팔티 기능성 웨어 (쿨링 원단).jpg','fcg006','clothes001','러펠스 시그니쳐 반팔티 기능성 웨어 (쿨링 원단)',23000,'러펠스 시그니쳐 반팔티 기능성 웨어 (쿨링 원단)-상세이미지.jpg',0,0);
+Insert into PRODUCT (ITEMNUM,IMAGE1,CG_CODE,SCG_CODE,PRODUCT,PRICE,DIMAGE,PCNT,SALE) values (10610,'어프레쉬 지오비 GOB 하이브리드 오버핏 숏슬리브 반팔티.jpg','fcg006','clothes001','어프레쉬 지오비 GOB 하이브리드 오버핏 숏슬리브 반팔티',23500,'어프레쉬 지오비 GOB 하이브리드 오버핏 숏슬리브 반팔티-상세이미지.jpg',1,0);
+Insert into PRODUCT (ITEMNUM,IMAGE1,CG_CODE,SCG_CODE,PRODUCT,PRICE,DIMAGE,PCNT,SALE) values (10611,'(DESCENTE) NVY0 라운드넥 반팔언더셔츠 (네이비).jpg','fcg006','clothes002','(DESCENTE) NVY0 라운드넥 반팔언더셔츠 (네이비)',25600,'(DESCENTE) NVY0 라운드넥 반팔언더셔츠 (네이비)-상세이미지.jpg',1,0);
+Insert into PRODUCT (ITEMNUM,IMAGE1,CG_CODE,SCG_CODE,PRODUCT,PRICE,DIMAGE,PCNT,SALE) values (10612,'BMC 어센틱 플레이어 셔츠.jpg','fcg006','clothes002','BMC 어센틱 플레이어 셔츠',23400,'BMC 어센틱 플레이어 셔츠-상세이미지.jpg',9,0);
+Insert into PRODUCT (ITEMNUM,IMAGE1,CG_CODE,SCG_CODE,PRODUCT,PRICE,DIMAGE,PCNT,SALE) values (10613,'MIZUNO 미즈노 하이넥 긴팔언더셔츠.jpg','fcg006','clothes002','MIZUNO 미즈노 하이넥 긴팔언더셔츠',33000,'MIZUNO 미즈노 하이넥 긴팔언더셔츠-상세이미지.jpg',0,0);
+Insert into PRODUCT (ITEMNUM,IMAGE1,CG_CODE,SCG_CODE,PRODUCT,PRICE,DIMAGE,PCNT,SALE) values (10614,'SSK 사사키 Proedge 코듀라 냉감 반팔 스판언더 (네이비).png','fcg006','clothes002','SSK 사사키 Proedge 코듀라 냉감 반팔 스판언더 (네이비)',27700,'SSK 사사키 Proedge 코듀라 냉감 반팔 스판언더 (네이비)-상세이미지.jpg',0,0);
+Insert into PRODUCT (ITEMNUM,IMAGE1,CG_CODE,SCG_CODE,PRODUCT,PRICE,DIMAGE,PCNT,SALE) values (10615,'STORM NEW 고급형 쿨론 스판 언더셔츠 블랙.jpg','fcg006','clothes002','STORM NEW 고급형 쿨론 스판 언더셔츠 블랙',26900,'STORM NEW 고급형 쿨론 스판 언더셔츠 블랙-상세이미지.jpg',0,0);
+Insert into PRODUCT (ITEMNUM,IMAGE1,CG_CODE,SCG_CODE,PRODUCT,PRICE,DIMAGE,PCNT,SALE) values (10580,'이스턴 팀 이큅먼트 휠 백 팀 장비 야구가방.jpg','fcg005','bag004','이스턴 팀 이큅먼트 휠 백 팀 장비 야구가방',121000,'이스턴 팀 이큅먼트 휠 백 팀 장비 야구가방-상세이미지.jpg',0,0);
+Insert into PRODUCT (ITEMNUM,IMAGE1,CG_CODE,SCG_CODE,PRODUCT,PRICE,DIMAGE,PCNT,SALE) values (10581,'MIZUNO유소년배트가방1개입.jpg','fcg005','bag005','MIZUNO유소년배트가방1개입',29000,'MIZUNO유소년배트가방1개입-상세이미지.jpg',1,0);
+Insert into PRODUCT (ITEMNUM,IMAGE1,CG_CODE,SCG_CODE,PRODUCT,PRICE,DIMAGE,PCNT,SALE) values (10582,'SSK 배트걸이 가방.jpg','fcg005','bag005','SSK 배트걸이 가방',36000,'SSK 배트걸이 가방-상세이미지.jpg',0,0);
+Insert into PRODUCT (ITEMNUM,IMAGE1,CG_CODE,SCG_CODE,PRODUCT,PRICE,DIMAGE,PCNT,SALE) values (10583,'SSK 사사키 2~3개입 그래픽 배트가방.jpg','fcg005','bag005','SSK 사사키 2~3개입 그래픽 배트가방',33000,'SSK 사사키 2~3개입 그래픽 배트가방-상세이미지.jpg',0,0);
+Insert into PRODUCT (ITEMNUM,IMAGE1,CG_CODE,SCG_CODE,PRODUCT,PRICE,DIMAGE,PCNT,SALE) values (10584,'SSK 사사키 PROEDGE 10개입 배트가방 (네이비).jpg','fcg005','bag005','SSK 사사키 PROEDGE 10개입 배트가방 (네이비)',59000,'SSK 사사키 PROEDGE 10개입 배트가방 (네이비)-상세이미지.jpg',0,0);
+Insert into PRODUCT (ITEMNUM,IMAGE1,CG_CODE,SCG_CODE,PRODUCT,PRICE,DIMAGE,PCNT,SALE) values (10585,'ZETT 제트 배트가방 (네이비).jpg','fcg005','bag005','ZETT 제트 배트가방 (네이비)',41000,'ZETT 제트 배트가방 (네이비)-상세이미지.jpg',0,0);
+Insert into PRODUCT (ITEMNUM,IMAGE1,CG_CODE,SCG_CODE,PRODUCT,PRICE,DIMAGE,PCNT,SALE) values (10586,'ZETT 제트 배트가방 (블랙).jpg','fcg005','bag005','ZETT 제트 배트가방 (블랙)',41000,'ZETT 제트 배트가방 (블랙)-상세이미지.jpg',0,0);
+Insert into PRODUCT (ITEMNUM,IMAGE1,CG_CODE,SCG_CODE,PRODUCT,PRICE,DIMAGE,PCNT,SALE) values (10587,'롤링스 야구배트케이스 가방.jpg','fcg005','bag005','롤링스 야구배트케이스 가방',38900,'롤링스 야구배트케이스 가방-상세이미지.jpg',0,0);
+Insert into PRODUCT (ITEMNUM,IMAGE1,CG_CODE,SCG_CODE,PRODUCT,PRICE,DIMAGE,PCNT,SALE) values (10588,'하이골드 베이스볼 배트 가방 3개입 (블랙).jpg','fcg005','bag005','하이골드 베이스볼 배트 가방 3개입 (블랙)',39900,'하이골드 베이스볼 배트 가방 3개입 (블랙)-상세이미지.jfif',0,0);
+Insert into PRODUCT (ITEMNUM,IMAGE1,CG_CODE,SCG_CODE,PRODUCT,PRICE,DIMAGE,PCNT,SALE) values (10589,'하타케야마 알파에디션-VI 배트가방 (6개입) 블랙.jpg','fcg005','bag005','하타케야마 알파에디션-VI 배트가방 (6개입) 블랙',52500,'하타케야마 알파에디션-VI 배트가방 (6개입) 블랙-상세이미지.jpg',0,0);
+Insert into PRODUCT (ITEMNUM,IMAGE1,CG_CODE,SCG_CODE,PRODUCT,PRICE,DIMAGE,PCNT,SALE) values (10590,'하타케야마 알파에디션-VI 배트가방 (6개입) 화이트.jpg','fcg005','bag005','하타케야마 알파에디션-VI 배트가방 (6개입) 화이트',52500,'하타케야마 알파에디션-VI 배트가방 (6개입) 화이트-상세이미지.jpg',0,0);
+Insert into PRODUCT (ITEMNUM,IMAGE1,CG_CODE,SCG_CODE,PRODUCT,PRICE,DIMAGE,PCNT,SALE) values (10591,'MIZUNO 미즈노 프로 볼가방.jpg','fcg005','bag006','MIZUNO 미즈노 프로 볼가방',40000,'MIZUNO 미즈노 프로 볼가방-상세이미지.jpg',0,0);
+Insert into PRODUCT (ITEMNUM,IMAGE1,CG_CODE,SCG_CODE,PRODUCT,PRICE,DIMAGE,PCNT,SALE) values (10592,'ZETT 제트 볼가방(60개입).jpg','fcg005','bag006','ZETT 제트 볼가방(60개입)',39900,'ZETT 제트 볼가방(60개입)-상세이미지.jpg',0,0);
+Insert into PRODUCT (ITEMNUM,IMAGE1,CG_CODE,SCG_CODE,PRODUCT,PRICE,DIMAGE,PCNT,SALE) values (10593,'골드이스트 국내제조 애나멜 볼가방.jpg','fcg005','bag006','골드이스트 국내제조 애나멜 볼가방',42500,'골드이스트 국내제조 애나멜 볼가방-상세이미지.jpg',0,0);
+Insert into PRODUCT (ITEMNUM,IMAGE1,CG_CODE,SCG_CODE,PRODUCT,PRICE,DIMAGE,PCNT,SALE) values (10594,'모리모토 2019 야구 볼가방.jpg','fcg005','bag006','모리모토 2019 야구 볼가방',33300,'모리모토 2019 야구 볼가방-상세이미지.jpg',0,0);
+Insert into PRODUCT (ITEMNUM,IMAGE1,CG_CODE,SCG_CODE,PRODUCT,PRICE,DIMAGE,PCNT,SALE) values (10595,'스카이라인 볼가방 (레드).jpg','fcg005','bag006','스카이라인 볼가방 (레드)',32000,'스카이라인 볼가방 (레드)-상세이미지.jpg',0,0);
+Insert into PRODUCT (ITEMNUM,IMAGE1,CG_CODE,SCG_CODE,PRODUCT,PRICE,DIMAGE,PCNT,SALE) values (10596,'스카이라인 볼가방 (블루).jpg','fcg005','bag006','스카이라인 볼가방 (블루)',32500,'스카이라인 볼가방 (블루)-상세이미지.jpg',0,0);
+Insert into PRODUCT (ITEMNUM,IMAGE1,CG_CODE,SCG_CODE,PRODUCT,PRICE,DIMAGE,PCNT,SALE) values (10597,'이스턴 볼가방.jpg','fcg005','bag006','이스턴 볼가방',47200,'이스턴 볼가방-상세이미지.jpg',0,0);
+Insert into PRODUCT (ITEMNUM,IMAGE1,CG_CODE,SCG_CODE,PRODUCT,PRICE,DIMAGE,PCNT,SALE) values (10598,'프로스펙스 야구 공가방 볼가방 80개입 (레드).jpg','fcg005','bag006','프로스펙스 야구 공가방 볼가방 80개입 (레드)',50000,'프로스펙스 야구 공가방 볼가방 80개입 (레드)-상세이미지.jpg',0,0);
+Insert into PRODUCT (ITEMNUM,IMAGE1,CG_CODE,SCG_CODE,PRODUCT,PRICE,DIMAGE,PCNT,SALE) values (10599,'프로스펙스 야구 공가방 볼가방 80개입.jpg','fcg005','bag006','프로스펙스 야구 공가방 볼가방 80개입',50000,'프로스펙스 야구 공가방 볼가방 80개입-상세이미지.jpg',0,0);
+Insert into PRODUCT (ITEMNUM,IMAGE1,CG_CODE,SCG_CODE,PRODUCT,PRICE,DIMAGE,PCNT,SALE) values (10600,'하타케야마 볼가방 YE.jpg','fcg005','bag006','하타케야마 볼가방 YE',38700,'하타케야마 볼가방 YE-상세이미지.jpg',0,0);
+Insert into PRODUCT (ITEMNUM,IMAGE1,CG_CODE,SCG_CODE,PRODUCT,PRICE,DIMAGE,PCNT,SALE) values (10601,'AWESOME STAR 어썸스타 세비아 티셔츠.jpg','fcg006','clothes001','AWESOME STAR 어썸스타 세비아 티셔츠',20000,'AWESOME STAR 어썸스타 세비아 티셔츠-상세이미지.jpg',1,0);
+Insert into PRODUCT (ITEMNUM,IMAGE1,CG_CODE,SCG_CODE,PRODUCT,PRICE,DIMAGE,PCNT,SALE) values (10602,'AWESOME STAR 어썸스타 엘시드 카모 티셔츠.jpg','fcg006','clothes001','AWESOME STAR 어썸스타 엘시드 카모 티셔츠',22000,'AWESOME STAR 어썸스타 엘시드 카모 티셔츠-상세이미지.jpg',0,0);
+Insert into PRODUCT (ITEMNUM,IMAGE1,CG_CODE,SCG_CODE,PRODUCT,PRICE,DIMAGE,PCNT,SALE) values (10603,'MIZUNO 미즈노 프로 메쉬반팔셔츠.jpg','fcg006','clothes001','MIZUNO 미즈노 프로 메쉬반팔셔츠',19900,'MIZUNO 미즈노 프로 메쉬반팔셔츠-상세이미지.jpg',0,0);
+Insert into PRODUCT (ITEMNUM,IMAGE1,CG_CODE,SCG_CODE,PRODUCT,PRICE,DIMAGE,PCNT,SALE) values (10604,'MIZUNO 미즈노 프로 비트업반팔셔츠.jpg','fcg006','clothes001','MIZUNO 미즈노 프로 비트업반팔셔츠',19900,'MIZUNO 미즈노 프로 비트업반팔셔츠-상세이미지.jpg',0,0);
+Insert into PRODUCT (ITEMNUM,IMAGE1,CG_CODE,SCG_CODE,PRODUCT,PRICE,DIMAGE,PCNT,SALE) values (10605,'MIZUNO 미즈노 프로메쉬 반팔언더티.jpg','fcg006','clothes001','MIZUNO 미즈노 프로메쉬 반팔언더티',19900,'MIZUNO 미즈노 프로메쉬 반팔언더티-상세이미지.jpg',0,0);
+Insert into PRODUCT (ITEMNUM,IMAGE1,CG_CODE,SCG_CODE,PRODUCT,PRICE,DIMAGE,PCNT,SALE) values (10606,'MIZUNO 미즈노 프로반팔티셔츠.jpg','fcg006','clothes001','MIZUNO 미즈노 프로반팔티셔츠',19900,'MIZUNO 미즈노 프로반팔티셔츠-상세이미지.jpg',0,0);
+Insert into PRODUCT (ITEMNUM,IMAGE1,CG_CODE,SCG_CODE,PRODUCT,PRICE,DIMAGE,PCNT,SALE) values (10607,'골드이스트 리얼마스터 언발란스 반팔티.jpg','fcg006','clothes001','골드이스트 리얼마스터 언발란스 반팔티',25000,'골드이스트 리얼마스터 언발란스 반팔티-상세이미지.jpg',0,0);
+Insert into PRODUCT (ITEMNUM,IMAGE1,CG_CODE,SCG_CODE,PRODUCT,PRICE,DIMAGE,PCNT,SALE) values (10608,'골드이스트 리얼마스터 쿨 반팔티.jpg','fcg006','clothes001','골드이스트 리얼마스터 쿨 반팔티',24000,'골드이스트 리얼마스터 쿨 반팔티-상세이미지.jpg',0,0);
+Insert into PRODUCT (ITEMNUM,IMAGE1,CG_CODE,SCG_CODE,PRODUCT,PRICE,DIMAGE,PCNT,SALE) values (10616,'ZETT BOK 352 스판언더셔츠 (옐로우).jpg','fcg006','clothes002','ZETT BOK 352 스판언더셔츠 (옐로우)',31000,'ZETT BOK 352 스판언더셔츠 (옐로우)-상세이미지.jpg',0,0);
+Insert into PRODUCT (ITEMNUM,IMAGE1,CG_CODE,SCG_CODE,PRODUCT,PRICE,DIMAGE,PCNT,SALE) values (10546,'도쿠마 프로 골드에디션 배팅장갑 골드.jpg','fcg003','glove005','도쿠마 프로 골드에디션 배팅장갑 골드',30000,'도쿠마 프로 골드에디션 배팅장갑 골드-상세이미지.jpg',0,0);
+Insert into PRODUCT (ITEMNUM,IMAGE1,CG_CODE,SCG_CODE,PRODUCT,PRICE,DIMAGE,PCNT,SALE) values (10547,'스톰 2019 STORM 배팅장갑 블랙 (유소년).jpg','fcg003','glove005','스톰 2019 STORM 배팅장갑 블랙 (유소년)',25900,'스톰 2019 STORM 배팅장갑 블랙 (유소년)-상세이미지.jpg',0,0);
+Insert into PRODUCT (ITEMNUM,IMAGE1,CG_CODE,SCG_CODE,PRODUCT,PRICE,DIMAGE,PCNT,SALE) values (10548,'아동용 마루치 Quest 배팅장갑 레드.jpg','fcg003','glove005','아동용 마루치 Quest 배팅장갑 레드',24900,'아동용 마루치 Quest 배팅장갑 레드-상세이미지.jpg',0,0);
+Insert into PRODUCT (ITEMNUM,IMAGE1,CG_CODE,SCG_CODE,PRODUCT,PRICE,DIMAGE,PCNT,SALE) values (10549,'아동용 마루치 Quest 배팅장갑 블랙.jpg','fcg003','glove005','아동용 마루치 Quest 배팅장갑 블랙',24900,'아동용 마루치 Quest 배팅장갑 블랙-상세이미지.jpg',0,0);
+Insert into PRODUCT (ITEMNUM,IMAGE1,CG_CODE,SCG_CODE,PRODUCT,PRICE,DIMAGE,PCNT,SALE) values (10550,'아식스 400 주니어 배팅장갑.jpg','fcg003','glove005','아식스 400 주니어 배팅장갑',23000,'아식스 400 주니어 배팅장갑-상세이미지.jpg',0,0);
+Insert into PRODUCT (ITEMNUM,IMAGE1,CG_CODE,SCG_CODE,PRODUCT,PRICE,DIMAGE,PCNT,SALE) values (10551,'DESCENTE RED0 야구 백팩.jpg','fcg005','bag001','DESCENTE RED0 야구 백팩',110000,'DESCENTE RED0 야구 백팩-상세이미지.jpg',0,0);
+Insert into PRODUCT (ITEMNUM,IMAGE1,CG_CODE,SCG_CODE,PRODUCT,PRICE,DIMAGE,PCNT,SALE) values (10552,'MIZUNO 미즈노 프로백팩 올보.jpg','fcg005','bag001','MIZUNO 미즈노 프로백팩 올보',100000,'MIZUNO 미즈노 프로백팩 올보-상세이미지.jpg',7,0);
+Insert into PRODUCT (ITEMNUM,IMAGE1,CG_CODE,SCG_CODE,PRODUCT,PRICE,DIMAGE,PCNT,SALE) values (10553,'ZETT 제트 백팩 (골드).jpg','fcg005','bag001','ZETT 제트 백팩 (골드)',99000,'ZETT 제트 백팩 (골드)-상세이미지.jpg',2,0);
+Insert into PRODUCT (ITEMNUM,IMAGE1,CG_CODE,SCG_CODE,PRODUCT,PRICE,DIMAGE,PCNT,SALE) values (10554,'ZETT 제트 백팩 야구 가방 (네이비).jpg','fcg005','bag001','ZETT 제트 백팩 야구 가방 (네이비)',95500,'ZETT 제트 백팩 야구 가방 (네이비)-상세이미지.jfif',0,0);
+Insert into PRODUCT (ITEMNUM,IMAGE1,CG_CODE,SCG_CODE,PRODUCT,PRICE,DIMAGE,PCNT,SALE) values (10555,'빅 자이언트 야구 백팩 (화이트).jpg','fcg005','bag001','빅 자이언트 야구 백팩 (화이트)',120000,'빅 자이언트 야구 백팩 (화이트)-상세이미지.jpg',0,0);
+Insert into PRODUCT (ITEMNUM,IMAGE1,CG_CODE,SCG_CODE,PRODUCT,PRICE,DIMAGE,PCNT,SALE) values (10556,'프로스펙스 포프로 하이브리드 야구 장비 가방 백팩 블랙.jpg','fcg005','bag001','프로스펙스 포프로 하이브리드 야구 장비 가방 백팩 블랙',10900,'프로스펙스 포프로 하이브리드 야구 장비 가방 백팩 블랙-상세이미지.jpg',0,0);
+Insert into PRODUCT (ITEMNUM,IMAGE1,CG_CODE,SCG_CODE,PRODUCT,PRICE,DIMAGE,PCNT,SALE) values (10557,'하타케야마 NEW 2PK 백팩 (와인).jpg','fcg005','bag001','하타케야마 NEW 2PK 백팩 (와인)',120000,'하타케야마 NEW 2PK 백팩 (와인)-상세이미지.jpg',0,0);
+Insert into PRODUCT (ITEMNUM,IMAGE1,CG_CODE,SCG_CODE,PRODUCT,PRICE,DIMAGE,PCNT,SALE) values (10558,'하타케야마 어센틱 프리미엄 알파 매버릭 에디션 A-1 타입 백팩 네이비.jpg','fcg005','bag001','하타케야마 어센틱 프리미엄 알파 매버릭 에디션 A-1 타입 백팩 네이비',119000,'하타케야마 어센틱 프리미엄 알파 매버릭 에디션 A-1 타입 백팩 네이비-상세이미지.jpg',0,0);
+Insert into PRODUCT (ITEMNUM,IMAGE1,CG_CODE,SCG_CODE,PRODUCT,PRICE,DIMAGE,PCNT,SALE) values (10559,'하타케야마 어센틱 프리미엄 알파 매버릭 에디션 A-1 타입 백팩 화이트.jpg','fcg005','bag001','하타케야마 어센틱 프리미엄 알파 매버릭 에디션 A-1 타입 백팩 화이트',119000,'하타케야마 어센틱 프리미엄 알파 매버릭 에디션 A-1 타입 백팩 화이트-상세이미지.jpg',0,0);
+Insert into PRODUCT (ITEMNUM,IMAGE1,CG_CODE,SCG_CODE,PRODUCT,PRICE,DIMAGE,PCNT,SALE) values (10560,'하타케야마 어센틱 프리미엄 알파 매버릭 에디션 A타입 백팩 블랙.jpg','fcg005','bag001','하타케야마 어센틱 프리미엄 알파 매버릭 에디션 A타입 백팩 블랙',119000,'하타케야마 어센틱 프리미엄 알파 매버릭 에디션 A타입 백팩 블랙-상세이미지.jpg',0,0);
+Insert into PRODUCT (ITEMNUM,IMAGE1,CG_CODE,SCG_CODE,PRODUCT,PRICE,DIMAGE,PCNT,SALE) values (10561,'MIZUNO글로벌엘리트메신저백.jpg','fcg005','bag002','MIZUNO글로벌엘리트메신저백',34000,'MIZUNO글로벌엘리트메신저백-상세이미지.jpg',6,0);
+Insert into PRODUCT (ITEMNUM,IMAGE1,CG_CODE,SCG_CODE,PRODUCT,PRICE,DIMAGE,PCNT,SALE) values (10562,'MIZUNO카무메신저백.jpg','fcg005','bag002','MIZUNO카무메신저백',40000,'MIZUNO카무메신저백-상세이미지.jpg',5,0);
+Insert into PRODUCT (ITEMNUM,IMAGE1,CG_CODE,SCG_CODE,PRODUCT,PRICE,DIMAGE,PCNT,SALE) values (10563,'러펠스 더플백 스포츠 장비가방 (포수장비).jpg','fcg005','bag002','러펠스 더플백 스포츠 장비가방 (포수장비)',55000,'러펠스 더플백 스포츠 장비가방 (포수장비)-상세이미지.jpg',2,0);
+Insert into PRODUCT (ITEMNUM,IMAGE1,CG_CODE,SCG_CODE,PRODUCT,PRICE,DIMAGE,PCNT,SALE) values (10564,'롤링스 베이스볼 캔버스 토트백.jpg','fcg005','bag002','롤링스 베이스볼 캔버스 토트백',22000,'롤링스 베이스볼 캔버스 토트백-상세이미지.jpg',0,0);
+Insert into PRODUCT (ITEMNUM,IMAGE1,CG_CODE,SCG_CODE,PRODUCT,PRICE,DIMAGE,PCNT,SALE) values (10565,'모리모토 어드밴스드 하이브리드 백팩 네이비.jpg','fcg005','bag002','모리모토 어드밴스드 하이브리드 백팩 네이비',66000,'모리모토 어드밴스드 하이브리드 백팩 네이비-상세이미지.jpg',0,0);
+Insert into PRODUCT (ITEMNUM,IMAGE1,CG_CODE,SCG_CODE,PRODUCT,PRICE,DIMAGE,PCNT,SALE) values (10566,'모리모토 어드밴스드 하이브리드 백팩 화이트.jpg','fcg005','bag002','모리모토 어드밴스드 하이브리드 백팩 화이트',66000,'모리모토 어드밴스드 하이브리드 백팩 화이트-상세이미지.jpg',0,0);
+Insert into PRODUCT (ITEMNUM,IMAGE1,CG_CODE,SCG_CODE,PRODUCT,PRICE,DIMAGE,PCNT,SALE) values (10567,'언더아머 컨테인 듀오 미디엄 백팩 더플백 (그레이).jpg','fcg005','bag002','언더아머 컨테인 듀오 미디엄 백팩 더플백 (그레이)',49000,'언더아머 컨테인 듀오 미디엄 백팩 더플백 (그레이)-상세이미지.jpg',0,0);
+Insert into PRODUCT (ITEMNUM,IMAGE1,CG_CODE,SCG_CODE,PRODUCT,PRICE,DIMAGE,PCNT,SALE) values (10568,'이보쉴드 트레이닝 가방 더플백 네이비.jpeg','fcg005','bag002','이보쉴드 트레이닝 가방 더플백 네이비',48000,'이보쉴드 트레이닝 가방 더플백 네이비-상세이미지.jpg',0,0);
+Insert into PRODUCT (ITEMNUM,IMAGE1,CG_CODE,SCG_CODE,PRODUCT,PRICE,DIMAGE,PCNT,SALE) values (10569,'이보쉴드 트레이닝 가방 더플백 블랙.jpeg','fcg005','bag002','이보쉴드 트레이닝 가방 더플백 블랙',48000,'이보쉴드 트레이닝 가방 더플백 블랙-상세이미지.jpg',0,0);
+Insert into PRODUCT (ITEMNUM,IMAGE1,CG_CODE,SCG_CODE,PRODUCT,PRICE,DIMAGE,PCNT,SALE) values (10570,'이보쉴드 트레이닝 가방 더플백 스칼렛.jpg','fcg005','bag002','이보쉴드 트레이닝 가방 더플백 스칼렛',48000,'이보쉴드 트레이닝 가방 더플백 스칼렛-상세이미지.jpg',1,0);
+Insert into PRODUCT (ITEMNUM,IMAGE1,CG_CODE,SCG_CODE,PRODUCT,PRICE,DIMAGE,PCNT,SALE) values (10571,'MIZUNO 미즈노 캐리어가방.jpg','fcg005','bag004','MIZUNO 미즈노 캐리어가방',120000,'MIZUNO 미즈노 캐리어가방-상세이미지.jpg',1,0);
+Insert into PRODUCT (ITEMNUM,IMAGE1,CG_CODE,SCG_CODE,PRODUCT,PRICE,DIMAGE,PCNT,SALE) values (10572,'SSK 사사키 PROEDGE 140L 포수장비 휠가방 (블랙).jpg','fcg005','bag004','SSK 사사키 PROEDGE 140L 포수장비 휠가방 (블랙)',133000,'SSK 사사키 PROEDGE 140L 포수장비 휠가방 (블랙)-상세이미지.jpg',2,0);
+Insert into PRODUCT (ITEMNUM,IMAGE1,CG_CODE,SCG_CODE,PRODUCT,PRICE,DIMAGE,PCNT,SALE) values (10573,'SSK 사사키 PROEDGE 140L 포수장비 휠가방.jpg','fcg005','bag004','SSK 사사키 PROEDGE 140L 포수장비 휠가방',135000,'SSK 사사키 PROEDGE 140L 포수장비 휠가방-상세이미지.jpg',0,0);
+Insert into PRODUCT (ITEMNUM,IMAGE1,CG_CODE,SCG_CODE,PRODUCT,PRICE,DIMAGE,PCNT,SALE) values (10574,'WILSON드마리니휠장비가방.jpg','fcg005','bag004','WILSON드마리니휠장비가방',122000,'WILSON드마리니휠장비가방-상세이미지.jpg',0,0);
+Insert into PRODUCT (ITEMNUM,IMAGE1,CG_CODE,SCG_CODE,PRODUCT,PRICE,DIMAGE,PCNT,SALE) values (10575,'데상트 다용도 휠백 야구 휠가방 (네이비).png','fcg005','bag004','데상트 다용도 휠백 야구 휠가방 (네이비)',110000,'데상트 다용도 휠백 야구 휠가방 (네이비)-상세이미지.jpg',0,0);
+Insert into PRODUCT (ITEMNUM,IMAGE1,CG_CODE,SCG_CODE,PRODUCT,PRICE,DIMAGE,PCNT,SALE) values (10576,'루이빌슬러거 오마하 리그 휠 백 야구장비 가방.jpg','fcg005','bag004','루이빌슬러거 오마하 리그 휠 백 야구장비 가방',155000,'루이빌슬러거 오마하 리그 휠 백 야구장비 가방-상세이미지.jpg',0,0);
+Insert into PRODUCT (ITEMNUM,IMAGE1,CG_CODE,SCG_CODE,PRODUCT,PRICE,DIMAGE,PCNT,SALE) values (10577,'브렛 글래디에이터 8배트 하드 캐리어.jpg','fcg005','bag004','브렛 글래디에이터 8배트 하드 캐리어',149000,'브렛 글래디에이터 8배트 하드 캐리어-상세이미지.jpg',0,0);
+Insert into PRODUCT (ITEMNUM,IMAGE1,CG_CODE,SCG_CODE,PRODUCT,PRICE,DIMAGE,PCNT,SALE) values (10545,'FILA 두산 802 배팅장갑.jpg','fcg003','glove005','FILA 두산 802 배팅장갑',19900,'FILA 두산 802 배팅장갑-상세이미지.jpg',0,0);
+Insert into PRODUCT (ITEMNUM,IMAGE1,CG_CODE,SCG_CODE,PRODUCT,PRICE,DIMAGE,PCNT,SALE) values (10578,'윌슨 드마리니 스페셜 OPS 프론트 라인 휠 가방 블랙.jpg','fcg005','bag004','윌슨 드마리니 스페셜 OPS 프론트 라인 휠 가방 블랙',139000,'윌슨 드마리니 스페셜 OPS 프론트 라인 휠 가방 블랙-상세이미지.jpg',0,0);
+Insert into PRODUCT (ITEMNUM,IMAGE1,CG_CODE,SCG_CODE,PRODUCT,PRICE,DIMAGE,PCNT,SALE) values (10579,'이스턴 옥탄 휠 백.jpg','fcg005','bag004','이스턴 옥탄 휠 백',127000,'이스턴 옥탄 휠 백-상세이미지.jpg',0,0);
+Insert into PRODUCT (ITEMNUM,IMAGE1,CG_CODE,SCG_CODE,PRODUCT,PRICE,DIMAGE,PCNT,SALE) values (10509,'프랭클린 CFX PRO FP 커스텀 배팅장갑.jpg','fcg003','glove001','프랭클린 CFX PRO FP 커스텀 배팅장갑',80000,'프랭클린 CFX PRO FP 커스텀 배팅장갑-상세이미지.jpg',8,0);
+Insert into PRODUCT (ITEMNUM,IMAGE1,CG_CODE,SCG_CODE,PRODUCT,PRICE,DIMAGE,PCNT,SALE) values (10510,'프랭클린 파워스트랩 커스텀 배팅장갑 (화이트).jpg','fcg003','glove001','프랭클린 파워스트랩 커스텀 배팅장갑 (화이트)',80000,'프랭클린 파워스트랩 커스텀 배팅장갑 (화이트)-상세이미지.jpg',8,0);
+Insert into PRODUCT (ITEMNUM,IMAGE1,CG_CODE,SCG_CODE,PRODUCT,PRICE,DIMAGE,PCNT,SALE) values (10511,'BBK 2024년형 화양연화 야구 수비장갑.jpg','fcg003','glove002','BBK 2024년형 화양연화 야구 수비장갑',30000,'BBK 2024년형 화양연화 야구 수비장갑-상세이미지.jpg',4,0);
+Insert into PRODUCT (ITEMNUM,IMAGE1,CG_CODE,SCG_CODE,PRODUCT,PRICE,DIMAGE,PCNT,SALE) values (10512,'FILA 휠라 두산 수비장갑.jpg','fcg003','glove002','FILA 휠라 두산 수비장갑',25000,'FILA 휠라 두산 수비장갑-상세이미지.jpg',2,0);
+Insert into PRODUCT (ITEMNUM,IMAGE1,CG_CODE,SCG_CODE,PRODUCT,PRICE,DIMAGE,PCNT,SALE) values (10513,'다비드 23 수비장갑.jpg','fcg003','glove002','다비드 23 수비장갑',23000,'다비드 23 수비장갑-상세이미지.png',0,0);
+Insert into PRODUCT (ITEMNUM,IMAGE1,CG_CODE,SCG_CODE,PRODUCT,PRICE,DIMAGE,PCNT,SALE) values (10514,'도쿠마 도코마 수비장갑.jpg','fcg003','glove002','도쿠마 도코마 수비장갑',24000,'도쿠마 도코마 수비장갑-상세이미지.jpg',0,0);
+Insert into PRODUCT (ITEMNUM,IMAGE1,CG_CODE,SCG_CODE,PRODUCT,PRICE,DIMAGE,PCNT,SALE) values (10515,'롤링스 벡터 카모2 수비용 장갑.jpg','fcg003','glove002','롤링스 벡터 카모2 수비용 장갑',31000,'롤링스 벡터 카모2 수비용 장갑-상세이미지.jpg',0,0);
+Insert into PRODUCT (ITEMNUM,IMAGE1,CG_CODE,SCG_CODE,PRODUCT,PRICE,DIMAGE,PCNT,SALE) values (10516,'미즈노 수비장갑 네이비.jpg','fcg003','glove002','미즈노 수비장갑 네이비',29900,'미즈노 수비장갑 네이비-상세이미지.jpg',0,0);
+Insert into PRODUCT (ITEMNUM,IMAGE1,CG_CODE,SCG_CODE,PRODUCT,PRICE,DIMAGE,PCNT,SALE) values (10517,'미즈노 수비장갑 블루.jpg','fcg003','glove002','미즈노 수비장갑 블루',29900,'미즈노 수비장갑 블루-상세이미지.jpg',0,0);
+Insert into PRODUCT (ITEMNUM,IMAGE1,CG_CODE,SCG_CODE,PRODUCT,PRICE,DIMAGE,PCNT,SALE) values (10518,'미즈노 프로 수비장갑 레드.jpg','fcg003','glove002','미즈노 프로 수비장갑 레드',30000,'미즈노 프로 수비장갑 레드-상세이미지.jpg',0,0);
+Insert into PRODUCT (ITEMNUM,IMAGE1,CG_CODE,SCG_CODE,PRODUCT,PRICE,DIMAGE,PCNT,SALE) values (10519,'제트 BGK-244 야구 수비장갑 (블랙).jpg','fcg003','glove002','제트 BGK-244 야구 수비장갑 (블랙)',34500,'제트 BGK-244 야구 수비장갑 (블랙)-상세이미지.jpg',0,0);
+Insert into PRODUCT (ITEMNUM,IMAGE1,CG_CODE,SCG_CODE,PRODUCT,PRICE,DIMAGE,PCNT,SALE) values (10520,'제트 BGK-244 야구 수비장갑 (블루).jpg','fcg003','glove002','제트 BGK-244 야구 수비장갑 (블루)',34500,'제트 BGK-244 야구 수비장갑 (블루)-상세이미지.jpg',0,0);
+Insert into PRODUCT (ITEMNUM,IMAGE1,CG_CODE,SCG_CODE,PRODUCT,PRICE,DIMAGE,PCNT,SALE) values (10521,'BBK 쿨맥스 쿠바메쉬 EVA 양손 주루장갑.jpg','fcg003','glove003','BBK 쿨맥스 쿠바메쉬 EVA 양손 주루장갑',49000,'BBK 쿨맥스 쿠바메쉬 EVA 양손 주루장갑-상세이미지.jpg',1,0);
+Insert into PRODUCT (ITEMNUM,IMAGE1,CG_CODE,SCG_CODE,PRODUCT,PRICE,DIMAGE,PCNT,SALE) values (10522,'비엠씨 BMC NEW PRO25 프로 슬라이딩 주루장갑 실버.jpg','fcg003','glove003','비엠씨 BMC NEW PRO25 프로 슬라이딩 주루장갑 실버',49900,'비엠씨 BMC NEW PRO25 프로 슬라이딩 주루장갑 실버-상세이미지.jpg',2,0);
+Insert into PRODUCT (ITEMNUM,IMAGE1,CG_CODE,SCG_CODE,PRODUCT,PRICE,DIMAGE,PCNT,SALE) values (10523,'알파 비스트 슬라이딩 주루 장갑 FOR PLAYER 배지환 게임모델 골드.jpg','fcg003','glove003','알파 비스트 슬라이딩 주루 장갑 FOR PLAYER 배지환 게임모델 골드',69000,'알파 비스트 슬라이딩 주루 장갑 FOR PLAYER 배지환 게임모델 골드-상세이미지.jpg',0,0);
+Insert into PRODUCT (ITEMNUM,IMAGE1,CG_CODE,SCG_CODE,PRODUCT,PRICE,DIMAGE,PCNT,SALE) values (10524,'이보쉴드 슬라이딩 미트 2.0 주루장갑 (블랙).jpg','fcg003','glove003','이보쉴드 슬라이딩 미트 2.0 주루장갑 (블랙)',65000,'이보쉴드 슬라이딩 미트 2.0 주루장갑 (블랙)-상세이미지.jpg',0,0);
+Insert into PRODUCT (ITEMNUM,IMAGE1,CG_CODE,SCG_CODE,PRODUCT,PRICE,DIMAGE,PCNT,SALE) values (10525,'제트 BLK-49B 고종욱 슬라이딩 장갑 무자수.jpg','fcg003','glove003','제트 BLK-49B 고종욱 슬라이딩 장갑 무자수',87000,'제트 BLK-49B 고종욱 슬라이딩 장갑 무자수-상세이미지.jpg',0,0);
+Insert into PRODUCT (ITEMNUM,IMAGE1,CG_CODE,SCG_CODE,PRODUCT,PRICE,DIMAGE,PCNT,SALE) values (10526,'제트 슬라이딩 장갑 주루 장갑 BLK-49B 엄지폐쇄 핑크.jpg','fcg003','glove003','제트 슬라이딩 장갑 주루 장갑 BLK-49B 엄지폐쇄 핑크',80000,'제트 슬라이딩 장갑 주루 장갑 BLK-49B 엄지폐쇄 핑크-상세이미지.jpg',0,0);
+Insert into PRODUCT (ITEMNUM,IMAGE1,CG_CODE,SCG_CODE,PRODUCT,PRICE,DIMAGE,PCNT,SALE) values (10527,'프로스펙스 엘리트 야구 슬라이딩 장갑 블랙.jpg','fcg003','glove003','프로스펙스 엘리트 야구 슬라이딩 장갑 블랙',60000,'프로스펙스 엘리트 야구 슬라이딩 장갑 블랙-상세이미지.jpg',0,0);
+Insert into PRODUCT (ITEMNUM,IMAGE1,CG_CODE,SCG_CODE,PRODUCT,PRICE,DIMAGE,PCNT,SALE) values (10528,'프로스펙스 엘리트 야구 슬라이딩 장갑 화이트.jpg','fcg003','glove003','프로스펙스 엘리트 야구 슬라이딩 장갑 화이트',60000,'프로스펙스 엘리트 야구 슬라이딩 장갑 화이트-상세이미지.jpg',0,0);
+Insert into PRODUCT (ITEMNUM,IMAGE1,CG_CODE,SCG_CODE,PRODUCT,PRICE,DIMAGE,PCNT,SALE) values (10529,'프로스펙스 포프로 야구 슬라이딩 장갑 채은성 모델 옐로우.jpg','fcg003','glove003','프로스펙스 포프로 야구 슬라이딩 장갑 채은성 모델 옐로우',68000,'프로스펙스 포프로 야구 슬라이딩 장갑 채은성 모델 옐로우-상세이미지.jpg',0,0);
+Insert into PRODUCT (ITEMNUM,IMAGE1,CG_CODE,SCG_CODE,PRODUCT,PRICE,DIMAGE,PCNT,SALE) values (10530,'프로스펙스 포프로 야구 슬라이딩 장갑 하재훈 모델 그린.jpg','fcg003','glove003','프로스펙스 포프로 야구 슬라이딩 장갑 하재훈 모델 그린',68000,'프로스펙스 포프로 야구 슬라이딩 장갑 하재훈 모델 그린-상세이미지.jpg',0,0);
+Insert into PRODUCT (ITEMNUM,IMAGE1,CG_CODE,SCG_CODE,PRODUCT,PRICE,DIMAGE,PCNT,SALE) values (10531,'BBK 2020 동계 소프트실리콘 배팅장갑 (블랙).jpg','fcg003','glove004','BBK 2020 동계 소프트실리콘 배팅장갑 (블랙)',29000,'BBK 2020 동계 소프트실리콘 배팅장갑 (블랙)-상세이미지.jpg',0,0);
+Insert into PRODUCT (ITEMNUM,IMAGE1,CG_CODE,SCG_CODE,PRODUCT,PRICE,DIMAGE,PCNT,SALE) values (10532,'BMC 전문가용 가죽 동계 배팅장갑.png','fcg003','glove004','BMC 전문가용 가죽 동계 배팅장갑',31000,'BMC 전문가용 가죽 동계 배팅장갑-상세이미지.jpg',1,0);
+Insert into PRODUCT (ITEMNUM,IMAGE1,CG_CODE,SCG_CODE,PRODUCT,PRICE,DIMAGE,PCNT,SALE) values (10533,'DESCENTE 방한 배팅장갑(NAVY).jpg','fcg003','glove004','DESCENTE 방한 배팅장갑(NAVY)',25000,'DESCENTE 방한 배팅장갑(NAVY)-상세이미지.jpg',0,0);
+Insert into PRODUCT (ITEMNUM,IMAGE1,CG_CODE,SCG_CODE,PRODUCT,PRICE,DIMAGE,PCNT,SALE) values (10534,'MIZUNO 트레이닝장갑 (검노).jpg','fcg003','glove004','MIZUNO 트레이닝장갑 (검노)',27600,'MIZUNO 트레이닝장갑 (검노)-상세이미지.jpg',0,0);
+Insert into PRODUCT (ITEMNUM,IMAGE1,CG_CODE,SCG_CODE,PRODUCT,PRICE,DIMAGE,PCNT,SALE) values (10535,'MIZUNO 트레이닝장갑(곤흰).gif','fcg003','glove004','MIZUNO 트레이닝장갑(곤흰)',27600,'MIZUNO 트레이닝장갑 (곤흰)-상세이미지.jpg',0,0);
+Insert into PRODUCT (ITEMNUM,IMAGE1,CG_CODE,SCG_CODE,PRODUCT,PRICE,DIMAGE,PCNT,SALE) values (10536,'MIZUNO 트레이닝장갑.jpg','fcg003','glove004','MIZUNO 트레이닝장갑',27600,'MIZUNO 트레이닝장갑-상세이미지.jpg',0,0);
+commit;
+Insert into PRODUCT (ITEMNUM,IMAGE1,CG_CODE,SCG_CODE,PRODUCT,PRICE,DIMAGE,PCNT,SALE) values (10537,'ZETT 제트 BGK-393 동계 배팅장갑.jpg','fcg003','glove004','ZETT 제트 BGK-393 동계 배팅장갑',28800,'ZETT 제트 BGK-393 동계 배팅장갑-상세이미지.jpg',0,0);
+Insert into PRODUCT (ITEMNUM,IMAGE1,CG_CODE,SCG_CODE,PRODUCT,PRICE,DIMAGE,PCNT,SALE) values (10538,'러펠스 동계용 배팅장갑 (블랙).jpg','fcg003','glove004','러펠스 동계용 배팅장갑 (블랙)',40000,'러펠스 동계용 배팅장갑 (블랙)-상세이미지.jpg',0,0);
+Insert into PRODUCT (ITEMNUM,IMAGE1,CG_CODE,SCG_CODE,PRODUCT,PRICE,DIMAGE,PCNT,SALE) values (10539,'벨크로 방한 배팅장갑.jpg','fcg003','glove004','벨크로 방한 배팅장갑',22000,'벨크로 방한 배팅장갑-상세이미지.jpg',0,0);
+Insert into PRODUCT (ITEMNUM,IMAGE1,CG_CODE,SCG_CODE,PRODUCT,PRICE,DIMAGE,PCNT,SALE) values (10540,'스파이더 그립 동계 배팅장갑 (블랙).jpg','fcg003','glove004','스파이더 그립 동계 배팅장갑 (블랙)',23000,'스파이더 그립 동계 배팅장갑 (블랙)-상세이미지.jpg',0,0);
+Insert into PRODUCT (ITEMNUM,IMAGE1,CG_CODE,SCG_CODE,PRODUCT,PRICE,DIMAGE,PCNT,SALE) values (10541,'44 스페셜오더 배팅장갑 (라인드라이브).jpg','fcg003','glove005','44 스페셜오더 배팅장갑 (라인드라이브)',35000,'44 스페셜오더 배팅장갑 (라인드라이브)-상세이미지.jpg',0,0);
+Insert into PRODUCT (ITEMNUM,IMAGE1,CG_CODE,SCG_CODE,PRODUCT,PRICE,DIMAGE,PCNT,SALE) values (10542,'44 스페셜오더 배팅장갑 (수퍼맨).jpg','fcg003','glove005','44 스페셜오더 배팅장갑 (수퍼맨)',34000,'44 스페셜오더 배팅장갑 (수퍼맨)-상세이미지.jpg',0,0);
+Insert into PRODUCT (ITEMNUM,IMAGE1,CG_CODE,SCG_CODE,PRODUCT,PRICE,DIMAGE,PCNT,SALE) values (10543,'ADIDAS 아디다스 배팅장갑.jpg','fcg003','glove005','ADIDAS 아디다스 배팅장갑',21900,'ADIDAS 아디다스 배팅장갑-상세이미지.jpg',0,0);
+Insert into PRODUCT (ITEMNUM,IMAGE1,CG_CODE,SCG_CODE,PRODUCT,PRICE,DIMAGE,PCNT,SALE) values (10544,'DESCENTE BKRD 양가죽 고급형 배팅장갑.jpg','fcg003','glove005','DESCENTE BKRD 양가죽 고급형 배팅장갑',29900,'DESCENTE BKRD 양가죽 고급형 배팅장갑-상세이미지.jpg',0,0);
+Insert into PRODUCT (ITEMNUM,IMAGE1,CG_CODE,SCG_CODE,PRODUCT,PRICE,DIMAGE,PCNT,SALE) values (10508,'야구 배팅장갑 스페셜 오더 핑크.jpg','fcg003','glove001','야구 배팅장갑 스페셜 오더 핑크',99000,'야구 배팅장갑 스페셜 오더 핑크-상세이미지.jpg',2,0);
+Insert into PRODUCT (ITEMNUM,IMAGE1,CG_CODE,SCG_CODE,PRODUCT,PRICE,DIMAGE,PCNT,SALE) values (10474,'NEWBALANCE 뉴발란스 Freshfoam 인조잔디화 (화이트).jpg','fcg004','shoes003','NEWBALANCE 뉴발란스 Freshfoam 인조잔디화 (화이트)',119000,'NEWBALANCE 뉴발란스 Freshfoam 인조잔디화 (화이트)-상세이미지.jpg',1,0);
+Insert into PRODUCT (ITEMNUM,IMAGE1,CG_CODE,SCG_CODE,PRODUCT,PRICE,DIMAGE,PCNT,SALE) values (10475,'SSK 인조잔디화 WHITE.png','fcg004','shoes003','SSK 인조잔디화 WHITE',89000,'SSK 인조잔디화 WHITE-상세이미지.jpg',13,0);
+Insert into PRODUCT (ITEMNUM,IMAGE1,CG_CODE,SCG_CODE,PRODUCT,PRICE,DIMAGE,PCNT,SALE) values (10476,'UNDERARMOUR 언더아머 UA 야드 베이스볼 인조잔디화 (레드).jpg','fcg004','shoes003','UNDERARMOUR 언더아머 UA 야드 베이스볼 인조잔디화 (레드)',93000,'UNDERARMOUR 언더아머 UA 야드 베이스볼 인조잔디화 (레드)-상세이미지.jpg',0,0);
+Insert into PRODUCT (ITEMNUM,IMAGE1,CG_CODE,SCG_CODE,PRODUCT,PRICE,DIMAGE,PCNT,SALE) values (10477,'ZETT 제트 인조잔디화 화이트.jpg','fcg004','shoes003','ZETT 제트 인조잔디화 화이트',99000,'ZETT 제트 인조잔디화 화이트-상세이미지.jpg',1,0);
+Insert into PRODUCT (ITEMNUM,IMAGE1,CG_CODE,SCG_CODE,PRODUCT,PRICE,DIMAGE,PCNT,SALE) values (10478,'강스 스튜디오 잭팟2 인조잔디 야구화 잔뽕 터프화 화이트.jpg','fcg004','shoes003','강스 스튜디오 잭팟2 인조잔디 야구화 잔뽕 터프화 화이트',87000,'강스 스튜디오 잭팟2 인조잔디 야구화 잔뽕 터프화 화이트-상세이미지.jpg',0,0);
+Insert into PRODUCT (ITEMNUM,IMAGE1,CG_CODE,SCG_CODE,PRODUCT,PRICE,DIMAGE,PCNT,SALE) values (10479,'프로스펙스 체인지업 TF 인조잔디화 터프 야구화 블루.jpg','fcg004','shoes003','프로스펙스 체인지업 TF 인조잔디화 터프 야구화 블루',120000,'프로스펙스 체인지업 TF 인조잔디화 터프 야구화 블루-상세이미지.jpg',0,0);
+Insert into PRODUCT (ITEMNUM,IMAGE1,CG_CODE,SCG_CODE,PRODUCT,PRICE,DIMAGE,PCNT,SALE) values (10480,'프로스펙스 체인지업 TF 인조잔디화 터프 야구화 옐로우 (LG트윈스 납품용).jpg','fcg004','shoes003','프로스펙스 체인지업 TF 인조잔디화 터프 야구화 옐로우 (LG트윈스 납품용)',120000,'프로스펙스 체인지업 TF 인조잔디화 터프 야구화 옐로우 (LG트윈스 납품용)-상세이미지.jpg',0,0);
+Insert into PRODUCT (ITEMNUM,IMAGE1,CG_CODE,SCG_CODE,PRODUCT,PRICE,DIMAGE,PCNT,SALE) values (10481,'ADIDAS 아디다스 포인트화 (검).jpg','fcg004','shoes004','ADIDAS 아디다스 포인트화 (검)',77000,'ADIDAS 아디다스 포인트화 (검)-상세이미지.jpg',2,0);
+Insert into PRODUCT (ITEMNUM,IMAGE1,CG_CODE,SCG_CODE,PRODUCT,PRICE,DIMAGE,PCNT,SALE) values (10482,'ADIDAS 아디다스 포인트화 (청).jpg','fcg004','shoes004','ADIDAS 아디다스 포인트화 (청)',77000,'ADIDAS 아디다스 포인트화 (청)-상세이미지.jpg',0,0);
+Insert into PRODUCT (ITEMNUM,IMAGE1,CG_CODE,SCG_CODE,PRODUCT,PRICE,DIMAGE,PCNT,SALE) values (10483,'ASICS SFPA02 SPEEDSHINE 포인트화.jpg','fcg004','shoes004','ASICS SFPA02 SPEEDSHINE 포인트화',75000,'ASICS SFPA02 SPEEDSHINE 포인트화-상세이미지.jpg',0,0);
+Insert into PRODUCT (ITEMNUM,IMAGE1,CG_CODE,SCG_CODE,PRODUCT,PRICE,DIMAGE,PCNT,SALE) values (10484,'ASICS STARSHINE 포인트화 (블루).jpg','fcg004','shoes004','ASICS STARSHINE 포인트화 (블루)',75000,'ASICS STARSHINE 포인트화 (블루)-상세이미지.jpg',0,0);
+Insert into PRODUCT (ITEMNUM,IMAGE1,CG_CODE,SCG_CODE,PRODUCT,PRICE,DIMAGE,PCNT,SALE) values (10485,'NEWBALANCE 뉴발란스 포인트화 (블랙).jpg','fcg004','shoes004','NEWBALANCE 뉴발란스 포인트화 (블랙)',139000,'NEWBALANCE 뉴발란스 포인트화 (블랙)-상세이미지.jpg',0,0);
+Insert into PRODUCT (ITEMNUM,IMAGE1,CG_CODE,SCG_CODE,PRODUCT,PRICE,DIMAGE,PCNT,SALE) values (10486,'NEWBALANCE 뉴발란스 포인트화 (화이트).jpg','fcg004','shoes004','NEWBALANCE 뉴발란스 포인트화 (화이트)',139000,'NEWBALANCE 뉴발란스 포인트화 (화이트)-상세이미지.jpg',0,0);
+Insert into PRODUCT (ITEMNUM,IMAGE1,CG_CODE,SCG_CODE,PRODUCT,PRICE,DIMAGE,PCNT,SALE) values (10487,'UNDERARMOUR 언더아머 리드오프 포인트화 (레드).jpg','fcg004','shoes004','UNDERARMOUR 언더아머 리드오프 포인트화 (레드)',99000,'UNDERARMOUR 언더아머 리드오프 포인트화 (레드)-상세이미지.png',0,0);
+Insert into PRODUCT (ITEMNUM,IMAGE1,CG_CODE,SCG_CODE,PRODUCT,PRICE,DIMAGE,PCNT,SALE) values (10488,'UNDERARMOUR 언더아머 리드오프 포인트화 (블루).jpg','fcg004','shoes004','UNDERARMOUR 언더아머 리드오프 포인트화 (블루)',99000,'UNDERARMOUR 언더아머 리드오프 포인트화 (블루)-상세이미지.png',0,0);
+Insert into PRODUCT (ITEMNUM,IMAGE1,CG_CODE,SCG_CODE,PRODUCT,PRICE,DIMAGE,PCNT,SALE) values (10489,'UNDERARMOUR 언더아머 미드컷 포인트화 (블랙).jpg','fcg004','shoes004','UNDERARMOUR 언더아머 미드컷 포인트화 (블랙)',99000,'UNDERARMOUR 언더아머 미드컷 포인트화 (블랙)-상세이미지.jpg',0,0);
+Insert into PRODUCT (ITEMNUM,IMAGE1,CG_CODE,SCG_CODE,PRODUCT,PRICE,DIMAGE,PCNT,SALE) values (10490,'언더아머 UNDERARMOUR 포인트화 흰적.jpg','fcg004','shoes004','언더아머 UNDERARMOUR 포인트화 흰적',98000,'언더아머 UNDERARMOUR 포인트화 흰적-상세이미지.jpg',0,0);
+Insert into PRODUCT (ITEMNUM,IMAGE1,CG_CODE,SCG_CODE,PRODUCT,PRICE,DIMAGE,PCNT,SALE) values (10491,'MIZUNO 슈즈스프레이.jpg','fcg004','shoes006','MIZUNO 슈즈스프레이',9900,'MIZUNO 슈즈스프레이-상세이미지.jpg',0,0);
+Insert into PRODUCT (ITEMNUM,IMAGE1,CG_CODE,SCG_CODE,PRODUCT,PRICE,DIMAGE,PCNT,SALE) values (10492,'MIZUNO 야구화끈.jpg','fcg004','shoes006','MIZUNO 야구화끈',7000,'MIZUNO 야구화끈-상세이미지.jpg',0,0);
+Insert into PRODUCT (ITEMNUM,IMAGE1,CG_CODE,SCG_CODE,PRODUCT,PRICE,DIMAGE,PCNT,SALE) values (10493,'MIZUNO에나멜야구화클리너.jpg','fcg004','shoes006','MIZUNO에나멜야구화클리너',8000,'MIZUNO에나멜야구화클리너-상세이미지.jpg',0,0);
+Insert into PRODUCT (ITEMNUM,IMAGE1,CG_CODE,SCG_CODE,PRODUCT,PRICE,DIMAGE,PCNT,SALE) values (10494,'Sof-Sole 다목적 세정제 (가죽제품용).jpg','fcg004','shoes006','Sof-Sole 다목적 세정제 (가죽제품용)',10000,'Sof-Sole 다목적 세정제 (가죽제품용)-상세이미지.jpg',0,0);
+Insert into PRODUCT (ITEMNUM,IMAGE1,CG_CODE,SCG_CODE,PRODUCT,PRICE,DIMAGE,PCNT,SALE) values (10495,'Studio Toe Gun 강스 클릿츠 전용 건.jpg','fcg004','shoes006','Studio Toe Gun 강스 클릿츠 전용 건',19000,'Studio Toe Gun 강스 클릿츠 전용 건-상세이미지.jpg',0,0);
+Insert into PRODUCT (ITEMNUM,IMAGE1,CG_CODE,SCG_CODE,PRODUCT,PRICE,DIMAGE,PCNT,SALE) values (10496,'강스 클릿츠 가드 투명 컬러.jpg','fcg004','shoes006','강스 클릿츠 가드 투명 컬러',25000,'강스 클릿츠 가드 투명 컬러-상세이미지.jpg',0,0);
+Insert into PRODUCT (ITEMNUM,IMAGE1,CG_CODE,SCG_CODE,PRODUCT,PRICE,DIMAGE,PCNT,SALE) values (10497,'멀티 와이드 투명 케이스 (화이트).jpg','fcg004','shoes006','멀티 와이드 투명 케이스 (화이트)',21000,'멀티 와이드 투명 케이스 (화이트)-상세이미지.jpg',0,0);
+Insert into PRODUCT (ITEMNUM,IMAGE1,CG_CODE,SCG_CODE,PRODUCT,PRICE,DIMAGE,PCNT,SALE) values (10498,'신개념 슈즈커버 (블랙).jpg','fcg004','shoes006','신개념 슈즈커버 (블랙)',6900,'신개념 슈즈커버 (블랙)-상세이미지.jpg',0,0);
+Insert into PRODUCT (ITEMNUM,IMAGE1,CG_CODE,SCG_CODE,PRODUCT,PRICE,DIMAGE,PCNT,SALE) values (10499,'터프토 프로 (바르는 스파이크 커버).jpg','fcg004','shoes006','터프토 프로 (바르는 스파이크 커버)',11000,'터프토 프로 (바르는 스파이크 커버)-상세이미지.jpg',0,0);
+Insert into PRODUCT (ITEMNUM,IMAGE1,CG_CODE,SCG_CODE,PRODUCT,PRICE,DIMAGE,PCNT,SALE) values (10500,'프로퍼포먼스 엔젤가드 야구화 -바르는 커버.jpg','fcg004','shoes006','프로퍼포먼스 엔젤가드 야구화 -바르는 커버',10900,'프로퍼포먼스 엔젤가드 야구화 -바르는 커버-상세이미지.jpg',0,0);
+Insert into PRODUCT (ITEMNUM,IMAGE1,CG_CODE,SCG_CODE,PRODUCT,PRICE,DIMAGE,PCNT,SALE) values (10501,'2024 BMC PRO 야구 배팅장갑 블랙에디션 옐로우.jpg','fcg003','glove001','2024 BMC PRO 야구 배팅장갑 블랙에디션 옐로우',79000,'2024 BMC PRO 야구 배팅장갑 블랙에디션 옐로우-상세이미지.jpg',0,0);
+Insert into PRODUCT (ITEMNUM,IMAGE1,CG_CODE,SCG_CODE,PRODUCT,PRICE,DIMAGE,PCNT,SALE) values (10502,'2024 아곤 전체 양가죽 프리미엄 양피 배팅장갑 화이트에디션.jpg','fcg003','glove001','2024 아곤 전체 양가죽 프리미엄 양피 배팅장갑 화이트에디션',89000,'2024 아곤 전체 양가죽 프리미엄 양피 배팅장갑 화이트에디션-상세이미지.jpg',0,0);
+Insert into PRODUCT (ITEMNUM,IMAGE1,CG_CODE,SCG_CODE,PRODUCT,PRICE,DIMAGE,PCNT,SALE) values (10473,'NEWBALANCE 뉴발란스 Freshfoam 인조잔디화 (블랙).jpg','fcg004','shoes003','NEWBALANCE 뉴발란스 Freshfoam 인조잔디화 (블랙)',119000,'NEWBALANCE 뉴발란스 Freshfoam 인조잔디화 (블랙)-상세이미지.jpg',0,0);
+Insert into PRODUCT (ITEMNUM,IMAGE1,CG_CODE,SCG_CODE,PRODUCT,PRICE,DIMAGE,PCNT,SALE) values (10503,'MIZUNO 미즈노 프로 배팅장갑 레드.jpg','fcg003','glove001','MIZUNO 미즈노 프로 배팅장갑 레드',50000,'MIZUNO 미즈노 프로 배팅장갑 레드-상세이미지.jpg',0,0);
+Insert into PRODUCT (ITEMNUM,IMAGE1,CG_CODE,SCG_CODE,PRODUCT,PRICE,DIMAGE,PCNT,SALE) values (10504,'MIZUNO 미즈노 프로 배팅장갑.jpg','fcg003','glove001','MIZUNO 미즈노 프로 배팅장갑',50000,'MIZUNO 미즈노 프로 배팅장갑-상세이미지.jpg',0,0);
+Insert into PRODUCT (ITEMNUM,IMAGE1,CG_CODE,SCG_CODE,PRODUCT,PRICE,DIMAGE,PCNT,SALE) values (10505,'UNDERARMOUR 언더아머 배팅장갑.jpg','fcg003','glove001','UNDERARMOUR 언더아머 배팅장갑',39000,'UNDERARMOUR 언더아머 배팅장갑-상세이미지.jpg',0,0);
+Insert into PRODUCT (ITEMNUM,IMAGE1,CG_CODE,SCG_CODE,PRODUCT,PRICE,DIMAGE,PCNT,SALE) values (10506,'스페셜오더 배팅장갑 (클래식네이비2).jpg','fcg003','glove001','스페셜오더 배팅장갑 (클래식네이비2)',45000,'스페셜오더 배팅장갑 (클래식네이비2)-상세이미지.jpg',0,0);
+Insert into PRODUCT (ITEMNUM,IMAGE1,CG_CODE,SCG_CODE,PRODUCT,PRICE,DIMAGE,PCNT,SALE) values (10507,'스포스피릿 골드에디션 배팅장갑 실버라인 프로용 골드.png','fcg003','glove001','스포스피릿 골드에디션 배팅장갑 실버라인 프로용 골드',49000,'스포스피릿 골드에디션 배팅장갑 실버라인 프로용 골드-상세이미지.jpg',0,0);
+Insert into PRODUCT (ITEMNUM,IMAGE1,CG_CODE,SCG_CODE,PRODUCT,PRICE,DIMAGE,PCNT,SALE) values (10436,'2022 올스타전 유니폼 키링(드림).jpg','fcg010','goods001','2022 올스타전 유니폼 키링(드림)',15600,'2022 올스타전 유니폼 키링(드림)-상세이미지.jpg',0,0);
+Insert into PRODUCT (ITEMNUM,IMAGE1,CG_CODE,SCG_CODE,PRODUCT,PRICE,DIMAGE,PCNT,SALE) values (10437,'2023 APBC 대표팀 유니폼 키링 (원정).jpg','fcg010','goods001','2023 APBC 대표팀 유니폼 키링 (원정)',13000,'2023 APBC 대표팀 유니폼 키링 (원정)-상세이미지.jpg',1,0);
+Insert into PRODUCT (ITEMNUM,IMAGE1,CG_CODE,SCG_CODE,PRODUCT,PRICE,DIMAGE,PCNT,SALE) values (10438,'2023 APBC 대표팀 유니폼 키링 (홈).jpg','fcg010','goods001','2023 APBC 대표팀 유니폼 키링 (홈)',13200,'2023 APBC 대표팀 유니폼 키링 (홈)-상세이미지.jpg',1,0);
+Insert into PRODUCT (ITEMNUM,IMAGE1,CG_CODE,SCG_CODE,PRODUCT,PRICE,DIMAGE,PCNT,SALE) values (10439,'2023 KBO 올스타전 유니폼키링(나눔).jpg','fcg010','goods001','2023 KBO 올스타전 유니폼키링(나눔)',12500,'2023 KBO 올스타전 유니폼키링(나눔)-상세이미지.jpg',0,0);
+Insert into PRODUCT (ITEMNUM,IMAGE1,CG_CODE,SCG_CODE,PRODUCT,PRICE,DIMAGE,PCNT,SALE) values (10440,'2023 KBO 올스타전 유니폼키링(드림).jpg','fcg010','goods001','2023 KBO 올스타전 유니폼키링(드림)',13900,'2023 KBO 올스타전 유니폼키링(드림)-상세이미지.jpg',0,0);
+Insert into PRODUCT (ITEMNUM,IMAGE1,CG_CODE,SCG_CODE,PRODUCT,PRICE,DIMAGE,PCNT,SALE) values (10441,'2024 KBO 올스타전 크뱅기 기념구키링.jpg','fcg010','goods001','2024 KBO 올스타전 크뱅기 기념구키링',12200,'2024 KBO 올스타전 크뱅기 기념구키링-상세이미지.jpg',1,0);
+Insert into PRODUCT (ITEMNUM,IMAGE1,CG_CODE,SCG_CODE,PRODUCT,PRICE,DIMAGE,PCNT,SALE) values (10442,'2024 KBO 월간 기념구 7월호 키링.jpg','fcg010','goods001','2024 KBO 월간 기념구 7월호 키링',15000,'2024 KBO 월간 기념구 7월호 키링-상세이미지.jpg',0,0);
+Insert into PRODUCT (ITEMNUM,IMAGE1,CG_CODE,SCG_CODE,PRODUCT,PRICE,DIMAGE,PCNT,SALE) values (10443,'LG트윈스 서울 유니폼 키링.jpg','fcg010','goods001','LG트윈스 서울 유니폼 키링',13900,'LG트윈스 서울 유니폼 키링-상세이미지.jpg',0,0);
+Insert into PRODUCT (ITEMNUM,IMAGE1,CG_CODE,SCG_CODE,PRODUCT,PRICE,DIMAGE,PCNT,SALE) values (10444,'LG트윈스 원정 유니폼 키링.jpg','fcg010','goods001','LG트윈스 원정 유니폼 키링',12900,'LG트윈스 원정 유니폼 키링-상세이미지.jpg',0,0);
+Insert into PRODUCT (ITEMNUM,IMAGE1,CG_CODE,SCG_CODE,PRODUCT,PRICE,DIMAGE,PCNT,SALE) values (10445,'SSG랜더스 2022 랜디 키링.jpg','fcg010','goods001','SSG랜더스 2022 랜디 키링',11000,'SSG랜더스 2022 랜디 키링-상세이미지.png',0,0);
+Insert into PRODUCT (ITEMNUM,IMAGE1,CG_CODE,SCG_CODE,PRODUCT,PRICE,DIMAGE,PCNT,SALE) values (10446,'2021 올스타 응원타올.jpg','fcg010','goods002','2021 올스타 응원타올',21000,'2021 올스타 응원타올-상세이미지.jpg',0,0);
+Insert into PRODUCT (ITEMNUM,IMAGE1,CG_CODE,SCG_CODE,PRODUCT,PRICE,DIMAGE,PCNT,SALE) values (10447,'2022 KBO 올스타전 응원타올.jpg','fcg010','goods002','2022 KBO 올스타전 응원타올',23000,'2022 KBO 올스타전 응원타올-상세이미지.jpg',1,0);
+Insert into PRODUCT (ITEMNUM,IMAGE1,CG_CODE,SCG_CODE,PRODUCT,PRICE,DIMAGE,PCNT,SALE) values (10448,'2023 야구대표팀 페이스타올.jpg','fcg010','goods002','2023 야구대표팀 페이스타올',19900,'2023 야구대표팀 페이스타올-.상세이미지.jpg',1,0);
+Insert into PRODUCT (ITEMNUM,IMAGE1,CG_CODE,SCG_CODE,PRODUCT,PRICE,DIMAGE,PCNT,SALE) values (10449,'롯데자이언츠 스포츠 쿨 타올.jpg','fcg010','goods002','롯데자이언츠 스포츠 쿨 타올',18900,'롯데자이언츠 스포츠 쿨 타올-상세이미지.jpg',0,0);
+Insert into PRODUCT (ITEMNUM,IMAGE1,CG_CODE,SCG_CODE,PRODUCT,PRICE,DIMAGE,PCNT,SALE) values (10450,'롯데자이언츠 플레이어 응원타올 (손아섭).jpg','fcg010','goods002','롯데자이언츠 플레이어 응원타올 (손아섭)',20000,'롯데자이언츠 플레이어 응원타올 (손아섭)-상세이미지.jpg',0,0);
+Insert into PRODUCT (ITEMNUM,IMAGE1,CG_CODE,SCG_CODE,PRODUCT,PRICE,DIMAGE,PCNT,SALE) values (10451,'KIA타이거즈 호걸이 가방걸이 인형.jpg','fcg010','goods003','KIA타이거즈 호걸이 가방걸이 인형',24000,'KIA타이거즈 호걸이 가방걸이 인형-상세이미지.jpg',0,0);
+Insert into PRODUCT (ITEMNUM,IMAGE1,CG_CODE,SCG_CODE,PRODUCT,PRICE,DIMAGE,PCNT,SALE) values (10452,'KIA타이거즈 호걸이 인형 머리띠.jpg','fcg010','goods003','KIA타이거즈 호걸이 인형 머리띠',15000,'KIA타이거즈 호걸이 인형 머리띠-상세이미지.jpg',3,0);
+Insert into PRODUCT (ITEMNUM,IMAGE1,CG_CODE,SCG_CODE,PRODUCT,PRICE,DIMAGE,PCNT,SALE) values (10453,'롯데자이언츠 루기 인형머리띠.jpg','fcg010','goods003','롯데자이언츠 루기 인형머리띠',14000,'롯데자이언츠 루기 인형머리띠-상세이미지.jpg',0,0);
+Insert into PRODUCT (ITEMNUM,IMAGE1,CG_CODE,SCG_CODE,PRODUCT,PRICE,DIMAGE,PCNT,SALE) values (10454,'한화이글스 수리 홈런 인형.jpg','fcg010','goods003','한화이글스 수리 홈런 인형',24000,'한화이글스 수리 홈런 인형-상세이미지.jpg',0,0);
+Insert into PRODUCT (ITEMNUM,IMAGE1,CG_CODE,SCG_CODE,PRODUCT,PRICE,DIMAGE,PCNT,SALE) values (10455,'한화이글스 오렌지 수리 고리 인형.jpg','fcg010','goods003','한화이글스 오렌지 수리 고리 인형',14900,'한화이글스 오렌지 수리 고리 인형-상세이미지.jpg',0,0);
+Insert into PRODUCT (ITEMNUM,IMAGE1,CG_CODE,SCG_CODE,PRODUCT,PRICE,DIMAGE,PCNT,SALE) values (10456,'KBO KT 슬리퍼.jpg','fcg010','goods004','KBO KT 슬리퍼',35000,'KBO KT 슬리퍼-상세이미지.jpg',0,0);
+Insert into PRODUCT (ITEMNUM,IMAGE1,CG_CODE,SCG_CODE,PRODUCT,PRICE,DIMAGE,PCNT,SALE) values (10457,'KBO SK 슬리퍼.jpg','fcg010','goods004','KBO SK 슬리퍼',35000,'KBO SK 슬리퍼-상세이미지.jpg',0,0);
+Insert into PRODUCT (ITEMNUM,IMAGE1,CG_CODE,SCG_CODE,PRODUCT,PRICE,DIMAGE,PCNT,SALE) values (10458,'KBO 롯데 슬리퍼.jpg','fcg010','goods004','KBO 롯데 슬리퍼',35000,'KBO 롯데 슬리퍼-상세이미지.jpg',0,0);
+Insert into PRODUCT (ITEMNUM,IMAGE1,CG_CODE,SCG_CODE,PRODUCT,PRICE,DIMAGE,PCNT,SALE) values (10459,'KBO 삼성 슬리퍼.jpg','fcg010','goods004','KBO 삼성 슬리퍼',35000,'KBO 삼성 슬리퍼-상세이미지.jpg',0,0);
+Insert into PRODUCT (ITEMNUM,IMAGE1,CG_CODE,SCG_CODE,PRODUCT,PRICE,DIMAGE,PCNT,SALE) values (10460,'KBO 한화 슬리퍼.jpg','fcg010','goods004','KBO 한화 슬리퍼',35000,'KBO 한화 슬리퍼-상세이미지.jpg',0,0);
+Insert into PRODUCT (ITEMNUM,IMAGE1,CG_CODE,SCG_CODE,PRODUCT,PRICE,DIMAGE,PCNT,SALE) values (10461,'NEWBALANCE 뉴발란스 징스파이크 (그레이).jpg','fcg004','shoes001','NEWBALANCE 뉴발란스 징스파이크 (그레이)',110000,'NEWBALANCE 뉴발란스 징스파이크 (그레이)-상세이미지.jpg',11,0);
+Insert into PRODUCT (ITEMNUM,IMAGE1,CG_CODE,SCG_CODE,PRODUCT,PRICE,DIMAGE,PCNT,SALE) values (10462,'NEWBALANCE 뉴발란스 징스파이크 화이트.jpg','fcg004','shoes001','NEWBALANCE 뉴발란스 징스파이크 화이트',110000,'NEWBALANCE 뉴발란스 징스파이크 화이트-상세이미지.jpg',20,0);
+Insert into PRODUCT (ITEMNUM,IMAGE1,CG_CODE,SCG_CODE,PRODUCT,PRICE,DIMAGE,PCNT,SALE) values (10463,'SSK 사사키 PROEDGE RIG UP Enamel 반목 스파이크.png','fcg004','shoes001','SSK 사사키 PROEDGE RIG UP Enamel 반목 스파이크',100000,'SSK 사사키 PROEDGE RIG UP Enamel 반목 스파이크-상세이미지.jpg',5,0);
+Insert into PRODUCT (ITEMNUM,IMAGE1,CG_CODE,SCG_CODE,PRODUCT,PRICE,DIMAGE,PCNT,SALE) values (10464,'SSK 사사키 PROEDGE Trytec Enamel 스파이크.png','fcg004','shoes001','SSK 사사키 PROEDGE Trytec Enamel 스파이크',100000,'SSK 사사키 PROEDGE Trytec Enamel 스파이크-상세이미지.jpg',0,0);
+Insert into PRODUCT (ITEMNUM,IMAGE1,CG_CODE,SCG_CODE,PRODUCT,PRICE,DIMAGE,PCNT,SALE) values (10435,'키모니 네오맥스 정강이 보호대.jpg','fcg007','protect006','키모니 네오맥스 발목 보호대',18900,'키모니 네오맥스 정강이 보호대-상세이미지.jpg',0,0);
+Insert into PRODUCT (ITEMNUM,IMAGE1,CG_CODE,SCG_CODE,PRODUCT,PRICE,DIMAGE,PCNT,SALE) values (10465,'UNDERARMOUR 언더아머 UA 야드 3.0 베이스볼 일체형징화 (블랙).png','fcg004','shoes001','UNDERARMOUR 언더아머 UA 야드 3.0 베이스볼 일체형징화 (블랙)',89000,'UNDERARMOUR 언더아머 UA 야드 3.0 베이스볼 일체형징화 (블랙)-상세이미지.png',0,0);
+Insert into PRODUCT (ITEMNUM,IMAGE1,CG_CODE,SCG_CODE,PRODUCT,PRICE,DIMAGE,PCNT,SALE) values (10466,'강스 스튜디오 잭팟2 메탈 프로 스파이크 화이트.jpg','fcg004','shoes001','강스 스튜디오 잭팟2 메탈 프로 스파이크 화이트',99000,'강스 스튜디오 잭팟2 메탈 프로 스파이크 화이트-상세이미지.jpg',0,0);
+Insert into PRODUCT (ITEMNUM,IMAGE1,CG_CODE,SCG_CODE,PRODUCT,PRICE,DIMAGE,PCNT,SALE) values (10467,'뉴발란스 오타니 일체형징화 (버건디).jpg','fcg004','shoes001','뉴발란스 오타니 일체형징화 (버건디)',150000,'뉴발란스 오타니 일체형징화 (버건디)-상세이미지.jpg',0,0);
+Insert into PRODUCT (ITEMNUM,IMAGE1,CG_CODE,SCG_CODE,PRODUCT,PRICE,DIMAGE,PCNT,SALE) values (10468,'제트 LIGHT SPEED WH 라이트 스피드 징스파이크 야구화 (화이트).jpg','fcg004','shoes001','제트 LIGHT SPEED WH 라이트 스피드 징스파이크 야구화 (화이트)',142000,'제트 LIGHT SPEED WH 라이트 스피드 징스파이크 야구화 (화이트)-상세이미지.jfif',0,0);
+Insert into PRODUCT (ITEMNUM,IMAGE1,CG_CODE,SCG_CODE,PRODUCT,PRICE,DIMAGE,PCNT,SALE) values (10469,'프로스펙스 징스파이크 엘리트 레더 징야구화 화이트 (LG 트윈스 납품용).jpg','fcg004','shoes001','프로스펙스 징스파이크 엘리트 레더 징야구화 화이트 (LG 트윈스 납품용)',95000,'프로스펙스 징스파이크 엘리트 레더 징야구화 화이트 (LG 트윈스 납품용)-상세이미지.jpg',0,0);
+Insert into PRODUCT (ITEMNUM,IMAGE1,CG_CODE,SCG_CODE,PRODUCT,PRICE,DIMAGE,PCNT,SALE) values (10470,'프로스펙스 체인지업 MG 징스파이크 징야구화 그린.jpg','fcg004','shoes001','프로스펙스 체인지업 MG 징스파이크 징야구화 그린',85000,'프로스펙스 체인지업 MG 징스파이크 징야구화 그린-상세이미지.jpg',0,0);
+Insert into PRODUCT (ITEMNUM,IMAGE1,CG_CODE,SCG_CODE,PRODUCT,PRICE,DIMAGE,PCNT,SALE) values (10471,'MIZUNO 미즈노 포인트 인조잔디화 (곤적).jpg','fcg004','shoes003','MIZUNO 미즈노 포인트 인조잔디화 (곤적)',100000,'MIZUNO 미즈노 포인트 인조잔디화 (곤적)-상세이미지.jpg',0,0);
+Insert into PRODUCT (ITEMNUM,IMAGE1,CG_CODE,SCG_CODE,PRODUCT,PRICE,DIMAGE,PCNT,SALE) values (10472,'MIZUNO 미즈노 프로 인조잔디화.jpg','fcg004','shoes003','MIZUNO 미즈노 프로 인조잔디화',100000,'MIZUNO 미즈노 프로 인조잔디화-상세이미지.jpg',0,0);
+Insert into PRODUCT (ITEMNUM,IMAGE1,CG_CODE,SCG_CODE,PRODUCT,PRICE,DIMAGE,PCNT,SALE) values (10423,'브렛 수비용 안면 보호대.jpg','fcg007','protect005','브렛 수비용 안면 보호대',38000,'브렛 수비용 안면 보호대-상세이미지.jpg',0,0);
+Insert into PRODUCT (ITEMNUM,IMAGE1,CG_CODE,SCG_CODE,PRODUCT,PRICE,DIMAGE,PCNT,SALE) values (10250,'44 스페셜오더 풋가드 블랙.jpg','fcg007','protect003','44 스페셜오더 풋가드 블랙',49000,'44 스페셜오더 풋가드 블랙-상세이미지.jpg',0,0);
+Insert into PRODUCT (ITEMNUM,IMAGE1,CG_CODE,SCG_CODE,PRODUCT,PRICE,DIMAGE,PCNT,SALE) values (10251,'GOLD 골드 G쉴드 프리미엄 풋가드 드래곤 그레이.jpg','fcg007','protect003','GOLD 골드 G쉴드 프리미엄 풋가드 드래곤 그레이',56000,'GOLD 골드 G쉴드 프리미엄 풋가드 드래곤 그레이-상세이미지.jpg',4,0);
+Insert into PRODUCT (ITEMNUM,IMAGE1,CG_CODE,SCG_CODE,PRODUCT,PRICE,DIMAGE,PCNT,SALE) values (10252,'MIZUNO풋가드918 흰색.jpg','fcg007','protect003','MIZUNO풋가드918 흰색',43400,'MIZUNO풋가드918 흰색-상세이미지.jpg',0,0);
+Insert into PRODUCT (ITEMNUM,IMAGE1,CG_CODE,SCG_CODE,PRODUCT,PRICE,DIMAGE,PCNT,SALE) values (10420,'NINE 나인  풋가드 (화이트).jpg','fcg007','protect003','NINE 나인  풋가드 (화이트)',44000,'NINE 나인  풋가드 (화이트)-상세이미지.jpg',0,0);
+Insert into PRODUCT (ITEMNUM,IMAGE1,CG_CODE,SCG_CODE,PRODUCT,PRICE,DIMAGE,PCNT,SALE) values (10254,'ZETT 제트 풋가드 우타 골드.png','fcg007','protect003','ZETT 제트 풋가드 우타 골드',43000,'ZETT 제트 풋가드 우타 골드-상세이미지.png',0,0);
+Insert into PRODUCT (ITEMNUM,IMAGE1,CG_CODE,SCG_CODE,PRODUCT,PRICE,DIMAGE,PCNT,SALE) values (10255,'골드 GOLD G쉴드 어센틱 23년 오지환 선수모델 풋가드.jpg','fcg007','protect003','골드 GOLD G쉴드 어센틱 23년 오지환 선수모델 풋가드',69000,'골드 GOLD G쉴드 어센틱 23년 오지환 선수모델 풋가드-상세이미지.jpg',0,0);
+Insert into PRODUCT (ITEMNUM,IMAGE1,CG_CODE,SCG_CODE,PRODUCT,PRICE,DIMAGE,PCNT,SALE) values (10256,'모리모토 프로텍티브 2.0 타자 풋가드.jpg','fcg007','protect003','모리모토 프로텍티브 2.0 타자 풋가드',55000,'모리모토 프로텍티브 2.0 타자 풋가드-상세이미지.jpg',0,0);
+Insert into PRODUCT (ITEMNUM,IMAGE1,CG_CODE,SCG_CODE,PRODUCT,PRICE,DIMAGE,PCNT,SALE) values (10257,'프랭클린 PRT 시리즈 렉가드 풋가드 (핑크에디션).jpg','fcg007','protect003','프랭클린 PRT 시리즈 렉가드 풋가드 (핑크에디션)',38000,'프랭클린 PRT 시리즈 렉가드 풋가드 (핑크에디션)-상세이미지.jpg',0,0);
+Insert into PRODUCT (ITEMNUM,IMAGE1,CG_CODE,SCG_CODE,PRODUCT,PRICE,DIMAGE,PCNT,SALE) values (10258,'프로스펙스 포프로 야구 타자 풋가드 오지환 모델 블랙.jpg','fcg007','protect003','프로스펙스 포프로 야구 타자 풋가드 오지환 모델 블랙',48700,'프로스펙스 포프로 야구 타자 풋가드 오지환 모델 블랙-상세이미지.jpg',0,0);
+Insert into PRODUCT (ITEMNUM,IMAGE1,CG_CODE,SCG_CODE,PRODUCT,PRICE,DIMAGE,PCNT,SALE) values (10259,'프로스펙스 포프로 야구 타자 풋가드 정수빈 모델 옐로우.jpg','fcg007','protect003','프로스펙스 포프로 야구 타자 풋가드 정수빈 모델 옐로우',50000,'프로스펙스 포프로 야구 타자 풋가드 정수빈 모델 옐로우-상세이미지.jpg',0,0);
+Insert into PRODUCT (ITEMNUM,IMAGE1,CG_CODE,SCG_CODE,PRODUCT,PRICE,DIMAGE,PCNT,SALE) values (10260,'GOLD 골드 G쉴드 프리미엄 손등가드 드래곤 아이보리.jpg','fcg007','protect004','GOLD 골드 G쉴드 프리미엄 손등가드 드래곤 아이보리',19900,'GOLD 골드 G쉴드 프리미엄 손등가드 드래곤 아이보리-상세이미지.jpg',0,0);
+Insert into PRODUCT (ITEMNUM,IMAGE1,CG_CODE,SCG_CODE,PRODUCT,PRICE,DIMAGE,PCNT,SALE) values (10261,'NEW SSK 핸드가드 - Black.jpg','fcg007','protect004','NEW SSK 핸드가드 - Black',20000,'NEW SSK 핸드가드 - Black-상세이미지.jpg',0,0);
+Insert into PRODUCT (ITEMNUM,IMAGE1,CG_CODE,SCG_CODE,PRODUCT,PRICE,DIMAGE,PCNT,SALE) values (10262,'도코마 야구 타자 손등가드 핸드가드 블랙.jpg','fcg007','protect004','도코마 야구 타자 손등가드 핸드가드 블랙',25000,'도코마 야구 타자 손등가드 핸드가드 블랙-상세이미지.jpg',0,0);
+Insert into PRODUCT (ITEMNUM,IMAGE1,CG_CODE,SCG_CODE,PRODUCT,PRICE,DIMAGE,PCNT,SALE) values (10263,'도코마 야구 타자 손등가드 핸드가드 스카이블루.jpg','fcg007','protect004','도코마 야구 타자 손등가드 핸드가드 스카이블루',25000,'도코마 야구 타자 손등가드 핸드가드 스카이블루-상세이미지.jpg',0,0);
+Insert into PRODUCT (ITEMNUM,IMAGE1,CG_CODE,SCG_CODE,PRODUCT,PRICE,DIMAGE,PCNT,SALE) values (10264,'슈퍼스킨 베이스볼 손등 보호대 핸드가드.jpg','fcg007','protect004','슈퍼스킨 베이스볼 손등 보호대 핸드가드',27000,'슈퍼스킨 베이스볼 손등 보호대 핸드가드-상세이미지.jpg',0,0);
+Insert into PRODUCT (ITEMNUM,IMAGE1,CG_CODE,SCG_CODE,PRODUCT,PRICE,DIMAGE,PCNT,SALE) values (10265,'이보쉴드 손등 보호대 핸드가드 (네이비).jpg','fcg007','protect004','이보쉴드 손등 보호대 핸드가드 (네이비)',23000,'이보쉴드 손등 보호대 핸드가드 (네이비)-상세이미지.jpg',0,0);
+Insert into PRODUCT (ITEMNUM,IMAGE1,CG_CODE,SCG_CODE,PRODUCT,PRICE,DIMAGE,PCNT,SALE) values (10266,'이보쉴드 타자 손등 보호대 핸드가드 (블랙).jpg','fcg007','protect004','이보쉴드 타자 손등 보호대 핸드가드 (블랙)',23000,'이보쉴드 타자 손등 보호대 핸드가드 (블랙)-상세이미지.jpg',0,0);
+commit;
+Insert into PRODUCT (ITEMNUM,IMAGE1,CG_CODE,SCG_CODE,PRODUCT,PRICE,DIMAGE,PCNT,SALE) values (10267,'제트 손등가드 손등보호대 BLK-45 (네이비).jpg','fcg007','protect004','제트 손등가드 손등보호대 BLK-45 (네이비)',22000,'제트 손등가드 손등보호대 BLK-45 (네이비)-상세이미지.jfif',0,0);
+Insert into PRODUCT (ITEMNUM,IMAGE1,CG_CODE,SCG_CODE,PRODUCT,PRICE,DIMAGE,PCNT,SALE) values (10268,'프로스펙스 포프로 야구 타자 손등가드 오지환 모델 블랙.jpg','fcg007','protect004','프로스펙스 포프로 야구 타자 손등가드 오지환 모델 블랙',21900,'프로스펙스 포프로 야구 타자 손등가드 오지환 모델 블랙-상세이미지.jpg',0,0);
+Insert into PRODUCT (ITEMNUM,IMAGE1,CG_CODE,SCG_CODE,PRODUCT,PRICE,DIMAGE,PCNT,SALE) values (10269,'프로스펙스 포프로 야구 타자 손등가드 하재훈 모델 그린.jpg','fcg007','protect004','프로스펙스 포프로 야구 타자 손등가드 하재훈 모델 그린',21900,'프로스펙스 포프로 야구 타자 손등가드 하재훈 모델 그린-상세이미지.jpg',0,0);
+Insert into PRODUCT (ITEMNUM,IMAGE1,CG_CODE,SCG_CODE,PRODUCT,PRICE,DIMAGE,PCNT,SALE) values (10421,'KP001 수비 안면보호 마스크 (성인).jpg','fcg007','protect005','KP001 수비 안면보호 마스크 (성인)',33000,'KP001 수비 안면보호 마스크 (성인)-상세이미지.jpg',0,0);
+Insert into PRODUCT (ITEMNUM,IMAGE1,CG_CODE,SCG_CODE,PRODUCT,PRICE,DIMAGE,PCNT,SALE) values (10422,'MIZUNO 미즈노 성인 안면보호마스크.jpg','fcg007','protect005','MIZUNO 미즈노 성인 안면보호마스크',39000,'MIZUNO 미즈노 성인 안면보호마스크-상세이미지.jpg',0,0);
+Insert into PRODUCT (ITEMNUM,IMAGE1,CG_CODE,SCG_CODE,PRODUCT,PRICE,DIMAGE,PCNT,SALE) values (10424,'브렛 아동용 수비용 안면 보호대.jpg','fcg007','protect005','브렛 아동용 수비용 안면 보호대',31000,'브렛 아동용 수비용 안면 보호대-상세이미지.jpg',0,0);
+Insert into PRODUCT (ITEMNUM,IMAGE1,CG_CODE,SCG_CODE,PRODUCT,PRICE,DIMAGE,PCNT,SALE) values (10425,'윌슨 B2037K 안면 보호 마스크 - P.jpg','fcg007','protect005','윌슨 B2037K 안면 보호 마스크 - P',32000,'윌슨 B2037K 안면 보호 마스크 - P-상세이미지.jpg',0,0);
+Insert into PRODUCT (ITEMNUM,IMAGE1,CG_CODE,SCG_CODE,PRODUCT,PRICE,DIMAGE,PCNT,SALE) values (10426,'맥데이비드 Carpel Tunnel Wrist 카펠 터널 손목.jpg','fcg007','protect006','맥데이비드 Carpel Tunnel Wrist 카펠 터널 손목',29000,'맥데이비드 Carpel Tunnel Wrist 카펠 터널 손목-상세이미지.jpg',0,0);
+Insert into PRODUCT (ITEMNUM,IMAGE1,CG_CODE,SCG_CODE,PRODUCT,PRICE,DIMAGE,PCNT,SALE) values (10427,'맥데이비드 Compression Arm Sleeve.jpg','fcg007','protect006','맥데이비드 Compression Arm Sleeve',28000,'맥데이비드 Compression Arm Sleeve-.상세이미지.jpg',0,0);
+Insert into PRODUCT (ITEMNUM,IMAGE1,CG_CODE,SCG_CODE,PRODUCT,PRICE,DIMAGE,PCNT,SALE) values (10428,'맥데이비드 Deluxe Elbow Support 팔꿈치 서포트.jpg','fcg007','protect006','맥데이비드 Deluxe Elbow Support 팔꿈치 서포트',30000,'맥데이비드 Deluxe Elbow Support 팔꿈치 서포트-상세이미지.jpg',0,0);
+Insert into PRODUCT (ITEMNUM,IMAGE1,CG_CODE,SCG_CODE,PRODUCT,PRICE,DIMAGE,PCNT,SALE) values (10429,'맥데이비드 Hexpad Tank Shirt pad.jpg','fcg007','protect006','맥데이비드 Hexpad Tank Shirt pad',35000,'맥데이비드 Hexpad Tank Shirt pad-상세이미지.jpg',0,0);
+Insert into PRODUCT (ITEMNUM,IMAGE1,CG_CODE,SCG_CODE,PRODUCT,PRICE,DIMAGE,PCNT,SALE) values (10430,'맥데이비드 Hexpad Thudd Short (737T).jpg','fcg007','protect006','맥데이비드 Hexpad Thudd Short (737T)',32200,'맥데이비드 Hexpad Thudd Short (737T)-상세이미지.jpg',0,0);
+Insert into PRODUCT (ITEMNUM,IMAGE1,CG_CODE,SCG_CODE,PRODUCT,PRICE,DIMAGE,PCNT,SALE) values (10431,'맥데이비드 Ligamet Knee Support 무릎 서포트.jpg','fcg007','protect006','맥데이비드 Ligamet Knee Support 무릎 서포트',28800,'맥데이비드 Ligamet Knee Support 무릎 서포트-상세이미지.jpg',0,0);
+Insert into PRODUCT (ITEMNUM,IMAGE1,CG_CODE,SCG_CODE,PRODUCT,PRICE,DIMAGE,PCNT,SALE) values (10432,'맥데이비드 Lt Wt Back Support.jpg','fcg007','protect006','맥데이비드 Lt Wt Back Support',35600,'맥데이비드 Lt Wt Back Support-상세이미지.jpg',0,0);
+Insert into PRODUCT (ITEMNUM,IMAGE1,CG_CODE,SCG_CODE,PRODUCT,PRICE,DIMAGE,PCNT,SALE) values (10433,'슈퍼스킨 슬라이딩 무릎보호대.jpg','fcg007','protect006','슈퍼스킨 슬라이딩 무릎보호대',19900,'슈퍼스킨 슬라이딩 무릎보호대-상세이미지.jpg',0,0);
+Insert into PRODUCT (ITEMNUM,IMAGE1,CG_CODE,SCG_CODE,PRODUCT,PRICE,DIMAGE,PCNT,SALE) values (10434,'키모니 네오맥스 발목 보호대.jpg','fcg007','protect006','키모니 네오맥스 발목 보호대',18000,'키모니 네오맥스 발목 보호대-상세이미지.jpg',0,0);
+Insert into PRODUCT (ITEMNUM,IMAGE1,CG_CODE,SCG_CODE,PRODUCT,PRICE,DIMAGE,PCNT,SALE) values (10205,'하타케야마 포수미트 카이타쿠야 M62 (화이트).jpg','fcg001','mitt004','하타케야마 포수미트 카이타쿠야 M62 (화이트)',450000,'하타케야마 포수미트 카이타쿠야 M62 (화이트)-상세이미지.jpg',1,0);
+Insert into PRODUCT (ITEMNUM,IMAGE1,CG_CODE,SCG_CODE,PRODUCT,PRICE,DIMAGE,PCNT,SALE) values (10206,'스톰 2024년 운 스페샬 포수미트 일반형 레드.jpg','fcg001','mitt004','스톰 2024년 운 스페샬 포수미트 일반형 레드',434000,'스톰 2024년 운 스페샬 포수미트 일반형 레드-상세이미지.jpg',0,0);
+Insert into PRODUCT (ITEMNUM,IMAGE1,CG_CODE,SCG_CODE,PRODUCT,PRICE,DIMAGE,PCNT,SALE) values (10229,'MIZUNO 미즈노 양귀헬멧 111 (화이트).jpg','fcg007','protect001','MIZUNO 미즈노 양귀헬멧 111 (화이트)',33000,'MIZUNO 미즈노 양귀헬멧 111 (화이트)-상세이미지.jpg',1,0);
+Insert into PRODUCT (ITEMNUM,IMAGE1,CG_CODE,SCG_CODE,PRODUCT,PRICE,DIMAGE,PCNT,SALE) values (10231,'도코마 도쿠마 PRO MODEL 각도조절형 외귀 투톤헬멧 - 검투사 별도.jpg','fcg007','protect001','도코마 도쿠마 PRO MODEL 각도조절형 외귀 투톤헬멧 - 검투사 별도',50500,'도코마 도쿠마 PRO MODEL 각도조절형 외귀 투톤헬멧 - 검투사 별도-상세이미지.jpg',4,0);
+Insert into PRODUCT (ITEMNUM,IMAGE1,CG_CODE,SCG_CODE,PRODUCT,PRICE,DIMAGE,PCNT,SALE) values (10232,'도코마 도쿠마 초경량 투톤 검투사 외귀헬멧-네이비.jpg','fcg007','protect001','도코마 도쿠마 초경량 투톤 검투사 외귀헬멧-네이비',45000,'도코마 도쿠마 초경량 투톤 검투사 외귀헬멧-네이비-상세이미지.jpg',2,0);
+Insert into PRODUCT (ITEMNUM,IMAGE1,CG_CODE,SCG_CODE,PRODUCT,PRICE,DIMAGE,PCNT,SALE) values (10233,'도코마 도쿠마 초경량 투톤 외귀헬멧-그린.jpg','fcg007','protect001','도코마 도쿠마 초경량 투톤 외귀헬멧-그린',35000,'도코마 도쿠마 초경량 투톤 외귀헬멧-그린-상세이미지.jpg',0,0);
+Insert into PRODUCT (ITEMNUM,IMAGE1,CG_CODE,SCG_CODE,PRODUCT,PRICE,DIMAGE,PCNT,SALE) values (10234,'브렛 프로페셔널 프리미엄 경량 배팅헬멧 레드 무광 좌타자용.jpg','fcg007','protect001','브렛 프로페셔널 프리미엄 경량 배팅헬멧 레드 무광 좌타자용',40000,'브렛 프로페셔널 프리미엄 경량 배팅헬멧 레드 무광 좌타자용-상세이미지.jpg',0,0);
+Insert into PRODUCT (ITEMNUM,IMAGE1,CG_CODE,SCG_CODE,PRODUCT,PRICE,DIMAGE,PCNT,SALE) values (10235,'브렛 프로페셔널 프리미엄 경량 배팅헬멧 로열블루 유광 좌타자용.jpg','fcg007','protect001','브렛 프로페셔널 프리미엄 경량 배팅헬멧 로열블루 유광 좌타자용',41000,'브렛 프로페셔널 프리미엄 경량 배팅헬멧 로열블루 유광 좌타자용-상세이미지.jpg',0,0);
+Insert into PRODUCT (ITEMNUM,IMAGE1,CG_CODE,SCG_CODE,PRODUCT,PRICE,DIMAGE,PCNT,SALE) values (10236,'브렛 프로페셔널 프리미엄 경량 배팅헬멧 블랙무광 우타자용.jpg','fcg007','protect001','브렛 프로페셔널 프리미엄 경량 배팅헬멧 블랙무광 우타자용',61000,'브렛 프로페셔널 프리미엄 경량 배팅헬멧 블랙무광 우타자용-상세이미지.jpg',0,0);
+Insert into PRODUCT (ITEMNUM,IMAGE1,CG_CODE,SCG_CODE,PRODUCT,PRICE,DIMAGE,PCNT,SALE) values (10237,'브렛 프로페셔널 프리미엄 경량 배팅헬멧 블랙유광 우타자용.jpg','fcg007','protect001','브렛 프로페셔널 프리미엄 경량 배팅헬멧 블랙유광 우타자용',61000,'브렛 프로페셔널 프리미엄 경량 배팅헬멧 블랙유광 우타자용-상세이미지.jpg',0,0);
+Insert into PRODUCT (ITEMNUM,IMAGE1,CG_CODE,SCG_CODE,PRODUCT,PRICE,DIMAGE,PCNT,SALE) values (10238,'엑스필더 신형 초경량 유광 외귀 헬멧 BUR.jpg','fcg007','protect001','엑스필더 신형 초경량 유광 외귀 헬멧 BUR',59000,'엑스필더 신형 초경량 유광 외귀 헬멧 BUR-상세이미지.jpg',0,0);
+Insert into PRODUCT (ITEMNUM,IMAGE1,CG_CODE,SCG_CODE,PRODUCT,PRICE,DIMAGE,PCNT,SALE) values (10239,'SSK 초경량 타자헬멧 유광 RED.jpg','fcg007','protect001','SSK 초경량 타자헬멧 유광 RED',39900,'SSK 초경량 타자헬멧 유광 RED-상세이미지.jpg',0,0);
+Insert into PRODUCT (ITEMNUM,IMAGE1,CG_CODE,SCG_CODE,PRODUCT,PRICE,DIMAGE,PCNT,SALE) values (10240,'ZETT 제트 싱글 암가드 블루.jpg','fcg007','protect002','ZETT 제트 싱글 암가드 블루',23000,'ZETT 제트 싱글 암가드 블루-상세이미지.jpg',0,0);
+Insert into PRODUCT (ITEMNUM,IMAGE1,CG_CODE,SCG_CODE,PRODUCT,PRICE,DIMAGE,PCNT,SALE) values (10241,'ZETT 제트 싱글 암가드 옐로우.jpg','fcg007','protect002','ZETT 제트 싱글 암가드 옐로우',23000,'ZETT 제트 싱글 암가드 옐로우-상세이미지.jpg',9,0);
+Insert into PRODUCT (ITEMNUM,IMAGE1,CG_CODE,SCG_CODE,PRODUCT,PRICE,DIMAGE,PCNT,SALE) values (10242,'도코마 도쿠마 PRO 직자수 암가드 - 벚꽃에디션 화이트.jpg','fcg007','protect002','도코마 도쿠마 PRO 직자수 암가드 - 벚꽃에디션 화이트',44000,'도코마 도쿠마 PRO 직자수 암가드 - 벚꽃에디션 화이트-상세이미지.jpg',1,0);
+Insert into PRODUCT (ITEMNUM,IMAGE1,CG_CODE,SCG_CODE,PRODUCT,PRICE,DIMAGE,PCNT,SALE) values (10243,'롤링스 어센틱 프라임 암가드 네이비.jpg','fcg007','protect002','롤링스 어센틱 프라임 암가드 네이비',31900,'롤링스 어센틱 프라임 암가드 네이비-상세이미지.jpg',0,0);
+Insert into PRODUCT (ITEMNUM,IMAGE1,CG_CODE,SCG_CODE,PRODUCT,PRICE,DIMAGE,PCNT,SALE) values (10244,'롤링스 어센틱 프라임 암가드 화이트.jpg','fcg007','protect002','롤링스 어센틱 프라임 암가드 화이트',29900,'롤링스 어센틱 프라임 암가드 화이트-상세이미지.jpg',0,0);
+Insert into PRODUCT (ITEMNUM,IMAGE1,CG_CODE,SCG_CODE,PRODUCT,PRICE,DIMAGE,PCNT,SALE) values (10245,'알파 비스트 a-beast 베이스볼 가드 세트 FOR PLAYER 배지환 게임모델 블랙.jpg','fcg007','protect002','알파 비스트 a-beast 베이스볼 가드 세트 FOR PLAYER 배지환 게임모델 블랙',29900,'알파 비스트 a-beast 베이스볼 가드 세트 FOR PLAYER 배지환 게임모델 블랙-상세이미지.jpg',0,0);
+Insert into PRODUCT (ITEMNUM,IMAGE1,CG_CODE,SCG_CODE,PRODUCT,PRICE,DIMAGE,PCNT,SALE) values (10246,'프랭클린 PRT 시리즈 엘보우가드 암가드 (핑크에디션).jpg','fcg007','protect002','프랭클린 PRT 시리즈 엘보우가드 암가드 (핑크에디션)',35500,'프랭클린 PRT 시리즈 엘보우가드 암가드 (핑크에디션)-상세이미지.jpg',0,0);
+Insert into PRODUCT (ITEMNUM,IMAGE1,CG_CODE,SCG_CODE,PRODUCT,PRICE,DIMAGE,PCNT,SALE) values (10247,'프랭클린 PRT 시리즈 엘보우가드 암가드 블루.jpg','fcg007','protect002','프랭클린 PRT 시리즈 엘보우가드 암가드 블루',36600,'프랭클린 PRT 시리즈 엘보우가드 암가드 블루-상세이미지.jpg',0,0);
+Insert into PRODUCT (ITEMNUM,IMAGE1,CG_CODE,SCG_CODE,PRODUCT,PRICE,DIMAGE,PCNT,SALE) values (10248,'프로스펙스 포프로 야구 타자 암가드 오지환 모델 레드.jpg','fcg007','protect002','프로스펙스 포프로 야구 타자 암가드 오지환 모델 레드',59900,'프로스펙스 포프로 야구 타자 암가드 오지환 모델 레드-상세이미지.jpg',0,0);
+Insert into PRODUCT (ITEMNUM,IMAGE1,CG_CODE,SCG_CODE,PRODUCT,PRICE,DIMAGE,PCNT,SALE) values (10249,'프로스펙스 포프로 야구 타자 암가드 정수빈 모델 옐로우.jpg','fcg007','protect002','프로스펙스 포프로 야구 타자 암가드 정수빈 모델 옐로우',59900,'프로스펙스 포프로 야구 타자 암가드 정수빈 모델 옐로우-상세이미지.jpg',0,0);
+Insert into PRODUCT (ITEMNUM,IMAGE1,CG_CODE,SCG_CODE,PRODUCT,PRICE,DIMAGE,PCNT,SALE) values (10172,'제트 프로스테이터스 연식 오더 글러브 외야 두산베어스 김인태 선수 모델.jpg','fcg001','mitt003','제트 프로스테이터스 연식 오더 글러브 외야 두산베어스 김인태 선수 모델',600000,'제트 프로스테이터스 연식 오더 글러브 외야 두산베어스 김인태 선수 모델-상세이미지.jpg',3,0);
+Insert into PRODUCT (ITEMNUM,IMAGE1,CG_CODE,SCG_CODE,PRODUCT,PRICE,DIMAGE,PCNT,SALE) values (10173,'프로-스펙스 스마트 임지열 외야 선수모델 글러브 화이트.jpg','fcg001','mitt003','프로-스펙스 스마트 임지열 외야 선수모델 글러브 화이트',550000,'프로-스펙스 스마트 임지열 외야 선수모델 글러브 화이트-상세이미지.jpg',2,0);
+Insert into PRODUCT (ITEMNUM,IMAGE1,CG_CODE,SCG_CODE,PRODUCT,PRICE,DIMAGE,PCNT,SALE) values (10174,'프로-스펙스 스마트 정수빈C 외야 선수모델 글러브 레드.jpg','fcg001','mitt003','프로-스펙스 스마트 정수빈C 외야 선수모델 글러브 레드',299000,'프로-스펙스 스마트 정수빈C 외야 선수모델 글러브 레드-상세이미지.jpg',1,0);
+Insert into PRODUCT (ITEMNUM,IMAGE1,CG_CODE,SCG_CODE,PRODUCT,PRICE,DIMAGE,PCNT,SALE) values (10207,'MIZUNO 미즈노 윌드라이브레드 유소년 내야 글러브 블랙.jpg','fcg001','mitt005','MIZUNO 미즈노 윌드라이브레드 유소년 내야 글러브 블랙',230000,'MIZUNO 미즈노 윌드라이브레드 유소년 내야 글러브 블랙-상세이미지.jpg',0,0);
+Insert into PRODUCT (ITEMNUM,IMAGE1,CG_CODE,SCG_CODE,PRODUCT,PRICE,DIMAGE,PCNT,SALE) values (10208,'MIZUNO 미즈노 유소년 윌드라이브 글러브 (블랙).jpg','fcg001','mitt005','MIZUNO 미즈노 유소년 윌드라이브 글러브 (블랙)',230000,'MIZUNO 미즈노 유소년 윌드라이브 글러브 (블랙)-상세이미지.jpg',0,0);
+Insert into PRODUCT (ITEMNUM,IMAGE1,CG_CODE,SCG_CODE,PRODUCT,PRICE,DIMAGE,PCNT,SALE) values (10209,'다비드 FS OF-81 23 유소년 외야.jpg','fcg001','mitt005','다비드 FS OF-81 23 유소년 외야',300000,'다비드 FS OF-81 23 유소년 외야-상세이미지.jpg',0,0);
+Insert into PRODUCT (ITEMNUM,IMAGE1,CG_CODE,SCG_CODE,PRODUCT,PRICE,DIMAGE,PCNT,SALE) values (10210,'러펠스 Ruppells 프로미싱 유스 스티어 야구 글러브 외야수용.jpg','fcg001','mitt005','러펠스 Ruppells 프로미싱 유스 스티어 야구 글러브 외야수용',245000,'러펠스 Ruppells 프로미싱 유스 스티어 야구 글러브 외야수용-상세이미지.jpg',0,0);
+Insert into PRODUCT (ITEMNUM,IMAGE1,CG_CODE,SCG_CODE,PRODUCT,PRICE,DIMAGE,PCNT,SALE) values (10211,'롤링스 하이퍼테크 주니어 내야 글러브 (레드).jpg','fcg001','mitt005','롤링스 하이퍼테크 주니어 내야 글러브 (레드)',333000,'롤링스 하이퍼테크 주니어 내야 글러브 (레드)-상세이미지.jpg',0,0);
+Insert into PRODUCT (ITEMNUM,IMAGE1,CG_CODE,SCG_CODE,PRODUCT,PRICE,DIMAGE,PCNT,SALE) values (10212,'롤링스 하이퍼테크 주니어 외야 글러브 (블루).jpg','fcg001','mitt005','롤링스 하이퍼테크 주니어 외야 글러브 (블루)',299000,'롤링스 하이퍼테크 주니어 외야 글러브 (블루)-상세이미지.jpg',0,0);
+Insert into PRODUCT (ITEMNUM,IMAGE1,CG_CODE,SCG_CODE,PRODUCT,PRICE,DIMAGE,PCNT,SALE) values (10214,'윌슨 A2000 유소년 내야 글러브 (민트).jpg','fcg001','mitt005','윌슨 A2000 유소년 내야 글러브 (민트)',200000,'윌슨 A2000 유소년 내야 글러브 (민트)-상세이미지.jpg',0,0);
+Insert into PRODUCT (ITEMNUM,IMAGE1,CG_CODE,SCG_CODE,PRODUCT,PRICE,DIMAGE,PCNT,SALE) values (10215,'인코자바 24LH 유소년 투수-올라운드 글러브 좌투.jpg','fcg001','mitt005','인코자바 24LH 유소년 투수-올라운드 글러브 좌투',210000,'인코자바 24LH 유소년 투수-올라운드 글러브 좌투-상세이미지.jpg',0,0);
+Insert into PRODUCT (ITEMNUM,IMAGE1,CG_CODE,SCG_CODE,PRODUCT,PRICE,DIMAGE,PCNT,SALE) values (10216,'프랭클린 피츠버그 주니어 글러브 옐로우.jpg','fcg001','mitt005','프랭클린 피츠버그 주니어 글러브 옐로우',317000,'프랭클린 피츠버그 주니어 글러브 옐로우-상세이미지.jpg',0,0);
+Insert into PRODUCT (ITEMNUM,IMAGE1,CG_CODE,SCG_CODE,PRODUCT,PRICE,DIMAGE,PCNT,SALE) values (10217,'미즈노 글로벌엘리트 유소년 내야M (오렌지).jpg','fcg001','mitt005','미즈노 글로벌엘리트 유소년 내야M (오렌지)',300000,'미즈노 글로벌엘리트 유소년 내야M (오렌지).jpg',0,0);
+Insert into PRODUCT (ITEMNUM,IMAGE1,CG_CODE,SCG_CODE,PRODUCT,PRICE,DIMAGE,PCNT,SALE) values (10218,'SSK 사사키 글러브 레이스 - Navy.png','fcg001','mitt006','SSK 사사키 글러브 레이스 - Navy',14000,'SSK 사사키 글러브 레이스 - Navy - 상세이미지.jpg',0,0);
+Insert into PRODUCT (ITEMNUM,IMAGE1,CG_CODE,SCG_CODE,PRODUCT,PRICE,DIMAGE,PCNT,SALE) values (10220,'ZETT 글러브 가방 BAP - 1개입.jpg','fcg001','mitt006','ZETT 글러브 가방 BAP - 1개입',40000,'ZETT 글러브 가방 BAP - 1개입-상세이미지.jpg',0,0);
+Insert into PRODUCT (ITEMNUM,IMAGE1,CG_CODE,SCG_CODE,PRODUCT,PRICE,DIMAGE,PCNT,SALE) values (10221,'강스 스튜디오 옥시젠 베이스볼 글러브 멀티 가죽 클리너 148ml.jpg','fcg001','mitt006','강스 스튜디오 옥시젠 베이스볼 글러브 멀티 가죽 클리너 148ml',9900,'강스 스튜디오 옥시젠 베이스볼 글러브 멀티 가죽 클리너 148ml-상세이미지.jpg',0,0);
+Insert into PRODUCT (ITEMNUM,IMAGE1,CG_CODE,SCG_CODE,PRODUCT,PRICE,DIMAGE,PCNT,SALE) values (10222,'골드 글러브 주머니.jpg','fcg001','mitt006','골드 글러브 주머니',9000,'골드 글러브 주머니-상세이미지.jpg',0,0);
+Insert into PRODUCT (ITEMNUM,IMAGE1,CG_CODE,SCG_CODE,PRODUCT,PRICE,DIMAGE,PCNT,SALE) values (10223,'러펠스 대왕 쉐이퍼 길들이기용 망치 (볼집용).jpg','fcg001','mitt006','러펠스 대왕 쉐이퍼 길들이기용 망치 (볼집용)',15000,'러펠스 대왕 쉐이퍼 길들이기용 망치 (볼집용)-상세이미지.jpg',0,0);
+Insert into PRODUCT (ITEMNUM,IMAGE1,CG_CODE,SCG_CODE,PRODUCT,PRICE,DIMAGE,PCNT,SALE) values (10224,'러펠스 대용량 프리미엄 밍크 오일 가죽 글러브 관리용품 85G.jpg','fcg001','mitt006','러펠스 대용량 프리미엄 밍크 오일 가죽 글러브 관리용품 85G',8800,'러펠스 대용량 프리미엄 밍크 오일 가죽 글러브 관리용품 85G-상세이미지.jpg',0,0);
+Insert into PRODUCT (ITEMNUM,IMAGE1,CG_CODE,SCG_CODE,PRODUCT,PRICE,DIMAGE,PCNT,SALE) values (10225,'롤링스 글러브 오일 패드 블랙.jpg','fcg001','mitt006','롤링스 글러브 오일 패드 블랙',19000,'롤링스 글러브 오일 패드 블랙-상세이미지.jpg',0,0);
+Insert into PRODUCT (ITEMNUM,IMAGE1,CG_CODE,SCG_CODE,PRODUCT,PRICE,DIMAGE,PCNT,SALE) values (10226,'롤링스 유지보수 브러쉬 솔 블랙.jpg','fcg001','mitt006','롤링스 유지보수 브러쉬 솔 블랙',4000,'롤링스 유지보수 브러쉬 솔 블랙-상세이미지.jfif',0,0);
+Insert into PRODUCT (ITEMNUM,IMAGE1,CG_CODE,SCG_CODE,PRODUCT,PRICE,DIMAGE,PCNT,SALE) values (10227,'하타케야마 가죽클리너 LC-1 일본제.jpg','fcg001','mitt006','하타케야마 가죽클리너 LC-1 일본제',3300,'하타케야마 가죽클리너 LC-1 일본제-상세이미지.jpg',0,0);
+Insert into PRODUCT (ITEMNUM,IMAGE1,CG_CODE,SCG_CODE,PRODUCT,PRICE,DIMAGE,PCNT,SALE) values (10228,'SSK 사사키 글러브 레이스 - Red.png','fcg001','mitt006','SSK 사사키 글러브 레이스 - Red',14000,'SSK 사사키 글러브 레이스 - Red -상세이미지.jpg',0,0);
+Insert into PRODUCT (ITEMNUM,IMAGE1,CG_CODE,SCG_CODE,PRODUCT,PRICE,DIMAGE,PCNT,SALE) values (10197,'스톰 NEW 볼트 VOLT 실버라벨 포수미트 일반형 스카이블루.jpg','fcg001','mitt004','스톰 NEW 볼트 VOLT 실버라벨 포수미트 일반형 스카이블루',399000,'스톰 NEW 볼트 VOLT 실버라벨 포수미트 일반형 스카이블루-상세이미지.jpg',0,0);
+Insert into PRODUCT (ITEMNUM,IMAGE1,CG_CODE,SCG_CODE,PRODUCT,PRICE,DIMAGE,PCNT,SALE) values (10198,'카나메 재팬 C100 포수 미트 블랙.jpg','fcg001','mitt004','카나메 재팬 C100 포수 미트 블랙',599000,'카나메 재팬 C100 포수 미트 블랙-상세이미지.jpg',0,0);
+Insert into PRODUCT (ITEMNUM,IMAGE1,CG_CODE,SCG_CODE,PRODUCT,PRICE,DIMAGE,PCNT,SALE) values (10199,'카나메 재팬 C200 포수 미트 옐로우.jpg','fcg001','mitt004','카나메 재팬 C200 포수 미트 옐로우',599000,'카나메 재팬 C200 포수 미트 옐로우-상세이미지.jpg',0,0);
+Insert into PRODUCT (ITEMNUM,IMAGE1,CG_CODE,SCG_CODE,PRODUCT,PRICE,DIMAGE,PCNT,SALE) values (10200,'하타케야마 2024 포수미트 V-M8jb.png','fcg001','mitt004','하타케야마 2024 포수미트 V-M8jb',551000,'하타케야마 2024 포수미트 V-M8jb-상세이미지.jpg',0,0);
+Insert into PRODUCT (ITEMNUM,IMAGE1,CG_CODE,SCG_CODE,PRODUCT,PRICE,DIMAGE,PCNT,SALE) values (10201,'하타케야마 PRO-M8EB 포수미트.jpg','fcg001','mitt004','하타케야마 PRO-M8EB 포수미트',348000,'하타케야마 PRO-M8EB 포수미트-상세이미지.jpg',0,0);
+Insert into PRODUCT (ITEMNUM,IMAGE1,CG_CODE,SCG_CODE,PRODUCT,PRICE,DIMAGE,PCNT,SALE) values (10202,'하타케야마 골드등급 양의지패턴 오더 포수미트 레드.jpg','fcg001','mitt004','하타케야마 골드등급 양의지패턴 오더 포수미트 레드',514000,'하타케야마 골드등급 양의지패턴 오더 포수미트 레드-상세이미지.jpg',0,0);
+Insert into PRODUCT (ITEMNUM,IMAGE1,CG_CODE,SCG_CODE,PRODUCT,PRICE,DIMAGE,PCNT,SALE) values (10203,'하타케야마 스페셜오더 포수미트 오렌지.jpg','fcg001','mitt004','하타케야마 스페셜오더 포수미트 오렌지',310000,'하타케야마 스페셜오더 포수미트 오렌지-상세이미지.jpg',0,0);
+Insert into PRODUCT (ITEMNUM,IMAGE1,CG_CODE,SCG_CODE,PRODUCT,PRICE,DIMAGE,PCNT,SALE) values (10204,'하타케야마 포수미트 골드오더 L27 유강남 패턴 128.jpg','fcg001','mitt004','하타케야마 포수미트 골드오더 L27 유강남 패턴 128',388000,'하타케야마 포수미트 골드오더 L27 유강남 패턴 128-상세이미지.jpg',0,0);
+Insert into PRODUCT (ITEMNUM,IMAGE1,CG_CODE,SCG_CODE,PRODUCT,PRICE,DIMAGE,PCNT,SALE) values (10171,'윌슨 KOREA A2K 외야 글러브 최형우 선수모델 레드.jpg','fcg001','mitt003','윌슨 KOREA A2K 외야 글러브 최형우 선수모델 레드',376000,'윌슨 KOREA A2K 외야 글러브 최형우 선수모델 레드-상세이미지.jpg',0,0);
+Insert into PRODUCT (ITEMNUM,IMAGE1,CG_CODE,SCG_CODE,PRODUCT,PRICE,DIMAGE,PCNT,SALE) values (10143,'야구공 나무받침대 (소).jpg','fcg008','baseball007','야구공 나무받침대 (소)',6500,'야구공 나무받침대 (소)-상세이미지.jpg',0,0);
+Insert into PRODUCT (ITEMNUM,IMAGE1,CG_CODE,SCG_CODE,PRODUCT,PRICE,DIMAGE,PCNT,SALE) values (10144,'야구공 아크릴케이스.jpg','fcg008','baseball007','야구공 아크릴케이스',7000,'야구공 아크릴케이스-상세이미지.jpg',0,0);
+Insert into PRODUCT (ITEMNUM,IMAGE1,CG_CODE,SCG_CODE,PRODUCT,PRICE,DIMAGE,PCNT,SALE) values (10145,'GOLD 골드 쉐도우 에디션 블랙 GBG-PRO 011 투수 글러브 야신야덕.jpg','fcg001','mitt001','GOLD 골드 쉐도우 에디션 블랙 GBG-PRO 011 투수 글러브 야신야덕',310000,'GOLD 골드 쉐도우 에디션 블랙 GBG-PRO 011 투수 글러브 야신야덕-상세이미지.jpg',19,0);
+Insert into PRODUCT (ITEMNUM,IMAGE1,CG_CODE,SCG_CODE,PRODUCT,PRICE,DIMAGE,PCNT,SALE) values (10146,'SSK 사사키 ALL NINE SL01B 올라운드 글러브.jpg','fcg001','mitt001','SSK 사사키 ALL NINE SL01B 올라운드 글러브',400000,'SSK 사사키 ALL NINE SL01B 올라운드 글러브-상세이미지.png',7,0);
+Insert into PRODUCT (ITEMNUM,IMAGE1,CG_CODE,SCG_CODE,PRODUCT,PRICE,DIMAGE,PCNT,SALE) values (10147,'러펠스 Ruppells PRO LIMITED 스리즈 - 24시즌 SSG 박종훈 선수 모델.jpg','fcg001','mitt001','러펠스 Ruppells PRO LIMITED 스리즈 - 24시즌 SSG 박종훈 선수 모델',450000,'러펠스 Ruppells PRO LIMITED 스리즈 - 24시즌 SSG 박종훈 선수 모델-상세이미지.jpg',1,0);
+Insert into PRODUCT (ITEMNUM,IMAGE1,CG_CODE,SCG_CODE,PRODUCT,PRICE,DIMAGE,PCNT,SALE) values (10148,'스톰 24년형 풍 KR스페셜 에디션 글러브 오가사와라웹-옐로우.jpg','fcg001','mitt001','스톰 24년형 풍 KR스페셜 에디션 글러브 오가사와라웹-옐로우',399000,'스톰 24년형 풍 KR스페셜 에디션 글러브 오가사와라웹-옐로우-상세이미지.jpg',0,0);
+Insert into PRODUCT (ITEMNUM,IMAGE1,CG_CODE,SCG_CODE,PRODUCT,PRICE,DIMAGE,PCNT,SALE) values (10149,'스톰 25시즌 운 한정판 슈퍼스타 스리즈 내야 및 올라운드 오가웹 레드.jpg','fcg001','mitt001','스톰 25시즌 운 한정판 슈퍼스타 스리즈 내야 및 올라운드 오가웹 레드',350000,'스톰 25시즌 운 한정판 슈퍼스타 스리즈 내야 및 올라운드 오가웹 레드-상세이미지.jpg',0,0);
+Insert into PRODUCT (ITEMNUM,IMAGE1,CG_CODE,SCG_CODE,PRODUCT,PRICE,DIMAGE,PCNT,SALE) values (10150,'스톰 2018년 주니어 시리즈 올라운드 오가사와라웹-탄.jpg','fcg001','mitt001','스톰 2018년 주니어 시리즈 올라운드 오가사와라웹-탄',311000,'스톰 2018년 주니어 시리즈 올라운드 오가사와라웹-탄-상세이미지.jpg',0,0);
+Insert into PRODUCT (ITEMNUM,IMAGE1,CG_CODE,SCG_CODE,PRODUCT,PRICE,DIMAGE,PCNT,SALE) values (10151,'스톰 2024년 폭풍 SMC 스페셜 투수 불꽃웹 (라이트브라운).jpg','fcg001','mitt001','스톰 2024년 폭풍 SMC 스페셜 투수 불꽃웹 (라이트브라운)',419000,'스톰 2024년 폭풍 SMC 스페셜 투수 불꽃웹 (라이트브라운)-상세이미지.jpg',0,0);
+Insert into PRODUCT (ITEMNUM,IMAGE1,CG_CODE,SCG_CODE,PRODUCT,PRICE,DIMAGE,PCNT,SALE) values (10152,'스톰 2024년 폭풍 한정판 1루미트 닭발형-라이트오렌지.jpg','fcg001','mitt001','스톰 2024년 폭풍 한정판 1루미트 닭발형-라이트오렌지',299000,'스톰 2024년 폭풍 한정판 1루미트 닭발형-라이트오렌지-상세이미지.jpg',0,0);
+Insert into PRODUCT (ITEMNUM,IMAGE1,CG_CODE,SCG_CODE,PRODUCT,PRICE,DIMAGE,PCNT,SALE) values (10153,'스톰 NEW 볼트 VOLT 실버라벨 올라운드 경첩바둑판웹 레드.jpg','fcg001','mitt001','스톰 NEW 볼트 VOLT 실버라벨 올라운드 경첩바둑판웹 레드',357000,'스톰 NEW 볼트 VOLT 실버라벨 올라운드 경첩바둑판웹 레드-상세이미지.jpg',0,0);
+Insert into PRODUCT (ITEMNUM,IMAGE1,CG_CODE,SCG_CODE,PRODUCT,PRICE,DIMAGE,PCNT,SALE) values (10154,'윌슨 KOREA A2K 투수 글러브 블루.jpg','fcg001','mitt001','윌슨 KOREA A2K 투수 글러브 블루',420000,'윌슨 KOREA A2K 투수 글러브 블루-상세이미지.jpg',0,0);
+Insert into PRODUCT (ITEMNUM,IMAGE1,CG_CODE,SCG_CODE,PRODUCT,PRICE,DIMAGE,PCNT,SALE) values (10155,'MIZUNO 미즈노 글로벌엘리트 내야 글러브 아이웹 옐로우.jpg','fcg001','mitt002','MIZUNO 미즈노 글로벌엘리트 내야 글러브 아이웹 옐로우',399000,'MIZUNO 미즈노 글로벌엘리트 내야 글러브 아이웹 옐로우-상세이미지.jpg',2,0);
+Insert into PRODUCT (ITEMNUM,IMAGE1,CG_CODE,SCG_CODE,PRODUCT,PRICE,DIMAGE,PCNT,SALE) values (10156,'SSK 사사키 프로엣지 내야 십자웹 야구 글러브.jpg','fcg001','mitt002','SSK 사사키 프로엣지 내야 십자웹 야구 글러브',470000,'SSK 사사키 프로엣지 내야 십자웹 야구 글러브-상세이미지.jpg',8,0);
+Insert into PRODUCT (ITEMNUM,IMAGE1,CG_CODE,SCG_CODE,PRODUCT,PRICE,DIMAGE,PCNT,SALE) values (10157,'미즈노 프로 BK600R 내야글러브 BK.jpg','fcg001','mitt002','미즈노 프로 BK600R 내야글러브 BK',299000,'미즈노 프로 BK600R 내야글러브 BK-상세이미지.jpg',4,0);
+Insert into PRODUCT (ITEMNUM,IMAGE1,CG_CODE,SCG_CODE,PRODUCT,PRICE,DIMAGE,PCNT,SALE) values (10158,'스톰 NEW 볼트 VOLT 실버라벨 내야 변형십자웹-카멜.jpg','fcg001','mitt002','스톰 NEW 볼트 VOLT 실버라벨 내야 변형십자웹-카멜',340000,'스톰 NEW 볼트 VOLT 실버라벨 내야 변형십자웹-카멜-상세이미지.jpg',0,0);
+Insert into PRODUCT (ITEMNUM,IMAGE1,CG_CODE,SCG_CODE,PRODUCT,PRICE,DIMAGE,PCNT,SALE) values (10159,'윌슨 KOREA A2K 내야 글러브 이유찬 모델 네이비.jpg','fcg001','mitt002','윌슨 KOREA A2K 내야 글러브 이유찬 모델 네이비',254000,'윌슨 KOREA A2K 내야 글러브 이유찬 모델 네이비-상세이미지.jpg',0,0);
+Insert into PRODUCT (ITEMNUM,IMAGE1,CG_CODE,SCG_CODE,PRODUCT,PRICE,DIMAGE,PCNT,SALE) values (10160,'윌슨 내야 야구 글러브 민트 화이트 핑크.jpg','fcg001','mitt002','윌슨 내야 야구 글러브 민트 화이트 핑크',300000,'윌슨 내야 야구 글러브 민트 화이트 핑크-상세이미지.jpg',0,0);
+Insert into PRODUCT (ITEMNUM,IMAGE1,CG_CODE,SCG_CODE,PRODUCT,PRICE,DIMAGE,PCNT,SALE) values (10161,'제트 프로스테이터스 경식 오더글러브 내야 나카무라 모델.jpg','fcg001','mitt002','제트 프로스테이터스 경식 오더글러브 내야 나카무라 모델',313000,'제트 프로스테이터스 경식 오더글러브 내야 나카무라 모델-상세이미지.jpg',0,0);
+Insert into PRODUCT (ITEMNUM,IMAGE1,CG_CODE,SCG_CODE,PRODUCT,PRICE,DIMAGE,PCNT,SALE) values (10162,'제트 프로스테이터스 경식 오더글러브 내야 아마미야 모델 076.jpg','fcg001','mitt002','제트 프로스테이터스 경식 오더글러브 내야 아마미야 모델 076',247000,'제트 프로스테이터스 경식 오더글러브 내야 아마미야 모델 076-상세이미지.jpg',0,0);
+Insert into PRODUCT (ITEMNUM,IMAGE1,CG_CODE,SCG_CODE,PRODUCT,PRICE,DIMAGE,PCNT,SALE) values (10163,'프로-스펙스 포프로 오지환B 선수모델 내야 글러브 화이트.jpg','fcg001','mitt002','프로-스펙스 포프로 오지환B 선수모델 내야 글러브 화이트',500000,'프로-스펙스 포프로 오지환B 선수모델 내야 글러브 화이트-상세이미지.jpg',0,0);
+Insert into PRODUCT (ITEMNUM,IMAGE1,CG_CODE,SCG_CODE,PRODUCT,PRICE,DIMAGE,PCNT,SALE) values (10164,'프로-스펙스 포프로 원성준 내야 선수모델 글러브 블랙 화이트.jpg','fcg001','mitt002','프로-스펙스 포프로 원성준 내야 선수모델 글러브 블랙 화이트',450000,'프로-스펙스 포프로 원성준 내야 선수모델 글러브 블랙 화이트-상세이미지.jpg',0,0);
+Insert into PRODUCT (ITEMNUM,IMAGE1,CG_CODE,SCG_CODE,PRODUCT,PRICE,DIMAGE,PCNT,SALE) values (10165,'SSK PROEDGE 사카에 한정판 경식 프로엣지 외야 네이비블랙.png','fcg001','mitt003','SSK PROEDGE 사카에 한정판 경식 프로엣지 외야 네이비블랙',510000,'SSK PROEDGE 사카에 한정판 경식 프로엣지 외야 네이비블랙-상세이미지.jpg',0,0);
+Insert into PRODUCT (ITEMNUM,IMAGE1,CG_CODE,SCG_CODE,PRODUCT,PRICE,DIMAGE,PCNT,SALE) values (10166,'구보타슬러거 KSG-SPV 외야글러브.jpg','fcg001','mitt003','구보타슬러거 KSG-SPV 외야글러브',340000,'구보타슬러거 KSG-SPV 외야글러브-상세이미지.jpg',0,0);
+Insert into PRODUCT (ITEMNUM,IMAGE1,CG_CODE,SCG_CODE,PRODUCT,PRICE,DIMAGE,PCNT,SALE) values (10167,'미즈노 메이저스타일 외야글러브 베이지.jpg','fcg001','mitt003','미즈노 메이저스타일 외야글러브 베이지',480000,'미즈노 메이저스타일 외야글러브 베이지-상세이미지.jpg',0,0);
+Insert into PRODUCT (ITEMNUM,IMAGE1,CG_CODE,SCG_CODE,PRODUCT,PRICE,DIMAGE,PCNT,SALE) values (10168,'미즈노 프로 700DS 외야글러브 BK.jpg','fcg001','mitt003','미즈노 프로 700DS 외야글러브 BK',300000,'미즈노 프로 700DS 외야글러브 BK-상세이미지.jpg',0,0);
+Insert into PRODUCT (ITEMNUM,IMAGE1,CG_CODE,SCG_CODE,PRODUCT,PRICE,DIMAGE,PCNT,SALE) values (10169,'스톰 풍 수작 외야수용 이치로웹 베이지.jpg','fcg001','mitt003','스톰 풍 수작 외야수용 이치로웹 베이지',434000,'스톰 풍 수작 외야수용 이치로웹 베이지-상세이미지.jpg',0,0);
+Insert into PRODUCT (ITEMNUM,IMAGE1,CG_CODE,SCG_CODE,PRODUCT,PRICE,DIMAGE,PCNT,SALE) values (10170,'윌슨 KOREA A2K 외야 글러브 배정대 선수모델 네이비.jpg','fcg001','mitt003','윌슨 KOREA A2K 외야 글러브 배정대 선수모델 네이비',400000,'윌슨 KOREA A2K 외야 글러브 배정대 선수모델 네이비-상세이미지.jpg',0,0);
+Insert into PRODUCT (ITEMNUM,IMAGE1,CG_CODE,SCG_CODE,PRODUCT,PRICE,DIMAGE,PCNT,SALE) values (10142,'베이스볼 컬러 아크릴 야구공 케이스 (RED).jpg','fcg008','baseball007','베이스볼 컬러 아크릴 야구공 케이스 (RED)',7000,'베이스볼 컬러 아크릴 야구공 케이스 (RED)-상세이미지.jpg',2,0);
+Insert into PRODUCT (ITEMNUM,IMAGE1,CG_CODE,SCG_CODE,PRODUCT,PRICE,DIMAGE,PCNT,SALE) values (10008,'MAZOR 메이저 2023 악셀3 알로이 배트 화이트.jpg','fcg002','bat001','MAZOR 메이저 2023 악셀3 알로이 배트 화이트',220000,'MAZOR 메이저 2023 악셀3 알로이 배트 화이트-상세이미지.jpg',28,20);
+commit;
+Insert into PRODUCT (ITEMNUM,IMAGE1,CG_CODE,SCG_CODE,PRODUCT,PRICE,DIMAGE,PCNT,SALE) values (10009,'MIZUNO 글로벌엘리트 알루미늄배트.jpg','fcg002','bat001','MIZUNO 글로벌엘리트 알루미늄배트',190000,'MIZUNO 글로벌엘리트 알루미늄배트-상세이미지.jpg',25,30);
+Insert into PRODUCT (ITEMNUM,IMAGE1,CG_CODE,SCG_CODE,PRODUCT,PRICE,DIMAGE,PCNT,SALE) values (10010,'MIZUNO 미즈노 글로벌엘리트 J콩 알로이 배트.jpg','fcg002','bat001','MIZUNO 미즈노 글로벌엘리트 J콩 알로이 배트',179000,'MIZUNO 미즈노 글로벌엘리트 J콩 알로이 배트-상세이미지.jpg',1,5);
+Insert into PRODUCT (ITEMNUM,IMAGE1,CG_CODE,SCG_CODE,PRODUCT,PRICE,DIMAGE,PCNT,SALE) values (10011,'STORM 2022 폭풍 화이트에디션 배트.jpg','fcg002','bat001','STORM 2022 폭풍 화이트에디션 배트',275000,'STORM 2022 폭풍 화이트에디션 배트-상세이미지.jpg',1,15);
+Insert into PRODUCT (ITEMNUM,IMAGE1,CG_CODE,SCG_CODE,PRODUCT,PRICE,DIMAGE,PCNT,SALE) values (10012,'골드 임팩트 LG트윈스 에디션 알로이 야구 배트.jpg','fcg002','bat001','골드 임팩트 LG트윈스 에디션 알로이 야구 배트',300000,'골드 임팩트 LG트윈스 에디션 알로이 야구 배트-상세이미지.jpg',0,0);
+Insert into PRODUCT (ITEMNUM,IMAGE1,CG_CODE,SCG_CODE,PRODUCT,PRICE,DIMAGE,PCNT,SALE) values (10013,'멘데즈 M2K 카오스 KHAOS 알로이 배트.jpg','fcg002','bat001','멘데즈 M2K 카오스 KHAOS 알로이 배트',210000,'멘데즈 M2K 카오스 KHAOS 알로이 배트-상세이미지.jpg',0,0);
+Insert into PRODUCT (ITEMNUM,IMAGE1,CG_CODE,SCG_CODE,PRODUCT,PRICE,DIMAGE,PCNT,SALE) values (10014,'멘데즈 MENDEZ M2K 슬러거 블랙 한정판 알로이 배트.jpg','fcg002','bat001','멘데즈 MENDEZ M2K 슬러거 블랙 한정판 알로이 배트',163000,'멘데즈 MENDEZ M2K 슬러거 블랙 한정판 알로이 배트-상세이미지.jpg',0,0);
+Insert into PRODUCT (ITEMNUM,IMAGE1,CG_CODE,SCG_CODE,PRODUCT,PRICE,DIMAGE,PCNT,SALE) values (10015,'에일리언덕 ALIEN DUCK PX900 풀알로이 야구배트.jpg','fcg002','bat001','에일리언덕 ALIEN DUCK PX900 풀알로이 야구배트',147000,'에일리언덕 ALIEN DUCK PX900 풀알로이 야구배트-상세이미지.jpg',0,0);
+Insert into PRODUCT (ITEMNUM,IMAGE1,CG_CODE,SCG_CODE,PRODUCT,PRICE,DIMAGE,PCNT,SALE) values (10016,'웨이트레이드 뉴킬러 NK 알로이 야구배트.jpg','fcg002','bat001','웨이트레이드 뉴킬러 NK 알로이 야구배트',199000,'웨이트레이드 뉴킬러 NK 알로이 야구배트-상세이미지.jpg',0,0);
+Insert into PRODUCT (ITEMNUM,IMAGE1,CG_CODE,SCG_CODE,PRODUCT,PRICE,DIMAGE,PCNT,SALE) values (10017,'BKYE 투피스 하이브리드 배트.jpg','fcg002','bat002','BKYE 투피스 하이브리드 배트',145000,'BKYE 투피스 하이브리드 배트-상세이미지.jpg',3,0);
+Insert into PRODUCT (ITEMNUM,IMAGE1,CG_CODE,SCG_CODE,PRODUCT,PRICE,DIMAGE,PCNT,SALE) values (10018,'STORM 스톰 2024 Z2 지투 카본 야구배트 화이트.jpg','fcg002','bat002','STORM 스톰 2024 Z2 지투 카본 야구배트 화이트',168000,'STORM 스톰 2024 Z2 지투 카본 야구배트 화이트-상세이미지.jpg',4,0);
+Insert into PRODUCT (ITEMNUM,IMAGE1,CG_CODE,SCG_CODE,PRODUCT,PRICE,DIMAGE,PCNT,SALE) values (10019,'TOW ONE KILL 투피스 컴포짓 야구배트.jpg','fcg002','bat002','TOW ONE KILL 투피스 컴포짓 야구배트',250000,'TOW ONE KILL 투피스 컴포짓 야구배트.jpg',10,0);
+Insert into PRODUCT (ITEMNUM,IMAGE1,CG_CODE,SCG_CODE,PRODUCT,PRICE,DIMAGE,PCNT,SALE) values (10020,'골드 임팩트 MAXIMUM POWER 투피스 카본 야구배트.png','fcg002','bat002','골드 임팩트 MAXIMUM POWER 투피스 카본 야구배트',340000,'골드 임팩트 MAXIMUM POWER 투피스 카본 야구배트-상세이미지.jpg',0,0);
+Insert into PRODUCT (ITEMNUM,IMAGE1,CG_CODE,SCG_CODE,PRODUCT,PRICE,DIMAGE,PCNT,SALE) values (10021,'골드임팩트 블랙 카본 배트.jpg','fcg002','bat002','골드임팩트 블랙 카본 배트',310000,'골드임팩트 블랙 카본 배트-상세이미지.jpg',0,0);
+Insert into PRODUCT (ITEMNUM,IMAGE1,CG_CODE,SCG_CODE,PRODUCT,PRICE,DIMAGE,PCNT,SALE) values (10022,'드마리니 CF글리치 투피스 카본 컴포짓 야구배트 -5, -8드롭.jpg','fcg002','bat002','드마리니 CF글리치 투피스 카본 컴포짓 야구배트',410000,'드마리니 CF글리치 투피스 카본 컴포짓 야구배트 -5, -8드롭-상세이미지.jpg',0,0);
+Insert into PRODUCT (ITEMNUM,IMAGE1,CG_CODE,SCG_CODE,PRODUCT,PRICE,DIMAGE,PCNT,SALE) values (10029,'웨이트레이드 BAN 카본 3피스 컴포짓 야구배트.jpg','fcg002','bat002','웨이트레이드 BAN 카본 3피스 컴포짓 야구배트',412000,'웨이트레이드 BAN 카본 3피스 컴포짓 야구배트-상세이미지.jpg',0,0);
+Insert into PRODUCT (ITEMNUM,IMAGE1,CG_CODE,SCG_CODE,PRODUCT,PRICE,DIMAGE,PCNT,SALE) values (10024,'웨이트레이드 2021 BAN Carbon 밴 카본 원피스 야구배트.jpg','fcg002','bat002','웨이트레이드 2021 BAN Carbon 밴 카본 원피스 야구배트',275000,'웨이트레이드 2021 BAN Carbon 밴 카본 원피스 야구배트-상세이미지.jpg',0,0);
+Insert into PRODUCT (ITEMNUM,IMAGE1,CG_CODE,SCG_CODE,PRODUCT,PRICE,DIMAGE,PCNT,SALE) values (10025,'윌슨 드마리니 2020 WTDXVB5 VOODOO 투피스 하이브리드 야구배트.jpg','fcg002','bat002','윌슨 드마리니 2020 WTDXVB5 VOODOO 투피스 하이브리드 야구배트',223000,'윌슨 드마리니 2020 WTDXVB5 VOODOO 투피스 하이브리드 야구배트-상세이미지.jpg',0,0);
+Insert into PRODUCT (ITEMNUM,IMAGE1,CG_CODE,SCG_CODE,PRODUCT,PRICE,DIMAGE,PCNT,SALE) values (10026,'이스턴 2020 맥썸 360 원피스 풀카본 야구배트.jpg','fcg002','bat002','이스턴 2020 맥썸 360 원피스 풀카본 야구배트',200000,'이스턴 2020 맥썸 360 원피스 풀카본 야구배트-상세이미지.jpg',0,0);
+Insert into PRODUCT (ITEMNUM,IMAGE1,CG_CODE,SCG_CODE,PRODUCT,PRICE,DIMAGE,PCNT,SALE) values (10030,'B45 프로 캐나다산 우드 배트 MT27 마더스데이 무광핑크.jpg','fcg002','bat003','B45 프로 캐나다산 우드 배트 MT27 마더스데이 무광핑크',120000,'B45 프로 캐나다산 우드 배트 MT27 마더스데이 무광핑크-상세이미지.jpg',4,0);
+Insert into PRODUCT (ITEMNUM,IMAGE1,CG_CODE,SCG_CODE,PRODUCT,PRICE,DIMAGE,PCNT,SALE) values (10031,'B45 프로 캐나다산 우드배트 BH137 버닝.jpg','fcg002','bat003','B45 프로 캐나다산 우드배트 BH137 버닝',90000,'B45 프로 캐나다산 우드배트 BH137 버닝-상세이미지.jpg',0,0);
+Insert into PRODUCT (ITEMNUM,IMAGE1,CG_CODE,SCG_CODE,PRODUCT,PRICE,DIMAGE,PCNT,SALE) values (10032,'SSK 사사키 나무배트.jpg','fcg002','bat003','SSK 사사키 나무배트',70000,'SSK 사사키 나무배트-상세이미지.jpg',0,0);
+Insert into PRODUCT (ITEMNUM,IMAGE1,CG_CODE,SCG_CODE,PRODUCT,PRICE,DIMAGE,PCNT,SALE) values (10033,'골드 슈프림 프로 ASG-T00 안권수 모델 야구 배트.jpg','fcg002','bat003','골드 슈프림 프로 ASG-T00 안권수 모델 야구 배트',141000,'골드 슈프림 프로 ASG-T00 안권수 모델 야구 배트-상세이미지.jpg',0,0);
+Insert into PRODUCT (ITEMNUM,IMAGE1,CG_CODE,SCG_CODE,PRODUCT,PRICE,DIMAGE,PCNT,SALE) values (10034,'브렛 골드윈 프로 하드메이플 압축 나무배트.jpg','fcg002','bat003','브렛 골드윈 프로 하드메이플 압축 나무배트',119000,'브렛 골드윈 프로 하드메이플 압축 나무배트-상세이미지.jpg',0,0);
+Insert into PRODUCT (ITEMNUM,IMAGE1,CG_CODE,SCG_CODE,PRODUCT,PRICE,DIMAGE,PCNT,SALE) values (10035,'브렛 프로 하드메이플 나무배트.jpg','fcg002','bat003','브렛 프로 하드메이플 나무배트',99000,'브렛 프로 하드메이플 나무배트-상세이미지.jpg',0,0);
+Insert into PRODUCT (ITEMNUM,IMAGE1,CG_CODE,SCG_CODE,PRODUCT,PRICE,DIMAGE,PCNT,SALE) values (10036,'빅터스 우드 야구 나무배트 V110 플랫그레이.jpg','fcg002','bat003','빅터스 우드 야구 나무배트 V110 플랫그레이',110000,'빅터스 우드 야구 나무배트 V110 플랫그레이-상세이미지.jpg',0,0);
+Insert into PRODUCT (ITEMNUM,IMAGE1,CG_CODE,SCG_CODE,PRODUCT,PRICE,DIMAGE,PCNT,SALE) values (10037,'오버플라이 메이플 우드배트 오지환 모델.jpg','fcg002','bat003','오버플라이 메이플 우드배트 오지환 모델',139000,'오버플라이 메이플 우드배트 오지환 모델-상세이미지.jpg',0,0);
+Insert into PRODUCT (ITEMNUM,IMAGE1,CG_CODE,SCG_CODE,PRODUCT,PRICE,DIMAGE,PCNT,SALE) values (10038,'제트 나무배트 BWTK-100 V2 오렌지.jpg','fcg002','bat003','제트 나무배트 BWTK-100 V2 오렌지',100000,'제트 나무배트 BWTK-100 V2 오렌지-상세이미지.jpg',0,0);
+Insert into PRODUCT (ITEMNUM,IMAGE1,CG_CODE,SCG_CODE,PRODUCT,PRICE,DIMAGE,PCNT,SALE) values (10039,'히트 스페셜 오더 등급 박뱅59 야구 우드 배트 블랙.jpg','fcg002','bat003','히트 스페셜 오더 등급 박뱅59 야구 우드 배트 블랙',120000,'히트 스페셜 오더 등급 박뱅59 야구 우드 배트 블랙-상세이미지.jpg',0,0);
+Insert into PRODUCT (ITEMNUM,IMAGE1,CG_CODE,SCG_CODE,PRODUCT,PRICE,DIMAGE,PCNT,SALE) values (10040,'MIZUNO 미즈노 글로벌엘리트 펑고 배트.jpg','fcg002','bat004','MIZUNO 미즈노 글로벌엘리트 펑고 배트',113000,'MIZUNO 미즈노 글로벌엘리트 펑고 배트-상세이미지.jpg',0,0);
+Insert into PRODUCT (ITEMNUM,IMAGE1,CG_CODE,SCG_CODE,PRODUCT,PRICE,DIMAGE,PCNT,SALE) values (10041,'MIZUNO 미즈노 트레이닝배트 블랙.jpg','fcg002','bat004','MIZUNO 미즈노 트레이닝배트 블랙',199000,'MIZUNO 미즈노 트레이닝배트 블랙-상세이미지.jpg',3,0);
+Insert into PRODUCT (ITEMNUM,IMAGE1,CG_CODE,SCG_CODE,PRODUCT,PRICE,DIMAGE,PCNT,SALE) values (10042,'MIZUNO 미즈노 프로노크배트 화이트.jpg','fcg002','bat004','MIZUNO 미즈노 프로노크배트 화이트',133000,'MIZUNO 미즈노 프로노크배트 화이트-상세이미지.jpg',0,0);
+Insert into PRODUCT (ITEMNUM,IMAGE1,CG_CODE,SCG_CODE,PRODUCT,PRICE,DIMAGE,PCNT,SALE) values (10007,'DOMINION 도미니온 고반발력 탑밸런스 알로이 야구배트.jpg','fcg002','bat001','DOMINION 도미니온 고반발력 탑밸런스 알로이 야구배트',239000,'DOMINION 도미니온 고반발력 탑밸런스 알로이 야구배트-상세이미지.jpg',0,10);
+Insert into PRODUCT (ITEMNUM,IMAGE1,CG_CODE,SCG_CODE,PRODUCT,PRICE,DIMAGE,PCNT,SALE) values (10043,'SSK PROFESSIONAL EDGE 우드 펑고배트 레드내추럴.png','fcg002','bat004','SSK PROFESSIONAL EDGE 우드 펑고배트 레드내추럴',200000,'SSK PROFESSIONAL EDGE 우드 펑고배트 레드내추럴-상세이미지.jfif',0,0);
+Insert into PRODUCT (ITEMNUM,IMAGE1,CG_CODE,SCG_CODE,PRODUCT,PRICE,DIMAGE,PCNT,SALE) values (10044,'SSK 사사키 두랄루민 펑고 배트.png','fcg002','bat004','SSK 사사키 두랄루민 펑고 배트',150000,'SSK 사사키 두랄루민 펑고 배트-상세이미지.jpg',0,0);
+Insert into PRODUCT (ITEMNUM,IMAGE1,CG_CODE,SCG_CODE,PRODUCT,PRICE,DIMAGE,PCNT,SALE) values (10045,'STORM NEW 펑고배트.jpg','fcg002','bat004','STORM NEW 펑고배트',177000,'STORM NEW 펑고배트-상세이미지.jpg',0,0);
+Insert into PRODUCT (ITEMNUM,IMAGE1,CG_CODE,SCG_CODE,PRODUCT,PRICE,DIMAGE,PCNT,SALE) values (10046,'골드 노크 펑고 배트 (내츄럴).jpg','fcg002','bat004','골드 노크 펑고 배트 (내츄럴)',99000,'골드 노크 펑고 배트 (내츄럴)-상세이미지.jpg',0,0);
+Insert into PRODUCT (ITEMNUM,IMAGE1,CG_CODE,SCG_CODE,PRODUCT,PRICE,DIMAGE,PCNT,SALE) values (10047,'데상트 DKB-7121 YEL0 숏 펑고배트.jpg','fcg002','bat004','데상트 DKB-7121 YEL0 숏 펑고배트',119000,'데상트 DKB-7121 YEL0 숏 펑고배트-상세이미지.jpg',0,0);
+Insert into PRODUCT (ITEMNUM,IMAGE1,CG_CODE,SCG_CODE,PRODUCT,PRICE,DIMAGE,PCNT,SALE) values (10048,'러펠스 프로페셔널 우드 메이플 펑고배트.jpg','fcg002','bat004','러펠스 프로페셔널 우드 메이플 펑고배트',137000,'러펠스 프로페셔널 우드 메이플 펑고배트-상세이미지.jpg',0,0);
+Insert into PRODUCT (ITEMNUM,IMAGE1,CG_CODE,SCG_CODE,PRODUCT,PRICE,DIMAGE,PCNT,SALE) values (10049,'롤링스 컴파짓 메이플 우드펑고 배트 블랙.jpg','fcg002','bat004','롤링스 컴파짓 메이플 우드펑고 배트 블랙',188000,'롤링스 컴파짓 메이플 우드펑고 배트 블랙-상세이미지.jpg',0,0);
+Insert into PRODUCT (ITEMNUM,IMAGE1,CG_CODE,SCG_CODE,PRODUCT,PRICE,DIMAGE,PCNT,SALE) values (10050,'BMC 2024 오디세이 중학 및 사회인 야구배트 KBSA공인 배트.jpg','fcg002','bat005','BMC 2024 오디세이 중학 및 사회인 야구배트 KBSA공인 배트',155000,'BMC 2024 오디세이 중학 및 사회인 야구배트 KBSA공인 배트-상세이미지.jpeg',0,0);
+Insert into PRODUCT (ITEMNUM,IMAGE1,CG_CODE,SCG_CODE,PRODUCT,PRICE,DIMAGE,PCNT,SALE) values (10051,'DOMINION 도미니온 고반발력 탑밸런스 유소년 알로이 야구배트.jpg','fcg002','bat005','DOMINION 도미니온 고반발력 탑밸런스 유소년 알로이 야구배트',121000,'DOMINION 도미니온 고반발력 탑밸런스 유소년 알로이 야구배트-상세이미지.jpg',0,0);
+Insert into PRODUCT (ITEMNUM,IMAGE1,CG_CODE,SCG_CODE,PRODUCT,PRICE,DIMAGE,PCNT,SALE) values (10052,'MIZUNO 미즈노 유소년 윌드라이브 배트.jpg','fcg002','bat005','MIZUNO 미즈노 유소년 윌드라이브 배트',152000,'MIZUNO 미즈노 유소년 윌드라이브 배트-상세이미지.jpg',0,0);
+Insert into PRODUCT (ITEMNUM,IMAGE1,CG_CODE,SCG_CODE,PRODUCT,PRICE,DIMAGE,PCNT,SALE) values (10053,'골드 쉐도우에디션 알루미늄 초등용 8드롭 배트 야신야덕.jpg','fcg002','bat005','골드 쉐도우에디션 알루미늄 초등용 8드롭 배트',231000,'골드 쉐도우에디션 알루미늄 초등용 8드롭 배트 야신야덕-상세이미지.jpg',0,0);
+Insert into PRODUCT (ITEMNUM,IMAGE1,CG_CODE,SCG_CODE,PRODUCT,PRICE,DIMAGE,PCNT,SALE) values (10054,'골드 임팩트 유소년용 레드 에디션 (유소년연맹,초등용).jpg','fcg002','bat005','골드 임팩트 유소년용 레드 에디션 (유소년연맹,초등용)',300000,'골드 임팩트 유소년용 레드 에디션 (유소년연맹,초등용)-상세이미지.jpg',0,0);
+Insert into PRODUCT (ITEMNUM,IMAGE1,CG_CODE,SCG_CODE,PRODUCT,PRICE,DIMAGE,PCNT,SALE) values (10055,'스톰 Z2 고반발 유소년 프리미엄 지투 알로이 야구배트 블랙.jpg','fcg002','bat005','스톰 Z2 고반발 유소년 프리미엄 지투 알로이 야구배트 블랙',247000,'스톰 Z2 고반발 유소년 프리미엄 지투 알로이 야구배트 블랙-상세이미지.jpg',0,0);
+Insert into PRODUCT (ITEMNUM,IMAGE1,CG_CODE,SCG_CODE,PRODUCT,PRICE,DIMAGE,PCNT,SALE) values (10057,'이스턴 스피드 ALX 한국리틀야구연맹 공인배트.jpg','fcg002','bat005','이스턴 스피드 ALX 한국리틀야구연맹 공인배트',184000,'이스턴 스피드 ALX 한국리틀야구연맹 공인배트-상세이미지.jpg',0,0);
+Insert into PRODUCT (ITEMNUM,IMAGE1,CG_CODE,SCG_CODE,PRODUCT,PRICE,DIMAGE,PCNT,SALE) values (10058,'프랭클린 VENOM 1300 알루미늄배트.jpg','fcg002','bat005','프랭클린 VENOM 1300 알루미늄배트',220000,'프랭클린 VENOM 1300 알루미늄배트-상세이미지.jpg',0,0);
+Insert into PRODUCT (ITEMNUM,IMAGE1,CG_CODE,SCG_CODE,PRODUCT,PRICE,DIMAGE,PCNT,SALE) values (10059,'프랭클린 하이스트 유소년 알루미늄 야구배트.jpg','fcg002','bat005','프랭클린 하이스트 유소년 알루미늄 야구배트',162000,'프랭클린 하이스트 유소년 알루미늄 야구배트-상세이미지.jpg',0,0);
+Insert into PRODUCT (ITEMNUM,IMAGE1,CG_CODE,SCG_CODE,PRODUCT,PRICE,DIMAGE,PCNT,SALE) values (10060,'스톰 볼트 유소년용 배트 화이트에디션.jpg','fcg002','bat005','스톰 볼트 유소년용 배트 화이트에디션',300000,'스톰 볼트 유소년용 배트 화이트에디션-상세이미지.jpg',0,0);
+Insert into PRODUCT (ITEMNUM,IMAGE1,CG_CODE,SCG_CODE,PRODUCT,PRICE,DIMAGE,PCNT,SALE) values (10061,'MIZUNO 미즈노 트레이닝 배트.jpg','fcg002','bat006','MIZUNO 미즈노 트레이닝 배트',148000,'MIZUNO 미즈노 트레이닝 배트-상세이미지.jpg',0,0);
+Insert into PRODUCT (ITEMNUM,IMAGE1,CG_CODE,SCG_CODE,PRODUCT,PRICE,DIMAGE,PCNT,SALE) values (10063,'러펠스 프로페셔널 우드 트레이닝 배트.jpg','fcg002','bat006','러펠스 프로페셔널 우드 트레이닝 배트',299000,'러펠스 프로페셔널 우드 트레이닝 배트-상세이미지.jpg',0,0);
+Insert into PRODUCT (ITEMNUM,IMAGE1,CG_CODE,SCG_CODE,PRODUCT,PRICE,DIMAGE,PCNT,SALE) values (10064,'롤링스 TWO-WAY 스피드 트레이닝 배트.jpg','fcg002','bat006','롤링스 TWO-WAY 스피드 트레이닝 배트',236000,'롤링스 TWO-WAY 스피드 트레이닝 배트-상세이미지.jpg',0,0);
+Insert into PRODUCT (ITEMNUM,IMAGE1,CG_CODE,SCG_CODE,PRODUCT,PRICE,DIMAGE,PCNT,SALE) values (10065,'마루치 One-Hand Trainer Bat 한손배트.jpg','fcg002','bat006','마루치 One-Hand Trainer Bat 한손배트',177000,'마루치 One-Hand Trainer Bat 한손배트-상세이미지.jpg',0,0);
+Insert into PRODUCT (ITEMNUM,IMAGE1,CG_CODE,SCG_CODE,PRODUCT,PRICE,DIMAGE,PCNT,SALE) values (10066,'브렛 트레이닝용 원핸드 배트 골드.jpg','fcg002','bat006','브렛 트레이닝용 원핸드 배트 골드',88000,'브렛 트레이닝용 원핸드 배트 골드-상세이미지.jpg',0,0);
+Insert into PRODUCT (ITEMNUM,IMAGE1,CG_CODE,SCG_CODE,PRODUCT,PRICE,DIMAGE,PCNT,SALE) values (10067,'브렛 트레이닝용 원핸드 배트 블루.jpg','fcg002','bat006','브렛 트레이닝용 원핸드 배트 블루',86000,'브렛 트레이닝용 원핸드 배트 블루-상세이미지.jpg',0,0);
+Insert into PRODUCT (ITEMNUM,IMAGE1,CG_CODE,SCG_CODE,PRODUCT,PRICE,DIMAGE,PCNT,SALE) values (10068,'브렛 프로 선수용 카운터 스윙배트.jpg','fcg002','bat006','브렛 프로 선수용 카운터 스윙배트',113000,'브렛 프로 선수용 카운터 스윙배트-상세이미지.jpg',0,0);
+Insert into PRODUCT (ITEMNUM,IMAGE1,CG_CODE,SCG_CODE,PRODUCT,PRICE,DIMAGE,PCNT,SALE) values (10069,'브렛 프로 어드저스터블 트레이닝 임팩트 배트.jpg','fcg002','bat006','브렛 프로 어드저스터블 트레이닝 임팩트 배트',129000,'브렛 프로 어드저스터블 트레이닝 임팩트 배트-상세이미지.jpg',0,0);
+Insert into PRODUCT (ITEMNUM,IMAGE1,CG_CODE,SCG_CODE,PRODUCT,PRICE,DIMAGE,PCNT,SALE) values (10070,'브렛 프로폐셔널 웨이트 트레이닝 배트.jpg','fcg002','bat006','브렛 프로폐셔널 웨이트 트레이닝 배트',174000,'브렛 프로폐셔널 웨이트 트레이닝 배트-상세이미지.jpg',0,0);
+Insert into PRODUCT (ITEMNUM,IMAGE1,CG_CODE,SCG_CODE,PRODUCT,PRICE,DIMAGE,PCNT,SALE) values (10071,'러펠스 프로페셔널 양면 플랫 직각 배트.jpg','fcg002','bat006','러펠스 프로페셔널 양면 플랫 직각 배트',300000,'러펠스 프로페셔널 양면 플랫 직각 배트-상세이미지.jpg',0,0);
+Insert into PRODUCT (ITEMNUM,IMAGE1,CG_CODE,SCG_CODE,PRODUCT,PRICE,DIMAGE,PCNT,SALE) values (10072,'롤링스 그라데이션 배트 그립테이프 마젠타.jpg','fcg002','bat008','롤링스 그라데이션 배트 그립테이프 마젠타',12000,'롤링스 그라데이션 배트 그립테이프 마젠타-상세이미지.jpg',0,0);
+Insert into PRODUCT (ITEMNUM,IMAGE1,CG_CODE,SCG_CODE,PRODUCT,PRICE,DIMAGE,PCNT,SALE) values (10074,'롤링스 그라데이션 배트 그립테이프 옐로우.jpg','fcg002','bat008','롤링스 그라데이션 배트 그립테이프 옐로우',12000,'롤링스 그라데이션 배트 그립테이프 옐로우-상세이미지.jpg',0,0);
+Insert into PRODUCT (ITEMNUM,IMAGE1,CG_CODE,SCG_CODE,PRODUCT,PRICE,DIMAGE,PCNT,SALE) values (10075,'롤링스 그라데이션 배트 그립테이프 핑크.jpg','fcg002','bat008','롤링스 그라데이션 배트 그립테이프 핑크',12000,'롤링스 그라데이션 배트 그립테이프 핑크-상세이미지.jpg',0,0);
+Insert into PRODUCT (ITEMNUM,IMAGE1,CG_CODE,SCG_CODE,PRODUCT,PRICE,DIMAGE,PCNT,SALE) values (10076,'리자드스킨 DSP 마이크 트라웃 배트그립.jpg','fcg002','bat008','리자드스킨 DSP 마이크 트라웃 배트그립',9900,'리자드스킨 DSP 마이크 트라웃 배트그립-상세이미지.jpg',0,0);
+Insert into PRODUCT (ITEMNUM,IMAGE1,CG_CODE,SCG_CODE,PRODUCT,PRICE,DIMAGE,PCNT,SALE) values (10077,'STORM 디지털 카모 배트그립.jpg','fcg002','bat008','STORM 디지털 카모 배트그립',14000,'STORM 디지털 카모 배트그립-상세이미지.jpg',0,0);
+Insert into PRODUCT (ITEMNUM,IMAGE1,CG_CODE,SCG_CODE,PRODUCT,PRICE,DIMAGE,PCNT,SALE) values (10084,'롤링스 카모2 배트 그립테이프 USA.jpg','fcg002','bat008','롤링스 카모2 배트 그립테이프 USA',12000,'롤링스 카모2 배트 그립테이프 USA-상세이미지.jpg',0,0);
+Insert into PRODUCT (ITEMNUM,IMAGE1,CG_CODE,SCG_CODE,PRODUCT,PRICE,DIMAGE,PCNT,SALE) values (10079,'MIZUNO 패턴 배트그립.jpg','fcg002','bat008','MIZUNO 패턴 배트그립',8000,'MIZUNO 패턴 배트그립-상세이미지.jpg',0,0);
+Insert into PRODUCT (ITEMNUM,IMAGE1,CG_CODE,SCG_CODE,PRODUCT,PRICE,DIMAGE,PCNT,SALE) values (10080,'KNB HIGH TACKINESS 배트그립 (핑크).jpg','fcg002','bat008','KNB HIGH TACKINESS 배트그립 (핑크)',7900,'KNB HIGH TACKINESS 배트그립 (핑크)-상세이미지.jpg',0,0);
+Insert into PRODUCT (ITEMNUM,IMAGE1,CG_CODE,SCG_CODE,PRODUCT,PRICE,DIMAGE,PCNT,SALE) values (10081,'KNB HIGH TACKINESS 배트그립 (그린).jpg','fcg002','bat008','KNB HIGH TACKINESS 배트그립 (그린)',7900,'KNB HIGH TACKINESS 배트그립 (그린)-상세이미지.jpg',0,0);
+Insert into PRODUCT (ITEMNUM,IMAGE1,CG_CODE,SCG_CODE,PRODUCT,PRICE,DIMAGE,PCNT,SALE) values (10082,'롤링스 그라데이션 배트 그립테이프 블랙.jpg','fcg002','bat008','롤링스 그라데이션 배트 그립테이프 블랙',12000,'롤링스 그라데이션 배트 그립테이프 블랙-상세이미지.jpg',0,0);
+Insert into PRODUCT (ITEMNUM,IMAGE1,CG_CODE,SCG_CODE,PRODUCT,PRICE,DIMAGE,PCNT,SALE) values (10086,'SSK 배트 Ring SRLG100.jpg','fcg002','bat009','SSK 배트 Ring SRLG100',7000,'SSK 배트 Ring SRLG100-상세이미지.png',0,0);
+Insert into PRODUCT (ITEMNUM,IMAGE1,CG_CODE,SCG_CODE,PRODUCT,PRICE,DIMAGE,PCNT,SALE) values (10087,'도쿠마 (도코마) 배트 양면 히팅가드.jpg','fcg002','bat009','도쿠마 (도코마) 배트 양면 히팅가드',11900,'도쿠마 (도코마) 배트 양면 히팅가드-상세이미지.jpg',0,0);
+Insert into PRODUCT (ITEMNUM,IMAGE1,CG_CODE,SCG_CODE,PRODUCT,PRICE,DIMAGE,PCNT,SALE) values (10088,'리자드스킨 그립부스터 대용량.jpg','fcg002','bat009','리자드스킨 그립부스터 대용량',21900,'리자드스킨 그립부스터 대용량-상세이미지.jpg',0,0);
+Insert into PRODUCT (ITEMNUM,IMAGE1,CG_CODE,SCG_CODE,PRODUCT,PRICE,DIMAGE,PCNT,SALE) values (10089,'마루치 그립 스틱 (배트끈끈이).jpg','fcg002','bat009','마루치 그립 스틱 (배트끈끈이)',5000,'마루치 그립 스틱 (배트끈끈이)-상세이미지.jpg',0,0);
+Insert into PRODUCT (ITEMNUM,IMAGE1,CG_CODE,SCG_CODE,PRODUCT,PRICE,DIMAGE,PCNT,SALE) values (10090,'월드페가수스 그립가드.jpg','fcg002','bat009','월드페가수스 그립가드',30000,'월드페가수스 그립가드-상세이미지.jpg',0,0);
+Insert into PRODUCT (ITEMNUM,IMAGE1,CG_CODE,SCG_CODE,PRODUCT,PRICE,DIMAGE,PCNT,SALE) values (10091,'윌슨 유소년용 포인트 배팅티 (블랙).jpg','fcg002','bat009','윌슨 유소년용 포인트 배팅티 (블랙)',41500,'윌슨 WTB2019K0 유소년용 포인트 배팅티 (블랙)-상세이미지.jpeg',0,0);
+Insert into PRODUCT (ITEMNUM,IMAGE1,CG_CODE,SCG_CODE,PRODUCT,PRICE,DIMAGE,PCNT,SALE) values (10092,'이스턴 배트 초크.jpg','fcg002','bat009','이스턴 배트 초크',4900,'이스턴 배트 초크-상세이미지.jpg',0,0);
+Insert into PRODUCT (ITEMNUM,IMAGE1,CG_CODE,SCG_CODE,PRODUCT,PRICE,DIMAGE,PCNT,SALE) values (10093,'이스턴 스피드 배트 웨이트.jpg','fcg002','bat009','이스턴 스피드 배트 웨이트',7600,'이스턴 스피드 배트 웨이트-상세이미지.jpg',0,0);
+Insert into PRODUCT (ITEMNUM,IMAGE1,CG_CODE,SCG_CODE,PRODUCT,PRICE,DIMAGE,PCNT,SALE) values (10094,'프로-스펙스 야구 배트 스프레이 미끄럼방지 그립가드.jpg','fcg002','bat009','프로-스펙스 야구 배트 스프레이 미끄럼방지 그립가드',19900,'프로-스펙스 야구 배트 스프레이 미끄럼방지 그립가드-상세이미지.jpg',0,0);
+Insert into PRODUCT (ITEMNUM,IMAGE1,CG_CODE,SCG_CODE,PRODUCT,PRICE,DIMAGE,PCNT,SALE) values (10095,'슈퍼스킨 배팅 캡.jpg','fcg002','bat009','슈퍼스킨 배팅 캡',3400,'슈퍼스킨 배팅 캡-상세이미지.jpg',0,0);
+Insert into PRODUCT (ITEMNUM,IMAGE1,CG_CODE,SCG_CODE,PRODUCT,PRICE,DIMAGE,PCNT,SALE) values (10096,'BMC C1 시합구 낱개.jpg','fcg008','baseball001','BMC C1 시합구 낱개',7000,'BMC C1 시합구 낱개-상세이미지.jpg',0,0);
+Insert into PRODUCT (ITEMNUM,IMAGE1,CG_CODE,SCG_CODE,PRODUCT,PRICE,DIMAGE,PCNT,SALE) values (10098,'ILB X 지오비 야신야덕 기념구 싸인볼 야구공 경식구 (12개1타스).jpg','fcg008','baseball001','ILB X 지오비 야신야덕 기념구 싸인볼 야구공 경식구 (12개1타스)',120000,'ILB X 지오비 야신야덕 기념구 싸인볼 야구공 경식구 (12개1타스)-상세이미지.jpg',6,0);
+Insert into PRODUCT (ITEMNUM,IMAGE1,CG_CODE,SCG_CODE,PRODUCT,PRICE,DIMAGE,PCNT,SALE) values (10099,'STORM 스톰 NEW 일반형 야구공.jpg','fcg008','baseball001','STORM 스톰 NEW 일반형 야구공',12000,'STORM 스톰 NEW 일반형 야구공-.상세이미지.jpg',2,0);
+Insert into PRODUCT (ITEMNUM,IMAGE1,CG_CODE,SCG_CODE,PRODUCT,PRICE,DIMAGE,PCNT,SALE) values (10100,'WE 위 WE-030 시합용야구공 1타.jpg','fcg008','baseball001','WE 위 WE-030 시합용야구공 1타',9900,'WE 위 WE-030 시합용야구공 1타-상세이미지.jpg',0,0);
+Insert into PRODUCT (ITEMNUM,IMAGE1,CG_CODE,SCG_CODE,PRODUCT,PRICE,DIMAGE,PCNT,SALE) values (10101,'스카이라인 AK-100 (낱1개).jpg','fcg008','baseball001','스카이라인 AK-100 (낱1개)',7700,'스카이라인 AK-100 (낱1개)-상세이미지.jpg',0,0);
+Insert into PRODUCT (ITEMNUM,IMAGE1,CG_CODE,SCG_CODE,PRODUCT,PRICE,DIMAGE,PCNT,SALE) values (10102,'스카이라인 Back to 1980s 스페셜 모델.jpg','fcg008','baseball001','스카이라인 Back to 1980s 스페셜 모델',10000,'스카이라인 Back to 1980s 스페셜 모델-상세이미지.png',0,0);
+Insert into PRODUCT (ITEMNUM,IMAGE1,CG_CODE,SCG_CODE,PRODUCT,PRICE,DIMAGE,PCNT,SALE) values (10103,'스카이라인 PK-030 경식공 -낱개.jpg','fcg008','baseball001','스카이라인 PK-030 경식공 -낱개',6000,'스카이라인 PK-030 경식공 -낱개-상세이미지.jpg',0,0);
+Insert into PRODUCT (ITEMNUM,IMAGE1,CG_CODE,SCG_CODE,PRODUCT,PRICE,DIMAGE,PCNT,SALE) values (10108,'스카이라인 SKYLINE MK - KBSA 초등학교 공인구 낱개.png','fcg008','baseball001','스카이라인 SKYLINE MK - KBSA 초등학교 공인구 낱개',13000,'스카이라인 SKYLINE MK- KBSA 초등학교 공인구 낱개-상세이미지.jpg',0,0);
+Insert into PRODUCT (ITEMNUM,IMAGE1,CG_CODE,SCG_CODE,PRODUCT,PRICE,DIMAGE,PCNT,SALE) values (10105,'프랭클린 야광 야구공.jpg','fcg008','baseball001','프랭클린 야광 야구공',7400,'프랭클린 야광 야구공-상세이미지.jpg',0,0);
+Insert into PRODUCT (ITEMNUM,IMAGE1,CG_CODE,SCG_CODE,PRODUCT,PRICE,DIMAGE,PCNT,SALE) values (10109,'BMC 탱고볼 AT100 경식용볼 공인규격 (10배 수명).jpg','fcg008','baseball001','BMC 탱고볼 AT100 경식용볼 공인규격 (10배 수명)',10000,'BMC 탱고볼 AT100 경식용볼 공인규격 (10배 수명)-상세이미지.jpg',0,0);
+Insert into PRODUCT (ITEMNUM,IMAGE1,CG_CODE,SCG_CODE,PRODUCT,PRICE,DIMAGE,PCNT,SALE) values (10121,'BLGN 컬러 안전구 1EA 그린.jpg','fcg008','baseball002','BLGN 컬러 안전구 1EA 그린',6000,'BLGN 컬러 안전구 1EA 그린-상세이미지.jpg',0,0);
+Insert into PRODUCT (ITEMNUM,IMAGE1,CG_CODE,SCG_CODE,PRODUCT,PRICE,DIMAGE,PCNT,SALE) values (10122,'BLWT 컬러 안전구 1EA 블루.jpg','fcg008','baseball002','BLWT 컬러 안전구 1EA 블루',6000,'BLWT 컬러 안전구 1EA 블루-상세이미지.jpg',8,0);
+Insert into PRODUCT (ITEMNUM,IMAGE1,CG_CODE,SCG_CODE,PRODUCT,PRICE,DIMAGE,PCNT,SALE) values (10123,'BKYL 컬러 안전구 1EA 옐로.jpg','fcg008','baseball002','BKYL 컬러 안전구 1EA 옐로',6000,'BKYL 컬러 안전구 1EA 옐로-상세이미지.jpg',7,0);
+Insert into PRODUCT (ITEMNUM,IMAGE1,CG_CODE,SCG_CODE,PRODUCT,PRICE,DIMAGE,PCNT,SALE) values (10125,'STORM 스톰 NEW 고급형 안전구 SS-001.jpg','fcg008','baseball002','STORM 스톰 NEW 고급형 안전구 SS-001',8700,'STORM 스톰 NEW 고급형 안전구 SS-001-상세이미지.jpg',0,0);
+Insert into PRODUCT (ITEMNUM,IMAGE1,CG_CODE,SCG_CODE,PRODUCT,PRICE,DIMAGE,PCNT,SALE) values (10126,'브렛 시그네틱 가죽 P 안전구(실타격가능).jpg','fcg008','baseball002','브렛 시그네틱 가죽 P 안전구(실타격가능)',7100,'브렛 시그네틱 가죽 P 안전구(실타격가능)-상세이미지.jpg',0,0);
+Insert into PRODUCT (ITEMNUM,IMAGE1,CG_CODE,SCG_CODE,PRODUCT,PRICE,DIMAGE,PCNT,SALE) values (10133,'아이워너 구질 연습 안전공 낱개.jpg','fcg008','baseball002','아이워너 구질 연습 안전공 낱개',7800,'아이워너 구질 연습 안전공 낱개-상세이미지.jpg',0,0);
+Insert into PRODUCT (ITEMNUM,IMAGE1,CG_CODE,SCG_CODE,PRODUCT,PRICE,DIMAGE,PCNT,SALE) values (10128,'아이워너 구질 연습 안전공 1타.jpg','fcg008','baseball002','아이워너 구질 연습 안전공 1타',6500,'아이워너 구질 연습 안전공 1타-상세이미지.jpg',0,0);
+Insert into PRODUCT (ITEMNUM,IMAGE1,CG_CODE,SCG_CODE,PRODUCT,PRICE,DIMAGE,PCNT,SALE) values (10129,'아이워너 안전공 1낱.jpg','fcg008','baseball002','아이워너 안전공 1낱',6300,'아이워너 안전공 1낱-상세이미지.jpg',0,0);
+Insert into PRODUCT (ITEMNUM,IMAGE1,CG_CODE,SCG_CODE,PRODUCT,PRICE,DIMAGE,PCNT,SALE) values (10130,'프랭클린 MLB 러버 네온 안전구 낱12개.jpg','fcg008','baseball002','프랭클린 MLB 러버 네온 안전구 낱12개',80000,'프랭클린 MLB 러버 네온 안전구 낱12개-상세이미지.jpg',0,0);
+Insert into PRODUCT (ITEMNUM,IMAGE1,CG_CODE,SCG_CODE,PRODUCT,PRICE,DIMAGE,PCNT,SALE) values (10131,'NVWT 컬러 안전구 1EA 네이비.jpg','fcg008','baseball002','NVWT 컬러 안전구 1EA 네이비',6000,'NVWT 컬러 안전구 1EA 네이비-상세이미지.jpg',1,0);
+Insert into PRODUCT (ITEMNUM,IMAGE1,CG_CODE,SCG_CODE,PRODUCT,PRICE,DIMAGE,PCNT,SALE) values (10134,'ANBD 스냅볼 블랙.jpg','fcg008','baseball004','ANBD 스냅볼 블랙',9000,'ANBD 스냅볼 블랙-상세이미지.jpg',0,0);
+commit;
+Insert into PRODUCT (ITEMNUM,IMAGE1,CG_CODE,SCG_CODE,PRODUCT,PRICE,DIMAGE,PCNT,SALE) values (10136,'STORM 스냅볼.jpg','fcg008','baseball004','STORM 스냅볼',9900,'STORM 스냅볼-상세이미지.jpg',2,0);
+Insert into PRODUCT (ITEMNUM,IMAGE1,CG_CODE,SCG_CODE,PRODUCT,PRICE,DIMAGE,PCNT,SALE) values (10137,'모리모토 SMB 12온스 스냅볼 (블랙).jpg','fcg008','baseball004','모리모토 SMB 12온스 스냅볼 (블랙)',11000,'모리모토 SMB 12온스 스냅볼 (블랙)-상세이미지.jpg',0,0);
+Insert into PRODUCT (ITEMNUM,IMAGE1,CG_CODE,SCG_CODE,PRODUCT,PRICE,DIMAGE,PCNT,SALE) values (10138,'스카이라인 SN-300 Snap Ball 스냅볼 낱개.jpg','fcg008','baseball004','스카이라인 SN-300 Snap Ball 스냅볼 낱개',13000,'스카이라인 SN-300 Snap Ball 스냅볼 낱개-상세이미지.jpg',0,0);
+Insert into PRODUCT (ITEMNUM,IMAGE1,CG_CODE,SCG_CODE,PRODUCT,PRICE,DIMAGE,PCNT,SALE) values (10139,'SSK 트레이닝볼 400g GDTRTS40.jpg','fcg008','baseball004','SSK 트레이닝볼 400g GDTRTS40',8000,'SSK 트레이닝볼 400g GDTRTS40-상세이미지.jpg',0,0);
+Insert into PRODUCT (ITEMNUM,IMAGE1,CG_CODE,SCG_CODE,PRODUCT,PRICE,DIMAGE,PCNT,SALE) values (10140,'KE016 볼 홀더 (블랙).jpg','fcg008','baseball007','KE016 볼 홀더 (블랙)',5500,'KE016 볼 홀더 (블랙)-상세이미지.jpg',0,0);
+Insert into PRODUCT (ITEMNUM,IMAGE1,CG_CODE,SCG_CODE,PRODUCT,PRICE,DIMAGE,PCNT,SALE) values (10141,'베이스볼 컬러 아크릴 야구공 케이스 (ORANGE).jpg','fcg008','baseball007','베이스볼 컬러 아크릴 야구공 케이스 (ORANGE)',7000,'베이스볼 컬러 아크릴 야구공 케이스 (ORANGE)-상세이미지.jpg',0,0);
+Insert into PRODUCT (ITEMNUM,IMAGE1,CG_CODE,SCG_CODE,PRODUCT,PRICE,DIMAGE,PCNT,SALE) values (10617,'도코마 도쿠마 스판 야구 언더셔츠 블루.jpg','fcg006','clothes002','도코마 도쿠마 스판 야구 언더셔츠 블루',30000,'도코마 도쿠마 스판 야구 언더셔츠 블루-상세이미지.jpg',0,0);
+Insert into PRODUCT (ITEMNUM,IMAGE1,CG_CODE,SCG_CODE,PRODUCT,PRICE,DIMAGE,PCNT,SALE) values (10618,'스포스피릿 21 컴프레션 투톤 반팔 언더셔츠 반목 레드.jpg','fcg006','clothes002','스포스피릿 21 컴프레션 투톤 반팔 언더셔츠 반목 레드',15900,'스포스피릿 21 컴프레션 투톤 반팔 언더셔츠 반목 레드-상세이미지.jpg',0,0);
+Insert into PRODUCT (ITEMNUM,IMAGE1,CG_CODE,SCG_CODE,PRODUCT,PRICE,DIMAGE,PCNT,SALE) values (10619,'언더아머 UNDERARMOUR 히트기어 반팔.jpg','fcg006','clothes002','언더아머 UNDERARMOUR 히트기어 반팔',28900,'언더아머 UNDERARMOUR 히트기어 반팔-상세이미지.jpg',0,0);
+Insert into PRODUCT (ITEMNUM,IMAGE1,CG_CODE,SCG_CODE,PRODUCT,PRICE,DIMAGE,PCNT,SALE) values (10620,'투더문 야구언더티 스판언더셔츠 오리지널.jpg','fcg006','clothes002','투더문 야구언더티 스판언더셔츠 오리지널',31900,'투더문 야구언더티 스판언더셔츠 오리지널-상세이미지.jpg',0,0);
+Insert into PRODUCT (ITEMNUM,IMAGE1,CG_CODE,SCG_CODE,PRODUCT,PRICE,DIMAGE,PCNT,SALE) values (10621,'DESCENTE BLK0 베이스볼 하프 타이즈(블랙).jpg','fcg006','clothes003','DESCENTE BLK0 베이스볼 하프 타이즈(블랙)',30000,'DESCENTE BLK0 베이스볼 하프 타이즈(블랙)-상세이미지.jpg',0,0);
+Insert into PRODUCT (ITEMNUM,IMAGE1,CG_CODE,SCG_CODE,PRODUCT,PRICE,DIMAGE,PCNT,SALE) values (10622,'MIZUNO 미즈노 슬라이딩 팬츠.jpg','fcg006','clothes003','MIZUNO 미즈노 슬라이딩 팬츠',29900,'MIZUNO 미즈노 슬라이딩 팬츠-상세이미지.jpg',4,0);
+Insert into PRODUCT (ITEMNUM,IMAGE1,CG_CODE,SCG_CODE,PRODUCT,PRICE,DIMAGE,PCNT,SALE) values (10623,'MIZUNO 미즈노 유소년 슬라이딩 팬츠.jpg','fcg006','clothes003','MIZUNO 미즈노 유소년 슬라이딩 팬츠',27900,'MIZUNO 미즈노 유소년 슬라이딩 팬츠-상세이미지.jpg',0,0);
+Insert into PRODUCT (ITEMNUM,IMAGE1,CG_CODE,SCG_CODE,PRODUCT,PRICE,DIMAGE,PCNT,SALE) values (10624,'MIZUNO 미즈노 프로 반팔스판 팬츠.jpg','fcg006','clothes003','MIZUNO 미즈노 프로 반팔스판 팬츠',28900,'MIZUNO 미즈노 프로 반팔스판 팬츠-상세이미지.jpg',0,0);
+Insert into PRODUCT (ITEMNUM,IMAGE1,CG_CODE,SCG_CODE,PRODUCT,PRICE,DIMAGE,PCNT,SALE) values (10625,'MIZUNO 슬라이딩팬츠 (검적).jpg','fcg006','clothes003','MIZUNO 슬라이딩팬츠 (검적)',28000,'MIZUNO 슬라이딩팬츠 (검적)-상세이미지.jpg',0,0);
+Insert into PRODUCT (ITEMNUM,IMAGE1,CG_CODE,SCG_CODE,PRODUCT,PRICE,DIMAGE,PCNT,SALE) values (10626,'러펠스 컴프레션 파워팬츠.jpg','fcg006','clothes003','러펠스 컴프레션 파워팬츠',31000,'러펠스 컴프레션 파워팬츠-상세이미지.jpg',0,0);
+Insert into PRODUCT (ITEMNUM,IMAGE1,CG_CODE,SCG_CODE,PRODUCT,PRICE,DIMAGE,PCNT,SALE) values (10627,'롤링스 선수용 HOH 컴프레션 슬라이딩팬츠.jpg','fcg006','clothes003','롤링스 선수용 HOH 컴프레션 슬라이딩팬츠',35000,'롤링스 선수용 HOH 컴프레션 슬라이딩팬츠-상세이미지.jpg',0,0);
+Insert into PRODUCT (ITEMNUM,IMAGE1,CG_CODE,SCG_CODE,PRODUCT,PRICE,DIMAGE,PCNT,SALE) values (10628,'언더아머 슬라이딩팬츠.jpg','fcg006','clothes003','언더아머 슬라이딩팬츠',25000,'언더아머 슬라이딩팬츠-상세이미지.jpg',0,0);
+Insert into PRODUCT (ITEMNUM,IMAGE1,CG_CODE,SCG_CODE,PRODUCT,PRICE,DIMAGE,PCNT,SALE) values (10629,'언더아머 유소년 슬라이딩팬츠.jpg','fcg006','clothes003','언더아머 유소년 슬라이딩팬츠',24500,'언더아머 유소년 슬라이딩팬츠-상세이미지.jpg',0,0);
+Insert into PRODUCT (ITEMNUM,IMAGE1,CG_CODE,SCG_CODE,PRODUCT,PRICE,DIMAGE,PCNT,SALE) values (10630,'제트 슬라이딩 팬츠.jpg','fcg006','clothes003','제트 슬라이딩 팬츠',24900,'제트 슬라이딩 팬츠-상세이미지.jpg',0,0);
+Insert into PRODUCT (ITEMNUM,IMAGE1,CG_CODE,SCG_CODE,PRODUCT,PRICE,DIMAGE,PCNT,SALE) values (10631,'(이월상품) 스포스피릿 21 코어 컴프레션 5부 레깅스 블랙.jpg','fcg006','clothes004','(이월상품) 스포스피릿 21 코어 컴프레션 5부 레깅스 블랙',20000,'(이월상품) 스포스피릿 21 코어 컴프레션 5부 레깅스 블랙-상세이미지.jpg',0,0);
+Insert into PRODUCT (ITEMNUM,IMAGE1,CG_CODE,SCG_CODE,PRODUCT,PRICE,DIMAGE,PCNT,SALE) values (10632,'AWESOME STAR 어썸스타 AP 크라이오 테크 핏 반바지.jpg','fcg006','clothes003','AWESOME STAR 어썸스타 AP 크라이오 테크 핏 반바지',21000,'AWESOME STAR 어썸스타 AP 크라이오 테크 핏 반바지-상세이미지.jpg',0,0);
+Insert into PRODUCT (ITEMNUM,IMAGE1,CG_CODE,SCG_CODE,PRODUCT,PRICE,DIMAGE,PCNT,SALE) values (10633,'SSK PRO 쇼츠 9 - KTHSPA.png','fcg006','clothes004','SSK PRO 쇼츠 9 - KTHSPA',23000,'SSK PRO 쇼츠 9 - KTHSPA-상세이미지.jfif',0,0);
+Insert into PRODUCT (ITEMNUM,IMAGE1,CG_CODE,SCG_CODE,PRODUCT,PRICE,DIMAGE,PCNT,SALE) values (10634,'UNDERARMOUR 언더아머 히트기어 아머 쇼츠 (블랙).png','fcg006','clothes004','UNDERARMOUR 언더아머 히트기어 아머 쇼츠 (블랙)',23900,'UNDERARMOUR 언더아머 히트기어 아머 쇼츠 (블랙)-상세이미지.png',0,0);
+Insert into PRODUCT (ITEMNUM,IMAGE1,CG_CODE,SCG_CODE,PRODUCT,PRICE,DIMAGE,PCNT,SALE) values (10635,'골드 언더팬츠 블랙.jpg','fcg006','clothes004','골드 언더팬츠 블랙',35000,'골드 언더팬츠 블랙-상세이미지.jpg',0,0);
+Insert into PRODUCT (ITEMNUM,IMAGE1,CG_CODE,SCG_CODE,PRODUCT,PRICE,DIMAGE,PCNT,SALE) values (10636,'골드이스트 머슬핏 파워팬츠-반바지 타이즈.png','fcg006','clothes004','골드이스트 머슬핏 파워팬츠-반바지 타이즈',29900,'골드이스트 머슬핏 파워팬츠-반바지 타이즈-상세이미지.jpg',0,0);
+Insert into PRODUCT (ITEMNUM,IMAGE1,CG_CODE,SCG_CODE,PRODUCT,PRICE,DIMAGE,PCNT,SALE) values (10637,'골드이스트 위너 컴프레션 기모 타이즈.png','fcg006','clothes004','골드이스트 위너 컴프레션 기모 타이즈',38800,'골드이스트 위너 컴프레션 기모 타이즈-상세이미지.jpg',0,0);
+Insert into PRODUCT (ITEMNUM,IMAGE1,CG_CODE,SCG_CODE,PRODUCT,PRICE,DIMAGE,PCNT,SALE) values (10638,'러펠스 베이직 쿨스판 타이즈 레깅스 (4계절용).jpg','fcg006','clothes004','러펠스 베이직 쿨스판 타이즈 레깅스 (4계절용)',41000,'러펠스 베이직 쿨스판 타이즈 레깅스 (4계절용)-상세이미지.jpg',0,0);
+Insert into PRODUCT (ITEMNUM,IMAGE1,CG_CODE,SCG_CODE,PRODUCT,PRICE,DIMAGE,PCNT,SALE) values (10639,'스포스피릿 21 코어 컴프레션 롱 레깅스 블랙.jpg','fcg006','clothes004','스포스피릿 21 코어 컴프레션 롱 레깅스 블랙',42200,'스포스피릿 21 코어 컴프레션 롱 레깅스 블랙-상세이미지.jpg',0,0);
+Insert into PRODUCT (ITEMNUM,IMAGE1,CG_CODE,SCG_CODE,PRODUCT,PRICE,DIMAGE,PCNT,SALE) values (10640,'윌슨 소프트 동계 기모 언더팬츠 (블랙).jpg','fcg006','clothes004','윌슨 소프트 동계 기모 언더팬츠 (블랙)',40000,'윌슨 소프트 동계 기모 언더팬츠 (블랙)-상세이미지.jpg',0,0);
+Insert into PRODUCT (ITEMNUM,IMAGE1,CG_CODE,SCG_CODE,PRODUCT,PRICE,DIMAGE,PCNT,SALE) values (10641,'(이월상품) 스포스피릿 아이싱 후드 반팔티 화이트.jpg','fcg006','clothes005','(이월상품) 스포스피릿 아이싱 후드 반팔티 화이트',39900,'(이월상품) 스포스피릿 아이싱 후드 반팔티 화이트-상세이미지.jpg',0,0);
+Insert into PRODUCT (ITEMNUM,IMAGE1,CG_CODE,SCG_CODE,PRODUCT,PRICE,DIMAGE,PCNT,SALE) values (10642,'러펠스 큐브 아이싱 티셔츠 오버핏 반팔티 블랙.jpg','fcg006','clothes005','러펠스 큐브 아이싱 티셔츠 오버핏 반팔티 블랙',30000,'러펠스 큐브 아이싱 티셔츠 오버핏 반팔티 블랙-상세이미지.jpg',0,0);
+Insert into PRODUCT (ITEMNUM,IMAGE1,CG_CODE,SCG_CODE,PRODUCT,PRICE,DIMAGE,PCNT,SALE) values (10643,'모리모토 스트레칭 비욘드 아이싱 티셔츠 (네이비).jpg','fcg006','clothes005','모리모토 스트레칭 비욘드 아이싱 티셔츠 (네이비)',29900,'모리모토 스트레칭 비욘드 아이싱 티셔츠 (네이비)-상세이미지''.jpg',0,0);
+Insert into PRODUCT (ITEMNUM,IMAGE1,CG_CODE,SCG_CODE,PRODUCT,PRICE,DIMAGE,PCNT,SALE) values (10644,'모리모토 스트레칭 비욘드 아이싱 티셔츠 (블랙).jpg','fcg006','clothes005','모리모토 스트레칭 비욘드 아이싱 티셔츠 (블랙)',29900,'모리모토 스트레칭 비욘드 아이싱 티셔츠 (블랙)-상세이미지.jpg',0,0);
+Insert into PRODUCT (ITEMNUM,IMAGE1,CG_CODE,SCG_CODE,PRODUCT,PRICE,DIMAGE,PCNT,SALE) values (10645,'스포스피릿 라운드 아이싱 티셔츠 네이비.jpg','fcg006','clothes005','스포스피릿 라운드 아이싱 티셔츠 네이비',17600,'스포스피릿 라운드 아이싱 티셔츠 네이비-상세이미지.jpg',0,0);
+Insert into PRODUCT (ITEMNUM,IMAGE1,CG_CODE,SCG_CODE,PRODUCT,PRICE,DIMAGE,PCNT,SALE) values (10646,'스포스피릿 라운드 아이싱 티셔츠 레드.jpg','fcg006','clothes005','스포스피릿 라운드 아이싱 티셔츠 레드',17600,'스포스피릿 라운드 아이싱 티셔츠 레드-상세이미지.jpg',0,0);
+Insert into PRODUCT (ITEMNUM,IMAGE1,CG_CODE,SCG_CODE,PRODUCT,PRICE,DIMAGE,PCNT,SALE) values (10647,'스포스피릿 라운드 아이싱 티셔츠 블랙.jpg','fcg006','clothes005','스포스피릿 라운드 아이싱 티셔츠 블랙',17600,'스포스피릿 라운드 아이싱 티셔츠 블랙-상세이미지.jpg',0,0);
+Insert into PRODUCT (ITEMNUM,IMAGE1,CG_CODE,SCG_CODE,PRODUCT,PRICE,DIMAGE,PCNT,SALE) values (10648,'프로-스펙스 아이싱 티셔츠 네이비.jpg','fcg006','clothes005','프로-스펙스 아이싱 티셔츠 네이비',35900,'프로-스펙스 아이싱 티셔츠 네이비-상세이미지.jpg',0,0);
+Insert into PRODUCT (ITEMNUM,IMAGE1,CG_CODE,SCG_CODE,PRODUCT,PRICE,DIMAGE,PCNT,SALE) values (10649,'프로-스펙스 아이싱 티셔츠 블랙.jpg','fcg006','clothes005','프로-스펙스 아이싱 티셔츠 블랙',35900,'프로-스펙스 아이싱 티셔츠 블랙-상세이미지.jpg',0,0);
+Insert into PRODUCT (ITEMNUM,IMAGE1,CG_CODE,SCG_CODE,PRODUCT,PRICE,DIMAGE,PCNT,SALE) values (10650,'프로-스펙스 아이싱 티셔츠 화이트.jpg','fcg006','clothes005','프로-스펙스 아이싱 티셔츠 화이트',35900,'프로-스펙스 아이싱 티셔츠 화이트-상세이미지.jpg',0,0);
+Insert into PRODUCT (ITEMNUM,IMAGE1,CG_CODE,SCG_CODE,PRODUCT,PRICE,DIMAGE,PCNT,SALE) values (10651,'MIZUNO 미즈노 프로 반팔 트레이닝 자켓 네이비.jpg','fcg006','clothes006','MIZUNO 미즈노 프로 반팔 트레이닝 자켓 네이비',51000,'MIZUNO 미즈노 프로 반팔 트레이닝 자켓 네이비-상세이미지.jpg',0,0);
+Insert into PRODUCT (ITEMNUM,IMAGE1,CG_CODE,SCG_CODE,PRODUCT,PRICE,DIMAGE,PCNT,SALE) values (10652,'MIZUNO 미즈노 프로 반팔 트레이닝 자켓 블랙.jpg','fcg006','clothes006','MIZUNO 미즈노 프로 반팔 트레이닝 자켓 블랙',51000,'MIZUNO 미즈노 프로 반팔 트레이닝 자켓 블랙-상세이미지.jpg',0,0);
+Insert into PRODUCT (ITEMNUM,IMAGE1,CG_CODE,SCG_CODE,PRODUCT,PRICE,DIMAGE,PCNT,SALE) values (10653,'MIZUNO 미즈노 프로 반팔 트레이닝 자켓 화이트.jpg','fcg006','clothes006','MIZUNO 미즈노 프로 반팔 트레이닝 자켓 화이트',51000,'MIZUNO 미즈노 프로 반팔 트레이닝 자켓 화이트-상세이미지.jpg',0,0);
+Insert into PRODUCT (ITEMNUM,IMAGE1,CG_CODE,SCG_CODE,PRODUCT,PRICE,DIMAGE,PCNT,SALE) values (10654,'골드이스트 리얼마스터 바람막이.jpg','fcg006','clothes006','골드이스트 리얼마스터 바람막이',40000,'골드이스트 리얼마스터 바람막이-상세이미지.jpg',0,0);
+Insert into PRODUCT (ITEMNUM,IMAGE1,CG_CODE,SCG_CODE,PRODUCT,PRICE,DIMAGE,PCNT,SALE) values (10655,'스포스피릿 21 반집업 반팔 바람막이 블랙.jpg','fcg006','clothes006','스포스피릿 21 반집업 반팔 바람막이 블랙',43900,'스포스피릿 21 반집업 반팔 바람막이 블랙-상세이미지.jpg',0,0);
+Insert into PRODUCT (ITEMNUM,IMAGE1,CG_CODE,SCG_CODE,PRODUCT,PRICE,DIMAGE,PCNT,SALE) values (10656,'스포스피릿 21 반집업 반팔 바람막이 블루.jpg','fcg006','clothes006','스포스피릿 21 반집업 반팔 바람막이 블루',43900,'스포스피릿 21 반집업 반팔 바람막이 블루-상세이미지.jpg',0,0);
+Insert into PRODUCT (ITEMNUM,IMAGE1,CG_CODE,SCG_CODE,PRODUCT,PRICE,DIMAGE,PCNT,SALE) values (10657,'프로-스펙스 야구 윈드브레이커 반팔 바람막이 티셔츠 네이비.jpg','fcg006','clothes006','프로-스펙스 야구 윈드브레이커 반팔 바람막이 티셔츠 네이비',60000,'프로-스펙스 야구 윈드브레이커 반팔 바람막이 티셔츠 네이비-상세이미지.jpg',0,0);
+Insert into PRODUCT (ITEMNUM,IMAGE1,CG_CODE,SCG_CODE,PRODUCT,PRICE,DIMAGE,PCNT,SALE) values (10658,'프로-스펙스 야구 윈드브레이커 반팔 바람막이 티셔츠 블랙.jpg','fcg006','clothes006','프로-스펙스 야구 윈드브레이커 반팔 바람막이 티셔츠 블랙',60000,'프로-스펙스 야구 윈드브레이커 반팔 바람막이 티셔츠 블랙-상세이미지.jpg',0,0);
+Insert into PRODUCT (ITEMNUM,IMAGE1,CG_CODE,SCG_CODE,PRODUCT,PRICE,DIMAGE,PCNT,SALE) values (10659,'프로-스펙스 야구 윈드브레이커 반팔 바람막이 티셔츠 화이트.jpg','fcg006','clothes006','프로-스펙스 야구 윈드브레이커 반팔 바람막이 티셔츠 화이트',60000,'프로-스펙스 야구 윈드브레이커 반팔 바람막이 티셔츠 화이트-상세이미지.jpg',0,0);
+Insert into PRODUCT (ITEMNUM,IMAGE1,CG_CODE,SCG_CODE,PRODUCT,PRICE,DIMAGE,PCNT,SALE) values (10660,'프로스펙스 야구 한국 국가대표팀 반팔 바람막이 (네이비).jpg','fcg006','clothes006','프로스펙스 야구 한국 국가대표팀 반팔 바람막이 (네이비)',79900,'프로스펙스 야구 한국 국가대표팀 반팔 바람막이 (네이비)-상세이미지.jpg',0,0);
+Insert into PRODUCT (ITEMNUM,IMAGE1,CG_CODE,SCG_CODE,PRODUCT,PRICE,DIMAGE,PCNT,SALE) values (10661,'DESCENTE BLK0 배색 자켓(BLACK).jpg','fcg006','clothes007','DESCENTE BLK0 배색 자켓(BLACK)',90000,'DESCENTE BLK0 배색 자켓(BLACK)-상세이미지.jpg',0,0);
+Insert into PRODUCT (ITEMNUM,IMAGE1,CG_CODE,SCG_CODE,PRODUCT,PRICE,DIMAGE,PCNT,SALE) values (10662,'MIZUNO 프로 ROYAL 롱패딩.jpg','fcg006','clothes007','MIZUNO 프로 ROYAL 롱패딩',130000,'MIZUNO 프로 ROYAL 롱패딩-상세이미지.jpg',0,0);
+Insert into PRODUCT (ITEMNUM,IMAGE1,CG_CODE,SCG_CODE,PRODUCT,PRICE,DIMAGE,PCNT,SALE) values (10663,'ZETT 제트 반팔 패딩 (검정).jpg','fcg006','clothes007','ZETT 제트 반팔 패딩 (검정)',100000,'ZETT 제트 반팔 패딩 (검정)-상세이미지.jpg',0,0);
+Insert into PRODUCT (ITEMNUM,IMAGE1,CG_CODE,SCG_CODE,PRODUCT,PRICE,DIMAGE,PCNT,SALE) values (10664,'도코마 도쿠마 야구 기모 풀오버 그레이.jpg','fcg006','clothes007','도코마 도쿠마 야구 기모 풀오버 그레이',112000,'도코마 도쿠마 야구 기모 풀오버 그레이-상세이미지.jpg',0,0);
+Insert into PRODUCT (ITEMNUM,IMAGE1,CG_CODE,SCG_CODE,PRODUCT,PRICE,DIMAGE,PCNT,SALE) values (10665,'도코마 도쿠마 야구 기모 풀오버 블루.jpg','fcg006','clothes007','도코마 도쿠마 야구 기모 풀오버 블루',112000,'도코마 도쿠마 야구 기모 풀오버 블루-상세이미지.jpg',0,0);
+Insert into PRODUCT (ITEMNUM,IMAGE1,CG_CODE,SCG_CODE,PRODUCT,PRICE,DIMAGE,PCNT,SALE) values (10666,'마제스틱 와펜 탈부착 패딩점퍼(BLACK).jpg','fcg006','clothes007','마제스틱 와펜 탈부착 패딩점퍼(BLACK)',152000,'마제스틱 와펜 탈부착 패딩점퍼(BLACK)-상세이미지.jpg',0,0);
+Insert into PRODUCT (ITEMNUM,IMAGE1,CG_CODE,SCG_CODE,PRODUCT,PRICE,DIMAGE,PCNT,SALE) values (10667,'제트 ZETT  동계점퍼.jpg','fcg006','clothes007','제트 ZETT  동계점퍼',134000,'제트 ZETT  동계점퍼-상세이미지.jpg',0,0);
+Insert into PRODUCT (ITEMNUM,IMAGE1,CG_CODE,SCG_CODE,PRODUCT,PRICE,DIMAGE,PCNT,SALE) values (10668,'제트 풀오버 (네이비).jpg','fcg006','clothes007','제트 풀오버 (네이비)',85000,'제트 풀오버 (네이비)-상세이미지.jpg',0,0);
+Insert into PRODUCT (ITEMNUM,IMAGE1,CG_CODE,SCG_CODE,PRODUCT,PRICE,DIMAGE,PCNT,SALE) values (10669,'제트 풀오버 (블랙).jpg','fcg006','clothes007','제트 풀오버 (블랙)',85000,'제트 풀오버 (블랙)-상세이미지.jpg',0,0);
+Insert into PRODUCT (ITEMNUM,IMAGE1,CG_CODE,SCG_CODE,PRODUCT,PRICE,DIMAGE,PCNT,SALE) values (10670,'프로스펙스 야구 한국 국가대표팀 팀 점퍼 (네이비).jpg','fcg006','clothes007','프로스펙스 야구 한국 국가대표팀 팀 점퍼 (네이비)',199000,'프로스펙스 야구 한국 국가대표팀 팀 점퍼 (네이비)-상세이미지.jpg',0,0);
+Insert into PRODUCT (ITEMNUM,IMAGE1,CG_CODE,SCG_CODE,PRODUCT,PRICE,DIMAGE,PCNT,SALE) values (10671,'DESCENTE BLK0 베이스볼 트레이닝 상의.jpg','fcg006','clothes008','DESCENTE BLK0 베이스볼 트레이닝 상의',77000,'DESCENTE BLK0 베이스볼 트레이닝 상의-상세이미지.jpg',0,0);
+Insert into PRODUCT (ITEMNUM,IMAGE1,CG_CODE,SCG_CODE,PRODUCT,PRICE,DIMAGE,PCNT,SALE) values (10672,'DESCENTE GRY0 베이스볼 트레이닝 상의.jpg','fcg006','clothes008','DESCENTE GRY0 베이스볼 트레이닝 상의',77000,'DESCENTE GRY0 베이스볼 트레이닝 상의-상세이미지.jpg',0,0);
+Insert into PRODUCT (ITEMNUM,IMAGE1,CG_CODE,SCG_CODE,PRODUCT,PRICE,DIMAGE,PCNT,SALE) values (10673,'K로고 반바지 (그레이).jpg','fcg006','clothes008','K로고 반바지 (그레이)',35000,'K로고 반바지 (그레이)-상세이미지.jpg',0,0);
+Insert into PRODUCT (ITEMNUM,IMAGE1,CG_CODE,SCG_CODE,PRODUCT,PRICE,DIMAGE,PCNT,SALE) values (10674,'K로고 반바지 (블랙).jpg','fcg006','clothes008','K로고 반바지 (블랙)',35000,'K로고 반바지 (블랙)-상세이미지.jpg',0,0);
+Insert into PRODUCT (ITEMNUM,IMAGE1,CG_CODE,SCG_CODE,PRODUCT,PRICE,DIMAGE,PCNT,SALE) values (10675,'K로고 반바지 (블루).jpg','fcg006','clothes008','K로고 반바지 (블루)',35000,'K로고 반바지 (블루)-상세이미지.jpg',0,0);
+Insert into PRODUCT (ITEMNUM,IMAGE1,CG_CODE,SCG_CODE,PRODUCT,PRICE,DIMAGE,PCNT,SALE) values (10676,'MIZUNO 미즈노 프로 비트업반팔셔츠 (곤).jpg','fcg006','clothes008','MIZUNO 미즈노 프로 비트업반팔셔츠 (곤)',31900,'MIZUNO 미즈노 프로 비트업반팔셔츠 (곤)-상세이미지.jpg',0,0);
+Insert into PRODUCT (ITEMNUM,IMAGE1,CG_CODE,SCG_CODE,PRODUCT,PRICE,DIMAGE,PCNT,SALE) values (10677,'MIZUNO 미즈노 프로 비트업반팔셔츠.jpg','fcg006','clothes008','MIZUNO 미즈노 프로 비트업반팔셔츠',31900,'MIZUNO 미즈노 프로 비트업반팔셔츠-상세이미지.jpg',0,0);
+Insert into PRODUCT (ITEMNUM,IMAGE1,CG_CODE,SCG_CODE,PRODUCT,PRICE,DIMAGE,PCNT,SALE) values (10678,'MIZUNO 미즈노 프로 트레이닝반바지 (검).jpg','fcg006','clothes008','MIZUNO 미즈노 프로 트레이닝반바지 (검)',30900,'MIZUNO 미즈노 프로 트레이닝반바지 (검)-상세이미지.jpg',0,0);
+Insert into PRODUCT (ITEMNUM,IMAGE1,CG_CODE,SCG_CODE,PRODUCT,PRICE,DIMAGE,PCNT,SALE) values (10679,'MIZUNO 미즈노 프로 트레이닝반바지 (곤).jpg','fcg006','clothes008','MIZUNO 미즈노 프로 트레이닝반바지 (곤)',30900,'MIZUNO 미즈노 프로 트레이닝반바지 (곤)-상세이미지.jpg',0,0);
+Insert into PRODUCT (ITEMNUM,IMAGE1,CG_CODE,SCG_CODE,PRODUCT,PRICE,DIMAGE,PCNT,SALE) values (10680,'SSK PRO 쇼츠 7 Black (숏타입).png','fcg006','clothes008','SSK PRO 쇼츠 7 Black (숏타입)',29000,'SSK PRO 쇼츠 7 Black (숏타입)-상세이미지.jpg',0,0);
+Insert into PRODUCT (ITEMNUM,IMAGE1,CG_CODE,SCG_CODE,PRODUCT,PRICE,DIMAGE,PCNT,SALE) values (10681,'DESCENTE 데상트 GRY0 후드 집업 (그레이).jpg','fcg006','clothes009','DESCENTE 데상트 GRY0 후드 집업 (그레이)',50000,'DESCENTE 데상트 GRY0 후드 집업 (그레이)-상세이미지.jpg',0,0);
+Insert into PRODUCT (ITEMNUM,IMAGE1,CG_CODE,SCG_CODE,PRODUCT,PRICE,DIMAGE,PCNT,SALE) values (10682,'DESCENTE 데상트 NVY0 후드 집업 (네이비).jpg','fcg006','clothes009','DESCENTE 데상트 NVY0 후드 집업 (네이비)',50000,'DESCENTE 데상트 NVY0 후드 집업 (네이비)-상세이미지.jpg',0,0);
+Insert into PRODUCT (ITEMNUM,IMAGE1,CG_CODE,SCG_CODE,PRODUCT,PRICE,DIMAGE,PCNT,SALE) values (10683,'K로고 후드티셔츠 (그레이).jpg','fcg006','clothes009','K로고 후드티셔츠 (그레이)',80000,'K로고 후드티셔츠 (그레이)-상세이미지.jpg',0,0);
+Insert into PRODUCT (ITEMNUM,IMAGE1,CG_CODE,SCG_CODE,PRODUCT,PRICE,DIMAGE,PCNT,SALE) values (10684,'K로고 후드티셔츠 (네이비).jpg','fcg006','clothes009','K로고 후드티셔츠 (네이비)',80000,'K로고 후드티셔츠 (네이비)-상세이미지''.jpg',0,0);
+Insert into PRODUCT (ITEMNUM,IMAGE1,CG_CODE,SCG_CODE,PRODUCT,PRICE,DIMAGE,PCNT,SALE) values (10685,'K로고 후드티셔츠 (블루).jpg','fcg006','clothes009','K로고 후드티셔츠 (블루)',80000,'K로고 후드티셔츠 (블루)-상세이미지.jpg',0,0);
+Insert into PRODUCT (ITEMNUM,IMAGE1,CG_CODE,SCG_CODE,PRODUCT,PRICE,DIMAGE,PCNT,SALE) values (10686,'UNDERARMOUR 언더아머 UA 유틸리티 후디 (블랙).png','fcg006','clothes009','UNDERARMOUR 언더아머 UA 유틸리티 후디 (블랙)',40000,'UNDERARMOUR 언더아머 UA 유틸리티 후디 (블랙)-상세이미지.png',0,0);
+Insert into PRODUCT (ITEMNUM,IMAGE1,CG_CODE,SCG_CODE,PRODUCT,PRICE,DIMAGE,PCNT,SALE) values (10687,'ZETT 제트 긴팔 후드티 그레이.jpg','fcg006','clothes009','ZETT 제트 긴팔 후드티 그레이',34000,'ZETT 제트 긴팔 후드티 그레이-상세이미지.jpg',0,0);
+Insert into PRODUCT (ITEMNUM,IMAGE1,CG_CODE,SCG_CODE,PRODUCT,PRICE,DIMAGE,PCNT,SALE) values (10688,'골드이스트 국내산 오버핏 USA 기모후드티 블루 에디션.jpg','fcg006','clothes009','골드이스트 국내산 오버핏 USA 기모후드티 블루 에디션',36000,'골드이스트 애슬레틱스 기모 오버핏 맨투맨-상세이미지.jpg',0,0);
+Insert into PRODUCT (ITEMNUM,IMAGE1,CG_CODE,SCG_CODE,PRODUCT,PRICE,DIMAGE,PCNT,SALE) values (10689,'골드이스트 애슬레틱스 기모 오버핏 맨투맨.jpg','fcg006','clothes009','골드이스트 애슬레틱스 기모 오버핏 맨투맨',40000,'골드이스트 애슬레틱스 기모 오버핏 맨투맨-상세이미지.jpg',0,0);
+Insert into PRODUCT (ITEMNUM,IMAGE1,CG_CODE,SCG_CODE,PRODUCT,PRICE,DIMAGE,PCNT,SALE) values (10690,'미즈노 스웨트 라운드티 맨투맨.jpg','fcg006','clothes009','미즈노 스웨트 라운드티 맨투맨',30000,'미즈노 스웨트 라운드티 맨투맨-상세이미지.jpg',0,0);
+Insert into PRODUCT (ITEMNUM,IMAGE1,CG_CODE,SCG_CODE,PRODUCT,PRICE,DIMAGE,PCNT,SALE) values (10691,'프로스펙스 KB-M511 야구 한국 국가대표팀 어센틱 모자 (네이비).jpg','fcg006','clothes010','프로스펙스 KB-M511 야구 한국 국가대표팀 어센틱 모자 (네이비)',70000,'프로스펙스 KB-M511 야구 한국 국가대표팀 어센틱 모자 (네이비)-상세이미지.jpg',0,0);
+Insert into PRODUCT (ITEMNUM,IMAGE1,CG_CODE,SCG_CODE,PRODUCT,PRICE,DIMAGE,PCNT,SALE) values (10692,'프로스펙스 KB-M521 야구 한국 국가대표팀 어센틱 메쉬 모자 (네이비).jpg','fcg006','clothes010','프로스펙스 KB-M521 야구 한국 국가대표팀 어센틱 메쉬 모자 (네이비)',70000,'프로스펙스 KB-M521 야구 한국 국가대표팀 어센틱 메쉬 모자 (네이비)-상세이미지.jpg',0,0);
+Insert into PRODUCT (ITEMNUM,IMAGE1,CG_CODE,SCG_CODE,PRODUCT,PRICE,DIMAGE,PCNT,SALE) values (10693,'프로스펙스 팀코리아 어센틱 모자 스페셜 에디션 블랙.jpg','fcg006','clothes010','프로스펙스 팀코리아 어센틱 모자 스페셜 에디션 블랙',70000,'프로스펙스 팀코리아 어센틱 모자 스페셜 에디션 블랙-상세이미지.jpg',0,0);
+Insert into PRODUCT (ITEMNUM,IMAGE1,CG_CODE,SCG_CODE,PRODUCT,PRICE,DIMAGE,PCNT,SALE) values (10694,'투더문 야구양말 논슬립 스터드 블랙.jpg','fcg006','clothes010','투더문 야구양말 논슬립 스터드 블랙',13000,'투더문 야구양말 논슬립 스터드 블랙-상세이미지.jpg',0,0);
+Insert into PRODUCT (ITEMNUM,IMAGE1,CG_CODE,SCG_CODE,PRODUCT,PRICE,DIMAGE,PCNT,SALE) values (10695,'대경 야구벨트 네이비.jpg','fcg006','clothes010','대경 야구벨트 네이비',25000,'대경 야구벨트 네이비-상세이미지.jpg',0,0);
+Insert into PRODUCT (ITEMNUM,IMAGE1,CG_CODE,SCG_CODE,PRODUCT,PRICE,DIMAGE,PCNT,SALE) values (10696,'골드 베이스볼 베이직 숏 삭스 화이트.jpg','fcg006','clothes010','골드 베이스볼 베이직 숏 삭스 화이트',12900,'골드 베이스볼 베이직 숏 삭스 화이트-상세이미지.jpg',0,0);
+Insert into PRODUCT (ITEMNUM,IMAGE1,CG_CODE,SCG_CODE,PRODUCT,PRICE,DIMAGE,PCNT,SALE) values (10697,'SSK 사사끼 심판용 밸트 YV295.png','fcg006','clothes010','SSK 사사끼 심판용 밸트 YV295',30000,'SSK 사사끼 심판용 밸트 YV295-상세이미지.jpg',0,0);
+Insert into PRODUCT (ITEMNUM,IMAGE1,CG_CODE,SCG_CODE,PRODUCT,PRICE,DIMAGE,PCNT,SALE) values (10698,'SSK 사사끼 PRO BELT YV180LA - NAVY.png','fcg006','clothes010','SSK 사사끼 PRO BELT YV180LA - NAVY',34000,'SSK 사사끼 PRO BELT YV180LA - NAVY-상세이미지.jpg',0,0);
+Insert into PRODUCT (ITEMNUM,IMAGE1,CG_CODE,SCG_CODE,PRODUCT,PRICE,DIMAGE,PCNT,SALE) values (10699,'FILA 야구양말 (청).jpg','fcg006','clothes010','FILA 야구양말 (청)',11000,'FILA 야구양말 (청)-상세이미지.jpg',0,0);
+Insert into PRODUCT (ITEMNUM,IMAGE1,CG_CODE,SCG_CODE,PRODUCT,PRICE,DIMAGE,PCNT,SALE) values (10700,'FILA 야구양말 (적).jpg','fcg006','clothes010','FILA 야구양말 (적)',11000,'FILA 야구양말 (적)-상세이미지.jpg',0,0);
+Insert into PRODUCT (ITEMNUM,IMAGE1,CG_CODE,SCG_CODE,PRODUCT,PRICE,DIMAGE,PCNT,SALE) values (10701,'백퍼센트 S3 선글라스 엘리 LE 24 하이퍼 레드.jpg','fcg011','etc001','백퍼센트 S3 선글라스 엘리 LE 24 하이퍼 레드',276000,'백퍼센트 S3 선글라스 엘리 LE 24 하이퍼 레드-상세이미지.jpg',0,0);
+Insert into PRODUCT (ITEMNUM,IMAGE1,CG_CODE,SCG_CODE,PRODUCT,PRICE,DIMAGE,PCNT,SALE) values (10702,'백퍼센트 S3 선글라스 타티스 24 LE.jpg','fcg011','etc001','백퍼센트 S3 선글라스 타티스 24 LE',273000,'백퍼센트 S3 선글라스 타티스 24 LE-상세이미지.jpg',0,0);
+Insert into PRODUCT (ITEMNUM,IMAGE1,CG_CODE,SCG_CODE,PRODUCT,PRICE,DIMAGE,PCNT,SALE) values (10703,'백퍼센트 스피드크래프트 BORA 보라 한스그로헤팀 화이트.jpg','fcg011','etc001','백퍼센트 스피드크래프트 BORA 보라 한스그로헤팀 화이트',280000,'백퍼센트 스피드크래프트 BORA 보라 한스그로헤팀 화이트-상세이미지.jpg',0,0);
+Insert into PRODUCT (ITEMNUM,IMAGE1,CG_CODE,SCG_CODE,PRODUCT,PRICE,DIMAGE,PCNT,SALE) values (10704,'백퍼센트 스피드크래프트 블랙 홀로그래픽 하이퍼 블루.jpg','fcg011','etc001','백퍼센트 스피드크래프트 블랙 홀로그래픽 하이퍼 블루',269000,'백퍼센트 스피드크래프트 블랙 홀로그래픽 하이퍼 블루-상세이미지.jpg',0,0);
+Insert into PRODUCT (ITEMNUM,IMAGE1,CG_CODE,SCG_CODE,PRODUCT,PRICE,DIMAGE,PCNT,SALE) values (10705,'백퍼센트 하이퍼크래프트 매트스톤그레이 크림슨실버.jpg','fcg011','etc001','백퍼센트 하이퍼크래프트 매트스톤그레이 크림슨실버',269000,'백퍼센트 하이퍼크래프트 매트스톤그레이 크림슨실버-상세이미지.jpg',0,0);
+Insert into PRODUCT (ITEMNUM,IMAGE1,CG_CODE,SCG_CODE,PRODUCT,PRICE,DIMAGE,PCNT,SALE) values (10706,'하이퍼크래프트 XS 유소년 매트블랙 스모크.jpg','fcg011','etc001','하이퍼크래프트 XS 유소년 매트블랙 스모크',300000,'하이퍼크래프트 XS 유소년 매트블랙 스모크-상세이미지.jpg',0,0);
+Insert into PRODUCT (ITEMNUM,IMAGE1,CG_CODE,SCG_CODE,PRODUCT,PRICE,DIMAGE,PCNT,SALE) values (10707,'하이퍼크래프트 XS 유소년 소프트택트 블랙 하이퍼 레드.jpg','fcg011','etc001','하이퍼크래프트 XS 유소년 소프트택트 블랙 하이퍼 레드',250000,'하이퍼크래프트 XS 유소년 소프트택트 블랙 하이퍼 레드-상세이미지.jpg',0,0);
+Insert into PRODUCT (ITEMNUM,IMAGE1,CG_CODE,SCG_CODE,PRODUCT,PRICE,DIMAGE,PCNT,SALE) values (10708,'하이퍼크래프트 메탈릭 디지털브라이트 다크퍼플.jpg','fcg011','etc001','하이퍼크래프트 메탈릭 디지털브라이트 다크퍼플',264000,'하이퍼크래프트 메탈릭 디지털브라이트 다크퍼플-상세이미지.jpg',0,0);
+Insert into PRODUCT (ITEMNUM,IMAGE1,CG_CODE,SCG_CODE,PRODUCT,PRICE,DIMAGE,PCNT,SALE) values (10709,'하이퍼크래프트 선글라스 소프트택트 그로우 스모크.jpg','fcg011','etc001','하이퍼크래프트 선글라스 소프트택트 그로우 스모크',264000,'하이퍼크래프트 선글라스 소프트택트 그로우 스모크-상세이미지.jpg',0,0);
+Insert into PRODUCT (ITEMNUM,IMAGE1,CG_CODE,SCG_CODE,PRODUCT,PRICE,DIMAGE,PCNT,SALE) values (10710,'하이퍼크래프트 선글라스 폴리쉬드 라벤더.jpg','fcg011','etc001','하이퍼크래프트 선글라스 폴리쉬드 라벤더',390000,'하이퍼크래프트 선글라스 폴리쉬드 라벤더-상세이미지.jpg',0,0);
+commit;
+Insert into PRODUCT (ITEMNUM,IMAGE1,CG_CODE,SCG_CODE,PRODUCT,PRICE,DIMAGE,PCNT,SALE) values (10711,'MIZUNO공글러브받침대.jpg','fcg011','etc002','MIZUNO공글러브받침대',30000,'MIZUNO공글러브받침대-상세이미지.jpg',0,0);
+Insert into PRODUCT (ITEMNUM,IMAGE1,CG_CODE,SCG_CODE,PRODUCT,PRICE,DIMAGE,PCNT,SALE) values (10712,'MIZUNO글러브진열대.jpg','fcg011','etc002','MIZUNO글러브진열대',25000,'MIZUNO글러브진열대-상세이미지.jpg',5,0);
+Insert into PRODUCT (ITEMNUM,IMAGE1,CG_CODE,SCG_CODE,PRODUCT,PRICE,DIMAGE,PCNT,SALE) values (10713,'MIZUNO미니어쳐배트.jpg','fcg011','etc002','MIZUNO미니어쳐배트',40000,'MIZUNO미니어쳐배트-상세이미지.jpg',1,0);
+Insert into PRODUCT (ITEMNUM,IMAGE1,CG_CODE,SCG_CODE,PRODUCT,PRICE,DIMAGE,PCNT,SALE) values (10714,'MIZUNO크리스탈큐브공모양장식품.jpg','fcg011','etc002','MIZUNO크리스탈큐브공모양장식품',69000,'MIZUNO크리스탈큐브공모양장식품-상세이미지.jpg',0,0);
+Insert into PRODUCT (ITEMNUM,IMAGE1,CG_CODE,SCG_CODE,PRODUCT,PRICE,DIMAGE,PCNT,SALE) values (10715,'로박엠 목걸이 LMC 블랙배번.jpg','fcg011','etc002','로박엠 목걸이 LMC 블랙배번',31000,'로박엠 목걸이 LMC 블랙배번-상세이미지.jpg',0,0);
+Insert into PRODUCT (ITEMNUM,IMAGE1,CG_CODE,SCG_CODE,PRODUCT,PRICE,DIMAGE,PCNT,SALE) values (10716,'로박엠 목걸이 LMF 시그니처 (게르마늄형).jpg','fcg011','etc002','로박엠 목걸이 LMF 시그니처 (게르마늄형)',33000,'로박엠 목걸이 LMF 시그니처 (게르마늄형)-상세이미지''.jpg',0,0);
+Insert into PRODUCT (ITEMNUM,IMAGE1,CG_CODE,SCG_CODE,PRODUCT,PRICE,DIMAGE,PCNT,SALE) values (10717,'로박엠 목걸이 LMF-BASEBALL 프로 야구 이대호선수 (22인치).jpg','fcg011','etc002','로박엠 목걸이 LMF-BASEBALL 프로 야구 이대호선수 (22인치)',34000,'로박엠 목걸이 LMF-BASEBALL 프로 야구 이대호선수 (22인치)-상세이미지.jpg',0,0);
+Insert into PRODUCT (ITEMNUM,IMAGE1,CG_CODE,SCG_CODE,PRODUCT,PRICE,DIMAGE,PCNT,SALE) values (10718,'로박엠 목걸이 LOBACM-C30 글러브.jpg','fcg011','etc002','로박엠 목걸이 LOBACM-C30 글러브',33000,'로박엠 목걸이 LOBACM-C30 글러브-상세이미지.jpg',0,0);
+Insert into PRODUCT (ITEMNUM,IMAGE1,CG_CODE,SCG_CODE,PRODUCT,PRICE,DIMAGE,PCNT,SALE) values (10719,'언더아머 헤어밴드 검정.jpg','fcg011','etc002','언더아머 헤어밴드 검정',15000,'언더아머 헤어밴드 검정-상세이미지.jpg',0,0);
+Insert into PRODUCT (ITEMNUM,IMAGE1,CG_CODE,SCG_CODE,PRODUCT,PRICE,DIMAGE,PCNT,SALE) values (10720,'언더아머 헤어밴드 화이트.jpg','fcg011','etc002','언더아머 헤어밴드 화이트',15000,'언더아머 헤어밴드 화이트-상세이미지.jpg',1,0);
+Insert into PRODUCT (ITEMNUM,IMAGE1,CG_CODE,SCG_CODE,PRODUCT,PRICE,DIMAGE,PCNT,SALE) values (10721,'FILA 손목밴드 (곤).jpg','fcg011','etc003','FILA 손목밴드 (곤)',11900,'FILA 손목밴드 (곤)-상세이미지.jpg',0,0);
+Insert into PRODUCT (ITEMNUM,IMAGE1,CG_CODE,SCG_CODE,PRODUCT,PRICE,DIMAGE,PCNT,SALE) values (10722,'FILA 손목밴드 (적).jpg','fcg011','etc003','FILA 손목밴드 (적)',11900,'FILA 손목밴드 (적)-상세이미지.jpg',0,0);
+Insert into PRODUCT (ITEMNUM,IMAGE1,CG_CODE,SCG_CODE,PRODUCT,PRICE,DIMAGE,PCNT,SALE) values (10723,'FILA 손목밴드 (청).jpg','fcg011','etc003','FILA 손목밴드 (청)',11900,'FILA 손목밴드 (청)-상세이미지.jpg',0,0);
+Insert into PRODUCT (ITEMNUM,IMAGE1,CG_CODE,SCG_CODE,PRODUCT,PRICE,DIMAGE,PCNT,SALE) values (10724,'MIZUNO 손목밴드 (흰).jpg','fcg011','etc003','MIZUNO 손목밴드 (흰)',12000,'MIZUNO 손목밴드 (흰)-상세이미지.jpg',0,0);
+Insert into PRODUCT (ITEMNUM,IMAGE1,CG_CODE,SCG_CODE,PRODUCT,PRICE,DIMAGE,PCNT,SALE) values (10725,'RAWLINGS 스판손목밴드.jpg','fcg011','etc003','RAWLINGS 스판손목밴드',14000,'RAWLINGS 스판손목밴드-상세이미지.jpg',0,0);
+Insert into PRODUCT (ITEMNUM,IMAGE1,CG_CODE,SCG_CODE,PRODUCT,PRICE,DIMAGE,PCNT,SALE) values (10726,'STORM 롱 손목아대 (레드).jpg','fcg011','etc003','STORM 롱 손목아대 (레드)',12300,'STORM 롱 손목아대 (레드)-상세이미지.jpg',0,0);
+Insert into PRODUCT (ITEMNUM,IMAGE1,CG_CODE,SCG_CODE,PRODUCT,PRICE,DIMAGE,PCNT,SALE) values (10727,'STORM 롱 손목아대 (블루).jpg','fcg011','etc003','STORM 롱 손목아대 (블루)',12300,'STORM 롱 손목아대 (블루)-상세이미지.jpg',0,0);
+Insert into PRODUCT (ITEMNUM,IMAGE1,CG_CODE,SCG_CODE,PRODUCT,PRICE,DIMAGE,PCNT,SALE) values (10728,'STORM 롱 손목아대 (오렌지).jpg','fcg011','etc003','STORM 롱 손목아대 (오렌지)',12300,'STORM 롱 손목아대 (오렌지)-상세이미지.jpg',0,0);
+Insert into PRODUCT (ITEMNUM,IMAGE1,CG_CODE,SCG_CODE,PRODUCT,PRICE,DIMAGE,PCNT,SALE) values (10729,'UNDERARMOUR 언더아머 손목밴드 15CM (화이트).jpg','fcg011','etc003','UNDERARMOUR 언더아머 손목밴드 15CM (화이트)',16000,'UNDERARMOUR 언더아머 손목밴드 15CM (화이트)-상세이미지.jpg',0,0);
+Insert into PRODUCT (ITEMNUM,IMAGE1,CG_CODE,SCG_CODE,PRODUCT,PRICE,DIMAGE,PCNT,SALE) values (10730,'미즈노 15CM 손목밴드.jpg','fcg011','etc003','미즈노 15CM 손목밴드',10900,'미즈노 15CM 손목밴드-상세이미지.jpg',0,0);
+Insert into PRODUCT (ITEMNUM,IMAGE1,CG_CODE,SCG_CODE,PRODUCT,PRICE,DIMAGE,PCNT,SALE) values (10731,'MIZUNO 니트 로진백.jpg','fcg011','etc004','MIZUNO 니트 로진백',7900,'MIZUNO 니트 로진백-상세이미지.jpg',0,0);
+Insert into PRODUCT (ITEMNUM,IMAGE1,CG_CODE,SCG_CODE,PRODUCT,PRICE,DIMAGE,PCNT,SALE) values (10732,'MIZUNO 미즈노 타자겸용 로진백.jpg','fcg011','etc004','MIZUNO 미즈노 타자겸용 로진백',9000,'MIZUNO 미즈노 타자겸용 로진백-상세이미지.jpg',1,0);
+Insert into PRODUCT (ITEMNUM,IMAGE1,CG_CODE,SCG_CODE,PRODUCT,PRICE,DIMAGE,PCNT,SALE) values (10733,'Skyline 스카이라인 로진.jpg','fcg011','etc004','Skyline 스카이라인 로진',8500,'Skyline 스카이라인 로진-상세이미지.jpg',0,0);
+Insert into PRODUCT (ITEMNUM,IMAGE1,CG_CODE,SCG_CODE,PRODUCT,PRICE,DIMAGE,PCNT,SALE) values (10734,'ZETT ZOP10 (ROSIN) 로진백.jpg','fcg011','etc004','ZETT ZOP10 (ROSIN) 로진백',5000,'ZETT ZOP10 (ROSIN) 로진백-상세이미지.jpg',0,0);
+Insert into PRODUCT (ITEMNUM,IMAGE1,CG_CODE,SCG_CODE,PRODUCT,PRICE,DIMAGE,PCNT,SALE) values (10735,'ZETT ZOP20 (ROSIN) 로진백.jpg','fcg011','etc004','ZETT ZOP20 (ROSIN) 로진백',5500,'ZETT ZOP20 (ROSIN) 로진백-상세이미지.jpg',0,0);
+Insert into PRODUCT (ITEMNUM,IMAGE1,CG_CODE,SCG_CODE,PRODUCT,PRICE,DIMAGE,PCNT,SALE) values (10736,'모리모토 프리미엄 로진백.jpg','fcg011','etc004','모리모토 프리미엄 로진백',12000,'모리모토 프리미엄 로진백-상세이미지.jpg',0,0);
+Insert into PRODUCT (ITEMNUM,IMAGE1,CG_CODE,SCG_CODE,PRODUCT,PRICE,DIMAGE,PCNT,SALE) values (10737,'브렛 베이스볼 로진백.jpg','fcg011','etc004','브렛 베이스볼 로진백',10500,'브렛 베이스볼 로진백-상세이미지.jpg',0,0);
+Insert into PRODUCT (ITEMNUM,IMAGE1,CG_CODE,SCG_CODE,PRODUCT,PRICE,DIMAGE,PCNT,SALE) values (10738,'윌슨 로진백 송진가루.jpg','fcg011','etc004','윌슨 로진백 송진가루',10100,'윌슨 로진백 송진가루-상세이미지.jpg',0,0);
+Insert into PRODUCT (ITEMNUM,IMAGE1,CG_CODE,SCG_CODE,PRODUCT,PRICE,DIMAGE,PCNT,SALE) values (10739,'프랭클린 MLB GATOR GRIP 로진 백.jpg','fcg011','etc004','프랭클린 MLB GATOR GRIP 로진 백',7700,'프랭클린 MLB GATOR GRIP 로진 백-상세이미지.jpg',0,0);
+Insert into PRODUCT (ITEMNUM,IMAGE1,CG_CODE,SCG_CODE,PRODUCT,PRICE,DIMAGE,PCNT,SALE) values (10740,'프로-스펙스 야구 로진백 송진가루.jpg','fcg011','etc004','프로-스펙스 야구 로진백 송진가루',11000,'프로-스펙스 야구 로진백 송진가루-상세이미지.jpg',0,0);
+Insert into PRODUCT (ITEMNUM,IMAGE1,CG_CODE,SCG_CODE,PRODUCT,PRICE,DIMAGE,PCNT,SALE) values (10741,'SSK 홈베이스 YH60.png','fcg011','etc007','SSK 홈베이스 YH60',30000,'SSK 홈베이스 YH60-상세이미지.png',0,0);
+Insert into PRODUCT (ITEMNUM,IMAGE1,CG_CODE,SCG_CODE,PRODUCT,PRICE,DIMAGE,PCNT,SALE) values (10742,'모리모토 PDH-1 프로 고정형 홈플레이트.jpg','fcg011','etc007','모리모토 PDH-1 프로 고정형 홈플레이트',37000,'모리모토 PDH-1 프로 고정형 홈플레이트-상세이미지.jpg',0,0);
+Insert into PRODUCT (ITEMNUM,IMAGE1,CG_CODE,SCG_CODE,PRODUCT,PRICE,DIMAGE,PCNT,SALE) values (10743,'브렛 고무 베이스셋트 5피스.jpg','fcg011','etc007','브렛 고무 베이스셋트 5피스',35000,'브렛 고무 베이스셋트 5피스-상세이미지.jpg',0,0);
+Insert into PRODUCT (ITEMNUM,IMAGE1,CG_CODE,SCG_CODE,PRODUCT,PRICE,DIMAGE,PCNT,SALE) values (10744,'브렛 고정식 프로 베이스셋트.jpg','fcg011','etc007','브렛 고정식 프로 베이스셋트',34000,'브렛 고정식 프로 베이스셋트-상세이미지.jpg',0,0);
+Insert into PRODUCT (ITEMNUM,IMAGE1,CG_CODE,SCG_CODE,PRODUCT,PRICE,DIMAGE,PCNT,SALE) values (10745,'브렛 고정형 고급형 베이스셋트.jpg','fcg011','etc007','브렛 고정형 고급형 베이스셋트',31000,'브렛 고정형 고급형 베이스셋트-상세이미지.jpg',0,0);
+Insert into PRODUCT (ITEMNUM,IMAGE1,CG_CODE,SCG_CODE,PRODUCT,PRICE,DIMAGE,PCNT,SALE) values (10746,'브렛 고정형 프로피쳐 플레이트.jpg','fcg011','etc007','브렛 고정형 프로피쳐 플레이트',56000,'브렛 고정형 프로피쳐 플레이트-상세이미지.jpg',0,0);
+Insert into PRODUCT (ITEMNUM,IMAGE1,CG_CODE,SCG_CODE,PRODUCT,PRICE,DIMAGE,PCNT,SALE) values (10747,'브렛 프로 고정형 홈플레이트.jpg','fcg011','etc007','브렛 프로 고정형 홈플레이트',40000,'브렛 프로 고정형 홈플레이트-상세이미지.jpg',0,0);
+Insert into PRODUCT (ITEMNUM,IMAGE1,CG_CODE,SCG_CODE,PRODUCT,PRICE,DIMAGE,PCNT,SALE) values (10748,'브렛 홈플레이트.jpg','fcg011','etc007','브렛 홈플레이트',29000,'브렛 홈플레이트-상세이미지.jpg',0,0);
+Insert into PRODUCT (ITEMNUM,IMAGE1,CG_CODE,SCG_CODE,PRODUCT,PRICE,DIMAGE,PCNT,SALE) values (10749,'일반 베이스 (WHITE).jpg','fcg011','etc007','일반 베이스 (WHITE)',25000,'일반 베이스 (WHITE)-상세이미지.jpg',3,0);
+Insert into PRODUCT (ITEMNUM,IMAGE1,CG_CODE,SCG_CODE,PRODUCT,PRICE,DIMAGE,PCNT,SALE) values (10750,'투수 플레이트 (WHITE).jpg','fcg011','etc007','투수 플레이트 (WHITE)',31200,'투수 플레이트 (WHITE)-상세이미지.jpg',2,0);
+commit;
+REM INSERTING into PROTECT_CATEGORY
+SET DEFINE OFF;
+Insert into PROTECT_CATEGORY (FCG_CODE,SCG_CODE,SCG_NAME,SCG_ENG) values ('fcg007','protect001','타자헬멧','helmet');
+Insert into PROTECT_CATEGORY (FCG_CODE,SCG_CODE,SCG_NAME,SCG_ENG) values ('fcg007','protect002','암가드','arm');
+Insert into PROTECT_CATEGORY (FCG_CODE,SCG_CODE,SCG_NAME,SCG_ENG) values ('fcg007','protect003','풋가드','foot');
+Insert into PROTECT_CATEGORY (FCG_CODE,SCG_CODE,SCG_NAME,SCG_ENG) values ('fcg007','protect004','핸드가드','hand');
+Insert into PROTECT_CATEGORY (FCG_CODE,SCG_CODE,SCG_NAME,SCG_ENG) values ('fcg007','protect005','안면마스크','face');
+Insert into PROTECT_CATEGORY (FCG_CODE,SCG_CODE,SCG_NAME,SCG_ENG) values ('fcg007','protect006','기타','etc');
+commit;
+REM INSERTING into SHOES_CATEGORY
+SET DEFINE OFF;
+Insert into SHOES_CATEGORY (FCG_CODE,SCG_CODE,SCG_NAME,SCG_ENG) values ('fcg004','shoes001','일체형','spike-aio');
+Insert into SHOES_CATEGORY (FCG_CODE,SCG_CODE,SCG_NAME,SCG_ENG) values ('fcg004','shoes002','교체형','spike-change');
+Insert into SHOES_CATEGORY (FCG_CODE,SCG_CODE,SCG_NAME,SCG_ENG) values ('fcg004','shoes003','인조잔디','artificial');
+Insert into SHOES_CATEGORY (FCG_CODE,SCG_CODE,SCG_NAME,SCG_ENG) values ('fcg004','shoes004','유소년','youth');
+Insert into SHOES_CATEGORY (FCG_CODE,SCG_CODE,SCG_NAME,SCG_ENG) values ('fcg004','shoes005','런닝/트레이닝','running/trainning');
+Insert into SHOES_CATEGORY (FCG_CODE,SCG_CODE,SCG_NAME,SCG_ENG) values ('fcg004','shoes006','기타','etc');
+commit;
+REM INSERTING into SOSICK
+SET DEFINE OFF;
+Insert into SOSICK (ID,NICKNAME,SNUM,STITLE,SCONTENTS,SDATE,SCNT,SIMAGE,STAG) values ('admin','관리자',2,'2','223',to_date('24/10/30','RR/MM/DD'),0,null,'국내야구');
+Insert into SOSICK (ID,NICKNAME,SNUM,STITLE,SCONTENTS,SDATE,SCNT,SIMAGE,STAG) values ('admin','관리자',1,'1','12',to_date('24/10/24','RR/MM/DD'),1,null,'국내야구');
+commit;
+REM INSERTING into UNIFORM_CATEGORY
+SET DEFINE OFF;
+Insert into UNIFORM_CATEGORY (FCG_CODE,SCG_CODE,SCG_NAME,SCG_ENG) values ('fcg009','uniform001','국가대표','national');
+Insert into UNIFORM_CATEGORY (FCG_CODE,SCG_CODE,SCG_NAME,SCG_ENG) values ('fcg009','uniform002','국내','kbo');
+Insert into UNIFORM_CATEGORY (FCG_CODE,SCG_CODE,SCG_NAME,SCG_ENG) values ('fcg009','uniform003','미국','mlb');
+Insert into UNIFORM_CATEGORY (FCG_CODE,SCG_CODE,SCG_NAME,SCG_ENG) values ('fcg009','uniform004','일본','npb');
+Insert into UNIFORM_CATEGORY (FCG_CODE,SCG_CODE,SCG_NAME,SCG_ENG) values ('fcg009','uniform005','기타','etc');
+Insert into UNIFORM_CATEGORY (FCG_CODE,SCG_CODE,SCG_NAME,SCG_ENG) values ('fcg009','uniform006','키즈','kids');
+commit;
+
+#PK
+
+  CREATE UNIQUE INDEX "BAG_CATEGORY_PK" ON "BAG_CATEGORY" ("FCG_CODE", "SCG_CODE") 
+  ;
+  CREATE UNIQUE INDEX "BASEBALL_CATEGORY_PK" ON "BASEBALL_CATEGORY" ("SCG_CODE", "FCG_CODE") 
+  ;
+  CREATE UNIQUE INDEX "BAT_CATEGORY_PK" ON "BAT_CATEGORY" ("FCG_CODE", "SCG_CODE") 
+  ;
+  CREATE UNIQUE INDEX "CLOTHES_CATEGORY_PK" ON "CLOTHES_CATEGORY" ("FCG_CODE", "SCG_CODE") 
+  ;
+  CREATE UNIQUE INDEX "COMMUNITY_PK" ON "COMMUNITY" ("CNUM") 
+  ;
+  CREATE UNIQUE INDEX "ETC_CATEGORY_PK" ON "ETC_CATEGORY" ("FCG_CODE", "SCG_CODE") 
+  ;
+  CREATE UNIQUE INDEX "EVENT_PK" ON "EVENT" ("EVNUM", "ID", "NICKNAME") 
+  ;
+  CREATE UNIQUE INDEX "FIRST_CATEGORY_PK" ON "FIRST_CATEGORY" ("CG_CODE") 
+  ;
+  CREATE UNIQUE INDEX "GLOVE_CATEGORY_PK" ON "MITT_CATEGORY" ("SCG_CODE", "FCG_CODE") 
+  ;
+  CREATE UNIQUE INDEX "GONGJI_PK" ON "GONGJI" ("GNUM") 
+  ;
+  CREATE UNIQUE INDEX "GOODS_CATEGORY_PK" ON "GOODS_CATEGORY" ("FCG_CODE", "SCG_CODE") 
+  ;
+  CREATE UNIQUE INDEX "MEMBER_AUTH_PK" ON "MEMBER_AUTH" ("AUTH_CODE") 
+  ;
+  CREATE UNIQUE INDEX "MEMBER_GRADE_PK" ON "MEMBER_GRADE" ("GRADE_CODE") 
+  ;
+  CREATE UNIQUE INDEX "PK_FAQ" ON "FAQ" ("CNUM") 
+  ;
+  CREATE UNIQUE INDEX "PK_MEMBER" ON "MEMBER" ("ID", "NICKNAME", "EMAIL", "GRADE_CODE", "AUTH") 
+  ;
+  CREATE UNIQUE INDEX "PLIKE_PK" ON "PLIKE" ("LIKENUM") 
+  ;
+  CREATE UNIQUE INDEX "PRODUCT_PK" ON "PRODUCT" ("ITEMNUM") 
+  ;
+  CREATE UNIQUE INDEX "PROTECT_CATEGORY_PK" ON "PROTECT_CATEGORY" ("FCG_CODE", "SCG_CODE") 
+  ;
+  CREATE UNIQUE INDEX "SHOES_CATEGORY_PK" ON "SHOES_CATEGORY" ("SCG_CODE", "FCG_CODE") 
+  ;
+  CREATE UNIQUE INDEX "SOSICK_PK" ON "SOSICK" ("ID", "NICKNAME", "SNUM") 
+  ;
+  CREATE UNIQUE INDEX "UNIFORM_CATEGORY_PK" ON "UNIFORM_CATEGORY" ("FCG_CODE", "SCG_CODE") 
+  ;
+  CREATE UNIQUE INDEX "UQ_MEMBER_ID" ON "MEMBER" ("ID") 
+  ;
+  CREATE UNIQUE INDEX "BAG_CATEGORY_PK" ON "BAG_CATEGORY" ("FCG_CODE", "SCG_CODE") 
+  ;
+  CREATE UNIQUE INDEX "BASEBALL_CATEGORY_PK" ON "BASEBALL_CATEGORY" ("SCG_CODE", "FCG_CODE") 
+  ;
+  CREATE UNIQUE INDEX "BAT_CATEGORY_PK" ON "BAT_CATEGORY" ("FCG_CODE", "SCG_CODE") 
+  ;
+  CREATE UNIQUE INDEX "CLOTHES_CATEGORY_PK" ON "CLOTHES_CATEGORY" ("FCG_CODE", "SCG_CODE") 
+  ;
+  CREATE UNIQUE INDEX "COMMUNITY_PK" ON "COMMUNITY" ("CNUM") 
+  ;
+  CREATE UNIQUE INDEX "ETC_CATEGORY_PK" ON "ETC_CATEGORY" ("FCG_CODE", "SCG_CODE") 
+  ;
+  CREATE UNIQUE INDEX "EVENT_PK" ON "EVENT" ("EVNUM", "ID", "NICKNAME") 
+  ;
+  CREATE UNIQUE INDEX "PK_FAQ" ON "FAQ" ("CNUM") 
+  ;
+  CREATE UNIQUE INDEX "FIRST_CATEGORY_PK" ON "FIRST_CATEGORY" ("CG_CODE") 
+  ;
+  CREATE UNIQUE INDEX "GONGJI_PK" ON "GONGJI" ("GNUM") 
+  ;
+  CREATE UNIQUE INDEX "GOODS_CATEGORY_PK" ON "GOODS_CATEGORY" ("FCG_CODE", "SCG_CODE") 
+  ;
+  CREATE UNIQUE INDEX "PK_MEMBER" ON "MEMBER" ("ID", "NICKNAME", "EMAIL", "GRADE_CODE", "AUTH") 
+  ;
+  CREATE UNIQUE INDEX "UQ_MEMBER_ID" ON "MEMBER" ("ID") 
+  ;
+  CREATE UNIQUE INDEX "MEMBER_AUTH_PK" ON "MEMBER_AUTH" ("AUTH_CODE") 
+  ;
+  CREATE UNIQUE INDEX "MEMBER_GRADE_PK" ON "MEMBER_GRADE" ("GRADE_CODE") 
+  ;
+  CREATE UNIQUE INDEX "GLOVE_CATEGORY_PK" ON "MITT_CATEGORY" ("SCG_CODE", "FCG_CODE") 
+  ;
+  CREATE UNIQUE INDEX "PLIKE_PK" ON "PLIKE" ("LIKENUM") 
+  ;
+  CREATE UNIQUE INDEX "PRODUCT_PK" ON "PRODUCT" ("ITEMNUM") 
+  ;
+  CREATE UNIQUE INDEX "PROTECT_CATEGORY_PK" ON "PROTECT_CATEGORY" ("FCG_CODE", "SCG_CODE") 
+  ;
+  CREATE UNIQUE INDEX "SHOES_CATEGORY_PK" ON "SHOES_CATEGORY" ("SCG_CODE", "FCG_CODE") 
+  ;
+  CREATE UNIQUE INDEX "SOSICK_PK" ON "SOSICK" ("ID", "NICKNAME", "SNUM") 
+  ;
+  CREATE UNIQUE INDEX "UNIFORM_CATEGORY_PK" ON "UNIFORM_CATEGORY" ("FCG_CODE", "SCG_CODE") 
+  ;
+
+#ALTER
+
+  ALTER TABLE "BAG_CATEGORY" ADD CONSTRAINT "BAG_CATEGORY_PK" PRIMARY KEY ("FCG_CODE", "SCG_CODE") ENABLE;
+  ALTER TABLE "BAG_CATEGORY" MODIFY ("SCG_CODE" NOT NULL ENABLE);
+  ALTER TABLE "BAG_CATEGORY" MODIFY ("FCG_CODE" NOT NULL ENABLE);
+
+  ALTER TABLE "BASEBALL_CATEGORY" ADD CONSTRAINT "BASEBALL_CATEGORY_PK" PRIMARY KEY ("SCG_CODE", "FCG_CODE") ENABLE;
+  ALTER TABLE "BASEBALL_CATEGORY" MODIFY ("SCG_CODE" NOT NULL ENABLE);
+  ALTER TABLE "BASEBALL_CATEGORY" MODIFY ("FCG_CODE" NOT NULL ENABLE);
+
+  ALTER TABLE "BAT_CATEGORY" ADD CONSTRAINT "BAT_CATEGORY_PK" PRIMARY KEY ("FCG_CODE", "SCG_CODE") ENABLE;
+  ALTER TABLE "BAT_CATEGORY" MODIFY ("SCG_CODE" NOT NULL ENABLE);
+  ALTER TABLE "BAT_CATEGORY" MODIFY ("FCG_CODE" NOT NULL ENABLE);
+
+  ALTER TABLE "CART" MODIFY ("OP1" NOT NULL ENABLE);
+  ALTER TABLE "CART" MODIFY ("IMAGE1" NOT NULL ENABLE);
+  ALTER TABLE "CART" MODIFY ("COUNT" NOT NULL ENABLE);
+  ALTER TABLE "CART" MODIFY ("PRICE" NOT NULL ENABLE);
+  ALTER TABLE "CART" MODIFY ("PRODUCT" NOT NULL ENABLE);
+  ALTER TABLE "CART" MODIFY ("ID" NOT NULL ENABLE);
+  ALTER TABLE "CART" MODIFY ("ITEMNUM" NOT NULL ENABLE);
+
+  ALTER TABLE "CLOTHES_CATEGORY" ADD CONSTRAINT "CLOTHES_CATEGORY_PK" PRIMARY KEY ("FCG_CODE", "SCG_CODE") ENABLE;
+  ALTER TABLE "CLOTHES_CATEGORY" MODIFY ("SCG_CODE" NOT NULL ENABLE);
+  ALTER TABLE "CLOTHES_CATEGORY" MODIFY ("FCG_CODE" NOT NULL ENABLE);
+
+  ALTER TABLE "COMMUNITY" ADD CONSTRAINT "COMMUNITY_PK" PRIMARY KEY ("CNUM") ENABLE;
+  ALTER TABLE "COMMUNITY" MODIFY ("CNUM" NOT NULL ENABLE);
+
+  ALTER TABLE "ETC_CATEGORY" ADD CONSTRAINT "ETC_CATEGORY_PK" PRIMARY KEY ("FCG_CODE", "SCG_CODE") ENABLE;
+  ALTER TABLE "ETC_CATEGORY" MODIFY ("SCG_CODE" NOT NULL ENABLE);
+  ALTER TABLE "ETC_CATEGORY" MODIFY ("FCG_CODE" NOT NULL ENABLE);
+
+  ALTER TABLE "EVENT" ADD CONSTRAINT "EVENT_PK" PRIMARY KEY ("EVNUM", "ID", "NICKNAME") ENABLE;
+  ALTER TABLE "EVENT" MODIFY ("ETITLE" NOT NULL ENABLE);
+  ALTER TABLE "EVENT" MODIFY ("NICKNAME" NOT NULL ENABLE);
+  ALTER TABLE "EVENT" MODIFY ("ID" NOT NULL ENABLE);
+  ALTER TABLE "EVENT" MODIFY ("EVNUM" NOT NULL ENABLE);
+
+  ALTER TABLE "FAQ" MODIFY ("INDENT" NOT NULL ENABLE);
+  ALTER TABLE "FAQ" MODIFY ("STEP" NOT NULL ENABLE);
+  ALTER TABLE "FAQ" MODIFY ("GROUPS" NOT NULL ENABLE);
+  ALTER TABLE "FAQ" MODIFY ("TAB" NOT NULL ENABLE);
+  ALTER TABLE "FAQ" MODIFY ("CNUM" NOT NULL ENABLE);
+  ALTER TABLE "FAQ" ADD CONSTRAINT "PK_FAQ" PRIMARY KEY ("CNUM") ENABLE;
+  ALTER TABLE "FAQ" MODIFY ("FAQCNT" NOT NULL ENABLE);
+
+  ALTER TABLE "FIRST_CATEGORY" ADD CONSTRAINT "FIRST_CATEGORY_PK" PRIMARY KEY ("CG_CODE") ENABLE;
+  ALTER TABLE "FIRST_CATEGORY" MODIFY ("CG_CODE" NOT NULL ENABLE);
+
+  ALTER TABLE "GLOVE_CATEGORY" MODIFY ("SCG_CODE" NOT NULL ENABLE);
+  ALTER TABLE "GLOVE_CATEGORY" MODIFY ("FCG_CODE" NOT NULL ENABLE);
+
+  ALTER TABLE "GONGJI" ADD CONSTRAINT "GONGJI_PK" PRIMARY KEY ("GNUM") ENABLE;
+  ALTER TABLE "GONGJI" MODIFY ("GNUM" NOT NULL ENABLE);
+
+  ALTER TABLE "GOODS_CATEGORY" ADD CONSTRAINT "GOODS_CATEGORY_PK" PRIMARY KEY ("FCG_CODE", "SCG_CODE") ENABLE;
+  ALTER TABLE "GOODS_CATEGORY" MODIFY ("SCG_CODE" NOT NULL ENABLE);
+  ALTER TABLE "GOODS_CATEGORY" MODIFY ("FCG_CODE" NOT NULL ENABLE);
+
+  ALTER TABLE "MEMBER" ADD CONSTRAINT "UQ_MEMBER_ID" UNIQUE ("ID") ENABLE;
+  ALTER TABLE "MEMBER" ADD CONSTRAINT "PK_MEMBER" PRIMARY KEY ("ID", "NICKNAME", "EMAIL", "GRADE_CODE", "AUTH") ENABLE;
+  ALTER TABLE "MEMBER" MODIFY ("AUTH" NOT NULL ENABLE);
+  ALTER TABLE "MEMBER" MODIFY ("GRADE_CODE" NOT NULL ENABLE);
+  ALTER TABLE "MEMBER" MODIFY ("TOTAL" NOT NULL ENABLE);
+  ALTER TABLE "MEMBER" MODIFY ("EMAIL" NOT NULL ENABLE);
+  ALTER TABLE "MEMBER" MODIFY ("ID" NOT NULL ENABLE);
+
+  ALTER TABLE "MEMBER_AUTH" ADD CONSTRAINT "MEMBER_AUTH_PK" PRIMARY KEY ("AUTH_CODE") ENABLE;
+  ALTER TABLE "MEMBER_AUTH" MODIFY ("AUTH_CODE" NOT NULL ENABLE);
+
+  ALTER TABLE "MEMBER_GRADE" ADD CONSTRAINT "MEMBER_GRADE_PK" PRIMARY KEY ("GRADE_CODE") ENABLE;
+  ALTER TABLE "MEMBER_GRADE" MODIFY ("GRADE_CODE" NOT NULL ENABLE);
+
+  ALTER TABLE "MITT_CATEGORY" ADD CONSTRAINT "GLOVE_CATEGORY_PK" PRIMARY KEY ("SCG_CODE", "FCG_CODE") ENABLE;
+  ALTER TABLE "MITT_CATEGORY" MODIFY ("SCG_CODE" NOT NULL ENABLE);
+  ALTER TABLE "MITT_CATEGORY" MODIFY ("FCG_CODE" NOT NULL ENABLE);
+
+  ALTER TABLE "PLIKE" ADD CONSTRAINT "PLIKE_PK" PRIMARY KEY ("LIKENUM") ENABLE;
+  ALTER TABLE "PLIKE" MODIFY ("ID" NOT NULL ENABLE);
+  ALTER TABLE "PLIKE" MODIFY ("ITEMNUM" NOT NULL ENABLE);
+  ALTER TABLE "PLIKE" MODIFY ("LIKENUM" NOT NULL ENABLE);
+
+  ALTER TABLE "PRODUCT" MODIFY ("ITEMNUM" NOT NULL ENABLE);
+  ALTER TABLE "PRODUCT" ADD CONSTRAINT "PRODUCT_PK" PRIMARY KEY ("ITEMNUM") ENABLE;
+  ALTER TABLE "PRODUCT" MODIFY ("SCG_CODE" NOT NULL ENABLE);
+  ALTER TABLE "PRODUCT" MODIFY ("CG_CODE" NOT NULL ENABLE);
+
+  ALTER TABLE "PROTECT_CATEGORY" ADD CONSTRAINT "PROTECT_CATEGORY_PK" PRIMARY KEY ("FCG_CODE", "SCG_CODE") ENABLE;
+  ALTER TABLE "PROTECT_CATEGORY" MODIFY ("SCG_CODE" NOT NULL ENABLE);
+  ALTER TABLE "PROTECT_CATEGORY" MODIFY ("FCG_CODE" NOT NULL ENABLE);
+
+  ALTER TABLE "SHOES_CATEGORY" ADD CONSTRAINT "SHOES_CATEGORY_PK" PRIMARY KEY ("SCG_CODE", "FCG_CODE") ENABLE;
+  ALTER TABLE "SHOES_CATEGORY" MODIFY ("SCG_CODE" NOT NULL ENABLE);
+  ALTER TABLE "SHOES_CATEGORY" MODIFY ("FCG_CODE" NOT NULL ENABLE);
+
+  ALTER TABLE "SOSICK" ADD CONSTRAINT "SOSICK_PK" PRIMARY KEY ("ID", "NICKNAME", "SNUM") ENABLE;
+  ALTER TABLE "SOSICK" MODIFY ("SNUM" NOT NULL ENABLE);
+  ALTER TABLE "SOSICK" MODIFY ("NICKNAME" NOT NULL ENABLE);
+  ALTER TABLE "SOSICK" MODIFY ("ID" NOT NULL ENABLE);
+
+  ALTER TABLE "UNIFORM_CATEGORY" ADD CONSTRAINT "UNIFORM_CATEGORY_PK" PRIMARY KEY ("FCG_CODE", "SCG_CODE") ENABLE;
+  ALTER TABLE "UNIFORM_CATEGORY" MODIFY ("SCG_CODE" NOT NULL ENABLE);
+  ALTER TABLE "UNIFORM_CATEGORY" MODIFY ("FCG_CODE" NOT NULL ENABLE);
+
+  ALTER TABLE "BAG_CATEGORY" ADD CONSTRAINT "FK_BAG_CATEGORY" FOREIGN KEY ("FCG_CODE")
+	  REFERENCES "FIRST_CATEGORY" ("CG_CODE") ENABLE;
+
+  ALTER TABLE "BASEBALL_CATEGORY" ADD CONSTRAINT "FK_BASEBALL_CATEGORY" FOREIGN KEY ("FCG_CODE")
+	  REFERENCES "FIRST_CATEGORY" ("CG_CODE") ENABLE;
+
+  ALTER TABLE "BAT_CATEGORY" ADD CONSTRAINT "FK_BAT_CATEGORY" FOREIGN KEY ("FCG_CODE")
+	  REFERENCES "FIRST_CATEGORY" ("CG_CODE") ENABLE;
+
+  ALTER TABLE "CART" ADD CONSTRAINT "FK_ID" FOREIGN KEY ("ID")
+	  REFERENCES "MEMBER" ("ID") ENABLE;
+
+  ALTER TABLE "CLOTHES_CATEGORY" ADD CONSTRAINT "FK_CLOTHES_CATEGORY" FOREIGN KEY ("FCG_CODE")
+	  REFERENCES "FIRST_CATEGORY" ("CG_CODE") ENABLE;
+
+  ALTER TABLE "ETC_CATEGORY" ADD CONSTRAINT "FK_ETC_CATEGORY" FOREIGN KEY ("FCG_CODE")
+	  REFERENCES "FIRST_CATEGORY" ("CG_CODE") ENABLE;
+
+  ALTER TABLE "GLOVE_CATEGORY" ADD CONSTRAINT "FK_GLOVE_CATEGORY" FOREIGN KEY ("FCG_CODE")
+	  REFERENCES "FIRST_CATEGORY" ("CG_CODE") ENABLE;
+
+  ALTER TABLE "GOODS_CATEGORY" ADD CONSTRAINT "FK_GOODS_CATEGORY" FOREIGN KEY ("FCG_CODE")
+	  REFERENCES "FIRST_CATEGORY" ("CG_CODE") ENABLE;
+
+  ALTER TABLE "MEMBER" ADD CONSTRAINT "FK_MEMBER_AUTH" FOREIGN KEY ("AUTH")
+	  REFERENCES "MEMBER_AUTH" ("AUTH_CODE") ENABLE;
+  ALTER TABLE "MEMBER" ADD CONSTRAINT "FK_MEMBER_GRADE_CODE" FOREIGN KEY ("GRADE_CODE")
+	  REFERENCES "MEMBER_GRADE" ("GRADE_CODE") ENABLE;
+
+  ALTER TABLE "MITT_CATEGORY" ADD CONSTRAINT "FK_MITT_CATEGORY" FOREIGN KEY ("FCG_CODE")
+	  REFERENCES "FIRST_CATEGORY" ("CG_CODE") ENABLE;
+
+
+  ALTER TABLE "PROTECT_CATEGORY" ADD CONSTRAINT "FK_PROTECT_CATEGORY" FOREIGN KEY ("FCG_CODE")
+	  REFERENCES "FIRST_CATEGORY" ("CG_CODE") ENABLE;
+
+  ALTER TABLE "SHOES_CATEGORY" ADD CONSTRAINT "FK_SHOES_CATEGORY" FOREIGN KEY ("FCG_CODE")
+	  REFERENCES "FIRST_CATEGORY" ("CG_CODE") ENABLE;
+
+  ALTER TABLE "UNIFORM_CATEGORY" ADD CONSTRAINT "FK_UNIFORM_CATEGORY" FOREIGN KEY ("FCG_CODE")
+	  REFERENCES "FIRST_CATEGORY" ("CG_CODE") ENABLE;
