@@ -50,7 +50,7 @@ UI/UX 설계 / 상품DB관리 / 상품 CRUD / 상품페이지 / 상품상세페�
 
 ### 💡Database ERD (Entity Relation Diagram)
 
-![ERD](https://github.com/user-attachments/assets/3db8dc0e-7cad-444b-bbe4-cdada754e57f)
+![ERD](https://github.com/user-attachments/assets/03a959e0-0ee2-4d0e-a501-2fd4aaf02534)
 
 ## 💡사용기술
 
