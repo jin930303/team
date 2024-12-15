@@ -289,8 +289,8 @@ public class LoginController {
         return responseMap;
     }
     
-    private static final String CLIENT_ID = "PtxqAuJgt0ECukbGfDgR";
-    private static final String CLIENT_SECRET = "v1p2zPAItY";
+    private static final String CLIENT_ID = "#";
+    private static final String CLIENT_SECRET = "#";
     private static final String REDIRECT_URI = "http://localhost:8091/team/main";
     
    
