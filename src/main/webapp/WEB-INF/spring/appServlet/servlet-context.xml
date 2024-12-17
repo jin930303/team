@@ -31,8 +31,8 @@
 			value="oracle.jdbc.driver.OracleDriver" />
 		<beans:property name="url"
 			value="jdbc:oracle:thin:@localhost:1521:xe" />
-		<beans:property name="username" value="team" />
-		<beans:property name="password" value="1234" />
+		<beans:property name="username" value="#" />
+		<beans:property name="password" value="#" />
 	</beans:bean>
 	<beans:bean id="sqlSessionFactory"
 		class="org.mybatis.spring.SqlSessionFactoryBean">
