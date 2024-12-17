@@ -103,7 +103,7 @@
         </a>
 
         <% 
-        String clientId = "PtxqAuJgt0ECukbGfDgR"; // 네이버 클라이언트 ID
+        String clientId = "#"; // 네이버 클라이언트 ID
         String redirectURI = URLEncoder.encode("http://localhost:8092/team/main", "UTF-8");
         SecureRandom random = new SecureRandom();
         String state = new BigInteger(130, random).toString();
