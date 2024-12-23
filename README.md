@@ -91,8 +91,8 @@ UI/UX 설계 / 상품DB관리 / 상품 CRUD / 상품페이지 / 상품상세페�
 <details>
 <summary><b> DB & WAS</b></summary>
 <ul>
-  <li>Oracle(Oracle Database 11g Express Edition Release 11.2.0)</li>
-  <li>Tomcat 9(9.0.93)</li>
+  <li>Oracle</li>
+  <li>Tomcat 9</li>
 </ul>
 </details>
 <details>
