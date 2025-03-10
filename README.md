@@ -24,7 +24,7 @@
 
 |Name|육진|김수한|김찬우|이태헌|
 |---| ---  |---  | ---      | ---   |
-|profile| <img src="https://github.com/user-attachments/assets/ba2f586a-40fe-4a8b-8281-c154a9aa641b"  width="180" height="220"/> |  <img src="https://github.com/user-attachments/assets/775d2fd7-e2b1-4ef0-b6ec-ce02e726b9b7"  width="180" height="220"/> | <img src="https://github.com/user-attachments/assets/c3165b27-d85d-4d79-aba6-04f38c78d9e8"  width="180" height="220"/>   | <img src="https://github.com/user-attachments/assets/0f6dd6b6-ebf2-403f-8360-7e0f92f5b00e"  width="180" height="220"/> |
+|profile| <img src="https://github.com/user-attachments/assets/963eb336-a89e-4444-ac65-d050ed89007b"  width="180" height="220"/> |  <img src="https://github.com/user-attachments/assets/775d2fd7-e2b1-4ef0-b6ec-ce02e726b9b7"  width="180" height="220"/> | <img src="https://github.com/user-attachments/assets/c3165b27-d85d-4d79-aba6-04f38c78d9e8"  width="180" height="220"/>   | <img src="https://github.com/user-attachments/assets/0f6dd6b6-ebf2-403f-8360-7e0f92f5b00e"  width="180" height="220"/> |
 |Position|BackendDevelop|Front/Backend<br>Develop|Front/Backend<br>Develop|Front/Backend<br>Develop|
 |Git|[@jin930303](https://github.com/jin930303)|[@shk0349](https://github.com/shk0349)|[@Somallcool](https://github.com/Somallcool)|[@TaeHoen-Lee](https://github.com/TaeHeon-Lee1)|
 |E-mail|<dbrwls12@gmail.com>|<shk0349@naver.com>|<gkdlfn1578@naver.com>|<dlxojs1924@naver.com>|
